@@ -1916,7 +1916,7 @@ footer strong {
 
 
 .hero {
-  background: radial-gradient(ellipse at 77% 47%,#5177ec 0%,#274fd9 42%,#173bbb 100%);
+  background: #6A5ACD; /* 첫 화면(Hero) 배경: 슬레이트 블루 */
 }
 
 .hero .art-exhibit {
@@ -1972,4 +1972,68 @@ footer strong {
 .seoul-preview-svg .district:hover path {
   fill: #f8faff;
   stroke: #9ba8c4;
+}
+
+
+/* ============================================================
+   메인 페이지 최종 조정: 카드 배치 / 페이지 연결 / 영역 크기
+   ============================================================ */
+/* 그리드의 직접 자식은 항상 article이며, 링크는 카드 내부 전체를 감싼다. */
+.scenes .scene-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:15px; }
+.scenes .scene-grid > .scene-card { min-width:0; width:100%; }
+.scenes .scene-card-link { display:block; width:100%; height:100%; color:inherit; text-decoration:none; cursor:pointer; }
+.scenes .scene-card-link:focus-visible { outline:3px solid var(--ss-blue); outline-offset:5px; }
+/* 기존 호버 선택자는 .scene-card를 기준으로 하므로 링크로 감싸도 유지된다. */
+/* 문화 캘린더 제목만 크기를 줄여 주변 제목과 균형 맞추기 */
+.calendar-section .section-heading h2 { font-size:clamp(39px,5vw,76px); line-height:1.02; }
+/* 서울 지도 소개 섹션의 전체 배경 높이를 줄이고 패딩 압축 */
+.map-teaser { padding-top:65px; padding-bottom:65px; gap:30px; }
+.map-copy h2 { font-size:clamp(38px,4.4vw,70px); margin:17px 0; }
+.map-copy .map-pill { margin-top:12px; }
+.map-teaser .map-graphic { max-width:540px; justify-self:center; width:100%; }
+/* 지도 위 원형 노란 스탬프 제거 */
+.map-stamp { display:none !important; }
+@media(max-width:800px) {
+  .scenes .scene-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+  .calendar-section .section-heading h2 {font-size:clamp(38px,7vw,62px);}
+  .map-teaser {padding-top:48px;padding-bottom:48px;}
+}
+@media(max-width:480px) {
+  .scenes .scene-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+  .calendar-section .section-heading h2 {font-size:clamp(33px,8vw,45px);}
+}
+
+
+/* 공통 헤더 아이콘: 기존 LOGIN / MY PAGE 디자인 유지 */
+.site-header .header-actions{display:flex;align-items:center;gap:8px;}
+.site-header .ss-header-quick-icons{margin-right:7px;}
+.site-header .ss-weather-icon{margin-left:3px;}
+/* 캘린더 옆 추천 카드의 저장 하트 */
+.calendar-note .date-card{position:relative;padding-right:58px;}
+.calendar-note .date-card .ss-calendar-heart{position:absolute;right:12px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:37px;height:37px;border:1px solid #cfd2d5;background:transparent;color:var(--ss-ink);border-radius:50%;font-size:22px;line-height:1;cursor:pointer;}
+.calendar-note .date-card .ss-calendar-heart[aria-pressed="true"]{background:var(--ss-yellow);border-color:var(--ss-yellow);}
+.calendar-note .date-card .ss-calendar-heart:focus-visible{outline:2px solid var(--ss-blue);outline-offset:3px;}
+
+.site-header .ss-icon-button,.site-header .ss-language,.site-header .ss-weather-icon{color:inherit;}
+
+/* 캘린더 오른쪽 문화 추천 카드: 마우스 호버 시 그림자 효과 */
+.calendar-note .date-card {
+  transition: box-shadow .28s ease, transform .28s ease;
+}
+.calendar-note .date-card:hover {
+  box-shadow: 0 15px 32px rgba(21, 36, 83, .18);
+  transform: translateY(-3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .calendar-note .date-card { transition: none; }
+}
+
+
+/* 지도 미리보기: 기존 자치구 SVG 대신 배경이 정리된 핀 지도 이미지 */
+.map-teaser .map-graphic .ss-map-illustration {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border: 0;
 }

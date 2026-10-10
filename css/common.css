@@ -470,3 +470,35 @@ a {
   }
 
 }
+
+
+/* ===== 공통 헤더 보조 아이콘 / 우측 하단 맨 위로 이동 ===== */
+.ss-header-quick-icons {display:inline-flex; align-items:center; gap:10px; flex:none; color:inherit;}
+.ss-icon-button {display:inline-grid;place-items:center;width:27px;height:27px;padding:3px;border:0;background:transparent;color:inherit;cursor:pointer;}
+.ss-icon-button svg,.ss-language svg,.ss-weather-icon svg {display:block;width:18px;height:18px;}
+.ss-language {display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-size:10px;font-weight:800;}
+.ss-weather-icon {display:inline-grid;place-items:center;width:25px;height:25px;color:inherit;}
+.ss-icon-button:hover,.ss-icon-button:focus-visible {color:var(--ss-header-accent,var(--ss-blue));}
+.ss-back-to-top {position:fixed;right:22px;bottom:22px;z-index:150;display:grid;place-items:center;width:42px;height:42px;background:#fff;color:#687280;border:1px solid #dae0e7;border-radius:50%;box-shadow:0 3px 12px #10182819;transition:transform .2s,box-shadow .2s;}
+.ss-back-to-top svg {width:19px;height:19px;}
+.ss-back-to-top:hover {transform:translateY(-3px);box-shadow:0 6px 16px #10182824;}
+.ss-back-to-top:focus-visible {outline:2px solid var(--ss-blue);outline-offset:3px;}
+@media(max-width:800px){.ss-header-quick-icons{gap:5px}.ss-icon-button{width:23px;height:23px}.ss-language svg{width:16px;height:16px}.ss-weather-icon{width:21px;height:21px}.ss-back-to-top{right:14px;bottom:14px;width:38px;height:38px;}}
+
+
+/* 상단 검색 / 언어 아이콘 호버 확대 — 기존 색상과 레이아웃 유지 */
+.ss-header-quick-icons .ss-icon-button svg,
+.ss-header-quick-icons .ss-language svg {
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform .22s ease;
+}
+.ss-header-quick-icons .ss-icon-button:hover svg,
+.ss-header-quick-icons .ss-icon-button:focus-visible svg,
+.ss-header-quick-icons .ss-language:hover svg {
+  transform: scale(1.23);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ss-header-quick-icons .ss-icon-button svg,
+  .ss-header-quick-icons .ss-language svg {transition: none;}
+}
