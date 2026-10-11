@@ -2037,3 +2037,70 @@ footer strong {
   object-fit: contain;
   border: 0;
 }
+
+
+/* SCENE:SEOUL · Editorial direction 2026 — JavaScript-free */
+.site-header{background:rgba(18,29,47,.86);backdrop-filter:blur(14px);color:white}
+.site-header .logo span{color:#ffdb63}.site-header .nav a{font-weight:600}.site-header.scrolled{background:rgba(246,244,239,.97);color:#172037}
+.edition-flow{position:relative;height:290vh;view-timeline-name:--edition;view-timeline-axis:block;background:#efede7}
+.edition-sticky{position:sticky;top:0;height:100svh;min-height:580px;overflow:hidden;isolation:isolate}
+.edition-cover{height:100%;background:#eae7df;color:#182039;position:relative;padding:102px 5.2vw 37px;background-image:repeating-linear-gradient(90deg,transparent 0,transparent calc(20% - 1px),#19253912 calc(20% - 1px),#19253912 20%)}
+.edition-rule,.edition-bottom{display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.12em;font-weight:700;border-top:1px solid #313842;padding-top:13px;gap:15px}
+.edition-bottom{position:absolute;bottom:32px;left:5.2vw;right:5.2vw}
+.edition-content{display:grid;grid-template-columns:.7fr 1.3fr;align-items:center;height:calc(100% - 90px);gap:2vw}
+.edition-intro{position:relative;z-index:3;align-self:center}.edition-small{font-size:11px;letter-spacing:.1em;font-weight:700}
+.edition-intro h1{font-size:clamp(44px,5.1vw,94px);font-weight:750;letter-spacing:-.09em;line-height:1.13;margin:22px 0}.edition-intro i{font-style:normal;color:#4565a6}.edition-intro p{font-size:13px;line-height:2;color:#56606b}
+.edition-numbers{display:flex;position:relative;align-items:center;justify-content:center;height:70%;overflow:hidden}
+.edition-ghost{position:absolute;font-family:Georgia,serif;font-style:italic;font-size:clamp(210px,35vw,650px);line-height:.8;letter-spacing:-.16em;color:#e8a45c;left:1%;font-weight:400}
+.edition-number-rail{position:absolute;top:0;left:25%;display:flex;flex-direction:column;align-items:center;gap:12vh;transform:translateY(29vh);font-family:Georgia,serif;font-style:italic;font-size:clamp(140px,22vw,410px);letter-spacing:-.13em;line-height:.78;color:#1b2633}
+.edition-number-rail span:nth-child(odd){color:#d6a52c}.edition-number-rail span:nth-child(even){color:#d56d3c}
+.edition-year{position:absolute;right:6%;bottom:4%;writing-mode:vertical-rl;letter-spacing:.25em;font-size:12px}
+.edition-transition{position:absolute;inset:0;background:#1b2d4c;color:#e9e5dc;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none}
+.edition-transition>span{font-family:Georgia,serif;font-style:italic;font-size:70vw;line-height:.7;letter-spacing:-.16em;transform:scale(.25);color:#f4ba53}.edition-transition p{position:absolute;bottom:9%;letter-spacing:.16em;font-size:12px}
+@supports(animation-timeline:view()){
+.edition-number-rail{animation:editionMonthRise linear both;animation-timeline:--edition;animation-range:contain 0% contain 96%}
+.edition-cover{animation:editionCoverFade linear both;animation-timeline:--edition;animation-range:contain 0% contain 100%}
+.edition-transition{animation:editionLastPage linear both;animation-timeline:--edition;animation-range:contain 0% contain 100%}
+.edition-transition>span{animation:editionZoom linear both;animation-timeline:--edition;animation-range:contain 0% contain 100%}}
+@keyframes editionMonthRise{0%{transform:translateY(29vh)}70%{transform:translateY(-920vh)}100%{transform:translateY(-1060vh)}}
+@keyframes editionCoverFade{0%,72%{opacity:1}92%,100%{opacity:0}}
+@keyframes editionLastPage{0%,76%{opacity:0}88%,100%{opacity:1}}
+@keyframes editionZoom{0%,76%{transform:scale(.25)}100%{transform:scale(1.75)}}
+.edition-next{min-height:80vh;background:#f6f4ef;display:grid;grid-template-columns:.55fr 1.4fr .25fr;padding:105px 6vw;gap:3vw;align-items:center;position:relative}
+.edition-next-index{font-size:10px;align-self:start;letter-spacing:.14em}.edition-next h2{font-size:clamp(44px,7vw,112px);letter-spacing:-.09em;line-height:1.14;font-weight:700;margin:20px 0}.edition-next h2 em{font-style:normal;color:#4666b0}.edition-next p{font-size:14px;line-height:2;color:#5e6471}
+.edition-text-link{display:inline-flex;align-items:center;gap:30px;border-bottom:1px solid currentColor;padding:12px 0;font-size:12px;font-weight:700;margin-top:16px}.edition-text-link:hover{color:#4666b0}
+.edition-side-type{font-size:clamp(35px,5vw,77px);font-weight:900;letter-spacing:-.14em;line-height:1}.edition-side-type span{color:#4666b0}
+.scenes{background:#f6f4ef}.section-heading h2{font-size:clamp(55px,8vw,115px)}.scene-grid{gap:1.1vw}.scene-art{transition:transform .35s}.scene-card:nth-child(2){transform:translateY(45px)}.scene-card:nth-child(4){transform:translateY(18px)}
+/* GARAGE-inspired date-led agenda */
+.agenda-section{background:#f8f7f4;color:#151719;padding:112px 6vw 120px}
+.agenda-title-line{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #151719;gap:20px;padding-bottom:27px}.agenda-title-line h2{font-weight:700;font-size:clamp(58px,9vw,138px);letter-spacing:-.105em;line-height:.8;margin:26px 0 0}.agenda-period{color:#4666b0}.agenda-layout{display:grid;grid-template-columns:27% 73%;border-bottom:1px solid #ccc}
+.agenda-aside{border-right:1px solid #c9c9c3;padding:38px 25px 30px 0}.agenda-aside>span,.agenda-aside small{font-size:10px;letter-spacing:.09em}.agenda-aside>strong{display:block;font-size:clamp(55px,8vw,120px);letter-spacing:-.09em;line-height:1.1;margin:23px 0}.agenda-aside>strong span{color:#a8acb1;font-weight:300}.agenda-aside p{max-width:260px;line-height:1.8;font-size:12px;color:#6c6e70}
+.agenda-month-mini{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:55px 0 22px;max-width:260px}.agenda-month-mini>*{font-size:10px;text-align:center}.agenda-month-mini b{font-size:8px;font-weight:500;color:#777}.agenda-month-mini span:nth-of-type(2),.agenda-month-mini span:nth-of-type(3){background:#e5e9f6;border-radius:50%}
+.agenda-days{padding-left:30px}.agenda-day{display:grid;grid-template-columns:125px 1fr;padding:24px 0;border-bottom:1px solid #9f9f9e;gap:10px}.agenda-day:last-child{border-bottom:0}.agenda-date{display:flex;flex-direction:column;gap:4px}.agenda-date span{font-size:11px}.agenda-date strong{font-size:53px;line-height:1;font-weight:600;letter-spacing:-.09em}
+.agenda-day-body{display:grid;gap:16px}.agenda-row{display:grid;grid-template-columns:180px 1fr auto;gap:18px;align-items:start;min-height:140px}.agenda-thumb{height:140px;display:flex;align-items:end;padding:14px;overflow:hidden}.agenda-thumb b{font-size:34px;line-height:.9;letter-spacing:-.08em}.agenda-thumb-a{background:#c1d5e2;color:#2b4b84}.agenda-thumb-b{background:#263453;color:#f0ce76}.agenda-thumb-c{background:#f2dba3;color:#b45535}
+.agenda-description small{font-size:9px;color:#777}.agenda-description h3{font-size:19px;font-weight:650;letter-spacing:-.04em;margin:10px 0}.agenda-description p,.agenda-description span{font-size:11px;color:#777}.agenda-save-input{position:absolute;opacity:0;width:1px;height:1px}.agenda-save{cursor:pointer;font-size:30px;line-height:1;padding:4px 10px;align-self:start;transition:color .2s,transform .2s}.agenda-save:hover{transform:scale(1.14)}.agenda-save-input:checked+.agenda-save{color:#db614f;background:#f6e4dd;border-radius:50%}.agenda-save-input:checked+.agenda-save:after{content:' 저장';font-size:10px}.agenda-save-input:focus-visible+.agenda-save{outline:2px solid #4666b0}.agenda-fold summary{cursor:pointer;padding:15px 0;font-size:12px}.agenda-fold summary span{float:right}.agenda-fold p{font-size:12px;color:#777}.agenda-foot{font-size:10px;color:#777;margin-top:20px}
+/* illustrated neighborhood atlas */
+.atlas-section{background:#e8e9df;min-height:790px;display:grid;grid-template-columns:35% 65%;align-items:center;padding:100px 5.5vw;gap:2vw;position:relative;overflow:hidden}
+.atlas-heading h2{font-size:clamp(44px,5.4vw,80px);line-height:1.18;letter-spacing:-.085em;margin:22px 0}.atlas-heading h2 i{font-style:normal;color:#44688b}.atlas-heading p{font-size:13px;line-height:1.9;color:#5b655e}
+.atlas-map-cta{display:inline-flex;align-items:center;gap:15px;margin-top:20px;font-size:12px;font-weight:700}.atlas-map-cta:first-letter{font-size:25px}
+.atlas-sheet{background:#f8f6ee;display:block;box-shadow:0 24px 0 -11px #cfcec2,0 34px 45px #263b3520;transform:rotate(-1.2deg);border:1px solid #d1d0c7;padding:18px;transition:transform .4s,box-shadow .4s}
+.atlas-sheet:hover{transform:rotate(0deg) translateY(-9px);box-shadow:0 29px 0 -11px #cfcec2,0 42px 55px #263b3540}
+.atlas-paper-head,.atlas-caption{display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.07em}.city-svg{width:100%;height:auto;display:block;max-height:530px}.city-svg .map-zone path{transition:fill .2s,filter .2s}.city-svg .map-zone:hover path{fill:#f5cb5c;filter:drop-shadow(2px 6px 3px #243b2a78)}.city-svg .map-label text{font-size:13px;font-weight:750;fill:#2d3d31}.atlas-caption{border-top:1px solid #bcbfb5;padding-top:12px}.atlas-disclaimer{grid-column:2;font-size:10px;color:#70766e;margin:0}
+@media(max-width:800px){.edition-content{grid-template-columns:1fr}.edition-intro{align-self:start;margin-top:12vh}.edition-numbers{position:absolute;inset:25% 0 8% 18%;opacity:.76}.edition-number-rail{left:19%;font-size:40vw}.edition-intro h1{font-size:clamp(45px,10vw,75px)}.edition-next{grid-template-columns:1fr;padding:80px 24px}.edition-side-type{display:none}.agenda-section{padding:85px 24px}.agenda-layout{grid-template-columns:1fr}.agenda-aside{border-right:0;border-bottom:1px solid #bbb}.agenda-month-mini{margin-top:22px}.agenda-days{padding-left:0}.agenda-day{grid-template-columns:85px 1fr}.agenda-row{grid-template-columns:115px 1fr 35px;gap:10px}.agenda-thumb{height:110px}.agenda-thumb b{font-size:23px}.atlas-section{grid-template-columns:1fr;padding:80px 25px}.atlas-disclaimer{grid-column:1}.scene-card:nth-child(2),.scene-card:nth-child(4){transform:none}}
+@media(max-width:480px){.edition-cover{padding-left:22px;padding-right:22px}.edition-intro p{font-size:12px}.edition-numbers{inset:35% -25% 4% 5%}.edition-ghost{font-size:65vw}.edition-rule{font-size:8px}.agenda-title-line{align-items:start;flex-direction:column}.agenda-title-line h2{font-size:17vw}.agenda-day{grid-template-columns:65px 1fr}.agenda-date strong{font-size:43px}.agenda-row{grid-template-columns:88px 1fr 29px}.agenda-thumb{height:95px;padding:9px}.agenda-thumb b{font-size:18px}.agenda-description h3{font-size:15px}.agenda-save{font-size:23px;padding:2px}.atlas-paper-head{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.edition-flow{height:100vh}.edition-transition{display:none}.edition-number-rail{animation:none!important;transform:translateY(27vh)}.atlas-sheet,.atlas-sheet:hover{transform:none}}
+/* Ensure original scroll reveal classes stay visible without JavaScript */
+.reveal,.reveal.visible{opacity:1!important;transform:none!important}
+.scene-card:nth-child(2){transform:translateY(45px)!important}
+.scene-card:nth-child(4){transform:translateY(18px)!important}
+@media(max-width:800px){.scene-card:nth-child(2),.scene-card:nth-child(4){transform:none!important}}
+
+/* 2026 full-year artwork: keep all four numerals visible, not cropped to 20. */
+.edition-numbers{overflow:visible;isolation:isolate}
+.edition-ghost{left:-2%;top:50%;width:max-content;max-width:none;white-space:nowrap;transform:translateY(-53%);font-size:clamp(145px,20.5vw,385px);letter-spacing:-.135em;line-height:1;font-weight:400;z-index:0;pointer-events:none}
+.edition-number-rail{z-index:1}
+@media(max-width:800px){.edition-ghost{left:-6%;font-size:clamp(120px,24vw,235px);top:50%}}
+@media(max-width:480px){.edition-ghost{left:-4%;font-size:29vw;letter-spacing:-.15em}}
+/* Clean city illustration: only silhouette, Han River, three buildings and place markers. */
+.city-svg .map-buildings{pointer-events:none}
+.city-svg .map-label{pointer-events:none}
