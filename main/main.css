@@ -2104,3 +2104,17 @@ footer strong {
 /* Clean city illustration: only silhouette, Han River, three buildings and place markers. */
 .city-svg .map-buildings{pointer-events:none}
 .city-svg .map-label{pointer-events:none}
+
+/* 공통 헤더 상태 변수: 스크롤 이후에도 같은 호버 색상 사용 */
+.site-header .header-utility:hover,
+.site-header .header-utility:focus-visible,
+.site-header .nav a:hover,
+.site-header .nav a:focus-visible {color:var(--ss-header-accent);transform:scale(1.11);}
+.site-header .ss-language:hover {transform:scale(1.17);}
+
+/* MAIN: utility buttons match the shared header hover animation. */
+.site-header .header-utility,.site-header .header-utility-solid{transition:color .23s ease,transform .23s var(--ss-ease);transform-origin:center}
+.site-header .header-utility:hover,.site-header .header-utility-solid:hover,
+.site-header .header-utility:focus-visible,.site-header .header-utility-solid:focus-visible{transform:scale(1.14);color:var(--ss-header-accent,var(--ss-blue))}
+.site-header .ss-header-quick-icons .ss-language:hover{transform:scale(1.19)}
+.site-header .ss-header-quick-icons .ss-language:hover svg{transform:none}

@@ -502,3 +502,68 @@ a {
   .ss-header-quick-icons .ss-icon-button svg,
   .ss-header-quick-icons .ss-language svg {transition: none;}
 }
+
+
+/* ==========================================================
+   11. 모든 페이지 공통 헤더 인터랙션
+   - 내비게이션·로그인·마이페이지: 색상 + 확대
+   - 언어 선택: 지구본과 KR이 한 번에 확대
+   - 페이지 고유 레이아웃/섹션 스타일은 포함하지 않음
+   ========================================================== */
+.ss-nav a,
+.site-header .nav a,
+.ss-header-actions .header-login,
+.ss-header-actions .header-mypage,
+.site-header .header-utility,
+.site-header .header-actions .header-utility {
+  display:inline-block;
+  transform-origin:center;
+  transition:color .22s ease,transform .22s var(--ss-ease);
+}
+.ss-nav a:hover,
+.ss-nav a:focus-visible,
+.site-header .nav a:hover,
+.site-header .nav a:focus-visible,
+.ss-header-actions .header-login:hover,
+.ss-header-actions .header-login:focus-visible,
+.ss-header-actions .header-mypage:hover,
+.ss-header-actions .header-mypage:focus-visible,
+.site-header .header-utility:hover,
+.site-header .header-utility:focus-visible,
+.site-header .header-actions .header-utility:hover,
+.site-header .header-actions .header-utility:focus-visible {
+  color:var(--ss-header-accent,var(--ss-blue));
+  transform:scale(1.11);
+}
+/* 기존 단독 SVG 확대 규칙보다 우선: 지구본과 KR을 같이 확대 */
+.ss-header-quick-icons .ss-language {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  transform-origin:center;
+  transition:transform .22s var(--ss-ease),color .22s ease;
+}
+.ss-header-quick-icons .ss-language:hover,
+.ss-header-quick-icons .ss-language:focus-within {
+  transform:scale(1.17);
+  color:var(--ss-header-accent,var(--ss-blue));
+}
+.ss-header-quick-icons .ss-language:hover svg {transform:none;}
+@media(prefers-reduced-motion:reduce){
+  .ss-nav a,.site-header .nav a,
+  .ss-header-actions .header-login,.ss-header-actions .header-mypage,
+  .site-header .header-utility,.ss-header-quick-icons .ss-language {transition:none;}
+}
+
+/* 2026-10-12: shared navigation effects for every page */
+.ss-header-actions .header-login, .ss-header-actions .header-mypage,
+.site-header .header-utility {display:inline-block;transition:transform .24s var(--ss-ease),color .24s ease;transform-origin:center}
+.ss-header-actions .header-login:hover,.ss-header-actions .header-mypage:hover,
+.site-header .header-utility:hover,
+.ss-header-actions .header-login:focus-visible,.ss-header-actions .header-mypage:focus-visible,
+.site-header .header-utility:focus-visible{color:var(--ss-header-accent,var(--ss-blue));transform:scale(1.14)}
+.ss-header-quick-icons .ss-language{display:inline-flex;align-items:center;transform-origin:center;transition:transform .24s var(--ss-ease),color .24s}
+.ss-header-quick-icons .ss-language:hover{transform:scale(1.19);color:var(--ss-header-accent,var(--ss-blue))}
+/* The globe and KR are one unit; do not scale the SVG a second time. */
+.ss-header-quick-icons .ss-language:hover svg{transform:none}
+@media(prefers-reduced-motion:reduce){.ss-header-actions .header-login,.ss-header-actions .header-mypage,.site-header .header-utility,.ss-header-quick-icons .ss-language{transition:none}}
