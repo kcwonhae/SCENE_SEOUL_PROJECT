@@ -2352,3 +2352,166 @@ footer strong {
  .season-scene:not(.season-spring),.season-stage-label:not(.season-stage-spring),.season-october-content{display:none!important}
  .season-film+.edition-next{margin-top:0;animation:none!important}
 }
+
+
+/* =============================================================
+ SCENE:SEOUL — Editorial refinement 2026.10 / CSS-only
+ Precise image transitions, chapter hand-off and asymmetrical grid
+ ============================================================= */
+:root{--editorial-ink:#1d2b40;--editorial-paper:#f6f4ef;--editorial-accent:#c6794d;--editorial-gutter:clamp(22px,6vw,110px)}
+/* Streamlined editorial geometry; preserve original cream / navy tone. */
+.season-film{height:570svh;background:#eeeae2}
+.season-film-sticky{background:#eeeae2}
+.season-scene{background-size:cover;background-position:50% 52%;filter:saturate(.88) contrast(.98);backface-visibility:hidden}
+.season-soften{background:linear-gradient(90deg,rgba(250,248,242,.88),rgba(250,248,242,.61) 23%,rgba(250,248,242,.1) 61%,transparent 85%),linear-gradient(180deg,transparent 70%,rgba(22,34,49,.24));}
+.season-orbit-outer{opacity:.36;filter:blur(17px)}
+.season-orbit-inner{opacity:.27;border-color:rgba(255,250,238,.42);box-shadow:none}
+.season-editorial{left:var(--editorial-gutter);max-width:660px}
+.season-editorial h1{font-size:clamp(45px,5.5vw,92px);line-height:1.105;letter-spacing:-.075em}
+.season-editorial p{max-width:38em}
+.season-bottom-strip{left:var(--editorial-gutter);right:var(--editorial-gutter)}
+.season-stage-label{right:var(--editorial-gutter)}
+.season-october-content{gap:10px}
+.season-october-content strong{font-size:clamp(175px,32vw,485px);font-kerning:normal}
+.season-october-content p{letter-spacing:-.045em}
+/* Do not combine random off-axis effects: every layer tracks one timeline. */
+@supports (animation-timeline:view()){
+ .season-spring{animation:ssSpringRefined linear both;animation-timeline:--ss-seasons;animation-range:contain 0% contain 28%}
+ .season-summer{animation:ssSummerRefined linear both;animation-timeline:--ss-seasons;animation-range:contain 16% contain 46%}
+ .season-autumn{animation:ssAutumnRefined linear both;animation-timeline:--ss-seasons;animation-range:contain 34% contain 65%}
+ .season-winter{animation:ssWinterRefined linear both;animation-timeline:--ss-seasons;animation-range:contain 53% contain 85%}
+ .season-october{animation:ssOctoberRefined linear both;animation-timeline:--ss-seasons;animation-range:contain 74% contain 100%}
+ .season-stage-spring{animation:ssStageSpring linear both;animation-timeline:--ss-seasons;animation-range:contain 0% contain 28%}
+ .season-stage-summer{animation:ssStageOther linear both;animation-timeline:--ss-seasons;animation-range:contain 16% contain 46%}
+ .season-stage-autumn{animation:ssStageOther linear both;animation-timeline:--ss-seasons;animation-range:contain 34% contain 65%}
+ .season-stage-winter{animation:ssStageOther linear both;animation-timeline:--ss-seasons;animation-range:contain 53% contain 85%}
+ .season-october-content{animation:ssOctoberTitle linear both;animation-timeline:--ss-seasons;animation-range:contain 74% contain 100%}
+ .season-editorial{animation:ssIntroRefined linear both;animation-timeline:--ss-seasons;animation-range:contain 0% contain 100%}
+ .season-orbit{animation:ssOrbitRefined linear both;animation-timeline:--ss-seasons;animation-range:contain 0% contain 100%}
+}
+@keyframes ssSpringRefined{0%,35%{opacity:1;transform:scale(1.09)}100%{opacity:0;transform:scale(1.17)}}
+@keyframes ssSummerRefined{0%{opacity:0;transform:scale(1.12)}21%,70%{opacity:1}100%{opacity:0;transform:scale(1.015)}}
+@keyframes ssAutumnRefined{0%{opacity:0;transform:scale(1.11)}23%,70%{opacity:1}100%{opacity:0;transform:scale(1.01)}}
+@keyframes ssWinterRefined{0%{opacity:0;transform:scale(1.1)}23%,70%{opacity:1}100%{opacity:0;transform:scale(1.01)}}
+@keyframes ssOctoberRefined{0%{opacity:0;transform:scale(1.09)}30%,100%{opacity:1}100%{transform:scale(1)}}
+@keyframes ssStageSpring{0%,30%{opacity:1}100%{opacity:0}}
+@keyframes ssStageOther{0%,15%{opacity:0}33%,66%{opacity:1}92%,100%{opacity:0}}
+@keyframes ssOctoberTitle{0%,22%{opacity:0;transform:translateY(38px) scale(.91)}75%,100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes ssIntroRefined{0%,54%{opacity:1;transform:translateY(-47%)}77%,100%{opacity:0;transform:translateY(-53%)}}
+@keyframes ssOrbitRefined{0%{opacity:.43;translate:0 0}75%{opacity:.25;translate:0 -1.4vh}100%{opacity:.17;translate:0 -2vh}}
+/* Cream editorial panel rises over film, then reintroduces October as chapter number. */
+.season-film+.edition-next{z-index:15;position:relative;margin-top:-14svh;border-radius:22px 22px 0 0;padding:clamp(145px,13vw,205px) var(--editorial-gutter) clamp(90px,10vw,150px);min-height:94svh;background:var(--editorial-paper);box-shadow:0 -24px 70px rgba(20,30,48,.13);overflow:hidden}
+.edition-next-index{position:relative;z-index:3;color:#68717c;font-size:10px;letter-spacing:.17em}
+.edition-next>div:nth-of-type(2){position:relative;z-index:3}
+.edition-transition-label{position:absolute;top:clamp(24px,5vw,60px);right:clamp(20px,6vw,90px);font:400 clamp(110px,17vw,290px)/1 'Bodoni Moda',Georgia,serif;letter-spacing:-.14em;color:rgba(38,58,89,.075);pointer-events:none;user-select:none}
+.edition-next h2{font-size:clamp(46px,6.3vw,96px);line-height:1.16;letter-spacing:-.07em}
+.edition-next h2 em{color:#385b91}
+.edition-side-type{opacity:.35}
+@supports (animation-timeline:view()){
+ .season-film+.edition-next{animation:ssSheetRefined linear both;animation-timeline:view();animation-range:entry 0% entry 100%}
+ .edition-transition-label{animation:ssIndexRefined linear both;animation-timeline:view();animation-range:entry 0% entry 100%}
+}
+@keyframes ssSheetRefined{0%{transform:translateY(10svh);border-radius:35px 35px 0 0}100%{transform:translateY(0);border-radius:0}}
+@keyframes ssIndexRefined{0%{transform:translateY(-16px) scale(1.11);opacity:0}100%{transform:translateY(0) scale(1);opacity:1}}
+/* Quiet entry into culture categories: spacious grid, one leading visual. */
+.scenes.section-pad{background:var(--editorial-paper);padding:clamp(88px,10vw,145px) var(--editorial-gutter) clamp(95px,11vw,170px)!important}
+.scenes .section-heading{padding-bottom:clamp(26px,3.3vw,48px);align-items:end}
+.scenes .section-heading h2{font-size:clamp(61px,8.2vw,130px);line-height:.99;letter-spacing:-.09em}
+.scenes .section-aside{font-size:clamp(12px,1.12vw,15px);line-height:1.9}
+.scenes .scene-grid{display:grid!important;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr)!important;gap:clamp(22px,3vw,47px)!important;align-items:start}
+.scenes .scene-card{transform:none!important;min-width:0;position:relative}
+.scenes .scene-card:nth-child(2),.scenes .scene-card:nth-child(4){padding-top:clamp(35px,5.2vw,85px)}
+.scenes .scene-card:nth-child(3){margin-top:-clamp(4px,1.4vw,23px)}
+.scenes .scene-card .scene-art{height:clamp(270px,29vw,495px);overflow:hidden;transform:none;transition:filter .55s ease,box-shadow .55s ease,transform .55s cubic-bezier(.18,.7,.2,1)}
+.scenes .scene-card:nth-child(1) .scene-art{height:clamp(350px,42vw,660px)}
+.scenes .scene-card:nth-child(2) .scene-art{height:clamp(270px,27vw,415px)}
+.scenes .scene-card:nth-child(3) .scene-art{height:clamp(300px,34vw,525px)}
+.scenes .scene-card:nth-child(4) .scene-art{height:clamp(280px,29vw,460px)}
+.scenes .scene-card:is(:hover,:focus-within) .scene-art{transform:translateY(-5px) scale(1.007);box-shadow:0 17px 34px rgba(19,34,55,.12)}
+.scenes .scene-art:after{opacity:.14}
+.scenes .scene-art-text{font-size:clamp(30px,4vw,75px)!important;letter-spacing:-.075em;line-height:.98}
+.scenes .scene-card:nth-child(2) .scene-art-text,.scenes .scene-card:nth-child(4) .scene-art-text{font-size:clamp(25px,3.2vw,57px)!important}
+.scenes .scene-meta{padding-top:clamp(16px,2vw,25px);border-top:1px solid rgba(34,50,74,.16);margin-top:16px}
+.scenes .scene-meta h3{font-size:clamp(23px,2.4vw,36px);letter-spacing:-.06em}
+.scenes .scene-meta h3 b{font-size:clamp(10px,.9vw,13px);letter-spacing:.05em}
+.scenes .scene-meta p{font-size:12px;line-height:1.7}
+@media(max-width:800px){
+ .season-film{height:510svh}
+ .season-editorial{left:7vw;right:7vw}
+ .season-soften{background:linear-gradient(180deg,rgba(248,246,239,.92),rgba(248,246,239,.66) 31%,transparent 72%,rgba(18,33,51,.19))}
+ .season-film+.edition-next{margin-top:-7svh;padding:140px 7vw 90px;min-height:75svh}
+ .edition-transition-label{font-size:clamp(120px,28vw,220px)}
+ .scenes.section-pad{padding:90px 7vw 115px!important}
+ .scenes .scene-grid{gap:30px!important}
+ .scenes .scene-card:nth-child(2),.scenes .scene-card:nth-child(4){padding-top:45px}
+ .scenes .scene-card .scene-art{height:clamp(260px,45vw,410px)}
+ .scenes .scene-card:nth-child(1) .scene-art{height:clamp(315px,54vw,520px)}
+}
+@media(max-width:620px){
+ .scenes .scene-grid{grid-template-columns:1fr!important;gap:48px!important}
+ .scenes .scene-card:nth-child(n){padding-top:0;margin-top:0;transform:none!important}
+ .scenes .scene-card:nth-child(n) .scene-art{height:clamp(300px,85vw,520px)}
+ .scenes .section-heading{display:block}
+ .scenes .section-aside{display:block;margin-top:24px}
+ .season-orbit-outer{opacity:.25}
+ .season-orbit-inner{display:none}
+ .edition-transition-label{top:35px;right:30px;opacity:.5}
+}
+@media(prefers-reduced-motion:reduce){
+ .season-film{height:100svh}
+ .season-orbit,.scenes .scene-card .scene-art,.season-film+.edition-next,.edition-transition-label{animation:none!important;transition:none!important;transform:none!important;translate:none!important}
+ .season-film+.edition-next{margin-top:0}
+}
+
+/* ============================================================
+   FIND YOUR SCENE — all four editorial cards in one desktop view
+   Retains the different artwork shapes and staggered proportions.
+   No JavaScript.
+   ============================================================ */
+@media (min-width: 1025px) and (min-height: 600px) {
+  .scenes.section-pad {
+    min-height: 100svh;
+    padding: clamp(35px,5.3vh,72px) var(--editorial-gutter) clamp(26px,4vh,52px) !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .scenes .section-heading {
+    padding-bottom: clamp(17px,2.8vh,30px);
+    gap: 30px;
+  }
+  .scenes .section-heading h2 {
+    font-size: clamp(54px, min(6.4vw, 10vh), 96px);
+    line-height: .91;
+  }
+  .scenes .scene-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4,minmax(0,1fr)) !important;
+    gap: clamp(12px,1.3vw,24px) !important;
+    align-items: end;
+  }
+  .scenes .scene-card:nth-child(n) {
+    transform: none !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    align-self: end;
+  }
+  .scenes .scene-card:nth-child(1) .scene-art { height: clamp(205px,36vh,370px); }
+  .scenes .scene-card:nth-child(2) .scene-art { height: clamp(190px,30vh,315px); }
+  .scenes .scene-card:nth-child(3) .scene-art { height: clamp(200px,34vh,355px); }
+  .scenes .scene-card:nth-child(4) .scene-art { height: clamp(195px,32vh,335px); }
+  .scenes .scene-art-text { font-size: clamp(24px,2.55vw,49px) !important; }
+  .scenes .scene-card:nth-child(2) .scene-art-text,
+  .scenes .scene-card:nth-child(4) .scene-art-text { font-size: clamp(21px,2.2vw,43px) !important; }
+  .scenes .scene-meta { margin-top: 10px; padding-top: 11px; }
+  .scenes .scene-meta h3 { font-size: clamp(18px,1.65vw,25px); margin-block: 7px; }
+  .scenes .scene-meta p { font-size: clamp(10px,.85vw,12px); line-height: 1.45; }
+  .scenes .scene-meta h3 b { font-size: clamp(9px,.73vw,11px); }
+}
+@media (min-width: 1025px) and (max-height: 730px) {
+  .scenes.section-pad { padding-block: 24px !important; }
+  .scenes .section-heading { padding-bottom: 12px; }
+  .scenes .section-heading h2 { font-size: clamp(44px,7.8vh,68px); }
+  .scenes .scene-card:nth-child(n) .scene-art { height: 29vh; min-height: 155px; }
+  .scenes .scene-meta p { line-height: 1.3; }
+}
