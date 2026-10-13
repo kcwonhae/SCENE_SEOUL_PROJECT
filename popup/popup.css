@@ -745,3 +745,36 @@ html{scroll-padding-top:calc(var(--ss-header-height,76px) + 8px)}
 @media(max-width:900px){.pop-editorial-hero{min-height:680px}.pop-hero-copy h1{font-size:clamp(90px,16vw,155px)}.pop-hero-side{display:none}.pop-hero-copy{padding:48px 0 65px}}
 @media(max-width:600px){.pop-editorial-hero{min-height:620px;background-position:center center}.pop-hero-layout{padding:24px 20px 22px}.pop-hero-overline{font-size:8px;letter-spacing:.08em}.pop-hero-overline>span:last-child{display:none}.pop-hero-copy{padding:45px 0 60px}.pop-hero-copy h1{font-size:clamp(76px,18.2vw,112px);letter-spacing:-.084em}.pop-hero-kicker{letter-spacing:.08em;font-size:10px}.pop-hero-lead{font-size:17px}.pop-hero-sub{font-size:12px}.pop-hero-bottom{font-size:9px;letter-spacing:.04em}.pop-editorial-hero:before{background:radial-gradient(ellipse at 50% 50%,rgba(250,248,245,.94) 0%,rgba(250,248,245,.7) 36%,rgba(250,248,245,.2) 65%,transparent 100%)}}
 @media(prefers-reduced-motion:reduce){.pop-hero-explore{transition:none}}
+
+/* POP-UP HERO -> SQUISH : clean overlapping panels; no extra ornaments */
+.popup-cover-flow { position: relative; isolation: isolate; }
+.popup-cover-flow > .pop-editorial-hero {
+  position: sticky;
+  top: var(--ss-header-height, 76px);
+  z-index: 1;
+  height: calc(100svh - var(--ss-header-height, 76px));
+  min-height: min(620px, calc(100svh - var(--ss-header-height, 76px)));
+  overflow: hidden;
+}
+.popup-cover-flow > .squish-feature {
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  background: #f6f4ef;
+  border-radius: 24px 24px 0 0;
+  padding-top: 90px;
+  box-shadow: 0 -18px 50px rgba(28, 43, 77, .09);
+}
+/* Maintain hero typography above the background until the next panel covers it. */
+.popup-cover-flow .pop-hero-layout { min-height: 100%; }
+@media (max-width: 670px) {
+  .popup-cover-flow > .pop-editorial-hero { min-height: 0; }
+  .popup-cover-flow > .squish-feature { border-radius: 16px 16px 0 0; padding-top: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .popup-cover-flow > .squish-feature { box-shadow: none; }
+}
+
+/* Consistent ivory background for POP-UP sections (no blue panel). */
+body, .ss-page, .popup-cover-flow { background-color: #f6f4ef; }
+.popup-cover-flow > .squish-feature, .discover.ss-catalog { background-color: #f6f4ef; }
