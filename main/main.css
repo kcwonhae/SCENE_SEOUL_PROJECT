@@ -2515,3 +2515,69 @@ footer strong {
   .scenes .scene-card:nth-child(n) .scene-art { height: 29vh; min-height: 155px; }
   .scenes .scene-meta p { line-height: 1.3; }
 }
+
+
+/* ============================================================
+   2026-10-13 — Calendar hearts & editorial hover polish
+   CSS-only: checkbox state is local to this page.
+   ============================================================ */
+/* A heart fills red on selection; do not tint the row or draw a selection ring. */
+.agenda-row .agenda-save{
+  position:relative;display:inline-grid;place-items:center;
+  width:43px;height:43px;padding:0;margin:0;
+  color:#263453;background:transparent;border:0;border-radius:0;
+  font-size:31px;line-height:1;
+  transition:transform .25s ease,color .2s ease;
+}
+.agenda-row .agenda-save-input:checked + .agenda-save{
+  color:transparent!important;background:transparent!important;
+  border:0!important;border-radius:0!important;
+}
+.agenda-row .agenda-save-input:checked + .agenda-save::after{
+  content:'♥'!important;position:absolute;inset:0;display:grid;place-items:center;
+  font-size:30px;color:#e44451;line-height:1;
+  animation:sceneHeartPop .28s cubic-bezier(.2,.8,.2,1.3) both;
+}
+.agenda-row .agenda-save-input:focus-visible + .agenda-save{
+  outline:2px solid #4666b0;outline-offset:2px;border-radius:8px;
+}
+@keyframes sceneHeartPop{from{transform:scale(.68)}65%{transform:scale(1.16)}to{transform:scale(1)}}
+/* Thumbnail and adjacent title move together, with a soft poster shadow. */
+.agenda-row{isolation:isolate;position:relative;}
+.agenda-row .agenda-thumb{
+  transform-origin:center center;
+  transition:transform .36s cubic-bezier(.2,.7,.2,1),box-shadow .36s ease;
+}
+.agenda-row .agenda-description{
+  min-width:0;transform-origin:left center;
+  transition:transform .36s cubic-bezier(.2,.7,.2,1);
+}
+.agenda-row .agenda-description h3{
+  transform-origin:left center;
+  transition:color .3s ease;
+}
+@media (hover:hover){
+  .agenda-row:hover{z-index:2;}
+  .agenda-row:hover .agenda-thumb{
+    transform:translateY(-3px) scale(1.045);
+    box-shadow:0 15px 28px rgba(25,40,65,.22);
+  }
+  .agenda-row:hover .agenda-description{transform:translateX(3px) scale(1.025);}
+  .agenda-row:hover .agenda-description h3{color:#284c89;}
+  /* All four FIND YOUR SCENE category posters gain a more visible shadow. */
+  .scenes .scene-card:hover .scene-art{
+    transform:translateY(-6px) scale(1.012);
+    box-shadow:0 23px 42px rgba(19,34,55,.22);
+    filter:brightness(1.018);
+  }
+}
+.scenes .scene-card:focus-within .scene-art{
+  box-shadow:0 23px 42px rgba(19,34,55,.22);
+}
+@media (max-width:480px){.agenda-row .agenda-save{width:30px;height:34px;font-size:25px}.agenda-row .agenda-save-input:checked + .agenda-save::after{font-size:25px}}
+@media (prefers-reduced-motion:reduce){
+  .agenda-row .agenda-thumb,.agenda-row .agenda-description,
+  .agenda-row .agenda-description h3,.agenda-row .agenda-save{transition:none!important;}
+  .agenda-row .agenda-save-input:checked + .agenda-save::after{animation:none!important;}
+  .agenda-row:hover .agenda-thumb,.agenda-row:hover .agenda-description{transform:none!important;}
+}
