@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 팀원 정보 메타 태그 필수 기입 -->
+    <meta name="author" content="팀번호_팀명_팀원이름">
+    <title>scene:seoul - 전시</title>
+    <!-- 공통 및 카테고리 CSS 연결 -->
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="category.css">
+    <!-- 전시 페이지 전용 추가 CSS -->
+    <link rel="stylesheet" href="exhibition-extra.css">
+</head>
+<body class="ss-page">
+
+    <!-- 상단 헤더 (공통 구조) -->
+    <header class="ss-header">
+        <div class="ss-header-logo"><a href="index.html">SCENE:<span class="ss-accent">SEOUL</span></a></div>
+        <nav class="ss-nav">
+            <a href="index.html">HOME</a>
+            <a href="exhibition.html" aria-current="page" class="is-active">전시</a>
+            <a href="#">공연</a>
+            <a href="#">팝업</a>
+            <a href="#">이벤트</a>
+            <a href="#">추천</a>
+            <a href="map.html">지도</a>
+        </nav>
+        <div class="ss-header-actions">
+            <a href="#">LOGIN</a>
+            <a href="#">MY PAGE</a>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="ss-catalog">
+        
+        <!-- 카테고리 헤더 제목 및 설명 -->
+        <div class="ss-catalog-head">
+            <div>
+                <h1 class="ss-catalog-title">EXHIBITIONS</h1>
+            </div>
+            <div>
+                <p class="ss-catalog-desc">서울에서 진행되는 다채로운 예술과 디자인 전시를 만나보세요.</p>
+            </div>
+        </div>
+
+        <!-- 필터 및 검색 바 -->
+        <div class="ss-toolbar">
+            <div class="ss-filters">
+                <button class="ss-filter is-active">전체</button>
+                <button class="ss-filter">미술</button>
+                <button class="ss-filter">사진</button>
+                <button class="ss-filter">디자인/미디어</button>
+                <button class="ss-filter">특별전</button>
+            </div>
+            <div class="ss-search">
+                <input type="text" placeholder="전시명을 검색하세요">
+                <span class="ss-search-icon">🔍</span>
+            </div>
+        </div>
+
+        <!-- 상단: 핫한 전시 섹션 -->
+        <section class="hot-exhibition-spotlight">
+            <div class="hot-spotlight-banner">
+                <div class="hot-badge">HOT PICK 🔥</div>
+                <h2>빛과 공간의 교차점 : 아틀리에 서울 특별전</h2>
+                <p>예술과 디지털 기술이 융합된 올해 가장 주목받는 대형 몰입형 전시</p>
+            </div>
+        </section>
+
+        <!-- 검색 결과 수 표시 -->
+        <div class="ss-catalog-status">SHOWING 6 RESULTS</div>
+
+        <!-- 하단: 포스터 카드 그리드 (3개씩 2줄 = 총 6개) -->
+        <div class="ss-card-grid">
+            
+            <!-- 카드 1 -->
+            <article class="ss-card">
+                <a href="#" class="ss-card-image">
+                    <img src="images/ex1.jpg" alt="전시 포스터 1">
+                </a>
+                <div class="ss-card-info">
+                    <div>
+                        <span class="ss-card-category">EXHIBITION</span>
+                        <h3 class="ss-card-title">도시의 기억과 풍경</h3>
+                        <p class="ss-card-meta">2026.05.01 ~ 2026.06.01<br>서울시립미술관</p>
+                    </div>
+                    <button class="ss-heart" aria-label="찜하기">♡</button>
+                </div>
+            </article>
+
+            <!-- 카드 2 -->
+            <article class="ss-card">
+                <a href="#" class="ss-card-image">
+                    <img src="images/ex2.jpg" alt="전시 포스터 2">
+                </a>
+                <div class="ss-card-info">
+                    <div>
+                        <span class="ss-card-category">EXHIBITION</span>
+                        <h3 class="ss-card-title">현대미술의 새로운 지평</h3>
+                        <p class="ss-card-meta">2026.05.10 ~ 2026.07.10<br>국립현대미술관 서울</p>
+                    </div>
+                    <button class="ss-heart" aria-label="찜하기">♡</button>
+                </div>
+            </article>
+
+            <!-- 카드 3 -->
+            <article class="ss-card">
+                <a href="#" class="ss-card-image">
+                    <img src="images/ex3.jpg" alt="전시 포스터 3">
+                </a>
+                <div class="ss-card-info">
+                    <div>
+                        <span class="ss-card-category">EXHIBITION</span>
+                        <h3 class="ss-card-title">모던 타이포그래피 전</h3>
+                        <p class="ss-card-meta">2026.05.15 ~ 2026.05.30<br>DDP 디자인랩</p>
+                    </div>
+                    <button class="ss-heart" aria-label="찜하기">♡</button>
+                </div>
+            </article>
+
+            <!-- 카드 4 -->
+            <article class="ss-card">
+                <a href="#" class="ss-card-image">
+                    <img src="images/ex4.jpg" alt="전시 포스터 4">
+                </a>
+                <div class="ss-card-info">
+                    <div>
+                        <span class="ss-card-category">EXHIBITION</span>
+                        <h3 class="ss-card-title">빛의 서사 : 사운드 아트</h3>
+                        <p class="ss-card-meta">2026.06.01 ~ 2026.07.01<br>대림미술관</p>
+                    </div>
+                    <button class="ss-heart" aria-label="찜하기">♡</button>
+                </div>
+            </article>
+
+            <!-- 카드 5 -->
+            <article class="ss-card">
+                <a href="#" class="ss-card-image">
+                    <img src="images/ex5.jpg" alt="전시 포스터 5">
+                </a>
+                <div class="ss-card-info">
+                    <div>
+                        <span class="ss-card-category">EXHIBITION</span>
+                        <h3 class="ss-card-title">자연의 숨결 조각전</h3>
+                        <p class="ss-card-meta">2026.06.05 ~ 2026.07.20<br>예술의전당 한가람미술관</p>
+                    </div>
+                    <button class="ss-heart" aria-label="찜하기">♡</button>
+                </div>
+            </article>
+
+            <!-- 카드 6 -->
+            <article class="ss-card">
+                <a href="#" class="ss-card-image">
+                    <img src="images/ex6.jpg" alt="전시 포스터 6">
+                </a>
+                <div class="ss-card-info">
+                    <div>
+                        <span class="ss-card-category">EXHIBITION</span>
+                        <h3 class="ss-card-title">클래식 포토그래피 아카이브</h3>
+                        <p class="ss-card-meta">2026.06.10 ~ 2026.08.10<br>리움미술관</p>
+                    </div>
+                    <button class="ss-heart" aria-label="찜하기">♡</button>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- 페이지네이션 (1 2 3 ...) -->
+        <div class="ss-pagination">
+            <a href="#" class="page-btn is-active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">3</a>
+            <span class="page-dots">...</span>
+            <a href="#" class="page-btn">다음</a>
+        </div>
+
+    </main>
+</body>
+</html>
