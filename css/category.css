@@ -287,6 +287,21 @@
   transform: translateY(-4px);
 }
 
+/* 카테고리 카드의 공통 호버: 전시·공연·팝업·이벤트에서 재사용 */
+.ss-catalog .ss-card .ss-card-image {
+  transform-origin: center;
+  will-change: transform;
+  transition: transform .35s var(--ss-ease), box-shadow .35s var(--ss-ease);
+}
+
+.ss-catalog .ss-card:hover .ss-card-image,
+.ss-catalog .ss-card:focus-within .ss-card-image {
+  transform: translateY(-5px) scale(1.045);
+  box-shadow: 0 22px 40px rgba(21,36,83,.28);
+  position: relative;
+  z-index: 3;
+}
+
 /* 실제 포스터 이미지 */
 .ss-card-image img {
   width: 100%;
@@ -493,27 +508,13 @@
     transition: none;
   }
 
-}
+  .ss-catalog .ss-card .ss-card-image {
+    transition: none;
+  }
 
-
-/* ==========================================================
-   13. 공통 포스터 호버 — 모든 카테고리 페이지 재사용
-   카드의 비율과 게시물 내용은 각 페이지에서 결정
-   ========================================================== */
-.ss-catalog .ss-card:hover .ss-card-image,
-.ss-catalog .ss-card:focus-within .ss-card-image {
-  transform:translateY(-5px) scale(1.035);
-  box-shadow:0 20px 35px rgba(21,36,83,.27);
-  position:relative;
-  z-index:2;
-}
-.ss-catalog .ss-card-image{transform-origin:center;will-change:transform;}
-@media(prefers-reduced-motion:reduce){
   .ss-catalog .ss-card:hover .ss-card-image,
-  .ss-catalog .ss-card:focus-within .ss-card-image{transform:none;}
-}
+  .ss-catalog .ss-card:focus-within .ss-card-image {
+    transform: none;
+  }
 
-/* Shared poster interaction: applies to exhibition, performance, popup and event cards. */
-.ss-catalog .ss-card .ss-card-image{transform-origin:center;transition:transform .35s var(--ss-ease),box-shadow .35s var(--ss-ease)}
-.ss-catalog .ss-card:hover .ss-card-image,.ss-catalog .ss-card:focus-within .ss-card-image{transform:translateY(-5px) scale(1.045);box-shadow:0 22px 40px rgba(21,36,83,.28);position:relative;z-index:3}
-@media(prefers-reduced-motion:reduce){.ss-catalog .ss-card:hover .ss-card-image,.ss-catalog .ss-card:focus-within .ss-card-image{transform:none}}
+}

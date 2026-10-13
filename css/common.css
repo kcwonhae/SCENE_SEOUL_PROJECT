@@ -157,6 +157,8 @@ a {
   /* 헤더 뒤쪽 배경 흐림 효과 */
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
+  isolation: isolate;
 }
 
 
@@ -170,6 +172,9 @@ a {
   font-weight: 900;
   letter-spacing: -1.6px;
   white-space: nowrap;
+  display: inline-block;
+  flex: none;
+  line-height: 1;
 }
 
 /* 로고에서 강조할 글자 색상 */
@@ -196,20 +201,25 @@ a {
   font-size: 12px;
   font-weight: 800;
   white-space: nowrap;
+  display: inline-block;
+  padding: 8px 0;
 
   transition: color .25s, transform .25s;
 }
 
 /* 마우스 호버 시 글자색과 위치 변화 */
-.ss-nav a:hover {
+.ss-nav a:hover,
+.ss-nav a:focus-visible {
   color: var(--ss-header-accent);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.07);
 }
 
 /* 현재 접속한 페이지의 메뉴 강조 */
 .ss-nav a[aria-current="page"],
 .ss-nav a.is-active {
   color: var(--ss-header-accent);
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 6px;
 }
 
 
@@ -224,8 +234,9 @@ a {
 .ss-header-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   white-space: nowrap;
+  margin-left: auto;
 }
 
 /* 버튼 기본 디자인 */
@@ -244,6 +255,32 @@ a {
 /* 마우스를 올렸을 때 글자 강조 */
 .ss-header-actions a:hover,
 .ss-header-actions button:hover {
+  color: var(--ss-header-accent);
+}
+
+
+/* 로그인·마이페이지 링크 공통 스타일 */
+.ss-header-actions .header-login,
+.ss-header-actions .header-mypage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0;
+  transition: transform .23s var(--ss-ease), color .23s ease;
+}
+
+.ss-header-actions .header-login:hover,
+.ss-header-actions .header-mypage:hover,
+.ss-header-actions .header-login:focus-visible,
+.ss-header-actions .header-mypage:focus-visible {
+  transform: scale(1.12);
   color: var(--ss-header-accent);
 }
 
@@ -282,6 +319,38 @@ a {
    .ss-header에서 별도로 지정 가능
 ========================================================== */
 
+
+/* ===== 공통 헤더 보조 아이콘 / 우측 하단 맨 위로 이동 ===== */
+.ss-header-quick-icons {display:inline-flex; align-items:center; gap:10px; flex:none; color:inherit; margin-right:7px;}
+.ss-icon-button {display:inline-grid;place-items:center;width:27px;height:27px;padding:3px;border:0;background:transparent;color:inherit;cursor:pointer;}
+.ss-icon-button svg,.ss-language svg,.ss-weather-icon svg {display:block;width:18px;height:18px;}
+.ss-language {display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-size:10px;font-weight:800;transition:transform .23s var(--ss-ease);}
+.ss-weather-icon {display:inline-grid;place-items:center;width:25px;height:25px;color:inherit;margin-left:3px;}
+.ss-language:hover {transform:scale(1.15);}
+.ss-icon-button:hover,.ss-icon-button:focus-visible {color:var(--ss-header-accent,var(--ss-blue));}
+.ss-back-to-top {position:fixed;right:22px;bottom:22px;z-index:150;display:grid;place-items:center;width:42px;height:42px;background:#fff;color:#687280;border:1px solid #dae0e7;border-radius:50%;box-shadow:0 3px 12px #10182819;transition:transform .2s,box-shadow .2s;}
+.ss-back-to-top svg {width:19px;height:19px;}
+.ss-back-to-top:hover {transform:translateY(-3px);box-shadow:0 6px 16px #10182824;}
+.ss-back-to-top:focus-visible {outline:2px solid var(--ss-blue);outline-offset:3px;}
+@media(max-width:800px){.ss-header-quick-icons{gap:5px}.ss-icon-button{width:23px;height:23px}.ss-language svg{width:16px;height:16px}.ss-weather-icon{width:21px;height:21px}.ss-back-to-top{right:14px;bottom:14px;width:38px;height:38px;}}
+
+
+/* 상단 검색 / 언어 아이콘 호버 확대 — 기존 색상과 레이아웃 유지 */
+.ss-header-quick-icons .ss-icon-button svg,
+.ss-header-quick-icons .ss-language svg {
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform .22s ease;
+}
+.ss-header-quick-icons .ss-icon-button:hover svg,
+.ss-header-quick-icons .ss-icon-button:focus-visible svg,
+.ss-header-quick-icons .ss-language:hover svg {
+  transform: scale(1.23);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ss-header-quick-icons .ss-icon-button svg,
+  .ss-header-quick-icons .ss-language svg {transition: none;}
+}
 
 /* ==========================================================
    09. 반응형 디자인
@@ -325,7 +394,7 @@ a {
 @media (max-width: 1200px) {
 
   .ss-header {
-    gap: 14px;
+    gap: 12px;
   }
 
   .ss-nav {
@@ -333,7 +402,11 @@ a {
   }
 
   .ss-header-actions {
-    gap: 9px;
+    gap: 5px;
+  }
+
+  .ss-header-quick-icons {
+    margin-right: 0;
   }
 
 }
@@ -356,7 +429,7 @@ a {
   /* 헤더 좌우 여백 축소 */
   .ss-header {
     padding: 0 18px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   /* 로고 크기 축소 */
@@ -397,6 +470,11 @@ a {
 
     padding: 9px 12px;
     border-bottom: 1px solid var(--ss-line);
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 16px;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* 메뉴 영역의 가로 스크롤바 숨김 */
@@ -406,6 +484,13 @@ a {
 
   .ss-nav a {
     font-size: 10px;
+    flex: none;
+  }
+
+  .ss-header-actions .header-login,
+  .ss-header-actions .header-mypage {
+    font-size: 10px;
+    padding: 4px;
   }
 
   /* 메뉴가 한 줄 추가된 만큼 본문 여백 확보 */
@@ -433,7 +518,7 @@ a {
   }
 
   .ss-header-actions {
-    gap: 7px;
+    gap: 5px;
   }
 
   .ss-header-actions a,
@@ -441,10 +526,24 @@ a {
     font-size: 9px;
   }
 
+  .ss-header-actions .header-login,
+  .ss-header-actions .header-mypage {
+    font-size: 9px;
+    padding: 2px;
+  }
+
+  .ss-header-quick-icons {
+    gap: 2px;
+  }
+
+  .ss-weather-icon {
+    margin-left: 0;
+  }
+
   /* 메뉴를 왼쪽부터 정렬 */
   .ss-nav {
     justify-content: flex-start;
-    gap: 14px;
+    gap: 16px;
   }
 
 }
@@ -469,97 +568,9 @@ a {
     transition-duration: .01ms !important;
   }
 
-}
+  .ss-header,
+  .ss-header * {
+    transition: none !important;
+  }
 
-
-/* ===== 공통 헤더 보조 아이콘 / 우측 하단 맨 위로 이동 ===== */
-.ss-header-quick-icons {display:inline-flex; align-items:center; gap:10px; flex:none; color:inherit;}
-.ss-icon-button {display:inline-grid;place-items:center;width:27px;height:27px;padding:3px;border:0;background:transparent;color:inherit;cursor:pointer;}
-.ss-icon-button svg,.ss-language svg,.ss-weather-icon svg {display:block;width:18px;height:18px;}
-.ss-language {display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-size:10px;font-weight:800;}
-.ss-weather-icon {display:inline-grid;place-items:center;width:25px;height:25px;color:inherit;}
-.ss-icon-button:hover,.ss-icon-button:focus-visible {color:var(--ss-header-accent,var(--ss-blue));}
-.ss-back-to-top {position:fixed;right:22px;bottom:22px;z-index:150;display:grid;place-items:center;width:42px;height:42px;background:#fff;color:#687280;border:1px solid #dae0e7;border-radius:50%;box-shadow:0 3px 12px #10182819;transition:transform .2s,box-shadow .2s;}
-.ss-back-to-top svg {width:19px;height:19px;}
-.ss-back-to-top:hover {transform:translateY(-3px);box-shadow:0 6px 16px #10182824;}
-.ss-back-to-top:focus-visible {outline:2px solid var(--ss-blue);outline-offset:3px;}
-@media(max-width:800px){.ss-header-quick-icons{gap:5px}.ss-icon-button{width:23px;height:23px}.ss-language svg{width:16px;height:16px}.ss-weather-icon{width:21px;height:21px}.ss-back-to-top{right:14px;bottom:14px;width:38px;height:38px;}}
-
-
-/* 상단 검색 / 언어 아이콘 호버 확대 — 기존 색상과 레이아웃 유지 */
-.ss-header-quick-icons .ss-icon-button svg,
-.ss-header-quick-icons .ss-language svg {
-  transform: scale(1);
-  transform-origin: center;
-  transition: transform .22s ease;
-}
-.ss-header-quick-icons .ss-icon-button:hover svg,
-.ss-header-quick-icons .ss-icon-button:focus-visible svg,
-.ss-header-quick-icons .ss-language:hover svg {
-  transform: scale(1.23);
-}
-@media (prefers-reduced-motion: reduce) {
-  .ss-header-quick-icons .ss-icon-button svg,
-  .ss-header-quick-icons .ss-language svg {transition: none;}
-}
-
-
-/* ==========================================================
-   11. 통합 상단 네비게이션 — MAIN / POP-UP / 다른 페이지 공통
-   각 페이지 HTML은 ss-header / ss-header-logo / ss-nav /
-   ss-header-actions 를 사용합니다. 페이지별 CSS에는 헤더를 중복 정의하지 않습니다.
-   ========================================================== */
-.ss-header {
-  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
-  isolation: isolate;
-}
-.ss-header-logo { display: inline-block; flex: none; line-height: 1; }
-.ss-header-logo .ss-accent { color: var(--ss-header-accent); }
-.ss-nav a { display: inline-block; padding: 8px 0; }
-.ss-nav a:hover, .ss-nav a:focus-visible { transform: translateY(-2px) scale(1.07); }
-.ss-nav a[aria-current="page"], .ss-nav a.is-active {
-  border-bottom: 2px solid currentColor;
-  padding-bottom: 6px;
-}
-.ss-header-actions { margin-left: auto; gap: 8px; }
-.ss-header-actions .header-login,
-.ss-header-actions .header-mypage {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 6px; border: 0; border-radius: 0;
-  background: transparent; color: inherit;
-  font-size: 11px; font-weight: 800; letter-spacing: 0;
-  transition: transform .23s var(--ss-ease), color .23s ease;
-}
-.ss-header-actions .header-login:hover,
-.ss-header-actions .header-mypage:hover,
-.ss-header-actions .header-login:focus-visible,
-.ss-header-actions .header-mypage:focus-visible {
-  transform: scale(1.12); color: var(--ss-header-accent);
-}
-.ss-header-quick-icons { margin-right: 7px; }
-.ss-weather-icon { margin-left: 3px; }
-.ss-language { transition: transform .23s var(--ss-ease); }
-.ss-language:hover { transform: scale(1.15); }
-@media (max-width: 1200px) {
-  .ss-header { gap: 12px; }
-  .ss-header-actions { gap: 5px; }
-  .ss-header-quick-icons { margin-right: 0; }
-}
-@media (max-width: 800px) {
-  .ss-header { flex-wrap: nowrap; }
-  .ss-header-actions { margin-left: auto; }
-  .ss-nav { flex-wrap: nowrap; justify-content: flex-start; gap: 16px;
-    white-space: nowrap; -webkit-overflow-scrolling: touch; }
-  .ss-nav a { flex: none; }
-  .ss-header-actions .header-login,
-  .ss-header-actions .header-mypage { font-size: 10px; padding: 4px; }
-}
-@media (max-width: 480px) {
-  .ss-header-quick-icons { gap: 2px; }
-  .ss-header-actions .header-login,
-  .ss-header-actions .header-mypage { font-size: 9px; padding: 2px; }
-  .ss-weather-icon { margin-left: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ss-header, .ss-header * { transition: none !important; }
 }
