@@ -16,13 +16,13 @@
 
 <body id="top">
 
-    <header class="site-header" id="header">
-        <a aria-label="씬 서울 홈" class="logo" href="#home">
-            SCENE<span>:</span>SEOUL
+    <header class="ss-header" id="header">
+        <a aria-label="씬 서울 홈" class="ss-header-logo" href="#home">
+            SCENE<span class="ss-accent">:</span>SEOUL
         </a>
 
-        <nav aria-label="메인 메뉴" class="nav">
-            <a class="active" href="#home">HOME</a>
+        <nav aria-label="메인 메뉴" class="ss-nav">
+            <a class="is-active" aria-current="page" href="#home">HOME</a>
             <a href="#scene">전시</a>
             <a href="#scene">공연</a>
             <a href="../popup/popup.html">팝업</a>
@@ -31,14 +31,7 @@
             <a href="#map-section">지도</a>
         </nav>
 
-        <button
-            aria-expanded="false"
-            aria-label="메뉴 펼치기"
-            class="menu-toggle"
-            id="menuToggle"
-        >☰</button>
-
-        <div class="header-side header-actions">
+        <div class="ss-header-actions">
             <span class="ss-header-quick-icons">
                 <button
                     aria-label="검색"
@@ -74,12 +67,12 @@
                 </span>
             </span>
 
-            <button class="header-utility" type="button">
+            <button class="header-login" type="button">
                 LOGIN
             </button>
 
             <button
-                class="header-utility header-utility-solid"
+                class="header-mypage"
                 type="button"
             >
                 MY PAGE

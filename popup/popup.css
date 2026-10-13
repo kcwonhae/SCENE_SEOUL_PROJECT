@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Italiana&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Italiana&display=swap");
 /* SCENE:SEOUL — popup.css
    common.css: 공통 폰트/컬러/헤더
    category.css: 필터/검색/포스터 카드 공통 레이아웃
@@ -21,8 +21,8 @@
 .modal{position:fixed;inset:0;background:#09142cbd;z-index:140;display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;backdrop-filter:blur(0);transition:opacity .4s,backdrop-filter .4s}.modal.open{opacity:1;pointer-events:auto;backdrop-filter:blur(12px)}.modal-inner{width:min(830px,100%);background:var(--ss-paper);max-height:92vh;overflow:auto;position:relative;transform:translateY(50px) scale(.97);transition:transform .65s var(--ss-ease)}.modal.open .modal-inner{transform:translateY(0) scale(1)}.modal-poster{height:240px;position:relative;overflow:hidden}.modal-poster .poster-art strong{font-size:80px}.modal-body{padding:35px 42px}.modal-body h2{font-size:clamp(30px,4vw,58px);letter-spacing:-.08em;margin:10px 0}.modal-body p{font-size:13px;color:#707782;line-height:1.9}.modal-meta{border-top:1px solid var(--ss-line);margin-top:25px;padding-top:19px;display:grid;grid-template-columns:90px 1fr;gap:15px;font-size:12px}.modal-meta dt{color:#8c9199}.modal-meta dd{margin:0;font-weight:800}.modal-close{position:absolute;right:22px;top:20px;border:0;background:#fff;border-radius:50%;width:43px;height:43px;z-index:5;font-size:24px}.modal-save{margin-top:25px;background:var(--ss-blue);color:white;border:0;border-radius:50px;padding:15px 24px;font-size:13px;font-weight:900}
 .cursor-dot,.cursor-ring{position:fixed;top:0;left:0;transform:translate(-50%,-50%);pointer-events:none;z-index:300;opacity:0;border-radius:50%}.cursor-dot{width:8px;height:8px;background:var(--ss-yellow);mix-blend-mode:difference}.cursor-ring{height:38px;width:38px;border:1.5px solid var(--ss-blue);transition:width .25s,height .25s,background .25s,border-color .25s}.cursor-ring.hover{height:74px;width:74px;background:#ffdb632f;border-color:var(--ss-yellow)}.spark{height:8px;width:8px;position:fixed;border-radius:50%;background:var(--ss-yellow);pointer-events:none;z-index:290;animation:trail .7s ease-out forwards}@keyframes trail{to{opacity:0;transform:translateY(22px) scale(0)}}
 .reveal-up{opacity:0;transform:translateY(38px);transition:opacity .9s var(--ss-ease),transform .9s var(--ss-ease)}.reveal-up.shown{opacity:1;transform:translateY(0)}
-@media(max-width:1100px){.right{display:none}.ss-nav{gap:13px}.ss-nav a{font-size:10px}.ticket-stack{right:2%;top:26%}.hero h1{font-size:17vw}.ss-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{padding-top:90px}}
-@media(max-width:670px){.popup-header{height:69px;padding:0 17px;gap:13px}.ss-header-logo{font-size:20px}.ss-nav{overflow:auto;max-width:70vw;gap:14px;scrollbar-width:none}.hero{height:770px;min-height:0}.hero-inner{padding:120px 25px 40px}.hero h1{font-size:25vw;margin:35px 0}.hero-desc{font-size:13px}.ticket-stack{width:62vw;right:10%;top:48%}.floating-ticket.front{padding:18px}.floating-ticket.back{padding:18px}.floating-ticket.front strong{font-size:13vw}.floating-ticket.back b{font-size:9vw}.sticker{width:73px;height:73px;font-size:10px;top:48%;right:5%}.hero-foot{bottom:21px}.circle-cta{width:81px;height:81px;font-size:11px}.vertical-note{display:none}.intro{display:block;padding:72px 21px 48px}.intro p{margin-top:25px}.discover{padding:0 20px 75px}.ss-toolbar{gap:18px}.search{width:100%}.search input{width:100%}.ss-card-grid{grid-template-columns:1fr;gap:27px}.card-media{height:410px}.card-foot h3{font-size:23px}.editorial{grid-template-columns:1fr;padding:80px 25px;gap:55px}.footer{padding:55px 23px;display:block}.footer p{margin-top:30px}.modal-body{padding:25px}.cursor-dot,.cursor-ring,.spark{display:none}}
+@media(max-width:1100px){.right{display:none}.ticket-stack{right:2%;top:26%}.hero h1{font-size:17vw}.ss-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{padding-top:90px}}
+@media(max-width:670px){.hero{height:770px;min-height:0}.hero-inner{padding:120px 25px 40px}.hero h1{font-size:25vw;margin:35px 0}.hero-desc{font-size:13px}.ticket-stack{width:62vw;right:10%;top:48%}.floating-ticket.front{padding:18px}.floating-ticket.back{padding:18px}.floating-ticket.front strong{font-size:13vw}.floating-ticket.back b{font-size:9vw}.sticker{width:73px;height:73px;font-size:10px;top:48%;right:5%}.hero-foot{bottom:21px}.circle-cta{width:81px;height:81px;font-size:11px}.vertical-note{display:none}.intro{display:block;padding:72px 21px 48px}.intro p{margin-top:25px}.discover{padding:0 20px 75px}.ss-toolbar{gap:18px}.search{width:100%}.search input{width:100%}.ss-card-grid{grid-template-columns:1fr;gap:27px}.card-media{height:410px}.card-foot h3{font-size:23px}.editorial{grid-template-columns:1fr;padding:80px 25px;gap:55px}.footer{padding:55px 23px;display:block}.footer p{margin-top:30px}.modal-body{padding:25px}.cursor-dot,.cursor-ring,.spark{display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
 /* INTERACTIVE PASSPORT — SCRATCH CARD */
@@ -436,8 +436,8 @@ body:has(#f-goods:checked) .css-popup-card:not([data-kind="굿즈"]){display:non
 
 
 
-@media(max-width:1050px){.popup-header .ss-nav{position:static;transform:none;overflow:auto;scrollbar-width:none}.popup-header{gap:12px}.popup-header .ss-nav{gap:12px}.popup-header .ss-nav a{font-size:11px}}
-@media(max-width:670px){.popup-header .ss-header-logo{font-size:18px}.header-account{gap:5px}.header-account a{padding:0 7px;font-size:9px;min-height:30px}.popup-header .ss-nav{max-width:none;min-width:0;flex:1}.popup-header .ss-nav a{font-size:10px}}
+
+
 
 /* Header account labels only: no button boxes */
 
@@ -445,7 +445,7 @@ body:has(#f-goods:checked) .css-popup-card:not([data-kind="굿즈"]){display:non
 
 
 /* 페이지 전용 조정: 공통 헤더는 common.css가 담당 */
-.popup-header { --ss-header-bg: rgba(246,244,239,.93); --ss-header-text: var(--ss-ink); --ss-header-accent: var(--ss-blue); }
+
 /* 팝업 포스터는 시각적 연출을 위해 공통 포스터보다 세로로 크게 표시 */
 .ss-catalog .ss-card-image { height: clamp(300px,32vw,460px); }
 .ss-catalog .ss-card-image .poster-art { position:absolute; inset:0; }
@@ -455,7 +455,7 @@ body:has(#f-goods:checked) .css-popup-card:not([data-kind="굿즈"]){display:non
 
 
 /* Studio editorial: visual hierarchy, category, play & ticket · CSS only */
-body{background:#f7f5f0}.popup-header{background:rgba(247,245,240,.96)}.ss-page{padding-top:var(--ss-header-height)}
+
 .pop-editorial-hero{background:#f7f5f0;min-height:620px;padding:40px 5.5vw 65px;color:#151a20;position:relative;overflow:hidden}
 .pop-hero-top,.pop-hero-bottom{display:flex;justify-content:space-between;gap:12px;font-size:10px;font-weight:700;letter-spacing:.13em}.pop-hero-top{border-top:1px solid #111b29;padding-top:13px}.pop-hero-bottom{border-top:1px solid #c7c8c5;padding-top:14px}.pop-hero-mid{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:490px;gap:30px}.pop-hero-mid h1{font-size:clamp(95px,17vw,250px);font-weight:700;line-height:.85;letter-spacing:-.12em;margin:34px 0}.pop-hero-mid h1 span{color:#cb7658}.pop-hero-mid p{font-size:14px;line-height:1.9;color:#626569}.pop-hero-graphic{min-height:390px;display:flex;align-items:center;justify-content:center;position:relative}.pop-graphic-one,.pop-graphic-two{width:230px;height:330px;border-radius:130px;display:grid;place-items:center;font-family:Georgia,serif;font-size:59px;font-style:italic;letter-spacing:-.09em;color:#1a1a1a;border:2px solid #1c1c1c;position:absolute;box-shadow:inset 0 0 0 11px #f7f5f050}.pop-graphic-one{background:#e58a68;transform:rotate(-16deg) translateX(-94px)}.pop-graphic-two{background:#f2cb56;transform:rotate(17deg) translateX(97px)}.pop-hero-graphic small{position:absolute;bottom:0;right:0;font-size:10px;letter-spacing:.12em}
 .strip{padding:9px 0;background:#e9e6dd}.strip-track span{font-size:11px;letter-spacing:.14em}
@@ -471,7 +471,7 @@ body{background:#f7f5f0}.popup-header{background:rgba(247,245,240,.96)}.ss-page{
 
 
 /* 2026.10 · 팝업 편집 개편: 한글 정보 중심, CSS 전용 */
-.pop-hero-graphic .pop-graphic-one,.pop-hero-graphic .pop-graphic-two{font-family:'Noto Sans KR',sans-serif;font-style:normal;font-size:clamp(31px,3vw,49px);font-weight:800;letter-spacing:-.09em}
+.pop-hero-graphic .pop-graphic-one,.pop-hero-graphic .pop-graphic-two{font-family:"Noto Sans KR",sans-serif;font-style:normal;font-size:clamp(31px,3vw,49px);font-weight:800;letter-spacing:-.09em}
 .pop-hero-mid h1{font-weight:800}
 .squish-heading p{max-width:325px}
 .play-and-ticket{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,315px);gap:19px;align-items:stretch}
@@ -512,7 +512,7 @@ body{background:#f7f5f0}.popup-header{background:rgba(247,245,240,.96)}.ss-page{
 .squish-feature .squish-footnote{margin:23px 0 0}
 /* 6번 입력으로 최종 공개 (radio 상태 전환) */
 .squish-item:nth-child(2):has(#toy1-6:checked) .css-counter{font-size:0}
-.squish-item:nth-child(2):has(#toy1-6:checked) .css-counter:after{content:'6 / 6';font-size:12px}
+.squish-item:nth-child(2):has(#toy1-6:checked) .css-counter:after{content:"6 / 6";font-size:12px}
 .squish-item:nth-child(2):has(#toy1-6:checked) .css-progress i{width:100%}
 .squish-item:nth-child(2):has(#toy1-6:checked) .squish-result{opacity:1;transform:scale(1) translateY(0);pointer-events:auto}
 .squish-item:nth-child(2):has(#toy1-6:checked) .squish-link{display:inline-flex}
@@ -719,18 +719,18 @@ html{scroll-padding-top:calc(var(--ss-header-height,76px) + 8px)}
 
 
 /* 2026 pastel POP-UP editorial hero — HTML & CSS only; other sections unchanged */
-.popup-header{background:rgba(250,248,246,.88);border-bottom:1px solid rgba(26,43,70,.09);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
-.popup-header .ss-header-logo{letter-spacing:-.055em;font-weight:800;color:#172b4a;}
-.popup-header .ss-header-logo .ss-accent{color:#e58a76;}
-.popup-header .ss-nav .is-active{color:#b66259;}
-.pop-editorial-hero{background:#faf8f5 url('./assets/popup-pastel-hero.webp') center center/cover no-repeat;min-height:clamp(650px,calc(100svh - var(--ss-header-height)),940px);height:auto;padding:0;color:#273854;isolation:isolate;}
-.pop-editorial-hero:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,rgba(250,248,245,.91) 0%,rgba(250,248,245,.78) 19%,rgba(250,248,245,.26) 40%,transparent 66%);}
+
+
+
+
+.pop-editorial-hero{background:#faf8f5 url("./assets/popup-pastel-hero.webp") center center/cover no-repeat;min-height:clamp(650px,calc(100svh - var(--ss-header-height)),940px);height:auto;padding:0;color:#273854;isolation:isolate;}
+.pop-editorial-hero:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,rgba(250,248,245,.91) 0%,rgba(250,248,245,.78) 19%,rgba(250,248,245,.26) 40%,transparent 66%);}
 .pop-hero-layout{position:relative;min-height:inherit;width:min(100%,1800px);margin:0 auto;display:flex;flex-direction:column;padding:38px clamp(25px,5.1vw,86px) 26px;}
 .pop-hero-overline{display:flex;justify-content:space-between;gap:18px;align-items:center;font-size:10px;font-weight:700;letter-spacing:.16em;color:#5f6b81;}
 .pop-overline-divider{margin:0 9px;color:#ca8c83;}
 .pop-hero-copy{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:55px 0 72px;position:relative;z-index:1;}
 .pop-hero-kicker{font-size:clamp(10px,.9vw,13px);font-weight:700;letter-spacing:.2em;color:#717d98;margin-bottom:14px;}
-.pop-hero-copy h1{font-family:'Italiana','Times New Roman',serif;font-size:clamp(102px,15.3vw,264px);font-weight:400;letter-spacing:-.075em;line-height:.9;margin:0 0 18px;color:#293956;text-shadow:0 10px 38px rgba(247,245,246,.7);white-space:nowrap;}
+.pop-hero-copy h1{font-family:"Italiana","Times New Roman",serif;font-size:clamp(102px,15.3vw,264px);font-weight:400;letter-spacing:-.075em;line-height:.9;margin:0 0 18px;color:#293956;text-shadow:0 10px 38px rgba(247,245,246,.7);white-space:nowrap;}
 .pop-hero-copy h1>span:first-child{color:#7e7c9b;}
 .pop-hero-copy .pop-hero-period{color:#c48f9d;}
 .pop-hero-lead{font-size:clamp(17px,1.65vw,24px);font-weight:600;letter-spacing:-.055em;line-height:1.5;margin:0 0 10px;color:#2d405f;}
@@ -776,5 +776,5 @@ html{scroll-padding-top:calc(var(--ss-header-height,76px) + 8px)}
 }
 
 /* Consistent ivory background for POP-UP sections (no blue panel). */
-body, .ss-page, .popup-cover-flow { background-color: #f6f4ef; }
+.popup-cover-flow { background-color: var(--ss-paper); }
 .popup-cover-flow > .squish-feature, .discover.ss-catalog { background-color: #f6f4ef; }

@@ -502,3 +502,64 @@ a {
   .ss-header-quick-icons .ss-icon-button svg,
   .ss-header-quick-icons .ss-language svg {transition: none;}
 }
+
+
+/* ==========================================================
+   11. 통합 상단 네비게이션 — MAIN / POP-UP / 다른 페이지 공통
+   각 페이지 HTML은 ss-header / ss-header-logo / ss-nav /
+   ss-header-actions 를 사용합니다. 페이지별 CSS에는 헤더를 중복 정의하지 않습니다.
+   ========================================================== */
+.ss-header {
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
+  isolation: isolate;
+}
+.ss-header-logo { display: inline-block; flex: none; line-height: 1; }
+.ss-header-logo .ss-accent { color: var(--ss-header-accent); }
+.ss-nav a { display: inline-block; padding: 8px 0; }
+.ss-nav a:hover, .ss-nav a:focus-visible { transform: translateY(-2px) scale(1.07); }
+.ss-nav a[aria-current="page"], .ss-nav a.is-active {
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 6px;
+}
+.ss-header-actions { margin-left: auto; gap: 8px; }
+.ss-header-actions .header-login,
+.ss-header-actions .header-mypage {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 6px; border: 0; border-radius: 0;
+  background: transparent; color: inherit;
+  font-size: 11px; font-weight: 800; letter-spacing: 0;
+  transition: transform .23s var(--ss-ease), color .23s ease;
+}
+.ss-header-actions .header-login:hover,
+.ss-header-actions .header-mypage:hover,
+.ss-header-actions .header-login:focus-visible,
+.ss-header-actions .header-mypage:focus-visible {
+  transform: scale(1.12); color: var(--ss-header-accent);
+}
+.ss-header-quick-icons { margin-right: 7px; }
+.ss-weather-icon { margin-left: 3px; }
+.ss-language { transition: transform .23s var(--ss-ease); }
+.ss-language:hover { transform: scale(1.15); }
+@media (max-width: 1200px) {
+  .ss-header { gap: 12px; }
+  .ss-header-actions { gap: 5px; }
+  .ss-header-quick-icons { margin-right: 0; }
+}
+@media (max-width: 800px) {
+  .ss-header { flex-wrap: nowrap; }
+  .ss-header-actions { margin-left: auto; }
+  .ss-nav { flex-wrap: nowrap; justify-content: flex-start; gap: 16px;
+    white-space: nowrap; -webkit-overflow-scrolling: touch; }
+  .ss-nav a { flex: none; }
+  .ss-header-actions .header-login,
+  .ss-header-actions .header-mypage { font-size: 10px; padding: 4px; }
+}
+@media (max-width: 480px) {
+  .ss-header-quick-icons { gap: 2px; }
+  .ss-header-actions .header-login,
+  .ss-header-actions .header-mypage { font-size: 9px; padding: 2px; }
+  .ss-weather-icon { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ss-header, .ss-header * { transition: none !important; }
+}
