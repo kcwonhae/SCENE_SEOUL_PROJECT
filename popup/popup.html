@@ -2,836 +2,479 @@
 <!DOCTYPE html>
 
 <html lang="ko">
-
 <head>
-    <meta charset="utf-8"/>
-    <meta content="김채원" name="author"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="#f6f4ef" name="theme-color"/>
-
-    <title>POP-UP — SCENE.SEOUL</title>
-
-    <link href="../css/common.css" rel="stylesheet"/>
-    <link href="../css/category.css" rel="stylesheet"/>
-    <link href="popup.css" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="김채원" name="author"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#f6f4ef" name="theme-color"/>
+<title>POP-UP — SCENE.SEOUL</title>
+<link href="../css/common.css" rel="stylesheet"/>
+<link href="../css/category.css" rel="stylesheet"/>
+<link href="popup.css" rel="stylesheet"/>
 </head>
-
 <body id="top">
-
-    <header class="ss-header">
-        <a class="ss-header-logo" href="../main/index.html">
+<header class="ss-header">
+<a class="ss-header-logo" href="../main/index.html">
             SCENE<b class="ss-accent">:</b>SEOUL
         </a>
-
-        <nav aria-label="주요 메뉴" class="ss-nav">
-            <a href="../main/index.html">HOME</a>
-            <a href="#top">전시</a>
-            <a href="#top">공연</a>
-            <a aria-current="page" class="is-active" href="#top">팝업</a>
-            <a href="#top">이벤트</a>
-            <a href="#top">추천</a>
-            <a href="#top">지도</a>
-        </nav>
-
-        <div class="ss-header-actions">
-            <span class="ss-header-quick-icons">
-                <button
-                    aria-label="검색"
-                    class="ss-icon-button"
-                    title="검색"
-                    type="button"
-                >
-                    <svg
-                        aria-hidden="true"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-width="1.8"
-                        viewbox="0 0 24 24"
-                    >
-                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
-                        <path d="m16 16 5 5"></path>
-                    </svg>
-                </button>
-
-                <span aria-label="언어: 한국어" class="ss-language">
-                    <svg
-                        aria-hidden="true"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        viewbox="0 0 24 24"
-                    >
-                        <circle cx="12" cy="12" r="9"></circle>
-                        <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
-                    </svg>
-                    <span>KR</span>
-                </span>
-            </span>
-
-            <a class="header-login" href="#top">LOGIN</a>
-            <a class="header-mypage" href="#top">MY PAGE</a>
-
-            <span
-                aria-label="날씨 아이콘"
-                class="ss-weather-icon"
-                title="날씨 아이콘 (표시용)"
-            >
-                <svg
-                    aria-hidden="true"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.75"
-                    viewbox="0 0 24 24"
-                >
-                    <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
-                    <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
-                </svg>
-            </span>
-        </div>
-    </header>
-
-    <main class="ss-page">
-
-        <div class="popup-cover-flow">
-        <section class="pop-editorial-hero" aria-labelledby="popup-hero-title">
-            <div class="pop-hero-layout">
-                <div class="pop-hero-overline">
-                    <span>SCENE:SEOUL <span class="pop-overline-divider">/</span> POP-UP ARCHIVE</span>
-                    <span>2026 · SEOUL CULTURE</span>
-                </div>
-                <div class="pop-hero-copy">
-                    <span class="pop-hero-kicker">잠깐 열리고, 오래 남는 서울의 장면</span>
-                    <h1 id="popup-hero-title">POP<span>–</span>UP<span class="pop-hero-period">.</span></h1>
-                    <p class="pop-hero-lead">지금, 서울의 특별한 순간을 만나다.</p>
-                    <p class="pop-hero-sub">도시 곳곳, 지금 이 순간에만 만날 수 있는<br/>팝업 공간과 새로운 경험을 발견해 보세요.</p>
-                    <a class="pop-hero-explore" href="#squish-discover">서울의 팝업 둘러보기 <span aria-hidden="true">↗</span></a>
-                </div>
-                <div class="pop-hero-side" aria-hidden="true">
-                    <span>NEW SPACES</span><span>NEW STORIES</span><span>ONLY IN SEOUL</span>
-                </div>
-                <div class="pop-hero-bottom">
-                    <span>CURATED MOMENTS / 2026</span>
-                    <a href="#squish-discover">SCROLL TO DISCOVER <span aria-hidden="true">↓</span></a>
-                </div>
-            </div>
-        </section>
+<nav aria-label="주요 메뉴" class="ss-nav">
+<a href="../main/index.html">HOME</a>
+<a href="../exhibition/exhibit.html">전시</a>
+<a href="../performance/performance.html">공연</a>
+<a aria-current="page" class="is-active" href="../popup/popup.html">팝업</a>
+<a href="../event/event.html">이벤트</a>
+<a href="../recommend/recommend.html">추천</a>
+<a href="../map/map.html">지도</a>
+</nav>
+<div class="ss-header-actions">
+<span class="ss-header-quick-icons">
+<button aria-label="검색" class="ss-icon-button" title="검색" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="10.8" cy="10.8" r="6.6"></circle>
+<path d="m16 16 5 5"></path>
+</svg>
+</button>
+<span aria-label="언어: 한국어" class="ss-language">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
+</svg>
+<span>KR</span>
+</span>
+</span>
+<a class="header-login" href="#top">LOGIN</a>
+<a class="header-mypage" href="../mypage/mypage.html">MY PAGE</a>
+<span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewbox="0 0 24 24">
+<path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
+<path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
+</svg>
+</span>
+</div>
+</header>
+<main class="ss-page">
+<div class="popup-cover-flow">
+<section aria-labelledby="popup-hero-title" class="pop-editorial-hero">
+<div class="pop-hero-layout">
+<div class="pop-hero-overline">
+<span>SCENE:SEOUL <span class="pop-overline-divider">/</span> POP-UP ARCHIVE</span>
+<span>2026 · SEOUL CULTURE</span>
+</div>
+<div class="pop-hero-copy">
+<span class="pop-hero-kicker">잠깐 열리고, 오래 남는 서울의 장면</span>
+<h1 class="pop-title-motion" id="popup-hero-title">POP<span>–</span>UP<span class="pop-hero-period">.</span></h1>
+<p class="pop-hero-lead">지금, 서울의 특별한 순간을 만나다.</p>
+<p class="pop-hero-sub">도시 곳곳, 지금 이 순간에만 만날 수 있는<br/>팝업 공간과 새로운 경험을 발견해 보세요.</p>
+<a class="pop-hero-explore" href="#squish-discover">서울의 팝업 둘러보기 <span aria-hidden="true">↗</span></a>
+</div>
+<div aria-hidden="true" class="pop-hero-side">
+<span>NEW SPACES</span><span>NEW STORIES</span><span>ONLY IN SEOUL</span>
+</div>
+<div class="pop-hero-bottom">
+<span>CURATED MOMENTS / 2026</span>
+<a href="#squish-discover">SCROLL TO DISCOVER <span aria-hidden="true">↓</span></a>
+</div>
+</div>
+</section>
 <!-- Added squishy discovery section; original page and scratch-card retained -->
-
-        <section
-            aria-labelledby="squishTitle"
-            class="squish-feature"
-            id="squish-discover"
-        >
-            <div class="squish-feature-inner">
-
-                <div class="squish-heading">
-                    <div>
-                        <span class="tiny">01 / 이번 주 주목할 팝업</span>
-                        <h2>
+<section aria-labelledby="squishTitle" class="squish-feature" id="squish-discover">
+<div class="squish-feature-inner">
+<div class="squish-heading">
+<div>
+<span class="tiny">01 / 이번 주 주목할 팝업</span>
+<h2>
                             만져보고,<br/>
-                            <em>새로운 팝업을 찾다.</em>
-                        </h2>
-                    </div>
-
-                    <p>
-                        세 가지 오브젝트를 직접 눌러보세요.
-                        요즘 눈여겨볼 만한 팝업을 소개합니다.
-                    </p>
-                </div>
-
-                <div class="play-and-ticket">
-
-                    <div class="squish-grid">
-
-                        <article class="squish-item">
-                            <span class="squish-no">01 / 말랑이</span>
-
-                            <p class="squish-hint">
+<em>새로운 팝업을 찾다.</em>
+</h2>
+</div>
+<p>세 가지 오브젝트를 눌러 팝업을 발견하고, 마지막 카드에서 당첨 확인까지 경험해 보세요.</p>
+</div>
+<div class="play-and-ticket">
+<div class="squish-grid">
+<article class="squish-item">
+<span class="squish-no">01 / 말랑이</span>
+<p class="squish-hint">
                                 꾹 여섯 번 눌러보세요
                                 <span class="css-counter">0 / 6</span>
-                            </p>
-
-                            <input
-                                checked="checked"
-                                class="css-steps"
-                                id="toy0-0"
-                                name="toy0-step"
-                                type="radio"
-                            />
-
-                            <label
-                                aria-label="1번째 누르기"
-                                class="css-step-label"
-                                for="toy0-1"
-                            ></label>
-
-                            <input class="css-steps" id="toy0-1" name="toy0-step" type="radio"/>
-
-                            <label
-                                aria-label="2번째 누르기"
-                                class="css-step-label"
-                                for="toy0-2"
-                            ></label>
-
-                            <input class="css-steps" id="toy0-2" name="toy0-step" type="radio"/>
-
-                            <label
-                                aria-label="3번째 누르기"
-                                class="css-step-label"
-                                for="toy0-3"
-                            ></label>
-
-                            <input class="css-steps" id="toy0-3" name="toy0-step" type="radio"/>
-
-                            <label
-                                aria-label="4번째 누르기"
-                                class="css-step-label"
-                                for="toy0-4"
-                            ></label>
-
-                            <input class="css-steps" id="toy0-4" name="toy0-step" type="radio"/>
-
-                            <label
-                                aria-label="5번째 누르기"
-                                class="css-step-label"
-                                for="toy0-5"
-                            ></label>
-
-                            <input class="css-steps" id="toy0-5" name="toy0-step" type="radio"/>
-
-                            <label
-                                aria-label="6번째 누르기"
-                                class="css-step-label"
-                                for="toy0-6"
-                            ></label>
-
-                            <input
-                                class="css-steps css-final"
-                                id="toy0-6"
-                                name="toy0-step"
-                                type="radio"
-                            />
-
-                            <button
-                                aria-expanded="false"
-                                aria-label="핑크 말랑이를 여섯 번 눌러 팝업 공개"
-                                class="squish-toy"
-                                type="button"
-                            >
-                                <span class="squish-blob"></span>
-
-                                <span class="squish-face">
-                                    <i class="squish-smile"></i>
-                                    <i class="squish-cheek"></i>
-                                    <i class="squish-cheek two"></i>
-                                </span>
-                            </button>
-
-                            <div aria-hidden="true" class="soft-meter">
-                                <span></span>
-                            </div>
-
-                            <div class="css-progress">
-                                <i></i>
-                            </div>
-
-                            <div aria-live="polite" class="squish-result">
-                                <span class="tiny">성수 · 뷰티</span>
-                                <b>클리오<br/>풍년다방</b>
-                                <small>성동구 뚝섬로 273</small>
-                                <span class="squish-date">09.22 — 10.27</span>
-                            </div>
-
-                            <div class="squish-actions">
-                                <a
-                                    class="squish-link"
-                                    href="https://popga.co.kr/content/magazine/429"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >팝업 정보 보기 ↗</a>
-
-                                <label class="css-reset" for="toy0-0">
+</p>
+<input checked="checked" class="css-steps" id="toy0-0" name="toy0-step" type="radio"/>
+<label aria-label="1번째 누르기" class="css-step-label" for="toy0-1"></label>
+<input class="css-steps" id="toy0-1" name="toy0-step" type="radio"/>
+<label aria-label="2번째 누르기" class="css-step-label" for="toy0-2"></label>
+<input class="css-steps" id="toy0-2" name="toy0-step" type="radio"/>
+<label aria-label="3번째 누르기" class="css-step-label" for="toy0-3"></label>
+<input class="css-steps" id="toy0-3" name="toy0-step" type="radio"/>
+<label aria-label="4번째 누르기" class="css-step-label" for="toy0-4"></label>
+<input class="css-steps" id="toy0-4" name="toy0-step" type="radio"/>
+<label aria-label="5번째 누르기" class="css-step-label" for="toy0-5"></label>
+<input class="css-steps" id="toy0-5" name="toy0-step" type="radio"/>
+<label aria-label="6번째 누르기" class="css-step-label" for="toy0-6"></label>
+<input class="css-steps css-final" id="toy0-6" name="toy0-step" type="radio"/>
+<button aria-expanded="false" aria-label="핑크 말랑이를 여섯 번 눌러 팝업 공개" class="squish-toy" type="button">
+<span class="squish-blob"></span>
+<span class="squish-face">
+<i class="squish-smile"></i>
+<i class="squish-cheek"></i>
+<i class="squish-cheek two"></i>
+</span>
+</button>
+<div aria-hidden="true" class="soft-meter">
+<span></span>
+</div>
+<div class="css-progress">
+<i></i>
+</div>
+<div aria-live="polite" class="squish-result">
+<span class="tiny">성수 · 뷰티</span>
+<b>클리오<br/>풍년다방</b>
+<small>성동구 뚝섬로 273</small>
+<span class="squish-date">09.22 — 10.27</span>
+</div>
+<div class="squish-actions">
+<a class="squish-link" href="https://popga.co.kr/content/magazine/429" rel="noopener noreferrer" target="_blank">팝업 정보 보기 ↗</a>
+<label class="css-reset" for="toy0-0">
                                     ↺ 다시 시작
                                 </label>
-                            </div>
-                        </article>
-
-                        <article class="squish-item">
-                            <span class="squish-no">02 / 숫자 키패드</span>
-
-                            <p class="squish-hint">
+</div>
+</article>
+<article class="squish-item">
+<span class="squish-no">02 / 숫자 키패드</span>
+<p class="squish-hint">
                                 숫자를 여섯 번 눌러보세요
                                 <span class="css-counter">0 / 6</span>
-                            </p>
-
-                            <input checked="checked" class="css-steps" id="toy1-0" name="toy1-step" type="radio"/>
-                            <input class="css-steps" id="toy1-1" name="toy1-step" type="radio"/>
-                            <input class="css-steps" id="toy1-2" name="toy1-step" type="radio"/>
-                            <input class="css-steps" id="toy1-3" name="toy1-step" type="radio"/>
-                            <input class="css-steps" id="toy1-4" name="toy1-step" type="radio"/>
-                            <input class="css-steps" id="toy1-5" name="toy1-step" type="radio"/>
-                            <input class="css-steps css-final" id="toy1-6" name="toy1-step" type="radio"/>
-
-                            <div
-                                aria-expanded="false"
-                                aria-label="숫자 키패드를 여섯 번 누르면 팝업 정보가 열립니다"
-                                class="squish-toy keypad-toy"
-                                role="group"
-                                tabindex="0"
-                            >
-                                <label aria-label="키보드 6번째 타건" class="key-tap" data-press="6" for="toy1-6"></label>
-                                <label aria-label="키보드 5번째 타건" class="key-tap" data-press="5" for="toy1-5"></label>
-                                <label aria-label="키보드 4번째 타건" class="key-tap" data-press="4" for="toy1-4"></label>
-                                <label aria-label="키보드 3번째 타건" class="key-tap" data-press="3" for="toy1-3"></label>
-                                <label aria-label="키보드 2번째 타건" class="key-tap" data-press="2" for="toy1-2"></label>
-                                <label aria-label="키보드 1번째 타건" class="key-tap" data-press="1" for="toy1-1"></label>
-
-                                <div class="number-pad">
-                                    <span class="number-key" data-digit="1">1</span>
-                                    <span class="number-key" data-digit="2">2</span>
-                                    <span class="number-key" data-digit="3">3</span>
-                                    <span class="number-key" data-digit="4">4</span>
-                                    <span class="number-key" data-digit="5">5</span>
-                                    <span class="number-key" data-digit="6">6</span>
-                                    <span class="number-key" data-digit="7">7</span>
-                                    <span class="number-key" data-digit="8">8</span>
-                                    <span class="number-key" data-digit="9">9</span>
-                                    <span class="number-key" data-digit="0">0</span>
-                                </div>
-
-                                <label
-                                    aria-label="1번째 누르기"
-                                    class="key-step"
-                                    for="toy1-1"
-                                    style="--dx:-70px;--dy:-82.5px"
-                                ></label>
-
-                                <label
-                                    aria-label="2번째 누르기"
-                                    class="key-step"
-                                    for="toy1-2"
-                                    style="--dx:0px;--dy:-82.5px"
-                                ></label>
-
-                                <label
-                                    aria-label="3번째 누르기"
-                                    class="key-step"
-                                    for="toy1-3"
-                                    style="--dx:70px;--dy:-82.5px"
-                                ></label>
-
-                                <label
-                                    aria-label="4번째 누르기"
-                                    class="key-step"
-                                    for="toy1-4"
-                                    style="--dx:-70px;--dy:-27.5px"
-                                ></label>
-
-                                <label
-                                    aria-label="5번째 누르기"
-                                    class="key-step"
-                                    for="toy1-5"
-                                    style="--dx:0px;--dy:-27.5px"
-                                ></label>
-
-                                <label
-                                    aria-label="6번째 누르기"
-                                    class="key-step"
-                                    for="toy1-6"
-                                    style="--dx:70px;--dy:-27.5px"
-                                ></label>
-                            </div>
-
-                            <div aria-hidden="true" class="soft-meter">
-                                <span></span>
-                            </div>
-
-                            <div class="css-progress">
-                                <i></i>
-                            </div>
-
-                            <div aria-live="polite" class="squish-result">
-                                <span class="tiny">성수 · 라이프스타일</span>
-                                <b>센녹<br/>배스 하우스</b>
-                                <small>성동구 연무장길 73</small>
-                                <span class="squish-date">10.07 — 10.16</span>
-                            </div>
-
-                            <div class="squish-actions">
-                                <a
-                                    class="squish-link"
-                                    href="https://popga.co.kr/content/magazine/429"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >팝업 정보 보기 ↗</a>
-
-                                <label class="css-reset" for="toy1-0">
+</p>
+<input checked="checked" class="css-steps" id="toy1-0" name="toy1-step" type="radio"/>
+<input class="css-steps" id="toy1-1" name="toy1-step" type="radio"/>
+<input class="css-steps" id="toy1-2" name="toy1-step" type="radio"/>
+<input class="css-steps" id="toy1-3" name="toy1-step" type="radio"/>
+<input class="css-steps" id="toy1-4" name="toy1-step" type="radio"/>
+<input class="css-steps" id="toy1-5" name="toy1-step" type="radio"/>
+<input class="css-steps css-final" id="toy1-6" name="toy1-step" type="radio"/>
+<div aria-expanded="false" aria-label="숫자 키패드를 여섯 번 누르면 팝업 정보가 열립니다" class="squish-toy keypad-toy" role="group" tabindex="0">
+<label aria-label="키보드 6번째 타건" class="key-tap" data-press="6" for="toy1-6"></label>
+<label aria-label="키보드 5번째 타건" class="key-tap" data-press="5" for="toy1-5"></label>
+<label aria-label="키보드 4번째 타건" class="key-tap" data-press="4" for="toy1-4"></label>
+<label aria-label="키보드 3번째 타건" class="key-tap" data-press="3" for="toy1-3"></label>
+<label aria-label="키보드 2번째 타건" class="key-tap" data-press="2" for="toy1-2"></label>
+<label aria-label="키보드 1번째 타건" class="key-tap" data-press="1" for="toy1-1"></label>
+<div class="number-pad">
+<span class="number-key" data-digit="1">1</span>
+<span class="number-key" data-digit="2">2</span>
+<span class="number-key" data-digit="3">3</span>
+<span class="number-key" data-digit="4">4</span>
+<span class="number-key" data-digit="5">5</span>
+<span class="number-key" data-digit="6">6</span>
+<span class="number-key" data-digit="7">7</span>
+<span class="number-key" data-digit="8">8</span>
+<span class="number-key" data-digit="9">9</span>
+<span class="number-key" data-digit="0">0</span>
+</div>
+<label aria-label="1번째 누르기" class="key-step" for="toy1-1" style="--dx:-70px;--dy:-82.5px"></label>
+<label aria-label="2번째 누르기" class="key-step" for="toy1-2" style="--dx:0px;--dy:-82.5px"></label>
+<label aria-label="3번째 누르기" class="key-step" for="toy1-3" style="--dx:70px;--dy:-82.5px"></label>
+<label aria-label="4번째 누르기" class="key-step" for="toy1-4" style="--dx:-70px;--dy:-27.5px"></label>
+<label aria-label="5번째 누르기" class="key-step" for="toy1-5" style="--dx:0px;--dy:-27.5px"></label>
+<label aria-label="6번째 누르기" class="key-step" for="toy1-6" style="--dx:70px;--dy:-27.5px"></label>
+</div>
+<div aria-hidden="true" class="soft-meter">
+<span></span>
+</div>
+<div class="css-progress">
+<i></i>
+</div>
+<div aria-live="polite" class="squish-result">
+<span class="tiny">성수 · 라이프스타일</span>
+<b>센녹<br/>배스 하우스</b>
+<small>성동구 연무장길 73</small>
+<span class="squish-date">10.07 — 10.16</span>
+</div>
+<div class="squish-actions">
+<a class="squish-link" href="https://popga.co.kr/content/magazine/429" rel="noopener noreferrer" target="_blank">팝업 정보 보기 ↗</a>
+<label class="css-reset" for="toy1-0">
                                     ↺ 다시 시작
                                 </label>
-                            </div>
-                        </article>
-
-                        <article class="squish-item is-wax">
-                            <span class="squish-no">03 / 왁스볼</span>
-
-                            <p class="squish-hint">
+</div>
+</article>
+<article class="squish-item is-wax">
+<span class="squish-no">03 / 왁스볼</span>
+<p class="squish-hint">
                                 껍질을 여섯 번 톡톡 깨보세요
                                 <span class="css-counter">0 / 6</span>
-                            </p>
-
-                            <input checked="checked" class="css-steps" id="toy2-0" name="toy2-step" type="radio"/>
-
-                            <label aria-label="1번째 누르기" class="css-step-label" for="toy2-1"></label>
-                            <input class="css-steps" id="toy2-1" name="toy2-step" type="radio"/>
-
-                            <label aria-label="2번째 누르기" class="css-step-label" for="toy2-2"></label>
-                            <input class="css-steps" id="toy2-2" name="toy2-step" type="radio"/>
-
-                            <label aria-label="3번째 누르기" class="css-step-label" for="toy2-3"></label>
-                            <input class="css-steps" id="toy2-3" name="toy2-step" type="radio"/>
-
-                            <label aria-label="4번째 누르기" class="css-step-label" for="toy2-4"></label>
-                            <input class="css-steps" id="toy2-4" name="toy2-step" type="radio"/>
-
-                            <label aria-label="5번째 누르기" class="css-step-label" for="toy2-5"></label>
-                            <input class="css-steps" id="toy2-5" name="toy2-step" type="radio"/>
-
-                            <label aria-label="6번째 누르기" class="css-step-label" for="toy2-6"></label>
-                            <input class="css-steps css-final" id="toy2-6" name="toy2-step" type="radio"/>
-
-                            <button
-                                aria-expanded="false"
-                                aria-label="왁스볼을 여섯 번 눌러 팝업 공개"
-                                class="squish-toy wax-toy"
-                                type="button"
-                            >
-                                <span class="wax-core"></span>
-                                <span class="squish-blob wax-shell"></span>
-
-                                <span aria-hidden="true" class="wax-cracks">
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                </span>
-
-                                <span class="squish-face">
-                                    <i class="squish-smile"></i>
-                                    <i class="squish-cheek"></i>
-                                    <i class="squish-cheek two"></i>
-                                </span>
-
-                                <span aria-hidden="true" class="wax-burst"></span>
-                            </button>
-
-                            <div aria-hidden="true" class="wax-meter">
-                                <span></span>
-                            </div>
-
-                            <div class="css-progress">
-                                <i></i>
-                            </div>
-
-                            <div aria-live="polite" class="squish-result">
-                                <span class="tiny">성수 · 캐릭터</span>
-                                <b>킥둥쓰<br/>POP-UP</b>
-                                <small>성동구 아차산로5길 24-14</small>
-                                <span class="squish-date">10.09 — 10.18</span>
-                            </div>
-
-                            <div class="squish-actions">
-                                <a
-                                    class="squish-link"
-                                    href="https://popga.co.kr/content/magazine/429"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >팝업 정보 보기 ↗</a>
-
-                                <label class="css-reset" for="toy2-0">
+</p>
+<input checked="checked" class="css-steps" id="toy2-0" name="toy2-step" type="radio"/>
+<label aria-label="1번째 누르기" class="css-step-label" for="toy2-1"></label>
+<input class="css-steps" id="toy2-1" name="toy2-step" type="radio"/>
+<label aria-label="2번째 누르기" class="css-step-label" for="toy2-2"></label>
+<input class="css-steps" id="toy2-2" name="toy2-step" type="radio"/>
+<label aria-label="3번째 누르기" class="css-step-label" for="toy2-3"></label>
+<input class="css-steps" id="toy2-3" name="toy2-step" type="radio"/>
+<label aria-label="4번째 누르기" class="css-step-label" for="toy2-4"></label>
+<input class="css-steps" id="toy2-4" name="toy2-step" type="radio"/>
+<label aria-label="5번째 누르기" class="css-step-label" for="toy2-5"></label>
+<input class="css-steps" id="toy2-5" name="toy2-step" type="radio"/>
+<label aria-label="6번째 누르기" class="css-step-label" for="toy2-6"></label>
+<input class="css-steps css-final" id="toy2-6" name="toy2-step" type="radio"/>
+<button aria-expanded="false" aria-label="왁스볼을 여섯 번 눌러 팝업 공개" class="squish-toy wax-toy" type="button">
+<span class="wax-core"></span>
+<span class="squish-blob wax-shell"></span>
+<span aria-hidden="true" class="wax-cracks">
+<i></i>
+<i></i>
+<i></i>
+<i></i>
+<i></i>
+<i></i>
+</span>
+<span class="squish-face">
+<i class="squish-smile"></i>
+<i class="squish-cheek"></i>
+<i class="squish-cheek two"></i>
+</span>
+<span aria-hidden="true" class="wax-burst"></span>
+</button>
+<div aria-hidden="true" class="wax-meter">
+<span></span>
+</div>
+<div class="css-progress">
+<i></i>
+</div>
+<div aria-live="polite" class="squish-result">
+<span class="tiny">성수 · 캐릭터</span>
+<b>킥둥쓰<br/>POP-UP</b>
+<small>성동구 아차산로5길 24-14</small>
+<span class="squish-date">10.09 — 10.18</span>
+</div>
+<div class="squish-actions">
+<a class="squish-link" href="https://popga.co.kr/content/magazine/429" rel="noopener noreferrer" target="_blank">팝업 정보 보기 ↗</a>
+<label class="css-reset" for="toy2-0">
                                     ↺ 다시 시작
                                 </label>
-                            </div>
-                        </article>
-
-                    </div>
-
-                    <aside
-                        aria-labelledby="personal-ticket-title"
-                        class="personal-ticket"
-                        id="special-ticket"
-                    >
-                        <div class="personal-ticket-intro">
-                            <span class="ticket-eyebrow">
-                                02 / 나만의 팝업 찾기
-                            </span>
-
-                            <h3 id="personal-ticket-title">
-                                찜한 취향으로<br/>
-                                골라보는 서울.
-                            </h3>
-
-                            <p>
-                                하트로 남긴 관심 장소를 바탕으로 AI가 어울리는 팝업을 추천해 주는 공간이에요.
-                            </p>
-                        </div>
-
-                        <div class="personal-ticket-paper">
-
-                            <div class="personal-ticket-head">
-                                <span>씬서울 추천 티켓</span>
-                                <span>№ 026</span>
-                            </div>
-
-                            <div class="personal-ticket-body">
-                                <span class="personal-ticket-star">✳</span>
-
-                                <strong>
-                                    다음에 갈 곳,<br/>
-                                    어디일까?
-                                </strong>
-
-                                <span class="personal-ticket-caption">
-                                    한 장을 열면 나만의 팝업이
-                                </span>
-                            </div>
-
-                            <input
-                                class="personal-ticket-checkbox"
-                                id="personal-ticket-reveal"
-                                type="checkbox"
-                            />
-
-                            <label
-                                class="personal-ticket-scratch"
-                                for="personal-ticket-reveal"
-                                tabindex="0"
-                            >
-                                <span>
-                                    이 부분을 눌러<br/>
-                                    티켓 열기
-                                </span>
-                                <span aria-hidden="true">↗</span>
-                            </label>
-
-                            <div class="personal-ticket-result">
-                                <strong>먼저 로그인해 주세요.</strong>
-
-                                <p>
-                                    찜한 장소를 바탕으로 추천을 받으려면 로그인이 필요해요.
-                                </p>
-
-                                <a href="#login-required">
-                                    로그인 안내 보기 ↗
-                                </a>
-                            </div>
-
-                            <div class="personal-ticket-bottom">
-                                <span>취향을 모아, 다음 장소를 찾다</span>
-                                <span>2026 · 서울</span>
-                            </div>
-                        </div>
-
-                        <p class="personal-ticket-note">
-                            현재는 추천 화면 시안입니다. 실제 찜 기록 분석과 AI 추천은 연결되어 있지 않습니다.
-                        </p>
-                    </aside>
-
-                </div>
-
-                <p class="squish-footnote">
+</div>
+</article>
+</div>
+<aside aria-labelledby="personal-ticket-title" class="personal-ticket winning-ticket" id="special-ticket"><div class="personal-ticket-intro"><span class="ticket-eyebrow">04 / LUCKY SCENE</span><h3 id="personal-ticket-title">세 번의 발견,<br/>한 번의 행운.</h3><p>01–03 체험을 모두 마치고 로그인하면 당첨 확인에 참여할 수 있어요.</p></div>
+<div class="personal-ticket-paper"><div class="personal-ticket-head"><span>SCENE:SEOUL</span><span>№ 026</span></div><div class="personal-ticket-body"><span class="personal-ticket-star">✳</span><strong>YOUR<br/>LUCKY SCENE</strong><span class="personal-ticket-caption">세 가지 체험 완료 후 확인</span></div>
+<div class="ticket-win-gate"><span class="win-gate-icon">✦</span><strong>당첨 확인하기</strong><small>말랑이 3개 + 로그인 필요</small><a class="ticket-login-link" href="#login-required">로그인 안내 ↗</a></div><div class="personal-ticket-bottom"><span>SCRATCH &amp; DISCOVER</span><span>2026 · SEOUL</span></div></div><p class="personal-ticket-note">HTML·CSS 시연: 3개 완료 여부만 화면에 반영하며 로그인 인증·당첨 추첨은 작동하지 않습니다.</p></aside>
+</div>
+<div class="pop-trending" id="more-trending">
+<div class="pop-section-title"><div><span class="tiny">MORE TO DISCOVER</span><h3>MORE TRENDING</h3></div><a href="#discover">VIEW ALL <span aria-hidden="true">↗</span></a></div>
+<div class="pop-trend-list"><details class="pop-trend-row">
+<summary><span class="trend-index">04</span><span class="trend-title-group"><strong>NEW FREQUENCY</strong><small>성수 · 아트 <span aria-hidden="true">·</span> 2026.10.20 — 11.12</small></span><span aria-hidden="true" class="trend-toggle"><span class="trend-open-icon">↗</span><span class="trend-close-icon">← 닫기</span></span></summary>
+<div class="trend-detail-content">
+<div aria-label="NEW FREQUENCY 예시 포스터" class="trend-poster trend-poster-blank"><span>POSTER</span></div>
+<div class="trend-detail-copy"><span class="tiny">POP-UP / 04</span><h4>NEW FREQUENCY</h4><p>아트와 사운드에서 영감을 받은 새로운 감각의 팝업 공간. 전시형 콘텐츠와 현장 체험을 함께 둘러보세요.</p><dl><div><dt>카테고리</dt><dd>성수 · 아트</dd></div><div><dt>위치</dt><dd>성동구 성수동</dd></div><div><dt>운영 기간</dt><dd>2026.10.20 — 11.12</dd></div></dl><span class="trend-demo-note">※ 기획용 예시 콘텐츠 · 방문 전 일정 확인</span></div>
+</div>
+</details>
+<details class="pop-trend-row">
+<summary><span class="trend-index">05</span><span class="trend-title-group"><strong>SUNDAY COLLECTIVE</strong><small>홍대 · 굿즈/마켓 <span aria-hidden="true">·</span> 2026.10.23 — 11.15</small></span><span aria-hidden="true" class="trend-toggle"><span class="trend-open-icon">↗</span><span class="trend-close-icon">← 닫기</span></span></summary>
+<div class="trend-detail-content">
+<div aria-label="SUNDAY COLLECTIVE 예시 포스터" class="trend-poster trend-poster-blank"><span>POSTER</span></div>
+<div class="trend-detail-copy"><span class="tiny">POP-UP / 05</span><h4>SUNDAY COLLECTIVE</h4><p>취향을 담은 소품과 작은 브랜드를 만나는 컬렉티브 마켓. 다양한 굿즈를 발견하는 즐거움을 제안합니다.</p><dl><div><dt>카테고리</dt><dd>홍대 · 굿즈/마켓</dd></div><div><dt>위치</dt><dd>마포구 서교동</dd></div><div><dt>운영 기간</dt><dd>2026.10.23 — 11.15</dd></div></dl><span class="trend-demo-note">※ 기획용 예시 콘텐츠 · 방문 전 일정 확인</span></div>
+</div>
+</details>
+<details class="pop-trend-row">
+<summary><span class="trend-index">06</span><span class="trend-title-group"><strong>OFFLINE ARCHIVE</strong><small>한남 · 패션 <span aria-hidden="true">·</span> 2026.10.25 — 11.18</small></span><span aria-hidden="true" class="trend-toggle"><span class="trend-open-icon">↗</span><span class="trend-close-icon">← 닫기</span></span></summary>
+<div class="trend-detail-content">
+<div aria-label="OFFLINE ARCHIVE 예시 포스터" class="trend-poster trend-poster-blank"><span>POSTER</span></div>
+<div class="trend-detail-copy"><span class="tiny">POP-UP / 06</span><h4>OFFLINE ARCHIVE</h4><p>온라인 밖에서 직접 보고 만나는 패션 아카이브. 큐레이션된 아이템과 공간의 분위기를 경험해 보세요.</p><dl><div><dt>카테고리</dt><dd>한남 · 패션</dd></div><div><dt>위치</dt><dd>용산구 한남동</dd></div><div><dt>운영 기간</dt><dd>2026.10.25 — 11.18</dd></div></dl><span class="trend-demo-note">※ 기획용 예시 콘텐츠 · 방문 전 일정 확인</span></div>
+</div>
+</details></div>
+</div><p class="squish-footnote">
                     소개된 행사 정보는 방문 전에 운영 여부와 일정을 확인해 주세요.
                     이 페이지는 HTML·CSS 시안입니다.
                 </p>
-
-            </div>
-        </section>
-        </div><!-- /popup-cover-flow -->
-
-        <section class="discover ss-catalog" id="discover">
-
-            <div class="pop-catalog-heading">
-                <span class="tiny">03 / 팝업 둘러보기</span>
-                <h2>어디로 가볼까?</h2>
-                <p>관심 있는 분야를 골라 팝업 정보를 살펴보세요.</p>
-            </div>
-
-            <div class="ss-toolbar">
-
-                <div class="css-filter-controls ss-filters" id="filters">
-
-                    <input checked="" id="f-all" name="popup-filter" type="radio"/>
-                    <label class="ss-filter" for="f-all">전체</label>
-
-                    <input id="f-fashion" name="popup-filter" type="radio"/>
-                    <label class="ss-filter" for="f-fashion">패션</label>
-
-                    <input id="f-art" name="popup-filter" type="radio"/>
-                    <label class="ss-filter" for="f-art">아트</label>
-
-                    <input id="f-life" name="popup-filter" type="radio"/>
-                    <label class="ss-filter" for="f-life">라이프스타일</label>
-
-                    <input id="f-goods" name="popup-filter" type="radio"/>
-                    <label class="ss-filter" for="f-goods">굿즈 · 마켓</label>
-
-                </div>
-
-                <span class="css-search-hint">
+</div>
+</section>
+</div><!-- /popup-cover-flow -->
+<section class="discover ss-catalog" id="discover">
+<div class="pop-catalog-heading">
+<span class="tiny">03 / 팝업 둘러보기</span>
+<h2>어디로 가볼까?</h2>
+<p>관심 있는 분야를 골라 팝업 정보를 살펴보세요.</p>
+</div>
+<div class="ss-toolbar">
+<div class="css-filter-controls ss-filters" id="filters">
+<input checked="" id="f-all" name="popup-filter" type="radio"/>
+<label class="ss-filter" for="f-all">전체</label>
+<input id="f-fashion" name="popup-filter" type="radio"/>
+<label class="ss-filter" for="f-fashion">패션</label>
+<input id="f-art" name="popup-filter" type="radio"/>
+<label class="ss-filter" for="f-art">아트</label>
+<input id="f-life" name="popup-filter" type="radio"/>
+<label class="ss-filter" for="f-life">라이프스타일</label>
+<input id="f-goods" name="popup-filter" type="radio"/>
+<label class="ss-filter" for="f-goods">굿즈 · 마켓</label>
+</div>
+<span class="css-search-hint">
                     분야를 선택해 살펴보세요
                 </span>
-            </div>
-
-            <div class="countline ss-catalog-status">
-                <span id="count">팝업 6곳 · 예시 콘텐츠</span>
-
-                <div class="popup-list-note">
+</div>
+<div class="countline ss-catalog-status">
+<span id="count">ALL · 24 RESULTS (기획용 예시)</span>
+<div class="popup-list-note">
                     ※ 실제 행사 포스터는 추후 업데이트됩니다.
                 </div>
-            </div>
-
-            <div class="ss-card-grid" id="cards">
-
-                <article
-                    class="ss-card css-popup-card"
-                    data-kind="아트"
-                    data-region="성수"
-                >
-                    <div class="card-media ss-card-image">
-                        <div class="poster-art p1">
-                            <strong>BLUE<br/>PLAY</strong>
-                            <span class="mini-stamp">성수 / 팝업</span>
-                        </div>
-                    </div>
-
-                    <div class="card-foot ss-card-info">
-                        <div>
-                            <small class="ss-card-category">성수 / 아트</small>
-                            <h3 class="ss-card-title">BLUE PLAYGROUND</h3>
-                            <p class="ss-card-meta">
+</div>
+<div class="ss-card-grid" id="cards">
+<article class="ss-card css-popup-card pop-page-1" data-kind="아트" data-region="성수">
+<div class="card-media ss-card-image">
+<div class="poster-blank"><span>POSTER</span></div>
+</div>
+<div class="card-foot ss-card-info">
+<div>
+<small class="ss-card-category">성수 / 아트</small>
+<h3 class="ss-card-title">BLUE PLAYGROUND</h3>
+<p class="ss-card-meta">
                                 성동구 성수동 · 2026 10.12 — 10.30
                             </p>
-                        </div>
-                    </div>
-
-                    <span class="css-save">
-                        <input id="save-1" type="checkbox"/>
-                        <label aria-label="관심 등록" for="save-1">♡</label>
-                    </span>
-                </article>
-
-                <article
-                    class="ss-card css-popup-card"
-                    data-kind="패션"
-                    data-region="한남"
-                >
-                    <div class="card-media ss-card-image">
-                        <div class="poster-art p2">
-                            <strong>AFTER<br/>HOURS</strong>
-                            <span class="mini-stamp">한남 / 팝업</span>
-                        </div>
-                    </div>
-
-                    <div class="card-foot ss-card-info">
-                        <div>
-                            <small class="ss-card-category">한남 / 패션</small>
-                            <h3 class="ss-card-title">AFTER HOURS CLUB</h3>
-                            <p class="ss-card-meta">
+</div>
+</div>
+<span class="css-save">
+<input id="save-1" type="checkbox"/>
+<label aria-label="관심 등록" for="save-1">♡</label>
+</span>
+</article>
+<article class="ss-card css-popup-card pop-page-1" data-kind="패션" data-region="한남">
+<div class="card-media ss-card-image">
+<div class="poster-blank"><span>POSTER</span></div>
+</div>
+<div class="card-foot ss-card-info">
+<div>
+<small class="ss-card-category">한남 / 패션</small>
+<h3 class="ss-card-title">AFTER HOURS CLUB</h3>
+<p class="ss-card-meta">
                                 용산구 한남동 · 2026 10.15 — 11.03
                             </p>
-                        </div>
-                    </div>
-
-                    <span class="css-save">
-                        <input id="save-2" type="checkbox"/>
-                        <label aria-label="관심 등록" for="save-2">♡</label>
-                    </span>
-                </article>
-
-                <article
-                    class="ss-card css-popup-card"
-                    data-kind="라이프"
-                    data-region="홍대"
-                >
-                    <div class="card-media ss-card-image">
-                        <div class="poster-art p3">
-                            <strong>SOFT<br/>OBJECT</strong>
-                            <span class="mini-stamp">홍대 / 팝업</span>
-                        </div>
-                    </div>
-
-                    <div class="card-foot ss-card-info">
-                        <div>
-                            <small class="ss-card-category">홍대 / 라이프</small>
-                            <h3 class="ss-card-title">SOFT OBJECTS</h3>
-                            <p class="ss-card-meta">
+</div>
+</div>
+<span class="css-save">
+<input id="save-2" type="checkbox"/>
+<label aria-label="관심 등록" for="save-2">♡</label>
+</span>
+</article>
+<article class="ss-card css-popup-card pop-page-2" data-kind="라이프" data-region="홍대">
+<div class="card-media ss-card-image">
+<div class="poster-blank"><span>POSTER</span></div>
+</div>
+<div class="card-foot ss-card-info">
+<div>
+<small class="ss-card-category">홍대 / 라이프</small>
+<h3 class="ss-card-title">SOFT OBJECTS</h3>
+<p class="ss-card-meta">
                                 마포구 연남동 · 2026 10.17 — 11.08
                             </p>
-                        </div>
-                    </div>
-
-                    <span class="css-save">
-                        <input id="save-3" type="checkbox"/>
-                        <label aria-label="관심 등록" for="save-3">♡</label>
-                    </span>
-                </article>
-
-                <article
-                    class="ss-card css-popup-card"
-                    data-kind="아트"
-                    data-region="성수"
-                >
-                    <div class="card-media ss-card-image">
-                        <div class="poster-art p4">
-                            <strong>NEW<br/>WAVE</strong>
-                            <span class="mini-stamp">성수 / 팝업</span>
-                        </div>
-                    </div>
-
-                    <div class="card-foot ss-card-info">
-                        <div>
-                            <small class="ss-card-category">성수 / 아트</small>
-                            <h3 class="ss-card-title">NEW FREQUENCY</h3>
-                            <p class="ss-card-meta">
+</div>
+</div>
+<span class="css-save">
+<input id="save-3" type="checkbox"/>
+<label aria-label="관심 등록" for="save-3">♡</label>
+</span>
+</article>
+<article class="ss-card css-popup-card pop-page-2" data-kind="아트" data-region="성수">
+<div class="card-media ss-card-image">
+<div class="poster-blank"><span>POSTER</span></div>
+</div>
+<div class="card-foot ss-card-info">
+<div>
+<small class="ss-card-category">성수 / 아트</small>
+<h3 class="ss-card-title">NEW FREQUENCY</h3>
+<p class="ss-card-meta">
                                 성동구 성수동 · 2026 10.20 — 11.12
                             </p>
-                        </div>
-                    </div>
-
-                    <span class="css-save">
-                        <input id="save-4" type="checkbox"/>
-                        <label aria-label="관심 등록" for="save-4">♡</label>
-                    </span>
-                </article>
-
-                <article
-                    class="ss-card css-popup-card"
-                    data-kind="굿즈"
-                    data-region="홍대"
-                >
-                    <div class="card-media ss-card-image">
-                        <div class="poster-art p5">
-                            <strong>SUNDAY<br/>CLUB</strong>
-                            <span class="mini-stamp">홍대 / 팝업</span>
-                        </div>
-                    </div>
-
-                    <div class="card-foot ss-card-info">
-                        <div>
-                            <small class="ss-card-category">
+</div>
+</div>
+<span class="css-save">
+<input id="save-4" type="checkbox"/>
+<label aria-label="관심 등록" for="save-4">♡</label>
+</span>
+</article>
+<article class="ss-card css-popup-card pop-page-3" data-kind="굿즈" data-region="홍대">
+<div class="card-media ss-card-image">
+<div class="poster-blank"><span>POSTER</span></div>
+</div>
+<div class="card-foot ss-card-info">
+<div>
+<small class="ss-card-category">
                                 홍대 / 굿즈 · 마켓
                             </small>
-                            <h3 class="ss-card-title">SUNDAY COLLECTIVE</h3>
-                            <p class="ss-card-meta">
+<h3 class="ss-card-title">SUNDAY COLLECTIVE</h3>
+<p class="ss-card-meta">
                                 마포구 서교동 · 2026 10.23 — 11.15
                             </p>
-                        </div>
-                    </div>
-
-                    <span class="css-save">
-                        <input id="save-5" type="checkbox"/>
-                        <label aria-label="관심 등록" for="save-5">♡</label>
-                    </span>
-                </article>
-
-                <article
-                    class="ss-card css-popup-card"
-                    data-kind="패션"
-                    data-region="한남"
-                >
-                    <div class="card-media ss-card-image">
-                        <div class="poster-art p6">
-                            <strong>OFF<br/>LINE</strong>
-                            <span class="mini-stamp">한남 / 팝업</span>
-                        </div>
-                    </div>
-
-                    <div class="card-foot ss-card-info">
-                        <div>
-                            <small class="ss-card-category">한남 / 패션</small>
-                            <h3 class="ss-card-title">OFFLINE ARCHIVE</h3>
-                            <p class="ss-card-meta">
+</div>
+</div>
+<span class="css-save">
+<input id="save-5" type="checkbox"/>
+<label aria-label="관심 등록" for="save-5">♡</label>
+</span>
+</article>
+<article class="ss-card css-popup-card pop-page-3" data-kind="패션" data-region="한남">
+<div class="card-media ss-card-image">
+<div class="poster-blank"><span>POSTER</span></div>
+</div>
+<div class="card-foot ss-card-info">
+<div>
+<small class="ss-card-category">한남 / 패션</small>
+<h3 class="ss-card-title">OFFLINE ARCHIVE</h3>
+<p class="ss-card-meta">
                                 용산구 한남동 · 2026 10.25 — 11.18
                             </p>
-                        </div>
-                    </div>
-
-                    <span class="css-save">
-                        <input id="save-6" type="checkbox"/>
-                        <label aria-label="관심 등록" for="save-6">♡</label>
-                    </span>
-                </article>
-
-            </div>
-        </section>
-
-        <footer class="footer">
-            <strong>SCENE.</strong>
-
-            <p>서울에서 열리는 전시와 팝업을 모아보는 문화 기록.
-
-            © 2026 SCENE:SEOUL · 현재 행사 정보는 시연용입니다.</p>
-        </footer>
-
-    </main>
-
-    <a
-        aria-label="페이지 맨 위로"
-        class="ss-back-to-top"
-        href="#top"
-        title="맨 위로 이동"
-    >
-        <svg
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.7"
-            viewbox="0 0 24 24"
-        >
-            <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
-        </svg>
-    </a>
-
-    <section
-        aria-labelledby="login-title"
-        aria-modal="true"
-        class="login-preview-dialog"
-        id="login-required"
-        role="dialog"
-    >
-        <div class="login-preview-sheet">
-
-            <a
-                aria-label="닫기"
-                class="login-preview-close"
-                href="#squish-discover"
-            >×</a>
-
-            <span class="ticket-eyebrow">
-                나만의 팝업 추천
-            </span>
-
-            <h2 id="login-title">
-                로그인하고<br/>
-                내 취향을 모아보세요.
-            </h2>
-
-            <p>
-                찜해 둔 장소를 기준으로 어울리는 팝업을 소개할 예정이에요.<br/>
-                현재는 디자인 미리보기로, 실제 로그인과 AI 추천은 아직 연결되지 않았습니다.
-            </p>
-
-            <a class="login-preview-return" href="#special-ticket">
+</div>
+</div>
+<span class="css-save">
+<input id="save-6" type="checkbox"/>
+<label aria-label="관심 등록" for="save-6">♡</label>
+</span>
+</article>
+<article class="ss-card css-popup-card pop-page-4" data-kind="아트" data-region="연남">
+<div class="card-media ss-card-image">
+<div class="poster-blank"><span>POSTER</span></div>
+</div>
+<div class="card-foot ss-card-info">
+<div>
+<small class="ss-card-category">연남 / 아트</small>
+<h3 class="ss-card-title">CITY EDITION 2026</h3>
+<p class="ss-card-meta">마포구 연남동 · 2026 11.03 — 11.20</p>
+</div>
+</div>
+<span class="css-save">
+<input id="save-7" type="checkbox"/>
+<label aria-label="관심 등록" for="save-7">♡</label>
+</span>
+</article><article class="ss-card css-popup-card pop-page-4" data-kind="라이프" data-region="성수">
+<div class="card-media ss-card-image">
+<div class="poster-blank"><span>POSTER</span></div>
+</div>
+<div class="card-foot ss-card-info">
+<div>
+<small class="ss-card-category">성수 / 라이프스타일</small>
+<h3 class="ss-card-title">OBJECT LAB</h3>
+<p class="ss-card-meta">성동구 성수동 · 2026 11.06 — 11.30</p>
+</div>
+</div>
+<span class="css-save">
+<input id="save-8" type="checkbox"/>
+<label aria-label="관심 등록" for="save-8">♡</label>
+</span>
+</article><article class="ss-card css-popup-card pop-page-1" data-kind="아트" data-region="한남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">한남 / 아트</small><h3 class="ss-card-title">PAPER &amp; LIGHT</h3><p class="ss-card-meta">용산구 한남동 · 2026.11.02 — 11.21</p></div></div><span class="css-save"><input id="save-9" type="checkbox"/><label aria-label="PAPER &amp; LIGHT 관심 등록" for="save-9">♡</label></span></article><article class="ss-card css-popup-card pop-page-1" data-kind="라이프" data-region="성수"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">성수 / 라이프</small><h3 class="ss-card-title">HIDDEN GARDEN</h3><p class="ss-card-meta">성동구 성수동 · 2026.11.04 — 11.24</p></div></div><span class="css-save"><input id="save-10" type="checkbox"/><label aria-label="HIDDEN GARDEN 관심 등록" for="save-10">♡</label></span></article><article class="ss-card css-popup-card pop-page-1" data-kind="굿즈" data-region="홍대"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">홍대 / 굿즈</small><h3 class="ss-card-title">STUDIO WEEKEND</h3><p class="ss-card-meta">마포구 서교동 · 2026.11.06 — 11.29</p></div></div><span class="css-save"><input id="save-11" type="checkbox"/><label aria-label="STUDIO WEEKEND 관심 등록" for="save-11">♡</label></span></article><article class="ss-card css-popup-card pop-page-1" data-kind="아트" data-region="연남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">연남 / 아트</small><h3 class="ss-card-title">CITY OF COLOR</h3><p class="ss-card-meta">마포구 연남동 · 2026.11.08 — 12.01</p></div></div><span class="css-save"><input id="save-12" type="checkbox"/><label aria-label="CITY OF COLOR 관심 등록" for="save-12">♡</label></span></article><article class="ss-card css-popup-card pop-page-2" data-kind="굿즈" data-region="성수"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">성수 / 굿즈</small><h3 class="ss-card-title">SLOW MARKET</h3><p class="ss-card-meta">성동구 성수동 · 2026.11.10 — 11.25</p></div></div><span class="css-save"><input id="save-13" type="checkbox"/><label aria-label="SLOW MARKET 관심 등록" for="save-13">♡</label></span></article><article class="ss-card css-popup-card pop-page-2" data-kind="패션" data-region="한남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">한남 / 패션</small><h3 class="ss-card-title">ATELIER 24</h3><p class="ss-card-meta">용산구 한남동 · 2026.11.12 — 12.02</p></div></div><span class="css-save"><input id="save-14" type="checkbox"/><label aria-label="ATELIER 24 관심 등록" for="save-14">♡</label></span></article><article class="ss-card css-popup-card pop-page-2" data-kind="라이프" data-region="홍대"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">홍대 / 라이프</small><h3 class="ss-card-title">SPACE FOR YOU</h3><p class="ss-card-meta">마포구 서교동 · 2026.11.13 — 12.04</p></div></div><span class="css-save"><input id="save-15" type="checkbox"/><label aria-label="SPACE FOR YOU 관심 등록" for="save-15">♡</label></span></article><article class="ss-card css-popup-card pop-page-2" data-kind="아트" data-region="연남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">연남 / 아트</small><h3 class="ss-card-title">COLOR ARCHIVE</h3><p class="ss-card-meta">마포구 연남동 · 2026.11.14 — 12.06</p></div></div><span class="css-save"><input id="save-16" type="checkbox"/><label aria-label="COLOR ARCHIVE 관심 등록" for="save-16">♡</label></span></article><article class="ss-card css-popup-card pop-page-3" data-kind="라이프" data-region="연남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">연남 / 라이프</small><h3 class="ss-card-title">SUNDAY OBJECT</h3><p class="ss-card-meta">마포구 연남동 · 2026.11.16 — 12.06</p></div></div><span class="css-save"><input id="save-17" type="checkbox"/><label aria-label="SUNDAY OBJECT 관심 등록" for="save-17">♡</label></span></article><article class="ss-card css-popup-card pop-page-3" data-kind="굿즈" data-region="성수"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">성수 / 굿즈</small><h3 class="ss-card-title">FUTURE GOODS</h3><p class="ss-card-meta">성동구 성수동 · 2026.11.17 — 12.10</p></div></div><span class="css-save"><input id="save-18" type="checkbox"/><label aria-label="FUTURE GOODS 관심 등록" for="save-18">♡</label></span></article><article class="ss-card css-popup-card pop-page-3" data-kind="패션" data-region="한남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">한남 / 패션</small><h3 class="ss-card-title">THE SMALL EDITION</h3><p class="ss-card-meta">용산구 한남동 · 2026.11.18 — 12.12</p></div></div><span class="css-save"><input id="save-19" type="checkbox"/><label aria-label="THE SMALL EDITION 관심 등록" for="save-19">♡</label></span></article><article class="ss-card css-popup-card pop-page-3" data-kind="아트" data-region="홍대"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">홍대 / 아트</small><h3 class="ss-card-title">WEEKEND FRAME</h3><p class="ss-card-meta">마포구 서교동 · 2026.11.20 — 12.14</p></div></div><span class="css-save"><input id="save-20" type="checkbox"/><label aria-label="WEEKEND FRAME 관심 등록" for="save-20">♡</label></span></article><article class="ss-card css-popup-card pop-page-4" data-kind="라이프" data-region="홍대"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">홍대 / 라이프</small><h3 class="ss-card-title">SOFT OPENING</h3><p class="ss-card-meta">마포구 합정동 · 2026.11.21 — 12.14</p></div></div><span class="css-save"><input id="save-21" type="checkbox"/><label aria-label="SOFT OPENING 관심 등록" for="save-21">♡</label></span></article><article class="ss-card css-popup-card pop-page-4" data-kind="아트" data-region="한남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">한남 / 아트</small><h3 class="ss-card-title">ROOM 2026</h3><p class="ss-card-meta">용산구 한남동 · 2026.11.23 — 12.16</p></div></div><span class="css-save"><input id="save-22" type="checkbox"/><label aria-label="ROOM 2026 관심 등록" for="save-22">♡</label></span></article><article class="ss-card css-popup-card pop-page-4" data-kind="패션" data-region="성수"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">성수 / 패션</small><h3 class="ss-card-title">POP PARADE</h3><p class="ss-card-meta">성동구 성수동 · 2026.11.25 — 12.18</p></div></div><span class="css-save"><input id="save-23" type="checkbox"/><label aria-label="POP PARADE 관심 등록" for="save-23">♡</label></span></article><article class="ss-card css-popup-card pop-page-4" data-kind="굿즈" data-region="연남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">연남 / 굿즈</small><h3 class="ss-card-title">CITY SELECT SHOP</h3><p class="ss-card-meta">마포구 연남동 · 2026.11.27 — 12.20</p></div></div><span class="css-save"><input id="save-24" type="checkbox"/><label aria-label="CITY SELECT SHOP 관심 등록" for="save-24">♡</label></span></article></div><div aria-label="팝업 페이지 선택" class="pop-pager" role="group"><input checked="" class="pop-page-radio" id="pop-pg1" name="pop-page" type="radio"/><label aria-label="1페이지" for="pop-pg1">1</label><input class="pop-page-radio" id="pop-pg2" name="pop-page" type="radio"/><label aria-label="2페이지" for="pop-pg2">2</label><input class="pop-page-radio" id="pop-pg3" name="pop-page" type="radio"/><label aria-label="3페이지" for="pop-pg3">3</label><input class="pop-page-radio" id="pop-pg4" name="pop-page" type="radio"/><label aria-label="4페이지" for="pop-pg4">4</label></div>
+</section>
+<footer class="footer pop-brand-footer"><strong class="footer-brand">SCENE<span>:</span>SEOUL</strong><p>서울의 문화를 소개하는 웹사이트 콘텐츠 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p><small class="footer-copyright">© 2026 SCENE:SEOUL</small></footer>
+</main>
+<a aria-label="페이지 맨 위로" class="ss-back-to-top" href="#top" title="맨 위로 이동">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
+<path d="m12 19 0-14m-6 6 6-6 6 6"></path>
+</svg>
+</a>
+<section aria-labelledby="login-title" aria-modal="true" class="login-preview-dialog" id="login-required" role="dialog">
+<div class="login-preview-sheet">
+<a aria-label="닫기" class="login-preview-close" href="#squish-discover">×</a>
+<span class="ticket-eyebrow">LUCKY SCENE · 로그인 안내</span>
+<h2 id="login-title">당첨 확인은<br/>로그인이 필요해요.</h2>
+<p>세 가지 체험을 모두 완료한 뒤 로그인한 회원이 당첨 확인에 참여하는 기획입니다. 이 HTML·CSS 시안에는 실제 로그인·추첨·쿠폰 지급 기능이 연결되어 있지 않습니다.</p>
+<a class="login-preview-return" href="#special-ticket">
                 티켓으로 돌아가기 ↗
             </a>
-        </div>
-    </section>
-
+</div>
+</section>
 </body>
 </html>
