@@ -1,629 +1,647 @@
+/* 카테고리 스타일 */
 
-/* ==========================================================
-   SCENE:SEOUL — 카테고리 공통 CSS (category.css)
-
-   [파일 역할]
-   전시 / 공연 / 팝업 / 이벤트 페이지에서
-   공통으로 사용하는 카테고리 및 포스터 디자인
-
-   [구성]
-   01. 카테고리 전체 영역
-   02. 카테고리 제목 및 설명
-   03. 필터 / 검색창 배치
-   04. 카테고리 필터 버튼
-   05. 검색창
-   06. 검색 결과 표시
-   07. 포스터 카드 배치
-   08. 포스터 이미지 및 호버 효과
-   09. 포스터 정보
-   10. 찜(하트) 버튼
-   11. 반응형 디자인
-   12. 애니메이션 접근성
-
-   [주의사항]
-   - common.css를 먼저 불러와야 함
-   - 상단 대형 배너, HOT 추천 영역, Footer는 제외
-   - 각 페이지 고유 디자인은 개별 CSS에서 관리
-========================================================== */
-
-
-/* ==========================================================
-   01. 카테고리 전체 영역
-
-   - 콘텐츠 최대 너비 1470px
-   - 화면 중앙 정렬
-   - 좌우 및 하단 여백 설정
-========================================================== */
-
+/* 카테고리 목록 */
 .ss-catalog {
-  max-width: 1470px;
-  margin: 0 auto;
-  padding: 0 clamp(22px,5vw,80px) 110px;
+    max-width: 1470px;
+    margin: 0 auto;
+    padding: 0 clamp(22px,5vw,80px) 110px;
 }
 
-
-/* ==========================================================
-   02. 카테고리 제목 및 설명
-
-   예시:
-   EXHIBITIONS             서울의 다양한 전시를 만나보세요
-
-   - 제목과 설명을 양쪽으로 배치
-   - 화면 크기에 따라 제목 크기 자동 조절
-========================================================== */
-
-/* 제목과 설명을 배치하는 전체 영역 */
 .ss-catalog-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 24px;
-  margin: 0 0 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin: 0 0 26px;
 }
 
-/* 카테고리 메인 제목 */
 .ss-catalog-title {
-  margin: 0;
-  font-size: clamp(32px,4.5vw,68px);
-  font-weight: 900;
-  letter-spacing: -.07em;
-  line-height: 1.1;
+    margin: 0;
+    font-size: clamp(32px,4.5vw,68px);
+    font-weight: 900;
+    letter-spacing: -.07em;
+    line-height: 1.1;
 }
 
-/* 카테고리 오른쪽 설명 */
 .ss-catalog-desc {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.8;
-  color: var(--ss-muted);
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--ss-muted);
 }
-
-
-/* ==========================================================
-   03. 필터 / 검색창 전체 배치
-
-   예시:
-   [전체] [미술] [사진] [체험]       [검색창]
-
-   - 왼쪽에는 필터 버튼
-   - 오른쪽에는 검색창
-   - 위아래 구분선 표시
-========================================================== */
 
 .ss-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 22px;
-
-  padding: 25px 0;
-
-  border-top: 1px solid var(--ss-line);
-  border-bottom: 1px solid var(--ss-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    padding: 25px 0;
+    border-top: 1px solid var(--ss-line);
+    border-bottom: 1px solid var(--ss-line);
 }
 
-
-/* ==========================================================
-   04. 카테고리 필터 버튼
-
-   예시:
-   [전체] [미술] [사진] [디자인]
-
-   - 둥근 캡슐 형태
-   - 마우스를 올리면 파란색 강조
-   - 선택된 버튼은 어두운 배경으로 표시
-========================================================== */
-
-/* 필터 버튼들을 가로로 배치 */
 .ss-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-/* 필터 버튼 기본 디자인 */
 .ss-filter {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 12px 17px;
-
-  border: 1px solid #D6D9DB;
-  border-radius: 999px;
-
-  background: transparent;
-  color: var(--ss-ink);
-
-  font-size: 12px;
-  font-weight: 800;
-
-  cursor: pointer;
-
-  transition:
-    background .25s,
-    border-color .25s,
-    color .25s,
-    transform .25s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 17px;
+    border: 1px solid #D6D9DB;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ss-ink);
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .25s, border-color .25s, color .25s, transform .25s;
 }
 
-/* 마우스를 올렸을 때 */
 .ss-filter:hover {
-  background: #FFF;
-  border-color: var(--ss-blue);
-  color: var(--ss-blue);
-  transform: translateY(-2px);
+    background: #FFF;
+    border-color: var(--ss-blue);
+    color: var(--ss-blue);
+    transform: translateY(-2px);
 }
 
-/* 현재 선택된 필터 버튼 */
 .ss-filter.is-active,
 .ss-filter[aria-pressed="true"],
 .ss-filter[aria-selected="true"] {
-  background: var(--ss-ink);
-  border-color: var(--ss-ink);
-  color: #FFF;
+    background: var(--ss-ink);
+    border-color: var(--ss-ink);
+    color: #FFF;
 }
 
-
-/* ==========================================================
-   05. 검색창 디자인
-
-   - 검색창 하단에 선 표시
-   - 기본 배경 투명
-   - 검색 아이콘은 공통 파란색 사용
-========================================================== */
-
-/* 검색창 전체 영역 */
 .ss-search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  border-bottom: 1px solid #9BA5B1;
-  padding: 9px 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #9BA5B1;
+    padding: 9px 4px;
 }
 
-/* 검색어 입력 부분 */
 .ss-search input {
-  width: 210px;
-  max-width: 55vw;
-
-  border: 0;
-  outline: none;
-
-  background: transparent;
-  color: var(--ss-ink);
-
-  font-size: 12px;
+    width: 210px;
+    max-width: 55vw;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--ss-ink);
+    font-size: 12px;
 }
 
-/* 키보드로 검색창을 선택했을 때 */
 .ss-search input:focus-visible {
-  outline: 2px solid var(--ss-blue);
-  outline-offset: 4px;
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 4px;
 }
 
-/* 돋보기 검색 아이콘 */
 .ss-search-icon {
-  font-size: 20px;
-  color: var(--ss-blue);
-  line-height: 1;
+    font-size: 20px;
+    color: var(--ss-blue);
+    line-height: 1;
 }
-
-
-/* ==========================================================
-   06. 검색 결과 및 콘텐츠 개수 표시
-
-   예시:
-   SHOWING 6 RESULTS
-
-   - 필터 아래, 포스터 카드 위에 표시
-========================================================== */
 
 .ss-catalog-status {
-  padding: 22px 0 25px;
-
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .06em;
-
-  color: var(--ss-muted);
+    padding: 22px 0 25px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    color: var(--ss-muted);
 }
 
-
-/* ==========================================================
-   07. 포스터 카드 배치
-
-   PC 기준:
-   [카드 1] [카드 2] [카드 3]
-   [카드 4] [카드 5] [카드 6]
-
-   - 기본 3열 배치
-   - 카드 개수가 늘어나면 다음 행에 자동 배치
-========================================================== */
-
-/* 포스터 카드 전체 그리드 */
 .ss-card-grid {
-  display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  gap: 22px 20px;
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 22px 20px;
 }
 
-/* 개별 포스터 카드 */
 .ss-card {
-  position: relative;
-  min-width: 0;
+    position: relative;
+    min-width: 0;
 }
 
-
-/* ==========================================================
-   08. 포스터 이미지 및 호버 효과
-
-   - 이미지 크기 반응형 조절
-   - 마우스를 올리면 살짝 위로 이동
-   - 그림자 효과 추가
-========================================================== */
-
-/* 포스터 이미지 영역 */
 .ss-card-image {
-  display: block;
-  position: relative;
-
-  height: clamp(180px,22vw,285px);
-
-  overflow: hidden;
-  background: #E6EAF2;
-
-  transition:
-    box-shadow .32s var(--ss-ease),
-    transform .32s var(--ss-ease);
+    display: block;
+    position: relative;
+    height: clamp(180px,22vw,285px);
+    overflow: hidden;
+    background: #E6EAF2;
+    transition: box-shadow .32s var(--ss-ease), transform .32s var(--ss-ease);
 }
 
-/* 마우스를 올리거나 카드 내부에 포커스가 있을 때 */
 .ss-card:hover .ss-card-image,
 .ss-card:focus-within .ss-card-image {
-  box-shadow: 0 18px 32px rgba(21,36,83,.22);
-  transform: translateY(-4px);
+    box-shadow: 0 18px 32px rgba(21,36,83,.22);
+    transform: translateY(-4px);
 }
 
-/* 카테고리 카드의 공통 호버: 전시·공연·팝업·이벤트에서 재사용 */
 .ss-catalog .ss-card .ss-card-image {
-  transform-origin: center;
-  will-change: transform;
-  transition: transform .35s var(--ss-ease), box-shadow .35s var(--ss-ease);
+    transform-origin: center;
+    will-change: transform;
+    transition: transform .35s var(--ss-ease), box-shadow .35s var(--ss-ease);
 }
 
 .ss-catalog .ss-card:hover .ss-card-image,
 .ss-catalog .ss-card:focus-within .ss-card-image {
-  transform: translateY(-5px) scale(1.045);
-  box-shadow: 0 22px 40px rgba(21,36,83,.28);
-  position: relative;
-  z-index: 3;
+    transform: translateY(-5px) scale(1.045);
+    box-shadow: 0 22px 40px rgba(21,36,83,.28);
+    position: relative;
+    z-index: 3;
 }
 
-/* 실제 포스터 이미지 */
 .ss-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-
-/* ==========================================================
-   09. 포스터 하단 정보
-
-   예시:
-   EXHIBITION
-   전시 제목
-   2026.10.01 ~ 2026.10.31
-
-   - 왼쪽: 카테고리 / 제목 / 날짜
-   - 오른쪽: 찜(하트) 버튼
-========================================================== */
-
-/* 카드 하단 정보 전체 배치 */
 .ss-card-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 0 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0 5px;
 }
 
-/* EXHIBITION / PERFORMANCE 등 카테고리 */
 .ss-card-category {
-  color: var(--ss-blue);
-  font-size: 11px;
-  font-weight: 900;
+    color: var(--ss-blue);
+    font-size: 11px;
+    font-weight: 900;
 }
 
-/* 콘텐츠 제목 */
 .ss-card-title {
-  margin: 8px 0;
-  font-size: clamp(17px,1.7vw,23px);
-  font-weight: 800;
-  letter-spacing: -.06em;
+    margin: 8px 0;
+    font-size: clamp(17px,1.7vw,23px);
+    font-weight: 800;
+    letter-spacing: -.06em;
 }
 
-/* 날짜 / 장소 등 부가 정보 */
 .ss-card-meta {
-  margin: 0;
-  color: var(--ss-muted);
-  font-size: 11px;
-  line-height: 1.6;
+    margin: 0;
+    color: var(--ss-muted);
+    font-size: 11px;
+    line-height: 1.6;
 }
 
-
-/* ==========================================================
-   10. 찜(하트) 버튼
-
-   - 포스터 정보 오른쪽에 배치
-   - 원형 버튼
-   - 선택하면 노란색 배경
-========================================================== */
-
-/* 하트 버튼 기본 디자인 */
 .ss-heart {
-  flex: none;
-  display: grid;
-  place-items: center;
-
-  width: 42px;
-  height: 42px;
-
-  border: 1px solid #CFD2D5;
-  border-radius: 50%;
-
-  background: transparent;
-  color: var(--ss-ink);
-
-  font-size: 23px;
-  line-height: 1;
-
-  cursor: pointer;
-
-  transition:
-    transform .25s,
-    background .25s,
-    border-color .25s;
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #CFD2D5;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ss-ink);
+    font-size: 23px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform .25s, background .25s, border-color .25s;
 }
 
-/* 하트 버튼에 마우스를 올렸을 때 */
 .ss-heart:hover {
-  transform: scale(1.12);
-  background: white;
+    transform: scale(1.12);
+    background: white;
 }
 
-/* 찜한 상태의 하트 버튼 */
 .ss-heart.is-saved,
 .ss-heart[aria-pressed="true"] {
-  background: var(--ss-yellow);
-  border-color: var(--ss-yellow);
+    background: var(--ss-yellow);
+    border-color: var(--ss-yellow);
 }
 
-/* 키보드로 하트 / 필터 버튼 선택 시 테두리 표시 */
 .ss-heart:focus-visible,
 .ss-filter:focus-visible {
-  outline: 2px solid var(--ss-blue);
-  outline-offset: 3px;
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 3px;
 }
-
-
-/* ==========================================================
-   11. 반응형 디자인
-
-   화면 크기에 따라 포스터 카드 개수 자동 조절
-
-   PC       : 3열
-   태블릿   : 2열
-   모바일   : 1열
-========================================================== */
-
-
-/* ----------------------------------------------------------
-   11-1. 태블릿 (1100px 이하)
-
-   포스터 카드 3열 → 2열
----------------------------------------------------------- */
 
 @media (max-width: 1100px) {
-  .ss-card-grid {
-    grid-template-columns: repeat(2,minmax(0,1fr));
-  }
+    .ss-card-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
 }
-
-
-/* ----------------------------------------------------------
-   11-2. 모바일 (670px 이하)
-
-   - 포스터 카드 1열 배치
-   - 제목과 설명 세로 배치
-   - 검색창 너비 확장
----------------------------------------------------------- */
 
 @media (max-width: 670px) {
+    .ss-catalog {
+        padding: 0 20px 75px;
+    }
 
-  /* 전체 영역 좌우 및 하단 여백 */
-  .ss-catalog {
-    padding: 0 20px 75px;
-  }
+    .ss-catalog-head {
+        display: block;
+    }
 
-  /* 제목과 설명을 위아래로 배치 */
-  .ss-catalog-head {
-    display: block;
-  }
+    .ss-catalog-desc {
+        margin-top: 12px;
+    }
 
-  .ss-catalog-desc {
-    margin-top: 12px;
-  }
+    .ss-toolbar {
+        gap: 18px;
+    }
 
-  /* 필터 / 검색창 간격 */
-  .ss-toolbar {
-    gap: 18px;
-  }
+    .ss-search {
+        width: 100%;
+    }
 
-  /* 검색창을 화면 너비에 맞춤 */
-  .ss-search {
-    width: 100%;
-  }
+    .ss-search input {
+        width: 100%;
+        max-width: none;
+    }
 
-  .ss-search input {
-    width: 100%;
-    max-width: none;
-  }
+    .ss-card-grid {
+        grid-template-columns: 1fr;
+        gap: 27px;
+    }
 
-  /* 포스터 카드 1열 배치 */
-  .ss-card-grid {
-    grid-template-columns: 1fr;
-    gap: 27px;
-  }
+    .ss-card-image {
+        height: clamp(280px,76vw,410px);
+    }
 
-  /* 모바일 포스터 이미지 높이 */
-  .ss-card-image {
-    height: clamp(280px,76vw,410px);
-  }
-
-  /* 모바일 카드 제목 크기 */
-  .ss-card-title {
-    font-size: 23px;
-  }
+    .ss-card-title {
+        font-size: 23px;
+    }
 
 }
-
-
-/* ==========================================================
-   12. 접근성 — 애니메이션 최소화
-
-   사용자가 OS에서 '동작 줄이기'를 설정한 경우
-   카드 / 필터 / 하트 버튼의 전환 효과 제거
-========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
+    .ss-card-image,
+    .ss-filter,
+    .ss-heart {
+        transition: none;
+    }
 
-  .ss-card-image,
-  .ss-filter,
-  .ss-heart {
-    transition: none;
-  }
+    .ss-catalog .ss-card .ss-card-image {
+        transition: none;
+    }
 
-  .ss-catalog .ss-card .ss-card-image {
-    transition: none;
-  }
-
-  .ss-catalog .ss-card:hover .ss-card-image,
-  .ss-catalog .ss-card:focus-within .ss-card-image {
-    transform: none;
-  }
+    .ss-catalog .ss-card:hover .ss-card-image,
+    .ss-catalog .ss-card:focus-within .ss-card-image {
+        transform: none;
+    }
 
 }
 
+.ss-catalog .ss-catalog-controls {
+    position: relative;
+}
 
-/* ==========================================================
-   13. 공통 카탈로그 확장형 (전시/공연/팝업/이벤트 재사용)
-   마크업 클래스: ss-catalog-controls / ss-catalog-card / ss-page-nav
-   분류별 실제 필터링 규칙만 해당 페이지 CSS에서 작성합니다.
-   ========================================================== */
-.ss-catalog .ss-catalog-controls {position:relative;}
 .ss-catalog .ss-filter-input,
 .ss-catalog .ss-page-radio {
-  position:absolute; width:1px; height:1px; margin:0; padding:0;
-  overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
 }
-.ss-catalog .ss-catalog-controls .ss-toolbar {gap:18px;padding:19px 0;}
+
+.ss-catalog .ss-catalog-controls .ss-toolbar {
+    gap: 18px;
+    padding: 19px 0;
+}
+
 .ss-catalog .ss-catalog-controls .ss-filter {
-  padding:9px 16px; min-height:36px; line-height:1.2;
-  background:rgba(255,255,255,.78); border:1px solid var(--ss-line);
-  border-radius:999px; font-size:12px; font-weight:600;
-  transform:none; transition:color .2s,background .2s,border-color .2s;
+    padding: 9px 16px;
+    min-height: 36px;
+    line-height: 1.2;
+    background: rgba(255,255,255,.78);
+    border: 1px solid var(--ss-line);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    transform: none;
+    transition: color .2s,background .2s,border-color .2s;
 }
+
 .ss-catalog .ss-catalog-controls .ss-filter:hover {
-  color:var(--ss-blue); background:#eaf0fc; border-color:#c5d2f0;
-  transform:none;
+    color: var(--ss-blue);
+    background: #eaf0fc;
+    border-color: #c5d2f0;
+    transform: none;
 }
+
 .ss-catalog .ss-filter-input:checked + .ss-filter {
-  background:var(--ss-yellow); border-color:var(--ss-yellow); color:var(--ss-ink);font-weight:800;
+    background: var(--ss-yellow);
+    border-color: var(--ss-yellow);
+    color: var(--ss-ink);
+    font-weight: 800;
 }
-.ss-catalog .ss-filter-input:focus-visible + .ss-filter {outline:2px solid var(--ss-blue);outline-offset:3px;}
-.ss-catalog .ss-search {gap:10px;min-width:210px;}
-.ss-catalog .ss-search input {width:min(230px,40vw);font-size:12px;}
-.ss-catalog .ss-search-icon {width:20px;height:20px;flex:none;color:var(--ss-blue);}
+
+.ss-catalog .ss-filter-input:focus-visible + .ss-filter {
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 3px;
+}
+
+.ss-catalog .ss-search {
+    gap: 10px;
+    min-width: 210px;
+}
+
+.ss-catalog .ss-search input {
+    width: min(230px,40vw);
+    font-size: 12px;
+}
+
+.ss-catalog .ss-search-icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    color: var(--ss-blue);
+}
+
 .ss-catalog .ss-catalog-status {
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:10px;padding:17px 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 17px 0 20px;
 }
-.ss-catalog .ss-catalog-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 20px;}
+
+.ss-catalog .ss-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 28px 20px;
+}
+
 .ss-catalog .ss-catalog-card {
-  position:relative;min-width:0;background:var(--ss-white);
-  box-shadow:0 2px 8px rgba(21,27,39,.035);
-  transition:transform .32s var(--ss-ease),box-shadow .32s ease;
+    position: relative;
+    min-width: 0;
+    background: var(--ss-white);
+    box-shadow: 0 2px 8px rgba(21,27,39,.035);
+    transition: transform .32s var(--ss-ease),box-shadow .32s ease;
 }
+
 .ss-catalog .ss-catalog-card:hover,
 .ss-catalog .ss-catalog-card:focus-within {
-  transform:translateY(-5px);box-shadow:0 10px 24px rgba(21,27,39,.085);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(21,27,39,.085);
 }
+
 .ss-catalog .ss-catalog-card .ss-card-image {
-  height:clamp(190px,22vw,285px);display:grid;place-items:center;
-  background:#e6eaf2;overflow:hidden;
-  transition:transform .35s var(--ss-ease),box-shadow .35s var(--ss-ease);
+    height: clamp(190px,22vw,285px);
+    display: grid;
+    place-items: center;
+    background: #e6eaf2;
+    overflow: hidden;
+    transition: transform .35s var(--ss-ease),box-shadow .35s var(--ss-ease);
 }
+
 .ss-catalog .ss-catalog-card:hover .ss-card-image,
 .ss-catalog .ss-catalog-card:focus-within .ss-card-image {
-  transform:translateY(-3px) scale(1.025);box-shadow:0 10px 25px rgba(21,36,83,.12);
+    transform: translateY(-3px) scale(1.025);
+    box-shadow: 0 10px 25px rgba(21,36,83,.12);
 }
-.ss-catalog .ss-poster-placeholder {font-size:10px;letter-spacing:.24em;font-weight:500;color:#a2adbd;}
-.ss-catalog .ss-catalog-card-info {display:block;padding:16px 18px 18px;}
-.ss-catalog .ss-card-topline {display:flex;align-items:center;justify-content:space-between;gap:12px;}
-.ss-catalog .ss-card-titleline {display:flex;align-items:center;justify-content:space-between;gap:10px;}
-.ss-catalog .ss-catalog-card .ss-card-category {font-size:10px;}
-.ss-catalog .ss-catalog-card .ss-card-title {margin:12px 0 9px;font-size:clamp(17px,1.55vw,21px);line-height:1.3;letter-spacing:-.045em;}
-.ss-catalog .ss-card-description {min-height:44px;margin:0 0 12px;color:var(--ss-muted);font-size:12px;line-height:1.6;}
-.ss-catalog .ss-catalog-card .ss-card-meta {font-size:11px;line-height:1.6;}
-.ss-catalog .ss-heart-toggle {position:relative;flex:none;}
-.ss-catalog .ss-heart-toggle input {position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;}
-.ss-catalog .ss-heart-toggle span::before {content:'♡';font-size:24px;}
-.ss-catalog .ss-heart-toggle:has(input:checked) {background:var(--ss-yellow);border-color:var(--ss-yellow);}
-.ss-catalog .ss-heart-toggle:has(input:checked) span::before {content:'♥';}
-.ss-catalog .ss-heart-toggle:has(input:focus-visible) {outline:2px solid var(--ss-blue);outline-offset:3px;}
-.ss-catalog .ss-card-details {margin-top:14px;border-top:1px solid var(--ss-line);}
+
+.ss-catalog .ss-poster-placeholder {
+    font-size: 10px;
+    letter-spacing: .24em;
+    font-weight: 500;
+    color: #a2adbd;
+}
+
+.ss-catalog .ss-catalog-card-info {
+    display: block;
+    padding: 16px 18px 18px;
+}
+
+.ss-catalog .ss-card-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.ss-catalog .ss-card-titleline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.ss-catalog .ss-catalog-card .ss-card-category {
+    font-size: 10px;
+}
+
+.ss-catalog .ss-catalog-card .ss-card-title {
+    margin: 12px 0 9px;
+    font-size: clamp(17px,1.55vw,21px);
+    line-height: 1.3;
+    letter-spacing: -.045em;
+}
+
+.ss-catalog .ss-card-description {
+    min-height: 44px;
+    margin: 0 0 12px;
+    color: var(--ss-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.ss-catalog .ss-catalog-card .ss-card-meta {
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.ss-catalog .ss-heart-toggle {
+    position: relative;
+    flex: none;
+}
+
+.ss-catalog .ss-heart-toggle input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.ss-catalog .ss-heart-toggle span::before {
+    content: "♡";
+    font-size: 24px;
+}
+
+.ss-catalog .ss-heart-toggle:has(input:checked) {
+    background: var(--ss-yellow);
+    border-color: var(--ss-yellow);
+}
+
+.ss-catalog .ss-heart-toggle:has(input:checked) span::before {
+    content: "♥";
+}
+
+.ss-catalog .ss-heart-toggle:has(input:focus-visible) {
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 3px;
+}
+
+.ss-catalog .ss-card-details {
+    margin-top: 14px;
+    border-top: 1px solid var(--ss-line);
+}
+
 .ss-catalog .ss-card-details summary {
-  list-style:none;display:flex;align-items:center;justify-content:space-between;
-  padding-top:12px;cursor:pointer;color:var(--ss-ink);
-  font-size:10px;font-weight:800;letter-spacing:.07em;transition:color .2s;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    cursor: pointer;
+    color: var(--ss-ink);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .07em;
+    transition: color .2s;
 }
-.ss-catalog .ss-card-details summary::-webkit-details-marker {display:none;}
-.ss-catalog .ss-card-details summary span {color:var(--ss-blue);font-size:18px;transition:transform .2s;}
-.ss-catalog .ss-card-details summary:hover {color:var(--ss-blue);}
-.ss-catalog .ss-card-details summary:hover span {transform:translate(3px,-3px);}
-.ss-catalog .ss-card-more {padding:14px 0 2px;font-size:11px;line-height:1.8;color:var(--ss-muted);}
-.ss-catalog .ss-card-more strong {color:var(--ss-ink);font-size:12px;}
-.ss-catalog .ss-card-more p {margin:6px 0;}
-.ss-catalog .ss-card-more small {font-size:10px;}
-.ss-catalog .ss-page-nav {display:flex;align-items:center;justify-content:center;gap:14px;margin:46px auto 3px;}
-.ss-catalog .ss-page-numbers {display:flex;align-items:center;gap:8px;}
+
+.ss-catalog .ss-card-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.ss-catalog .ss-card-details summary span {
+    color: var(--ss-blue);
+    font-size: 18px;
+    transition: transform .2s;
+}
+
+.ss-catalog .ss-card-details summary:hover {
+    color: var(--ss-blue);
+}
+
+.ss-catalog .ss-card-details summary:hover span {
+    transform: translate(3px,-3px);
+}
+
+.ss-catalog .ss-card-more {
+    padding: 14px 0 2px;
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--ss-muted);
+}
+
+.ss-catalog .ss-card-more strong {
+    color: var(--ss-ink);
+    font-size: 12px;
+}
+
+.ss-catalog .ss-card-more p {
+    margin: 6px 0;
+}
+
+.ss-catalog .ss-card-more small {
+    font-size: 10px;
+}
+
+.ss-catalog .ss-page-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 46px auto 3px;
+}
+
+.ss-catalog .ss-page-numbers {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .ss-catalog .ss-page-numbers label {
-  display:grid;place-items:center;width:40px;height:40px;border-radius:50%;
-  font-size:14px;font-weight:700;color:#4b525d;cursor:pointer;transition:background .2s,color .2s;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    color: #4b525d;
+    cursor: pointer;
+    transition: background .2s,color .2s;
 }
-.ss-catalog .ss-page-numbers label:hover {background:var(--ss-yellow);color:var(--ss-ink);}
+
+.ss-catalog .ss-page-numbers label:hover {
+    background: var(--ss-yellow);
+    color: var(--ss-ink);
+}
+
 .ss-catalog .ss-page-arrow {
-  display:none;align-items:center;justify-content:center;
-  width:30px;height:38px;cursor:pointer;font-size:25px;font-weight:400;
-  color:var(--ss-muted);background:transparent;border:0;border-radius:0;
-  transition:color .2s,transform .2s;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 38px;
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 400;
+    color: var(--ss-muted);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    transition: color .2s,transform .2s;
 }
-.ss-catalog .ss-page-arrow:hover {color:var(--ss-blue);transform:scale(1.2);}
-.ss-catalog .ss-page-arrow.is-disabled {opacity:.3;cursor:default;}
-.ss-catalog .ss-page-arrow.is-disabled:hover {color:var(--ss-muted);transform:none;}
-@media(max-width:1100px) and (min-width:671px){.ss-catalog .ss-catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
-@media(max-width:670px){
-  .ss-catalog .ss-catalog-grid{grid-template-columns:1fr;gap:25px;}
-  .ss-catalog .ss-catalog-card .ss-card-image{height:clamp(250px,75vw,410px);}
-  .ss-catalog .ss-catalog-controls .ss-search{width:100%;}
-  .ss-catalog .ss-catalog-controls .ss-search input{width:100%;max-width:none;}
+
+.ss-catalog .ss-page-arrow:hover {
+    color: var(--ss-blue);
+    transform: scale(1.2);
 }
-@media(prefers-reduced-motion:reduce){
-  .ss-catalog .ss-catalog-card,.ss-catalog .ss-page-arrow,.ss-catalog .ss-page-numbers label{transition:none;}
-  .ss-catalog .ss-catalog-card:hover{transform:none;}
+
+.ss-catalog .ss-page-arrow.is-disabled {
+    opacity: .3;
+    cursor: default;
+}
+
+.ss-catalog .ss-page-arrow.is-disabled:hover {
+    color: var(--ss-muted);
+    transform: none;
+}
+
+@media (max-width:1100px) and (min-width:671px) {
+    .ss-catalog .ss-catalog-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media (max-width:670px) {
+    .ss-catalog .ss-catalog-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .ss-catalog .ss-catalog-card .ss-card-image {
+        height: clamp(250px,75vw,410px);
+    }
+
+    .ss-catalog .ss-catalog-controls .ss-search {
+        width: 100%;
+    }
+
+    .ss-catalog .ss-catalog-controls .ss-search input {
+        width: 100%;
+        max-width: none;
+    }
+
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .ss-catalog .ss-catalog-card,.ss-catalog .ss-page-arrow,.ss-catalog .ss-page-numbers label {
+        transition: none;
+    }
+
+    .ss-catalog .ss-catalog-card:hover {
+        transform: none;
+    }
+
 }
