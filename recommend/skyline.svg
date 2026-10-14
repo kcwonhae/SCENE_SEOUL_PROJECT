@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 180" width="1600" height="180" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6F4EF" stop-opacity="0"/>
+      <stop offset="1" stop-color="#F6F4EF" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <!-- 해(달) -->
+  <circle cx="1210" cy="78" r="34" fill="#FFDB63" opacity=".75"/>
+  <!-- 먼 산 능선 (북한산/인왕산 느낌) -->
+  <path d="M0 120 L90 104 L170 84 L230 98 L310 62 L380 90 L450 74 L540 104 L640 118 L1000 122 L1180 108 L1260 86 L1340 70 L1420 92 L1500 108 L1600 120 L1600 180 L0 180Z" fill="#4666B0" opacity=".10"/>
+  <!-- 남산과 타워 -->
+  <g fill="#4666B0" opacity=".22">
+    <path d="M360 180 C420 120 520 92 600 100 C680 108 740 140 800 180Z"/>
+    <rect x="563" y="40" width="4" height="62"/>
+    <rect x="564" y="22" width="2" height="18"/>
+    <ellipse cx="565" cy="62" rx="12" ry="5"/>
+  </g>
+  <!-- 도시 스카이라인 -->
+  <g fill="#4666B0" opacity=".28">
+    <rect x="640" y="140" width="24" height="20"/><rect x="670" y="128" width="22" height="32"/><rect x="700" y="144" width="28" height="16"/>
+    <rect x="740" y="136" width="26" height="24"/><rect x="780" y="148" width="28" height="12"/>
+    <rect x="820" y="128" width="30" height="32"/><rect x="856" y="114" width="26" height="46"/><rect x="886" y="134" width="34" height="26"/>
+    <rect x="924" y="104" width="28" height="56"/><rect x="956" y="122" width="36" height="38"/><rect x="998" y="140" width="30" height="20"/>
+    <polygon points="1086,160 1094,60 1100,10 1106,60 1114,160"/>
+    <rect x="1130" y="118" width="30" height="42"/><rect x="1166" y="98" width="26" height="62"/><rect x="1196" y="124" width="34" height="36"/>
+    <rect x="1236" y="108" width="28" height="52"/><rect x="1270" y="134" width="40" height="26"/><rect x="1316" y="116" width="30" height="44"/>
+    <rect x="1352" y="140" width="36" height="20"/><rect x="1394" y="126" width="30" height="34"/><rect x="1430" y="142" width="34" height="18"/><rect x="1470" y="132" width="28" height="28"/>
+  </g>
+  <!-- 불 켜진 창 -->
+  <g fill="#FFDB63" opacity=".9">
+    <rect x="862" y="124" width="4" height="4"/><rect x="892" y="144" width="4" height="4"/><rect x="930" y="112" width="4" height="4"/><rect x="938" y="124" width="4" height="4"/>
+    <rect x="962" y="132" width="4" height="4"/><rect x="1136" y="128" width="4" height="4"/><rect x="1142" y="140" width="4" height="4"/><rect x="1172" y="108" width="4" height="4"/>
+    <rect x="1204" y="134" width="4" height="4"/><rect x="1240" y="118" width="4" height="4"/><rect x="1278" y="144" width="4" height="4"/><rect x="1322" y="126" width="4" height="4"/><rect x="1400" y="136" width="4" height="4"/>
+  </g>
+  <!-- 한강 -->
+  <path d="M0 158 Q100 150 200 158 T400 158 T600 158 T800 158 T1000 158 T1200 158 T1400 158 T1600 158 L1600 180 L0 180Z" fill="#4666B0" opacity=".14"/>
+  <rect x="0" y="146" width="1600" height="34" fill="url(#fade)"/>
+</svg>
