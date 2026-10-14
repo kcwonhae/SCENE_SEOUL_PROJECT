@@ -1,0 +1,990 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap');
+/* =====================================================
+   SCENE.SEOUL - 공연 페이지
+   공통 디자인(폰트, 색 변수, 상단 헤더)은 ../css/common.css 에서 가져옵니다.
+   이 파일에는 이 페이지만의 디자인만 있습니다.
+   ===================================================== */
+
+/* ---------- 1. 이 페이지에서 쓰는 이름 → common.css 변수에 연결 ---------- */
+:root {
+  --white: var(--ss-white);
+  --bg: #ECE9E1;
+  --line: var(--ss-line);
+  --mute: var(--ss-muted);
+  --text: #4B525D;
+  --ink: var(--ss-ink);
+  --blue: var(--ss-blue);
+  --yellow: var(--ss-yellow);
+  --radius: 12px;
+  --header-h: var(--ss-header-height);
+  /* 히어로 + 캐러셀이 하나로 이어지는 배경: 위(top) → 가운데(mid) → 아래(페이지 배경색) */
+  --stage-top: #F8F3EA;
+  --stage-mid: #F1ECE3;
+  --stage-end: var(--ss-paper);
+}
+
+/* ---------- 2. 기본 ---------- */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 200;
+  padding: .6rem 1rem;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.skip:focus {
+  top: 12px;
+}
+
+/* ---------- 본문 기본 글자 크기: 팀 규칙 14px (common.css에 아직 없어서 여기서 지정) ---------- */
+.ss-page {
+  font-size: 14px;
+}
+
+/* ---------- 3. 푸터 (메인 페이지와 같은 디자인) ---------- */
+footer {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 5%;
+  margin-top: 96px;
+  background: var(--ss-yellow);
+}
+
+footer strong {
+  font-size: 28px;
+  letter-spacing: -.09em;
+}
+
+footer strong span {
+  color: var(--ss-blue);
+}
+
+footer p,
+footer small {
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- 4. 카테고리 영역 (구조는 category.css가 담당, 여기는 공연만의 추가 규칙) ---------- */
+.anchor {
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+/* #id 링크용 착지점 (스크롤 위치 보정은 common.css의 scroll-padding-top) */
+.ss-catalog {
+  display: flex;
+  flex-direction: column;
+  counter-reset: shown;
+  padding-top: 24px;
+}
+
+.ss-toolbar {
+  order: 2;
+  position: relative;
+  z-index: 20;
+}
+
+.ss-card-grid {
+  order: 4;
+}
+
+.ss-catalog-status {
+  order: 3;
+}
+
+.pager {
+  order: 5;
+}
+
+/* 보이는 카드 수 세기: 숨겨진(display:none) 카드는 세지 않음 */
+.ss-card {
+  counter-increment: shown;
+}
+
+.count::before {
+  content: counter(shown);
+}
+
+/* 페이지 번호: 장르를 고르지 않은 평소 상태에서는 선택한 페이지의 카드 6장만 보임 */
+body:has(#pg1:checked):not(:has(.anchor:not(#all):target)) .ss-card:not(.p1),
+body:has(#pg2:checked):not(:has(.anchor:not(#all):target)) .ss-card:not(.p2),
+body:has(#pg3:checked):not(:has(.anchor:not(#all):target)) .ss-card:not(.p3),
+body:has(#pg4:checked):not(:has(.anchor:not(#all):target)) .ss-card:not(.p4) {
+  display: none;
+}
+
+/* 장르/세부 카테고리를 고르면 해당 공연 전체를 보여주고 'ALL' 표시와 페이지 번호는 숨김 */
+body:has(.anchor:not(#all):target) :is(.pager, .hot-label) {
+  display: none;
+}
+
+/* 장르 필터 (장르 탭과 세부 카테고리 모두) */
+body:has(:is(#concert, #concert-all, #concert-domestic, #concert-global, #concert-festival):target) .ss-card:not([data-genre="concert"]),
+body:has(:is(#musical, #musical-all, #musical-licensed, #musical-creative):target) .ss-card:not([data-genre="musical"]),
+body:has(:is(#play, #play-all, #play-daehakro, #play-etc):target) .ss-card:not([data-genre="play"]),
+body:has(:is(#classic, #classic-all, #classic-classical, #classic-opera, #classic-dance, #classic-gugak):target) .ss-card:not([data-genre="classic"]),
+/* 세부 카테고리 필터 */
+body:has(#concert-domestic:target) .ss-card:not([data-sub="domestic"]),
+body:has(#concert-global:target) .ss-card:not([data-sub="global"]),
+body:has(#concert-festival:target) .ss-card:not([data-sub="festival"]),
+body:has(#musical-licensed:target) .ss-card:not([data-sub="licensed"]),
+body:has(#musical-creative:target) .ss-card:not([data-sub="creative"]),
+body:has(#play-daehakro:target) .ss-card:not([data-sub="daehakro"]),
+body:has(#play-etc:target) .ss-card:not([data-sub="etc"]),
+body:has(#classic-classical:target) .ss-card:not([data-sub="classical"]),
+body:has(#classic-opera:target) .ss-card:not([data-sub="opera"]),
+body:has(#classic-dance:target) .ss-card:not([data-sub="dance"]),
+body:has(#classic-gugak:target) .ss-card:not([data-sub="gugak"]) {
+  display: none;
+}
+
+/* 현재 선택된 장르 버튼 = category.css의 .is-active 와 같은 모양 */
+body:not(:has(:target)) .ss-filter[href="#all"],
+body:has(#all:target) .ss-filter[href="#all"],
+body:has(:is(#concert, #concert-all, #concert-domestic, #concert-global, #concert-festival):target) .ss-filter[href="#concert"],
+body:has(:is(#musical, #musical-all, #musical-licensed, #musical-creative):target) .ss-filter[href="#musical"],
+body:has(:is(#play, #play-all, #play-daehakro, #play-etc):target) .ss-filter[href="#play"],
+body:has(:is(#classic, #classic-all, #classic-classical, #classic-opera, #classic-dance, #classic-gugak):target) .ss-filter[href="#classic"] {
+  background: var(--ss-ink);
+  border-color: var(--ss-ink);
+  color: #FFF;
+}
+
+/* 세부 카테고리: 장르 버튼에 마우스를 올리면 글자만 가로로 (박스 없음) */
+.filter-group {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 25;
+  display: flex;
+  gap: 22px;
+  width: max-content;
+  padding: 12px 14px 12px;
+  background: var(--ss-paper);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -4px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+}
+
+.filter-group:hover>.menu,
+.filter-group:focus-within>.menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.menu a {
+  padding: 2px 0;
+  color: var(--mute);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color .2s;
+}
+
+.menu a:hover,
+.menu a:focus-visible {
+  color: var(--blue);
+}
+
+/* 현재 선택된 세부 카테고리는 진하게 */
+body:has(#concert-all:target) .menu a[href="#concert-all"],
+body:has(#concert-domestic:target) .menu a[href="#concert-domestic"],
+body:has(#concert-global:target) .menu a[href="#concert-global"],
+body:has(#concert-festival:target) .menu a[href="#concert-festival"],
+body:has(#musical-all:target) .menu a[href="#musical-all"],
+body:has(#musical-licensed:target) .menu a[href="#musical-licensed"],
+body:has(#musical-creative:target) .menu a[href="#musical-creative"],
+body:has(#play-all:target) .menu a[href="#play-all"],
+body:has(#play-daehakro:target) .menu a[href="#play-daehakro"],
+body:has(#play-etc:target) .menu a[href="#play-etc"],
+body:has(#classic-all:target) .menu a[href="#classic-all"],
+body:has(#classic-classical:target) .menu a[href="#classic-classical"],
+body:has(#classic-opera:target) .menu a[href="#classic-opera"],
+body:has(#classic-dance:target) .menu a[href="#classic-dance"],
+body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+/* 카드: 플레이스홀더, 제목 링크, 배지 */
+.ss-card-image.ph::after {
+  content: "POSTER";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  letter-spacing: .25em;
+  color: rgba(21, 36, 83, .35);
+}
+
+.ss-card-title a:hover,
+.ss-card-title a:focus-visible {
+  color: var(--blue);
+}
+
+.badge {
+  position: absolute;
+  z-index: 1;
+  left: 10px;
+  bottom: 10px;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* 하트: category.css의 .ss-heart 모양을 그대로 쓰되, JS 없이 체크박스로 동작 */
+.ss-heart {
+  position: relative;
+}
+
+.ss-heart input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.ss-heart::before {
+  content: "♡";
+}
+
+.ss-heart:has(input:checked) {
+  background: var(--ss-yellow);
+  border-color: var(--ss-yellow);
+}
+
+.ss-heart:has(input:checked)::before {
+  content: "♥";
+  animation: heart-pop .45s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.ss-heart:has(input:focus-visible) {
+  outline: 2px solid var(--ss-blue);
+  outline-offset: 3px;
+}
+
+@keyframes heart-pop {
+  0% {
+    transform: scale(.4);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 기타 */
+.hot-label {
+  color: var(--blue);
+}
+
+/* 페이지 번호 (1 2 3 4) */
+.pager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 48px 0 8px;
+}
+
+.pg-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pager label {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+
+.pager label:hover {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+.pg-radio:checked+label {
+  background: var(--blue);
+  color: #fff;
+}
+
+.pg-radio:focus-visible+label {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* ---------- 히어로 + 캐러셀 공통 배경 ---------- */
+.stage {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(255, 219, 99, .28), transparent 34%),
+    linear-gradient(180deg, var(--stage-top), var(--stage-mid) 45%, var(--stage-end));
+}
+
+/* ---------- 5. 상단 히어로 (큰 세리프 제목 + 소개 문구) ---------- */
+.perf-hero {
+  --navy: #1B2B5E;
+  position: relative;
+  min-height: clamp(180px, 15vw, 220px);
+  padding: clamp(22px, 2.6vw, 34px) clamp(22px, 5vw, 80px) 22px;
+
+}
+
+/* 배경의 가는 호(장식) */
+.perf-hero::before,
+.perf-hero::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(27, 43, 94, .13);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.perf-hero::before {
+  width: 70vw;
+  aspect-ratio: 1;
+  right: -22vw;
+  top: -34vw;
+}
+
+.perf-hero::after {
+  width: 46vw;
+  aspect-ratio: 1;
+  right: -4vw;
+  top: 4vw;
+  border-color: rgba(70, 102, 176, .16);
+}
+
+.perf-crumb {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--mute);
+}
+
+.perf-crumb a:hover,
+.perf-crumb a:focus-visible {
+  color: var(--blue);
+}
+
+.perf-crumb [aria-current] {
+  color: var(--navy);
+}
+
+.perf-title {
+  position: relative;
+  z-index: 2;
+  margin: clamp(10px, 1.6vw, 20px) 0 clamp(8px, 1vw, 14px) -.04em;
+  font-family: 'Playfair Display', 'Noto Serif KR', Georgia, serif;
+  font-size: clamp(32px, 7.5vw, 120px);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -.015em;
+  color: var(--navy);
+}
+
+.perf-lead {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(15px, 1.5vw, 20px);
+  font-weight: 800;
+  line-height: 1.45;
+  letter-spacing: -.04em;
+  color: var(--ink);
+}
+
+.perf-desc {
+  position: relative;
+  z-index: 2;
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--text);
+}
+
+/* 오른쪽 분야 목록 */
+.perf-tags {
+  position: absolute;
+  z-index: 2;
+  right: clamp(22px, 5vw, 80px);
+  bottom: 78px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  line-height: 1.7;
+  color: var(--navy);
+}
+
+/* 아래로 내려가는 원형 버튼 */
+.perf-down {
+  position: absolute;
+  z-index: 3;
+  right: clamp(22px, 5vw, 80px);
+  bottom: 22px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(27, 43, 94, .55);
+  border-radius: 50%;
+  color: var(--navy);
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), background .25s, color .25s, border-color .25s;
+}
+
+.perf-down:hover,
+.perf-down:focus-visible {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+  transform: translateY(4px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .perf-hero>* {
+    animation: perf-rise .9s var(--ss-ease) both;
+  }
+
+  .perf-title {
+    animation-delay: .08s;
+  }
+
+  .perf-lead {
+    animation-delay: .2s;
+  }
+
+  .perf-desc {
+    animation-delay: .3s;
+  }
+
+  .perf-tags,
+  .perf-down {
+    animation-delay: .4s;
+  }
+}
+
+@keyframes perf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+/* ---------- 6. 반응형 ---------- */
+@media (max-width: 760px) {
+  .perf-hero {
+    min-height: 0;
+    padding-bottom: 90px;
+  }
+
+  .perf-tags {
+    display: none;
+  }
+
+  /* 좁은 화면에서는 오른쪽 분야 목록 숨김 */
+  .perf-down {
+    bottom: 24px;
+  }
+
+  .ss-catalog {
+    padding-top: 12px;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  /* 터치 화면: 장르 버튼을 누르면 해당 장르 전체가 보임 */
+
+  .rk-row {
+    flex-direction: column;
+    height: auto;
+    align-items: stretch;
+  }
+
+  .rk-row .rk-card,
+  .rk-row:not(:has(.rk-card:hover, .rk-card:focus-visible)) .rk-card:first-child {
+    height: 150px;
+    flex: none;
+    opacity: 1;
+    filter: none;
+    box-shadow: 0 10px 24px rgba(21, 27, 39, .10);
+  }
+
+  .rk-head span {
+    display: none;
+  }
+}
+
+/* ===== 캐러셀 전체 영역 ===== */
+.hot {
+  height: 460px;
+  position: relative;
+  padding: 0 5.8%;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hot-heading {
+  position: absolute;
+  left: 5.9%;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  z-index: 4;
+}
+
+.hot-heading i {
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: #aaa59b;
+}
+
+.counter {
+  position: absolute;
+  top: 43px;
+  right: 6.1%;
+  font-size: 12px;
+  z-index: 4;
+}
+
+.counter span {
+  color: var(--accent);
+}
+
+.giant-type {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 24px;
+  transform: translateX(-50%);
+  font-family: Didot, 'Bodoni 72', 'Times New Roman', serif;
+  color: rgba(25, 28, 43, .19);
+  font-size: clamp(130px, 18vw, 245px);
+  line-height: .76;
+  text-align: center;
+  letter-spacing: -.09em;
+  pointer-events: none;
+}
+
+.giant-type span {
+  margin-left: 20px;
+}
+
+/* ===== 3D 캐러셀 ===== */
+.carousel {
+  position: absolute;
+  top: 104px;
+  left: 50%;
+  width: min(1100px, 90vw);
+  height: 310px;
+  transform: translateX(-50%);
+  perspective: 1100px;
+  transform-style: preserve-3d;
+}
+
+/* 포스터 1장의 기본 모양 (모든 포스터가 같은 크기. 자리별 크기/각도는 아래 @keyframes가 정함) */
+.poster {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 190px;
+  height: 240px;
+  margin-left: -95px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(28, 24, 19, .09);
+  transform-style: preserve-3d;
+  overflow: hidden;
+  animation: poster-cycle 28s infinite;
+  /* 7장 x 4초 = 28초에 한 바퀴. 한 칸 이동은 4초마다 */
+  transition: scale .3s, box-shadow .3s;
+}
+
+/* 마우스를 올리면 멈추고, 올린 포스터는 살짝 커짐 */
+.carousel:hover .poster,
+.carousel:focus-within .poster {
+  animation-play-state: paused;
+}
+
+.poster:hover {
+  scale: 1.06;
+  box-shadow: 0 16px 34px rgba(28, 24, 19, .22);
+}
+
+/* 포스터마다 시작 위치를 다르게: 음수 delay = 이미 그만큼 진행된 상태로 시작 */
+.poster:nth-child(1) { animation-delay: -24s; }
+.poster:nth-child(2) { animation-delay: -20s; }
+.poster:nth-child(3) { animation-delay: -16s; }
+.poster:nth-child(4) { animation-delay: -12s; }
+.poster:nth-child(5) { animation-delay: -8s; }
+.poster:nth-child(6) { animation-delay: -4s; }
+.poster:nth-child(7) { animation-delay: 0s; }
+
+.poster-art {
+  height: 187px;
+  position: relative;
+  overflow: hidden;
+  padding: 15px;
+  font-family: Arial, sans-serif;
+  color: #101014;
+}
+
+.poster-art>span {
+  position: relative;
+  z-index: 2;
+  display: block;
+  font-size: 18px;
+  line-height: .98;
+  font-weight: 600;
+  letter-spacing: -.06em;
+}
+
+.poster-art small {
+  position: absolute;
+  left: 12px;
+  bottom: 8px;
+  font-size: 8px;
+  z-index: 3;
+}
+
+.poster-info {
+  height: 53px;
+  padding: 7px 9px;
+  color: #151515;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.poster-info strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.poster-info small {
+  font-size: 9px;
+  color: #666;
+}
+
+/* 일곱 자리 (왼쪽 끝 s0 → 중앙 s3 → 오른쪽 끝 s6): 옆으로 이동한 거리, 깊이, 각도, 크기.
+   --w 는 캐러셀 너비. 값을 바꾸면 간격/기울기가 바뀜 */
+.carousel {
+  --w: min(1100px, 90vw);
+  --s0: translateX(calc(var(--w) * -.464)) translateY(11px) translateZ(-45px) rotateY(58deg) scale(.34);
+  --s1: translateX(calc(var(--w) * -.355)) translateY(7px) translateZ(5px) rotateY(40deg) scale(.6);
+  --s2: translateX(calc(var(--w) * -.195)) translateY(5px) translateZ(30px) rotateY(22deg) scale(.9);
+  --s3: translateX(0) translateY(0) translateZ(100px) rotateY(0deg) scale(1);
+  --s4: translateX(calc(var(--w) * .195)) translateY(5px) translateZ(30px) rotateY(-22deg) scale(.9);
+  --s5: translateX(calc(var(--w) * .355)) translateY(7px) translateZ(5px) rotateY(-40deg) scale(.6);
+  --s6: translateX(calc(var(--w) * .464)) translateY(11px) translateZ(-45px) rotateY(-58deg) scale(.34);
+  --out-l: translateX(calc(var(--w) * -.62)) translateY(11px) translateZ(-45px) rotateY(58deg) scale(.2);
+  --out-r: translateX(calc(var(--w) * .62)) translateY(11px) translateZ(-45px) rotateY(-58deg) scale(.2);
+}
+
+/* 한 장이 오른쪽 끝 → 왼쪽 끝으로 가는 28초 동안의 움직임.
+   한 자리에서 3.2초 머물고 0.8초 동안 옆 자리로 이동 (= 4초마다 한 칸) */
+@keyframes poster-cycle {
+  0%, 11.43%     { transform: var(--s6); z-index: 1; opacity: .9; animation-timing-function: cubic-bezier(.45, 0, .2, 1); }
+  14.29%, 25.71% { transform: var(--s5); z-index: 2; opacity: 1;  animation-timing-function: cubic-bezier(.45, 0, .2, 1); }
+  28.57%, 40%    { transform: var(--s4); z-index: 3; opacity: 1;  animation-timing-function: cubic-bezier(.45, 0, .2, 1); }
+  42.86%, 54.29% { transform: var(--s3); z-index: 8; opacity: 1;  animation-timing-function: cubic-bezier(.45, 0, .2, 1); }
+  57.14%, 68.57% { transform: var(--s2); z-index: 3; opacity: 1;  animation-timing-function: cubic-bezier(.45, 0, .2, 1); }
+  71.43%, 82.86% { transform: var(--s1); z-index: 2; opacity: 1;  animation-timing-function: cubic-bezier(.45, 0, .2, 1); }
+  85.71%, 97.14% { transform: var(--s0); z-index: 1; opacity: .9; animation-timing-function: ease-in; }
+  98.2%          { transform: var(--out-l); z-index: 0; opacity: 0; }
+  98.21%         { transform: var(--out-r); z-index: 0; opacity: 0; animation-timing-function: ease-out; }
+  100%           { transform: var(--s6); z-index: 1; opacity: .9; }
+}
+
+/* ===== 포스터별 그래픽 ===== */
+.art-pink {
+  background: linear-gradient(145deg, #f4b5bf, #f8d9cb 60%, #f4eee3);
+}
+
+.art-pink b {
+  position: absolute;
+  right: 8px;
+  bottom: 2px;
+  font-size: 65px;
+  color: #d94c65;
+}
+
+.art-black {
+  background: linear-gradient(145deg, #05070b, #171e2b 60%, #c6a57f);
+  color: #fff;
+}
+
+.art-black b {
+  position: absolute;
+  right: 8px;
+  bottom: 5px;
+  color: #c5b3a1;
+  font-size: 50px;
+}
+
+.art-cream {
+  background: #f2efe6;
+}
+
+.blue-shape {
+  position: absolute;
+  width: 68px;
+  height: 104px;
+  right: 8px;
+  bottom: -9px;
+  background: linear-gradient(130deg, #9eafff, #3046ca);
+  border-radius: 60% 45% 0 0;
+  transform: rotate(10deg);
+  opacity: .85;
+}
+
+.art-orange {
+  background: linear-gradient(140deg, #ff8a15, #f8a13e);
+}
+
+.center-title {
+  font-size: 17px !important;
+}
+
+.phone-art {
+  position: absolute;
+  width: 57px;
+  height: 92px;
+  border: 6px solid #25221f;
+  border-radius: 9px;
+  background: #d9e1e1;
+  left: 50%;
+  top: 47px;
+  transform: translateX(-50%) rotate(12deg);
+  box-shadow: 0 4px 10px #bd6b19;
+  padding: 18px 4px;
+}
+
+.phone-art i {
+  display: block;
+  height: 4px;
+  margin: 5px 0;
+  background: #3b4042;
+}
+
+.vb {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  color: #fff;
+  background: #c6a04e;
+  font-size: 10px;
+  padding: 3px 5px;
+}
+
+.art-pink2 {
+  background: linear-gradient(150deg, #ffb2c7, #ef799c);
+}
+
+.art-pink2>span {
+  font-size: 15px;
+}
+
+.portrait {
+  position: absolute;
+  right: 15px;
+  bottom: 5px;
+  width: 45px;
+  height: 70px;
+  border-radius: 50% 50% 15% 15%;
+  background: #242129;
+  color: #e5b28c;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 3px;
+}
+
+.art-lilac {
+  background: linear-gradient(140deg, #eee2d9, #d6c3bd);
+}
+
+.egg {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  color: #b9a58b;
+  font-size: 55px;
+}
+
+.art-yellow {
+  background: linear-gradient(140deg, #f8df76, #e8ac4a);
+}
+
+.art-yellow b {
+  position: absolute;
+  right: 7px;
+  bottom: 0;
+  font-size: 44px;
+  color: #a85c29;
+}
+
+/* 좌우 버튼 */
+.arrow { display: none; }
+
+/* 하단 정보 */
+.event-meta {
+  position: absolute;
+  bottom: 15px;
+  left: 5.9%;
+  right: 5.9%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  font-size: 12px;
+  line-height: 1.6;
+  z-index: 4;
+}
+
+.event-meta p {
+  margin: 0;
+}
+
+/* 모바일 대응 */
+@media (max-width: 620px) {
+  .hot {
+    height: 440px;
+  }
+
+  .carousel {
+    --w: 920px;
+    top: 90px;
+    width: 920px;
+    transform: translateX(-50%) scale(.58);
+    transform-origin: top center;
+  }
+
+  .giant-type {
+    top: 45px;
+    font-size: 145px;
+  }
+
+  .hot-heading {
+    top: 22px;
+  }
+
+  .counter {
+    top: 26px;
+  }
+
+  .arrow {
+    top: 170px;
+    width: 38px;
+    height: 38px;
+    font-size: 25px;
+  }
+
+  .event-meta {
+    bottom: 18px;
+    font-size: 9px;
+  }
+}
+
+/* ---------- 7. 모션 줄이기 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .poster {
+    animation-play-state: paused !important;
+    /* 자동 이동 없음: 시작 위치 그대로 멈춰 있음 */
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ss-heart::before {
+    animation: none;
+  }
+
+  * {
+    transition: none !important;
+  }
+
+  .rk-card {
+    transition: none;
+  }
+}
