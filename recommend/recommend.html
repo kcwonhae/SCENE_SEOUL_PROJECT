@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 추천 | SCENE.SEOUL</title>
+  <meta name="description" content="누구와 가는지, 어떤 분위기인지 고르면 서울의 전시·공연·팝업·문화공간을 추천해 드려요.">
+
+  <!-- 팀원 정보 (이름과 학번으로 바꾸세요) -->
+  <meta name="team-number" content="00">
+  <meta name="team-name" content="팀명">
+  <meta name="author" content="팀원(학번)">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="recommend.css">
+</head>
+<body id="top">
+  <a class="skip" href="#main">본문 바로가기</a>
+
+  <!-- 팀 공통 헤더 (common.css의 .ss-header). 모든 페이지에 같은 마크업을 쓰세요 -->
+  <header class="ss-header">
+    <a class="ss-header-logo" href="../main/index.html" aria-label="씬 서울 홈">SCENE<span class="ss-accent">:</span>SEOUL</a>
+    <nav class="ss-nav" aria-label="메인 메뉴">
+      <a href="../main/index.html">HOME</a>
+      <a href="#">전시</a>
+      <a href="../performance/performance.html">공연</a>
+      <a href="../popup/popup.html">팝업</a>
+      <a href="#">이벤트</a>
+      <a href="../recommend/recommend.html" aria-current="page">추천</a>
+      <a href="#">지도</a>
+    </nav>
+    <div class="ss-header-actions">
+      <span class="ss-header-quick-icons"><button class="ss-icon-button" type="button" aria-label="검색" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 5 5"/></svg></button><span class="ss-language" aria-label="언어: 한국어"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"/></svg><span>KR</span></span></span>
+      <button type="button">LOGIN</button>
+      <button type="button">MY PAGE</button>
+      <span class="ss-weather-icon" title="날씨 아이콘 (표시용)" aria-label="날씨 아이콘"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"/><path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"/></svg></span>
+    </div>
+  </header>
+
+  <main id="main" class="ss-page">
+    <!-- 이 영역 전체가 라디오 선택 상태(:has)에 반응합니다 -->
+    <div class="ai">
+
+      <!-- 질문 입력창 -->
+      <section class="intro" aria-labelledby="ai-title">
+        <h1 id="ai-title">오늘은 어떤 문화생활이<br>끌리세요?</h1>
+        <p class="lead">아래에서 고르면 AI가 서울의 전시, 공연, 팝업, 공간을 골라 드려요.</p>
+
+        <div class="prompt">
+          <!-- 아래 칩에서 고른 내용이 이 문장으로 바뀝니다 -->
+          <p class="sum">
+            <span class="w-solo">혼자 가요.</span><span class="w-couple">연인과 가요.</span><span class="w-friends">친구와 가요.</span><span class="w-family">가족과 가요.</span>
+            <span class="m-calm">차분한 분위기의</span><span class="m-lively">신나는 분위기의</span><span class="m-emo">감성적인 분위기의</span><span class="m-unique">이색적인 분위기의</span>
+            <span class="g-ex">전시가 좋고,</span><span class="g-live">공연이 좋고,</span><span class="g-pop">팝업이 좋고,</span><span class="g-space">문화공간이 좋고,</span>
+            <span class="b-free">예산은 무료예요.</span><span class="b-30">예산은 3만 원 이하예요.</span><span class="b-50">예산은 5만 원 이하예요.</span><span class="b-any">예산은 제한 없어요.</span>
+            <span class="caret" aria-hidden="true"></span>
+          </p>
+          <a class="send" href="#result" aria-label="추천 결과 보기">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- 선택 칩: 결과는 '누구와' 선택에 따라 바뀝니다 -->
+      <section class="options" aria-label="추천 조건 선택">
+        <div class="group" role="radiogroup" aria-labelledby="gn-who">
+          <span class="group-name" id="gn-who">누구와</span>
+          <div class="chips">
+            <span class="chip"><input type="radio" name="who" id="who-solo" checked><label for="who-solo">혼자</label></span>
+            <span class="chip"><input type="radio" name="who" id="who-couple"><label for="who-couple">연인</label></span>
+            <span class="chip"><input type="radio" name="who" id="who-friends"><label for="who-friends">친구</label></span>
+            <span class="chip"><input type="radio" name="who" id="who-family"><label for="who-family">가족</label></span>
+          </div>
+        </div>
+
+        <div class="group" role="radiogroup" aria-labelledby="gn-mood">
+          <span class="group-name" id="gn-mood">분위기</span>
+          <div class="chips">
+            <span class="chip"><input type="radio" name="mood" id="mood-calm" checked><label for="mood-calm">차분한</label></span>
+            <span class="chip"><input type="radio" name="mood" id="mood-lively"><label for="mood-lively">신나는</label></span>
+            <span class="chip"><input type="radio" name="mood" id="mood-emo"><label for="mood-emo">감성적인</label></span>
+            <span class="chip"><input type="radio" name="mood" id="mood-unique"><label for="mood-unique">이색적인</label></span>
+          </div>
+        </div>
+
+        <div class="group" role="radiogroup" aria-labelledby="gn-genre">
+          <span class="group-name" id="gn-genre">장르</span>
+          <div class="chips">
+            <span class="chip"><input type="radio" name="genre" id="g-ex" checked><label for="g-ex">전시</label></span>
+            <span class="chip"><input type="radio" name="genre" id="g-live"><label for="g-live">공연</label></span>
+            <span class="chip"><input type="radio" name="genre" id="g-pop"><label for="g-pop">팝업</label></span>
+            <span class="chip"><input type="radio" name="genre" id="g-space"><label for="g-space">문화공간</label></span>
+          </div>
+        </div>
+
+        <div class="group" role="radiogroup" aria-labelledby="gn-budget">
+          <span class="group-name" id="gn-budget">예산</span>
+          <div class="chips">
+            <span class="chip"><input type="radio" name="budget" id="b-free" checked><label for="b-free">무료</label></span>
+            <span class="chip"><input type="radio" name="budget" id="b-30"><label for="b-30">3만 원 이하</label></span>
+            <span class="chip"><input type="radio" name="budget" id="b-50"><label for="b-50">5만 원 이하</label></span>
+            <span class="chip"><input type="radio" name="budget" id="b-any"><label for="b-any">제한 없음</label></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI 추천 결과 (제목, 장소, 날짜는 모두 임시 데이터입니다) -->
+      <section class="results" id="result" aria-live="polite" aria-label="AI 추천 결과">
+
+        <!-- 혼자 -->
+        <div class="result r-solo">
+          <div class="think" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="result-head"><h2>혼자 가기 좋은 곳 3건</h2><p>조용히 머물다 올 수 있는 곳 위주로 골랐어요.</p></div>
+          <div class="picks">
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">1순위 · 전시</span>
+                <h3>고요한 빛의 방</h3>
+                <p class="meta">성수 아트룸 · 2026.10.01 ~ 12.20 · 무료</p>
+                <p class="reason"><b>추천 이유</b>조용한 분위기를 좋아하고 혼자 가신다고 해서, 오래 머물기 좋은 전시를 골랐어요.</p>
+                <div class="match"><span>일치율 94%</span><span class="bar"><i style="--p:94%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">지도에서 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">2순위 · 공연</span>
+                <h3>피아노 솔로 나이트</h3>
+                <p class="meta">한강아트센터 콘서트홀 · 10.24 · 25,000원</p>
+                <p class="reason"><b>추천 이유</b>1인 좌석이 많아 혼자 앉아도 편해요.</p>
+                <div class="match"><span>일치율 90%</span><span class="bar"><i style="--p:90%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">3순위 · 공간</span>
+                <h3>책방 골목 산책</h3>
+                <p class="meta">연남 · 상시 운영 · 무료</p>
+                <p class="reason"><b>추천 이유</b>대화 없이 천천히 둘러보기 좋은 동네 서점 코스예요.</p>
+                <div class="match"><span>일치율 86%</span><span class="bar"><i style="--p:86%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- 연인 -->
+        <div class="result r-couple">
+          <div class="think" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="result-head"><h2>연인과 가기 좋은 곳 3건</h2><p>다녀와서 이야기 나누기 좋은 곳 위주로 골랐어요.</p></div>
+          <div class="picks">
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">1순위 · 공연</span>
+                <h3>별을 따라가는 밤</h3>
+                <p class="meta">서울극장 대극장 · 2026.10.24 ~ 11.30 · 55,000원</p>
+                <p class="reason"><b>추천 이유</b>관람 후에도 이야기가 이어지는 창작 뮤지컬이라 둘이 함께 보기 좋아요.</p>
+                <div class="match"><span>일치율 95%</span><span class="bar"><i style="--p:95%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">지도에서 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">2순위 · 전시</span>
+                <h3>물의 정원 야간 미디어아트</h3>
+                <p class="meta">뚝섬 한강공원 · 10.01 ~ 11.15 · 15,000원</p>
+                <p class="reason"><b>추천 이유</b>저녁에 함께 걸으며 보기 좋은 야외 전시예요.</p>
+                <div class="match"><span>일치율 91%</span><span class="bar"><i style="--p:91%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">3순위 · 팝업</span>
+                <h3>젤리 마켓</h3>
+                <p class="meta">여의도 · 10.12 ~ 10.25 · 무료</p>
+                <p class="reason"><b>추천 이유</b>함께 소품을 골라 보는 가벼운 팝업이에요.</p>
+                <div class="match"><span>일치율 85%</span><span class="bar"><i style="--p:85%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- 친구 -->
+        <div class="result r-friends">
+          <div class="think" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="result-head"><h2>친구와 가기 좋은 곳 3건</h2><p>여럿이 함께 즐길 수 있는 곳 위주로 골랐어요.</p></div>
+          <div class="picks">
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">1순위 · 공연</span>
+                <h3>서울 인디 페스티벌 2026</h3>
+                <p class="meta">뚝섬 한강공원 · 11.01 ~ 11.02 · 45,000원</p>
+                <p class="reason"><b>추천 이유</b>여러 팀을 하루에 볼 수 있는 야외 공연이라 친구들과 함께하기 좋아요.</p>
+                <div class="match"><span>일치율 96%</span><span class="bar"><i style="--p:96%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">지도에서 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">2순위 · 팝업</span>
+                <h3>스티커 하우스</h3>
+                <p class="meta">홍대 · 10.15 ~ 11.10 · 무료</p>
+                <p class="reason"><b>추천 이유</b>직접 꾸미는 체험이 있어 함께 하면 더 재밌어요.</p>
+                <div class="match"><span>일치율 92%</span><span class="bar"><i style="--p:92%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">3순위 · 전시</span>
+                <h3>도시의 소리</h3>
+                <p class="meta">광화문 · 10.05 ~ 12.31 · 12,000원</p>
+                <p class="reason"><b>추천 이유</b>사진 찍고 이야기 나누기 좋은 체험형 전시예요.</p>
+                <div class="match"><span>일치율 88%</span><span class="bar"><i style="--p:88%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- 가족 -->
+        <div class="result r-family">
+          <div class="think" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="result-head"><h2>가족과 가기 좋은 곳 3건</h2><p>아이도 어른도 편하게 즐길 수 있는 곳 위주로 골랐어요.</p></div>
+          <div class="picks">
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">1순위 · 공연</span>
+                <h3>소년합창단 특별 초청 공연</h3>
+                <p class="meta">한강아트센터 콘서트홀 · 2026.12.20 · 30,000원</p>
+                <p class="reason"><b>추천 이유</b>전 연령이 함께 볼 수 있는 구성이라 가족 나들이로 좋아요.</p>
+                <div class="match"><span>일치율 94%</span><span class="bar"><i style="--p:94%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">지도에서 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">2순위 · 전시</span>
+                <h3>종이 숲</h3>
+                <p class="meta">종로 · 10.01 ~ 12.10 · 8,000원</p>
+                <p class="reason"><b>추천 이유</b>만지고 체험할 수 있어 아이와 함께하기 좋아요.</p>
+                <div class="match"><span>일치율 90%</span><span class="bar"><i style="--p:90%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+            <article class="pick">
+              <div class="poster ph"></div>
+              <div class="info">
+                <span class="rank">3순위 · 공간</span>
+                <h3>옥상 정원</h3>
+                <p class="meta">을지로 · 상시 운영 · 무료</p>
+                <p class="reason"><b>추천 이유</b>걷다가 쉬어 가기 좋은 열린 공간이에요.</p>
+                <div class="match"><span>일치율 84%</span><span class="bar"><i style="--p:84%"></i></span></div>
+                <div class="actions"><a href="#">상세 보기</a><a href="#">저장</a></div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- 직접 찾아보기: 다른 페이지로 연결 -->
+    <section class="more" aria-labelledby="more-title">
+      <h2 id="more-title">직접 찾아볼래요?</h2>
+      <ul>
+        <li><a href="../performance/performance.html"><strong>공연</strong><span>콘서트, 뮤지컬, 연극, 클래식/무용</span></a></li>
+        <li><a href="#"><strong>전시</strong><span>지금 열리는 전시 모아 보기</span></a></li>
+        <li><a href="#"><strong>팝업</strong><span>이번 달 팝업스토어와 행사</span></a></li>
+        <li><a href="#"><strong>지도</strong><span>내 주변 문화공간 찾기</span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <strong>SCENE<span>:</span>SEOUL</strong>
+    <p>서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p>
+    <small>© 2026 SCENE.SEOUL</small>
+  </footer>
+
+  <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19 0-14m-6 6 6-6 6 6"/></svg></a>
+</body>
+</html>
