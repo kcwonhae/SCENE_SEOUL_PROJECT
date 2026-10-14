@@ -286,179 +286,645 @@
 </div>
 </section>
 </div><!-- /popup-cover-flow -->
-<section class="discover ss-catalog" id="discover">
-<div class="pop-catalog-heading">
-<span class="tiny">03 / 팝업 둘러보기</span>
-<h2>어디로 가볼까?</h2>
-<p>관심 있는 분야를 골라 팝업 정보를 살펴보세요.</p>
+<section aria-labelledby="popup-catalog-title" class="discover ss-catalog popup-catalog" id="discover">
+<div class="ss-catalog-head pop-catalog-heading">
+<div>
+<p class="tiny">03 / CURATED IN SEOUL</p>
+<h2 class="ss-catalog-title" id="popup-catalog-title">어디로 가볼까?</h2>
 </div>
+<p class="ss-catalog-desc">관심 있는 분야를 골라<br/>서울의 팝업을 찾아보세요.</p>
+</div>
+<div class="pop-catalog-controls ss-catalog-controls">
+<!-- CSS로 동작하는 라디오 필터: 전시(exhibition) 페이지와 같은 구조 -->
+
+
+
+
+
+<!-- 페이지 번호도 CSS만으로 동작. 전체 필터 시 6개씩 4페이지. -->
+<input checked="" class="pop-hidden-radio" id="pop-pg1" name="popup-page" type="radio"/>
+<input class="pop-hidden-radio" id="pop-pg2" name="popup-page" type="radio"/>
+<input class="pop-hidden-radio" id="pop-pg3" name="popup-page" type="radio"/>
+<input class="pop-hidden-radio" id="pop-pg4" name="popup-page" type="radio"/>
 <div class="ss-toolbar">
-<div class="css-filter-controls ss-filters" id="filters">
-<input checked="" id="f-all" name="popup-filter" type="radio"/>
-<label class="ss-filter" for="f-all">전체</label>
-<input id="f-fashion" name="popup-filter" type="radio"/>
-<label class="ss-filter" for="f-fashion">패션</label>
-<input id="f-art" name="popup-filter" type="radio"/>
-<label class="ss-filter" for="f-art">아트</label>
-<input id="f-life" name="popup-filter" type="radio"/>
-<label class="ss-filter" for="f-life">라이프스타일</label>
-<input id="f-goods" name="popup-filter" type="radio"/>
-<label class="ss-filter" for="f-goods">굿즈 · 마켓</label>
+<div aria-label="팝업 유형 필터" class="ss-filters" role="group">
+<input checked="" class="pop-hidden-radio ss-filter-input" id="f-all" name="popup-filter" type="radio"/><label class="ss-filter" for="f-all">전체</label>
+<input class="pop-hidden-radio ss-filter-input" id="f-fashion" name="popup-filter" type="radio"/><label class="ss-filter" for="f-fashion">패션</label>
+<input class="pop-hidden-radio ss-filter-input" id="f-art" name="popup-filter" type="radio"/><label class="ss-filter" for="f-art">아트</label>
+<input class="pop-hidden-radio ss-filter-input" id="f-life" name="popup-filter" type="radio"/><label class="ss-filter" for="f-life">라이프스타일</label>
+<input class="pop-hidden-radio ss-filter-input" id="f-goods" name="popup-filter" type="radio"/><label class="ss-filter" for="f-goods">굿즈 · 마켓</label>
 </div>
-<span class="css-search-hint">
-                    분야를 선택해 살펴보세요
-                </span>
+<div class="ss-search" role="search" title="검색 UI 시안: 실제 검색은 JavaScript 또는 서버 연동 후 이용 가능">
+<input aria-describedby="popup-search-note" autocomplete="off" id="popup-catalog-search" placeholder="팝업명, 장소 검색" type="search"/>
+<svg aria-hidden="true" class="ss-search-icon" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 5 5"></path></svg>
 </div>
-<div class="countline ss-catalog-status">
-<span id="count">ALL · 24 RESULTS (기획용 예시)</span>
-<div class="popup-list-note">
-                    ※ 실제 행사 포스터는 추후 업데이트됩니다.
-                </div>
 </div>
-<div class="ss-card-grid" id="cards">
-<article class="ss-card css-popup-card pop-page-1" data-kind="아트" data-region="성수">
-<div class="card-media ss-card-image">
-<div class="poster-blank"><span>POSTER</span></div>
+<div class="ss-catalog-status pop-catalog-status">
+<span class="pop-all-status">ALL · 24 RESULTS <span class="pop-status-sub">(페이지당 6개)</span></span>
+<span class="pop-filter-status">선택한 분야의 팝업을 보고 있어요</span>
+<span class="pop-status-note" id="popup-search-note">※ 포스터와 행사 정보는 기획용 예시 · 검색은 UI 시안</span>
 </div>
-<div class="card-foot ss-card-info">
-<div>
-<small class="ss-card-category">성수 / 아트</small>
+<div class="ss-card-grid pop-catalog-grid ss-catalog-grid" id="cards">
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-kind="art">
+<div aria-label="BLUE PLAYGROUND 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
 <h3 class="ss-card-title">BLUE PLAYGROUND</h3>
-<p class="ss-card-meta">
-                                성동구 성수동 · 2026 10.12 — 10.30
-                            </p>
+<label aria-label="BLUE PLAYGROUND 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="BLUE PLAYGROUND 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
 </div>
+<p class="pop-card-description ss-card-description">성수에서 만나볼 수 있는 아트 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026 10.12 — 10.30</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>BLUE PLAYGROUND</strong>
+<p>분류 · 아트<br/>장소 및 기간 · 성동구 성수동 · 2026 10.12 — 10.30</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
 </div>
-<span class="css-save">
-<input id="save-1" type="checkbox"/>
-<label aria-label="관심 등록" for="save-1">♡</label>
-</span>
+</details>
+</div>
 </article>
-<article class="ss-card css-popup-card pop-page-1" data-kind="패션" data-region="한남">
-<div class="card-media ss-card-image">
-<div class="poster-blank"><span>POSTER</span></div>
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-kind="fashion">
+<div aria-label="AFTER HOURS CLUB 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
 </div>
-<div class="card-foot ss-card-info">
-<div>
-<small class="ss-card-category">한남 / 패션</small>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
 <h3 class="ss-card-title">AFTER HOURS CLUB</h3>
-<p class="ss-card-meta">
-                                용산구 한남동 · 2026 10.15 — 11.03
-                            </p>
+<label aria-label="AFTER HOURS CLUB 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="AFTER HOURS CLUB 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
 </div>
+<p class="pop-card-description ss-card-description">한남에서 만나볼 수 있는 패션 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026 10.15 — 11.03</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>AFTER HOURS CLUB</strong>
+<p>분류 · 패션<br/>장소 및 기간 · 용산구 한남동 · 2026 10.15 — 11.03</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
 </div>
-<span class="css-save">
-<input id="save-2" type="checkbox"/>
-<label aria-label="관심 등록" for="save-2">♡</label>
-</span>
+</details>
+</div>
 </article>
-<article class="ss-card css-popup-card pop-page-2" data-kind="라이프" data-region="홍대">
-<div class="card-media ss-card-image">
-<div class="poster-blank"><span>POSTER</span></div>
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-kind="life">
+<div aria-label="SOFT OBJECTS 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
 </div>
-<div class="card-foot ss-card-info">
-<div>
-<small class="ss-card-category">홍대 / 라이프</small>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
 <h3 class="ss-card-title">SOFT OBJECTS</h3>
-<p class="ss-card-meta">
-                                마포구 연남동 · 2026 10.17 — 11.08
-                            </p>
+<label aria-label="SOFT OBJECTS 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SOFT OBJECTS 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
 </div>
+<p class="pop-card-description ss-card-description">홍대에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026 10.17 — 11.08</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>SOFT OBJECTS</strong>
+<p>분류 · 라이프스타일<br/>장소 및 기간 · 마포구 연남동 · 2026 10.17 — 11.08</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
 </div>
-<span class="css-save">
-<input id="save-3" type="checkbox"/>
-<label aria-label="관심 등록" for="save-3">♡</label>
-</span>
+</details>
+</div>
 </article>
-<article class="ss-card css-popup-card pop-page-2" data-kind="아트" data-region="성수">
-<div class="card-media ss-card-image">
-<div class="poster-blank"><span>POSTER</span></div>
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-kind="art">
+<div aria-label="NEW FREQUENCY 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
 </div>
-<div class="card-foot ss-card-info">
-<div>
-<small class="ss-card-category">성수 / 아트</small>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
 <h3 class="ss-card-title">NEW FREQUENCY</h3>
-<p class="ss-card-meta">
-                                성동구 성수동 · 2026 10.20 — 11.12
-                            </p>
+<label aria-label="NEW FREQUENCY 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="NEW FREQUENCY 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
 </div>
+<p class="pop-card-description ss-card-description">성수에서 만나볼 수 있는 아트 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026 10.20 — 11.12</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>NEW FREQUENCY</strong>
+<p>분류 · 아트<br/>장소 및 기간 · 성동구 성수동 · 2026 10.20 — 11.12</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
 </div>
-<span class="css-save">
-<input id="save-4" type="checkbox"/>
-<label aria-label="관심 등록" for="save-4">♡</label>
-</span>
+</details>
+</div>
 </article>
-<article class="ss-card css-popup-card pop-page-3" data-kind="굿즈" data-region="홍대">
-<div class="card-media ss-card-image">
-<div class="poster-blank"><span>POSTER</span></div>
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-kind="goods">
+<div aria-label="SUNDAY COLLECTIVE 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
 </div>
-<div class="card-foot ss-card-info">
-<div>
-<small class="ss-card-category">
-                                홍대 / 굿즈 · 마켓
-                            </small>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
 <h3 class="ss-card-title">SUNDAY COLLECTIVE</h3>
-<p class="ss-card-meta">
-                                마포구 서교동 · 2026 10.23 — 11.15
-                            </p>
+<label aria-label="SUNDAY COLLECTIVE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SUNDAY COLLECTIVE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
 </div>
+<p class="pop-card-description ss-card-description">홍대에서 만나볼 수 있는 굿즈 · 마켓 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 서교동 · 2026 10.23 — 11.15</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>SUNDAY COLLECTIVE</strong>
+<p>분류 · 굿즈 · 마켓<br/>장소 및 기간 · 마포구 서교동 · 2026 10.23 — 11.15</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
 </div>
-<span class="css-save">
-<input id="save-5" type="checkbox"/>
-<label aria-label="관심 등록" for="save-5">♡</label>
-</span>
+</details>
+</div>
 </article>
-<article class="ss-card css-popup-card pop-page-3" data-kind="패션" data-region="한남">
-<div class="card-media ss-card-image">
-<div class="poster-blank"><span>POSTER</span></div>
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-kind="fashion">
+<div aria-label="OFFLINE ARCHIVE 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
 </div>
-<div class="card-foot ss-card-info">
-<div>
-<small class="ss-card-category">한남 / 패션</small>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
 <h3 class="ss-card-title">OFFLINE ARCHIVE</h3>
-<p class="ss-card-meta">
-                                용산구 한남동 · 2026 10.25 — 11.18
-                            </p>
+<label aria-label="OFFLINE ARCHIVE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="OFFLINE ARCHIVE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
 </div>
+<p class="pop-card-description ss-card-description">한남에서 만나볼 수 있는 패션 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026 10.25 — 11.18</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>OFFLINE ARCHIVE</strong>
+<p>분류 · 패션<br/>장소 및 기간 · 용산구 한남동 · 2026 10.25 — 11.18</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
 </div>
-<span class="css-save">
-<input id="save-6" type="checkbox"/>
-<label aria-label="관심 등록" for="save-6">♡</label>
-</span>
+</details>
+</div>
 </article>
-<article class="ss-card css-popup-card pop-page-4" data-kind="아트" data-region="연남">
-<div class="card-media ss-card-image">
-<div class="poster-blank"><span>POSTER</span></div>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-kind="art">
+<div aria-label="CITY EDITION 2026 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
 </div>
-<div class="card-foot ss-card-info">
-<div>
-<small class="ss-card-category">연남 / 아트</small>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">연남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
 <h3 class="ss-card-title">CITY EDITION 2026</h3>
+<label aria-label="CITY EDITION 2026 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="CITY EDITION 2026 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">연남에서 만나볼 수 있는 아트 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
 <p class="ss-card-meta">마포구 연남동 · 2026 11.03 — 11.20</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>CITY EDITION 2026</strong>
+<p>분류 · 아트<br/>장소 및 기간 · 마포구 연남동 · 2026 11.03 — 11.20</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
 </div>
+</details>
 </div>
-<span class="css-save">
-<input id="save-7" type="checkbox"/>
-<label aria-label="관심 등록" for="save-7">♡</label>
-</span>
-</article><article class="ss-card css-popup-card pop-page-4" data-kind="라이프" data-region="성수">
-<div class="card-media ss-card-image">
-<div class="poster-blank"><span>POSTER</span></div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-kind="life">
+<div aria-label="OBJECT LAB 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
 </div>
-<div class="card-foot ss-card-info">
-<div>
-<small class="ss-card-category">성수 / 라이프스타일</small>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
 <h3 class="ss-card-title">OBJECT LAB</h3>
+<label aria-label="OBJECT LAB 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="OBJECT LAB 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성수에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
 <p class="ss-card-meta">성동구 성수동 · 2026 11.06 — 11.30</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>OBJECT LAB</strong>
+<p>분류 · 라이프스타일<br/>장소 및 기간 · 성동구 성수동 · 2026 11.06 — 11.30</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
 </div>
+</details>
 </div>
-<span class="css-save">
-<input id="save-8" type="checkbox"/>
-<label aria-label="관심 등록" for="save-8">♡</label>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-kind="art">
+<div aria-label="PAPER &amp; LIGHT 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">PAPER &amp; LIGHT</h3>
+<label aria-label="PAPER &amp; LIGHT 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="PAPER &amp; LIGHT 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">한남에서 만나볼 수 있는 아트 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026.11.02 — 11.21</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>PAPER &amp; LIGHT</strong>
+<p>분류 · 아트<br/>장소 및 기간 · 용산구 한남동 · 2026.11.02 — 11.21</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-kind="life">
+<div aria-label="HIDDEN GARDEN 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">HIDDEN GARDEN</h3>
+<label aria-label="HIDDEN GARDEN 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="HIDDEN GARDEN 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성수에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.11.04 — 11.24</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>HIDDEN GARDEN</strong>
+<p>분류 · 라이프스타일<br/>장소 및 기간 · 성동구 성수동 · 2026.11.04 — 11.24</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-kind="goods">
+<div aria-label="STUDIO WEEKEND 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">STUDIO WEEKEND</h3>
+<label aria-label="STUDIO WEEKEND 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="STUDIO WEEKEND 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">홍대에서 만나볼 수 있는 굿즈 · 마켓 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 서교동 · 2026.11.06 — 11.29</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>STUDIO WEEKEND</strong>
+<p>분류 · 굿즈 · 마켓<br/>장소 및 기간 · 마포구 서교동 · 2026.11.06 — 11.29</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-kind="art">
+<div aria-label="CITY OF COLOR 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">연남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">CITY OF COLOR</h3>
+<label aria-label="CITY OF COLOR 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="CITY OF COLOR 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">연남에서 만나볼 수 있는 아트 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026.11.08 — 12.01</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>CITY OF COLOR</strong>
+<p>분류 · 아트<br/>장소 및 기간 · 마포구 연남동 · 2026.11.08 — 12.01</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-kind="goods">
+<div aria-label="SLOW MARKET 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">SLOW MARKET</h3>
+<label aria-label="SLOW MARKET 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SLOW MARKET 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성수에서 만나볼 수 있는 굿즈 · 마켓 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.11.10 — 11.25</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>SLOW MARKET</strong>
+<p>분류 · 굿즈 · 마켓<br/>장소 및 기간 · 성동구 성수동 · 2026.11.10 — 11.25</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-kind="fashion">
+<div aria-label="ATELIER 24 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">ATELIER 24</h3>
+<label aria-label="ATELIER 24 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="ATELIER 24 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">한남에서 만나볼 수 있는 패션 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026.11.12 — 12.02</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>ATELIER 24</strong>
+<p>분류 · 패션<br/>장소 및 기간 · 용산구 한남동 · 2026.11.12 — 12.02</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-kind="life">
+<div aria-label="SPACE FOR YOU 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">SPACE FOR YOU</h3>
+<label aria-label="SPACE FOR YOU 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SPACE FOR YOU 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">홍대에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 서교동 · 2026.11.13 — 12.04</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>SPACE FOR YOU</strong>
+<p>분류 · 라이프스타일<br/>장소 및 기간 · 마포구 서교동 · 2026.11.13 — 12.04</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-kind="art">
+<div aria-label="COLOR ARCHIVE 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">연남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">COLOR ARCHIVE</h3>
+<label aria-label="COLOR ARCHIVE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="COLOR ARCHIVE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">연남에서 만나볼 수 있는 아트 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026.11.14 — 12.06</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>COLOR ARCHIVE</strong>
+<p>분류 · 아트<br/>장소 및 기간 · 마포구 연남동 · 2026.11.14 — 12.06</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-kind="life">
+<div aria-label="SUNDAY OBJECT 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">연남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">SUNDAY OBJECT</h3>
+<label aria-label="SUNDAY OBJECT 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SUNDAY OBJECT 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">연남에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026.11.16 — 12.06</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>SUNDAY OBJECT</strong>
+<p>분류 · 라이프스타일<br/>장소 및 기간 · 마포구 연남동 · 2026.11.16 — 12.06</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-kind="goods">
+<div aria-label="FUTURE GOODS 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">FUTURE GOODS</h3>
+<label aria-label="FUTURE GOODS 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="FUTURE GOODS 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성수에서 만나볼 수 있는 굿즈 · 마켓 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.11.17 — 12.10</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>FUTURE GOODS</strong>
+<p>분류 · 굿즈 · 마켓<br/>장소 및 기간 · 성동구 성수동 · 2026.11.17 — 12.10</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-kind="fashion">
+<div aria-label="THE SMALL EDITION 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">THE SMALL EDITION</h3>
+<label aria-label="THE SMALL EDITION 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="THE SMALL EDITION 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">한남에서 만나볼 수 있는 패션 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026.11.18 — 12.12</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>THE SMALL EDITION</strong>
+<p>분류 · 패션<br/>장소 및 기간 · 용산구 한남동 · 2026.11.18 — 12.12</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-kind="art">
+<div aria-label="WEEKEND FRAME 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">WEEKEND FRAME</h3>
+<label aria-label="WEEKEND FRAME 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="WEEKEND FRAME 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">홍대에서 만나볼 수 있는 아트 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 서교동 · 2026.11.20 — 12.14</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>WEEKEND FRAME</strong>
+<p>분류 · 아트<br/>장소 및 기간 · 마포구 서교동 · 2026.11.20 — 12.14</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-kind="life">
+<div aria-label="SOFT OPENING 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">SOFT OPENING</h3>
+<label aria-label="SOFT OPENING 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SOFT OPENING 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">홍대에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 합정동 · 2026.11.21 — 12.14</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>SOFT OPENING</strong>
+<p>분류 · 라이프스타일<br/>장소 및 기간 · 마포구 합정동 · 2026.11.21 — 12.14</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-kind="art">
+<div aria-label="ROOM 2026 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">ROOM 2026</h3>
+<label aria-label="ROOM 2026 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="ROOM 2026 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">한남에서 만나볼 수 있는 아트 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026.11.23 — 12.16</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>ROOM 2026</strong>
+<p>분류 · 아트<br/>장소 및 기간 · 용산구 한남동 · 2026.11.23 — 12.16</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-kind="fashion">
+<div aria-label="POP PARADE 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">POP PARADE</h3>
+<label aria-label="POP PARADE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="POP PARADE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성수에서 만나볼 수 있는 패션 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.11.25 — 12.18</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>POP PARADE</strong>
+<p>분류 · 패션<br/>장소 및 기간 · 성동구 성수동 · 2026.11.25 — 12.18</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-kind="goods">
+<div aria-label="CITY SELECT SHOP 포스터 자리 표시" class="ss-card-image">
+<span aria-hidden="true" class="pop-poster-label ss-poster-placeholder">POSTER</span>
+</div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">연남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">CITY SELECT SHOP</h3>
+<label aria-label="CITY SELECT SHOP 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="CITY SELECT SHOP 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">연남에서 만나볼 수 있는 굿즈 · 마켓 팝업 시안입니다. 콘텐츠와 운영 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026.11.27 — 12.20</p>
+<details class="pop-card-details ss-card-details">
+<summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary>
+<div class="pop-card-more ss-card-more">
+<strong>CITY SELECT SHOP</strong>
+<p>분류 · 굿즈 · 마켓<br/>장소 및 기간 · 마포구 연남동 · 2026.11.27 — 12.20</p>
+<small>※ 기획용 예시 정보로 실제 행사 운영·예약과 무관합니다.</small>
+</div>
+</details>
+</div>
+</article>
+</div>
+<nav aria-label="팝업 목록 페이지" class="pop-pager ss-page-nav">
+<span aria-label="이전 페이지" class="pop-page-prev">
+<label aria-hidden="true" class="pop-page-arrow pop-arrow-off ss-page-arrow">&lt;</label>
+<label aria-label="이전: 1페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg1">&lt;</label>
+<label aria-label="이전: 2페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg2">&lt;</label>
+<label aria-label="이전: 3페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg3">&lt;</label>
 </span>
-</article><article class="ss-card css-popup-card pop-page-1" data-kind="아트" data-region="한남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">한남 / 아트</small><h3 class="ss-card-title">PAPER &amp; LIGHT</h3><p class="ss-card-meta">용산구 한남동 · 2026.11.02 — 11.21</p></div></div><span class="css-save"><input id="save-9" type="checkbox"/><label aria-label="PAPER &amp; LIGHT 관심 등록" for="save-9">♡</label></span></article><article class="ss-card css-popup-card pop-page-1" data-kind="라이프" data-region="성수"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">성수 / 라이프</small><h3 class="ss-card-title">HIDDEN GARDEN</h3><p class="ss-card-meta">성동구 성수동 · 2026.11.04 — 11.24</p></div></div><span class="css-save"><input id="save-10" type="checkbox"/><label aria-label="HIDDEN GARDEN 관심 등록" for="save-10">♡</label></span></article><article class="ss-card css-popup-card pop-page-1" data-kind="굿즈" data-region="홍대"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">홍대 / 굿즈</small><h3 class="ss-card-title">STUDIO WEEKEND</h3><p class="ss-card-meta">마포구 서교동 · 2026.11.06 — 11.29</p></div></div><span class="css-save"><input id="save-11" type="checkbox"/><label aria-label="STUDIO WEEKEND 관심 등록" for="save-11">♡</label></span></article><article class="ss-card css-popup-card pop-page-1" data-kind="아트" data-region="연남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">연남 / 아트</small><h3 class="ss-card-title">CITY OF COLOR</h3><p class="ss-card-meta">마포구 연남동 · 2026.11.08 — 12.01</p></div></div><span class="css-save"><input id="save-12" type="checkbox"/><label aria-label="CITY OF COLOR 관심 등록" for="save-12">♡</label></span></article><article class="ss-card css-popup-card pop-page-2" data-kind="굿즈" data-region="성수"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">성수 / 굿즈</small><h3 class="ss-card-title">SLOW MARKET</h3><p class="ss-card-meta">성동구 성수동 · 2026.11.10 — 11.25</p></div></div><span class="css-save"><input id="save-13" type="checkbox"/><label aria-label="SLOW MARKET 관심 등록" for="save-13">♡</label></span></article><article class="ss-card css-popup-card pop-page-2" data-kind="패션" data-region="한남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">한남 / 패션</small><h3 class="ss-card-title">ATELIER 24</h3><p class="ss-card-meta">용산구 한남동 · 2026.11.12 — 12.02</p></div></div><span class="css-save"><input id="save-14" type="checkbox"/><label aria-label="ATELIER 24 관심 등록" for="save-14">♡</label></span></article><article class="ss-card css-popup-card pop-page-2" data-kind="라이프" data-region="홍대"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">홍대 / 라이프</small><h3 class="ss-card-title">SPACE FOR YOU</h3><p class="ss-card-meta">마포구 서교동 · 2026.11.13 — 12.04</p></div></div><span class="css-save"><input id="save-15" type="checkbox"/><label aria-label="SPACE FOR YOU 관심 등록" for="save-15">♡</label></span></article><article class="ss-card css-popup-card pop-page-2" data-kind="아트" data-region="연남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">연남 / 아트</small><h3 class="ss-card-title">COLOR ARCHIVE</h3><p class="ss-card-meta">마포구 연남동 · 2026.11.14 — 12.06</p></div></div><span class="css-save"><input id="save-16" type="checkbox"/><label aria-label="COLOR ARCHIVE 관심 등록" for="save-16">♡</label></span></article><article class="ss-card css-popup-card pop-page-3" data-kind="라이프" data-region="연남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">연남 / 라이프</small><h3 class="ss-card-title">SUNDAY OBJECT</h3><p class="ss-card-meta">마포구 연남동 · 2026.11.16 — 12.06</p></div></div><span class="css-save"><input id="save-17" type="checkbox"/><label aria-label="SUNDAY OBJECT 관심 등록" for="save-17">♡</label></span></article><article class="ss-card css-popup-card pop-page-3" data-kind="굿즈" data-region="성수"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">성수 / 굿즈</small><h3 class="ss-card-title">FUTURE GOODS</h3><p class="ss-card-meta">성동구 성수동 · 2026.11.17 — 12.10</p></div></div><span class="css-save"><input id="save-18" type="checkbox"/><label aria-label="FUTURE GOODS 관심 등록" for="save-18">♡</label></span></article><article class="ss-card css-popup-card pop-page-3" data-kind="패션" data-region="한남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">한남 / 패션</small><h3 class="ss-card-title">THE SMALL EDITION</h3><p class="ss-card-meta">용산구 한남동 · 2026.11.18 — 12.12</p></div></div><span class="css-save"><input id="save-19" type="checkbox"/><label aria-label="THE SMALL EDITION 관심 등록" for="save-19">♡</label></span></article><article class="ss-card css-popup-card pop-page-3" data-kind="아트" data-region="홍대"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">홍대 / 아트</small><h3 class="ss-card-title">WEEKEND FRAME</h3><p class="ss-card-meta">마포구 서교동 · 2026.11.20 — 12.14</p></div></div><span class="css-save"><input id="save-20" type="checkbox"/><label aria-label="WEEKEND FRAME 관심 등록" for="save-20">♡</label></span></article><article class="ss-card css-popup-card pop-page-4" data-kind="라이프" data-region="홍대"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">홍대 / 라이프</small><h3 class="ss-card-title">SOFT OPENING</h3><p class="ss-card-meta">마포구 합정동 · 2026.11.21 — 12.14</p></div></div><span class="css-save"><input id="save-21" type="checkbox"/><label aria-label="SOFT OPENING 관심 등록" for="save-21">♡</label></span></article><article class="ss-card css-popup-card pop-page-4" data-kind="아트" data-region="한남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">한남 / 아트</small><h3 class="ss-card-title">ROOM 2026</h3><p class="ss-card-meta">용산구 한남동 · 2026.11.23 — 12.16</p></div></div><span class="css-save"><input id="save-22" type="checkbox"/><label aria-label="ROOM 2026 관심 등록" for="save-22">♡</label></span></article><article class="ss-card css-popup-card pop-page-4" data-kind="패션" data-region="성수"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">성수 / 패션</small><h3 class="ss-card-title">POP PARADE</h3><p class="ss-card-meta">성동구 성수동 · 2026.11.25 — 12.18</p></div></div><span class="css-save"><input id="save-23" type="checkbox"/><label aria-label="POP PARADE 관심 등록" for="save-23">♡</label></span></article><article class="ss-card css-popup-card pop-page-4" data-kind="굿즈" data-region="연남"><div class="card-media ss-card-image"><div class="poster-blank"><span>POSTER</span></div></div><div class="card-foot ss-card-info"><div><small class="ss-card-category">연남 / 굿즈</small><h3 class="ss-card-title">CITY SELECT SHOP</h3><p class="ss-card-meta">마포구 연남동 · 2026.11.27 — 12.20</p></div></div><span class="css-save"><input id="save-24" type="checkbox"/><label aria-label="CITY SELECT SHOP 관심 등록" for="save-24">♡</label></span></article></div><div aria-label="팝업 페이지 선택" class="pop-pager" role="group"><input checked="" class="pop-page-radio" id="pop-pg1" name="pop-page" type="radio"/><label aria-label="1페이지" for="pop-pg1">1</label><input class="pop-page-radio" id="pop-pg2" name="pop-page" type="radio"/><label aria-label="2페이지" for="pop-pg2">2</label><input class="pop-page-radio" id="pop-pg3" name="pop-page" type="radio"/><label aria-label="3페이지" for="pop-pg3">3</label><input class="pop-page-radio" id="pop-pg4" name="pop-page" type="radio"/><label aria-label="4페이지" for="pop-pg4">4</label></div>
+<div class="pop-page-numbers ss-page-numbers">
+<label aria-label="1페이지" for="pop-pg1">1</label>
+<label aria-label="2페이지" for="pop-pg2">2</label>
+<label aria-label="3페이지" for="pop-pg3">3</label>
+<label aria-label="4페이지" for="pop-pg4">4</label>
+</div>
+<span aria-label="다음 페이지" class="pop-page-next">
+<label aria-label="다음: 2페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg2">&gt;</label>
+<label aria-label="다음: 3페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg3">&gt;</label>
+<label aria-label="다음: 4페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg4">&gt;</label>
+<label aria-hidden="true" class="pop-page-arrow pop-arrow-off ss-page-arrow">&gt;</label>
+</span>
+</nav>
+</div>
 </section>
-<footer class="footer pop-brand-footer"><strong class="footer-brand">SCENE<span>:</span>SEOUL</strong><p>서울의 문화를 소개하는 웹사이트 콘텐츠 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p><small class="footer-copyright">© 2026 SCENE:SEOUL</small></footer>
+<footer class="footer pop-brand-footer ss-site-footer"><strong class="footer-brand">SCENE<span>:</span>SEOUL</strong><p>서울의 문화를 소개하는 웹사이트 콘텐츠 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p><small class="footer-copyright">© 2026 SCENE:SEOUL</small></footer>
 </main>
 <a aria-label="페이지 맨 위로" class="ss-back-to-top" href="#top" title="맨 위로 이동">
 <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">

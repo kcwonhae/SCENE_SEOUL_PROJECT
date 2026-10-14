@@ -574,3 +574,30 @@ a {
   }
 
 }
+
+
+/* ==========================================================
+   11. 팀 공통 하단 푸터 (선택 적용: .ss-site-footer)
+   동일한 브랜드 푸터를 쓰는 페이지에서 footer에 클래스를 추가합니다.
+   ========================================================== */
+.ss-site-footer {
+  display:grid;
+  grid-template-columns: minmax(170px,1fr) minmax(230px,1.45fr) auto;
+  align-items:center;
+  gap:24px;
+  min-height:82px;
+  margin:0;
+  padding:22px clamp(22px,5vw,80px);
+  background:var(--ss-yellow);
+  color:var(--ss-ink);
+  border:0;
+}
+.ss-site-footer .footer-brand {font-size:26px; font-weight:900; line-height:1.1; letter-spacing:-.09em; white-space:nowrap;}
+.ss-site-footer .footer-brand span {color:var(--ss-blue);}
+.ss-site-footer p {margin:0; text-align:center; font-size:11px; line-height:1.7;}
+.ss-site-footer .footer-copyright {font-size:10px; white-space:nowrap; text-align:right;}
+@media(max-width:800px){
+  .ss-site-footer {display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px;}
+  .ss-site-footer p {text-align:left;flex-basis:100%;}
+  .ss-site-footer .footer-copyright {text-align:left;}
+}
