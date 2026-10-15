@@ -3473,13 +3473,6 @@ body,body .ss-page,.popup-cover-flow,.pop-v3-intro,.popup-cover-flow>.squish-fea
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
-/* Restore original yellow hover on the catalog filter pills. */
-.popup-catalog .ss-catalog-controls .ss-filter:hover {
-  background: var(--ss-yellow) !important;
-  border-color: var(--ss-yellow) !important;
-  color: var(--ss-ink) !important;
-  transform: none;
-}
 @media (max-width:760px) {
   .popup-catalog .pop-v3-catalog-head {
     width: 100% !important;

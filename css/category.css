@@ -324,9 +324,9 @@
 }
 
 .ss-catalog .ss-catalog-controls .ss-filter:hover {
-    color: var(--ss-blue);
-    background: #eaf0fc;
-    border-color: #c5d2f0;
+    color: var(--ss-ink);
+    background: var(--ss-yellow);
+    border-color: var(--ss-yellow);
     transform: none;
 }
 
