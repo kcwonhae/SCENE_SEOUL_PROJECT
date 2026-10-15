@@ -327,12 +327,6 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
   margin-left: .1em;
 }
 
-/* 윤곽선 글자 */
-.perf-hero .perf-title-outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--ss-ink);
-}
-
 /* 오른쪽 분야 목록 */
 .perf-tags {
   position: absolute;
@@ -537,33 +531,25 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
 .poster:nth-child(6) { animation-delay: -4s; }
 .poster:nth-child(7) { animation-delay: 0s; }
 
+/* 포스터 사진 들어가는 윗부분 */
 .poster-art {
   height: 187px;
   position: relative;
   overflow: hidden;
-  padding: 15px;
+  padding: 0px;
   font-family: Arial, sans-serif;
   color: #101014;
 }
 
-.poster-art>span {
-  position: relative;
-  z-index: 2;
+/* 포스터 사진: 칸 크기에 맞추되 비율 유지, 넘치는 부분 잘라냄 */
+.poster-art img {
   display: block;
-  font-size: 18px;
-  line-height: .98;
-  font-weight: 600;
-  letter-spacing: -.06em;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.poster-art small {
-  position: absolute;
-  left: 12px;
-  bottom: 8px;
-  font-size: 8px;
-  z-index: 3;
-}
-
+/* 포스터 아랫부분: 공연 제목과 부제를 보여주는 흰색 칸 */ 
 .poster-info {
   height: 53px;
   padding: 7px 9px;
@@ -576,11 +562,12 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
   overflow: hidden;
 }
 
+/*공연 제목 */
 .poster-info strong {
   font-size: 12px;
   font-weight: 600;
 }
-
+/* 장소·날짜 등 작은 글자 */
 .poster-info small {
   font-size: 9px;
   color: #666;
@@ -616,132 +603,7 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
   100%           { transform: var(--s6); z-index: 1; opacity: .9; }
 }
 
-/* ===== 포스터별 그래픽 ===== */
-.art-pink {
-  background: linear-gradient(145deg, #f4b5bf, #f8d9cb 60%, #f4eee3);
-}
 
-.art-pink b {
-  position: absolute;
-  right: 8px;
-  bottom: 2px;
-  font-size: 65px;
-  color: #d94c65;
-}
-
-.art-black {
-  background: linear-gradient(145deg, #05070b, #171e2b 60%, #c6a57f);
-  color: #fff;
-}
-
-.art-black b {
-  position: absolute;
-  right: 8px;
-  bottom: 5px;
-  color: #c5b3a1;
-  font-size: 50px;
-}
-
-.art-cream {
-  background: #f2efe6;
-}
-
-.blue-shape {
-  position: absolute;
-  width: 68px;
-  height: 104px;
-  right: 8px;
-  bottom: -9px;
-  background: linear-gradient(130deg, #9eafff, #3046ca);
-  border-radius: 60% 45% 0 0;
-  transform: rotate(10deg);
-  opacity: .85;
-}
-
-.art-orange {
-  background: linear-gradient(140deg, #ff8a15, #f8a13e);
-}
-
-.center-title {
-  font-size: 17px !important;
-}
-
-.phone-art {
-  position: absolute;
-  width: 57px;
-  height: 92px;
-  border: 6px solid #25221f;
-  border-radius: 9px;
-  background: #d9e1e1;
-  left: 50%;
-  top: 47px;
-  transform: translateX(-50%) rotate(12deg);
-  box-shadow: 0 4px 10px #bd6b19;
-  padding: 18px 4px;
-}
-
-.phone-art i {
-  display: block;
-  height: 4px;
-  margin: 5px 0;
-  background: #3b4042;
-}
-
-.vb {
-  position: absolute;
-  bottom: 10px;
-  right: 12px;
-  color: #fff;
-  background: #c6a04e;
-  font-size: 10px;
-  padding: 3px 5px;
-}
-
-.art-pink2 {
-  background: linear-gradient(150deg, #ffb2c7, #ef799c);
-}
-
-.art-pink2>span {
-  font-size: 15px;
-}
-
-.portrait {
-  position: absolute;
-  right: 15px;
-  bottom: 5px;
-  width: 45px;
-  height: 70px;
-  border-radius: 50% 50% 15% 15%;
-  background: #242129;
-  color: #e5b28c;
-  font-size: 20px;
-  text-align: center;
-  padding-top: 3px;
-}
-
-.art-lilac {
-  background: linear-gradient(140deg, #eee2d9, #d6c3bd);
-}
-
-.egg {
-  position: absolute;
-  right: 10px;
-  bottom: 5px;
-  color: #b9a58b;
-  font-size: 55px;
-}
-
-.art-yellow {
-  background: linear-gradient(140deg, #f8df76, #e8ac4a);
-}
-
-.art-yellow b {
-  position: absolute;
-  right: 7px;
-  bottom: 0;
-  font-size: 44px;
-  color: #a85c29;
-}
 
 /* 좌우 버튼 */
 .arrow { display: none; }
@@ -762,46 +624,6 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
 
 .event-meta p {
   margin: 0;
-}
-
-/* 모바일 대응 */
-@media (max-width: 620px) {
-  .hot {
-    height: 440px;
-  }
-
-  .carousel {
-    --w: 920px;
-    top: 90px;
-    width: 920px;
-    transform: translateX(-50%) scale(.58);
-    transform-origin: top center;
-  }
-
-  .giant-type {
-    top: 45px;
-    font-size: 145px;
-  }
-
-  .hot-heading {
-    top: 22px;
-  }
-
-  .counter {
-    top: 26px;
-  }
-
-  .arrow {
-    top: 170px;
-    width: 38px;
-    height: 38px;
-    font-size: 25px;
-  }
-
-  .event-meta {
-    bottom: 18px;
-    font-size: 9px;
-  }
 }
 
 /* ---------- 7. 모션 줄이기 ---------- */
