@@ -1,13 +1,12 @@
-/* SCENE:SEOUL | 마이페이지 스타일시트
- * 작성자: 김안나(2410639)
- * 공통 스타일: ../css/common.css, ../css/category.css
- */
-
-
+/* SCENE:SEOUL | MY PAGE
+   공통 스타일은 ../css/common.css와 ../css/category.css에서 불러온다.
+   이 파일에는 마이페이지의 배치, 캘린더, 포스터 인터랙션만 정의한다.
+*/
 
 /* 공통 색상 변수 연결 */
 :root{--blue:var(--ss-blue);--yellow:var(--ss-yellow);--ink:var(--ss-ink);--paper:var(--ss-paper);--line:var(--ss-line);--muted:var(--ss-muted);--ease:var(--ss-ease)}
 
+/* 마이페이지 전체 레이아웃: 공통 색상 변수를 사용하면서 본문 폭과 여백을 정합니다. */
 .my-main {max-width:1470px;margin:auto;padding:58px clamp(22px,5vw,80px) 70px}
 .my-eyebrow {font-size:10px;letter-spacing:.18em;font-weight:800;color:var(--blue);margin:0 0 17px}
 .my-title-row {display:flex;justify-content:space-between;align-items:flex-end;gap:25px;padding-bottom:27px;border-bottom:1px solid var(--ink)}
@@ -40,8 +39,10 @@
 .weekdays {display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
 .weekdays span {padding:13px 8px;font-size:9px;letter-spacing:.1em;color:var(--muted)}
 .weekdays span:first-child {color:#b65445}
+/* 캘린더 날짜 배치: grid-template-columns로 일주일(7일)을 열로 구성합니다. */
 .calendar-grid {display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-left:1px solid var(--line)}
 .day {position:relative;min-height:165px;padding:10px 9px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0}
+/* 날짜 호버: 마우스가 올라간 날짜에 강조 효과를 적용합니다. */
 .day:hover, .day:focus-within {z-index:6}
 .day.outside {background:#efede8;color:#9b9d9e}
 .day-number {display:inline-grid;place-items:center;min-width:22px;height:22px;font-size:11px;margin-bottom:9px}
@@ -49,6 +50,7 @@
 .day.sunday:not(.outside) .day-number {color:#b65445}
 .day.today .day-number {color:white!important}
 .day-posters {display:flex;flex-wrap:wrap;gap:5px}
+/* 포스터 버튼: 포스터 이미지의 크기/배치와 클릭 가능한 영역을 지정합니다. */
 .poster-trigger {position:relative;border:0;padding:0;background:transparent;width:100%;text-align:left;color:var(--ink)}
 .poster-trigger .poster-mini {width:100%;aspect-ratio:1.1;max-height:108px;display:block;object-fit:cover}
 .poster-trigger .poster-name {font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;margin-top:5px}
@@ -150,7 +152,7 @@ dialog::backdrop {background:#151b2766}
 .tray-info {display:block;padding:10px 0 2px}
 .fit-title {display:block;white-space:nowrap;line-height:1.5;max-width:100%;letter-spacing:-.035em}
 .tray-info strong {font-size:12px}
-.content-description {display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp: 2;overflow:hidden;font-size:10px;line-height:1.7;color:var(--muted);margin:5px 0 7px}
+.content-description {display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:10px;line-height:1.7;color:var(--muted);margin:5px 0 7px}
 .tray-info small {font-size:9px;color:var(--muted)}
 .dialog-body img {float:none;display:block;width:140px;margin:0 auto 20px}
 .dialog-body h2 {width:100%;margin-bottom:7px}
@@ -269,7 +271,7 @@ dialog::backdrop {background:#151b2766}
 }
 .autumn-leaf-scene {position:fixed;inset:76px 0 0;z-index:1;pointer-events:none;overflow:hidden;opacity:.46;}
 /* 공통 헤더 레이아웃 */
-.my-main, footer {position:relative;z-index:2}
+.my-main {position:relative;z-index:2}
 .autumn-leaf-scene .leaf {position:absolute;display:block;width:25px;height:39px;opacity:0;background:linear-gradient(125deg,#c9823c 0%,#b65c2b 48%,#7f3e25 100%);border-radius:100% 0 100% 0;box-shadow:inset 2px 1px 2px #f7d49b66,1px 3px 5px #4e2b1c20;transform-origin:50% 80%;}
 .autumn-leaf-scene .leaf:after {content:"";position:absolute;left:49%;top:8%;width:1px;height:83%;background:#f1c28a99;transform:rotate(-17deg);transform-origin:top;}
 .leaf-1 {left:79%;top:70%;background:linear-gradient(135deg,#d7a34c,#9a512a 75%);animation:leaf-drift-1 19s ease-in-out infinite 1s}
@@ -341,43 +343,12 @@ body:after {width:65vw;height:145px;opacity:.6}
     order: 2 !important;
 }
 
-/* 공통 푸터 스타일 */
-footer {
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 5%;
-  margin-top: 96px;
-  background: var(--ss-yellow);
-}
-
-footer strong {
-  font-size: 28px;
-  letter-spacing: -.09em;
-}
-
-footer strong span {
-  color: var(--ss-blue);
-}
-
-footer p,
-footer small {
-  font-size: 11px;
-  line-height: 1.6;
-}
-
-@media (max-width: 800px) {
-  footer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
+/* 푸터의 노란 배경, 3열 배치, 반응형 디자인은 ../css/common.css의 .ss-site-footer를 사용합니다. */
 
 /* 고정 헤더 아래 본문 배치 */
 .my-main { margin-top: var(--ss-header-height); }
 
-/* 캘린더 및 일정 비교 영역 */
+
 :root { --cat-exhibit:#b84d42; --cat-show:#d5a528; --cat-popup:#54815a; --cat-event:#4676ba; }
 /* 캘린더 배경색 */
 #calendarPanel .calendar-grid { background:#f3f2ed; }
@@ -394,108 +365,12 @@ footer small {
 #calendarPanel .month-legend span:nth-child(4)::before { background:var(--cat-event); }
 #calendarPanel .day-category-dots { right:8px; top:10px; display:flex; gap:4px; }
 #calendarPanel .category-dot { width:7px; height:7px; border-radius:50%; }
-.pick-compare { margin-top:48px; border-top:2px solid var(--ink); padding-top:29px; }
-.pick-compare-top { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:23px; }
-.pick-compare-kicker { margin:0 0 10px; font-size:10px; font-weight:800; letter-spacing:.16em; color:var(--blue); }
-.pick-compare h3 { margin:0; font-size:clamp(25px,3vw,40px); letter-spacing:-.065em; line-height:1.2; }
-.pick-compare h3 span { color:var(--blue); }
-.pick-compare-intro { margin:11px 0 0; font-size:12px; color:var(--muted); line-height:1.7; }
-.pick-compare-count { display:flex; flex-direction:column; align-items:end; white-space:nowrap; }
-.pick-compare-count strong { font-size:52px; line-height:1; letter-spacing:-.09em; color:var(--blue); }
-.pick-compare-count span { font-size:9px; letter-spacing:.12em; font-weight:800; color:var(--muted); }
-.pick-compare-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
-.pick-option { min-width:0; background:#fff; border:1px solid var(--line); padding:20px 17px 17px; transition:transform .25s ease,box-shadow .25s ease; }
-.pick-option:hover { transform:translateY(-4px); box-shadow:0 12px 28px #151b2714; }
-.pick-option-head { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:18px; }
-.pick-kind { font-size:11px; font-weight:800; white-space:nowrap; }
+
 .kind-show { color:#a9800d; } .kind-popup { color:#54815a; } .kind-event { color:#4676ba; }
-.pick-option-index { font-size:9px; color:var(--muted); letter-spacing:.08em; }
-.pick-option h4 { min-height:52px; margin:0 0 8px; font-size:17px; line-height:1.5; letter-spacing:-.05em; }
-.pick-option-sub { min-height:40px; margin:0 0 16px; color:var(--muted); font-size:11px; line-height:1.7; }
-.pick-option dl { margin:0; border-top:1px solid var(--line); }
-.pick-option dl div { display:flex; justify-content:space-between; gap:10px; align-items:baseline; border-bottom:1px solid var(--line); padding:10px 0; }
-.pick-option dt { font-size:10px; color:var(--muted); flex:none; }
-.pick-option dd { margin:0; font-size:11px; font-weight:800; text-align:right; }
-.pick-option dd small { font-size:9px; font-weight:400; color:var(--muted); }
-.pick-place { display:inline-block; border-radius:20px; padding:3px 9px; background:#eef1f6; color:#36475f; }
-.pick-reason { margin:16px 0 0; font-size:10px; line-height:1.8; color:var(--muted); }
-.pick-reason b { display:block; color:var(--ink); font-size:11px; }
-.pick-compare-bottom { display:flex; justify-content:space-between; gap:15px; align-items:center; margin-top:14px; padding:16px 18px; background:#e8edf6; }
-.pick-compare-bottom p { margin:0; font-size:11px; line-height:1.8; }
-.pick-compare-bottom p strong { color:var(--blue); margin-right:10px; }
-.pick-compare-bottom p span { color:#9fa8b5; margin:0 5px; }
-.pick-compare-bottom a { white-space:nowrap; font-size:11px; font-weight:800; color:var(--blue); border-bottom:1px solid currentColor; padding-bottom:3px; }
-.pick-compare-disclaimer { margin:13px 0 0; font-size:10px; line-height:1.7; color:var(--muted); }
-@media(max-width:1000px) { .pick-compare-grid { grid-template-columns:1fr; } .pick-option h4,.pick-option-sub { min-height:0; } }
-@media(max-width:650px) { .pick-compare-top { align-items:start; } .pick-compare-count { display:none; } .pick-compare-bottom { flex-direction:column; align-items:start; } }
 
-/* 선택한 일정 비교 카드 */
-.pick-compare {
-  box-sizing:border-box;
-  width:calc(100% + 100px);
-  max-width:1370px;
-  margin:58px 0 0 50%;
-  transform:translateX(-50%);
-  border-top:2px solid var(--ink);
-  padding:34px 0 0;
-}
-.pick-compare-top { margin-bottom:29px; }
-.pick-compare-grid { gap:20px; }
-.pick-option { padding:25px 22px 22px; }
-.pick-option-head { margin-bottom:20px; }
-.pick-option-index { font-size:31px; line-height:1; font-weight:900; color:var(--ink); letter-spacing:-.065em; }
-.pick-option-feature { display:grid; grid-template-columns:minmax(0,1fr) 112px; align-items:start; gap:14px; min-height:160px; margin-bottom:17px; }
-.pick-option-copy { min-width:0; }
-.pick-option h4 { min-height:0; font-size:clamp(20px,1.7vw,25px); line-height:1.28; margin:0 0 12px; word-break:keep-all; }
-.pick-option-sub { min-height:0; margin:0; font-size:12px; line-height:1.7; }
-.pick-option-poster { width:112px; height:151px; overflow:hidden; background:#ecece8; border:1px solid var(--line); }
-.pick-option-poster img { display:block; width:100%; height:100%; object-fit:cover; }
-.pick-option dt { font-size:11px; }
-.pick-option dd { font-size:12px; }
-.pick-reason b { font-size:12px; }
-@media(max-width:1200px) {
-  .pick-compare { width:100%; }
-  .pick-option-feature { grid-template-columns:minmax(0,1fr) 88px; }
-  .pick-option-poster { width:88px; height:120px; }
-}
-@media(max-width:1000px) {
-  .pick-compare { max-width:740px; }
-  .pick-option-feature { min-height:0; grid-template-columns:minmax(0,1fr) 115px; }
-  .pick-option-poster { width:115px; height:154px; }
-}
-@media(max-width:650px) {
-  .pick-compare { margin-top:38px; }
-  .pick-option { padding:20px 17px; }
-  .pick-option-feature { grid-template-columns:minmax(0,1fr) 90px; }
-  .pick-option-poster { width:90px; height:122px; }
-  .pick-option h4 { font-size:20px; }
-  .pick-option-index { font-size:27px; }
-}
-
-/* 비교 영역 중앙 정렬 */
 #calendarPanel .month-legend span::before { width:7px; height:7px; }
 #calendarPanel .day-category-dots { gap:3px; }
 #calendarPanel .category-dot { width:5px; height:5px; }
-.pick-compare {
-  position:relative; left:auto; transform:none;
-  box-sizing:border-box; width:100%; max-width:1370px;
-  margin:56px auto 0; padding:38px 0 0; border-top:0;
-}
-.pick-compare::before {
-  content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
-  width:min(380px,65%); height:1px; background:var(--ss-line, #c9c9c4);
-}
-.pick-compare-top { display:block; text-align:center; margin-bottom:34px; }
-.pick-compare-kicker { font-size:clamp(12px,1.1vw,15px); letter-spacing:.14em; margin-bottom:14px; }
-.pick-compare h3 { font-size:clamp(32px,4vw,54px); }
-.pick-compare-intro { font-size:clamp(12px,1.2vw,15px); margin-top:15px; }
-/* 다른 탭에서 비교 영역 숨김 */
-.my-main:has(#calendarPanel[hidden]) > .pick-compare { display:none; }
-@media(max-width:650px) {
-  .pick-compare { margin-top:38px; padding-top:30px; }
-  .pick-compare-top { margin-bottom:25px; }
-  .pick-compare::before { width:min(240px,65%); }
-}
 
 /* 캘린더 중심 레이아웃 */
 /* 날짜 칸 배경색 */
@@ -508,58 +383,26 @@ footer small {
 #calendarPanel .calendar-grid .day { height:auto; min-height:152px; padding:10px 8px 12px; }
 #calendarPanel .day-posters > .poster-trigger { max-width:90px; }
 #calendarPanel .poster-trigger .poster-mini { height:108px; max-height:none; object-fit:contain; object-position:center; background:#eeede8; }
-/* 비교 카드 크기 및 스타일 */
-.pick-compare { max-width:1120px; margin-top:44px; padding-top:30px; }
-.pick-compare::before { width:min(300px,60%); }
-.pick-compare-top { margin-bottom:24px; }
-.pick-compare-kicker { font-size:12px; margin-bottom:10px; }
-.pick-compare h3 { font-size:clamp(29px,3vw,40px); }
-.pick-compare-intro { font-size:12px; margin-top:10px; }
-.pick-compare-grid { gap:13px; }
-.pick-option { padding:18px 15px 16px; box-shadow:none; border-color:#e4e4df; }
-.pick-option:hover { transform:translateY(-2px); box-shadow:0 5px 15px #151b270c; }
-.pick-option-head { margin-bottom:13px; }
-.pick-option-index { font-size:25px; }
-.pick-option-feature { grid-template-columns:minmax(0,1fr) 82px; min-height:119px; gap:10px; margin-bottom:10px; }
-.pick-option-poster { width:82px; height:110px; }
-.pick-option h4 { font-size:clamp(17px,1.5vw,20px); margin-bottom:7px; }
-.pick-option-sub { font-size:11px; }
-.pick-option dl div { padding:8px 0; }
-.pick-option dt { font-size:10px; }
-.pick-option dd { font-size:11px; }
-.pick-reason { margin-top:11px; }
-.pick-reason b { font-size:11px; }
-.pick-compare-bottom { padding:12px 15px; background:#eff1f3; }
+
 @media(max-width:1000px) {
   #calendarPanel .calendar-grid .day { min-height:140px; }
   #calendarPanel .poster-trigger .poster-mini { height:95px; }
-  .pick-compare { max-width:740px; }
-  .pick-option-feature { grid-template-columns:minmax(0,1fr) 82px; min-height:0; }
-  .pick-option-poster { width:82px; height:110px; }
+  
+  
+  
 }
 @media(max-width:760px) {
   #calendarPanel .calendar-grid .day { min-height:106px; padding:6px 4px 9px; }
   #calendarPanel .day-posters > .poster-trigger { max-width:100%; }
   #calendarPanel .poster-trigger .poster-mini { height:65px; }
 }
-@media(max-width:650px) {
-  .pick-compare { margin-top:34px; padding-top:26px; }
-  .pick-option { padding:16px 13px; }
-  .pick-option-feature { grid-template-columns:minmax(0,1fr) 75px; }
-  .pick-option-poster { width:75px; height:100px; }
-}
 
-
-/* 캘린더와 비교 영역 간격 */
 /* 캘린더 날짜 칸 높이 */
 #calendarPanel .calendar-grid .day { min-height:132px; }
 #calendarPanel .poster-trigger .poster-mini { height:91px; }
 
-/* 비교 영역 구분선 및 제목 간격 */
-.pick-compare { margin-top:74px; padding-top:53px; }
-.pick-compare-top { margin-bottom:26px; }
 /* 선택 안내문 간격 */
-.pick-compare-bottom { margin-top:31px; }
+
 
 /* 계정 카드 배치 */
 @media (min-width:761px) {
@@ -572,8 +415,8 @@ footer small {
 @media (max-width:760px) {
   #calendarPanel .calendar-grid .day { min-height:106px; }
   #calendarPanel .poster-trigger .poster-mini { height:65px; }
-  .pick-compare { margin-top:52px; padding-top:39px; }
-  .pick-compare-bottom { margin-top:24px; }
+  
+  
 }
 
 
@@ -611,17 +454,12 @@ footer small {
   #calendarPanel .poster-trigger .poster-mini { height:88px; }
 }
 
-/* 현재 페이지 표시: 마이페이지 네비게이션 */
-.ss-header .header-mypage.is-active {
-  position: relative;
-  color: var(--ss-blue);
+/* 현재 페이지 표시: MY PAGE는 공통 메뉴(.ss-nav) 밖에 있는 헤더 링크입니다. */
+.ss-header .ss-header-actions .header-mypage[aria-current="page"] {
+  color: var(--ss-header-accent);
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 4px;
 }
-.ss-header .header-mypage.is-active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -5px;
-  height: 2px;
-  background: var(--ss-blue);
-}
+
+/* 공통 헤더 로고는 공통 CSS의 글꼴과 색상을 사용한다. */
+.ss-header .ss-header-logo { text-decoration: none; }
