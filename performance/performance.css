@@ -321,6 +321,18 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
   letter-spacing: -.075em;
 }
 
+/* 제목 끝의 점 */
+.perf-hero .perf-title-dot {
+  color: var(--ss-blue);
+  margin-left: .1em;
+}
+
+/* 윤곽선 글자 */
+.perf-hero .perf-title-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ss-ink);
+}
+
 /* 오른쪽 분야 목록 */
 .perf-tags {
   position: absolute;
