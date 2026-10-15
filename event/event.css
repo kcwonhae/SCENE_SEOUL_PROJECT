@@ -44,7 +44,7 @@
 
 .event-guide-description {
   margin: 23px 0 0;
-  color: var(--ss-muted);
+  color: #111;
   font-size: 13px;
   line-height: 1.9;
 }
@@ -52,12 +52,12 @@
 .event-guide-location {
   flex: none;
   margin: 0 0 5px;
-  color: var(--ss-muted);
+  color: #111;
   font-size: 10px;
   font-weight: 700;
   line-height: 2;
   letter-spacing: .1em;
-  text-align: left;
+  text-align: right;
 }
 
 /* 추천 이벤트 영역 */
