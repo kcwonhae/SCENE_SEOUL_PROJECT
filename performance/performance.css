@@ -130,8 +130,8 @@ footer small {
   order: 4;
 }
 
-.ss-catalog-status {
-  order: 3;
+.ss-catalog .ss-catalog-status {
+  display: block;
 }
 
 .pager {
@@ -252,6 +252,14 @@ body:has(#classic-dance:target) .menu a[href="#classic-dance"],
 body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
   color: var(--ink);
   font-weight: 800;
+}
+
+/* 카드 오른쪽 위 작은 라벨 (장르/세부 분류) */
+.ss-card-region {
+  color: var(--ss-muted);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 /* 카드: 플레이스홀더, 제목 링크, 배지 */
