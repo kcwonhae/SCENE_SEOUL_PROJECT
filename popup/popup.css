@@ -3371,9 +3371,6 @@ body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) .ticket-win-
 .pop-v3-toy-head-side{max-width:380px}
 .popup-cover-flow .play-and-ticket{margin-bottom:34px!important}
 .pop-v3-catalog-head{width:min(1290px,calc(100% - 108px));margin:0 auto 28px}
-.pop-v3-catalog-head h2{margin:12px 0 10px;font-size:clamp(35px,3.9vw,55px);font-weight:830;letter-spacing:-.075em;line-height:1.17;color:#1e2a3b}
-.pop-v3-catalog-head h2 em{font-style:normal;color:#4663b5}
-.pop-v3-catalog-head p{margin:0;color:#8a8f98;font-size:13px;line-height:1.7}
 .popup-catalog{padding-top:22px!important;background:transparent!important}
 .popup-catalog .pop-catalog-marker{display:none!important}
 .popup-catalog .ss-catalog-controls .ss-toolbar{padding-top:0!important}
@@ -3398,25 +3395,14 @@ body,body .ss-page,.popup-cover-flow,.pop-v3-intro,.popup-cover-flow>.squish-fea
 .pop-v3-intro{padding:16px 0 0!important}
 .pop-v3-topline{margin-bottom:28px!important;font-size:10px}
 .pop-v4-headline{padding-top:0;max-width:730px}
-.pop-v4-headline .pop-v3-eyebrow{margin:0 0 19px;display:inline-flex}
-.pop-v4-headline h1{font-size:clamp(94px,12vw,180px);font-weight:900;letter-spacing:-.105em;line-height:.97;color:var(--pop-v4-ink);margin:0 0 28px}
-.pop-v4-headline p{font-size:15px;line-height:2.03;color:#6d7581;margin:0 0 25px;word-break:keep-all}
 .pop-v4-hero-actions{display:flex;align-items:center;gap:36px;margin:0 0 48px}
 .pop-v4-text-link{border-bottom:1px solid #202f4d;display:inline-flex;align-items:center;justify-content:space-between;min-width:166px;padding:9px 0 15px;font-size:13px;font-weight:800;color:#283650!important}
 .pop-v4-text-link span{font-size:19px;font-weight:400;padding-left:24px}
 .pop-v4-editorial-aside{font-size:10px;line-height:1.6;font-weight:750;letter-spacing:.12em;color:#959991}
-.pop-v4-feature{width:100%;display:grid;grid-template-columns:1fr 1fr;min-height:310px;border:2px solid #212636;background:#fafa84;overflow:hidden;box-shadow:4px 5px 0 #202638;margin:0 auto}
-.pop-v4-feature-art{position:relative;min-height:310px;overflow:hidden;background:#cbcff3;border-right:2px solid #242735}
 .pop-v4-art-label{position:absolute;top:13px;left:14px;padding:5px 7px;background:#fafaf3;border:1px solid #212636;font-size:10px;letter-spacing:.07em;font-weight:900;z-index:3}
 .pop-v4-art-sun{position:absolute;top:13%;left:19%;width:34%;aspect-ratio:1;background:#fff37c;border:1.6px solid #25283a;border-radius:50%;z-index:2}
 .pop-v4-art-orbit{position:absolute;width:165%;height:85%;left:-28%;top:22%;border-top:1.6px solid #293047;transform:rotate(-24deg)}
 .pop-v4-art-peach{position:absolute;width:18%;height:42%;right:14%;bottom:-7%;background:#db957e;border:1.6px solid #29283a;border-radius:60% 40% 56% 44%;transform:rotate(34deg)}
-.pop-v4-feature-copy{padding:25px 28px 20px;display:flex;flex-direction:column;color:#151926}
-.pop-v4-feature-index{font-size:10px;letter-spacing:.11em;font-weight:850}
-.pop-v4-feature-copy h2{font-size:clamp(38px,4.9vw,70px);font-weight:900;line-height:.95;letter-spacing:-.07em;margin:34px 0 15px}
-.pop-v4-feature-copy p{font-size:12px;line-height:1.8;margin:0 0 19px}
-.pop-v4-feature-copy>a{margin-top:auto;background:#151821;color:white!important;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;letter-spacing:.03em}
-.pop-v4-feature-copy>a span{font-size:17px}
 .popup-cover-flow>.squish-feature{padding:125px 0 88px!important}
 .pop-v4-personal{background:transparent;padding:20px 0 75px}
 .pop-v4-personal-inner{display:flex;align-items:end;justify-content:space-between;gap:28px}
@@ -3427,22 +3413,13 @@ body,body .ss-page,.popup-cover-flow,.pop-v3-intro,.popup-cover-flow>.squish-fea
 .pop-v4-personal-link span{font-size:19px;font-weight:400}
 .popup-catalog{padding-top:28px!important}
 .pop-v3-catalog-head{margin-bottom:36px}
-.pop-v3-catalog-head h2{font-size:clamp(54px,6vw,88px)!important;font-weight:900!important;letter-spacing:-.085em!important;margin:16px 0 10px!important}
-.pop-v3-catalog-head h2 em{font-style:normal;color:#4d66b4}
 @media(max-width:760px){
  .pop-v3-shell,.popup-cover-flow .squish-feature-inner,.pop-v4-personal-inner,.pop-v3-catalog-head{width:calc(100% - 38px)!important}
  .pop-v3-topline{margin-bottom:24px!important}
- .pop-v4-headline h1{font-size:clamp(72px,16vw,120px)}
- .pop-v4-headline p{font-size:13px}
- .pop-v4-feature{grid-template-columns:1fr;box-shadow:3px 4px 0 #202638}
- .pop-v4-feature-art{min-height:230px;border-right:0;border-bottom:2px solid #242735}
- .pop-v4-feature-copy{min-height:270px}
- .pop-v4-feature-copy h2{margin:24px 0 12px}
  .popup-cover-flow>.squish-feature{padding-top:95px!important;padding-bottom:65px!important}
  .pop-v4-personal-inner{align-items:start;flex-direction:column;gap:18px}
  .pop-v4-personal{padding-bottom:50px}
  .pop-v4-personal-link{margin-top:0}
- .pop-v3-catalog-head h2{font-size:clamp(48px,10vw,72px)!important}
 }
 
 
@@ -3452,7 +3429,6 @@ body,body .ss-page,.popup-cover-flow,.pop-v3-intro,.popup-cover-flow>.squish-fea
 /* Main catalog content starts at the left marker requested in reference screenshot. */
 .pop-v3-catalog-head{width:calc(100% - 11vw)!important;max-width:none!important;margin-left:5.5vw!important;margin-right:5.5vw!important}
 .popup-catalog{padding-top:84px!important}
-.pop-v3-catalog-head h2{font-size:clamp(54px,6vw,88px)!important}
 /* Unlike the feature area, coupon is placed after catalog and before footer. */
 .popup-coupon-flow{background:var(--pop-v6-paper)!important}
 .popup-coupon-flow>.squish-feature{padding:115px 0 110px!important}
@@ -3479,4 +3455,44 @@ body,body .ss-page,.popup-cover-flow,.pop-v3-intro,.popup-cover-flow>.squish-fea
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+}
+
+
+/* === POP-UP-specific theme and artwork only; shared structure in common/category.css === */
+.pop-v3-intro {
+    --ss-editorial-ink: #1e2637;
+    --ss-editorial-accent: #4d66b4;
+    --ss-feature-background: #fafa84;
+    --ss-feature-art-background: #cbcff3;
+}
+.popup-catalog { --ss-editorial-accent: #4d66b4; }
+/* Banner colors and abstract shapes remain unique to POP-UP. */
+.pop-v4-feature.ss-feature-banner { overflow: visible; }
+.pop-v4-feature .ss-feature-banner-art { overflow: hidden; }
+/* Static information line replaces the previous expandable details panel. */
+.popup-catalog .pop-card-details-static {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--ss-line);
+    color: var(--ss-ink);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .07em;
+    cursor: default;
+    user-select: none;
+}
+.popup-catalog .pop-card-details-static span { color: var(--ss-blue); font-size: 18px; }
+
+/* Entrance of banner content preserves hover scale on its outer card. */
+.pop-v4-feature .ss-feature-banner-art,
+.pop-v4-feature .ss-feature-banner-copy {
+    animation: ss-enter-up .7s var(--ss-ease) .32s both;
+}
+@media (prefers-reduced-motion: reduce) {
+    .pop-v4-feature .ss-feature-banner-art,
+    .pop-v4-feature .ss-feature-banner-copy { animation: none; }
 }

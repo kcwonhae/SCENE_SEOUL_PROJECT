@@ -647,3 +647,144 @@ a {
         transform: translateX(-50%);
     }
 }
+
+
+/* ===========================================================
+   SCENE:SEOUL / SHARED EDITORIAL SYSTEM (2026-10-15)
+   Use these ss-* classes across POP-UP / EXHIBITION / PERFORMANCE / EVENT.
+   Page-specific words and accent colors belong in each page's HTML/CSS.
+   =========================================================== */
+:root {
+    --ss-editorial-ink: #1e2637;
+    --ss-editorial-accent: var(--ss-blue);
+    --ss-editorial-muted: #6d7581;
+    --ss-feature-border: #212636;
+    --ss-feature-shadow: #202638;
+    --ss-feature-background: #fafa84;
+    --ss-feature-art-background: #cbcff3;
+}
+
+/* 01. Hero: same typography/spacing, different page title and copy */
+.ss-editorial-hero { color: var(--ss-editorial-ink); }
+.ss-editorial-hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 19px;
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .14em;
+    line-height: 1.4;
+    color: var(--ss-editorial-accent);
+}
+.ss-editorial-hero-kicker span { font-size: 15px; margin-left: 9px; }
+.ss-editorial-hero-title {
+    margin: 0 0 28px;
+    color: var(--ss-editorial-ink);
+    font-family: var(--ss-font);
+    font-size: clamp(72px, 10vw, 154px);
+    font-weight: 900;
+    letter-spacing: -.105em;
+    line-height: .97;
+    overflow-wrap: anywhere;
+}
+.ss-editorial-hero-description {
+    margin: 0 0 25px;
+    color: var(--ss-editorial-muted);
+    font-size: 15px;
+    line-height: 2.03;
+    word-break: keep-all;
+}
+
+/* 02. Shared feature banner: smaller, hover lift + soft shadow */
+.ss-feature-banner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: min(100%, 1140px);
+    min-height: 272px;
+    margin: 0 auto;
+    border: 2px solid var(--ss-feature-border);
+    background: var(--ss-feature-background);
+    box-shadow: 4px 5px 0 var(--ss-feature-shadow);
+    transform: translateZ(0) scale(1);
+    transform-origin: center;
+    transition: transform .34s var(--ss-ease), box-shadow .34s var(--ss-ease);
+    isolation: isolate;
+}
+.ss-feature-banner:hover,
+.ss-feature-banner:focus-within {
+    transform: translateY(-4px) scale(1.015);
+    box-shadow: 5px 7px 0 var(--ss-feature-shadow), 0 20px 38px rgba(24,33,57,.15);
+    z-index: 2;
+}
+.ss-feature-banner-art {
+    position: relative;
+    min-height: 272px;
+    overflow: hidden;
+    background: var(--ss-feature-art-background);
+    border-right: 2px solid var(--ss-feature-border);
+}
+.ss-feature-banner-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 22px 26px 19px;
+    color: var(--ss-ink);
+}
+.ss-feature-banner-index {
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .11em;
+}
+.ss-feature-banner-title {
+    margin: 24px 0 12px;
+    font-size: clamp(36px, 4.1vw, 59px);
+    font-weight: 900;
+    letter-spacing: -.07em;
+    line-height: .97;
+}
+.ss-feature-banner-description {
+    margin: 0 0 15px;
+    font-size: 12px;
+    line-height: 1.8;
+}
+.ss-feature-banner-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding: 12px 15px;
+    background: #151821;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .03em;
+    transition: background .2s ease;
+}
+.ss-feature-banner-link:hover,
+.ss-feature-banner-link:focus-visible { background: #344f94; }
+.ss-feature-banner-link span { font-size: 17px; }
+
+/* 03. Page entrance animation: applied only where opted in */
+@keyframes ss-enter-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.ss-entrance { animation: ss-enter-up .72s var(--ss-ease) both; }
+.ss-entrance--delay-1 { animation-delay: .10s; }
+.ss-entrance--delay-2 { animation-delay: .22s; }
+.ss-entrance--delay-3 { animation-delay: .35s; }
+@media (max-width: 760px) {
+    .ss-editorial-hero-title { font-size: clamp(65px, 15vw, 112px); }
+    .ss-editorial-hero-description { font-size: 13px; }
+    .ss-feature-banner { grid-template-columns: 1fr; }
+    .ss-feature-banner-art { min-height: 205px; border-right: 0; border-bottom: 2px solid var(--ss-feature-border); }
+    .ss-feature-banner-copy { min-height: 248px; }
+    .ss-feature-banner-title { margin-top: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ss-feature-banner { transition: none; }
+    .ss-feature-banner:hover, .ss-feature-banner:focus-within { transform: none; }
+    .ss-entrance { animation: none; }
+}

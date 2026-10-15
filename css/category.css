@@ -645,3 +645,40 @@
     }
 
 }
+
+
+/* ===========================================================
+   SCENE:SEOUL / SHARED CATEGORY HEADING (2026-10-15)
+   Consistent eyebrow, title, highlighted category word and description.
+   Text content is set independently in each page's HTML.
+   =========================================================== */
+.ss-category-heading { margin: 0 0 36px; }
+.ss-category-eyebrow {
+    display: inline-block;
+    color: var(--ss-editorial-ink, #1e2637);
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .13em;
+    line-height: 1.5;
+}
+.ss-category-title {
+    margin: 16px 0 10px;
+    color: var(--ss-editorial-ink, #1e2637);
+    font-family: var(--ss-font);
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 900;
+    letter-spacing: -.085em;
+    line-height: 1.12;
+}
+.ss-category-title-accent { color: var(--ss-editorial-accent, var(--ss-blue)); font-style: normal; }
+.ss-category-description {
+    margin: 0;
+    color: #8a8f98;
+    font-size: 13px;
+    line-height: 1.7;
+    word-break: keep-all;
+}
+@media (max-width: 760px) {
+    .ss-category-heading { margin-bottom: 25px; }
+    .ss-category-title { font-size: clamp(46px, 10vw, 72px); }
+}
