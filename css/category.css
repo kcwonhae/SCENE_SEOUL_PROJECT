@@ -691,3 +691,17 @@
 .ss-catalog .ss-catalog-card-info:has(.ss-card-facts) .ss-card-description { min-height:0; margin-bottom:11px; }
 .ss-catalog .ss-catalog-card-info:has(.ss-card-facts) .ss-card-title { margin:13px 0 10px; }
 .ss-catalog .ss-catalog-card-info:has(.ss-card-facts) .ss-card-topline { margin-bottom:2px; }
+
+/* 공통 카테고리 페이지네이션: 번호/화살표 클릭 시 필터부터 보이도록 스크롤 */
+.ss-catalog .ss-catalog-controls {
+    position: relative;
+}
+.ss-catalog .ss-pagination-anchor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    scroll-margin-top: calc(var(--ss-header-height, 76px) + 12px);
+}

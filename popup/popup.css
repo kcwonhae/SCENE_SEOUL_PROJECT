@@ -2751,17 +2751,18 @@ body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) .ticket-win-
     display: none;
 }
 
-.pop-catalog-controls:has(#f-all:checked):has(#pop-pg1:checked) .pop-catalog-card:not(.pop-page-1),
-.pop-catalog-controls:has(#f-all:checked):has(#pop-pg2:checked) .pop-catalog-card:not(.pop-page-2),
-.pop-catalog-controls:has(#f-all:checked):has(#pop-pg3:checked) .pop-catalog-card:not(.pop-page-3),
-.pop-catalog-controls:has(#f-all:checked):has(#pop-pg4:checked) .pop-catalog-card:not(.pop-page-4) {
+/* 페이지 번호와 화살표: URL 해시(:target) 기반. 선택 즉시 목록 제목으로 이동 */
+.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-1),
+.popup-catalog:has(#pop-pg2:target) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-2),
+.popup-catalog:has(#pop-pg3:target) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-3),
+.popup-catalog:has(#pop-pg4:target) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-4) {
     display: none;
 }
 
-.pop-catalog-controls:has(#pop-pg1:checked) .ss-page-numbers label[for="pop-pg1"],
-.pop-catalog-controls:has(#pop-pg2:checked) .ss-page-numbers label[for="pop-pg2"],
-.pop-catalog-controls:has(#pop-pg3:checked) .ss-page-numbers label[for="pop-pg3"],
-.pop-catalog-controls:has(#pop-pg4:checked) .ss-page-numbers label[for="pop-pg4"] {
+.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .ss-page-numbers a[href="#pop-pg1"],
+.popup-catalog:has(#pop-pg2:target) .ss-page-numbers a[href="#pop-pg2"],
+.popup-catalog:has(#pop-pg3:target) .ss-page-numbers a[href="#pop-pg3"],
+.popup-catalog:has(#pop-pg4:target) .ss-page-numbers a[href="#pop-pg4"] {
     background: var(--ss-blue);
     color: #fff;
 }
@@ -2774,14 +2775,14 @@ body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) .ticket-win-
     height: 40px;
 }
 
-.pop-catalog-controls:has(#pop-pg1:checked) .pop-page-prev .ss-page-arrow:nth-child(1),
-.pop-catalog-controls:has(#pop-pg2:checked) .pop-page-prev .ss-page-arrow:nth-child(2),
-.pop-catalog-controls:has(#pop-pg3:checked) .pop-page-prev .ss-page-arrow:nth-child(3),
-.pop-catalog-controls:has(#pop-pg4:checked) .pop-page-prev .ss-page-arrow:nth-child(4),
-.pop-catalog-controls:has(#pop-pg1:checked) .pop-page-next .ss-page-arrow:nth-child(1),
-.pop-catalog-controls:has(#pop-pg2:checked) .pop-page-next .ss-page-arrow:nth-child(2),
-.pop-catalog-controls:has(#pop-pg3:checked) .pop-page-next .ss-page-arrow:nth-child(3),
-.pop-catalog-controls:has(#pop-pg4:checked) .pop-page-next .ss-page-arrow:nth-child(4) {
+.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .pop-page-prev .ss-page-arrow:nth-child(1),
+.popup-catalog:has(#pop-pg2:target) .pop-page-prev .ss-page-arrow:nth-child(2),
+.popup-catalog:has(#pop-pg3:target) .pop-page-prev .ss-page-arrow:nth-child(3),
+.popup-catalog:has(#pop-pg4:target) .pop-page-prev .ss-page-arrow:nth-child(4),
+.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .pop-page-next .ss-page-arrow:nth-child(1),
+.popup-catalog:has(#pop-pg2:target) .pop-page-next .ss-page-arrow:nth-child(2),
+.popup-catalog:has(#pop-pg3:target) .pop-page-next .ss-page-arrow:nth-child(3),
+.popup-catalog:has(#pop-pg4:target) .pop-page-next .ss-page-arrow:nth-child(4) {
     display: inline-flex;
 }
 
@@ -3724,4 +3725,33 @@ body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) .ticket-win-
 @media (prefers-reduced-motion: reduce) {
   .pop-v4-feature .pop-feature-poster { transition: none; }
   .pop-v4-feature:hover .pop-feature-poster { transform: none; }
+}
+
+/* 페이지 이동 스크롤 위치는 공통 category.css의 .ss-pagination-anchor에서 관리 */
+.popup-catalog .ss-page-numbers a {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    color: #4b525d;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+.popup-catalog .ss-page-numbers a:hover {
+    background: var(--ss-yellow);
+    color: var(--ss-ink);
+}
+.popup-catalog .ss-page-numbers a:focus-visible,
+.popup-catalog .pop-page-arrow:focus-visible {
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 3px;
+}
+@media (max-width: 670px) {
+    .popup-catalog .pop-page-anchor { top: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .popup-catalog .ss-page-numbers a { transition: none; }
 }

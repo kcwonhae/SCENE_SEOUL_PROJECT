@@ -86,12 +86,13 @@
 <p class="ss-category-description">분야별로 서울의 팝업을 자유롭게 둘러보세요.</p>
 </div>
 <div class="pop-catalog-controls ss-catalog-controls">
+<!-- 페이지 이동 시 필터와 카드가 먼저 보이도록 하는 공통 스크롤 기준 -->
+<span class="pop-page-anchor ss-pagination-anchor" id="pop-pg1" aria-hidden="true"></span>
+<span class="pop-page-anchor ss-pagination-anchor" id="pop-pg2" aria-hidden="true"></span>
+<span class="pop-page-anchor ss-pagination-anchor" id="pop-pg3" aria-hidden="true"></span>
+<span class="pop-page-anchor ss-pagination-anchor" id="pop-pg4" aria-hidden="true"></span>
 <!-- CSS로 동작하는 라디오 필터: 전시(exhibition) 페이지와 같은 구조 -->
 <!-- 페이지 번호도 CSS만으로 동작. 전체 필터 시 6개씩 4페이지. -->
-<input checked="" class="pop-hidden-radio" id="pop-pg1" name="popup-page" type="radio"/>
-<input class="pop-hidden-radio" id="pop-pg2" name="popup-page" type="radio"/>
-<input class="pop-hidden-radio" id="pop-pg3" name="popup-page" type="radio"/>
-<input class="pop-hidden-radio" id="pop-pg4" name="popup-page" type="radio"/>
 <div class="ss-toolbar">
 <div aria-label="팝업 유형 필터" class="ss-filters" role="group">
 <input checked="" class="pop-hidden-radio ss-filter-input" id="f-all" name="popup-filter" type="radio"/><label class="ss-filter" for="f-all">전체</label>
@@ -523,20 +524,20 @@
 <nav aria-label="팝업 목록 페이지" class="pop-pager ss-page-nav">
 <span aria-label="이전 페이지" class="pop-page-prev">
 <label aria-hidden="true" class="pop-page-arrow pop-arrow-off ss-page-arrow">&lt;</label>
-<label aria-label="이전: 1페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg1">&lt;</label>
-<label aria-label="이전: 2페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg2">&lt;</label>
-<label aria-label="이전: 3페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg3">&lt;</label>
+<a aria-label="이전: 1페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg1">&lt;</a>
+<a aria-label="이전: 2페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg2">&lt;</a>
+<a aria-label="이전: 3페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg3">&lt;</a>
 </span>
 <div class="pop-page-numbers ss-page-numbers">
-<label aria-label="1페이지" for="pop-pg1">1</label>
-<label aria-label="2페이지" for="pop-pg2">2</label>
-<label aria-label="3페이지" for="pop-pg3">3</label>
-<label aria-label="4페이지" for="pop-pg4">4</label>
+<a aria-label="1페이지" href="#pop-pg1">1</a>
+<a aria-label="2페이지" href="#pop-pg2">2</a>
+<a aria-label="3페이지" href="#pop-pg3">3</a>
+<a aria-label="4페이지" href="#pop-pg4">4</a>
 </div>
 <span aria-label="다음 페이지" class="pop-page-next">
-<label aria-label="다음: 2페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg2">&gt;</label>
-<label aria-label="다음: 3페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg3">&gt;</label>
-<label aria-label="다음: 4페이지" class="pop-page-arrow ss-page-arrow" for="pop-pg4">&gt;</label>
+<a aria-label="다음: 2페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg2">&gt;</a>
+<a aria-label="다음: 3페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg3">&gt;</a>
+<a aria-label="다음: 4페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg4">&gt;</a>
 <label aria-hidden="true" class="pop-page-arrow pop-arrow-off ss-page-arrow">&gt;</label>
 </span>
 </nav>
