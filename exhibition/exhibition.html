@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="project" content="SCENE:SEOUL">
     <meta name="contributor" content="윤서영">
     <meta name="description" content="서울의 전시를 발견하고 나만의 장면을 찾아보세요.">
@@ -19,22 +18,646 @@
 <body>
 
     <!-- 01. 공통 헤더 -->
-    <header class="ss-header">
-
-        <a class="ss-header-logo" href="../main/index.html"
-           aria-label="SCENE:SEOUL 홈">
+     <header class="ss-header" id="header">
+        <a aria-label="씬 서울 홈" class="ss-header-logo" href="../main/index.html">
             SCENE<span class="ss-accent">:</span>SEOUL
         </a>
 
-        <nav class="ss-nav" aria-label="주요 메뉴">
+        <nav aria-label="메인 메뉴" class="ss-nav">
             <a href="../main/index.html">HOME</a>
-            <a href="../exhibition/exhibition.html" aria-current="page">전시</a>
+            <a class="is-active" aria-current="page" href="../exhibition/exhibition.html">전시</a>
             <a href="../performance/performance.html">공연</a>
             <a href="../popup/popup.html">팝업</a>
             <a href="../event/event.html">이벤트</a>
             <a href="../recommend/recommend.html">추천</a>
             <a href="../map/map.html">지도</a>
         </nav>
+
+        <div class="ss-header-actions">
+            <span class="ss-header-quick-icons">
+                <button
+                    aria-label="검색"
+                    class="ss-icon-button"
+                    title="검색"
+                    type="button"
+                >
+                    <svg
+                        aria-hidden="true"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-width="1.8"
+                        viewbox="0 0 24 24"
+                    >
+                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
+                        <path d="m16 16 5 5"></path>
+                    </svg>
+                </button>
+
+                <span aria-label="언어: 한국어" class="ss-language">
+                    <svg
+                        aria-hidden="true"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        viewbox="0 0 24 24"
+                    >
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
+                    </svg>
+                    <span>KR</span>
+                </span>
+            </span>
+
+            <button class="header-login" type="button">
+                LOGIN
+            </button>
+
+            <a class="header-mypage" href="../mypage/mypage.html">MY PAGE</a>
+
+            <span
+                aria-label="날씨 아이콘"
+                class="ss-weather-icon"
+                title="날씨 아이콘 (표시용)"
+            >
+                <svg
+                    aria-hidden="true"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.75"
+                    viewbox="0 0 24 24"
+                >
+                    <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
+                    <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
+                </svg>
+            </span>
+        </div>
+    </header>
+
+
+    <main class="ss-page">
+
+        <!-- 02. 페이지 소개 -->
+        <section class="exhibition-intro"
+                 aria-labelledby="page-title">
+
+            <p class="exhibition-eyebrow">
+                SCENE:SEOUL / CULTURE ARCHIVE
+            </p>
+
+            <h1 id="page-title">
+                Exhibition
+                <span class="title-accent">.</span>
+            </h1>
+
+            <div class="intro-bottom">
+
+                <p>
+                    오늘의 서울에서 나만의 장면을 발견하다.<br>
+                    취향에 맞는 전시를 탐색하고, 새로운 영감을 만나보세요.
+                </p>
+
+                <p class="edition">
+                    SEOUL, KOREA<br>
+                    EXHIBITION GUIDE · 2026
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- 03. 대표 전시 -->
+        <section class="featured-exhibition"
+                 aria-labelledby="featured-title">
+
+            <div class="featured-poster">
+
+                <a href="https://sema.seoul.go.kr/en/whatson/landing"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="대표 전시 상세 정보 열기">
+
+                    <img src="../images/featured-exhibition.jpg"
+                         alt="유영국 대표 전시 포스터">
+
+                </a>
+
+            </div>
+
+            <div class="featured-info">
+
+                <div>
+                    <p class="featured-kicker">
+                        EDITOR'S PICK · 01
+                    </p>
+
+                    <h2 id="featured-title">
+                        Yoo Youngkuk:<br>
+                        A Mountain Within Me
+                    </h2>
+
+                    <p class="featured-description">
+                        자연의 형태와 색채를 추상적으로 풀어낸
+                        유영국의 작품을 만나보세요.
+                    </p>
+                </div>
+
+                <div class="featured-bottom">
+
+                    <p>
+                        서울시립미술관 서소문본관<br>
+                        2026.05.19 — 10.25
+                    </p>
+
+                    <a href="https://sema.seoul.go.kr/en/whatson/landing"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        EXPLORE EXHIBITION
+                        <span aria-hidden="true">↗</span>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 04. 전시 카탈로그 -->
+        <section class="ss-catalog exhibition-catalog"
+                 aria-labelledby="catalog-title">
+
+            <div class="ss-catalog-head">
+
+                <div>
+                    <p class="catalog-eyebrow">
+                        EXPLORE EXHIBITIONS
+                    </p>
+
+                    <h2 class="ss-catalog-title" id="catalog-title">
+                        All 
+                        <span class="title-accent">Exhibitions</span>
+                    </h2>
+                </div>
+
+                <p class="ss-catalog-desc">
+                    전시를 둘러보고<br>
+                    마음에 드는 장면을 찾아보세요.
+                </p>
+
+            </div>
+
+
+            <!-- 04-1. 전시 분류 필터 -->
+            <div class="catalog-controls">
+
+                <input class="filter-input"
+                       type="radio"
+                       name="exhibition-filter"
+                       id="filter-all"
+                       checked>
+
+                <input class="filter-input"
+                       type="radio"
+                       name="exhibition-filter"
+                       id="filter-art">
+
+                <input class="filter-input"
+                       type="radio"
+                       name="exhibition-filter"
+                       id="filter-photo">
+
+                <input class="filter-input"
+                       type="radio"
+                       name="exhibition-filter"
+                       id="filter-media">
+
+                <input class="filter-input"
+                       type="radio"
+                       name="exhibition-filter"
+                       id="filter-history">
+
+
+                <div class="ss-toolbar">
+
+                    <div class="ss-filters" aria-label="전시 유형 필터">
+                        <label class="ss-filter" for="filter-all">전체</label>
+                        <label class="ss-filter" for="filter-art">미술</label>
+                        <label class="ss-filter" for="filter-photo">사진</label>
+                        <label class="ss-filter" for="filter-media">미디어 아트</label>
+                        <label class="ss-filter" for="filter-history">역사·문화</label>
+                    </div>
+
+                    <div class="ss-search">
+                        <input type="text" placeholder="전시명을 검색하세요">
+                        <svg aria-hidden="true" class="ss-search-icon" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 5 5"></path></svg>
+                    </div>
+
+                </div>
+
+
+                <p class="ss-catalog-status">
+                    SELECT A CATEGORY TO EXPLORE
+                </p>
+
+
+                <!-- 04-2. 전시 카드 목록 -->
+                <div class="ss-card-grid exhibition-grid">
+
+
+                    <!-- 카드 01: 미술 / 중구 -->
+                    <article class="ss-card exhibition-card art jung">
+
+                        <div class="ss-card-image">
+
+                            <a href="https://sema.seoul.go.kr/en/whatson/landing"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Yoo Youngkuk: A Mountain Within Me 전시 정보 열기">
+
+                                <img src="../images/exhibition-yoo.jpg"
+                                     alt="Yoo Youngkuk: A Mountain Within Me 전시 포스터">
+
+                            </a>
+
+                        </div>
+
+                        <div class="ss-card-info">
+
+                            <div class="card-meta">
+                                <span class="ss-card-category">ART</span>
+                                <span>중구</span>
+                            </div>
+
+                            <h3 class="ss-card-title">
+                                Yoo Youngkuk: A Mountain Within Me
+                            </h3>
+
+                            <p class="card-description">
+                                한국 추상미술의 거장 유영국의 작품을 통해
+                                만나는 자연과 색채.
+                            </p>
+
+                            <p class="ss-card-meta">
+                                서울시립미술관 서소문본관<br>
+                                2026.05.19 — 10.25
+                            </p>
+
+                            <a class="card-link"
+                               href="https://sema.seoul.go.kr/en/whatson/landing"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                VIEW EXHIBITION
+                                <span aria-hidden="true">↗</span>
+                            </a>
+
+                        </div>
+                    </article>
+
+
+                    <!-- 카드 02: 사진 / 노원구 -->
+                    <article class="ss-card exhibition-card photo nowon">
+
+                        <div class="ss-card-image">
+
+                            <a href="https://sema.seoul.go.kr/en/whatson/landing"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Human Error 전시 정보 열기">
+
+                                <img src="../images/exhibition-human-error.jpg"
+                                     alt="Human Error 전시 포스터">
+
+                            </a>
+
+                        </div>
+
+                        <div class="ss-card-info">
+
+                            <div class="card-meta">
+                                <span class="ss-card-category">PHOTO</span>
+                                <span>노원구</span>
+                            </div>
+
+                            <h3 class="ss-card-title">Human Error</h3>
+
+                            <p class="card-description">
+                                오인환과 장서영의 작업을 통해 인간과
+                                감각의 관계를 탐색하는 전시.
+                            </p>
+
+                            <p class="ss-card-meta">
+                                북서울미술관<br>
+                                2026.08.13 — 10.25
+                            </p>
+
+                            <a class="card-link"
+                               href="https://sema.seoul.go.kr/en/whatson/landing"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                VIEW EXHIBITION
+                                <span aria-hidden="true">↗</span>
+                            </a>
+
+                        </div>
+                    </article>
+
+
+                    <!-- 카드 03: 미디어 아트 / 종로구 -->
+                    <article class="ss-card exhibition-card media jongno">
+
+                        <div class="ss-card-image">
+
+                            <a href="https://english.visitseoul.net/exhibition/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Light Resting in the Grain 전시 정보 열기">
+
+                                <img src="../images/exhibition-light.jpg"
+                                     alt="Light Resting in the Grain 전시 포스터">
+                            </a>
+
+                        </div>
+
+                        <div class="ss-card-info">
+
+                            <div class="card-meta">
+                                <span class="ss-card-category">MEDIA</span>
+                                <span>종로구</span>
+                            </div>
+
+                            <h3 class="ss-card-title">
+                                Light Resting in the Grain
+                            </h3>
+
+                            <p class="card-description">
+                                김덕용과 변용국의 작품에서 발견하는
+                                재료와 빛의 감각.
+                            </p>
+
+                            <p class="ss-card-meta">
+                                서울 전시 공간<br>
+                                2026.08.28 — 10.31
+                            </p>
+
+                            <a class="card-link"
+                               href="https://english.visitseoul.net/exhibition/"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                VIEW EXHIBITION
+                                <span aria-hidden="true">↗</span>
+                            </a>
+
+                        </div>
+                    </article>
+
+
+                    <!-- 카드 04: 역사·문화 / 종로구 -->
+                    <article class="ss-card exhibition-card history jongno">
+
+                        <div class="ss-card-image">
+
+                            <a href="https://english.visitseoul.net/exhibition/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Evergreen Through the Ages 전시 정보 열기">
+
+                                <img src="../images/exhibition-evergreen.jpg"
+                                     alt="Evergreen Through the Ages 전시 포스터">
+
+                            </a>
+
+                        </div>
+
+                        <div class="ss-card-info">
+
+                            <div class="card-meta">
+                                <span class="ss-card-category">HISTORY</span>
+                                <span>종로구</span>
+                            </div>
+
+                            <h3 class="ss-card-title">
+                                Evergreen Through the Ages
+                            </h3>
+
+                            <p class="card-description">
+                                고희동 가옥에서 만나는 선비의 품격과
+                                전통문화의 아름다움.
+                            </p>
+
+                            <p class="ss-card-meta">
+                                종로구 고희동 가옥 미술관<br>
+                                2026.09.05 — 12.27
+                            </p>
+
+                            <a class="card-link"
+                               href="https://english.visitseoul.net/exhibition/"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                VIEW EXHIBITION
+                                <span aria-hidden="true">↗</span>
+                            </a>
+
+                        </div>
+                    </article>
+
+
+                    <!-- 카드 05: 미술 / 성북구 -->
+                    <article class="ss-card exhibition-card art seongbuk">
+
+                        <div class="ss-card-image">
+
+                            <a href="https://english.visitseoul.net/exhibition/"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Singing Ornaments in the House 전시 정보 열기">
+
+                                <img src="../images/exhibition-ornaments.jpg"
+                                     alt="Singing Ornaments in the House 전시 포스터">
+
+                            </a>
+
+                        </div>
+
+                        <div class="ss-card-info">
+
+                            <div class="card-meta">
+                                <span class="ss-card-category">ART</span>
+                                <span>성북구</span>
+                            </div>
+
+                            <h3 class="ss-card-title">
+                                Singing Ornaments in the House
+                            </h3>
+
+                            <p class="card-description">
+                                집과 장식, 일상 속 예술의 관계를
+                                새롭게 바라보는 특별전.
+                            </p>
+
+                            <p class="ss-card-meta">
+                                성북구립미술관<br>
+                                2026.04.17 — 11.21
+                            </p>
+
+                            <a class="card-link"
+                               href="https://english.visitseoul.net/exhibition/"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                VIEW EXHIBITION
+                                <span aria-hidden="true">↗</span>
+                            </a>
+
+                        </div>
+                    </article>
+
+
+                    <!-- 카드 06: 사진 / 중구 -->
+                    <article class="ss-card exhibition-card photo jung">
+
+                        <div class="ss-card-image">
+
+                            <a href="https://sema.seoul.go.kr/en/whatson/landing"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Martin Parr: We Are Martin Parr 전시 정보 열기">
+
+                                <img src="../images/exhibition-martin-parr.jpg"
+                                     alt="Martin Parr: We Are Martin Parr 전시 포스터">
+
+                            </a>
+
+                        </div>
+
+                        <div class="ss-card-info">
+
+                            <div class="card-meta">
+                                <span class="ss-card-category">PHOTO</span>
+                                <span>중구</span>
+                            </div>
+
+                            <h3 class="ss-card-title">
+                                Martin Parr: We Are Martin Parr
+                            </h3>
+
+                            <p class="card-description">
+                                일상과 사회를 독특한 색채로 포착하는
+                                사진작가 마틴 파의 시선.
+                            </p>
+
+                            <p class="ss-card-meta">
+                                서울시립 사진미술관<br>
+                                2026.07.16 — 10.18
+                            </p>
+
+                            <a class="card-link"
+                               href="https://sema.seoul.go.kr/en/whatson/landing"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                VIEW EXHIBITION
+                                <span aria-hidden="true">↗</span>
+                            </a>
+
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        
+    <!-- 페이지네이션 -->
+    
+    
+<!-- 페이지네이션 버튼 -->
+<!-- 페이지네이션 -->
+<nav class="exhibition-pagination" aria-label="전시 목록 페이지">
+
+    <!-- 이전 페이지 화살표 -->
+    <span class="ss-page-arrow is-disabled ex-prev ex-prev-off"
+          aria-hidden="true">&lt;</span>
+
+    <label class="ss-page-arrow ex-prev"
+           for="ex-pg1"
+           aria-label="이전 페이지">&lt;</label>
+
+    <label class="ss-page-arrow ex-prev"
+           for="ex-pg2"
+           aria-label="이전 페이지">&lt;</label>
+
+    <label class="ss-page-arrow ex-prev"
+           for="ex-pg3"
+           aria-label="이전 페이지">&lt;</label>
+
+
+    <!-- 페이지 번호 -->
+    <input class="ex-page-radio"
+           type="radio"
+           name="exhibition-page"
+           id="ex-pg1"
+           checked>
+    <label class="ss-page-numbers" for="ex-pg1">1</label>
+
+    <input class="ex-page-radio"
+           type="radio"
+           name="exhibition-page"
+           id="ex-pg2">
+    <label class="ss-page-numbers" for="ex-pg2">2</label>
+
+    <input class="ex-page-radio"
+           type="radio"
+           name="exhibition-page"
+           id="ex-pg3">
+    <label class="ss-page-numbers" for="ex-pg3">3</label>
+
+    <input class="ex-page-radio"
+           type="radio"
+           name="exhibition-page"
+           id="ex-pg4">
+    <label class="ss-page-numbers" for="ex-pg4">4</label>
+
+
+    <!-- 다음 페이지 화살표 -->
+    <label class="ss-page-arrow ex-next"
+           for="ex-pg2"
+           aria-label="다음 페이지">&gt;</label>
+
+    <label class="ss-page-arrow ex-next"
+           for="ex-pg3"
+           aria-label="다음 페이지">&gt;</label>
+
+    <label class="ss-page-arrow ex-next"
+           for="ex-pg4"
+           aria-label="다음 페이지">&gt;</label>
+
+    <span class="ss-page-arrow is-disabled ex-next ex-next-off"
+          aria-hidden="true">&gt;</span>
+
+</nav>
+
+    <!-- 05. 공통 푸터 -->
+    <footer class="ss-site-footer">
+        <strong>
+            SCENE<span>:</span>SEOUL
+        </strong>
+
+        <p>
+            서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.
+        </p>
+
+        <small>
+            © 2026 SCENE.SEOUL
+        </small>
+    </footer>
+
+
+    <!-- 페이지 상단으로 이동 -->
+    <a class="ss-back-to-top"
+       href="#"
+       aria-label="맨 위로 이동">↑</a>
+
+</body>
+</html>                </nav>
 
         <div class="ss-header-actions">
 
