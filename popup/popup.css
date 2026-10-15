@@ -1378,7 +1378,7 @@
 }
 
 @media (max-width:670px) {
-    
+
 
     .squish-grid {
         border: 0;
@@ -2047,7 +2047,7 @@ html {
 
 }
 @media (max-width: 670px) {
-    
+
 
     .popup-cover-flow > .squish-feature {
         border-radius: 16px 16px 0 0;
@@ -2751,18 +2751,17 @@ body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) .ticket-win-
     display: none;
 }
 
-/* 페이지 번호와 화살표: URL 해시(:target) 기반. 선택 즉시 목록 제목으로 이동 */
-.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-1),
-.popup-catalog:has(#pop-pg2:target) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-2),
-.popup-catalog:has(#pop-pg3:target) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-3),
-.popup-catalog:has(#pop-pg4:target) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-4) {
+.pop-catalog-controls:has(#f-all:checked):has(#pop-pg1:checked) .pop-catalog-card:not(.pop-page-1),
+.pop-catalog-controls:has(#f-all:checked):has(#pop-pg2:checked) .pop-catalog-card:not(.pop-page-2),
+.pop-catalog-controls:has(#f-all:checked):has(#pop-pg3:checked) .pop-catalog-card:not(.pop-page-3),
+.pop-catalog-controls:has(#f-all:checked):has(#pop-pg4:checked) .pop-catalog-card:not(.pop-page-4) {
     display: none;
 }
 
-.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .ss-page-numbers a[href="#pop-pg1"],
-.popup-catalog:has(#pop-pg2:target) .ss-page-numbers a[href="#pop-pg2"],
-.popup-catalog:has(#pop-pg3:target) .ss-page-numbers a[href="#pop-pg3"],
-.popup-catalog:has(#pop-pg4:target) .ss-page-numbers a[href="#pop-pg4"] {
+.pop-catalog-controls:has(#pop-pg1:checked) .ss-page-numbers label[for="pop-pg1"],
+.pop-catalog-controls:has(#pop-pg2:checked) .ss-page-numbers label[for="pop-pg2"],
+.pop-catalog-controls:has(#pop-pg3:checked) .ss-page-numbers label[for="pop-pg3"],
+.pop-catalog-controls:has(#pop-pg4:checked) .ss-page-numbers label[for="pop-pg4"] {
     background: var(--ss-blue);
     color: #fff;
 }
@@ -2775,14 +2774,14 @@ body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) .ticket-win-
     height: 40px;
 }
 
-.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .pop-page-prev .ss-page-arrow:nth-child(1),
-.popup-catalog:has(#pop-pg2:target) .pop-page-prev .ss-page-arrow:nth-child(2),
-.popup-catalog:has(#pop-pg3:target) .pop-page-prev .ss-page-arrow:nth-child(3),
-.popup-catalog:has(#pop-pg4:target) .pop-page-prev .ss-page-arrow:nth-child(4),
-.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .pop-page-next .ss-page-arrow:nth-child(1),
-.popup-catalog:has(#pop-pg2:target) .pop-page-next .ss-page-arrow:nth-child(2),
-.popup-catalog:has(#pop-pg3:target) .pop-page-next .ss-page-arrow:nth-child(3),
-.popup-catalog:has(#pop-pg4:target) .pop-page-next .ss-page-arrow:nth-child(4) {
+.pop-catalog-controls:has(#pop-pg1:checked) .pop-page-prev .ss-page-arrow:nth-child(1),
+.pop-catalog-controls:has(#pop-pg2:checked) .pop-page-prev .ss-page-arrow:nth-child(2),
+.pop-catalog-controls:has(#pop-pg3:checked) .pop-page-prev .ss-page-arrow:nth-child(3),
+.pop-catalog-controls:has(#pop-pg4:checked) .pop-page-prev .ss-page-arrow:nth-child(4),
+.pop-catalog-controls:has(#pop-pg1:checked) .pop-page-next .ss-page-arrow:nth-child(1),
+.pop-catalog-controls:has(#pop-pg2:checked) .pop-page-next .ss-page-arrow:nth-child(2),
+.pop-catalog-controls:has(#pop-pg3:checked) .pop-page-next .ss-page-arrow:nth-child(3),
+.pop-catalog-controls:has(#pop-pg4:checked) .pop-page-next .ss-page-arrow:nth-child(4) {
     display: inline-flex;
 }
 
@@ -3374,7 +3373,7 @@ body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) .ticket-win-
 .pop-v3-catalog-head{width:min(1290px,calc(100% - 108px));margin:0 auto 28px}
 .popup-catalog{padding-top:22px!important;background:transparent!important}
 .popup-catalog .pop-catalog-marker{display:none!important}
-.popup-catalog .ss-catalog-controls .ss-toolbar{padding-top:0!important}
+.popup-catalog .ss-catalog-controls .ss-toolbar{padding:19px 0!important}
 .popup-catalog .ss-catalog-controls{background:transparent!important}
 .popup-catalog .ss-catalog-grid,.popup-catalog .ss-catalog-status,.popup-catalog .ss-pagination-wrap{background:transparent!important}
 @media(max-width:760px){
@@ -3727,31 +3726,361 @@ body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) .ticket-win-
   .pop-v4-feature:hover .pop-feature-poster { transform: none; }
 }
 
-/* 페이지 이동 스크롤 위치는 공통 category.css의 .ss-pagination-anchor에서 관리 */
-.popup-catalog .ss-page-numbers a {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 14px;
-    font-weight: 700;
-    color: #4b525d;
-    cursor: pointer;
-    transition: background .2s, color .2s;
+
+/* 이번 수정: 공통 여백 클래스와 충돌하는 팝업 옛 여백값 보정 */
+.popup-catalog.ss-catalog-spaced .pop-v3-catalog-head { margin-bottom: 0 !important; }
+.popup-catalog.ss-catalog-spaced .ss-catalog-controls { margin-top: 34px; }
+@media(max-width:760px) {
+    .popup-catalog.ss-catalog-spaced .ss-catalog-controls { margin-top:25px; }
 }
-.popup-catalog .ss-page-numbers a:hover {
-    background: var(--ss-yellow);
-    color: var(--ss-ink);
+
+
+/* 2026-10-16: 상단/필터 여백 복구, 좌우 여백 조정, 제목 소폭 축소 */
+/* 상단 여백을 늘리지 않음: 기존의 짧은 시작 간격으로 복구 */
+body .ss-page .popup-cover-flow .pop-v3-intro {
+  padding-top: 16px !important;
 }
-.popup-catalog .ss-page-numbers a:focus-visible,
-.popup-catalog .pop-page-arrow:focus-visible {
-    outline: 2px solid var(--ss-blue);
-    outline-offset: 3px;
+/* 좌우를 넓히기 위해 중앙 콘텐츠 너비만 축소 */
+body .ss-page .popup-cover-flow .pop-v3-shell {
+  width: min(1100px, calc(100% - 72px)) !important;
+  max-width: 1100px !important;
+  margin-inline: auto !important;
+  padding-top: 0 !important;
 }
-@media (max-width: 670px) {
-    .popup-catalog .pop-page-anchor { top: 64px; }
+body .ss-page .popup-cover-flow .ss-feature-banner:not(.ss-feature-banner--editorial) {
+  width: min(100%, 1020px) !important;
+}
+/* 카탈로그도 적정 좌우 여백으로 통일 */
+body .ss-page .popup-catalog {
+  width: min(1240px, 100%) !important;
+  max-width: 1240px !important;
+  margin-inline: auto !important;
+}
+/* 설명 아래 필터 윗선까지 추가했던 빈 공간 제거 */
+body .ss-page .popup-catalog .ss-catalog-controls {
+  margin-top: 0 !important;
+}
+body .ss-page .popup-catalog .pop-v3-catalog-head {
+  margin-bottom: 18px !important;
+}
+/* POP-UP / ALL POP-UPS / 비밀 팝업 제목 각각 살짝 축소 */
+body .ss-page .pop-v4-headline .ss-editorial-hero-title {
+  font-size: clamp(65px, 7.5vw, 118px) !important;
+}
+body .ss-page .popup-catalog .ss-category-title {
+  font-size: clamp(45px, 4.6vw, 68px) !important;
+}
+body .ss-page .popup-coupon-flow .pop-v3-toy-head h2 {
+  font-size: clamp(31px, 3.5vw, 49px) !important;
+}
+/* 이전 요청: 하트 외곽 원 제거, 누르면 채워지는 하트 및 호버 유지 */
+body .ss-page .popup-catalog .pop-catalog-card .ss-heart.ss-heart-toggle,
+body .ss-page .popup-catalog .pop-catalog-card .ss-heart.ss-heart-toggle:hover,
+body .ss-page .popup-catalog .pop-catalog-card .ss-heart.ss-heart-toggle:has(input:checked) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+body .ss-page .popup-catalog .pop-catalog-card .ss-heart.ss-heart-toggle:has(input:checked) span::before {
+  content: "♥" !important;
+  color: var(--ss-blue) !important;
+}
+@media(max-width: 760px) {
+  body .ss-page .popup-cover-flow .pop-v3-intro { padding-top: 14px !important; }
+  body .ss-page .popup-cover-flow .pop-v3-shell { width: calc(100% - 36px) !important; }
+  body .ss-page .pop-v4-headline .ss-editorial-hero-title { font-size: clamp(58px, 13vw, 92px) !important; }
+  body .ss-page .popup-catalog .ss-category-title { font-size: clamp(40px, 9vw, 62px) !important; }
+  body .ss-page .popup-coupon-flow .pop-v3-toy-head h2 { font-size: clamp(30px, 8vw, 44px) !important; }
+}
+
+
+/* 2026-10-16 FIX: exhibition-like gutter, no extra empty space above hero.
+   The date is out of document flow so it cannot push the title down. */
+@media (min-width: 761px) {
+  body .ss-page .popup-cover-flow .pop-v3-intro {
+    padding-top: 0 !important;
+  }
+  body .ss-page .popup-cover-flow .pop-v3-shell {
+    position: relative !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 1470px !important;
+    margin: 0 auto !important;
+    padding: 12px clamp(22px, 5vw, 80px) 0 !important;
+  }
+  body .ss-page .popup-cover-flow .pop-v3-topline {
+    position: absolute !important;
+    top: 15px !important;
+    right: clamp(22px, 5vw, 80px) !important;
+    width: auto !important;
+    margin: 0 !important;
+    z-index: 1;
+  }
+  body .ss-page .popup-cover-flow .pop-v4-headline {
+    padding-top: 0 !important;
+  }
+  body .ss-page .popup-cover-flow .ss-feature-banner {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  /* Catalog uses the same outer width and side gutters as the hero. */
+  body .ss-page .popup-catalog {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 1470px !important;
+    margin-inline: auto !important;
+    padding-left: clamp(22px, 5vw, 80px) !important;
+    padding-right: clamp(22px, 5vw, 80px) !important;
+  }
+}
+@media (max-width: 760px) {
+  body .ss-page .popup-cover-flow .pop-v3-intro { padding-top: 0 !important; }
+  body .ss-page .popup-cover-flow .pop-v3-shell {
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 14px 19px 0 !important;
+  }
+  body .ss-page .popup-cover-flow .pop-v3-topline {
+    position: relative !important;
+    margin: 0 0 12px !important;
+  }
+}
+
+
+/* =========================================
+   2026-10-16 사용자가 지정한 디자인 조정만
+   - 상단 공간 추가하지 않음 / 기본 인터랙션 유지
+   ========================================= */
+/* POP-UP 헤드라인을 아주 조금 확대 */
+body .ss-page .pop-v4-headline .ss-editorial-hero-title {
+  font-size: clamp(68px, 8.2vw, 128px) !important;
+}
+/* 추천 배너: 가로는 조금 줄이고, 세로는 조금 늘림 */
+/* 배너 가로·세로 크기는 common.css의 --ss-editorial-banner-*에서 관리 */
+
+/* 추천 버튼: 화살표만 호버하면 커짐. 클릭 동작은 기존과 동일 */
+body .ss-page .pop-v4-feature .pop-feature-static span {
+  display: inline-block;
+  transform-origin: 50% 50%;
+  transition: transform .24s ease;
+}
+body .ss-page .pop-v4-feature .pop-feature-static:hover span,
+body .ss-page .pop-v4-feature .pop-feature-static:focus-visible span {
+  transform: scale(1.4);
+}
+/* 형광펜으로 표시된 좌우 여백을 소폭 줄임: 상단 여백은 건드리지 않음 */
+@media (min-width: 761px) {
+  body .ss-page .popup-cover-flow .pop-v3-shell {
+    max-width: 1520px !important;
+    padding-left: clamp(20px, 3.6vw, 62px) !important;
+    padding-right: clamp(20px, 3.6vw, 62px) !important;
+  }
+  body .ss-page .popup-cover-flow .pop-v3-topline {
+    right: clamp(20px, 3.6vw, 62px) !important;
+  }
+  body .ss-page .popup-catalog {
+    max-width: 1520px !important;
+    padding-left: clamp(20px, 3.6vw, 62px) !important;
+    padding-right: clamp(20px, 3.6vw, 62px) !important;
+  }
+}
+/* 목록과 SECRET POP-UP 사이 간격 살짝 줄이되 붙지는 않게 */
+body .ss-page .popup-coupon-flow > .squish-feature {
+  padding-top: 76px !important;
+  padding-bottom: 37px !important;
+}
+body .ss-page .popup-coupon-flow .play-and-ticket {
+  margin-bottom: 16px !important;
+}
+/* 말랑이 공개 후 하트: 원형 테두리/배경을 없애고 빨간색으로 채움 */
+body .ss-page .popup-coupon-flow .secret-heart.ss-heart-toggle,
+body .ss-page .popup-coupon-flow .secret-heart.ss-heart-toggle:hover,
+body .ss-page .popup-coupon-flow .secret-heart.ss-heart-toggle:has(input:checked) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+body .ss-page .popup-coupon-flow .secret-heart.ss-heart-toggle:has(input:checked) span::before {
+  content: "♥" !important;
+  color: var(--ss-heart-selected, #e54850) !important;
+}
+/* 전체 팝업 카드도 빨간 하트 (기존 파랑 지정 우선순위 극복) */
+body .ss-page .popup-catalog .pop-catalog-card .ss-heart.ss-heart-toggle:has(input:checked) span::before {
+  content: "♥" !important;
+  color: var(--ss-heart-selected, #e54850) !important;
+}
+@media (max-width: 760px) {
+  body .ss-page .pop-v4-headline .ss-editorial-hero-title { font-size: clamp(62px, 13.5vw, 98px) !important; }
+  body .ss-page .popup-cover-flow .pop-v4-feature.ss-feature-banner { width: 100% !important; }
+  body .ss-page .popup-cover-flow .pop-v4-feature.ss-feature-banner .ss-feature-banner-art { min-height: 230px !important; }
+  body .ss-page .popup-cover-flow .pop-v4-feature.ss-feature-banner .ss-feature-banner-copy { min-height: 325px !important; }
+  body .ss-page .popup-coupon-flow > .squish-feature { padding-top: 56px !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-    .popup-catalog .ss-page-numbers a { transition: none; }
+  body .ss-page .pop-v4-feature .pop-feature-static span { transition: none; }
 }
+
+/* 2026-10-16: 전시 페이지 참고 비율에 맞춘 마지막 크기 조정
+   헤더 아래 여백은 아주 조금만 증가, 양옆은 넓게 활용 */
+@media (min-width: 761px) {
+  body .ss-page .popup-cover-flow .pop-v3-shell {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 1680px !important;
+    margin-inline: auto !important;
+    padding: 23px clamp(22px, 5vw, 80px) 0 !important;
+  }
+  body .ss-page .popup-cover-flow .pop-v3-topline {
+    top: 26px !important;
+    right: clamp(22px, 5vw, 80px) !important;
+  }
+  body .ss-page .popup-catalog {
+    max-width: 1680px !important;
+    padding-left: clamp(22px, 5vw, 80px) !important;
+    padding-right: clamp(22px, 5vw, 80px) !important;
+  }
+}
+
+/* 2026-10-16: 요청하신 03 SECRET POP-UP·배너의 여백만 조정 */
+@media (min-width: 761px) {
+  /* SECRET POP-UP 좌우 여백을 줄여 카탈로그와 시각적으로 맞춤 */
+  body .ss-page .popup-coupon-flow > .squish-feature {
+    padding-left: clamp(22px, 5vw, 80px) !important;
+    padding-right: clamp(22px, 5vw, 80px) !important;
+  }
+  body .ss-page .popup-coupon-flow .squish-feature-inner {
+    width: 100% !important;
+    max-width: 1520px !important;
+    margin-inline: auto !important;
+  }
+
+}
+/* 카테고리 번호와 화살표를 눌러도 필터가 헤더 아래 온전히 보이도록 */
+.popup-catalog .ss-pagination-anchor,
+body .ss-page .popup-catalog .pop-page-anchor {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  display: block !important;
+  width: 1px !important;
+  height: 1px !important;
+  pointer-events: none !important;
+  scroll-margin-top: calc(var(--ss-header-height, 76px) + 16px) !important;
+}
+
+/* 페이지 전환과 활성화 (:target) — HTML·CSS 방식 */
+/* 페이지 번호와 화살표: URL 해시(:target) 기반. 선택 즉시 목록 제목으로 이동 */
+.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-1),
+.popup-catalog:has(#pop-pg2:target) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-2),
+.popup-catalog:has(#pop-pg3:target) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-3),
+.popup-catalog:has(#pop-pg4:target) .pop-catalog-controls:has(#f-all:checked) .pop-catalog-card:not(.pop-page-4) {
+    display: none;
+}
+
+.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .ss-page-numbers a[href="#pop-pg1"],
+.popup-catalog:has(#pop-pg2:target) .ss-page-numbers a[href="#pop-pg2"],
+.popup-catalog:has(#pop-pg3:target) .ss-page-numbers a[href="#pop-pg3"],
+.popup-catalog:has(#pop-pg4:target) .ss-page-numbers a[href="#pop-pg4"] {
+    background: var(--ss-blue);
+    color: #fff;
+}
+
+.pop-page-prev,.pop-page-next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 40px;
+}
+
+.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .pop-page-prev .ss-page-arrow:nth-child(1),
+.popup-catalog:has(#pop-pg2:target) .pop-page-prev .ss-page-arrow:nth-child(2),
+.popup-catalog:has(#pop-pg3:target) .pop-page-prev .ss-page-arrow:nth-child(3),
+.popup-catalog:has(#pop-pg4:target) .pop-page-prev .ss-page-arrow:nth-child(4),
+.popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .pop-page-next .ss-page-arrow:nth-child(1),
+.popup-catalog:has(#pop-pg2:target) .pop-page-next .ss-page-arrow:nth-child(2),
+.popup-catalog:has(#pop-pg3:target) .pop-page-next .ss-page-arrow:nth-child(3),
+.popup-catalog:has(#pop-pg4:target) .pop-page-next .ss-page-arrow:nth-child(4) {
+    display: inline-flex;
+}
+
+.pop-catalog-controls:not(:has(#f-all:checked)) .ss-page-nav {
+    display: none;
+}
+
+.pop-catalog-controls .pop-arrow-off {
+    opacity: .27;
+    cursor: default;
+}
+
+.pop-catalog-controls .pop-arrow-off:hover {
+    color: var(--ss-muted);
+    transform: none;
+}
+
+
+/* 2026-10-16 / Editorial card density + pagination appearance */
+@media (min-width: 761px) {
+  /* Redistribute unused vertical space instead of leaving one large gap above CTA. */
+  body .ss-page .popup-cover-flow .pop-v4-feature.ss-feature-banner .ss-feature-banner-copy {
+    display: flex !important; flex-direction: column !important;
+    justify-content: space-between !important;
+    padding: 25px 29px 23px !important;
+  }
+}
+body .ss-page .popup-cover-flow .pop-v4-feature .ss-feature-banner-index {
+  font-size: 11px; letter-spacing: .09em;
+}
+body .ss-page .popup-cover-flow .pop-v4-feature .ss-feature-banner-kicker {
+  font-size: 12px; line-height: 1.5; margin-top: 8px;
+}
+body .ss-page .popup-cover-flow .pop-v4-feature .ss-feature-banner-title {
+  font-size: clamp(43px, 4.3vw, 62px) !important;
+  line-height: 1.02 !important; margin: 9px 0 10px !important;
+}
+body .ss-page .popup-cover-flow .pop-v4-feature .ss-feature-banner-description {
+  margin: 0 0 9px !important; font-size: 13px !important; line-height: 1.65 !important;
+}
+body .ss-page .popup-cover-flow .pop-v4-feature .ss-feature-banner-facts {
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: 9px; margin: 0 !important; padding: 4px 0 10px !important;
+  font-weight: 650; font-size: 12px;
+}
+body .ss-page .popup-cover-flow .pop-v4-feature .ss-feature-fact {
+  display: inline-flex; align-items: center; gap: 8px; line-height: 1.45;
+}
+body .ss-page .popup-cover-flow .pop-v4-feature .ss-feature-fact svg {
+  width: 16px; height: 16px; flex: none; color: #676f87;
+}
+body .ss-page .popup-cover-flow .pop-v4-feature .ss-feature-banner-link {
+  margin-top: 12px !important; flex-shrink: 0;
+}
+/* Restore the original round number indicators even with hash-based <a> links. */
+body .ss-page .popup-catalog .ss-page-numbers a {
+  display: grid; place-items: center; width: 40px; height: 40px;
+  padding: 0; border-radius: 50%; font-size: 14px; font-weight: 700;
+  color: #4b525d; background: transparent; text-decoration: none;
+}
+body .ss-page .popup-catalog .ss-page-numbers a:hover {
+  background: var(--ss-yellow); color: var(--ss-ink);
+}
+body .ss-page .popup-catalog:not(:has(#pop-pg2:target, #pop-pg3:target, #pop-pg4:target)) .ss-page-numbers a[href="#pop-pg1"],
+body .ss-page .popup-catalog:has(#pop-pg2:target) .ss-page-numbers a[href="#pop-pg2"],
+body .ss-page .popup-catalog:has(#pop-pg3:target) .ss-page-numbers a[href="#pop-pg3"],
+body .ss-page .popup-catalog:has(#pop-pg4:target) .ss-page-numbers a[href="#pop-pg4"] {
+  background: var(--ss-blue); color: #fff; border-radius: 50%;
+}
+/* SECRET POP-UP alignment is governed by the responsive .popup-coupon-flow rules above. */
+
+/* Layout alignment: use same content bounds as the catalog at every viewport width.
+   Catalog: max-width 1680px with clamp(22px, 5vw, 80px) side padding.
+   SECRET POP-UP: full-width background + identical inset and 1520px content max-width. */
+body .ss-page .popup-coupon-flow .squish-feature-inner {
+    width: 100%;
+    max-width: 1520px;
+    margin-inline: auto;
+}
+

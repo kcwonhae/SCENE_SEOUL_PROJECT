@@ -703,5 +703,63 @@
     width: 1px;
     height: 1px;
     pointer-events: none;
-    scroll-margin-top: calc(var(--ss-header-height, 76px) + 12px);
+    scroll-margin-top: calc(var(--ss-header-height, 76px) + 16px);
+}
+
+
+/* SCENE:SEOUL - 공통 카테고리 카드/간격 (선택 적용) */
+/* 카테고리 헤더와 필터의 윗줄 간 여유 확보 */
+.ss-catalog.ss-catalog-spaced .ss-catalog-controls { margin-top: 34px; }
+/* ALL POP-UPS. 같은 카탈로그 제목 약간 축소 */
+.ss-category-title.ss-category-title--balanced { font-size:clamp(48px, 5.1vw, 76px); }
+/* 하트 모양은 그대로, 둥근 테두리/배경만 제거; 체크된 하트 채움 유지 */
+.ss-catalog .ss-heart-toggle {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+.ss-catalog .ss-heart-toggle:hover,
+.ss-catalog .ss-heart-toggle:has(input:checked) {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+.ss-catalog .ss-heart-toggle:has(input:checked) span::before { content: '♥'; color: var(--ss-blue); }
+@media(max-width:760px) {
+    .ss-catalog.ss-catalog-spaced .ss-catalog-controls { margin-top: 25px; }
+    .ss-category-title.ss-category-title--balanced { font-size:clamp(42px, 9vw, 68px); }
+}
+
+/* 선택 적용 공통 카탈로그 디자인 정리 */
+.ss-catalog .ss-category-title--balanced { font-size:clamp(48px,5vw,74px) !important; }
+.ss-catalog .ss-catalog-card .ss-heart.ss-heart-toggle,
+.ss-catalog .ss-catalog-card .ss-heart.ss-heart-toggle:hover,
+.ss-catalog .ss-catalog-card .ss-heart.ss-heart-toggle:has(input:checked) {
+  border:0 !important; border-radius:0 !important; background:transparent !important; box-shadow:none !important;
+}
+.ss-catalog .ss-catalog-card .ss-heart.ss-heart-toggle:has(input:checked) span::before { content:'♥' !important; color:var(--ss-blue) !important; }
+
+
+/* 카드 공통: 하트 모양만 보이고 선택 시 빨간색으로 채움 */
+.ss-catalog .ss-catalog-card .ss-heart.ss-heart-toggle:has(input:checked) span::before {
+  content: "♥" !important;
+  color: var(--ss-heart-selected, #e54850) !important;
+}
+
+/* Pagination: <a> links inherit the original round <label> button design.
+   This is shared across category pages; hash navigation remains intact. */
+.ss-catalog .ss-page-numbers a {
+  display: grid; place-items: center; width: 40px; height: 40px;
+  border-radius: 50%; text-decoration: none;
+  font-size: 14px; font-weight: 700; line-height: 1; color: #4b525d;
+  cursor: pointer; transition: background .2s, color .2s, transform .2s;
+}
+.ss-catalog .ss-page-numbers a:hover {
+  background: var(--ss-yellow); color: var(--ss-ink);
+}
+.ss-catalog .ss-page-numbers a:focus-visible {
+  outline: 2px solid var(--ss-blue); outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ss-catalog .ss-page-numbers a { transition: none; }
 }
