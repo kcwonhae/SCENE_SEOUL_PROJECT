@@ -31,12 +31,6 @@ html {scroll-behavior: smooth;}
     font-weight: 900;
 }
 
-/* 기존 제목의 외곽선 스타일을 유지할 때 사용하는 기본 span */
-.exhibition-intro h1 span:not(.title-accent) {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--ss-ink);
-}
-
 .title-accent {
     color: var(--ss-blue);
     -webkit-text-stroke: 0;
