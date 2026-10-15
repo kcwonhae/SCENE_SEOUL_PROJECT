@@ -3448,7 +3448,7 @@ body,body .ss-page,.popup-cover-flow,.pop-v3-intro,.popup-cover-flow>.squish-fea
 
 /* === Final requested layout adjustments (v6) === */
 :root{--pop-v6-paper:#efeee9}
-body,body .ss-page,.popup-cover-flow,.pop-v3-intro,.popup-cover-flow>.squish-feature,.popup-catalog,.pop-brand-footer{background:var(--pop-v6-paper)!important}
+body,body .ss-page,.popup-cover-flow,.pop-v3-intro,.popup-cover-flow>.squish-feature,.popup-catalog{background:var(--pop-v6-paper)!important}
 /* Main catalog content starts at the left marker requested in reference screenshot. */
 .pop-v3-catalog-head{width:calc(100% - 11vw)!important;max-width:none!important;margin-left:5.5vw!important;margin-right:5.5vw!important}
 .popup-catalog{padding-top:84px!important}
