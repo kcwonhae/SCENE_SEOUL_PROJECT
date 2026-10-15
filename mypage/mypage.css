@@ -150,7 +150,7 @@ dialog::backdrop {background:#151b2766}
 .tray-info {display:block;padding:10px 0 2px}
 .fit-title {display:block;white-space:nowrap;line-height:1.5;max-width:100%;letter-spacing:-.035em}
 .tray-info strong {font-size:12px}
-.content-description {display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:10px;line-height:1.7;color:var(--muted);margin:5px 0 7px}
+.content-description {display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp: 2;overflow:hidden;font-size:10px;line-height:1.7;color:var(--muted);margin:5px 0 7px}
 .tray-info small {font-size:9px;color:var(--muted)}
 .dialog-body img {float:none;display:block;width:140px;margin:0 auto 20px}
 .dialog-body h2 {width:100%;margin-bottom:7px}
