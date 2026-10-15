@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 
 <html lang="ko">
-<head><!-- SCENE:SEOUL | 이벤트 페이지 | 작성자: 김안나 (2410639) --><!-- SCENE:SEOUL 이벤트 페이지 -->
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="#f6f4ef" name="theme-color"/>
-<title>
-   EVENT — SCENE.SEOUL
-  </title>
-<!-- 공통 스타일시트 --><link href="../css/common.css" rel="stylesheet"/><!-- 카테고리 공통 스타일시트 --><link href="../css/category.css" rel="stylesheet"/><!-- 이벤트 페이지 스타일시트 --><link href="event.css" rel="stylesheet"/></head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="김안나 (2410639)" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f7f2" />
+
+    <title>EVENT — SCENE:SEOUL</title>
+
+    <link href="../css/common.css" rel="stylesheet" />
+    <link href="../css/category.css" rel="stylesheet" />
+    <link href="./event.css" rel="stylesheet" />
+</head>
+
 <body>
 <!-- 상단 네비게이션 --><header class="ss-header" id="header">
 <a aria-label="씬 서울 홈" class="ss-header-logo" href="../main/index.html">
@@ -112,27 +117,27 @@
 </div>
 </div>
 </section>
-<section class="discover" id="discover">
-<div class="toolbar">
-<div class="css-filter-controls" id="filters">
-<input checked="" id="f-all" name="event-filter" type="radio"/>
-<label for="f-all">
+<section class="discover ss-catalog" id="discover">
+<div class="toolbar ss-toolbar ss-catalog-controls">
+<div class="css-filter-controls ss-filters" id="filters">
+<input class="ss-filter-input" checked="" id="f-all" name="event-filter" type="radio"/>
+<label class="ss-filter" for="f-all">
        ALL
       </label>
-<input id="f-festival" name="event-filter" type="radio"/>
-<label for="f-festival">
+<input class="ss-filter-input" id="f-festival" name="event-filter" type="radio"/>
+<label class="ss-filter" for="f-festival">
        축제
       </label>
-<input id="f-flea" name="event-filter" type="radio"/>
-<label for="f-flea">
+<input class="ss-filter-input" id="f-flea" name="event-filter" type="radio"/>
+<label class="ss-filter" for="f-flea">
        플리마켓
       </label>
-<input id="f-film" name="event-filter" type="radio"/>
-<label for="f-film">
+<input class="ss-filter-input" id="f-film" name="event-filter" type="radio"/>
+<label class="ss-filter" for="f-film">
        영화
       </label>
-<input id="f-talk" name="event-filter" type="radio"/>
-<label for="f-talk">
+<input class="ss-filter-input" id="f-talk" name="event-filter" type="radio"/>
+<label class="ss-filter" for="f-talk">
        강연·토크
       </label>
 </div>

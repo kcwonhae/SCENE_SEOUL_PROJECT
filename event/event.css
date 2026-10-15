@@ -1,5 +1,5 @@
 /* SCENE:SEOUL | 이벤트 스타일시트
- * 작성자: 김안나(2410639)
+ * 작성자: 김안나 | 학번: 2410639
  * 공통 스타일: ../css/common.css, ../css/category.css
  */
 
@@ -243,42 +243,9 @@
   padding: 0 clamp(22px, 5vw, 80px) 110px;
 }
 
-.toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  flex-wrap: wrap;
-  padding: 25px 0;
-  border-top: 1px solid #cfd3d4;
-  border-bottom: 1px solid #cfd3d4;
-}
 
-.css-filter-controls {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
 
-.css-filter-controls input {
-  position: absolute;
-  opacity: 0;
-}
-
-.css-filter-controls label {
-  padding: 12px 17px;
-  background: transparent;
-  border: 1px solid #d6d9db;
-  border-radius: 90px;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.css-filter-controls input:checked + label {
-  background: var(--ss-ink);
-  color: #fff;
-}
+/* 카테고리 버튼의 크기, 색상 및 호버 효과는 ../css/category.css를 사용합니다. */
 
 .css-search-hint {
   color: var(--ss-muted);
