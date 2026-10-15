@@ -610,3 +610,18 @@ footer small {
   #calendarPanel .calendar-grid .day { min-height:119px; }
   #calendarPanel .poster-trigger .poster-mini { height:88px; }
 }
+
+/* 현재 페이지 표시: 마이페이지 네비게이션 */
+.ss-header .header-mypage.is-active {
+  position: relative;
+  color: var(--ss-blue);
+}
+.ss-header .header-mypage.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 2px;
+  background: var(--ss-blue);
+}
