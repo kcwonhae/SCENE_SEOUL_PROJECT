@@ -80,10 +80,14 @@ p {
 
 /* #id 링크용 착지점 (스크롤 위치 보정은 common.css의 scroll-padding-top) */
 .ss-catalog {
-  display: flex;
-  flex-direction: column;
   counter-reset: shown;
   padding-top: 24px;
+}
+
+/* 공통 .ss-catalog-controls 안에서 순서(order)로 배치 */
+.ss-catalog-controls {
+  display: flex;
+  flex-direction: column;
 }
 
 .ss-toolbar {
@@ -147,31 +151,20 @@ body:has(#classic-gugak:target) .ss-card:not([data-sub="gugak"]) {
   display: none;
 }
 
-.ss-toolbar .ss-filter {
-  background: rgba(255, 255, 255, .78);
-  border-color: var(--ss-line);
-  font-weight: 600;
-}
-
-.ss-toolbar .ss-filter:hover {
-  background: #eaf0fc;
-  border-color: #c5d2f0;
-  color: var(--ss-blue);
-}
-
-/* 현재 선택된 장르 버튼 = category.css의 .is-active 와 같은 모양 */
+/* 현재 선택된 장르 버튼 = 공통(category.css)의 선택 모양(노란색)과 동일 */
 body:not(:has(:target)) .ss-filter[href="#all"],
 body:has(#all:target) .ss-filter[href="#all"],
 body:has(:is(#concert, #concert-all, #concert-domestic, #concert-global, #concert-festival):target) .ss-filter[href="#concert"],
 body:has(:is(#musical, #musical-all, #musical-licensed, #musical-creative):target) .ss-filter[href="#musical"],
 body:has(:is(#play, #play-all, #play-daehakro, #play-etc):target) .ss-filter[href="#play"],
 body:has(:is(#classic, #classic-all, #classic-classical, #classic-opera, #classic-dance, #classic-gugak):target) .ss-filter[href="#classic"] {
-  background: var(--ss-ink);
-  border-color: var(--ss-ink);
-  color: #FFF;
+  background: var(--ss-yellow);
+  border-color: var(--ss-yellow);
+  color: var(--ss-ink);
+  font-weight: 800;
 }
 
-/* 세부 카테고리: 장르 버튼에 마우스를 올리면 글자만 가로로 (박스 없음) */
+/* 세부 카테고리: 장르 버튼에 마우스를 올리면 글자만 가로로 */
 .filter-group {
   position: relative;
 }
@@ -241,17 +234,6 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
 }
 
 /* 카드: 플레이스홀더, 제목 링크, 배지 */
-.ss-card-image.ph::after {
-  content: "POSTER";
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 11px;
-  letter-spacing: .25em;
-  color: rgba(21, 36, 83, .35);
-}
-
 .ss-card-title a:hover,
 .ss-card-title a:focus-visible {
   color: var(--blue);
@@ -273,88 +255,13 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
   font-weight: 800;
 }
 
-/* 하트: category.css의 .ss-heart 모양을 그대로 쓰되, JS 없이 체크박스로 동작 */
-.ss-heart {
-  position: relative;
-}
-
-.ss-heart input {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.ss-heart::before {
-  content: "♡";
-}
-
-.ss-heart:has(input:checked) {
-  background: var(--ss-yellow);
-  border-color: var(--ss-yellow);
-}
-
-.ss-heart:has(input:checked)::before {
-  content: "♥";
-  animation: heart-pop .45s cubic-bezier(.34, 1.56, .64, 1);
-}
-
-.ss-heart:has(input:focus-visible) {
-  outline: 2px solid var(--ss-blue);
-  outline-offset: 3px;
-}
-
-@keyframes heart-pop {
-  0% {
-    transform: scale(.4);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
 /* 기타 */
 .hot-label {
   color: var(--blue);
 }
 
-/* 페이지 번호 (1 2 3 4) */
-.pager {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin: 48px 0 8px;
-}
-
-.pg-radio {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.pager label {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-  cursor: pointer;
-  transition: background .2s, color .2s;
-}
-
-.pager label:hover {
-  background: var(--yellow);
-  color: var(--ink);
-}
-
+/* 페이지 번호: 모양은 공통(category.css)의 .ss-page-nav / .ss-page-numbers / .ss-page-arrow 사용.
+   여기서는 "선택된 번호 색"과 "현재 페이지에 맞는 화살표만 보이기"만 정함 */
 .pg-radio:checked+label {
   background: var(--blue);
   color: #fff;
@@ -363,6 +270,17 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
 .pg-radio:focus-visible+label {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
+}
+
+.pager:has(#pg1:checked) .pg-prev-off,
+.pager:has(#pg2:checked) .pg-prev[for="pg1"],
+.pager:has(#pg3:checked) .pg-prev[for="pg2"],
+.pager:has(#pg4:checked) .pg-prev[for="pg3"],
+.pager:has(#pg1:checked) .pg-next[for="pg2"],
+.pager:has(#pg2:checked) .pg-next[for="pg3"],
+.pager:has(#pg3:checked) .pg-next[for="pg4"],
+.pager:has(#pg4:checked) .pg-next-off {
+  display: inline-flex;
 }
 
 /* ---------- 히어로 + 캐러셀 공통 배경 ---------- */
@@ -376,60 +294,31 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
 .perf-hero {
   --navy: #1b2b5e;
   position: relative;
+  max-width: 1470px;
+  margin: 0 auto;
   min-height: clamp(180px, 15vw, 220px);
-  padding: clamp(22px, 2.6vw, 34px) clamp(22px, 5vw, 80px) 22px;
-
+  padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
 }
 
-.perf-crumb {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  gap: 12px;
+/* 히어로 글자 */
+.perf-hero .ss-hero-crumb {
+  color: var(--ss-blue);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: .12em;
-  color: var(--mute);
 }
 
-.perf-crumb a:hover,
-.perf-crumb a:focus-visible {
-  color: var(--blue);
+.perf-hero .ss-hero-crumb [aria-current="page"] {
+  color: inherit;
 }
 
-.perf-crumb [aria-current] {
-  color: var(--navy);
-}
-
-.perf-title {
-  position: relative;
-  z-index: 2;
-  margin: clamp(10px, 1.6vw, 20px) 0 clamp(8px, 1vw, 14px) -.04em;
-  font-family: 'Noto Sans KR', Georgia, serif;
-  font-size: clamp(32px, 7.5vw, 120px);
-  font-weight: 800;
-  line-height: .95;
-  letter-spacing: -.04em;
-  color: var(--navy);
-}
-
-.perf-lead {
-  position: relative;
-  z-index: 2;
-  font-size: clamp(15px, 1.5vw, 20px);
-  font-weight: 800;
-  line-height: 1.45;
-  letter-spacing: -.04em;
-  color: var(--ink);
-}
-
-.perf-desc {
-  position: relative;
-  z-index: 2;
-  margin-top: 6px;
-  font-size: 13px;
-  line-height: 1.9;
-  color: var(--text);
+.perf-hero .ss-hero-title {
+  margin: 20px 0 14px;
+  color: var(--ss-ink);
+  font-size: clamp(58px, 8vw, 126px);
+  font-weight: 900;
+  line-height: .94;
+  letter-spacing: -.075em;
 }
 
 /* 오른쪽 분야 목록 */
@@ -449,28 +338,12 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
   color: var(--navy);
 }
 
-/* 아래로 내려가는 원형 버튼 */
+/* 아래로 내려가는 버튼: 모양은 공통 .ss-hero-down, 여기서는 위치만 */
 .perf-down {
   position: absolute;
   z-index: 3;
   right: clamp(22px, 5vw, 80px);
   bottom: 22px;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(27, 43, 94, .55);
-  border-radius: 50%;
-  color: var(--navy);
-  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), background .25s, color .25s, border-color .25s;
-}
-
-.perf-down:hover,
-.perf-down:focus-visible {
-  background: var(--yellow);
-  border-color: var(--yellow);
-  color: var(--ink);
-  transform: translateY(4px);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -478,15 +351,15 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
     animation: perf-rise .9s var(--ss-ease) both;
   }
 
-  .perf-title {
+  .ss-hero-title {
     animation-delay: .08s;
   }
 
-  .perf-lead {
+  .ss-hero-lead {
     animation-delay: .2s;
   }
 
-  .perf-desc {
+  .ss-hero-desc {
     animation-delay: .3s;
   }
 
@@ -500,6 +373,13 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
   from {
     opacity: 0;
     transform: translateY(18px);
+  }
+}
+
+@media (max-width: 670px) {
+  .perf-hero .ss-hero-title {
+    font-size: clamp(34px, 11.5vw, 80px);
+    letter-spacing: -.07em;
   }
 }
 
@@ -562,19 +442,7 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
   position: absolute;
   left: 5.9%;
   top: 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-family: Georgia, serif;
-  font-size: 16px;
   z-index: 4;
-}
-
-.hot-heading i {
-  display: block;
-  width: 80px;
-  height: 1px;
-  background: #aaa59b;
 }
 
 .counter {
@@ -933,10 +801,6 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
 
   html {
     scroll-behavior: auto;
-  }
-
-  .ss-heart::before {
-    animation: none;
   }
 
   * {

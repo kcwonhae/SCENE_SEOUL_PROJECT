@@ -23,12 +23,12 @@
     <a class="ss-header-logo" href="../main/index.html" aria-label="씬 서울 홈">SCENE<span class="ss-accent">:</span>SEOUL</a>
     <nav class="ss-nav" aria-label="메인 메뉴">
       <a href="../main/index.html">HOME</a>
-      <a href="#">전시</a>
+      <a href="../exhibition/exhibition.html">전시</a>
       <a href="../performance/performance.html" aria-current="page">공연</a>
       <a href="../popup/popup.html">팝업</a>
-      <a href="#">이벤트</a>
+      <a href="../event/event.html">이벤트</a>
       <a href="../recommend/recommend.html">추천</a>
-      <a href="#">지도</a>
+      <a href="../map/map.html">지도</a>
     </nav>
     <div class="ss-header-actions">
       <span class="ss-header-quick-icons"><button class="ss-icon-button" type="button" aria-label="검색" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 5 5"/></svg></button><span class="ss-language" aria-label="언어: 한국어"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"/></svg><span>KR</span></span></span>
@@ -45,19 +45,18 @@
 
     <!-- 페이지 상단 히어로 -->
     <section class="perf-hero" aria-labelledby="perf-title">
-      <nav class="perf-crumb" aria-label="현재 위치">
+      <nav class="ss-hero-crumb" aria-label="현재 위치">
         <a href="../main/index.html">SCENE:SEOUL</a><span aria-hidden="true">/</span><span aria-current="page">PERFORMANCE</span>
       </nav>
-      <h1 class="perf-title" id="perf-title">PERFORMANCE</h1>
-      <p class="perf-lead">지금, 서울의 무대에서<br>새로운 이야기가 시작됩니다.</p>
-      <p class="perf-desc">음악, 연극, 뮤지컬, 무용, 클래식까지<br>서울 곳곳의 다채로운 공연을 만나보세요.</p>
-      <ul class="perf-tags" aria-hidden="true"><li>LIVE</li><li>MUSIC</li><li>DANCE</li><li>CLASSICAL</li></ul>
-      <a class="perf-down" href="#all" aria-label="공연 목록으로 이동"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></a>
+      <h1 class="ss-hero-title" id="perf-title">PERFORMANCE</h1>
+      <p class="ss-hero-lead">지금, 서울의 무대에서<br>새로운 이야기가 시작됩니다.</p>
+      <p class="ss-hero-desc">음악, 연극, 뮤지컬, 무용, 클래식까지<br>서울 곳곳의 다채로운 공연을 만나보세요.</p>
+      <a class="ss-hero-down perf-down" href="#all" aria-label="공연 목록으로 이동"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></a>
     </section>
 
     <!-- 캐러셀 -->
     <section class="hot" id="hot">
-      <div class="hot-heading"><span>HOT</span><i></i></div>
+      <div class="hot-heading ss-section-marker"><span>HOT</span><i></i></div>
       <div class="giant-type" aria-hidden="true"><br /><span></span></div>
       <button class="arrow arrow-left" aria-label="Previous poster">‹</button>
       <div class="carousel" aria-label="Featured performances">
@@ -125,6 +124,7 @@
     <!-- 카테고리 영역: 구조와 클래스는 category.css(.ss-catalog …)를 따릅니다 -->
     <section class="ss-catalog" aria-label="공연 목록">
       <!-- 필터(장르 버튼, 마우스를 올리면 세부 카테고리) + 검색창 -->
+      <div class="ss-catalog-controls">
       <div class="ss-toolbar">
         <nav class="ss-filters" aria-label="공연 장르">
           <a class="ss-filter" href="#all">전체</a>
@@ -169,7 +169,7 @@
       <!-- 카드 그리드: 가로 3칸 x 세로 2줄 = 한 페이지 6장 (p1~p4 = 페이지 번호). 장르를 고르면 해당 공연 전체 -->
       <div class="ss-card-grid ss-catalog-grid">
         <article class="ss-card ss-catalog-card p1" data-genre="classic" data-sub="classical">
-          <a class="ss-card-image ph" href="#" aria-label="가을 피아노 리사이틀 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="가을 피아노 리사이틀 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CLASSIC · DANCE</span>
@@ -177,7 +177,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">가을 피아노 리사이틀</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="가을 피아노 리사이틀 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="가을 피아노 리사이틀 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">한강아트센터 콘서트홀에서 만나볼 수 있는 클래식 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">한강아트센터 콘서트홀 · 2026.10.18</p>
@@ -192,7 +192,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p1" data-genre="classic" data-sub="dance">
-          <a class="ss-card-image ph" href="#" aria-label="국립 발레 〈호수의 노래〉 상세 보기"><span class="badge">단독</span></a>
+          <a class="ss-card-image" href="#" aria-label="국립 발레 〈호수의 노래〉 상세 보기"><span class="ss-poster-placeholder">POSTER</span><span class="badge">단독</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CLASSIC · DANCE</span>
@@ -200,7 +200,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">국립 발레 〈호수의 노래〉</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="국립 발레 〈호수의 노래〉 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="국립 발레 〈호수의 노래〉 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">서울극장 오페라극장에서 만나볼 수 있는 클래식 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">서울극장 오페라극장 · 2026.11.05 ~ 11.09</p>
@@ -215,7 +215,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p1" data-genre="concert" data-sub="global">
-          <a class="ss-card-image ph" href="#" aria-label="크리스마스 인 콘서트 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="크리스마스 인 콘서트 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CONCERT</span>
@@ -223,7 +223,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">크리스마스 인 콘서트</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="크리스마스 인 콘서트 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="크리스마스 인 콘서트 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">한강아트센터 콘서트홀에서 만나볼 수 있는 콘서트 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">한강아트센터 콘서트홀 · 2026.12.24</p>
@@ -238,7 +238,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p1" data-genre="classic" data-sub="classical">
-          <a class="ss-card-image ph" href="#" aria-label="피아노 협주곡의 밤 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="피아노 협주곡의 밤 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CLASSIC · DANCE</span>
@@ -246,7 +246,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">피아노 협주곡의 밤</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="피아노 협주곡의 밤 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="피아노 협주곡의 밤 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">광화문아트홀에서 만나볼 수 있는 클래식 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">광화문아트홀 · 2026.10.31</p>
@@ -261,7 +261,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p1" data-genre="concert" data-sub="domestic">
-          <a class="ss-card-image ph" href="#" aria-label="싱어송라이터 쇼케이스 2026 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="싱어송라이터 쇼케이스 2026 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CONCERT</span>
@@ -269,7 +269,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">싱어송라이터 쇼케이스 2026</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="싱어송라이터 쇼케이스 2026 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="싱어송라이터 쇼케이스 2026 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">성수 라이브홀에서 만나볼 수 있는 콘서트 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">성수 라이브홀 · 2026.11.14</p>
@@ -284,7 +284,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p1" data-genre="musical" data-sub="creative">
-          <a class="ss-card-image ph" href="#" aria-label="별을 따라가는 밤 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="별을 따라가는 밤 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · MUSICAL</span>
@@ -292,7 +292,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">별을 따라가는 밤</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="별을 따라가는 밤 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="별을 따라가는 밤 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">서울극장 대극장에서 만나볼 수 있는 뮤지컬 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">서울극장 대극장 · 2026.10.24 ~ 11.30</p>
@@ -307,7 +307,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p2" data-genre="musical" data-sub="licensed">
-          <a class="ss-card-image ph" href="#" aria-label="시간의 도서관 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="시간의 도서관 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · MUSICAL</span>
@@ -315,7 +315,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">시간의 도서관</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="시간의 도서관 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="시간의 도서관 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">강남문화예술회관에서 만나볼 수 있는 뮤지컬 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">강남문화예술회관 · 2026.11.07 ~ 11.22</p>
@@ -330,7 +330,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p2" data-genre="play" data-sub="daehakro">
-          <a class="ss-card-image ph" href="#" aria-label="빈 의자의 대화 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="빈 의자의 대화 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · PLAY</span>
@@ -338,7 +338,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">빈 의자의 대화</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="빈 의자의 대화 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="빈 의자의 대화 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">대학로 별빛소극장에서 만나볼 수 있는 연극 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">대학로 별빛소극장 · 2026.10.30 ~ 11.29</p>
@@ -353,7 +353,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p2" data-genre="play" data-sub="etc">
-          <a class="ss-card-image ph" href="#" aria-label="겨울 정원 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="겨울 정원 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · PLAY</span>
@@ -361,7 +361,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">겨울 정원</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="겨울 정원 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="겨울 정원 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">마포소극장에서 만나볼 수 있는 연극 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">마포소극장 · 2026.11.07 ~ 11.16</p>
@@ -376,7 +376,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p2" data-genre="musical" data-sub="creative">
-          <a class="ss-card-image ph" href="#" aria-label="골목의 노래 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="골목의 노래 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · MUSICAL</span>
@@ -384,7 +384,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">골목의 노래</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="골목의 노래 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="골목의 노래 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">홍대 문화극장에서 만나볼 수 있는 뮤지컬 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">홍대 문화극장 · 2026.11.20 ~ 12.14</p>
@@ -399,7 +399,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p2" data-genre="concert" data-sub="festival">
-          <a class="ss-card-image ph" href="#" aria-label="서울 인디 페스티벌 2026 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="서울 인디 페스티벌 2026 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CONCERT</span>
@@ -407,7 +407,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">서울 인디 페스티벌 2026</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="서울 인디 페스티벌 2026 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="서울 인디 페스티벌 2026 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">뚝섬 한강공원에서 만나볼 수 있는 콘서트 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">뚝섬 한강공원 · 2026.11.01 ~ 11.02</p>
@@ -422,7 +422,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p2" data-genre="concert" data-sub="domestic">
-          <a class="ss-card-image ph" href="#" aria-label="밤의 재즈 라이브 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="밤의 재즈 라이브 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CONCERT</span>
@@ -430,7 +430,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">밤의 재즈 라이브</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="밤의 재즈 라이브 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="밤의 재즈 라이브 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">성수 라이브홀에서 만나볼 수 있는 콘서트 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">성수 라이브홀 · 2026.11.14</p>
@@ -445,7 +445,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p3" data-genre="concert" data-sub="global">
-          <a class="ss-card-image ph" href="#" aria-label="해외 밴드 내한 공연 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="해외 밴드 내한 공연 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CONCERT</span>
@@ -453,7 +453,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">해외 밴드 내한 공연</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="해외 밴드 내한 공연 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="해외 밴드 내한 공연 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">잠실 실내체육관에서 만나볼 수 있는 콘서트 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">잠실 실내체육관 · 2026.12.05</p>
@@ -468,7 +468,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p3" data-genre="concert" data-sub="festival">
-          <a class="ss-card-image ph" href="#" aria-label="한강 뮤직 페스티벌 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="한강 뮤직 페스티벌 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CONCERT</span>
@@ -476,7 +476,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">한강 뮤직 페스티벌</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="한강 뮤직 페스티벌 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="한강 뮤직 페스티벌 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">반포 한강공원에서 만나볼 수 있는 콘서트 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">반포 한강공원 · 2026.10.25 ~ 10.26</p>
@@ -491,7 +491,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p3" data-genre="musical" data-sub="licensed">
-          <a class="ss-card-image ph" href="#" aria-label="내한 뮤지컬 〈밤의 극장〉 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="내한 뮤지컬 〈밤의 극장〉 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · MUSICAL</span>
@@ -499,7 +499,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">내한 뮤지컬 〈밤의 극장〉</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="내한 뮤지컬 〈밤의 극장〉 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="내한 뮤지컬 〈밤의 극장〉 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">서울극장 대극장에서 만나볼 수 있는 뮤지컬 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">서울극장 대극장 · 2026.12.10 ~ 2027.01.31</p>
@@ -514,7 +514,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p3" data-genre="musical" data-sub="creative">
-          <a class="ss-card-image ph" href="#" aria-label="옥상의 청춘 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="옥상의 청춘 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · MUSICAL</span>
@@ -522,7 +522,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">옥상의 청춘</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="옥상의 청춘 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="옥상의 청춘 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">대학로 아트홀에서 만나볼 수 있는 뮤지컬 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">대학로 아트홀 · 2026.11.12 ~ 12.28</p>
@@ -537,7 +537,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p3" data-genre="play" data-sub="daehakro">
-          <a class="ss-card-image ph" href="#" aria-label="대학로 코미디 나이트 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="대학로 코미디 나이트 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · PLAY</span>
@@ -545,7 +545,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">대학로 코미디 나이트</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="대학로 코미디 나이트 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="대학로 코미디 나이트 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">대학로 웃음소극장에서 만나볼 수 있는 연극 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">대학로 웃음소극장 · 2026.10.20 ~ 11.30</p>
@@ -560,7 +560,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p3" data-genre="play" data-sub="etc">
-          <a class="ss-card-image ph" href="#" aria-label="두 번째 문 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="두 번째 문 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · PLAY</span>
@@ -568,7 +568,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">두 번째 문</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="두 번째 문 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="두 번째 문 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">홍대 문화극장에서 만나볼 수 있는 연극 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">홍대 문화극장 · 2026.11.18 ~ 12.07</p>
@@ -583,7 +583,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p4" data-genre="classic" data-sub="classical">
-          <a class="ss-card-image ph" href="#" aria-label="오페라 〈달빛의 정원〉 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="오페라 〈달빛의 정원〉 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CLASSIC · DANCE</span>
@@ -591,7 +591,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">오페라 〈달빛의 정원〉</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="오페라 〈달빛의 정원〉 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="오페라 〈달빛의 정원〉 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">서울극장 오페라극장에서 만나볼 수 있는 클래식 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">서울극장 오페라극장 · 2026.12.02 ~ 12.06</p>
@@ -606,7 +606,7 @@
           </div>
         </article>
         <article class="ss-card ss-catalog-card p4" data-genre="classic" data-sub="gugak">
-          <a class="ss-card-image ph" href="#" aria-label="국악 한마당 〈바람의 소리〉 상세 보기"></a>
+          <a class="ss-card-image" href="#" aria-label="국악 한마당 〈바람의 소리〉 상세 보기"><span class="ss-poster-placeholder">POSTER</span></a>
           <div class="ss-catalog-card-info">
             <div class="ss-card-topline">
               <span class="ss-card-category">PERFORMANCE · CLASSIC · DANCE</span>
@@ -614,7 +614,7 @@
             </div>
             <div class="ss-card-titleline">
               <h3 class="ss-card-title"><a href="#">국악 한마당 〈바람의 소리〉</a></h3>
-              <label class="ss-heart"><input type="checkbox" aria-label="국악 한마당 〈바람의 소리〉 관심 공연에 담기"></label>
+              <label class="ss-heart ss-heart-toggle"><input type="checkbox" aria-label="국악 한마당 〈바람의 소리〉 관심 공연에 담기"><span aria-hidden="true"></span></label>
             </div>
             <p class="ss-card-description">서울국악당에서 만나볼 수 있는 클래식 공연 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
             <p class="ss-card-meta">서울국악당 · 2026.11.27</p>
@@ -634,29 +634,33 @@
       <p class="ss-catalog-status"><span class="hot-label">ALL · </span>SHOWING <span class="count"></span> RESULTS</p>
 
             <!-- 페이지 번호: 라디오 버튼 + :has() 로 동작 (JS 없음). 장르를 고르면 숨겨집니다 -->
-      <nav class="pager" aria-label="공연 목록 페이지">
-        <input class="pg-radio" type="radio" name="pg" id="pg1" checked><label for="pg1">1</label>
-        <input class="pg-radio" type="radio" name="pg" id="pg2"><label for="pg2">2</label>
-        <input class="pg-radio" type="radio" name="pg" id="pg3"><label for="pg3">3</label>
-        <input class="pg-radio" type="radio" name="pg" id="pg4"><label for="pg4">4</label>
+      <nav class="ss-page-nav pager" aria-label="공연 목록 페이지">
+        <span class="ss-page-arrow is-disabled pg-prev-off" aria-hidden="true">‹</span>
+        <label class="ss-page-arrow pg-prev" for="pg1" aria-label="이전 페이지">‹</label>
+        <label class="ss-page-arrow pg-prev" for="pg2" aria-label="이전 페이지">‹</label>
+        <label class="ss-page-arrow pg-prev" for="pg3" aria-label="이전 페이지">‹</label>
+
+        <div class="ss-page-numbers">
+          <input class="ss-page-radio pg-radio" type="radio" name="pg" id="pg1" checked><label for="pg1">1</label>
+          <input class="ss-page-radio pg-radio" type="radio" name="pg" id="pg2"><label for="pg2">2</label>
+          <input class="ss-page-radio pg-radio" type="radio" name="pg" id="pg3"><label for="pg3">3</label>
+          <input class="ss-page-radio pg-radio" type="radio" name="pg" id="pg4"><label for="pg4">4</label>
+        </div>
+
+        <label class="ss-page-arrow pg-next" for="pg2" aria-label="다음 페이지">›</label>
+        <label class="ss-page-arrow pg-next" for="pg3" aria-label="다음 페이지">›</label>
+        <label class="ss-page-arrow pg-next" for="pg4" aria-label="다음 페이지">›</label>
+        <span class="ss-page-arrow is-disabled pg-next-off" aria-hidden="true">›</span>
       </nav>
+      </div><!-- /.ss-catalog-controls -->
     </section>
 
   </main>
 
-  <!-- 공통 푸터 -->
   <footer class="ss-site-footer">
-    <strong>
-      SCENE<span>:</span>SEOUL
-    </strong>
-  
-    <p>
-      서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.
-    </p>
-  
-    <small>
-      © 2026 SCENE.SEOUL
-    </small>
+    <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
+    <p>서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p>
+    <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
   </footer>
 
   <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19 0-14m-6 6 6-6 6 6"/></svg></a>
