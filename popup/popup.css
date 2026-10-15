@@ -3496,3 +3496,232 @@ body,body .ss-page,.popup-cover-flow,.pop-v3-intro,.popup-cover-flow>.squish-fea
     .pop-v4-feature .ss-feature-banner-art,
     .pop-v4-feature .ss-feature-banner-copy { animation: none; }
 }
+
+
+/* === SECRET POP-UP : photo cards, tighter section, scroll reveal === */
+/* Keep the original CSS-only squishy interactions intact. */
+.popup-coupon-flow > .squish-feature {
+    padding-top: 68px !important; /* bring heading and cards slightly upward */
+    padding-bottom: 26px !important; /* remove empty band below the three cards */
+}
+.popup-coupon-flow .pop-v3-toy-head { margin-bottom: 24px !important; }
+.popup-coupon-flow .play-and-ticket {
+    margin-bottom: 0 !important;
+    align-items: stretch !important;
+}
+.popup-coupon-flow .play-and-ticket > .squish-grid {
+    align-self: stretch;
+    grid-auto-rows: 1fr !important;
+}
+.popup-coupon-flow .play-and-ticket .squish-grid > .squish-item {
+    isolation: isolate;
+    background: #eeeae5 !important;
+}
+/* Real reference photos are placed in each card; lifestyle photo intentionally repeats. */
+.popup-coupon-flow .secret-scene-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+.popup-coupon-flow .secret-scene-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(248,247,244,.82), rgba(248,247,244,.66) 40%, rgba(248,247,244,.83));
+    transition: background .35s ease;
+}
+.popup-coupon-flow .secret-scene-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(.82);
+    transition: transform .65s cubic-bezier(.2,.8,.2,1), filter .4s ease;
+}
+.popup-coupon-flow .squish-item:hover .secret-scene-photo img { transform: scale(1.055); }
+.popup-coupon-flow .squish-item:has(.css-final:checked) .secret-scene-photo::after {
+    background: linear-gradient(180deg, rgba(248,247,244,.84), rgba(248,247,244,.72) 50%, rgba(248,247,244,.88));
+}
+.popup-coupon-flow .squish-no, .popup-coupon-flow .squish-hint,
+.popup-coupon-flow .squish-result, .popup-coupon-flow .squish-actions { z-index: 4; }
+.popup-coupon-flow .squish-result { text-shadow: 0 1px 1px rgba(255,255,255,.7); }
+.popup-coupon-flow .squish-result b { line-height: 1.12; }
+/* Scroll entrance only for this unique POP-UP section. */
+@keyframes secret-scene-reveal {
+    from { opacity: 0; transform: translateY(35px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@supports (animation-timeline: view()) {
+    .popup-coupon-flow .pop-v3-toy-head,
+    .popup-coupon-flow .squish-grid > .squish-item,
+    .popup-coupon-flow .winning-ticket {
+        animation-name: secret-scene-reveal;
+        animation-duration: 1s;
+        animation-timing-function: cubic-bezier(.2,.7,.2,1);
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 24%;
+    }
+}
+@media (max-width: 760px) {
+    .popup-coupon-flow > .squish-feature { padding-top: 55px !important; padding-bottom: 22px !important; }
+    .popup-coupon-flow .pop-v3-toy-head { margin-bottom: 18px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .popup-coupon-flow .pop-v3-toy-head,
+    .popup-coupon-flow .squish-grid > .squish-item,
+    .popup-coupon-flow .winning-ticket { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .popup-coupon-flow .secret-scene-photo img { transition: none !important; }
+}
+
+/* === 2026-10-15: requested popup-only refinements === */
+/* Banner size & editorial text. Shared structure lives in common.css. */
+.pop-v4-feature.ss-feature-banner--editorial .ss-feature-banner-title { font-size:clamp(35px,3.9vw,54px); line-height:1.05; margin:13px 0 14px; }
+.pop-v4-feature.ss-feature-banner--editorial .ss-feature-banner-description { font-size:13px; line-height:1.75; margin-bottom:4px; }
+/* Catalog: retain existing card hover, heart and image styles. */
+.popup-catalog .ss-card-facts { margin-bottom:15px; }
+.popup-catalog .pop-card-details-static { font-size:11px; }
+/* SECRET POP-UP: reveal photo only after six presses; keep CSS-only toy mechanics. */
+.popup-coupon-flow .secret-scene-photo { opacity:0; visibility:hidden; height:46%; bottom:auto; transition:opacity .45s ease,visibility .45s ease; }
+.popup-coupon-flow .squish-item:has(.css-final:checked) .secret-scene-photo { opacity:1; visibility:visible; }
+.popup-coupon-flow .secret-scene-photo::after { background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.03))!important; }
+.popup-coupon-flow .squish-item:has(.css-final:checked) .secret-scene-photo::after { background:linear-gradient(180deg,transparent,rgba(255,255,255,.12))!important; }
+.popup-coupon-flow .play-and-ticket .squish-grid > .squish-item { height:475px!important; min-height:475px!important; }
+.popup-coupon-flow .squish-item .squish-no { font-size:11px; font-weight:900; letter-spacing:.07em; }
+.popup-coupon-flow .squish-item .squish-hint { font-size:12px; }
+.popup-coupon-flow .play-and-ticket .squish-item > .squish-result {
+ inset:46% 0 63px!important; padding:13px 16px 10px; gap:5px; align-items:stretch; justify-content:flex-start;
+ background:rgba(255,255,255,.97); text-align:left; border-top:1px solid #e4e5e6;
+ overflow:hidden; transform:translateY(18px); opacity:0; text-shadow:none; pointer-events:none;
+}
+.popup-coupon-flow .play-and-ticket .squish-item:has(.css-final:checked) > .squish-result { opacity:1; transform:translateY(0); pointer-events:auto; }
+.popup-coupon-flow .squish-result-top { display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:28px; }
+.popup-coupon-flow .squish-result-kind { color:#4e66b3; font-size:10px; font-weight:800; }
+.popup-coupon-flow .squish-result-name { color:#1d2940; font-size:clamp(16px,1.45vw,21px)!important; font-weight:900; line-height:1.18; letter-spacing:-.055em; }
+.popup-coupon-flow .squish-result-desc { margin:3px 0; color:#5b6575; font-size:11px; line-height:1.5; word-break:keep-all; }
+.popup-coupon-flow .squish-result-location { font-size:11px; font-weight:750; color:#3c4658; }
+.popup-coupon-flow .squish-result .squish-date { border:0; padding:0; border-radius:0; font-size:11px; color:#58647a; font-weight:700; }
+.popup-coupon-flow .secret-heart.ss-heart-toggle { display:grid; place-items:center; width:32px; height:32px; min-width:32px; border-radius:50%; border:1px solid #d4d9e2; background:white; position:relative; cursor:pointer; }
+.popup-coupon-flow .secret-heart.ss-heart-toggle input { position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; }
+.popup-coupon-flow .secret-heart.ss-heart-toggle span::before { content:'♡'; font-size:24px; color:#3b475d; line-height:1; }
+.popup-coupon-flow .secret-heart.ss-heart-toggle:has(input:checked) { background:var(--ss-yellow); border-color:var(--ss-yellow); }
+.popup-coupon-flow .secret-heart.ss-heart-toggle:has(input:checked) span::before { content:'♥'; color:#2b3a55; }
+.popup-coupon-flow .secret-heart.ss-heart-toggle:hover { transform:scale(1.08); box-shadow:0 4px 12px #394e7a22; }
+.popup-coupon-flow .secret-heart.ss-heart-toggle:has(input:focus-visible) { outline:2px solid var(--ss-blue); outline-offset:3px; }
+.popup-coupon-flow .play-and-ticket .squish-item > .squish-actions { bottom:16px!important; }
+.popup-coupon-flow .play-and-ticket .squish-actions .squish-link { padding:10px 11px; font-size:10px; }
+.popup-coupon-flow .play-and-ticket .squish-actions .css-reset { padding:9px 11px; font-size:10px; }
+/* More compact top-to-card gap; ticket demo controls. */
+.popup-coupon-flow .secret-demo-toolbar { display:flex; align-items:center; flex-wrap:wrap; gap:9px; padding:0 0 13px; font-size:11px; color:#606c7c; }
+.popup-coupon-flow .secret-demo-toolbar > span { margin-right:auto; font-weight:800; color:#425aa1; }
+.popup-coupon-flow .secret-demo-toolbar button { background:#fff; border:1px solid #ccd3e3; border-radius:22px; color:#3c5397; font-size:10px; font-weight:800; padding:8px 12px; cursor:pointer; }
+.popup-coupon-flow .secret-demo-toolbar button:hover { background:var(--ss-yellow); border-color:var(--ss-yellow); }
+.popup-coupon-flow .secret-demo-toolbar button[aria-pressed=true] { background:#445eaa; color:white; border-color:#445eaa; }
+.popup-coupon-flow .winning-ticket .personal-ticket-intro h3 { font-size:clamp(21px,2.1vw,30px); }
+.popup-coupon-flow .ticket-login-link { border:0; background:none; cursor:pointer; }
+.lucky-demo-dialog[hidden] { display:none!important; }
+.lucky-demo-dialog { position:fixed; inset:0; z-index:999; background:rgba(17,25,43,.64); display:grid; place-items:center; padding:20px; }
+.lucky-demo-sheet { position:relative; width:min(460px,100%); background:#f9f5e8; border:2px solid #2d3444; padding:36px 32px; box-shadow:8px 8px 0 #e1d376; }
+.lucky-demo-sheet h2 { font-size:clamp(25px,4vw,38px); line-height:1.1; letter-spacing:-.06em; margin:18px 0; }
+.lucky-demo-sheet p { font-size:13px; line-height:1.8; color:#536072; }
+.lucky-demo-close { position:absolute; right:13px; top:10px; border:0; background:none; font-size:27px; cursor:pointer; }
+.lucky-demo-code { margin:24px 0; padding:19px 10px; text-align:center; background:#ffdf77; border:1px dashed #3d4661; font-size:16px; font-weight:900; }
+.lucky-demo-done { padding:12px 16px; background:#26385f; border:0; color:white; font-weight:800; cursor:pointer; }
+@media(max-width:980px){
+ .popup-coupon-flow .play-and-ticket .squish-grid > .squish-item { height:445px!important; min-height:445px!important; }
+ .popup-coupon-flow .play-and-ticket .squish-item > .squish-result { padding:9px 10px 5px; }
+ .popup-coupon-flow .squish-result-desc { font-size:10px; }
+}
+@media(max-width:760px){
+ .popup-coupon-flow .play-and-ticket .squish-grid > .squish-item { height:460px!important; min-height:460px!important; }
+ .popup-coupon-flow .play-and-ticket .squish-item > .squish-result { inset:46% 0 62px!important; padding:12px 16px; }
+ .popup-coupon-flow .squish-result-name { font-size:19px!important; }
+}
+@media(prefers-reduced-motion:reduce){.popup-coupon-flow .secret-scene-photo {transition:none!important;}}
+
+/* === CSS ONLY demo: no scripts, no storage. Hearts & radio toy states work natively. === */
+.popup-coupon-flow .secret-demo-toolbar .secret-demo-help{flex-basis:100%;font-size:10px;color:#777f8c}
+.popup-coupon-flow .secret-demo-login-input{position:absolute;width:1px;height:1px;opacity:0;}
+.popup-coupon-flow .secret-demo-login-label{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid #ccd3e3;border-radius:22px;background:#fff;color:#3c5397;font-size:10px;font-weight:800;padding:8px 12px;}
+.popup-coupon-flow .secret-demo-login-label:hover{background:var(--ss-yellow);border-color:var(--ss-yellow)}
+.popup-coupon-flow .secret-demo-login-input:focus-visible + .secret-demo-login-label{outline:2px solid #4564b2;outline-offset:3px}
+.popup-coupon-flow .secret-login-on,.popup-coupon-flow .secret-status-personal{display:none}
+body:has(#demo-login:checked) .secret-login-on{display:inline}
+body:has(#demo-login:checked) .secret-login-off{display:none}
+body:has(#demo-login:checked) .secret-demo-login-label{background:#445eaa;color:#fff;border-color:#445eaa}
+.popup-coupon-flow .squish-result .secret-result-label{color:#4d66b4;font-size:9px;font-weight:800;letter-spacing:.06em}
+.popup-coupon-flow .squish-result .secret-pick-variant{display:none;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
+.popup-coupon-flow .squish-result .secret-pick--popular{display:flex}
+/* Logged in + any heart in catalog: use the last matching category in priority order. */
+body:has(.popup-catalog .ss-heart-toggle input:checked) .secret-status-popular{display:none}
+body:has(.popup-catalog .ss-heart-toggle input:checked) .secret-status-personal{display:inline}
+body:has(.popup-catalog .ss-heart-toggle input:checked) .squish-result .secret-pick--popular{display:none}
+body:has(.popup-catalog .pop-catalog-card[data-kind="art"] .ss-heart-toggle input:checked):not(:has(.popup-catalog .pop-catalog-card[data-kind="fashion"] .ss-heart-toggle input:checked)):not(:has(.popup-catalog .pop-catalog-card[data-kind="life"] .ss-heart-toggle input:checked)):not(:has(.popup-catalog .pop-catalog-card[data-kind="goods"] .ss-heart-toggle input:checked)) .squish-result .secret-pick--art{display:flex}
+body:has(.popup-catalog .pop-catalog-card[data-kind="fashion"] .ss-heart-toggle input:checked):not(:has(.popup-catalog .pop-catalog-card[data-kind="life"] .ss-heart-toggle input:checked)):not(:has(.popup-catalog .pop-catalog-card[data-kind="goods"] .ss-heart-toggle input:checked)) .squish-result .secret-pick--fashion{display:flex}
+body:has(.popup-catalog .pop-catalog-card[data-kind="life"] .ss-heart-toggle input:checked):not(:has(.popup-catalog .pop-catalog-card[data-kind="goods"] .ss-heart-toggle input:checked)) .squish-result .secret-pick--life{display:flex}
+body:has(.popup-catalog .pop-catalog-card[data-kind="goods"] .ss-heart-toggle input:checked) .squish-result .secret-pick--goods{display:flex}
+
+/* Coupon only becomes clickable after all three toys are opened. */
+.popup-coupon-flow #open-lucky-coupon{display:none;pointer-events:none;text-decoration:none}
+body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) #open-lucky-coupon{display:inline-flex;pointer-events:auto;cursor:pointer}
+body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) .ticket-win-gate small{display:none}
+body:has(#toy0-6:checked):has(#toy1-6:checked):has(#toy2-6:checked) .ticket-win-gate strong::after{content:' · OPEN';color:#263c8b}
+.lucky-demo-dialog{display:none!important}
+.lucky-demo-dialog:target{display:grid!important}
+.lucky-demo-close,.lucky-demo-done{text-decoration:none;display:inline-block}
+/* On narrower cards keep all information visible. */
+@media(max-width:1100px){.popup-coupon-flow .squish-result .secret-pick-variant{gap:3px}.popup-coupon-flow .squish-result .squish-result-desc{line-height:1.35}}
+
+/* 이번 수정: 시연용 로그인 UI 제거, 찜 기록에 따른 CSS-only 추천 */
+.popup-coupon-flow .secret-status-personal { display: none; }
+
+/* 이번 수정: 럭키드로우 팝업 기본 흰색 스타일 */
+.lucky-demo-dialog { background: rgba(20, 25, 35, .42) !important; }
+.lucky-demo-sheet {
+  background: #fff !important;
+  border: 1px solid #d9dce3 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+.lucky-demo-code {
+  background: #fff !important;
+  border: 1px solid #d9dce3 !important;
+  color: #1e2637 !important;
+  box-shadow: none !important;
+}
+.lucky-demo-done { background: #26385f; }
+
+/* 이번 수정: SCENE PICK 왼쪽 패널에 기존 assets 사진 재사용 */
+.pop-v4-feature .ss-feature-banner-art { position: relative; }
+.pop-v4-feature .pop-feature-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: saturate(.84);
+  transition: transform .45s ease;
+}
+.pop-v4-feature:hover .pop-feature-poster { transform: scale(1.035); }
+.pop-v4-feature .pop-v4-art-label { position: relative; z-index: 2; }
+.pop-v4-feature .pop-feature-static {
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  text-align: left;
+  font-family: inherit;
+  cursor: default;
+}
+.pop-v4-feature .pop-feature-static:hover,
+.pop-v4-feature .pop-feature-static:focus-visible {
+  background: #151821;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pop-v4-feature .pop-feature-poster { transition: none; }
+  .pop-v4-feature:hover .pop-feature-poster { transform: none; }
+}

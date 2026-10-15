@@ -788,3 +788,11 @@ a {
     .ss-feature-banner:hover, .ss-feature-banner:focus-within { transform: none; }
     .ss-entrance { animation: none; }
 }
+
+/* 공통 추천 배너: 정보가 있는 에디터 픽 구성(해당 요소를 쓰는 페이지만 적용) */
+.ss-feature-banner--editorial { min-height: 348px; }
+.ss-feature-banner--editorial .ss-feature-banner-art { min-height: 348px; }
+.ss-feature-banner--editorial .ss-feature-banner-copy { padding: 27px 28px 23px; }
+.ss-feature-banner-kicker { display:block; margin-top:15px; color:var(--ss-blue); font-size:11px; font-weight:800; letter-spacing:.025em; }
+.ss-feature-banner-facts { display:flex; flex-wrap:wrap; align-items:center; gap:9px 18px; padding:12px 0 17px; color:#343b52; font-size:11px; font-weight:750; }
+@media(max-width:760px){ .ss-feature-banner--editorial .ss-feature-banner-art {min-height:210px;} .ss-feature-banner--editorial .ss-feature-banner-copy {min-height:325px;} }
