@@ -1,0 +1,718 @@
+/* 카테고리 스타일 */
+
+/* 카테고리 목록 */
+.ss-catalog {
+    max-width: 1470px;
+    margin: 0 auto;
+    padding: 0 clamp(22px,5vw,80px) 110px;
+}
+
+.ss-catalog-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin: 0 0 26px;
+}
+
+.ss-catalog-title {
+    margin: 0;
+    font-size: clamp(32px,4.5vw,68px);
+    font-weight: 900;
+    letter-spacing: -.07em;
+    line-height: 1.1;
+}
+
+.ss-catalog-desc {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--ss-muted);
+}
+
+.ss-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    padding: 25px 0;
+    border-top: 1px solid var(--ss-line);
+    border-bottom: 1px solid var(--ss-line);
+}
+
+.ss-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.ss-filter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 17px;
+    border: 1px solid #D6D9DB;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ss-ink);
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .25s, border-color .25s, color .25s, transform .25s;
+}
+
+.ss-filter:hover {
+    background: #FFF;
+    border-color: var(--ss-blue);
+    color: var(--ss-blue);
+    transform: translateY(-2px);
+}
+
+.ss-filter.is-active,
+.ss-filter[aria-pressed="true"],
+.ss-filter[aria-selected="true"] {
+    background: var(--ss-ink);
+    border-color: var(--ss-ink);
+    color: #FFF;
+}
+
+.ss-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #9BA5B1;
+    padding: 9px 4px;
+}
+
+.ss-search input {
+    width: 210px;
+    max-width: 55vw;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--ss-ink);
+    font-size: 12px;
+}
+
+.ss-search input:focus-visible {
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 4px;
+}
+
+.ss-search-icon {
+    font-size: 20px;
+    color: var(--ss-blue);
+    line-height: 1;
+}
+
+.ss-catalog-status {
+    padding: 22px 0 25px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    color: var(--ss-muted);
+}
+
+.ss-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 22px 20px;
+}
+
+.ss-card {
+    position: relative;
+    min-width: 0;
+}
+
+.ss-card-image {
+    display: block;
+    position: relative;
+    height: clamp(180px,22vw,285px);
+    overflow: hidden;
+    background: #E6EAF2;
+    transition: box-shadow .32s var(--ss-ease), transform .32s var(--ss-ease);
+}
+
+.ss-card:hover .ss-card-image,
+.ss-card:focus-within .ss-card-image {
+    box-shadow: 0 18px 32px rgba(21,36,83,.22);
+    transform: translateY(-4px);
+}
+
+.ss-catalog .ss-card .ss-card-image {
+    transform-origin: center;
+    will-change: transform;
+    transition: transform .35s var(--ss-ease), box-shadow .35s var(--ss-ease);
+}
+
+.ss-catalog .ss-card:hover .ss-card-image,
+.ss-catalog .ss-card:focus-within .ss-card-image {
+    transform: translateY(-5px) scale(1.045);
+    box-shadow: 0 22px 40px rgba(21,36,83,.28);
+    position: relative;
+    z-index: 3;
+}
+
+.ss-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.ss-card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0 5px;
+}
+
+.ss-card-category {
+    color: var(--ss-blue);
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.ss-card-title {
+    margin: 8px 0;
+    font-size: clamp(17px,1.7vw,23px);
+    font-weight: 800;
+    letter-spacing: -.06em;
+}
+
+.ss-card-meta {
+    margin: 0;
+    color: var(--ss-muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.ss-filter:focus-visible {
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 3px;
+}
+
+@media (max-width: 1100px) {
+    .ss-card-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media (max-width: 670px) {
+    .ss-catalog {
+        padding: 0 20px 75px;
+    }
+
+    .ss-catalog-head {
+        display: block;
+    }
+
+    .ss-catalog-desc {
+        margin-top: 12px;
+    }
+
+    .ss-toolbar {
+        gap: 18px;
+    }
+
+    .ss-search {
+        width: 100%;
+    }
+
+    .ss-search input {
+        width: 100%;
+        max-width: none;
+    }
+
+    .ss-card-grid {
+        grid-template-columns: 1fr;
+        gap: 27px;
+    }
+
+    .ss-card-image {
+        height: clamp(280px,76vw,410px);
+    }
+
+    .ss-card-title {
+        font-size: 23px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ss-card-image,
+    .ss-filter {
+        transition: none;
+    }
+
+    .ss-catalog .ss-card .ss-card-image {
+        transition: none;
+    }
+
+    .ss-catalog .ss-card:hover .ss-card-image,
+    .ss-catalog .ss-card:focus-within .ss-card-image {
+        transform: none;
+    }
+
+}
+
+.ss-catalog .ss-catalog-controls {
+    position: relative;
+}
+
+.ss-catalog .ss-filter-input,
+.ss-catalog .ss-page-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.ss-catalog .ss-catalog-controls .ss-toolbar {
+    gap: 18px;
+    padding: 19px 0;
+}
+
+.ss-catalog .ss-catalog-controls .ss-filter {
+    padding: 9px 16px;
+    min-height: 36px;
+    line-height: 1.2;
+    background: rgba(255,255,255,.78);
+    border: 1px solid var(--ss-line);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    transform: none;
+    transition: color .2s, background .2s, border-color .2s, transform .15s;
+}
+
+/* 필터에 마우스를 올리면 연한 파란색 */
+.ss-catalog .ss-catalog-controls .ss-filter:hover {
+    background: #EAF0FC;
+    border-color: #C5D2F0;
+    color: var(--ss-blue);
+    transform: none;
+}
+
+/* 버튼을 누르는 순간의 짧은 반응 */
+.ss-catalog .ss-catalog-controls .ss-filter:active {
+    transform: scale(.97);
+}
+
+.ss-catalog .ss-filter-input:checked + .ss-filter {
+    background: var(--ss-yellow);
+    border-color: var(--ss-yellow);
+    color: var(--ss-ink);
+    font-weight: 800;
+}
+
+.ss-catalog .ss-filter-input:focus-visible + .ss-filter {
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 3px;
+}
+
+.ss-catalog .ss-search {
+    gap: 10px;
+    min-width: 210px;
+}
+
+.ss-catalog .ss-search input {
+    width: min(230px,40vw);
+    font-size: 12px;
+}
+
+.ss-catalog .ss-search-icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    color: var(--ss-blue);
+}
+
+.ss-catalog .ss-catalog-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 17px 0 20px;
+}
+
+.ss-catalog .ss-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 28px 20px;
+}
+
+.ss-catalog .ss-catalog-card {
+    position: relative;
+    min-width: 0;
+    background: var(--ss-white);
+    box-shadow: 0 2px 8px rgba(21,27,39,.035);
+    transition: transform .32s var(--ss-ease),box-shadow .32s ease;
+}
+
+.ss-catalog .ss-catalog-card:hover,
+.ss-catalog .ss-catalog-card:focus-within {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(21,27,39,.085);
+}
+
+.ss-catalog .ss-catalog-card .ss-card-image {
+    height: clamp(190px,22vw,285px);
+    display: grid;
+    place-items: center;
+    background: #e6eaf2;
+    overflow: hidden;
+    transition: transform .35s var(--ss-ease),box-shadow .35s var(--ss-ease);
+}
+
+.ss-catalog .ss-catalog-card:hover .ss-card-image,
+.ss-catalog .ss-catalog-card:focus-within .ss-card-image {
+    transform: translateY(-3px) scale(1.025);
+    box-shadow: 0 10px 25px rgba(21,36,83,.12);
+}
+
+.ss-catalog .ss-poster-placeholder {
+    font-size: 10px;
+    letter-spacing: .24em;
+    font-weight: 500;
+    color: #a2adbd;
+}
+
+.ss-catalog .ss-catalog-card-info {
+    display: block;
+    padding: 16px 18px 18px;
+}
+
+.ss-catalog .ss-card-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.ss-catalog .ss-card-titleline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.ss-catalog .ss-catalog-card .ss-card-category {
+    font-size: 10px;
+}
+
+.ss-catalog .ss-catalog-card .ss-card-title {
+    margin: 12px 0 9px;
+    font-size: clamp(17px,1.55vw,21px);
+    line-height: 1.3;
+    letter-spacing: -.045em;
+}
+
+.ss-catalog .ss-card-description {
+    min-height: 44px;
+    margin: 0 0 12px;
+    color: var(--ss-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.ss-catalog .ss-catalog-card .ss-card-meta {
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.ss-catalog .ss-card-details {
+    margin-top: 14px;
+    border-top: 1px solid var(--ss-line);
+}
+
+/* "VIEW ... ↗" 줄: 모양만 유지. 호버 효과와 아래로 펼쳐지는 내용은 없음 */
+.ss-catalog .ss-card-details summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    cursor: default;
+    pointer-events: none;
+    color: var(--ss-ink);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .07em;
+}
+
+.ss-catalog .ss-card-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.ss-catalog .ss-card-details summary span {
+    color: var(--ss-blue);
+    font-size: 18px;
+}
+
+.ss-catalog .ss-card-more {
+    display: none;
+}
+
+.ss-catalog .ss-page-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 46px auto 3px;
+}
+
+.ss-catalog .ss-page-numbers {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ss-catalog .ss-page-numbers label {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    color: #4b525d;
+    cursor: pointer;
+    transition: background .2s,color .2s;
+}
+
+.ss-catalog .ss-page-numbers label:hover {
+    background: var(--ss-yellow);
+    color: var(--ss-ink);
+}
+
+.ss-catalog .ss-page-arrow {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 38px;
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 400;
+    color: var(--ss-muted);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    transition: color .2s,transform .2s;
+}
+
+.ss-catalog .ss-page-arrow:hover {
+    color: var(--ss-blue);
+    transform: scale(1.2);
+}
+
+.ss-catalog .ss-page-arrow.is-disabled {
+    opacity: .3;
+    cursor: default;
+}
+
+.ss-catalog .ss-page-arrow.is-disabled:hover {
+    color: var(--ss-muted);
+    transform: none;
+}
+
+@media (max-width:1100px) and (min-width:671px) {
+    .ss-catalog .ss-catalog-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media (max-width:670px) {
+    .ss-catalog .ss-catalog-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .ss-catalog .ss-catalog-card .ss-card-image {
+        height: clamp(250px,75vw,410px);
+    }
+
+    .ss-catalog .ss-catalog-controls .ss-search {
+        width: 100%;
+    }
+
+    .ss-catalog .ss-catalog-controls .ss-search input {
+        width: 100%;
+        max-width: none;
+    }
+
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .ss-catalog .ss-catalog-card,.ss-catalog .ss-page-arrow,.ss-catalog .ss-page-numbers label {
+        transition: none;
+    }
+
+    .ss-catalog .ss-catalog-card:hover {
+        transform: none;
+    }
+
+}
+
+
+/* ===========================================================
+   SCENE:SEOUL / SHARED CATEGORY HEADING (2026-10-15)
+   Consistent eyebrow, title, highlighted category word and description.
+   Text content is set independently in each page's HTML.
+   =========================================================== */
+.ss-category-heading { margin: 0 0 36px; }
+.ss-category-eyebrow {
+    display: inline-block;
+    color: var(--ss-editorial-ink, #1e2637);
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .13em;
+    line-height: 1.5;
+}
+.ss-category-title {
+    margin: 16px 0 10px;
+    color: var(--ss-editorial-ink, #1e2637);
+    font-family: var(--ss-font);
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 900;
+    letter-spacing: -.085em;
+    line-height: 1.12;
+}
+.ss-category-title-accent { color: var(--ss-editorial-accent, var(--ss-blue)); font-style: normal; }
+.ss-category-description {
+    margin: 0;
+    color: #8a8f98;
+    font-size: 13px;
+    line-height: 1.7;
+    word-break: keep-all;
+}
+@media (max-width: 760px) {
+    .ss-category-heading { margin-bottom: 25px; }
+    .ss-category-title { font-size: clamp(46px, 10vw, 72px); }
+}
+
+/* 공통 카드 정보 행: 팝업·공연·전시 등에서 선택적으로 재사용 */
+.ss-catalog .ss-card-facts { display:flex; flex-direction:column; align-items:flex-start; gap:9px; margin:12px 0 16px; }
+.ss-catalog .ss-card-fact { display:flex; align-items:center; gap:8px; color:var(--ss-muted); font-size:11px; line-height:1.5; }
+.ss-catalog .ss-card-fact-icon { flex:none; width:15px; height:15px; color:#89919c; }
+.ss-catalog .ss-catalog-card-info:has(.ss-card-facts) { padding:18px 19px 20px; }
+.ss-catalog .ss-catalog-card-info:has(.ss-card-facts) .ss-card-description { min-height:0; margin-bottom:11px; }
+.ss-catalog .ss-catalog-card-info:has(.ss-card-facts) .ss-card-title { margin:13px 0 10px; }
+.ss-catalog .ss-catalog-card-info:has(.ss-card-facts) .ss-card-topline { margin-bottom:2px; }
+
+/* 공통 카테고리 페이지네이션: 번호/화살표 클릭 시 필터부터 보이도록 스크롤 */
+.ss-catalog .ss-catalog-controls {
+    position: relative;
+}
+.ss-catalog .ss-pagination-anchor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    scroll-margin-top: calc(var(--ss-header-height, 76px) + 16px);
+}
+
+
+/* SCENE:SEOUL - 공통 카테고리 카드/간격 (선택 적용) */
+/* 카테고리 헤더와 필터의 윗줄 간 여유 확보 */
+.ss-catalog.ss-catalog-spaced .ss-catalog-controls { margin-top: 34px; }
+/* ALL POP-UPS. 같은 카탈로그 제목 약간 축소 */
+.ss-category-title.ss-category-title--balanced { font-size:clamp(48px, 5.1vw, 76px); }
+@media(max-width:760px) {
+    .ss-catalog.ss-catalog-spaced .ss-catalog-controls { margin-top: 25px; }
+    .ss-category-title.ss-category-title--balanced { font-size:clamp(42px, 9vw, 68px); }
+}
+
+/* 선택 적용 공통 카탈로그 디자인 정리 */
+.ss-catalog .ss-category-title--balanced { font-size:clamp(48px,5vw,74px) !important; }
+/* Pagination: <a> links inherit the original round <label> button design.
+   This is shared across category pages; hash navigation remains intact. */
+.ss-catalog .ss-page-numbers a {
+  display: grid; place-items: center; width: 40px; height: 40px;
+  border-radius: 50%; text-decoration: none;
+  font-size: 14px; font-weight: 700; line-height: 1; color: #4b525d;
+  cursor: pointer; transition: background .2s, color .2s, transform .2s;
+}
+.ss-catalog .ss-page-numbers a:hover {
+  background: var(--ss-yellow); color: var(--ss-ink);
+}
+.ss-catalog .ss-page-numbers a:focus-visible {
+  outline: 2px solid var(--ss-blue); outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ss-catalog .ss-page-numbers a { transition: none; }
+}
+
+
+/* 공통 찜 하트: 포스터 안 오른쪽 아래. 동그라미 없음, 평소엔 흰 윤곽선 하트, 누르면 노란색으로 채움 */
+.ss-catalog .ss-catalog-card .ss-heart-toggle {
+  position: absolute;
+  z-index: 5;
+  right: 12px;
+  top: calc(clamp(190px, 22vw, 285px) - 54px);   /* 포스터 높이 - 하트 42px - 여백 12px */
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: transform .25s;
+}
+
+/* 기존 글자 하트(♡ ♥)는 쓰지 않고 아래 ::after 모양으로 그림 */
+.ss-catalog .ss-catalog-card .ss-heart-toggle span {
+  display: none;
+}
+
+.ss-catalog .ss-catalog-card .ss-heart-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  background-color: #fff;                       /* 평소 색 */
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .45));
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+}
+
+/* 누르면: 노란색으로 가득 채운 하트 */
+.ss-catalog .ss-catalog-card .ss-heart-toggle:has(input:checked)::after {
+  background-color: var(--ss-yellow);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='black' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='black' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.ss-catalog .ss-catalog-card .ss-heart-toggle:hover {
+  transform: scale(1.12);
+}
+
+.ss-catalog .ss-catalog-card .ss-heart-toggle input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.ss-catalog .ss-catalog-card .ss-heart-toggle:has(input:focus-visible) {
+  outline: 2px solid var(--ss-blue);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-catalog .ss-catalog-card .ss-heart-toggle { transition: none; }
+}
