@@ -42,8 +42,8 @@
             <circle cx="12" cy="12" r="9" />
             <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18" />
           </svg><span>KR</span></span></span>
-      <button type="button">LOGIN</button>
-      <button type="button">MY PAGE</button>
+      <a class="header-login" href="#login-required">LOGIN</a>
+      <a class="header-mypage" href="../mypage/mypage.html">MY PAGE</a>
       <span class="ss-weather-icon" title="날씨 아이콘 (표시용)" aria-label="날씨 아이콘"><svg viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z" />
@@ -65,26 +65,29 @@
         </nav>
         <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="perf-title"><span
             class="perf-title-outline">Perfor</span>mance<span class="perf-title-dot">.</span></h1>
-        <p class="ss-hero-desc ss-entrance ss-entrance--delay-2">지금, 서울의 무대에서 새로운 이야기가 시작됩니다.<br>음악,
-          연극, 뮤지컬, 무용, 클래식까지 서울 곳곳의 다채로운 공연을 만나보세요.</p>
-        <ul class="perf-tags ss-entrance ss-entrance--delay-3" aria-hidden="true">
-          <li>LIVE</li>
-          <li>MUSIC</li>
-          <li>DANCE</li>
-          <li>CLASSICAL</li>
-        </ul>
+        <div class="perf-hero-bottom">
+          <p class="ss-editorial-hero-description ss-entrance ss-entrance--delay-2">지금, 서울의 무대에서 새로운 이야기가 시작됩니다.<br>음악,
+            연극, 뮤지컬, 무용, 클래식까지 서울 곳곳의 다채로운 공연을 만나보세요.</p>
+          <ul class="perf-tags ss-entrance ss-entrance--delay-3" aria-hidden="true">
+            <li>LIVE</li>
+            <li>MUSIC</li>
+            <li>DANCE</li>
+            <li>CLASSICAL</li>
+          </ul>
+        </div>
       </section>
 
       <!-- 공통 추천 배너 (EDITOR'S PICK): 모양은 common.css의 .ss-feature-banner--editorial -->
       <section class="perf-feature" id="hot" aria-label="주목할 공연">
         <div class="ss-feature-banner ss-feature-banner--editorial">
           <div class="ss-feature-banner-art">
-            <img src="../performance/images/poster-sample.jpg" alt="Fremdclick96 포스터">
+            <img src="../images/poster-sample.jpg" alt="국립발레단 포스터">
           </div>
           <div class="ss-feature-banner-copy">
             <span class="ss-feature-banner-index">EDITOR'S PICK / PERFORMANCE</span>
-            <span class="ss-feature-banner-kicker">Ann-Sofie Reiners</span>
-            <h2 class="ss-feature-banner-title">Fremdclick96</h2>
+            <span class="ss-feature-banner-kicker">클래식·무용</span>
+            <h2 class="ss-feature-banner-title">국립발레단 <지젤>
+            </h2>
             <p class="ss-feature-banner-description">서울에서 만나는 특별한 공연 프로그램.<br>현대 무용과 사운드가 만나는 무대를 소개합니다.</p>
             <div class="ss-feature-banner-facts">
               <span>2025.07.17 - 09.19</span>
@@ -178,12 +181,11 @@
         <!-- 카드 그리드: 가로 3칸 x 세로 2줄 = 한 페이지 6장 (p1~p4 = 페이지 번호). 장르를 고르면 해당 공연 전체 -->
         <div class="ss-card-grid ss-catalog-grid">
           <article class="ss-card ss-catalog-card p1" data-genre="classic" data-sub="classical">
-            <a class="ss-card-image" href="#" aria-label="가을 피아노 리사이틀 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="가을 피아노 리사이틀 상세 보기"><img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CLASSIC · DANCE</span>
-                <span class="ss-card-region">클래식</span>
+                <span class="ss-card-region">용산구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">가을 피아노 리사이틀</a></h3>
@@ -203,12 +205,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p1" data-genre="classic" data-sub="dance">
-            <a class="ss-card-image" href="#" aria-label="국립 발레 〈호수의 노래〉 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span><span class="badge">단독</span></a>
+            <a class="ss-card-image" href="#" aria-label="국립 발레 〈호수의 노래〉 상세 보기">  <img src="../images/poster-sample.jpg" alt=""><span class="badge">단독</span></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CLASSIC · DANCE</span>
-                <span class="ss-card-region">발레/무용</span>
+                <span class="ss-card-region">서초구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">국립 발레 〈호수의 노래〉</a></h3>
@@ -228,12 +229,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p1" data-genre="concert" data-sub="global">
-            <a class="ss-card-image" href="#" aria-label="크리스마스 인 콘서트 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="크리스마스 인 콘서트 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CONCERT</span>
-                <span class="ss-card-region">내한</span>
+                <span class="ss-card-region">성동구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">크리스마스 인 콘서트</a></h3>
@@ -253,12 +253,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p1" data-genre="classic" data-sub="classical">
-            <a class="ss-card-image" href="#" aria-label="피아노 협주곡의 밤 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="피아노 협주곡의 밤 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CLASSIC · DANCE</span>
-                <span class="ss-card-region">클래식</span>
+                <span class="ss-card-region">강남구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">피아노 협주곡의 밤</a></h3>
@@ -278,12 +277,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p1" data-genre="concert" data-sub="domestic">
-            <a class="ss-card-image" href="#" aria-label="싱어송라이터 쇼케이스 2026 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="싱어송라이터 쇼케이스 2026 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CONCERT</span>
-                <span class="ss-card-region">국내 콘서트</span>
+                <span class="ss-card-region">용산구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">싱어송라이터 쇼케이스 2026</a></h3>
@@ -303,12 +301,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p1" data-genre="musical" data-sub="creative">
-            <a class="ss-card-image" href="#" aria-label="별을 따라가는 밤 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="별을 따라가는 밤 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · MUSICAL</span>
-                <span class="ss-card-region">창작</span>
+                <span class="ss-card-region">성북구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">별을 따라가는 밤</a></h3>
@@ -328,12 +325,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p2" data-genre="musical" data-sub="licensed">
-            <a class="ss-card-image" href="#" aria-label="시간의 도서관 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="시간의 도서관 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · MUSICAL</span>
-                <span class="ss-card-region">라이선스</span>
+                <span class="ss-card-region">마포구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">시간의 도서관</a></h3>
@@ -353,12 +349,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p2" data-genre="play" data-sub="daehakro">
-            <a class="ss-card-image" href="#" aria-label="빈 의자의 대화 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="빈 의자의 대화 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · PLAY</span>
-                <span class="ss-card-region">대학로</span>
+                <span class="ss-card-region">성북구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">빈 의자의 대화</a></h3>
@@ -378,12 +373,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p2" data-genre="play" data-sub="etc">
-            <a class="ss-card-image" href="#" aria-label="겨울 정원 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="겨울 정원 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · PLAY</span>
-                <span class="ss-card-region">연극</span>
+                <span class="ss-card-region">성북구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">겨울 정원</a></h3>
@@ -403,12 +397,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p2" data-genre="musical" data-sub="creative">
-            <a class="ss-card-image" href="#" aria-label="골목의 노래 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="골목의 노래 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · MUSICAL</span>
-                <span class="ss-card-region">창작</span>
+                <span class="ss-card-region">성북구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">골목의 노래</a></h3>
@@ -428,12 +421,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p2" data-genre="concert" data-sub="festival">
-            <a class="ss-card-image" href="#" aria-label="서울 인디 페스티벌 2026 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="서울 인디 페스티벌 2026 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CONCERT</span>
-                <span class="ss-card-region">페스티벌</span>
+                <span class="ss-card-region">강동구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">서울 인디 페스티벌 2026</a></h3>
@@ -453,12 +445,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p2" data-genre="concert" data-sub="domestic">
-            <a class="ss-card-image" href="#" aria-label="밤의 재즈 라이브 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="밤의 재즈 라이브 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CONCERT</span>
-                <span class="ss-card-region">국내 콘서트</span>
+                <span class="ss-card-region">강동구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">밤의 재즈 라이브</a></h3>
@@ -478,12 +469,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p3" data-genre="concert" data-sub="global">
-            <a class="ss-card-image" href="#" aria-label="해외 밴드 내한 공연 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="해외 밴드 내한 공연 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CONCERT</span>
-                <span class="ss-card-region">내한</span>
+                <span class="ss-card-region">서초구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">해외 밴드 내한 공연</a></h3>
@@ -503,12 +493,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p3" data-genre="concert" data-sub="festival">
-            <a class="ss-card-image" href="#" aria-label="한강 뮤직 페스티벌 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="한강 뮤직 페스티벌 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CONCERT</span>
-                <span class="ss-card-region">페스티벌</span>
+                <span class="ss-card-region">강서구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">한강 뮤직 페스티벌</a></h3>
@@ -528,12 +517,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p3" data-genre="musical" data-sub="licensed">
-            <a class="ss-card-image" href="#" aria-label="내한 뮤지컬 〈밤의 극장〉 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="내한 뮤지컬 〈밤의 극장〉 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · MUSICAL</span>
-                <span class="ss-card-region">라이선스</span>
+                <span class="ss-card-region">서초구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">내한 뮤지컬 〈밤의 극장〉</a></h3>
@@ -553,12 +541,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p3" data-genre="musical" data-sub="creative">
-            <a class="ss-card-image" href="#" aria-label="옥상의 청춘 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="옥상의 청춘 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · MUSICAL</span>
-                <span class="ss-card-region">창작</span>
+                <span class="ss-card-region">동작구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">옥상의 청춘</a></h3>
@@ -578,12 +565,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p3" data-genre="play" data-sub="daehakro">
-            <a class="ss-card-image" href="#" aria-label="대학로 코미디 나이트 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="대학로 코미디 나이트 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · PLAY</span>
-                <span class="ss-card-region">대학로</span>
+                <span class="ss-card-region">성북구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">대학로 코미디 나이트</a></h3>
@@ -603,12 +589,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p3" data-genre="play" data-sub="etc">
-            <a class="ss-card-image" href="#" aria-label="두 번째 문 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="두 번째 문 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · PLAY</span>
-                <span class="ss-card-region">연극</span>
+                <span class="ss-card-region">성북구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">두 번째 문</a></h3>
@@ -628,12 +613,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p4" data-genre="classic" data-sub="classical">
-            <a class="ss-card-image" href="#" aria-label="오페라 〈달빛의 정원〉 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="오페라 〈달빛의 정원〉 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CLASSIC · DANCE</span>
-                <span class="ss-card-region">클래식</span>
+                <span class="ss-card-region">강남구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">오페라 〈달빛의 정원〉</a></h3>
@@ -653,12 +637,11 @@
             </div>
           </article>
           <article class="ss-card ss-catalog-card p4" data-genre="classic" data-sub="gugak">
-            <a class="ss-card-image" href="#" aria-label="국악 한마당 〈바람의 소리〉 상세 보기"><span
-                class="ss-poster-placeholder">POSTER</span></a>
+            <a class="ss-card-image" href="#" aria-label="국악 한마당 〈바람의 소리〉 상세 보기">  <img src="../images/poster-sample.jpg" alt=""></a>
             <div class="ss-catalog-card-info">
               <div class="ss-card-topline">
                 <span class="ss-card-category">PERFORMANCE · CLASSIC · DANCE</span>
-                <span class="ss-card-region">국악</span>
+                <span class="ss-card-region">서초구</span>
               </div>
               <div class="ss-card-titleline">
                 <h3 class="ss-card-title"><a href="#">국악 한마당 〈바람의 소리〉</a></h3>
