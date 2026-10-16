@@ -6,9 +6,20 @@ html {scroll-behavior: smooth;}
 
 /* 페이지에서 쓰는 이름 변경 -> common.css에서 가져옴. */
 :root {
+  --white: var(--ss-white);
   --bg: #ECE9E1;
+  --line: var(--ss-line);
+  --mute: var(--ss-muted);
+  --text: #4B525D;
+  --ink: var(--ss-ink);
+  --blue: var(--ss-blue);
+  --yellow: var(--ss-yellow);
   --radius: 12px;
   --header-h: var(--ss-header-height);
+
+  --stage-top: #F8F3EA;
+  --stage-mid: #F1ECE3;
+  --stage-end: var(--ss-paper);
 }
 
 /* 목록 디자인 */
