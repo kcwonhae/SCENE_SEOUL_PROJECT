@@ -93,14 +93,7 @@ p {
   order: 4;
 }
 
-/* 카드 오른쪽 위 작은 라벨 (장르/세부 분류) */
-.ss-card-region {
-  color: var(--ss-muted);
-  font-size: 10px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
+/* 카드 상태 */
 .ss-catalog .ss-catalog-status {
   display: block;
   order: 3;
