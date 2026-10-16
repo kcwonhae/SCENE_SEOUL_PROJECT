@@ -1,0 +1,374 @@
+/* EVENT 페이지 전용 스타일
+ * 공통 헤더·푸터는 별도 공통 CSS에서 관리합니다.
+ * CSS 선택자별 역할을 설명하며, 화면 상태별 규칙은 선언 순서를 유지합니다.
+ */
+
+/* 페이지에서 사용하는 색상·간격 등의 사용자 정의 속성을 선언합니다. */
+:root {
+  --white: var(--ss-white);
+  --bg: #ECE9E1;
+  --line: var(--ss-line);
+  --mute: var(--ss-muted);
+  --text: #4B525D;
+  --ink: var(--ss-ink);
+  --blue: var(--ss-blue);
+  --yellow: var(--ss-yellow);
+  --radius: 12px;
+  --header-h: var(--ss-header-height);
+  --stage-top: #F8F3EA;
+  --stage-mid: #F1ECE3;
+  --stage-end: var(--ss-paper);
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* 키보드로 탐색할 때 현재 포커스 위치를 명확하게 표시합니다. */
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 200;
+  padding: .6rem 1rem;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--white);
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+.skip:focus {
+  top: 12px;
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+.ss-page {
+  font-size: 14px;
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+.anchor {
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+.ss-catalog {
+  counter-reset: shown;
+  padding-top: 24px;
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+.ss-catalog-controls {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+.ss-toolbar {
+  order: 2;
+  position: relative;
+  z-index: 20;
+}
+
+/* 이벤트 카드의 콘텐츠 배치와 시각적 계층을 정의합니다. */
+.ss-card-grid {
+  order: 4;
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+.ss-catalog .ss-catalog-status {
+  display: block;
+  order: 3;
+}
+
+/* 페이지 번호의 선택 상태 및 이전·다음 버튼 표시를 제어합니다. */
+.pager {
+  order: 5;
+}
+
+/* 이벤트 카드의 콘텐츠 배치와 시각적 계층을 정의합니다. */
+.ss-card {
+  counter-increment: shown;
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+.count::before {
+  content: counter(shown);
+}
+
+/* URL 해시 또는 자식 요소 상태를 CSS 선택자로 판별하여 표시를 제어합니다. */
+body:not(:has(.anchor:not(#all):target)) .ss-card:not(.p1) {
+  display: none;
+}
+
+/* URL 해시 또는 자식 요소 상태를 CSS 선택자로 판별하여 표시를 제어합니다. */
+body:has(.anchor:not(#all):target) :is(.pager, .hot-label) {
+  display: none;
+}
+
+/* URL 해시 또는 자식 요소 상태를 CSS 선택자로 판별하여 표시를 제어합니다. */
+body:has(#festival:target) .ss-card:not([data-genre="festival"]),
+body:has(#flea:target) .ss-card:not([data-genre="flea"]),
+body:has(#film:target) .ss-card:not([data-genre="film"]),
+body:has(#talk:target) .ss-card:not([data-genre="talk"]) {
+  display: none;
+}
+
+/* URL 해시 또는 자식 요소 상태를 CSS 선택자로 판별하여 표시를 제어합니다. */
+body:not(:has(:target)) .ss-filter[href="#all"],
+body:has(#all:target) .ss-filter[href="#all"],
+body:has(#festival:target) .ss-filter[href="#festival"],
+body:has(#flea:target) .ss-filter[href="#flea"],
+body:has(#film:target) .ss-filter[href="#film"],
+body:has(#talk:target) .ss-filter[href="#talk"] {
+  background: var(--ss-yellow);
+  border-color: var(--ss-yellow);
+  color: var(--ss-ink);
+  font-weight: 800;
+}
+
+/* 마우스를 올렸을 때의 시각적 피드백을 적용합니다. */
+.filter-group:hover>.menu,
+.filter-group:focus-within>.menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* 카테고리 필터와 드롭다운 메뉴의 배치·상태를 설정합니다. */
+.menu a {
+  padding: 2px 0;
+  color: var(--mute);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color .2s;
+}
+
+/* 마우스를 올렸을 때의 시각적 피드백을 적용합니다. */
+.menu a:hover,
+.menu a:focus-visible {
+  color: var(--blue);
+}
+
+/* 이벤트 카드의 콘텐츠 배치와 시각적 계층을 정의합니다. */
+.ss-card-region {
+  color: var(--ss-muted);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* 마우스를 올렸을 때의 시각적 피드백을 적용합니다. */
+.ss-card-title a:hover,
+.ss-card-title a:focus-visible {
+  color: var(--blue);
+}
+
+/* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+.hot-label {
+  color: var(--blue);
+}
+
+/* 선택된 체크박스 또는 라디오 버튼 상태에 따라 표시를 전환합니다. */
+.pg-radio:checked+label {
+  background: var(--blue);
+  color: #fff;
+}
+
+/* 키보드로 탐색할 때 현재 포커스 위치를 명확하게 표시합니다. */
+.pg-radio:focus-visible+label {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* 선택된 체크박스 또는 라디오 버튼 상태에 따라 표시를 전환합니다. */
+.pager:has(#pg1:checked) .pg-prev-off,
+.pager:has(#pg2:checked) .pg-prev[for="pg1"],
+.pager:has(#pg3:checked) .pg-prev[for="pg2"],
+.pager:has(#pg4:checked) .pg-prev[for="pg3"],
+.pager:has(#pg1:checked) .pg-next[for="pg2"],
+.pager:has(#pg2:checked) .pg-next[for="pg3"],
+.pager:has(#pg3:checked) .pg-next[for="pg4"],
+.pager:has(#pg4:checked) .pg-next-off {
+  display: inline-flex;
+}
+
+/* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+.stage {
+  position: relative;
+  overflow: hidden;
+  background: var(--ss-paper);
+}
+
+/* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+.perf-hero {
+  --navy: #1b2b5e;
+  position: relative;
+  max-width: 1470px;
+  margin: 0 auto;
+  min-height: clamp(180px, 15vw, 220px);
+  padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
+}
+
+/* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+.perf-hero .ss-hero-crumb {
+  color: var(--ss-blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+/* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+.perf-hero .ss-hero-crumb [aria-current="page"] {
+  color: inherit;
+}
+
+/* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+.perf-hero .ss-hero-title {
+  margin: 20px 0 14px;
+  color: var(--ss-ink);
+  font-size: clamp(58px, 8vw, 126px);
+  font-weight: 900;
+  line-height: .94;
+  letter-spacing: -.075em;
+}
+
+/* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+.perf-hero .perf-title-dot {
+  color: var(--ss-blue);
+  margin-left: .1em;
+}
+
+/* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+.perf-tags {
+  position: absolute;
+  z-index: 2;
+  right: clamp(22px, 5vw, 80px);
+  bottom: 78px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  line-height: 1.7;
+  color: var(--navy);
+}
+
+/* 반응형 화면 또는 기능 지원 조건에 따라 내부 스타일을 적용합니다. */
+@media (max-width: 670px) {
+  /* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+  .perf-hero .ss-hero-title {
+    font-size: clamp(34px, 11.5vw, 80px);
+    letter-spacing: -.07em;
+  }
+
+}
+
+/* 반응형 화면 또는 기능 지원 조건에 따라 내부 스타일을 적용합니다. */
+@media (max-width: 760px) {
+  /* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+  .perf-hero {
+    min-height: 0;
+    padding-bottom: 90px;
+  }
+
+  /* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+  .perf-tags {
+    display: none;
+  }
+
+  /* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+  .perf-down {
+    bottom: 24px;
+  }
+
+  /* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+  .ss-catalog {
+    padding-top: 12px;
+  }
+
+  /* 카테고리 필터와 드롭다운 메뉴의 배치·상태를 설정합니다. */
+  .menu {
+    display: none;
+  }
+
+  /* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+  .rk-row {
+    flex-direction: column;
+    height: auto;
+    align-items: stretch;
+  }
+
+  /* 마우스를 올렸을 때의 시각적 피드백을 적용합니다. */
+  .rk-row .rk-card,
+  .rk-row:not(:has(.rk-card:hover, .rk-card:focus-visible)) .rk-card:first-child {
+    height: 150px;
+    flex: none;
+    opacity: 1;
+    filter: none;
+    box-shadow: 0 10px 24px rgba(21, 27, 39, .10);
+  }
+
+  /* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+  .rk-head span {
+    display: none;
+  }
+
+}
+
+/* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+.perf-feature {
+  padding: 8px clamp(22px, 5vw, 80px) 64px;
+}
+
+/* 페이지 상단 제목과 소개 영역의 위치 및 크기를 지정합니다. */
+.perf-feature .ss-feature-banner-art img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 반응형 화면 또는 기능 지원 조건에 따라 내부 스타일을 적용합니다. */
+@media (prefers-reduced-motion: reduce) {
+  /* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* 해당 요소의 크기, 여백, 정렬 또는 색상을 지정합니다. */
+  * {
+    transition: none !important;
+  }
+
+  /* 이벤트 카드의 콘텐츠 배치와 시각적 계층을 정의합니다. */
+  .rk-card {
+    transition: none;
+  }
+
+}
