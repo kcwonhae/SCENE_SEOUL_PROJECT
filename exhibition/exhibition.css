@@ -3,791 +3,287 @@
 /* 페이지 내부 링크 이동을 부드럽게 처리 */
 html {scroll-behavior: smooth;}
 
-/* 페이지 소개 영역: 제목과 설명의 최대 너비 및 여백 */
-.exhibition-intro {
-    max-width: 1470px;
-    margin: 0 auto;
-    padding: clamp(42px, 6vw, 82px)
-             clamp(22px, 5vw, 80px) 42px;
+
+/* 페이지에서 쓰는 이름 변경 -> common.css에서 가져옴. */
+:root {
+  --white: var(--ss-white);
+  --bg: #ECE9E1;
+  --line: var(--ss-line);
+  --mute: var(--ss-muted);
+  --text: #4B525D;
+  --ink: var(--ss-ink);
+  --blue: var(--ss-blue);
+  --yellow: var(--ss-yellow);
+  --radius: 12px;
+  --header-h: var(--ss-header-height);
+  /* 히어로 + 추천 배너가 하나로 이어지는 배경: 위(top) → 가운데(mid) → 아래(페이지 배경색) */
+  --stage-top: #F8F3EA;
+  --stage-mid: #F1ECE3;
+  --stage-end: var(--ss-paper);
 }
 
-/* 소개 영역과 카탈로그에서 공통으로 사용하는 작은 영문 라벨 */
-.exhibition-eyebrow,
-.catalog-eyebrow,
-.featured-kicker {
+/* 목록 디자인 */
+ul {
     margin: 0;
-    color: var(--ss-blue);
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: .12em;
+  padding: 0;
+  list-style: none;
 }
 
-/* 메인 제목: 화면 크기에 따라 글자 크기 조절 */
-.exhibition-intro h1 {
-    margin: 20px 0 0;
-    font-size: clamp(58px, 8vw, 126px); 
-    line-height: .94;
-    letter-spacing: -.075em;
-    font-weight: 900;
+/* 제목, 문단 여백 조정 */
+h1,
+h2,
+h3,
+p {
+  margin: 0;
 }
 
-.title-accent {
-    color: var(--ss-blue);
-    -webkit-text-stroke: 0;
+/* 키보드 탐색 시 표시 */
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
 }
 
-/* 소개 문구와 에디션 정보를 양쪽에 배치 */
-.intro-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 24px;
-    margin-top: 32px;
+/* 접근성용 링크 평상시 숨기기 */
+.skip {
+  position: absolute; /* 위치를 분리 후 지정 */
+  left: 12px;  /* 기준 위치의 왼쪽에서 12px 떨어짐 */
+  top: -80px;  /* 위쪽으로 올려 화면 밖으로 숨기기 */
+  z-index: 200;  /* 다른 요소와 겹칠 때 앞쪽에 표시 */
+  padding: .6rem 1rem;  /* 글자 주변 여백 */
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--white);
 }
 
-.intro-bottom p {
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.9;
+.skip:focus {
+  top: 12px;
 }
 
-/* 오른쪽 에디션 및 날짜 정보 */
-.intro-bottom .edition {
-    color: var(--ss-muted);
-    text-align: right;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .06em;
-    white-space: nowrap;
+/* 본문 글자 크기 재지정 */
+.ss-page {
+    font-size: 14px;   
 }
 
-
-/* ---------- 02. 대표 전시 ---------- */
-
-/* 대표 전시: 왼쪽 포스터와 오른쪽 설명을 2열로 배치 */
-.featured-exhibition {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, .92fr);
-    width: calc(100% - clamp(56px, 13vw, 160px));
-    max-width: 1470px;
-    height: 400px;
-    min-height: 0px;
-    margin: 0 auto 68px;
-    overflow: hidden;
-
-    border: 1px solid var(--ss-line);
-    background: var(--ss-yellow);
-
-    box-shadow:
-        0 10px 28px rgba(21, 27, 39, .08),
-        0 24px 50px rgba(21, 27, 39, .06);
-
-    transition: box-shadow .3s ease;
+/* 해당 위치로 이동하는 기능 */
+.anchor {
+  display: block;
+  height: 0;
+  visibility: hidden;
 }
 
-/* 대표 전시 카드 전체에 마우스를 올렸을 때 그림자 강조 */
-.featured-exhibition:hover {
-    box-shadow:
-        0 15px 34px rgba(21, 27, 39, .11),
-        0 30px 60px rgba(21, 27, 39, .08);
+/* 공통 css 재지정 */
+.ss-catalog {
+  counter-reset: shown;
+  padding-top: 24px;
 }
 
-/* 대표 전시 이미지 영역 */
-.featured-poster {
-    position: relative;
-    min-width: 0;
-    height: 400px;
-    min-height: 0px;
-    overflow: hidden;
-    background: #E9EDF4;
+/* 공통 .ss-catalog-controls 안에서 순서(order)로 배치 */
+.ss-catalog-controls {
+  display: flex;
+  flex-direction: column;
 }
 
-/* 이미지 클릭 시 상세 페이지로 이동하는 링크 영역 */
-.featured-poster a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    min-height: 290px;
-    overflow: hidden;
+.ss-toolbar {
+  order: 2;
+  position: relative;
+  z-index: 20;
 }
 
-/* 대표 전시 포스터 이미지 */
-.featured-poster img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    min-height: 290px;
-    object-fit: cover;
-    object-position: center;
-    transition: transform .5s var(--ss-ease);
+.ss-card-grid {
+  order: 4;
 }
 
-/* 포스터 이미지에만 가벼운 확대 효과 적용 */
-.featured-poster a:hover img {
-    transform: scale(1.035);
+.ss-catalog .ss-catalog-status {
+  display: block;
+  order: 3;
 }
 
-/* 대표 전시 설명: 제목과 하단 정보를 위아래로 배치 */
-.featured-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 30px;
-    padding: clamp(22px, 3vw, 38px);
+.pager {
+  order: 5;
 }
 
-.featured-info h2 {
-    margin: 17px 0 14px;
-    font-size: clamp(25px, 3vw, 39px);
-    line-height: 1.12;
-    letter-spacing: -.065em;
+/* 보이는 카드 수 세기: 숨겨진(display:none) 카드는 세지 않음 */
+.ss-card {
+  counter-increment: shown;
 }
 
-/* 대표 전시 소개 문구 */
-.featured-description {
-    max-width: 390px;
-    margin: 0;
-    color: var(--ss-muted);
-    font-size: 13px;
-    line-height: 1.9;
+.count::before {
+  content: counter(shown);
 }
 
-/* 전시 기간과 상세 페이지 링크를 하단에 배치 */
-.featured-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 18px;
+/* 페이지 번호는 모양만 있음(넘어가지 않음): 평소에는 1페이지 카드 6장만 보임. 장르를 고르면 해당 공연 전체 */
+body:not(:has(.anchor:not(#all):target)) .ss-card:not(.p1) {
+  display: none;
 }
 
-.featured-bottom p {
-    margin: 0;
-    color: var(--ss-muted);
-    font-size: 11px;
-    line-height: 1.8;
+/* 장르/세부 카테고리를 고르면 해당 공연 전체를 보여주고 'ALL' 표시와 페이지 번호는 숨김 */
+body:has(.anchor:not(#all):target) :is(.pager, .hot-label) {
+  display: none;
 }
 
-/* 대표 전시 상세 페이지 이동 버튼 */
-.featured-bottom a {
-    display: inline-flex;
-    align-items: center;
-    gap: 18px;
-    padding: 12px 14px;
-
-    background: var(--ss-blue);
-    color: var(--ss-white);
-
-    font-size: 10px;
-    font-weight: 800;
-    white-space: nowrap;
-    transition:
-        background .25s ease,
-        transform .25s var(--ss-ease);
+/* 장르 필터 */
+body:has(#art:target) .ss-card:not([data-genre="art"]),
+body:has(#photo:target) .ss-card:not([data-genre="photo"]),
+body:has(#media:target) .ss-card:not([data-genre="media"]),
+body:has(#history:target) .ss-card:not([data-genre="history"]) {
+  display: none;
 }
 
-.featured-bottom a:hover {
-    background: var(--ss-blue-hover);
-    transform: translateY(-2px);
+/* 현재 선택된 장르 버튼 = 공통(category.css)의 선택 모양(노란색)과 동일 */
+body:not(:has(:target)) .ss-filter[href="#all"],
+body:has(#all:target) .ss-filter[href="#all"],
+body:has(#art:target) .ss-filter[href="#art"],
+body:has(#photo:target) .ss-filter[href="#photo"],
+body:has(#media:target) .ss-filter[href="#media"],
+body:has(#history:target) .ss-filter[href="#history"] {
+  background: var(--ss-yellow);
+  border-color: var(--ss-yellow);
+  color: var(--ss-ink);
+  font-weight: 800;
 }
 
-
-/* ---------- 03. 전시 카탈로그 제목 및 필터 ---------- */
-
-/* 전체 전시 목록 영역 */
-.exhibition-catalog {
-    max-width: 1470px;
-    margin: 0 auto;
-    padding: 0 clamp(22px, 5vw, 80px) 64px;
+/* id= hot 부분 */
+.hot-label{
+    color: var(--blue);
 }
 
-/* 카탈로그 제목과 설명을 양쪽에 배치 */
-.exhibition-catalog .ss-catalog-head {
-    align-items: flex-end;
-    margin-bottom: 28px;
+/* 필터 */
+.pg-radio:checked+label {
+  background: var(--blue);
+  color: #fff;
 }
 
-/* 카탈로그 제목 위 작은 라벨 */
-.catalog-eyebrow {
-    margin-bottom: 10px;
+.pg-radio:focus-visible+label {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
 }
 
-/* Find your exhibition 아래의 전시 목록 제목 */
-.exhibition-catalog .ss-catalog-title {
-    font-size: clamp(40px, 6vw, 76px);
+.pager:has(#pg1:checked) .pg-prev-off,
+.pager:has(#pg2:checked) .pg-prev[for="pg1"],
+.pager:has(#pg3:checked) .pg-prev[for="pg2"],
+.pager:has(#pg4:checked) .pg-prev[for="pg3"],
+.pager:has(#pg1:checked) .pg-next[for="pg2"],
+.pager:has(#pg2:checked) .pg-next[for="pg3"],
+.pager:has(#pg3:checked) .pg-next[for="pg4"],
+.pager:has(#pg4:checked) .pg-next-off {
+  display: inline-flex;
 }
 
-/* 카탈로그 오른쪽 설명 */
-.exhibition-catalog .ss-catalog-desc {
-    text-align: right;
+/* 히어로 + 대표 전시 베너 */
+.stage {
+  position: relative;
+  overflow: hidden;
+  background: var(--ss-paper);
 }
 
-/* 필터와 라디오 버튼을 묶는 영역 */
-.catalog-controls {
-    position: relative;
+/* 히어로 제목 + 소개 */
+.ex-hero {
+  --navy: #1b2b5e;
+  position: relative;
+  max-width: 1470px;
+  margin: 0 auto;
+  min-height: clamp(180px, 15vw, 220px);
+  padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
 }
 
-/* 실제 라디오 버튼은 화면에서 숨기되 키보드 접근은 유지 */
-.filter-input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
+/* 히어로 글자 + 공통 재지정 */
+.ex-hero .ss-hero-crumb {
+  color: var(--ss-blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
 }
 
-/* 필터 툴바 하단의 불필요한 여백 제거 */
-.catalog-controls .ss-toolbar {
-    margin-bottom: 0;
+/* 히어로 색 + 공통 재지정 */
+.ex-hero .ss-hero-crumb [aria-current="page"] {
+  color: inherit;
 }
 
-/* 필터 버튼: 크기, 글씨 두께, 기본 상태 */
-.catalog-controls .ss-filter {
-    min-height: 36px;
-    padding: 9px 16px;
-    border: 1px solid var(--ss-line);
-    border-radius: 999px;
-
-    background: rgba(255, 255, 255, .8);
-    color: var(--ss-ink);
-
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.2;
-    cursor: pointer;
-    user-select: none;
-
-    transition:
-        background .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
+/* 히어로 제목 공통 재지정 */
+.ex-hero .ss-hero-title {
+  margin: 20px 0 14px;
+  color: var(--ss-ink);
+  font-size: clamp(58px, 8vw, 126px);
+  font-weight: 900;
+  line-height: .94;
+  letter-spacing: -.075em;
 }
 
-/* 필터에 마우스를 올리면 연한 파란색 */
-.catalog-controls .ss-filter:hover {
-    background: #EAF0FC;
-    border-color: #C5D2F0;
-    color: var(--ss-blue);
-    transform: none;
+/* 제목 끝의 점 */
+.ex-hero .ex-title-dot {
+  color: var(--ss-blue);
+  margin-left: .1em;
 }
 
-/* 선택된 필터는 노란색으로 구분 */
-#filter-all:checked ~ .ss-toolbar label[for="filter-all"],
-#filter-art:checked ~ .ss-toolbar label[for="filter-art"],
-#filter-photo:checked ~ .ss-toolbar label[for="filter-photo"],
-#filter-media:checked ~ .ss-toolbar label[for="filter-media"],
-#filter-history:checked ~ .ss-toolbar label[for="filter-history"] {
-    background: var(--ss-yellow);
-    border-color: var(--ss-yellow);
-    color: var(--ss-ink);
-    font-weight: 700;
-    box-shadow: none;
-    transform: none;
+/* 오른쪽 분야 목록 */
+.intro-tags {
+  position: absolute;
+  z-index: 2;
+  right: clamp(22px, 5vw, 80px);
+  bottom: 78px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  line-height: 1.7;
+  color: var(--navy);
 }
 
-/* 버튼을 누르는 순간의 짧은 반응 */
-.catalog-controls .ss-filter:active {
-    transform: scale(.97);
-}
+/* 등장 애니메이션은 공통 .ss-entrance 클래스를 HTML에서 붙여 사용 */
 
-/* 키보드로 필터를 선택할 때 포커스 표시 */
-.filter-input:focus-visible + .ss-toolbar label {
-    outline: 2px solid var(--ss-blue);
-    outline-offset: 3px;
-}
-
-/* 현재 필터 상태를 안내하는 문구 */
-.exhibition-catalog .ss-catalog-status {
-    padding: 24px 0;
-}
-
-#filter-art:checked ~ .ss-catalog-status,
-#filter-photo:checked ~ .ss-catalog-status,
-#filter-media:checked ~ .ss-catalog-status,
-#filter-history:checked ~ .ss-catalog-status {
-    color: var(--ss-blue);
-}
-
-/* 카탈로그 오른쪽의 전시 개수 등 보조 정보 */
-.catalog-note {
-    color: var(--ss-muted);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    white-space: nowrap;
-}
-
-.catalog-note span {
-    margin-left: 8px;
-    color: var(--ss-blue);
-    font-size: 16px;
-}
-
-
-/* ---------- 04. 전시 포스터 카드 ---------- */
-
-/* 기본 3열 배치: 카드 사이의 가로·세로 간격 (시연용으로 이 정도 양으로만 구현! */
-.exhibition-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 30px 22px;
-}
-
-/* 포스터와 설명을 하나의 카드로 구성 */
-.exhibition-grid .ss-card {
-    position: relative;
-    min-width: 0;
-    overflow: hidden;
-
-    /*border: 1px solid rgba(21, 27, 39, .075);*/
-    background: var(--ss-white);
-
-    box-shadow: 0 2px 8px rgba(21, 27, 39, .035);
-
-    transition:
-        transform .32s var(--ss-ease),
-        box-shadow .32s ease,
-        border-color .25s ease;
-}
-
-/* 카드 전체 호버: 살짝 상승하고 그림자 강조 */
-.exhibition-grid .ss-card:hover {
-    transform: translateY(-5px);
-    /*border-color: rgba(70, 102, 176, .22);*/
-    box-shadow: 0 10px 24px rgba(21, 27, 39, .085);
-}
-
-/* 카드 상단 포스터 영역 */
-.exhibition-grid .ss-card-image {
-    position: relative;
-    display: flex;
-    height: clamp(205px, 23vw, 292px);
-    overflow: hidden;
-    text-decoration: none;
-}
-
-/* 이미지에 링크가 적용된 경우 클릭 영역을 채움 */
-.exhibition-grid .ss-card-image > a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-/* 포스터 이미지 비율 유지 및 확대 애니메이션 */
-.exhibition-grid .ss-card-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform .5s var(--ss-ease);
-}
-
-.exhibition-grid .ss-card:hover .ss-card-image img {
-    transform: scale(1.035);
-}
-
-/* 포스터 상단 분류 태그와 하단 번호 */
-.poster-tag,
-.poster-index {
-    position: absolute;
-    z-index: 2;
-    padding: 7px 9px;
-    background: rgba(255, 255, 255, .9);
-    color: var(--ss-ink);
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: .04em;
-}
-
-.poster-tag {
-    top: 14px;
-    left: 14px;
-}
-
-.poster-index {
-    right: 14px;
-    bottom: 14px;
-}
-
-/* 카드 설명 영역 */
-.exhibition-grid .ss-card-info {
-    display: block;
-    padding: 17px 18px 18px;
-}
-
-/* 카드의 분류, 날짜 등의 메타 정보 */
-.card-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    color: var(--ss-muted);
-    font-size: 10px;
-    font-weight: 700;
-}
-
-/* 전시 제목 */
-.exhibition-grid .ss-card-title {
-    margin: 12px 0 9px;
-    font-size: clamp(17px, 1.55vw, 21px);
-    line-height: 1.3;
-    letter-spacing: -.045em;
-}
-
-/* 전시 소개 문구: 카드마다 높이가 크게 달라지지 않도록 설정 */
-.card-description {
-    min-height: 44px;
-    margin: 0 0 12px;
-    color: var(--ss-muted);
-    font-size: 12px;
-    line-height: 1.8;
-}
-
-/* 카드 하단의 장소, 기간 등 추가 정보 */
-.exhibition-grid .ss-card-meta {
-    font-size: 11px;
-    line-height: 1.8;
-}
-
-/* 카드 하단 상세 페이지 이동 링크 */
-.card-link {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid var(--ss-line);
-
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .04em;
-}
-
-/* 상세 페이지 링크의 화살표 */
-.card-link span {
-    color: var(--ss-blue);
-    transition: transform .25s var(--ss-ease);
-}
-
-.exhibition-grid .ss-card:hover .card-link span {
-    transform: translate(3px, -3px);
-}
-
-
-/* ---------- 05. CSS 라디오 버튼 필터 ---------- */
-
-/* 선택한 분류에 해당하지 않는 카드 숨기기 */
-#filter-art:checked ~ .ss-card-grid .ss-card:not(.art),
-#filter-photo:checked ~ .ss-card-grid .ss-card:not(.photo),
-#filter-media:checked ~ .ss-card-grid .ss-card:not(.media),
-#filter-history:checked ~ .ss-card-grid .ss-card:not(.history) {
-    display: none;
-}
-
-
-/* ---------- 06. 반응형 레이아웃 ---------- */
-
-/* 태블릿 및 작은 노트북: 포스터를 2열로 배치 */
-@media (max-width: 1100px) {
-    .exhibition-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .featured-exhibition {
-        width: calc(100% - 64px);
-    }
-}
-
-/* 태블릿: 대표 전시를 세로형 레이아웃으로 변경 */
-@media (max-width: 800px) {
-    .featured-exhibition {
-        grid-template-columns: 1fr;
-        width: calc(100% - 40px);
-        margin-bottom: 58px;
-    }
-
-    .featured-poster,
-    .featured-poster a,
-    .featured-poster img {
-        min-height: 245px;
-    }
-
-    .featured-info {
-        padding: 26px;
-    }
-
-    .exhibition-intro {
-        padding-top: 42px;
-    }
-}
-
-/* 모바일: 소개 문구, 카드, 필터의 여백 조정 */
 @media (max-width: 670px) {
-    .exhibition-intro {
-        padding-right: 20px;
-        padding-left: 20px;
-    }
-
-    .exhibition-intro h1 {
-        letter-spacing: -.07em;
-    }
-
-    .intro-bottom {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 14px;
-    }
-
-    .intro-bottom .edition {
-        text-align: left;
-    }
-
-    .featured-bottom {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .exhibition-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .exhibition-grid .ss-card-image {
-        height: clamp(270px, 78vw, 360px);
-    }
-
-    .exhibition-grid .ss-card-info {
-        padding: 15px 16px 17px;
-    }
-
-    .card-description {
-        min-height: 0;
-    }
-
-    .exhibition-catalog .ss-catalog-desc {
-        margin-top: 12px;
-        text-align: left;
-    }
-
-    .catalog-note {
-        display: none;
-    }
-
-    .catalog-controls .ss-filter {
-        padding: 8px 13px;
-        font-size: 11px;
-    }
-
+  .ex-hero .ss-hero-title {
+    font-size: clamp(34px, 11.5vw, 80px);
+    letter-spacing: -.07em;
+  }
 }
 
+/* ---------- 6. 반응형 ---------- */
+@media (max-width: 760px) {
+  .ex-hero {
+    min-height: 0;
+    padding-bottom: 90px;
+  }
 
-/* ---------- 전시 페이지네이션 ---------- */
-/* ---------- 01. 페이지네이션 전체 ---------- */
-
-.exhibition-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin: 40px auto 48px;
-    padding: 0;
-    background: transparent;
-}
-
-
-/* ---------- 02. 라디오 버튼 숨기기 ---------- */
-
-.exhibition-pagination .ex-page-radio {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-
-/* ---------- 03. 페이지 번호 ---------- */
-
-.exhibition-pagination .ss-page-numbers {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--ss-ink);
-    font-size: 13px;
-    font-weight: 700;
-    cursor: default;
-    transition:
-        background .2s ease,
-        color .2s ease,
-        transform .2s ease;
-}
-
-
-/* ---------- 04. 페이지 번호 호버 ---------- */
-/* 호버하면 노란색 */
-
-.exhibition-pagination .ss-page-numbers:hover {
-    background: var(--ss-yellow);
-    color: var(--ss-ink);
-    transform: none;
-}
-
-/* ---------- 05. 현재 선택된 페이지 ---------- */
-/* 선택된 페이지는 파란색 */
-
-.exhibition-pagination:has(#ex-pg1:checked)
-.ss-page-numbers[for="ex-pg1"],
-
-.exhibition-pagination:has(#ex-pg2:checked)
-.ss-page-numbers[for="ex-pg2"],
-
-.exhibition-pagination:has(#ex-pg3:checked)
-.ss-page-numbers[for="ex-pg3"],
-
-.exhibition-pagination:has(#ex-pg4:checked)
-.ss-page-numbers[for="ex-pg4"] {
-    background: var(--ss-blue);
-    color: #fff;
-    transform: none;
-}
-
-/* 클릭하면 파란색 유지 */
-
-.exhibition-pagination:has(#ex-pg1:checked)
-.ss-page-numbers[for="ex-pg1"]:hover,
-
-.exhibition-pagination:has(#ex-pg2:checked)
-.ss-page-numbers[for="ex-pg2"]:hover,
-
-.exhibition-pagination:has(#ex-pg3:checked)
-.ss-page-numbers[for="ex-pg3"]:hover,
-
-.exhibition-pagination:has(#ex-pg4:checked)
-.ss-page-numbers[for="ex-pg4"]:hover {
-    background: var(--ss-blue);
-    color: #fff;
-    transform: none;
-}
-
-
-/* ---------- 06. 화살표 기본 설정 ---------- */
-
-.exhibition-pagination .ss-page-arrow {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--ss-ink);
-    font-size: 22px;
-    line-height: 1;
-    cursor: default;
-
-    transition:
-        color .2s ease,
-        transform .2s ease,
-        opacity .2s ease;
-}
-
-
-/* ---------- 07. 이전 화살표 표시 ---------- */
-
-/* 기본적으로 이전 화살표 숨기기 */
-
-.exhibition-pagination .ex-prev {
+  .ex-tags {
     display: none;
+  }
+
+  /* 좁은 화면에서는 오른쪽 분야 목록 숨김 */
+  .ex-down {
+    bottom: 24px;
+  }
+
+  .ss-catalog {
+    padding-top: 12px;
+  }
 }
 
-/* 1페이지: 비활성 이전 화살표 */
-
-.exhibition-pagination:has(#ex-pg1:checked) .ex-prev-off {
-    display: inline-flex;
+/* 대표전시 */
+.featured-exhibition {
+  padding: 8px clamp(22px, 5vw, 80px) 64px;
 }
 
-/* 2페이지: 1페이지로 이동 */
-
-.exhibition-pagination:has(#ex-pg2:checked)
-.ex-prev[for="ex-pg1"] {
-    display: inline-flex;
+/* 이미지가 배너 높이를 늘리지 않도록 칸에 꽉 채움 */
+.featured-exhibition .ss-feature-banner-art img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* 3페이지: 2페이지로 이동 */
+/* ---------- 7. 모션 줄이기 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-.exhibition-pagination:has(#ex-pg3:checked)
-.ex-prev[for="ex-pg2"] {
-    display: inline-flex;
-}
-
-/* 4페이지: 3페이지로 이동 */
-
-.exhibition-pagination:has(#ex-pg4:checked)
-.ex-prev[for="ex-pg3"] {
-    display: inline-flex;
-}
-
-/* ---------- 08. 다음 화살표 표시 ---------- */
-/* 기본적으로 다음 화살표 숨기기 */
-
-.exhibition-pagination .ex-next {
-    display: none;
-}
-
-/* 1페이지: 2페이지로 이동 */
-
-.exhibition-pagination:has(#ex-pg1:checked)
-.ex-next[for="ex-pg2"] {
-    display: inline-flex;
-}
-
-/* 2페이지: 3페이지로 이동 */
-
-.exhibition-pagination:has(#ex-pg2:checked)
-.ex-next[for="ex-pg3"] {
-    display: inline-flex;
-}
-
-/* 3페이지: 4페이지로 이동 */
-
-.exhibition-pagination:has(#ex-pg3:checked)
-.ex-next[for="ex-pg4"] {
-    display: inline-flex;
-}
-
-/* 4페이지: 비활성 다음 화살표 */
-
-.exhibition-pagination:has(#ex-pg4:checked) .ex-next-off {
-    display: inline-flex;
-}
-
-
-/* ---------- 09. 활성 화살표 호버 ---------- */
-/* 마우스를 올리면 파란색 + 확대 */
-
-.exhibition-pagination .ss-page-arrow:not(.is-disabled):hover {
-    color: var(--ss-blue);
-    transform: scale(1.2);
-}
-
-/* ---------- 10. 비활성 화살표 ---------- */
-
-.exhibition-pagination .ss-page-arrow.is-disabled {
-    opacity: .27;
-    cursor: default;
-}
-
-/* 비활성 화살표는 호버 효과 없음 */
-
-.exhibition-pagination .ss-page-arrow.is-disabled:hover {
-    color: var(--ss-muted);
-    transform: none;
+  * {
+    transition: none !important;
+  }
 }
