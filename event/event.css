@@ -1,76 +1,80 @@
-/* 이벤트 페이지에서만 사용하는 섹션 간격 */
-.event-hero {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 78px clamp(22px, 5vw, 80px) 42px;
+/* 이벤트 페이지에만 필요한 배치 및 CSS 전용 필터 기능. 공통 요소의 디자인은 common.css / category.css에서 관리합니다. */
+
+/* 이벤트 인트로 배치 */
+.exhibition-intro {
+    max-width: 1470px;
+    margin: 0 auto;
+    padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
+}
+.exhibition-eyebrow {
+    margin: 0;
+    color: var(--ss-blue);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .12em;
+}
+.exhibition-intro h1 {
+    margin: 20px 0 0;
+    font-size: clamp(58px, 8vw, 126px);
+    line-height: .94;
+    letter-spacing: -.075em;
+    font-weight: 900;
+}
+.intro-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-top: 32px;
+}
+.intro-bottom p { margin: 0; font-size: 13px; line-height: 1.9; }
+.intro-bottom .edition {
+    color: var(--ss-muted);
+    text-align: right;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    white-space: nowrap;
 }
 
-.event-feature {
-  padding: 0 clamp(22px, 5vw, 80px) 90px;
-}
-
-/* 공통 배너의 이미지 영역에 포스터를 맞춘다. */
+/* 추천 배너의 외부 여백과 이미지 배치만 이벤트 페이지에서 지정 */
+.event-feature { padding: 0 clamp(22px, 5vw, 80px) 90px; }
 .event-feature .ss-feature-banner-art img {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
 }
 
-/* 공연 페이지와 동일한 카드 오른쪽 상단 분류 라벨 */
-.ss-catalog .ss-card-region {
-  color: var(--ss-muted);
-  font-size: 10px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-/* 공통 하트 디자인에 CSS 체크 상태를 연결한다. */
-.ss-catalog .ss-heart { position: relative; }
-.ss-catalog .ss-heart input {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-.ss-catalog .ss-heart::before { content: "♡"; }
-.ss-catalog .ss-heart:has(input:checked) {
-  background: var(--ss-yellow);
-  border-color: var(--ss-yellow);
-}
-.ss-catalog .ss-heart:has(input:checked)::before { content: "♥"; }
-.ss-catalog .ss-heart:has(input:focus-visible) {
-  outline: 2px solid var(--ss-blue);
-  outline-offset: 3px;
-}
-
-/* 자바스크립트 없이 라디오 버튼으로 카테고리를 선택한다. */
+/* 공통 라디오 필터 스타일을 사용하고, 보이는 카드만 전환 */
 .ss-catalog-controls:has(#filter-festival:checked) .ss-catalog-card:not([data-kind="축제"]),
 .ss-catalog-controls:has(#filter-flea:checked) .ss-catalog-card:not([data-kind="플리마켓"]),
 .ss-catalog-controls:has(#filter-film:checked) .ss-catalog-card:not([data-kind="영화"]),
-.ss-catalog-controls:has(#filter-talk:checked) .ss-catalog-card:not([data-kind="강연·토크"]) {
-  display: none;
-}
+.ss-catalog-controls:has(#filter-talk:checked) .ss-catalog-card:not([data-kind="강연·토크"]) { display: none; }
 
-@media (max-width: 760px) {
-  .event-hero { padding-top: 55px; padding-bottom: 32px; }
-  .event-feature { padding-bottom: 60px; }
-}
+/* 선택한 카테고리에 맞는 결과 문구만 표시 */
+.ss-catalog .event-result { display: none; }
+.ss-catalog .ss-catalog-controls:has(#filter-all:checked) .event-result--all,
+.ss-catalog .ss-catalog-controls:has(#filter-festival:checked) .event-result--festival,
+.ss-catalog .ss-catalog-controls:has(#filter-flea:checked) .event-result--flea,
+.ss-catalog .ss-catalog-controls:has(#filter-film:checked) .event-result--film,
+.ss-catalog .ss-catalog-controls:has(#filter-talk:checked) .event-result--talk { display: inline; }
 
-/* 페이지 번호의 크기와 호버 색상은 공통 category.css에서 가져온다. */
-.ss-catalog .ss-page-numbers .ss-page-radio:checked + label {
-  background: var(--ss-yellow);
-  color: var(--ss-ink);
-}
-.ss-catalog .ss-page-numbers .ss-page-radio:focus-visible + label {
-  outline: 2px solid var(--ss-blue);
-  outline-offset: 3px;
-}
+/* 카드 제목과 지역명이 한 줄에 들어갈 때 줄바꿈하지 않도록 보정 */
+.ss-catalog .ss-card-titleline .ss-card-title { min-width: 0; flex: 1; font-size: clamp(15px, 1.25vw, 18px); }
+.ss-catalog .ss-card-titleline .ss-card-title a { display: block; white-space: nowrap; }
+.ss-catalog .ss-card-region { color: var(--ss-muted); font-size: 10px; font-weight: 700; white-space: nowrap; }
 
-/* 양옆 화살표는 추가 페이지 데이터가 없어 비활성화 상태로 표시한다. */
-.ss-catalog .ss-page-nav .ss-page-arrow { display: inline-flex; }
+/* 페이지네이션: 숫자와 화살표의 크기·색·호버는 category.css를 재사용.
+   공통 CSS에서 화살표는 기본적으로 숨겨지므로 표시만 활성화. */
+.ss-catalog .ss-page-nav .event-static-arrow { display: inline-flex; user-select: none; }
+.ss-catalog .ss-page-numbers .event-current-page:not(:hover) { background: var(--ss-blue); color: var(--ss-white); }
+
+@media (max-width: 670px) {
+    .intro-bottom { flex-direction: column; align-items: flex-start; }
+    .intro-bottom .edition { text-align: left; white-space: normal; }
+    .event-feature { padding-bottom: 60px; }
+    .ss-catalog .ss-card-titleline .ss-card-title a { white-space: normal; }
+}
