@@ -6,25 +6,14 @@ html {scroll-behavior: smooth;}
 
 /* 페이지에서 쓰는 이름 변경 -> common.css에서 가져옴. */
 :root {
-  --white: var(--ss-white);
   --bg: #ECE9E1;
-  --line: var(--ss-line);
-  --mute: var(--ss-muted);
-  --text: #4B525D;
-  --ink: var(--ss-ink);
-  --blue: var(--ss-blue);
-  --yellow: var(--ss-yellow);
   --radius: 12px;
   --header-h: var(--ss-header-height);
-  /* 히어로 + 추천 배너가 하나로 이어지는 배경: 위(top) → 가운데(mid) → 아래(페이지 배경색) */
-  --stage-top: #F8F3EA;
-  --stage-mid: #F1ECE3;
-  --stage-end: var(--ss-paper);
 }
 
 /* 목록 디자인 */
 ul {
-    margin: 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -93,6 +82,14 @@ p {
   order: 4;
 }
 
+/* 카드 오른쪽 위 작은 라벨 (장르/세부 분류) */
+.ss-card-region {
+  color: var(--ss-muted);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .ss-catalog .ss-catalog-status {
   display: block;
   order: 3;
@@ -111,13 +108,9 @@ p {
   content: counter(shown);
 }
 
-/* 페이지 번호는 모양만 있음(넘어가지 않음): 평소에는 1페이지 카드 6장만 보임. 장르를 고르면 해당 공연 전체 */
+/* 페이지 번호는 모양만 있음(넘어가지 않음)
+기본 화면에서는 1페이지 카드 6장만 보임. */
 body:not(:has(.anchor:not(#all):target)) .ss-card:not(.p1) {
-  display: none;
-}
-
-/* 장르/세부 카테고리를 고르면 해당 공연 전체를 보여주고 'ALL' 표시와 페이지 번호는 숨김 */
-body:has(.anchor:not(#all):target) :is(.pager, .hot-label) {
   display: none;
 }
 
@@ -142,7 +135,7 @@ body:has(#history:target) .ss-filter[href="#history"] {
   font-weight: 800;
 }
 
-/* id= hot 부분 */
+/* 결과 목록의 all 표시 */
 .hot-label{
     color: var(--blue);
 }
@@ -248,13 +241,8 @@ body:has(#history:target) .ss-filter[href="#history"] {
     padding-bottom: 90px;
   }
 
-  .ex-tags {
+  .intro-tags {
     display: none;
-  }
-
-  /* 좁은 화면에서는 오른쪽 분야 목록 숨김 */
-  .ex-down {
-    bottom: 24px;
   }
 
   .ss-catalog {
