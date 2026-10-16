@@ -109,11 +109,8 @@ p {
   content: counter(shown);
 }
 
-/* 페이지 번호: 장르를 고르지 않은 평소 상태에서는 선택한 페이지의 카드 6장만 보임 */
-body:has(#pg1:checked):not(:has(.anchor:not(#all):target)) .ss-card:not(.p1),
-body:has(#pg2:checked):not(:has(.anchor:not(#all):target)) .ss-card:not(.p2),
-body:has(#pg3:checked):not(:has(.anchor:not(#all):target)) .ss-card:not(.p3),
-body:has(#pg4:checked):not(:has(.anchor:not(#all):target)) .ss-card:not(.p4) {
+/* 페이지 번호는 모양만 있음(넘어가지 않음): 평소에는 1페이지 카드 6장만 보임. 장르를 고르면 해당 공연 전체 */
+body:not(:has(.anchor:not(#all):target)) .ss-card:not(.p1) {
   display: none;
 }
 
@@ -122,57 +119,25 @@ body:has(.anchor:not(#all):target) :is(.pager, .hot-label) {
   display: none;
 }
 
-/* 장르 필터 (장르 탭과 세부 카테고리 모두) */
-body:has(:is(#concert, #concert-all, #concert-domestic, #concert-global, #concert-festival):target) .ss-card:not([data-genre="concert"]),
-body:has(:is(#musical, #musical-all, #musical-licensed, #musical-creative):target) .ss-card:not([data-genre="musical"]),
-body:has(:is(#play, #play-all, #play-daehakro, #play-etc):target) .ss-card:not([data-genre="play"]),
-body:has(:is(#classic, #classic-all, #classic-classical, #classic-opera, #classic-dance, #classic-gugak):target) .ss-card:not([data-genre="classic"]),
-/* 세부 카테고리 필터 */
-body:has(#concert-domestic:target) .ss-card:not([data-sub="domestic"]),
-body:has(#concert-global:target) .ss-card:not([data-sub="global"]),
-body:has(#concert-festival:target) .ss-card:not([data-sub="festival"]),
-body:has(#musical-licensed:target) .ss-card:not([data-sub="licensed"]),
-body:has(#musical-creative:target) .ss-card:not([data-sub="creative"]),
-body:has(#play-daehakro:target) .ss-card:not([data-sub="daehakro"]),
-body:has(#play-etc:target) .ss-card:not([data-sub="etc"]),
-body:has(#classic-classical:target) .ss-card:not([data-sub="classical"]),
-body:has(#classic-opera:target) .ss-card:not([data-sub="opera"]),
-body:has(#classic-dance:target) .ss-card:not([data-sub="dance"]),
-body:has(#classic-gugak:target) .ss-card:not([data-sub="gugak"]) {
+/* 장르 필터 */
+body:has(#concert:target) .ss-card:not([data-genre="concert"]),
+body:has(#musical:target) .ss-card:not([data-genre="musical"]),
+body:has(#play:target) .ss-card:not([data-genre="play"]),
+body:has(#classic:target) .ss-card:not([data-genre="classic"]) {
   display: none;
 }
 
 /* 현재 선택된 장르 버튼 = 공통(category.css)의 선택 모양(노란색)과 동일 */
 body:not(:has(:target)) .ss-filter[href="#all"],
 body:has(#all:target) .ss-filter[href="#all"],
-body:has(:is(#concert, #concert-all, #concert-domestic, #concert-global, #concert-festival):target) .ss-filter[href="#concert"],
-body:has(:is(#musical, #musical-all, #musical-licensed, #musical-creative):target) .ss-filter[href="#musical"],
-body:has(:is(#play, #play-all, #play-daehakro, #play-etc):target) .ss-filter[href="#play"],
-body:has(:is(#classic, #classic-all, #classic-classical, #classic-opera, #classic-dance, #classic-gugak):target) .ss-filter[href="#classic"] {
+body:has(#concert:target) .ss-filter[href="#concert"],
+body:has(#musical:target) .ss-filter[href="#musical"],
+body:has(#play:target) .ss-filter[href="#play"],
+body:has(#classic:target) .ss-filter[href="#classic"] {
   background: var(--ss-yellow);
   border-color: var(--ss-yellow);
   color: var(--ss-ink);
   font-weight: 800;
-}
-
-/* 세부 카테고리: 장르 버튼에 마우스를 올리면 글자만 가로로 */
-.filter-group {
-  position: relative;
-}
-
-.menu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  z-index: 25;
-  display: flex;
-  gap: 22px;
-  width: max-content;
-  padding: 2px 0 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translate(-50%, -4px);
-  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
 }
 
 .filter-group:hover>.menu,
@@ -196,26 +161,6 @@ body:has(:is(#classic, #classic-all, #classic-classical, #classic-opera, #classi
   color: var(--blue);
 }
 
-/* 현재 선택된 세부 카테고리는 진하게 */
-body:has(#concert-all:target) .menu a[href="#concert-all"],
-body:has(#concert-domestic:target) .menu a[href="#concert-domestic"],
-body:has(#concert-global:target) .menu a[href="#concert-global"],
-body:has(#concert-festival:target) .menu a[href="#concert-festival"],
-body:has(#musical-all:target) .menu a[href="#musical-all"],
-body:has(#musical-licensed:target) .menu a[href="#musical-licensed"],
-body:has(#musical-creative:target) .menu a[href="#musical-creative"],
-body:has(#play-all:target) .menu a[href="#play-all"],
-body:has(#play-daehakro:target) .menu a[href="#play-daehakro"],
-body:has(#play-etc:target) .menu a[href="#play-etc"],
-body:has(#classic-all:target) .menu a[href="#classic-all"],
-body:has(#classic-classical:target) .menu a[href="#classic-classical"],
-body:has(#classic-opera:target) .menu a[href="#classic-opera"],
-body:has(#classic-dance:target) .menu a[href="#classic-dance"],
-body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
-  color: var(--ink);
-  font-weight: 800;
-}
-
 /* 카드 오른쪽 위 작은 라벨 (장르/세부 분류) */
 .ss-card-region {
   color: var(--ss-muted);
@@ -224,26 +169,10 @@ body:has(#classic-gugak:target) .menu a[href="#classic-gugak"] {
   white-space: nowrap;
 }
 
-/* 카드: 플레이스홀더, 제목 링크, 배지 */
+/* 카드: 플레이스홀더, 제목 링크 */
 .ss-card-title a:hover,
 .ss-card-title a:focus-visible {
   color: var(--blue);
-}
-
-.badge {
-  position: absolute;
-  z-index: 1;
-  left: 10px;
-  bottom: 10px;
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: var(--ss-yellow);
-  border-color: var(--ss-yellow);
-  color: var(--ss-ink);
-  font-weight: 800;
 }
 
 /* 기타 */
