@@ -4,7 +4,7 @@
    이 파일에는 이 페이지만의 디자인만 있습니다.
    ===================================================== */
 
-/* ---------- 1. 이 페이지에서 쓰는 이름 → common.css 변수에 연결 ---------- */
+/* ---------- 이 페이지에서 쓰는 이름 → common.css 변수에 연결 ---------- */
 :root {
   --white:  var(--ss-white);
   --bg:     #ECE9E1;               /* 띠 영역(랭킹, 푸터 위) 배경: 페이지 배경보다 한 단계 진한 아이보리 */
@@ -18,22 +18,14 @@
   --header-h: var(--ss-header-height);
 }
 
-/* ---------- 2. 기본 ---------- */
+/* ---------- 기본 ---------- */
 ul, ol { margin: 0; padding: 0; list-style: none; }
 h1, h2, h3, p { margin: 0; }
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: 12px; top: -80px; z-index: 200; padding: .6rem 1rem; border-radius: 8px; background: var(--ink); color: var(--white); }
 .skip:focus { top: 12px; }
 
-/* ---------- 3. 푸터 (메인 페이지와 같은 디자인) ---------- */
-footer { display: flex; gap: 20px; justify-content: space-between; align-items: center; padding: 25px 5%; margin-top: 96px; background: var(--ss-yellow); }
-footer strong { font-size: 28px; letter-spacing: -.09em; }
-footer strong span { color: var(--ss-blue); }
-footer p, footer small { font-size: 11px; line-height: 1.6; }
-@media (max-width: 800px) { footer { flex-direction: column; align-items: flex-start; } }
-
-/* ---------- 4. 첫 화면: 제목 + 질문 입력창 ---------- */
+/* ---------- 첫 화면: 제목 + 질문 입력창 ---------- */
 /* 상단 배경: 새벽빛 그라데이션 + 서울 스카이라인 (skyline.svg: 북한산 능선, 남산타워, 한강, 도시 야경) */
 .intro {
   position: relative; overflow: hidden; padding: 80px 24px 130px; text-align: center;
@@ -89,7 +81,7 @@ footer p, footer small { font-size: 11px; line-height: 1.6; }
 .ai:has(#b-50:checked) .b-50,
 .ai:has(#b-any:checked) .b-any { display: inline; }
 
-/* ---------- 5. 선택 칩 (누구와, 날씨, 시간대, 실내외, 분위기, 장르, 예산) ---------- */
+/* ---------- 선택 칩 (누구와, 날씨, 시간대, 실내외, 분위기, 장르, 예산) ---------- */
 .options { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 .group { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .group:first-child { border-top: 1px solid var(--line); }
@@ -106,7 +98,7 @@ footer p, footer small { font-size: 11px; line-height: 1.6; }
 .chip input:focus-visible + label { outline: 3px solid var(--ink); outline-offset: 3px; }
 .chip input:checked + label { background: var(--ink); border-color: var(--ink); color: var(--white); }
 
-/* ---------- 6. AI 추천 결과 ---------- */
+/* ---------- AI 추천 결과 ---------- */
 .results { max-width: 1100px; margin: 0 auto; padding: 64px 24px 24px; }
 .result { display: none; position: relative; min-height: 420px; }
 .ai:has(#who-solo:checked) .r-solo,
@@ -151,7 +143,7 @@ footer p, footer small { font-size: 11px; line-height: 1.6; }
 .actions a:first-child { border-color: var(--ink); background: var(--ink); color: var(--white); }
 .actions a:first-child:hover { background: var(--white); color: var(--ink); }
 
-/* ---------- 7. 더 찾아보기 ---------- */
+/* ---------- 더 찾아보기 ---------- */
 .more { max-width: 1100px; margin: 0 auto; padding: 56px 24px 0; }
 .more h2 { font-size: 1.3rem; font-weight: 800; }
 .more ul { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
@@ -161,7 +153,7 @@ footer p, footer small { font-size: 11px; line-height: 1.6; }
 .more span { display: block; margin-top: 4px; color: var(--mute); font-size: .9rem; }
 
 
-/* ---------- 9. 움직임 (모션 줄이기를 켠 사용자는 제외) ---------- */
+/* ---------- 움직임 (모션 줄이기를 켠 사용자는 제외) ---------- */
 @media (prefers-reduced-motion: no-preference) {
   /* 결과가 바뀔 때: 점 3개가 잠깐 깜빡인 뒤 결과가 나타나고, 일치율 막대가 차오름 */
   .think { display: flex; animation: think-out .2s .9s forwards; }
@@ -181,7 +173,7 @@ footer p, footer small { font-size: 11px; line-height: 1.6; }
   * { transition: none !important; }
 }
 
-/* ---------- 10. 반응형 ---------- */
+/* ---------- 반응형 ---------- */
 @media (max-width: 900px) {
   .picks { grid-template-columns: 1fr; }
   .more ul { grid-template-columns: repeat(2, 1fr); }
@@ -196,7 +188,7 @@ footer p, footer small { font-size: 11px; line-height: 1.6; }
   .poster, .pick:first-child .poster { width: 100%; max-width: 220px; }
 }
 
-/* ---------- 11. 팀 컬러 적용 (파랑 + 노랑 포인트) ---------- */
+/* ---------- 팀 컬러 적용 (파랑 + 노랑 포인트) ---------- */
 .chip label:hover { border-color: var(--blue); color: var(--blue); }
 .chip input:checked + label { background: var(--blue); border-color: var(--blue); color: var(--white); }
 .match .bar i { background: var(--blue); }
@@ -206,3 +198,5 @@ footer p, footer small { font-size: 11px; line-height: 1.6; }
 .actions a:hover, .actions a:focus-visible { border-color: var(--blue); color: var(--blue); }
 .more a:hover, .more a:focus-visible { border-color: var(--blue); }
 .rank { color: var(--blue); }
+
+.ss-site-footer { margin-top: 96px; }
