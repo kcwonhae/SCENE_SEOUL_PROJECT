@@ -19,88 +19,58 @@
 <body id="page">
 
     <!-- 01. 공통 헤더 -->
-    <header class="ss-header" id="header">
 
-        <a
-            aria-label="씬 서울 홈"
-            class="ss-header-logo"
-            href="../main/index.html"
-        >
+    <!-- 01. 공통 헤더 -->
+     <header class="ss-header">
+        <a class="ss-header-logo" href="../main/index.html" aria-label="씬 서울 홈">
             SCENE<span class="ss-accent">:</span>SEOUL
         </a>
-
+       
         <nav aria-label="메인 메뉴" class="ss-nav">
             <a href="../main/index.html">HOME</a>
-            <a href="../exhibition/exhibition.html">전시</a>
+            <a class="is-active" aria-current="page" href="../exhibition/exhibition.html">전시</a>
             <a href="../performance/performance.html">공연</a>
             <a href="../popup/popup.html">팝업</a>
             <a href="../event/event.html">이벤트</a>
             <a href="../recommend/recommend.html">추천</a>
-            <a
-                class="is-active"
-                aria-current="page"
-                href="../map/map.html"
-            >지도</a>
+            <a href="../map/map.html">지도</a>
         </nav>
 
         <div class="ss-header-actions">
-
             <span class="ss-header-quick-icons">
-
-                <button
-                    aria-label="검색"
-                    class="ss-icon-button"
-                    title="검색"
-                    type="button"
-                >
+                <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
                     <svg
                         aria-hidden="true"
                         fill="none"
                         stroke="currentColor"
                         stroke-linecap="round"
                         stroke-width="1.8"
-                        viewBox="0 0 24 24"
-                    >
+                        viewBox="0 0 24 24">
+
                         <circle cx="10.8" cy="10.8" r="6.6"></circle>
                         <path d="m16 16 5 5"></path>
                     </svg>
                 </button>
 
-                <span
-                    aria-label="언어: 한국어"
-                    class="ss-language"
-                >
+                <span aria-label="언어: 한국어" class="ss-language">
                     <svg
                         aria-hidden="true"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="1.7"
                         viewBox="0 0 24 24"
-                    >
+                        >
                         <circle cx="12" cy="12" r="9"></circle>
                         <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
                     </svg>
                     <span>KR</span>
                 </span>
-
             </span>
 
-            <button class="header-login" type="button">
-                LOGIN
-            </button>
+            <a class="header-login" href="#login-required">LOGIN</a>
+            <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
 
-            <a
-                class="header-mypage"
-                href="../mypage/mypage.html"
-            >
-                MY PAGE
-            </a>
-
-            <span
-                aria-label="날씨 아이콘"
-                class="ss-weather-icon"
-                title="날씨 아이콘 (표시용)"
-            >
+            <span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
                 <svg
                     aria-hidden="true"
                     fill="none"
@@ -114,11 +84,9 @@
                     <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
                 </svg>
             </span>
-
         </div>
     </header>
-
-
+    
     <!-- 02. 메인 콘텐츠 -->
     <main class="ss-page map-page">
 
@@ -180,7 +148,7 @@
             <!-- 지도와 선택 지역 패널 -->
             <div class="map-layout">
 
-                <!-- 서울 지도 -->
+                <!-- 서울 지도 (마땅한 svg가 없어서 ai를 통해 구현, 경로가 있는 svg를 찾기 어려웠음.)-->
                 <div class="map-region">
 
                     <svg
