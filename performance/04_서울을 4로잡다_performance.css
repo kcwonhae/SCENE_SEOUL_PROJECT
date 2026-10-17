@@ -140,35 +140,6 @@ body:has(#classic:target) .ss-filter[href="#classic"] {
   font-weight: 800;
 }
 
-.filter-group:hover>.menu,
-.filter-group:focus-within>.menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, 0);
-}
-
-.menu a {
-  padding: 2px 0;
-  color: var(--mute);
-  font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
-  transition: color .2s;
-}
-
-.menu a:hover,
-.menu a:focus-visible {
-  color: var(--blue);
-}
-
-/* 카드 오른쪽 위 작은 라벨 (장르/세부 분류) */
-.ss-card-region {
-  color: var(--ss-muted);
-  font-size: 10px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
 /* 카드: 플레이스홀더, 제목 링크 */
 .ss-card-title a:hover,
 .ss-card-title a:focus-visible {
@@ -201,6 +172,11 @@ body:has(#classic:target) .ss-filter[href="#classic"] {
 .pager:has(#pg3:checked) .pg-next[for="pg4"],
 .pager:has(#pg4:checked) .pg-next-off {
   display: inline-flex;
+}
+
+.pager .pg-num.is-current {
+  background: var(--blue);
+  color: #fff;
 }
 
 /* ---------- 히어로 + 추천 배너 공통 배경 ---------- */
@@ -280,42 +256,13 @@ body:has(#classic:target) .ss-filter[href="#classic"] {
     padding-bottom: 90px;
   }
 
+  /* 좁은 화면에서는 오른쪽 분야 목록 숨김 */
   .perf-tags {
     display: none;
   }
 
-  /* 좁은 화면에서는 오른쪽 분야 목록 숨김 */
-  .perf-down {
-    bottom: 24px;
-  }
-
   .ss-catalog {
     padding-top: 12px;
-  }
-
-  .menu {
-    display: none;
-  }
-
-  /* 터치 화면: 장르 버튼을 누르면 해당 장르 전체가 보임 */
-
-  .rk-row {
-    flex-direction: column;
-    height: auto;
-    align-items: stretch;
-  }
-
-  .rk-row .rk-card,
-  .rk-row:not(:has(.rk-card:hover, .rk-card:focus-visible)) .rk-card:first-child {
-    height: 150px;
-    flex: none;
-    opacity: 1;
-    filter: none;
-    box-shadow: 0 10px 24px rgba(21, 27, 39, .10);
-  }
-
-  .rk-head span {
-    display: none;
   }
 }
 
@@ -342,9 +289,5 @@ body:has(#classic:target) .ss-filter[href="#classic"] {
 
   * {
     transition: none !important;
-  }
-
-  .rk-card {
-    transition: none;
   }
 }
