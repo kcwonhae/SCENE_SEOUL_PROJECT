@@ -1,31 +1,17 @@
-/*
- * SCENE:SEOUL — 이벤트 페이지 전용 스타일
- * 공통 헤더·푸터·기본 색상은 css 폴더의 공통 스타일에서 관리합니다.
- * 이 파일은 페이지 구성, 반응형 배치, 호버·키보드 포커스 동작만 정의합니다.
- * 같은 선택자의 중복 선언은 합치되, @media 내부 스타일은 해당 조건 안에 유지합니다.
- */
+/* =====================================================
+   SCENE:SEOUL - 이벤트 페이지
+   공통 디자인(폰트, 색 변수, 상단 헤더)은 ../css/common.css 에서 가져옵니다.
+   이 파일에는 이벤트 페이지에만 필요한 추가 스타일을 정의합니다.
+   ===================================================== */
 
-/* 페이지 전용 색상과 크기 변수: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 공통 CSS의 색상 변수를 이벤트 페이지의 짧은 변수명으로 참조한다. */
 :root {
   --white: var(--ss-white);
-  --bg: #ECE9E1;
-  --line: var(--ss-line);
-  --mute: var(--ss-muted);
-  --text: #4B525D;
   --ink: var(--ss-ink);
   --blue: var(--ss-blue);
-  --yellow: var(--ss-yellow);
-  --radius: 12px;
-  --header-h: var(--ss-header-height);
-  --stage-top: #F8F3EA;
-  --stage-mid: #F1ECE3;
-  --stage-end: var(--ss-paper);
 }
 
-
-/* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 목록과 제목의 브라우저 기본 여백 및 목록 기호를 제거한다. */
 ul,
 ol {
   margin: 0;
@@ -39,9 +25,6 @@ h3,
 p {
   margin: 0;
 }
-
-
-/* 상단 메뉴와 키보드 접근성: 관련 요소의 배치와 상태를 설정합니다. */
 
 :focus-visible {
   outline: 3px solid var(--blue);
@@ -63,27 +46,25 @@ p {
   top: 12px;
 }
 
-
-/* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 본문 영역의 기본 글자 크기를 14px로 지정한다. */
 .ss-page {
   font-size: 14px;
 }
 
+/* URL 해시 이동에 사용하는 앵커를 화면에서 숨기고 높이를 0으로 지정한다. */
 .anchor {
   display: block;
   height: 0;
   visibility: hidden;
 }
 
-
-/* 카테고리 필터·이벤트 카드·페이지 이동: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 카테고리 영역의 결과 카운터를 초기화하고 위쪽 여백을 지정한다. */
 .ss-catalog {
   counter-reset: shown;
   padding-top: 24px;
 }
 
+/* 공통 .ss-catalog-controls 안에서 순서(order)로 배치 */
 .ss-catalog-controls {
   display: flex;
   flex-direction: column;
@@ -108,28 +89,26 @@ p {
   order: 5;
 }
 
+/* 보이는 카드 수 세기: 숨겨진(display:none) 카드는 세지 않음 */
 .ss-card {
   counter-increment: shown;
 }
-
-
-/* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
 
 .count::before {
   content: counter(shown);
 }
 
-
-/* 카테고리 필터·이벤트 카드·페이지 이동: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 기본 상태에서는 첫 번째 페이지(p1)의 카드 6개만 표시한다. */
 body:not(:has(.anchor:not(#all):target)) .ss-card:not(.p1) {
   display: none;
 }
 
+/* 카테고리 선택 시 페이지 번호와 ALL 문구를 숨기고 해당 카테고리의 카드를 표시한다. */
 body:has(.anchor:not(#all):target) :is(.pager, .hot-label) {
   display: none;
 }
 
+/* 선택한 카테고리의 data-genre 값과 일치하지 않는 카드를 숨긴다. */
 body:has(#festival:target) .ss-card:not([data-genre="festival"]),
 body:has(#flea:target) .ss-card:not([data-genre="flea"]),
 body:has(#film:target) .ss-card:not([data-genre="film"]),
@@ -137,6 +116,7 @@ body:has(#talk:target) .ss-card:not([data-genre="talk"]) {
   display: none;
 }
 
+/* 현재 선택된 카테고리 버튼의 배경과 테두리를 노란색으로 표시한다. */
 body:not(:has(:target)) .ss-filter[href="#all"],
 body:has(#all:target) .ss-filter[href="#all"],
 body:has(#festival:target) .ss-filter[href="#festival"],
@@ -149,36 +129,7 @@ body:has(#talk:target) .ss-filter[href="#talk"] {
   font-weight: 800;
 }
 
-.filter-group:hover>.menu,
-.filter-group:focus-within>.menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, 0);
-}
-
-
-/* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
-
-.menu a {
-  padding: 2px 0;
-  color: var(--mute);
-  font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
-  transition: color .2s;
-}
-
-
-/* 상단 메뉴와 키보드 접근성: 관련 요소의 배치와 상태를 설정합니다. */
-
-.menu a:hover,
-.menu a:focus-visible {
-  color: var(--blue);
-}
-
-
-/* 카테고리 필터·이벤트 카드·페이지 이동: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 카드 지역명: 공통 카드 안의 지역 정보를 작고 굵게 표시하고 줄바꿈을 방지한다. */
 .ss-card-region {
   color: var(--ss-muted);
   font-size: 10px;
@@ -186,39 +137,27 @@ body:has(#talk:target) .ss-filter[href="#talk"] {
   white-space: nowrap;
 }
 
-
-/* 상단 메뉴와 키보드 접근성: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 카드 제목 링크: 마우스 호버 또는 키보드 포커스 시 글자색을 파란색으로 변경한다. */
 .ss-card-title a:hover,
 .ss-card-title a:focus-visible {
   color: var(--blue);
 }
 
-
-/* 페이지 제목과 주요 콘텐츠: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 결과 개수 앞의 ALL 텍스트를 파란색으로 표시한다. */
 .hot-label {
   color: var(--blue);
 }
 
-
-/* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 페이지 번호: 선택된 번호의 색상을 지정하고 라디오 버튼 상태에 맞는 화살표를 표시한다. */
 .pg-radio:checked+label {
   background: var(--blue);
   color: #fff;
 }
 
-
-/* 상단 메뉴와 키보드 접근성: 관련 요소의 배치와 상태를 설정합니다. */
-
 .pg-radio:focus-visible+label {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
-
-
-/* 카테고리 필터·이벤트 카드·페이지 이동: 관련 요소의 배치와 상태를 설정합니다. */
 
 .pager:has(#pg1:checked) .pg-prev-off,
 .pager:has(#pg2:checked) .pg-prev[for="pg1"],
@@ -231,18 +170,14 @@ body:has(#talk:target) .ss-filter[href="#talk"] {
   display: inline-flex;
 }
 
-
-/* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 히어로와 추천 배너를 감싸는 영역의 배경색 및 넘침 처리를 지정한다. */
 .stage {
   position: relative;
   overflow: hidden;
   background: var(--ss-paper);
 }
 
-
-/* 페이지 제목과 주요 콘텐츠: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 상단 히어로: 제목과 소개 영역의 최대 너비, 높이 및 여백을 설정한다. */
 .perf-hero {
   --navy: #1b2b5e;
   position: relative;
@@ -252,6 +187,7 @@ body:has(#talk:target) .ss-filter[href="#talk"] {
   padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
 }
 
+/* 히어로 경로 표시: 글자 크기, 굵기, 색상 및 자간을 지정한다. */
 .perf-hero .ss-hero-crumb {
   color: var(--ss-blue);
   font-size: 11px;
@@ -272,14 +208,13 @@ body:has(#talk:target) .ss-filter[href="#talk"] {
   letter-spacing: -.075em;
 }
 
+/* EVENT 제목 뒤의 점을 파란색으로 표시한다. */
 .perf-hero .perf-title-dot {
   color: var(--ss-blue);
   margin-left: .1em;
 }
 
-
-/* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 히어로 오른쪽에 표시하는 이벤트 분야 목록의 위치와 글자 모양을 설정한다. */
 .perf-tags {
   position: absolute;
   z-index: 2;
@@ -296,85 +231,38 @@ body:has(#talk:target) .ss-filter[href="#talk"] {
   color: var(--navy);
 }
 
+/* 등장 애니메이션은 HTML의 .ss-entrance 클래스와 공통 CSS를 사용한다. */
 
-/* (max-width: 670px): 화면 너비 또는 브라우저 기능에 맞춰 레이아웃을 조정합니다. */
 @media (max-width: 670px) {
-  /* 페이지 제목과 주요 콘텐츠: 관련 요소의 배치와 상태를 설정합니다. */
-
   .perf-hero .ss-hero-title {
     font-size: clamp(34px, 11.5vw, 80px);
     letter-spacing: -.07em;
   }
 }
 
-
-/* (max-width: 760px): 화면 너비 또는 브라우저 기능에 맞춰 레이아웃을 조정합니다. */
+/* 화면 너비 760px 이하: 히어로 높이와 카탈로그 여백을 조정하고 분야 목록을 숨긴다. */
 @media (max-width: 760px) {
-  /* 페이지 제목과 주요 콘텐츠: 관련 요소의 배치와 상태를 설정합니다. */
-
   .perf-hero {
     min-height: 0;
     padding-bottom: 90px;
   }
 
-
-  /* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
-
+  /* 좁은 화면에서 오른쪽 이벤트 분야 목록을 숨긴다. */
   .perf-tags {
     display: none;
   }
 
-  .perf-down {
-    bottom: 24px;
-  }
-
-
-  /* 카테고리 필터·이벤트 카드·페이지 이동: 관련 요소의 배치와 상태를 설정합니다. */
-
   .ss-catalog {
     padding-top: 12px;
   }
-
-
-  /* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
-
-  .menu {
-    display: none;
-  }
-
-  .rk-row {
-    flex-direction: column;
-    height: auto;
-    align-items: stretch;
-  }
-
-
-  /* 상단 메뉴와 키보드 접근성: 관련 요소의 배치와 상태를 설정합니다. */
-
-  .rk-row .rk-card,
-    .rk-row:not(:has(.rk-card:hover, .rk-card:focus-visible)) .rk-card:first-child {
-    height: 150px;
-    flex: none;
-    opacity: 1;
-    filter: none;
-    box-shadow: 0 10px 24px rgba(21, 27, 39, .10);
-  }
-
-
-  /* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
-
-  .rk-head span {
-    display: none;
-  }
 }
 
-
-/* 페이지 제목과 주요 콘텐츠: 관련 요소의 배치와 상태를 설정합니다. */
-
+/* 추천 배너: 공통 배너 디자인을 유지하며 바깥 영역의 안쪽 여백을 지정한다. */
 .perf-feature {
   padding: 8px clamp(22px, 5vw, 80px) 64px;
 }
 
+/* 배너 이미지를 영역 전체에 채우고 원본 비율을 유지하며 넘치는 부분을 자른다. */
 .perf-feature .ss-feature-banner-art img {
   position: absolute;
   inset: 0;
@@ -384,23 +272,13 @@ body:has(#talk:target) .ss-filter[href="#talk"] {
   object-fit: cover;
 }
 
-
-/* (prefers-reduced-motion: reduce): 화면 너비 또는 브라우저 기능에 맞춰 레이아웃을 조정합니다. */
+/* 움직임 감소 설정: 부드러운 스크롤과 전환 애니메이션을 비활성화한다. */
 @media (prefers-reduced-motion: reduce) {
-  /* 레이아웃 및 공통 요소의 페이지별 조정: 관련 요소의 배치와 상태를 설정합니다. */
-
   html {
     scroll-behavior: auto;
   }
 
   * {
     transition: none !important;
-  }
-
-
-  /* 카테고리 필터·이벤트 카드·페이지 이동: 관련 요소의 배치와 상태를 설정합니다. */
-
-  .rk-card {
-    transition: none;
   }
 }
