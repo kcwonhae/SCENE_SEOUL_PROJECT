@@ -1,708 +1,696 @@
 <!DOCTYPE html>
 
 <html lang="ko">
-    <head>
-        <meta charset="utf-8"/>
-        <meta content="김채원" name="author"/>
-        <meta content="width=device-width, initial-scale=1" name="viewport"/>
-        <meta content="#f6f4ef" name="theme-color"/>
-        <title>POP-UP — SCENE.SEOUL</title>
-        <link href="../css/04_서울을 4로잡다_common.css" rel="stylesheet"/>
-        <link href="../css/04_서울을 4로잡다_category.css" rel="stylesheet"/>
-        <link href="04_서울을 4로잡다_popup.css" rel="stylesheet"/>
-    </head>
-    <body id="top">
-
-        <!-- 01 / 상단 공통 메뉴바 -->
-        <header class="ss-header">
-            <a class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html">
+<head>
+<meta charset="utf-8"/>
+<meta content="김채원" name="author"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#f6f4ef" name="theme-color"/>
+<title>POP-UP — SCENE.SEOUL</title>
+<link href="../css/04_서울을 4로잡다_common.css" rel="stylesheet"/>
+<link href="../css/04_서울을 4로잡다_category.css" rel="stylesheet"/>
+<link href="04_서울을 4로잡다_popup.css" rel="stylesheet"/>
+</head>
+<body id="top">
+<!-- 01 / 상단 공통 메뉴바 -->
+<header class="ss-header">
+<a class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html">
                 SCENE<b class="ss-accent">:</b>SEOUL
             </a>
-            <nav aria-label="주요 메뉴" class="ss-nav">
-                <a href="../main/04_서울을 4로잡다_index.html">HOME</a>
-                <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
-                <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
-                <a aria-current="page" class="is-active" href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
-                <a href="../event/04_서울을 4로잡다_event.html">이벤트</a>
-                <a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
-                <a href="../map/04_서울을 4로잡다_map.html">지도</a>
-            </nav>
-            <div class="ss-header-actions">
-                <span class="ss-header-quick-icons">
-                    <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
-                        <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24">
-                            <circle cx="10.8" cy="10.8" r="6.6"></circle>
-                            <path d="m16 16 5 5"></path>
-                        </svg>
-                    </button>
-                    <span aria-label="언어: 한국어" class="ss-language">
-                        <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24">
-                            <circle cx="12" cy="12" r="9"></circle>
-                            <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
-                        </svg>
-                        <span>KR</span>
-                    </span>
-                </span>
-                <a class="header-login" href="#login-required">LOGIN</a>
-                <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
-                <span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
-                    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewbox="0 0 24 24">
-                        <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
-                        <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
-                    </svg>
-                </span>
-            </div>
-        </header>
-
-        <!-- 02 / 팝업 페이지 메인 시작 -->
-        <main class="ss-page">
-            <div class="stage popup-performance-stage">
-
-                <!-- 03 / 대형 Pop-up 제목과 짧은 소개 문구 -->
-                <section aria-labelledby="popup-hero-title" class="perf-hero">
-                    <nav aria-label="현재 위치" class="ss-hero-crumb ss-entrance"><a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a><span aria-hidden="true"> / </span><span aria-current="page">POP-UP</span></nav>
-                    <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="popup-hero-title">Pop-up<span class="perf-title-dot">.</span></h1>
-                    <div class="perf-hero-bottom"><p class="ss-editorial-hero-description ss-entrance ss-entrance--delay-2">잠깐 열렸다 사라지기에 더 특별한 공간.<br/>지금 서울에서 만날 수 있는 팝업의 순간을 발견하세요.</p>
-                        <ul aria-hidden="true" class="perf-tags ss-entrance ss-entrance--delay-3"><li>FASHION</li><li>ART</li><li>LIFESTYLE</li><li>GOODS &amp; MARKET</li></ul></div>
-                </section>
-
-                <!-- 04 / EDITOR'S PICK 배너 -->
-                <section aria-label="이번 주 추천 팝업" class="perf-feature"><div class="ss-feature-banner ss-feature-banner--editorial">
-                        <div class="ss-feature-banner-art"><img alt="따뜻한 우드톤의 라이프스타일 팝업 공간" src="../images/popup.01.jpg"/></div>
-                        <div class="ss-feature-banner-copy"><span class="ss-feature-banner-index">EDITOR'S PICK / POP-UP</span><span class="ss-feature-banner-kicker">라이프스타일 · 공간</span>
-                            <h2 class="ss-feature-banner-title">일상 속 작은 발견</h2>
-                            <p class="ss-feature-banner-description">취향이 머무는 공간, 서울의 라이프스타일 팝업.<br/>새로운 브랜드와 특별한 순간을 만나보세요.</p>
-                            <div class="ss-feature-banner-facts"><span>2026.10.15 - 2026.11.03</span><span>마포구 서교동</span><span>POP-UP</span></div>
-                            <a class="ss-feature-banner-link" href="#discover">팝업 살펴보기 <span aria-hidden="true">↗</span></a>
-                        </div></div></section></div>
-
-            <!-- 05 / ALL POP-UPS: 카테고리/검색 UI/24개 카드/페이지 이동 -->
-            <section aria-labelledby="popup-catalog-title" class="discover ss-catalog popup-catalog" id="discover">
-                <div class="pop-v3-catalog-head ss-category-heading">
-                    <span class="pop-v3-section-eyebrow ss-category-eyebrow">SCENE:SEOUL / POP-UP</span>
-                    <h2 class="ss-category-title" id="popup-catalog-title">ALL <em class="ss-category-title-accent">POP-UPS.</em></h2>
-                    <p class="ss-category-description">분야별로 서울의 팝업을 자유롭게 둘러보세요.</p>
-                </div>
-
-                <!-- 필터 선택 라디오와 4페이지 앵커: CSS :checked 및 :target 사용 -->
-                <div class="pop-catalog-controls ss-catalog-controls">
-                    <!-- CSS로 동작하는 라디오 필터: 전시(exhibition) 페이지와 같은 구조 -->
-                    <!-- 페이지 번호도 CSS만으로 동작. 전체 필터 시 6개씩 4페이지. -->
-                    <!-- 페이지 번호·화살표 선택 시 필터 상단으로 이동 (JavaScript 없음) -->
-                    <span aria-hidden="true" class="pop-page-anchor ss-pagination-anchor" id="pop-pg1"></span>
-                    <span aria-hidden="true" class="pop-page-anchor ss-pagination-anchor" id="pop-pg2"></span>
-                    <span aria-hidden="true" class="pop-page-anchor ss-pagination-anchor" id="pop-pg3"></span>
-                    <span aria-hidden="true" class="pop-page-anchor ss-pagination-anchor" id="pop-pg4"></span>
-                    <div class="ss-toolbar">
-                        <div aria-label="팝업 유형 필터" class="ss-filters" role="group">
-                            <!-- 필터 기본값(전체 선택). 라디오 버튼을 바꿀 때 CSS만으로 목록 변경 -->
-                            <input checked="" class="pop-hidden-radio ss-filter-input" id="f-all" name="popup-filter" type="radio"/><label class="ss-filter" for="f-all">전체</label>
-                            <input class="pop-hidden-radio ss-filter-input" id="f-fashion" name="popup-filter" type="radio"/><label class="ss-filter" for="f-fashion">패션</label>
-                            <input class="pop-hidden-radio ss-filter-input" id="f-art" name="popup-filter" type="radio"/><label class="ss-filter" for="f-art">아트</label>
-                            <input class="pop-hidden-radio ss-filter-input" id="f-life" name="popup-filter" type="radio"/><label class="ss-filter" for="f-life">라이프스타일</label>
-                            <input class="pop-hidden-radio ss-filter-input" id="f-goods" name="popup-filter" type="radio"/><label class="ss-filter" for="f-goods">굿즈 · 마켓</label>
-                        </div>
-                        <div class="ss-search" role="search" title="검색 UI 시안: 실제 검색은 JavaScript 또는 서버 연동 후 이용 가능">
-                            <input aria-describedby="popup-search-note" autocomplete="off" id="popup-catalog-search" placeholder="팝업명, 장소 검색" type="search"/>
-                            <svg aria-hidden="true" class="ss-search-icon" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 5 5"></path></svg>
-                        </div>
-                    </div>
-                    <div class="ss-catalog-status pop-catalog-status">
-                        <span class="pop-all-status">ALL · 24 RESULTS <span class="pop-status-sub">(페이지당 6개)</span></span>
-                        <span class="pop-filter-status">선택한 분야의 팝업을 보고 있어요</span>
-                        <span class="pop-status-note" id="popup-search-note">※ 포스터와 행사 정보는 기획용 예시 · 검색은 UI 시안</span>
-                    </div>
-
-                    <!-- 팝업 카드 24개: 각 카드의 관심 하트는 checkbox -->
-                    <!-- 카드 목록: pop-page-1~4 그룹, checkbox가 관심 하트를 제어 -->
-                    <div class="ss-card-grid pop-catalog-grid ss-catalog-grid" id="cards">
-                        <article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="1" data-kind="art">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 25%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">성수</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">BLUE PLAYGROUND</h3>
-                                    <label aria-label="BLUE PLAYGROUND 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="BLUE PLAYGROUND 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">다채로운 색채와 예술적 상상력이 만나는 체험형 아트 공간</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>성동구 성수동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.10.12 — 10.30</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="2" data-kind="fashion">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 47%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">AFTER HOURS CLUB</h3>
-                                    <label aria-label="AFTER HOURS CLUB 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="AFTER HOURS CLUB 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">일상에서 벗어나 새로운 스타일을 발견하는 패션 팝업</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>용산구 한남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.10.15 — 11.03</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="3" data-kind="life">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 69%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">홍대</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">SOFT OBJECTS</h3>
-                                    <label aria-label="SOFT OBJECTS 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="SOFT OBJECTS 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">부드러운 감성과 감각적인 오브제로 채운 라이프스타일 공간</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 연남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.10.17 — 11.08</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="4" data-kind="art">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 25%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">성수</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">NEW FREQUENCY</h3>
-                                    <label aria-label="NEW FREQUENCY 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="NEW FREQUENCY 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">소리와 시각적 표현이 어우러지는 새로운 감각의 아트 팝업</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>성동구 성수동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.10.20 — 11.12</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="5" data-kind="goods">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 47%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">홍대</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">SUNDAY COLLECTIVE</h3>
-                                    <label aria-label="SUNDAY COLLECTIVE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="SUNDAY COLLECTIVE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">취향이 담긴 소품과 특별한 굿즈를 발견하는 주말 마켓</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 서교동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.10.23 — 11.15</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="6" data-kind="fashion">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 69%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">OFFLINE ARCHIVE</h3>
-                                    <label aria-label="OFFLINE ARCHIVE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="OFFLINE ARCHIVE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">온라인을 벗어나 직접 보고 경험하는 감각적인 패션 공간</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>용산구 한남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.10.25 — 11.18</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="7" data-kind="art">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 25%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">연남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">CITY EDITION 2026</h3>
-                                    <label aria-label="CITY EDITION 2026 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="CITY EDITION 2026 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">도시의 다양한 장면을 새로운 시선으로 재해석한 아트 공간</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 연남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.03 — 11.20</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="8" data-kind="life">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 47%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">성수</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">OBJECT LAB</h3>
-                                    <label aria-label="OBJECT LAB 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="OBJECT LAB 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">일상 속 사물의 새로운 쓰임과 디자인을 발견하는 공간</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>성동구 성수동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.06 — 11.30</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="9" data-kind="art">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 69%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">한남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">PAPER &amp; LIGHT</h3>
-                                    <label aria-label="PAPER &amp; LIGHT 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="PAPER &amp; LIGHT 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">종이와 빛이 만들어 내는 섬세한 예술적 순간</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>용산구 한남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.02 — 11.21</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="10" data-kind="life">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 25%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">성수</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">HIDDEN GARDEN</h3>
-                                    <label aria-label="HIDDEN GARDEN 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="HIDDEN GARDEN 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">도심 속 작은 정원에서 만나는 자연과 휴식의 감성</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>성동구 성수동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.04 — 11.24</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="11" data-kind="goods">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 47%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">홍대</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">STUDIO WEEKEND</h3>
-                                    <label aria-label="STUDIO WEEKEND 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="STUDIO WEEKEND 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">개성 있는 창작자의 작품과 굿즈를 만나는 주말 공간</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 서교동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.06 — 11.29</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="12" data-kind="art">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 69%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">연남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">CITY OF COLOR</h3>
-                                    <label aria-label="CITY OF COLOR 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="CITY OF COLOR 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">색으로 표현한 도시의 풍경과 감정을 경험하는 공간</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 연남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.08 — 12.01</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="13" data-kind="goods">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 25%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">성수</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">SLOW MARKET</h3>
-                                    <label aria-label="SLOW MARKET 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="SLOW MARKET 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">천천히 둘러보며 나만의 취향을 발견하는 감성 마켓</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>성동구 성수동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.10 — 11.25</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="14" data-kind="fashion">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 47%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">ATELIER 24</h3>
-                                    <label aria-label="ATELIER 24 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="ATELIER 24 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">디자이너의 감각과 새로운 스타일을 만나는 패션 아틀리에</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>용산구 한남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.12 — 12.02</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="15" data-kind="life">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 69%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">홍대</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">SPACE FOR YOU</h3>
-                                    <label aria-label="SPACE FOR YOU 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="SPACE FOR YOU 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">나만의 공간을 특별하게 만드는 인테리어와 소품의 만남</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 서교동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.13 — 12.04</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="16" data-kind="art">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 25%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">연남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">COLOR ARCHIVE</h3>
-                                    <label aria-label="COLOR ARCHIVE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="COLOR ARCHIVE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">다양한 색채와 시각적 기록을 탐색하는 아트 아카이브</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 연남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.14 — 12.06</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="17" data-kind="life">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 47%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">연남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">SUNDAY OBJECT</h3>
-                                    <label aria-label="SUNDAY OBJECT 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="SUNDAY OBJECT 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">평범한 일상을 특별하게 만드는 감각적인 오브제 컬렉션</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 연남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.16 — 12.06</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="18" data-kind="goods">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 69%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">성수</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">FUTURE GOODS</h3>
-                                    <label aria-label="FUTURE GOODS 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="FUTURE GOODS 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">새로운 아이디어와 디자인이 담긴 미래형 굿즈 마켓</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>성동구 성수동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.17 — 12.10</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="19" data-kind="fashion">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 25%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">THE SMALL EDITION</h3>
-                                    <label aria-label="THE SMALL EDITION 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="THE SMALL EDITION 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">작지만 특별한 디테일이 돋보이는 패션 컬렉션</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>용산구 한남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.18 — 12.12</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="20" data-kind="art">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 47%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">홍대</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">WEEKEND FRAME</h3>
-                                    <label aria-label="WEEKEND FRAME 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="WEEKEND FRAME 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">일상의 순간을 새로운 시각으로 담아내는 아트 공간</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 서교동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.20 — 12.14</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="21" data-kind="life">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 69%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">홍대</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">SOFT OPENING</h3>
-                                    <label aria-label="SOFT OPENING 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="SOFT OPENING 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">따뜻한 감성과 편안한 분위기로 채운 라이프스타일 팝업</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 합정동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.21 — 12.14</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="22" data-kind="art">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 25%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">한남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">ROOM 2026</h3>
-                                    <label aria-label="ROOM 2026 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="ROOM 2026 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">하나의 공간에서 펼쳐지는 새로운 예술적 경험</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>용산구 한남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.23 — 12.16</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="23" data-kind="fashion">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 47%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">성수</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">POP PARADE</h3>
-                                    <label aria-label="POP PARADE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="POP PARADE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">개성 넘치는 스타일과 트렌드를 한자리에서 만나는 공간</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>성동구 성수동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.25 — 12.18</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                        <article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="24" data-kind="goods">
-                            <div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 69%;"/></div>
-                            <div class="ss-card-info pop-card-info ss-catalog-card-info">
-                                <div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">연남</span></div>
-                                <div class="pop-card-titleline ss-card-titleline">
-                                    <h3 class="ss-card-title">CITY SELECT SHOP</h3>
-                                    <label aria-label="CITY SELECT SHOP 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
-                                        <input aria-label="CITY SELECT SHOP 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
-                                    </label>
-                                </div>
-                                <p class="pop-card-description ss-card-description">도시의 다양한 취향을 모아 놓은 특별한 셀렉트숍</p>
-                                <div class="ss-card-facts"><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>마포구 연남동</span></span><span class="ss-card-fact"><svg aria-hidden="true" class="ss-card-fact-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><span>2026.11.27 — 12.20</span></span></div>
-                                <div aria-label="팝업 정보 안내" class="pop-card-details pop-card-details-static">POP-UP INFORMATION <span aria-hidden="true">↗</span></div>
-                            </div>
-                        </article>
-                    </div>
-                    <nav aria-label="팝업 목록 페이지" class="pop-pager ss-page-nav">
-                        <span aria-label="이전 페이지" class="pop-page-prev">
-                            <label aria-hidden="true" class="pop-page-arrow pop-arrow-off ss-page-arrow">&lt;</label>
-                            <a aria-label="이전: 1페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg1">&lt;</a>
-                            <a aria-label="이전: 2페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg2">&lt;</a>
-                            <a aria-label="이전: 3페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg3">&lt;</a>
-                        </span>
-                        <div class="pop-page-numbers ss-page-numbers">
-                            <a aria-label="1페이지" href="#pop-pg1">1</a>
-                            <a aria-label="2페이지" href="#pop-pg2">2</a>
-                            <a aria-label="3페이지" href="#pop-pg3">3</a>
-                            <a aria-label="4페이지" href="#pop-pg4">4</a>
-                        </div>
-                        <span aria-label="다음 페이지" class="pop-page-next">
-                            <a aria-label="다음: 2페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg2">&gt;</a>
-                            <a aria-label="다음: 3페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg3">&gt;</a>
-                            <a aria-label="다음: 4페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg4">&gt;</a>
-                            <label aria-hidden="true" class="pop-page-arrow pop-arrow-off ss-page-arrow">&gt;</label>
-                        </span>
-                    </nav>
-                </div>
-            </section>
-            <div class="popup-cover-flow popup-coupon-flow">
-
-                <!-- 06 / SECRET POP-UP: 말랑이 3개, 각 radio의 0~6 단계 -->
-                <section aria-labelledby="squishTitle" class="squish-feature" id="squish-discover">
-                    <div class="squish-feature-inner"><div class="pop-v3-toy-head"><div><span class="pop-v3-section-eyebrow"></span><h2>서울의 <em>숨은 팝업</em>을 발견하다.</h2></div><div class="pop-v3-toy-head-side"><span class="pop-v3-toy-star">✳</span><p>세 가지 말랑이를 깨고 추천 팝업을 발견해 보세요.<br/>찜한 팝업이 있으면 관심 분야를, 없다면 인기 팝업을 추천해요.</p><small>PERSONAL PICKS OR POPULAR PICKS / 2026</small></div></div>
-                        <h2 class="ss-visually-hidden" id="squishTitle">취향에 맞는 팝업 세 곳 발견하기</h2>
-
-                        <!-- CSS-only 상호작용: 여섯 번 누르기 / 결과 공개 / 쿠폰 잠금 해제 -->
-                        <div class="play-and-ticket">
-                            <div class="squish-grid">
-                                <!-- [장난감 1] 분홍 말랑이: radio 0~6 단계, 마지막에 결과 표시 -->
-                                <!-- [장난감 2] 숫자 키패드: 6회 누르기, radio 단계 변화 -->
-                                <article class="squish-item">
-                                    <div aria-hidden="true" class="secret-scene-photo"><img alt="" loading="lazy" src="../images/popup.01.jpg"/></div>
-                                    <span class="squish-no">01 / SECRET PICK</span>
-                                    <p class="squish-hint">
+<nav aria-label="주요 메뉴" class="ss-nav">
+<a href="../main/04_서울을 4로잡다_index.html">HOME</a>
+<a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
+<a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
+<a aria-current="page" class="is-active" href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
+<a href="../event/04_서울을 4로잡다_event.html">이벤트</a>
+<a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
+<a href="../map/04_서울을 4로잡다_map.html">지도</a>
+</nav>
+<div class="ss-header-actions">
+<span class="ss-header-quick-icons">
+<button aria-label="검색" class="ss-icon-button" title="검색" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="10.8" cy="10.8" r="6.6"></circle>
+<path d="m16 16 5 5"></path>
+</svg>
+</button>
+<span aria-label="언어: 한국어" class="ss-language">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
+</svg>
+<span>KR</span>
+</span>
+</span>
+<a class="header-login" href="#login-required">LOGIN</a>
+<a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
+<span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewbox="0 0 24 24">
+<path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
+<path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
+</svg>
+</span>
+</div>
+</header>
+<!-- 02 / 팝업 페이지 메인 시작 -->
+<main class="ss-page">
+<div class="stage popup-performance-stage">
+<!-- 03 / 대형 Pop-up 제목과 짧은 소개 문구 -->
+<section aria-labelledby="popup-hero-title" class="perf-hero">
+<nav aria-label="현재 위치" class="ss-hero-crumb ss-entrance"><a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a><span aria-hidden="true"> / </span><span aria-current="page">POP-UP</span></nav>
+<h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="popup-hero-title">Pop-up<span class="perf-title-dot">.</span></h1>
+<div class="perf-hero-bottom"><p class="ss-editorial-hero-description ss-entrance ss-entrance--delay-2">잠깐 열렸다 사라지기에 더 특별한 공간.<br/>지금 서울에서 만날 수 있는 팝업의 순간을 발견하세요.</p>
+<ul aria-hidden="true" class="perf-tags ss-entrance ss-entrance--delay-3"><li>FASHION</li><li>ART</li><li>LIFESTYLE</li><li>GOODS &amp; MARKET</li></ul></div>
+</section>
+<!-- 04 / EDITOR'S PICK 배너 -->
+<section aria-label="이번 주 추천 팝업" class="perf-feature"><div class="ss-feature-banner ss-feature-banner--editorial">
+<div class="ss-feature-banner-art"><img alt="따뜻한 우드톤의 라이프스타일 팝업 공간" src="../images/popup.01.jpg"/></div>
+<div class="ss-feature-banner-copy"><span class="ss-feature-banner-index">EDITOR'S PICK / POP-UP</span><span class="ss-feature-banner-kicker">라이프스타일 · 공간</span>
+<h2 class="ss-feature-banner-title">일상 속 작은 발견</h2>
+<p class="ss-feature-banner-description">취향이 머무는 공간, 서울의 라이프스타일 팝업.<br/>새로운 브랜드와 특별한 순간을 만나보세요.</p>
+<div class="ss-feature-banner-facts"><span>2026.10.15 - 2026.11.03</span><span>마포구 서교동</span><span>POP-UP</span></div>
+<a class="ss-feature-banner-link" href="#discover">팝업 살펴보기 <span aria-hidden="true">↗</span></a>
+</div></div></section></div>
+<!-- 05 / ALL POP-UPS: 카테고리/검색 UI/24개 카드/페이지 이동 -->
+<section aria-labelledby="popup-catalog-title" class="discover ss-catalog popup-catalog" id="discover">
+<div class="pop-v3-catalog-head ss-category-heading">
+<span class="pop-v3-section-eyebrow ss-category-eyebrow">SCENE:SEOUL / POP-UP</span>
+<h2 class="ss-category-title" id="popup-catalog-title">ALL <em class="ss-category-title-accent">POP-UPS.</em></h2>
+<p class="ss-category-description">분야별로 서울의 팝업을 자유롭게 둘러보세요.</p>
+</div>
+<!-- 필터 선택 라디오와 4페이지 앵커: CSS :checked 및 :target 사용 -->
+<div class="pop-catalog-controls ss-catalog-controls">
+<!-- CSS로 동작하는 라디오 필터: 전시(exhibition) 페이지와 같은 구조 -->
+<!-- 페이지 번호도 CSS만으로 동작. 전체 필터 시 6개씩 4페이지. -->
+<!-- 페이지 번호·화살표 선택 시 필터 상단으로 이동 (JavaScript 없음) -->
+<span aria-hidden="true" class="pop-page-anchor ss-pagination-anchor" id="pop-pg1"></span>
+<span aria-hidden="true" class="pop-page-anchor ss-pagination-anchor" id="pop-pg2"></span>
+<span aria-hidden="true" class="pop-page-anchor ss-pagination-anchor" id="pop-pg3"></span>
+<span aria-hidden="true" class="pop-page-anchor ss-pagination-anchor" id="pop-pg4"></span>
+<div class="ss-toolbar">
+<div aria-label="팝업 유형 필터" class="ss-filters" role="group">
+<!-- 필터 기본값(전체 선택). 라디오 버튼을 바꿀 때 CSS만으로 목록 변경 -->
+<input checked="" class="pop-hidden-radio ss-filter-input" id="f-all" name="popup-filter" type="radio"/><label class="ss-filter" for="f-all">전체</label>
+<input class="pop-hidden-radio ss-filter-input" id="f-fashion" name="popup-filter" type="radio"/><label class="ss-filter" for="f-fashion">패션</label>
+<input class="pop-hidden-radio ss-filter-input" id="f-art" name="popup-filter" type="radio"/><label class="ss-filter" for="f-art">아트</label>
+<input class="pop-hidden-radio ss-filter-input" id="f-life" name="popup-filter" type="radio"/><label class="ss-filter" for="f-life">라이프스타일</label>
+<input class="pop-hidden-radio ss-filter-input" id="f-goods" name="popup-filter" type="radio"/><label class="ss-filter" for="f-goods">굿즈 · 마켓</label>
+</div>
+<div class="ss-search" role="search" title="검색 UI 시안: 실제 검색은 JavaScript 또는 서버 연동 후 이용 가능">
+<input aria-describedby="popup-search-note" autocomplete="off" id="popup-catalog-search" placeholder="팝업명, 장소 검색" type="search"/>
+<svg aria-hidden="true" class="ss-search-icon" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="20"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 5 5"></path></svg>
+</div>
+</div>
+<div class="ss-catalog-status pop-catalog-status">
+<span class="pop-all-status"><span class="pop-status-all-label">ALL</span> · 24 RESULTS <span class="pop-status-sub">(페이지당 6개)</span></span>
+<span class="pop-filter-status">선택한 분야의 팝업을 보고 있어요</span>
+<span class="pop-status-note" id="popup-search-note"></span>
+</div>
+<!-- 팝업 카드 24개: 각 카드의 관심 하트는 checkbox -->
+<!-- 카드 목록: pop-page-1~4 그룹, checkbox가 관심 하트를 제어 -->
+<div class="ss-card-grid pop-catalog-grid ss-catalog-grid" id="cards">
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="1" data-kind="art">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 25%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">BLUE PLAYGROUND</h3>
+<label aria-label="BLUE PLAYGROUND 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="BLUE PLAYGROUND 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성동구 성수동에서 만나볼 수 있는 아트 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.10.12 — 10.30</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="2" data-kind="fashion">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 47%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">AFTER HOURS CLUB</h3>
+<label aria-label="AFTER HOURS CLUB 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="AFTER HOURS CLUB 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">용산구 한남동에서 만나볼 수 있는 패션 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026.10.15 — 11.03</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="3" data-kind="life">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 69%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">SOFT OBJECTS</h3>
+<label aria-label="SOFT OBJECTS 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SOFT OBJECTS 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 연남동에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026.10.17 — 11.08</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="4" data-kind="art">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 25%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">NEW FREQUENCY</h3>
+<label aria-label="NEW FREQUENCY 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="NEW FREQUENCY 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성동구 성수동에서 만나볼 수 있는 아트 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.10.20 — 11.12</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="5" data-kind="goods">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 47%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">SUNDAY COLLECTIVE</h3>
+<label aria-label="SUNDAY COLLECTIVE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SUNDAY COLLECTIVE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 서교동에서 만나볼 수 있는 마켓 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 서교동 · 2026.10.23 — 11.15</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-1 ss-catalog-card" data-demo-id="6" data-kind="fashion">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 69%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">OFFLINE ARCHIVE</h3>
+<label aria-label="OFFLINE ARCHIVE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="OFFLINE ARCHIVE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">용산구 한남동에서 만나볼 수 있는 패션 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026.10.25 — 11.18</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="7" data-kind="art">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 25%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">연남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">CITY EDITION 2026</h3>
+<label aria-label="CITY EDITION 2026 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="CITY EDITION 2026 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 연남동에서 만나볼 수 있는 아트 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026.11.03 — 11.20</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="8" data-kind="life">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 47%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">OBJECT LAB</h3>
+<label aria-label="OBJECT LAB 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="OBJECT LAB 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성동구 성수동에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.11.06 — 11.30</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="9" data-kind="art">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 69%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">PAPER &amp; LIGHT</h3>
+<label aria-label="PAPER &amp; LIGHT 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="PAPER &amp; LIGHT 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">용산구 한남동에서 만나볼 수 있는 아트 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026.11.02 — 11.21</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="10" data-kind="life">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 25%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">HIDDEN GARDEN</h3>
+<label aria-label="HIDDEN GARDEN 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="HIDDEN GARDEN 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성동구 성수동에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.11.04 — 11.24</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="11" data-kind="goods">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 47%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">STUDIO WEEKEND</h3>
+<label aria-label="STUDIO WEEKEND 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="STUDIO WEEKEND 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 서교동에서 만나볼 수 있는 마켓 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 서교동 · 2026.11.06 — 11.29</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-2 ss-catalog-card" data-demo-id="12" data-kind="art">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 69%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">연남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">CITY OF COLOR</h3>
+<label aria-label="CITY OF COLOR 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="CITY OF COLOR 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 연남동에서 만나볼 수 있는 아트 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026.11.08 — 12.01</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="13" data-kind="goods">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 25%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">SLOW MARKET</h3>
+<label aria-label="SLOW MARKET 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SLOW MARKET 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성동구 성수동에서 만나볼 수 있는 마켓 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.11.10 — 11.25</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="14" data-kind="fashion">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 47%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">ATELIER 24</h3>
+<label aria-label="ATELIER 24 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="ATELIER 24 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">용산구 한남동에서 만나볼 수 있는 패션 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026.11.12 — 12.02</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="15" data-kind="life">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 69%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">SPACE FOR YOU</h3>
+<label aria-label="SPACE FOR YOU 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SPACE FOR YOU 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 서교동에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 서교동 · 2026.11.13 — 12.04</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="16" data-kind="art">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 25%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">연남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">COLOR ARCHIVE</h3>
+<label aria-label="COLOR ARCHIVE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="COLOR ARCHIVE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 연남동에서 만나볼 수 있는 아트 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026.11.14 — 12.06</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="17" data-kind="life">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 47%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">연남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">SUNDAY OBJECT</h3>
+<label aria-label="SUNDAY OBJECT 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SUNDAY OBJECT 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 연남동에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026.11.16 — 12.06</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-3 ss-catalog-card" data-demo-id="18" data-kind="goods">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 69%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">FUTURE GOODS</h3>
+<label aria-label="FUTURE GOODS 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="FUTURE GOODS 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성동구 성수동에서 만나볼 수 있는 마켓 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.11.17 — 12.10</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="19" data-kind="fashion">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 25%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">THE SMALL EDITION</h3>
+<label aria-label="THE SMALL EDITION 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="THE SMALL EDITION 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">용산구 한남동에서 만나볼 수 있는 패션 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026.11.18 — 12.12</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="20" data-kind="art">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 47%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">WEEKEND FRAME</h3>
+<label aria-label="WEEKEND FRAME 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="WEEKEND FRAME 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 서교동에서 만나볼 수 있는 아트 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 서교동 · 2026.11.20 — 12.14</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="21" data-kind="life">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 25% 69%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 라이프스타일</span><span class="pop-region">홍대</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">SOFT OPENING</h3>
+<label aria-label="SOFT OPENING 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="SOFT OPENING 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 합정동에서 만나볼 수 있는 라이프스타일 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 합정동 · 2026.11.21 — 12.14</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="22" data-kind="art">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 41% 25%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 아트</span><span class="pop-region">한남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">ROOM 2026</h3>
+<label aria-label="ROOM 2026 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="ROOM 2026 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">용산구 한남동에서 만나볼 수 있는 아트 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">용산구 한남동 · 2026.11.23 — 12.16</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="23" data-kind="fashion">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 57% 47%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 패션</span><span class="pop-region">성수</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">POP PARADE</h3>
+<label aria-label="POP PARADE 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="POP PARADE 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">성동구 성수동에서 만나볼 수 있는 패션 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">성동구 성수동 · 2026.11.25 — 12.18</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+<article class="ss-card pop-catalog-card pop-page-4 ss-catalog-card" data-demo-id="24" data-kind="goods">
+<div aria-label="팝업 공간 참고 사진" class="ss-card-image"><img alt="라이프스타일 팝업 공간 참고 사진" loading="lazy" src="../images/popup.01.jpg" style="object-position: 73% 69%;"/></div>
+<div class="ss-card-info pop-card-info ss-catalog-card-info">
+<div class="pop-card-topline ss-card-topline"><span class="ss-card-category">POP-UP · 굿즈 · 마켓</span><span class="pop-region">연남</span></div>
+<div class="pop-card-titleline ss-card-titleline">
+<h3 class="ss-card-title">CITY SELECT SHOP</h3>
+<label aria-label="CITY SELECT SHOP 관심 팝업에 담기" class="ss-heart ss-heart-toggle">
+<input aria-label="CITY SELECT SHOP 관심 팝업에 담기" type="checkbox"/><span aria-hidden="true"></span>
+</label>
+</div>
+<p class="pop-card-description ss-card-description">마포구 연남동에서 만나볼 수 있는 마켓 팝업 시안입니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-meta">마포구 연남동 · 2026.11.27 — 12.20</p>
+<details class="ss-card-details"><summary>VIEW POP-UP DETAILS <span aria-hidden="true">↗</span></summary></details>
+</div>
+</article>
+</div>
+<nav aria-label="팝업 목록 페이지" class="pop-pager ss-page-nav">
+<span aria-label="이전 페이지" class="pop-page-prev">
+<label aria-hidden="true" class="pop-page-arrow pop-arrow-off ss-page-arrow">&lt;</label>
+<a aria-label="이전: 1페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg1">&lt;</a>
+<a aria-label="이전: 2페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg2">&lt;</a>
+<a aria-label="이전: 3페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg3">&lt;</a>
+</span>
+<div class="pop-page-numbers ss-page-numbers">
+<a aria-label="1페이지" href="#pop-pg1">1</a>
+<a aria-label="2페이지" href="#pop-pg2">2</a>
+<a aria-label="3페이지" href="#pop-pg3">3</a>
+<a aria-label="4페이지" href="#pop-pg4">4</a>
+</div>
+<span aria-label="다음 페이지" class="pop-page-next">
+<a aria-label="다음: 2페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg2">&gt;</a>
+<a aria-label="다음: 3페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg3">&gt;</a>
+<a aria-label="다음: 4페이지" class="pop-page-arrow ss-page-arrow" href="#pop-pg4">&gt;</a>
+<label aria-hidden="true" class="pop-page-arrow pop-arrow-off ss-page-arrow">&gt;</label>
+</span>
+</nav>
+</div>
+</section>
+<div class="popup-cover-flow popup-coupon-flow">
+<!-- 06 / SECRET POP-UP: 말랑이 3개, 각 radio의 0~6 단계 -->
+<section aria-labelledby="squishTitle" class="squish-feature" id="squish-discover">
+<div class="squish-feature-inner"><div class="pop-v3-toy-head"><div><span class="pop-v3-section-eyebrow"></span><h2>서울의 <em>숨은 팝업</em>을 발견하다.</h2></div><div class="pop-v3-toy-head-side"><span class="pop-v3-toy-star">✳</span><p>세 가지 말랑이를 깨고 추천 팝업을 발견해 보세요.<br/>찜한 팝업이 있으면 관심 분야를, 없다면 인기 팝업을 추천해요.</p><small>PERSONAL PICKS OR POPULAR PICKS / 2026</small></div></div>
+<h2 class="ss-visually-hidden" id="squishTitle">취향에 맞는 팝업 세 곳 발견하기</h2>
+<!-- CSS-only 상호작용: 여섯 번 누르기 / 결과 공개 / 쿠폰 잠금 해제 -->
+<div class="play-and-ticket">
+<div class="squish-grid">
+<!-- [장난감 1] 분홍 말랑이: radio 0~6 단계, 마지막에 결과 표시 -->
+<!-- [장난감 2] 숫자 키패드: 6회 누르기, radio 단계 변화 -->
+<article class="squish-item">
+<div aria-hidden="true" class="secret-scene-photo"><img alt="" loading="lazy" src="../images/popup.01.jpg"/></div>
+<span class="squish-no">01 / SECRET PICK</span>
+<p class="squish-hint">
                                         말랑이를 6번 눌러 팝업 발견
                                         <span class="css-counter">0 / 6</span>
-                                    </p>
-                                    <input checked="checked" class="css-steps" id="toy0-0" name="toy0-step" type="radio"/>
-                                    <label aria-label="1번째 누르기" class="css-step-label" for="toy0-1"></label>
-                                    <input class="css-steps" id="toy0-1" name="toy0-step" type="radio"/>
-                                    <label aria-label="2번째 누르기" class="css-step-label" for="toy0-2"></label>
-                                    <input class="css-steps" id="toy0-2" name="toy0-step" type="radio"/>
-                                    <label aria-label="3번째 누르기" class="css-step-label" for="toy0-3"></label>
-                                    <input class="css-steps" id="toy0-3" name="toy0-step" type="radio"/>
-                                    <label aria-label="4번째 누르기" class="css-step-label" for="toy0-4"></label>
-                                    <input class="css-steps" id="toy0-4" name="toy0-step" type="radio"/>
-                                    <label aria-label="5번째 누르기" class="css-step-label" for="toy0-5"></label>
-                                    <input class="css-steps" id="toy0-5" name="toy0-step" type="radio"/>
-                                    <label aria-label="6번째 누르기" class="css-step-label" for="toy0-6"></label>
-                                    <input class="css-steps css-final" id="toy0-6" name="toy0-step" type="radio"/>
-                                    <button aria-expanded="false" aria-label="핑크 말랑이를 여섯 번 눌러 팝업 공개" class="squish-toy" type="button">
-                                        <span class="squish-blob"></span>
-                                        <span class="squish-face">
-                                        <i class="squish-smile"></i>
-                                        <i class="squish-cheek"></i>
-                                        <i class="squish-cheek two"></i>
-                                        </span>
-                                    </button>
-                                    <div aria-hidden="true" class="soft-meter">
-                                        <span></span>
-                                    </div>
-                                    <div class="css-progress">
-                                        <i></i>
-                                    </div>
-                                    <div aria-live="polite" class="squish-result" data-pick-slot="0">
-                                        <div class="squish-result-top"><span class="secret-result-label">REVEALED POP-UP</span><label aria-label="추천 팝업 찜하기" class="secret-heart ss-heart ss-heart-toggle"><input aria-label="추천 팝업 찜하기" type="checkbox"/><span aria-hidden="true"></span></label></div>
-                                        <div class="secret-pick-variant secret-pick--popular"><span class="squish-result-kind">POPULAR PICK · 뷰티</span><b class="squish-result-name">클리오 풍년다방</b><p class="squish-result-desc">뷰티 브랜드의 감각적인 팝업 공간을 발견해 보세요.</p><span class="squish-result-location">⌖ 성동구 뚝섬로 273</span><span class="squish-date">▦ 09.22 — 10.27</span></div><div class="secret-pick-variant secret-pick--art"><span class="squish-result-kind">FOR YOU · 아트</span><b class="squish-result-name">BLUE PLAYGROUND</b><p class="squish-result-desc">다채로운 색채와 예술적 상상력이 만나는 체험형 아트 공간</p><span class="squish-result-location">⌖ 성동구 성수동</span><span class="squish-date">▦ 10.12 — 10.30</span></div><div class="secret-pick-variant secret-pick--fashion"><span class="squish-result-kind">FOR YOU · 패션</span><b class="squish-result-name">AFTER HOURS CLUB</b><p class="squish-result-desc">일상에서 벗어나 새로운 스타일을 발견하는 패션 팝업</p><span class="squish-result-location">⌖ 용산구 한남동</span><span class="squish-date">▦ 10.15 — 11.03</span></div><div class="secret-pick-variant secret-pick--life"><span class="squish-result-kind">FOR YOU · 라이프스타일</span><b class="squish-result-name">SOFT OBJECTS</b><p class="squish-result-desc">부드러운 감성과 감각적인 오브제로 채운 라이프스타일 공간</p><span class="squish-result-location">⌖ 마포구 연남동</span><span class="squish-date">▦ 10.17 — 11.08</span></div><div class="secret-pick-variant secret-pick--goods"><span class="squish-result-kind">FOR YOU · 굿즈·마켓</span><b class="squish-result-name">SUNDAY COLLECTIVE</b><p class="squish-result-desc">취향이 담긴 소품과 특별한 굿즈를 발견하는 주말 마켓</p><span class="squish-result-location">⌖ 마포구 서교동</span><span class="squish-date">▦ 10.23 — 11.15</span></div>
-                                    </div>
-                                    <div class="squish-actions">
-                                        <a class="squish-link" href="#discover">팝업 정보 보기 ↗</a>
-                                        <label class="css-reset" for="toy0-0">
+</p>
+<input checked="checked" class="css-steps" id="toy0-0" name="toy0-step" type="radio"/>
+<label aria-label="1번째 누르기" class="css-step-label" for="toy0-1"></label>
+<input class="css-steps" id="toy0-1" name="toy0-step" type="radio"/>
+<label aria-label="2번째 누르기" class="css-step-label" for="toy0-2"></label>
+<input class="css-steps" id="toy0-2" name="toy0-step" type="radio"/>
+<label aria-label="3번째 누르기" class="css-step-label" for="toy0-3"></label>
+<input class="css-steps" id="toy0-3" name="toy0-step" type="radio"/>
+<label aria-label="4번째 누르기" class="css-step-label" for="toy0-4"></label>
+<input class="css-steps" id="toy0-4" name="toy0-step" type="radio"/>
+<label aria-label="5번째 누르기" class="css-step-label" for="toy0-5"></label>
+<input class="css-steps" id="toy0-5" name="toy0-step" type="radio"/>
+<label aria-label="6번째 누르기" class="css-step-label" for="toy0-6"></label>
+<input class="css-steps css-final" id="toy0-6" name="toy0-step" type="radio"/>
+<button aria-expanded="false" aria-label="핑크 말랑이를 여섯 번 눌러 팝업 공개" class="squish-toy" type="button">
+<span class="squish-blob"></span>
+<span class="squish-face">
+<i class="squish-smile"></i>
+<i class="squish-cheek"></i>
+<i class="squish-cheek two"></i>
+</span>
+</button>
+<div aria-hidden="true" class="soft-meter">
+<span></span>
+</div>
+<div class="css-progress">
+<i></i>
+</div>
+<div aria-live="polite" class="squish-result" data-pick-slot="0">
+<div class="squish-result-top"><span class="secret-result-label">REVEALED POP-UP</span><label aria-label="추천 팝업 찜하기" class="secret-heart ss-heart ss-heart-toggle"><input aria-label="추천 팝업 찜하기" type="checkbox"/><span aria-hidden="true"></span></label></div>
+<div class="secret-pick-variant secret-pick--popular"><span class="squish-result-kind">POPULAR PICK · 뷰티</span><b class="squish-result-name">클리오 풍년다방</b><p class="squish-result-desc">뷰티 브랜드의 감각적인 팝업 공간을 발견해 보세요.</p><span class="squish-result-location">⌖ 성동구 뚝섬로 273</span><span class="squish-date">▦ 09.22 — 10.27</span></div><div class="secret-pick-variant secret-pick--art"><span class="squish-result-kind">FOR YOU · 아트</span><b class="squish-result-name">BLUE PLAYGROUND</b><p class="squish-result-desc">다채로운 색채와 예술적 상상력이 만나는 체험형 아트 공간</p><span class="squish-result-location">⌖ 성동구 성수동</span><span class="squish-date">▦ 10.12 — 10.30</span></div><div class="secret-pick-variant secret-pick--fashion"><span class="squish-result-kind">FOR YOU · 패션</span><b class="squish-result-name">AFTER HOURS CLUB</b><p class="squish-result-desc">일상에서 벗어나 새로운 스타일을 발견하는 패션 팝업</p><span class="squish-result-location">⌖ 용산구 한남동</span><span class="squish-date">▦ 10.15 — 11.03</span></div><div class="secret-pick-variant secret-pick--life"><span class="squish-result-kind">FOR YOU · 라이프스타일</span><b class="squish-result-name">SOFT OBJECTS</b><p class="squish-result-desc">부드러운 감성과 감각적인 오브제로 채운 라이프스타일 공간</p><span class="squish-result-location">⌖ 마포구 연남동</span><span class="squish-date">▦ 10.17 — 11.08</span></div><div class="secret-pick-variant secret-pick--goods"><span class="squish-result-kind">FOR YOU · 굿즈·마켓</span><b class="squish-result-name">SUNDAY COLLECTIVE</b><p class="squish-result-desc">취향이 담긴 소품과 특별한 굿즈를 발견하는 주말 마켓</p><span class="squish-result-location">⌖ 마포구 서교동</span><span class="squish-date">▦ 10.23 — 11.15</span></div>
+</div>
+<div class="squish-actions">
+<a class="squish-link" href="#discover">팝업 정보 보기 ↗</a>
+<label class="css-reset" for="toy0-0">
                                         ↺ 다시 시작
                                         </label>
-                                    </div>
-                                </article>
-                                <article class="squish-item">
-                                    <div aria-hidden="true" class="secret-scene-photo"><img alt="" loading="lazy" src="../images/popup.01.jpg"/></div>
-                                    <span class="squish-no">02 / SECRET PICK</span>
-                                    <p class="squish-hint">
+</div>
+</article>
+<article class="squish-item">
+<div aria-hidden="true" class="secret-scene-photo"><img alt="" loading="lazy" src="../images/popup.01.jpg"/></div>
+<span class="squish-no">02 / SECRET PICK</span>
+<p class="squish-hint">
                                         키패드를 6번 눌러 팝업 발견
                                         <span class="css-counter">0 / 6</span>
-                                    </p>
-                                    <input checked="checked" class="css-steps" id="toy1-0" name="toy1-step" type="radio"/>
-                                    <input class="css-steps" id="toy1-1" name="toy1-step" type="radio"/>
-                                    <input class="css-steps" id="toy1-2" name="toy1-step" type="radio"/>
-                                    <input class="css-steps" id="toy1-3" name="toy1-step" type="radio"/>
-                                    <input class="css-steps" id="toy1-4" name="toy1-step" type="radio"/>
-                                    <input class="css-steps" id="toy1-5" name="toy1-step" type="radio"/>
-                                    <input class="css-steps css-final" id="toy1-6" name="toy1-step" type="radio"/>
-                                    <div aria-expanded="false" aria-label="숫자 키패드를 여섯 번 누르면 팝업 정보가 열립니다" class="squish-toy keypad-toy" role="group" tabindex="0">
-                                        <label aria-label="키보드 6번째 타건" class="key-tap" data-press="6" for="toy1-6"></label>
-                                        <label aria-label="키보드 5번째 타건" class="key-tap" data-press="5" for="toy1-5"></label>
-                                        <label aria-label="키보드 4번째 타건" class="key-tap" data-press="4" for="toy1-4"></label>
-                                        <label aria-label="키보드 3번째 타건" class="key-tap" data-press="3" for="toy1-3"></label>
-                                        <label aria-label="키보드 2번째 타건" class="key-tap" data-press="2" for="toy1-2"></label>
-                                        <label aria-label="키보드 1번째 타건" class="key-tap" data-press="1" for="toy1-1"></label>
-                                        <div class="number-pad">
-                                        <span class="number-key" data-digit="1">1</span>
-                                        <span class="number-key" data-digit="2">2</span>
-                                        <span class="number-key" data-digit="3">3</span>
-                                        <span class="number-key" data-digit="4">4</span>
-                                        <span class="number-key" data-digit="5">5</span>
-                                        <span class="number-key" data-digit="6">6</span>
-                                        <span class="number-key" data-digit="7">7</span>
-                                        <span class="number-key" data-digit="8">8</span>
-                                        <span class="number-key" data-digit="9">9</span>
-                                        <span class="number-key" data-digit="0">0</span>
-                                        </div>
-                                        <label aria-label="1번째 누르기" class="key-step" for="toy1-1" style="--dx:-70px;--dy:-82.5px"></label>
-                                        <label aria-label="2번째 누르기" class="key-step" for="toy1-2" style="--dx:0px;--dy:-82.5px"></label>
-                                        <label aria-label="3번째 누르기" class="key-step" for="toy1-3" style="--dx:70px;--dy:-82.5px"></label>
-                                        <label aria-label="4번째 누르기" class="key-step" for="toy1-4" style="--dx:-70px;--dy:-27.5px"></label>
-                                        <label aria-label="5번째 누르기" class="key-step" for="toy1-5" style="--dx:0px;--dy:-27.5px"></label>
-                                        <label aria-label="6번째 누르기" class="key-step" for="toy1-6" style="--dx:70px;--dy:-27.5px"></label>
-                                    </div>
-                                    <div aria-hidden="true" class="soft-meter">
-                                        <span></span>
-                                    </div>
-                                    <div class="css-progress">
-                                        <i></i>
-                                    </div>
-                                    <div aria-live="polite" class="squish-result" data-pick-slot="1">
-                                        <div class="squish-result-top"><span class="secret-result-label">REVEALED POP-UP</span><label aria-label="추천 팝업 찜하기" class="secret-heart ss-heart ss-heart-toggle"><input aria-label="추천 팝업 찜하기" type="checkbox"/><span aria-hidden="true"></span></label></div>
-                                        <div class="secret-pick-variant secret-pick--popular"><span class="squish-result-kind">POPULAR PICK · 라이프스타일</span><b class="squish-result-name">센녹 배스하우스</b><p class="squish-result-desc">일상의 휴식과 라이프스타일을 경험하는 팝업 공간.</p><span class="squish-result-location">⌖ 성동구 연무장길 73</span><span class="squish-date">▦ 10.07 — 10.16</span></div><div class="secret-pick-variant secret-pick--art"><span class="squish-result-kind">FOR YOU · 아트</span><b class="squish-result-name">NEW FREQUENCY</b><p class="squish-result-desc">소리와 시각적 표현이 어우러지는 새로운 감각의 아트 팝업</p><span class="squish-result-location">⌖ 성동구 성수동</span><span class="squish-date">▦ 10.20 — 11.12</span></div><div class="secret-pick-variant secret-pick--fashion"><span class="squish-result-kind">FOR YOU · 패션</span><b class="squish-result-name">OFFLINE ARCHIVE</b><p class="squish-result-desc">온라인을 벗어나 직접 보고 경험하는 감각적인 패션 공간</p><span class="squish-result-location">⌖ 용산구 한남동</span><span class="squish-date">▦ 10.25 — 11.18</span></div><div class="secret-pick-variant secret-pick--life"><span class="squish-result-kind">FOR YOU · 라이프스타일</span><b class="squish-result-name">OBJECT LAB</b><p class="squish-result-desc">일상 속 사물의 새로운 쓰임과 디자인을 발견하는 공간</p><span class="squish-result-location">⌖ 성동구 성수동</span><span class="squish-date">▦ 11.06 — 11.30</span></div><div class="secret-pick-variant secret-pick--goods"><span class="squish-result-kind">FOR YOU · 굿즈·마켓</span><b class="squish-result-name">STUDIO WEEKEND</b><p class="squish-result-desc">개성 있는 창작자의 작품과 굿즈를 만나는 주말 공간</p><span class="squish-result-location">⌖ 마포구 서교동</span><span class="squish-date">▦ 11.06 — 11.29</span></div>
-                                    </div>
-                                    <div class="squish-actions">
-                                        <a class="squish-link" href="#discover">팝업 정보 보기 ↗</a>
-                                        <label class="css-reset" for="toy1-0">
+</p>
+<input checked="checked" class="css-steps" id="toy1-0" name="toy1-step" type="radio"/>
+<input class="css-steps" id="toy1-1" name="toy1-step" type="radio"/>
+<input class="css-steps" id="toy1-2" name="toy1-step" type="radio"/>
+<input class="css-steps" id="toy1-3" name="toy1-step" type="radio"/>
+<input class="css-steps" id="toy1-4" name="toy1-step" type="radio"/>
+<input class="css-steps" id="toy1-5" name="toy1-step" type="radio"/>
+<input class="css-steps css-final" id="toy1-6" name="toy1-step" type="radio"/>
+<div aria-expanded="false" aria-label="숫자 키패드를 여섯 번 누르면 팝업 정보가 열립니다" class="squish-toy keypad-toy" role="group" tabindex="0">
+<label aria-label="키보드 6번째 타건" class="key-tap" data-press="6" for="toy1-6"></label>
+<label aria-label="키보드 5번째 타건" class="key-tap" data-press="5" for="toy1-5"></label>
+<label aria-label="키보드 4번째 타건" class="key-tap" data-press="4" for="toy1-4"></label>
+<label aria-label="키보드 3번째 타건" class="key-tap" data-press="3" for="toy1-3"></label>
+<label aria-label="키보드 2번째 타건" class="key-tap" data-press="2" for="toy1-2"></label>
+<label aria-label="키보드 1번째 타건" class="key-tap" data-press="1" for="toy1-1"></label>
+<div class="number-pad">
+<span class="number-key" data-digit="1">1</span>
+<span class="number-key" data-digit="2">2</span>
+<span class="number-key" data-digit="3">3</span>
+<span class="number-key" data-digit="4">4</span>
+<span class="number-key" data-digit="5">5</span>
+<span class="number-key" data-digit="6">6</span>
+<span class="number-key" data-digit="7">7</span>
+<span class="number-key" data-digit="8">8</span>
+<span class="number-key" data-digit="9">9</span>
+<span class="number-key" data-digit="0">0</span>
+</div>
+<label aria-label="1번째 누르기" class="key-step" for="toy1-1" style="--dx:-70px;--dy:-82.5px"></label>
+<label aria-label="2번째 누르기" class="key-step" for="toy1-2" style="--dx:0px;--dy:-82.5px"></label>
+<label aria-label="3번째 누르기" class="key-step" for="toy1-3" style="--dx:70px;--dy:-82.5px"></label>
+<label aria-label="4번째 누르기" class="key-step" for="toy1-4" style="--dx:-70px;--dy:-27.5px"></label>
+<label aria-label="5번째 누르기" class="key-step" for="toy1-5" style="--dx:0px;--dy:-27.5px"></label>
+<label aria-label="6번째 누르기" class="key-step" for="toy1-6" style="--dx:70px;--dy:-27.5px"></label>
+</div>
+<div aria-hidden="true" class="soft-meter">
+<span></span>
+</div>
+<div class="css-progress">
+<i></i>
+</div>
+<div aria-live="polite" class="squish-result" data-pick-slot="1">
+<div class="squish-result-top"><span class="secret-result-label">REVEALED POP-UP</span><label aria-label="추천 팝업 찜하기" class="secret-heart ss-heart ss-heart-toggle"><input aria-label="추천 팝업 찜하기" type="checkbox"/><span aria-hidden="true"></span></label></div>
+<div class="secret-pick-variant secret-pick--popular"><span class="squish-result-kind">POPULAR PICK · 라이프스타일</span><b class="squish-result-name">센녹 배스하우스</b><p class="squish-result-desc">일상의 휴식과 라이프스타일을 경험하는 팝업 공간.</p><span class="squish-result-location">⌖ 성동구 연무장길 73</span><span class="squish-date">▦ 10.07 — 10.16</span></div><div class="secret-pick-variant secret-pick--art"><span class="squish-result-kind">FOR YOU · 아트</span><b class="squish-result-name">NEW FREQUENCY</b><p class="squish-result-desc">소리와 시각적 표현이 어우러지는 새로운 감각의 아트 팝업</p><span class="squish-result-location">⌖ 성동구 성수동</span><span class="squish-date">▦ 10.20 — 11.12</span></div><div class="secret-pick-variant secret-pick--fashion"><span class="squish-result-kind">FOR YOU · 패션</span><b class="squish-result-name">OFFLINE ARCHIVE</b><p class="squish-result-desc">온라인을 벗어나 직접 보고 경험하는 감각적인 패션 공간</p><span class="squish-result-location">⌖ 용산구 한남동</span><span class="squish-date">▦ 10.25 — 11.18</span></div><div class="secret-pick-variant secret-pick--life"><span class="squish-result-kind">FOR YOU · 라이프스타일</span><b class="squish-result-name">OBJECT LAB</b><p class="squish-result-desc">일상 속 사물의 새로운 쓰임과 디자인을 발견하는 공간</p><span class="squish-result-location">⌖ 성동구 성수동</span><span class="squish-date">▦ 11.06 — 11.30</span></div><div class="secret-pick-variant secret-pick--goods"><span class="squish-result-kind">FOR YOU · 굿즈·마켓</span><b class="squish-result-name">STUDIO WEEKEND</b><p class="squish-result-desc">개성 있는 창작자의 작품과 굿즈를 만나는 주말 공간</p><span class="squish-result-location">⌖ 마포구 서교동</span><span class="squish-date">▦ 11.06 — 11.29</span></div>
+</div>
+<div class="squish-actions">
+<a class="squish-link" href="#discover">팝업 정보 보기 ↗</a>
+<label class="css-reset" for="toy1-0">
                                         ↺ 다시 시작
                                         </label>
-                                    </div>
-                                </article>
-                                <!-- [장난감 3] 왁스볼: 6회 눌러 팝업 공개 -->
-                                <article class="squish-item is-wax">
-                                    <div aria-hidden="true" class="secret-scene-photo"><img alt="" loading="lazy" src="../images/popup.01.jpg"/></div>
-                                    <span class="squish-no">03 / SECRET PICK</span>
-                                    <p class="squish-hint">
+</div>
+</article>
+<!-- [장난감 3] 왁스볼: 6회 눌러 팝업 공개 -->
+<article class="squish-item is-wax">
+<div aria-hidden="true" class="secret-scene-photo"><img alt="" loading="lazy" src="../images/popup.01.jpg"/></div>
+<span class="squish-no">03 / SECRET PICK</span>
+<p class="squish-hint">
                                         왁스볼을 6번 눌러 팝업 발견
                                         <span class="css-counter">0 / 6</span>
-                                    </p>
-                                    <input checked="checked" class="css-steps" id="toy2-0" name="toy2-step" type="radio"/>
-                                    <label aria-label="1번째 누르기" class="css-step-label" for="toy2-1"></label>
-                                    <input class="css-steps" id="toy2-1" name="toy2-step" type="radio"/>
-                                    <label aria-label="2번째 누르기" class="css-step-label" for="toy2-2"></label>
-                                    <input class="css-steps" id="toy2-2" name="toy2-step" type="radio"/>
-                                    <label aria-label="3번째 누르기" class="css-step-label" for="toy2-3"></label>
-                                    <input class="css-steps" id="toy2-3" name="toy2-step" type="radio"/>
-                                    <label aria-label="4번째 누르기" class="css-step-label" for="toy2-4"></label>
-                                    <input class="css-steps" id="toy2-4" name="toy2-step" type="radio"/>
-                                    <label aria-label="5번째 누르기" class="css-step-label" for="toy2-5"></label>
-                                    <input class="css-steps" id="toy2-5" name="toy2-step" type="radio"/>
-                                    <label aria-label="6번째 누르기" class="css-step-label" for="toy2-6"></label>
-                                    <input class="css-steps css-final" id="toy2-6" name="toy2-step" type="radio"/>
-                                    <button aria-expanded="false" aria-label="왁스볼을 여섯 번 눌러 팝업 공개" class="squish-toy wax-toy" type="button">
-                                        <span class="wax-core"></span>
-                                        <span class="squish-blob wax-shell"></span>
-                                        <span aria-hidden="true" class="wax-cracks">
-                                        <i></i>
-                                        <i></i>
-                                        <i></i>
-                                        <i></i>
-                                        <i></i>
-                                        <i></i>
-                                        </span>
-                                        <span class="squish-face">
-                                        <i class="squish-smile"></i>
-                                        <i class="squish-cheek"></i>
-                                        <i class="squish-cheek two"></i>
-                                        </span>
-                                        <span aria-hidden="true" class="wax-burst"></span>
-                                    </button>
-                                    <div aria-hidden="true" class="wax-meter">
-                                        <span></span>
-                                    </div>
-                                    <div class="css-progress">
-                                        <i></i>
-                                    </div>
-                                    <div aria-live="polite" class="squish-result" data-pick-slot="2">
-                                        <div class="squish-result-top"><span class="secret-result-label">REVEALED POP-UP</span><label aria-label="추천 팝업 찜하기" class="secret-heart ss-heart ss-heart-toggle"><input aria-label="추천 팝업 찜하기" type="checkbox"/><span aria-hidden="true"></span></label></div>
-                                        <div class="secret-pick-variant secret-pick--popular"><span class="squish-result-kind">POPULAR PICK · 캐릭터</span><b class="squish-result-name">킥둥쓰 POP-UP</b><p class="squish-result-desc">캐릭터와 굿즈가 어우러지는 즐거운 팝업 공간.</p><span class="squish-result-location">⌖ 성동구 아차산로5길 24-14</span><span class="squish-date">▦ 10.09 — 10.18</span></div><div class="secret-pick-variant secret-pick--art"><span class="squish-result-kind">FOR YOU · 아트</span><b class="squish-result-name">CITY OF COLOR</b><p class="squish-result-desc">색으로 표현한 도시의 풍경과 감정을 경험하는 공간</p><span class="squish-result-location">⌖ 마포구 연남동</span><span class="squish-date">▦ 11.08 — 12.01</span></div><div class="secret-pick-variant secret-pick--fashion"><span class="squish-result-kind">FOR YOU · 패션</span><b class="squish-result-name">ATELIER 24</b><p class="squish-result-desc">디자이너의 감각과 새로운 스타일을 만나는 패션 아틀리에</p><span class="squish-result-location">⌖ 용산구 한남동</span><span class="squish-date">▦ 11.12 — 12.02</span></div><div class="secret-pick-variant secret-pick--life"><span class="squish-result-kind">FOR YOU · 라이프스타일</span><b class="squish-result-name">HIDDEN GARDEN</b><p class="squish-result-desc">도심 속 작은 정원에서 만나는 자연과 휴식의 감성</p><span class="squish-result-location">⌖ 성동구 성수동</span><span class="squish-date">▦ 11.04 — 11.24</span></div><div class="secret-pick-variant secret-pick--goods"><span class="squish-result-kind">FOR YOU · 굿즈·마켓</span><b class="squish-result-name">FUTURE GOODS</b><p class="squish-result-desc">새로운 아이디어와 디자인이 담긴 미래형 굿즈 마켓</p><span class="squish-result-location">⌖ 성동구 성수동</span><span class="squish-date">▦ 11.17 — 12.10</span></div>
-                                    </div>
-                                    <div class="squish-actions">
-                                        <a class="squish-link" href="#discover">팝업 정보 보기 ↗</a>
-                                        <label class="css-reset" for="toy2-0">
+</p>
+<input checked="checked" class="css-steps" id="toy2-0" name="toy2-step" type="radio"/>
+<label aria-label="1번째 누르기" class="css-step-label" for="toy2-1"></label>
+<input class="css-steps" id="toy2-1" name="toy2-step" type="radio"/>
+<label aria-label="2번째 누르기" class="css-step-label" for="toy2-2"></label>
+<input class="css-steps" id="toy2-2" name="toy2-step" type="radio"/>
+<label aria-label="3번째 누르기" class="css-step-label" for="toy2-3"></label>
+<input class="css-steps" id="toy2-3" name="toy2-step" type="radio"/>
+<label aria-label="4번째 누르기" class="css-step-label" for="toy2-4"></label>
+<input class="css-steps" id="toy2-4" name="toy2-step" type="radio"/>
+<label aria-label="5번째 누르기" class="css-step-label" for="toy2-5"></label>
+<input class="css-steps" id="toy2-5" name="toy2-step" type="radio"/>
+<label aria-label="6번째 누르기" class="css-step-label" for="toy2-6"></label>
+<input class="css-steps css-final" id="toy2-6" name="toy2-step" type="radio"/>
+<button aria-expanded="false" aria-label="왁스볼을 여섯 번 눌러 팝업 공개" class="squish-toy wax-toy" type="button">
+<span class="wax-core"></span>
+<span class="squish-blob wax-shell"></span>
+<span aria-hidden="true" class="wax-cracks">
+<i></i>
+<i></i>
+<i></i>
+<i></i>
+<i></i>
+<i></i>
+</span>
+<span class="squish-face">
+<i class="squish-smile"></i>
+<i class="squish-cheek"></i>
+<i class="squish-cheek two"></i>
+</span>
+<span aria-hidden="true" class="wax-burst"></span>
+</button>
+<div aria-hidden="true" class="wax-meter">
+<span></span>
+</div>
+<div class="css-progress">
+<i></i>
+</div>
+<div aria-live="polite" class="squish-result" data-pick-slot="2">
+<div class="squish-result-top"><span class="secret-result-label">REVEALED POP-UP</span><label aria-label="추천 팝업 찜하기" class="secret-heart ss-heart ss-heart-toggle"><input aria-label="추천 팝업 찜하기" type="checkbox"/><span aria-hidden="true"></span></label></div>
+<div class="secret-pick-variant secret-pick--popular"><span class="squish-result-kind">POPULAR PICK · 캐릭터</span><b class="squish-result-name">킥둥쓰 POP-UP</b><p class="squish-result-desc">캐릭터와 굿즈가 어우러지는 즐거운 팝업 공간.</p><span class="squish-result-location">⌖ 성동구 아차산로5길 24-14</span><span class="squish-date">▦ 10.09 — 10.18</span></div><div class="secret-pick-variant secret-pick--art"><span class="squish-result-kind">FOR YOU · 아트</span><b class="squish-result-name">CITY OF COLOR</b><p class="squish-result-desc">색으로 표현한 도시의 풍경과 감정을 경험하는 공간</p><span class="squish-result-location">⌖ 마포구 연남동</span><span class="squish-date">▦ 11.08 — 12.01</span></div><div class="secret-pick-variant secret-pick--fashion"><span class="squish-result-kind">FOR YOU · 패션</span><b class="squish-result-name">ATELIER 24</b><p class="squish-result-desc">디자이너의 감각과 새로운 스타일을 만나는 패션 아틀리에</p><span class="squish-result-location">⌖ 용산구 한남동</span><span class="squish-date">▦ 11.12 — 12.02</span></div><div class="secret-pick-variant secret-pick--life"><span class="squish-result-kind">FOR YOU · 라이프스타일</span><b class="squish-result-name">HIDDEN GARDEN</b><p class="squish-result-desc">도심 속 작은 정원에서 만나는 자연과 휴식의 감성</p><span class="squish-result-location">⌖ 성동구 성수동</span><span class="squish-date">▦ 11.04 — 11.24</span></div><div class="secret-pick-variant secret-pick--goods"><span class="squish-result-kind">FOR YOU · 굿즈·마켓</span><b class="squish-result-name">FUTURE GOODS</b><p class="squish-result-desc">새로운 아이디어와 디자인이 담긴 미래형 굿즈 마켓</p><span class="squish-result-location">⌖ 성동구 성수동</span><span class="squish-date">▦ 11.17 — 12.10</span></div>
+</div>
+<div class="squish-actions">
+<a class="squish-link" href="#discover">팝업 정보 보기 ↗</a>
+<label class="css-reset" for="toy2-0">
                                         ↺ 다시 시작
                                         </label>
-                                    </div>
-                                </article>
-                            </div>
-                            <aside aria-labelledby="personal-ticket-title" class="personal-ticket winning-ticket" id="special-ticket"><div class="personal-ticket-intro"><span class="ticket-eyebrow">LUCKY POP-UP DRAW</span><h3 id="personal-ticket-title">세 번의 발견,<br/>나만의 깜짝 쿠폰.</h3><p>추천 팝업 세 곳을 발견하면 시연용 럭키드로우 쿠폰이 열려요.</p></div>
-                                <div class="personal-ticket-paper"><div class="personal-ticket-head"><span>SCENE:SEOUL</span><span>№ 026</span></div><div class="personal-ticket-body"><span class="personal-ticket-star">✳</span><strong>YOUR<br/>SURPRISE COUPON</strong><span class="personal-ticket-caption">3개의 팝업 발견 후 오픈</span></div>
-                                    <div class="ticket-win-gate"><span class="win-gate-icon">✦</span><strong>LUCKY DRAW · DEMO</strong><small>팝업 3곳을 발견해 주세요</small><a class="ticket-login-link" href="#lucky-demo-dialog" id="open-lucky-coupon">깜짝 쿠폰 확인하기 ↗</a></div><div class="personal-ticket-bottom"><span>SCRATCH &amp; DISCOVER</span><span>2026 · SEOUL</span></div></div><p class="personal-ticket-note">시연용 럭키드로우입니다. 실제 할인·당첨·경품은 제공되지 않습니다.</p></aside>
-                        </div>
-                    </div></section>
-            </div>
-
-            <!-- 07 / 하단 공통 브랜드 푸터 -->
-            <footer class="footer pop-brand-footer ss-site-footer"><strong class="footer-brand">SCENE<span>:</span>SEOUL</strong><p>서울의 문화를 소개하는 웹사이트 콘텐츠 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p><small class="footer-copyright">© 2026 SCENE:SEOUL</small></footer>
-        </main>
-        <a aria-label="페이지 맨 위로" class="ss-back-to-top" href="#top" title="맨 위로 이동">
-            <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
-                <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
-            </svg>
-        </a>
-
-        <!-- 08 / 시연 로그인 안내 모달: :target으로 열고 닫기 -->
-        <section aria-labelledby="login-title" aria-modal="true" class="login-preview-dialog" id="login-required" role="dialog">
-            <div class="login-preview-sheet">
-                <a aria-label="닫기" class="login-preview-close" href="#squish-discover">×</a>
-                <span class="ticket-eyebrow">SECRET SCENE · 체험 안내</span>
-                <h2 id="login-title">팝업 취향 추천,<br/>시연으로 경험해요.</h2>
-                <p>팝업 목록에서 하트를 누르면 선택한 분야에 맞춰 추천 예시가 바뀝니다. HTML·CSS만으로 동작하는 시연이며 실제 로그인·쿠키 저장 기능은 없습니다.</p>
-                <a class="login-preview-return" href="#special-ticket">
+</div>
+</article>
+</div>
+<aside aria-labelledby="personal-ticket-title" class="personal-ticket winning-ticket" id="special-ticket"><div class="personal-ticket-intro"><span class="ticket-eyebrow">LUCKY POP-UP DRAW</span><h3 id="personal-ticket-title">세 번의 발견,<br/>나만의 깜짝 쿠폰.</h3><p>추천 팝업 세 곳을 발견하면 시연용 럭키드로우 쿠폰이 열려요.</p></div>
+<div class="personal-ticket-paper"><div class="personal-ticket-head"><span>SCENE:SEOUL</span><span>№ 026</span></div><div class="personal-ticket-body"><span class="personal-ticket-star">✳</span><strong>YOUR<br/>SURPRISE COUPON</strong><span class="personal-ticket-caption">3개의 팝업 발견 후 오픈</span></div>
+<div class="ticket-win-gate"><span class="win-gate-icon">✦</span><strong>LUCKY DRAW · DEMO</strong><small>팝업 3곳을 발견해 주세요</small><a class="ticket-login-link" href="#lucky-demo-dialog" id="open-lucky-coupon">깜짝 쿠폰 확인하기 ↗</a></div><div class="personal-ticket-bottom"><span>SCRATCH &amp; DISCOVER</span><span>2026 · SEOUL</span></div></div><p class="personal-ticket-note">시연용 럭키드로우입니다. 실제 할인·당첨·경품은 제공되지 않습니다.</p></aside>
+</div>
+</div></section>
+</div>
+<!-- 07 / 하단 공통 브랜드 푸터 -->
+<footer class="footer pop-brand-footer ss-site-footer"><strong class="footer-brand">SCENE<span>:</span>SEOUL</strong><p>서울의 문화를 소개하는 웹사이트 콘텐츠 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p><small class="footer-copyright">© 2026 SCENE:SEOUL</small></footer>
+</main>
+<a aria-label="페이지 맨 위로" class="ss-back-to-top" href="#top" title="맨 위로 이동">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
+<path d="m12 19 0-14m-6 6 6-6 6 6"></path>
+</svg>
+</a>
+<!-- 08 / 시연 로그인 안내 모달: :target으로 열고 닫기 -->
+<section aria-labelledby="login-title" aria-modal="true" class="login-preview-dialog" id="login-required" role="dialog">
+<div class="login-preview-sheet">
+<a aria-label="닫기" class="login-preview-close" href="#squish-discover">×</a>
+<span class="ticket-eyebrow">SECRET SCENE · 체험 안내</span>
+<h2 id="login-title">팝업 취향 추천,<br/>시연으로 경험해요.</h2>
+<p>팝업 목록에서 하트를 누르면 선택한 분야에 맞춰 추천 예시가 바뀝니다. HTML·CSS만으로 동작하는 시연이며 실제 로그인·쿠키 저장 기능은 없습니다.</p>
+<a class="login-preview-return" href="#special-ticket">
                     팝업 발견 영역으로 돌아가기 ↗
                 </a>
-            </div>
-        </section>
-
-        <!-- 09 / 행운 쿠폰 모달: 세 장난감 완료 시 진입 -->
-        <section aria-labelledby="lucky-title" aria-modal="true" class="lucky-demo-dialog" id="lucky-demo-dialog" role="dialog">
-            <div class="lucky-demo-sheet"><a aria-label="닫기" class="lucky-demo-close" href="#special-ticket">×</a><span class="ticket-eyebrow">SCENE:SEOUL · LUCKY DRAW</span>
-                <h2 id="lucky-title">나만의 깜짝 쿠폰!</h2><p>세 가지 팝업을 모두 발견했어요.<br/>이 쿠폰은 화면 시연을 위한 가상 쿠폰이며 실제 혜택은 없습니다.</p>
-                <div class="lucky-demo-code">SCENE · SURPRISE · 2026</div><a class="lucky-demo-done" href="#discover">팝업 더 둘러보기 ↗</a></div></section>
-    </body>
+</div>
+</section>
+<!-- 09 / 행운 쿠폰 모달: 세 장난감 완료 시 진입 -->
+<section aria-labelledby="lucky-title" aria-modal="true" class="lucky-demo-dialog" id="lucky-demo-dialog" role="dialog">
+<div class="lucky-demo-sheet"><a aria-label="닫기" class="lucky-demo-close" href="#special-ticket">×</a><span class="ticket-eyebrow">SCENE:SEOUL · LUCKY DRAW</span>
+<h2 id="lucky-title">나만의 깜짝 쿠폰!</h2><p>세 가지 팝업을 모두 발견했어요.<br/>이 쿠폰은 화면 시연을 위한 가상 쿠폰이며 실제 혜택은 없습니다.</p>
+<div class="lucky-demo-code">SCENE · SURPRISE · 2026</div><a class="lucky-demo-done" href="#discover">팝업 더 둘러보기 ↗</a></div></section>
+</body>
 </html>

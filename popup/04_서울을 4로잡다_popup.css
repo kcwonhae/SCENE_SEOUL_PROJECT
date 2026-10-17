@@ -3140,3 +3140,34 @@ html, body, body .ss-page, body .ss-page > .stage, body .ss-page > .popup-perfor
 body .ss-page .popup-catalog.ss-catalog, body .ss-page .popup-catalog .ss-catalog-controls, body .ss-page .popup-catalog .ss-catalog-grid {
     background: transparent !important;
 }
+
+
+/* 공연 페이지와 동일한 카드 하단 정보 표시 */
+.popup-catalog .ss-card-meta {
+    margin: 0 0 12px;
+    color: var(--ss-muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+.popup-catalog .ss-card-details { margin-top: 14px; border-top: 1px solid var(--ss-line); }
+.popup-catalog .ss-card-details summary {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 12px; list-style: none; cursor: default; pointer-events: none;
+    color: var(--ss-ink); font-size: 10px; font-weight: 800; letter-spacing: .07em;
+}
+.popup-catalog .ss-card-details summary::-webkit-details-marker { display: none; }
+.popup-catalog .ss-card-details summary span { color: var(--ss-blue); font-size: 18px; }
+
+/* 2026-10-17 | 공연 페이지와 카탈로그 제목 크기 및 결과 표시 통일 */
+body .ss-page .popup-catalog .ss-category-title {
+    font-size: clamp(40px, 4.6vw, 66px) !important;
+}
+.popup-catalog .pop-all-status .pop-status-all-label {
+    color: inherit !important;
+    font-weight: inherit;
+}
+@media (max-width:760px) {
+    body .ss-page .popup-catalog .ss-category-title {
+        font-size: clamp(36px, 8vw, 56px) !important;
+    }
+}
