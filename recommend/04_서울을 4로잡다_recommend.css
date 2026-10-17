@@ -1,22 +1,18 @@
 /* =====================================================
    SCENE.SEOUL - AI 추천 페이지
-   공통 디자인(폰트, 색 변수, 상단 헤더)은 ../css/common.css 에서 가져옵니다.
+   공통 디자인(폰트, 색 변수, 상단 헤더)은 04_서울을 4로잡다_common.css 에서 가져옵니다.
    이 파일에는 이 페이지만의 디자인만 있습니다.
    ===================================================== */
 
-/* ---------- 이 페이지에서 쓰는 이름 → common.css 변수에 연결 ---------- */
+/* ---------- 이 페이지에서 쓰는 이름 → 04_서울을 4로잡다_common.css 변수에 연결 ---------- */
 :root {
   --white: var(--ss-white);
-  --bg: #ECE9E1;
-  /* 띠 영역(랭킹, 푸터 위) 배경: 페이지 배경보다 한 단계 진한 아이보리 */
   --line: var(--ss-line);
   --mute: var(--ss-muted);
   --text: #4B525D;
   --ink: var(--ss-ink);
   --blue: var(--ss-blue);
   --yellow: var(--ss-yellow);
-  --radius: 12px;
-  --header-h: var(--ss-header-height);
 }
 
 /* ---------- 기본 ---------- */
@@ -91,7 +87,7 @@ p {
   display: flex;
   align-items: center;
   gap: 24px;
-  max-width: 852px;
+  max-width: none;
   margin: 0 auto;
   padding: 22px 24px 22px 28px;
   border: 1px solid var(--line);
@@ -223,6 +219,7 @@ p {
   color: var(--blue);
 }
 
+/* 칩들이 가로로 나열되고, 자리가 모자라면 다음 줄로 넘어감 */
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -233,6 +230,7 @@ p {
   position: relative;
 }
 
+/* 실제 라디오 버튼은 투명하게 숨김 (눈에 보이는 것은 label) */
 .chip input {
   position: absolute;
   opacity: 0;
@@ -240,6 +238,7 @@ p {
   height: 1px;
 }
 
+/* 칩 모양 */
 .chip label {
   display: inline-block;
   padding: 10px 22px;
@@ -253,8 +252,9 @@ p {
 }
 
 .chip label:hover {
-  border-color: var(--ink);
-  color: var(--ink);
+  background: #EAF0FC;
+  border-color: #C5D2F0;
+  color: var(--blue);
 }
 
 .chip input:focus-visible+label {
@@ -263,9 +263,9 @@ p {
 }
 
 .chip input:checked+label {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--white);
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
 }
 
 /* ---------- AI 추천 결과 ---------- */
@@ -313,7 +313,7 @@ p {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--blue);
 }
 
 .picks {
@@ -331,13 +331,12 @@ p {
   background: var(--white);
 }
 
+/* 포스터 칸 (카드 위쪽에 붙고, 마우스를 올리면 위로 떠오름) */
 .poster {
-  position: relative;
   flex: none;
   align-self: flex-start;
   width: 160px;
   overflow: hidden;
-  background: linear-gradient(160deg, #DDE5F6, #7F98D0);
   transition: transform .45s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease-out;
 }
 
@@ -346,12 +345,14 @@ p {
   box-shadow: 0 14px 30px rgba(0, 0, 0, .14);
 }
 
+/* 포스터 이미지: 칸 폭에 맞추고 비율 유지 */
 .poster img {
   display: block;
   width: 100%;
   height: auto;
 }
 
+/* 포스터 오른쪽 정보 영역 (세로로 쌓임) */
 .info {
   display: flex;
   flex-direction: column;
@@ -359,12 +360,14 @@ p {
   min-width: 0;
 }
 
+/* '1순위 · 전시' 같은 순위 표시 */
 .rank {
-  color: var(--mute);
+  color: var(--blue);
   font-size: .9rem;
   font-weight: 600;
 }
 
+/* 작품 제목 */
 .info h3 {
   margin-top: 6px;
   font-size: clamp(1.4rem, 2.4vw, 2rem);
@@ -392,6 +395,7 @@ p {
   color: var(--ink);
 }
 
+/* 일치율: 글자 + 막대 */
 .match {
   display: flex;
   align-items: center;
@@ -414,9 +418,10 @@ p {
   display: block;
   width: var(--p);
   height: 100%;
-  background: var(--ink);
+  background: var(--blue);
 }
 
+/* 버튼 줄 (상세 보기 / 지도에서 보기 / 저장): 카드 맨 아래에 붙음 */
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -425,6 +430,7 @@ p {
   padding-top: 20px;
 }
 
+/* 버튼 기본 모양 (알약 형태) */
 .actions a {
   padding: 9px 18px;
   border: 1px solid var(--line);
@@ -437,18 +443,22 @@ p {
 
 .actions a:hover,
 .actions a:focus-visible {
-  border-color: var(--ink);
-  color: var(--ink);
+  background: #EAF0FC;
+  border-color: #C5D2F0;
+  color: var(--blue);
 }
 
 .actions a:first-child {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--white);
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+  font-weight: 800;
 }
 
-.actions a:first-child:hover {
-  background: var(--white);
+.actions a:first-child:hover,
+.actions a:first-child:focus-visible {
+  background: var(--yellow);
+  border-color: var(--yellow);
   color: var(--ink);
 }
 
@@ -480,7 +490,7 @@ p {
 
 .more a:hover,
 .more a:focus-visible {
-  border-color: var(--ink);
+  border-color: var(--blue);
   transform: translateY(-4px);
 }
 
@@ -611,52 +621,7 @@ p {
   }
 }
 
-/* ---------- 팀 컬러 적용 (파랑 + 노랑 포인트) ---------- */
-.chip label:hover {
-  border-color: var(--blue);
-  color: var(--blue);
-}
-
-.chip input:checked+label {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: var(--white);
-}
-
-.match .bar i {
-  background: var(--blue);
-}
-
-.think i {
-  background: var(--blue);
-}
-
-.actions a:first-child {
-  border-color: var(--blue);
-  background: var(--blue);
-}
-
-.actions a:first-child:hover {
-  background: var(--yellow);
-  border-color: var(--yellow);
-  color: var(--ink);
-}
-
-.actions a:hover,
-.actions a:focus-visible {
-  border-color: var(--blue);
-  color: var(--blue);
-}
-
-.more a:hover,
-.more a:focus-visible {
-  border-color: var(--blue);
-}
-
-.rank {
-  color: var(--blue);
-}
-
+/* ---------- 푸터 간격 ---------- */
 .ss-site-footer {
   margin-top: 96px;
 }
