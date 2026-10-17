@@ -538,6 +538,14 @@ body .ss-page .ss-editorial-page-spacing { padding-top: clamp(42px, 6vw, 82px) !
     line-height: 1.6;
 }
 
+/* 카드 안 장소·지역 작은 라벨 (공연·팝업·전시·이벤트 공통) */
+.ss-card-region {
+    color: var(--ss-muted);
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
 .ss-filter:focus-visible { outline: 2px solid var(--ss-blue); outline-offset: 3px; }
 
 @media (max-width: 1100px) {
@@ -846,7 +854,7 @@ body .ss-page .ss-editorial-page-spacing { padding-top: clamp(42px, 6vw, 82px) !
     margin: 16px 0 10px;
     color: var(--ss-editorial-ink, #1e2637);
     font-family: var(--ss-font);
-    font-size: clamp(52px, 6vw, 88px);
+    font-size: clamp(40px, 4.6vw, 66px);
     font-weight: 900;
     letter-spacing: -.085em;
     line-height: 1.12;
@@ -865,7 +873,7 @@ body .ss-page .ss-editorial-page-spacing { padding-top: clamp(42px, 6vw, 82px) !
 @media (max-width: 760px) {
     .ss-category-heading { margin-bottom: 25px; }
 
-    .ss-category-title { font-size: clamp(46px, 10vw, 72px); }
+    .ss-category-title { font-size: clamp(36px, 8vw, 56px); }
 
 }
 
@@ -924,16 +932,10 @@ body .ss-page .ss-editorial-page-spacing { padding-top: clamp(42px, 6vw, 82px) !
 
 .ss-catalog.ss-catalog-spaced .ss-catalog-controls { margin-top: 34px; }
 
-.ss-category-title.ss-category-title--balanced { font-size: clamp(48px, 5.1vw, 76px); }
 
 @media (max-width:760px) {
     .ss-catalog.ss-catalog-spaced .ss-catalog-controls { margin-top: 25px; }
-
-    .ss-category-title.ss-category-title--balanced { font-size: clamp(42px, 9vw, 68px); }
-
 }
-
-.ss-catalog .ss-category-title--balanced { font-size: clamp(48px,5vw,74px) !important; }
 
 .ss-catalog .ss-page-numbers a {
     display: grid;
