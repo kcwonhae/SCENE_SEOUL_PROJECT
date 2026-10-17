@@ -3163,7 +3163,7 @@ body .ss-page .popup-catalog .ss-category-title {
     font-size: clamp(40px, 4.6vw, 66px) !important;
 }
 .popup-catalog .pop-all-status .pop-status-all-label {
-    color: inherit !important;
+    color: var(--ss-blue) !important;
     font-weight: inherit;
 }
 @media (max-width:760px) {
