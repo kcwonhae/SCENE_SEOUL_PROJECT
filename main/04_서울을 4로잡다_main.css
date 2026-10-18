@@ -1058,7 +1058,7 @@ footer strong { letter-spacing: -.09em; font-size: 28px; }
     display: grid;
     place-items: center;
     font-size: 30px;
-    color: #e44451;
+    color: #FFDB63;
     line-height: 1;
     animation: sceneHeartPop .28s cubic-bezier(.2,.8,.2,1.3) both;
 }
