@@ -237,7 +237,7 @@ html {
 }
 
 
-/* ---------- 04. 성동구만 클릭 가능 ---------- */
+/* ---------- 04. 현재는 성동구만 클릭 가능 ---------- */
 
 /* 나머지 행정구는 클릭 비활성화 */
 .map-svg .district-layer > .district:not(.district-seongdong) {
@@ -327,7 +327,7 @@ html {
 }
 
 
-/* 핵심: 지도 컨테이너 크기를 확대하지 않고 지도 SVG가 들어 있는 .map-region만 확대. */
+/* 핵심: 지도 컨테이너 크기를 확대하지 않고 지도 SVG가 들어 있는 .map-region만 확대 */
 
 .map-section:has(#seongdong:target) .map-region {
     width: min(100%, 780px);
@@ -363,10 +363,7 @@ html {
     min-width: 0;
     padding: 24px 20px;
 
-    /*
-       패널 전체에 고정 높이를 강제하지 않음.
-       콘텐츠는 패널 안에서 자연스럽게 표시.
-    */
+    /* 패널 전체에 고정 높이를 강제하지 않음. 콘텐츠는 패널 안에서 자연스럽게 표시 */
     overflow-y: auto;
     overscroll-behavior: contain;
 
@@ -639,19 +636,6 @@ html {
         transition: none;
     }
 }
-
-/* 지도 확대 시 주변 레이아웃의 불필요한 움직임 방지 */
-.map-layout {
-    position: relative;
-    overflow: hidden;
-    overflow: clip;
-}
-
-/* 지도 자체만 확대 */
-.map-region {
-    transform-origin: 67.4% 53.3%;
-}
-
 
 /* ---------- 성동구 콘텐츠 카테고리 필터 ---------- */
 
