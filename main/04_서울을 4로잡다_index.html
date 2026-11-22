@@ -1,294 +1,340 @@
 <!DOCTYPE html>
-
 <html lang="ko">
-    <head>
-        <meta charset="utf-8"/>
-         <meta name="team-number" content="04">
-        <meta name="team-name" content="서울을 4로잡다">
-         <meta name="author" content="2415738 김채원">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCENE:SEOUL</title>
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
+    <link rel="stylesheet" href="04_서울을 4로잡다_index.css">
 
-        <meta content="width=device-width,initial-scale=1" name="viewport"/>
-        <meta content="#f8f7f2" name="theme-color"/>
-        <title>SCENE:SEOUL — 서울 문화 아카이브</title>
-        <link href="../css/04_서울을 4로잡다_common.css" rel="stylesheet"/>
-        <link href="./04_서울을 4로잡다_main.css" rel="stylesheet"/>
-    </head>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script src="04_서울을 4로잡다_index.js" defer></script>
+
+</head>
+<body>
     <body id="top">
 
-        <!-- 01 / 고정 메뉴바: 스타일은 css/common.css에서 일괄 관리 -->
-        <header class="ss-header" id="header">
-            <a aria-label="씬 서울 홈" class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html">
-                SCENE<span class="ss-accent">:</span>SEOUL
-            </a>
-            <nav aria-label="메인 메뉴" class="ss-nav">
-                <a aria-current="page" class="is-active" href="../main/04_서울을 4로잡다_index.html">HOME</a>
-                <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
-                <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
-                <a href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
-                <a href="../event/04_서울을 4로잡다_event.html">이벤트</a>
-                <a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
-                <a href="../map/04_서울을 4로잡다_map.html">지도</a>
-            </nav>
-            <div class="ss-header-actions">
-                <span class="ss-header-quick-icons">
-                    <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
-                        <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24">
-                            <circle cx="10.8" cy="10.8" r="6.6"></circle>
-                            <path d="m16 16 5 5"></path>
-                        </svg>
-                    </button>
-                    <span aria-label="언어: 한국어" class="ss-language">
-                        <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24">
-                            <circle cx="12" cy="12" r="9"></circle>
-                            <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
-                        </svg>
-                        <span>KR</span>
-                    </span>
-                </span>
-                <button class="header-login" type="button">
-                    LOGIN
-                </button>
-                <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY CALENDER</a>
-                <span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
-                    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewbox="0 0 24 24">
-                        <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
-                        <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
-                    </svg>
-                </span>
-            </div>
-        </header>
-
-        <!-- 02 / 메인 콘텐츠 시작 -->
-        <main>
-
-            <!-- 03 / 스크롤 히어로: 이미지 4장과 나만의 서울 소개 -->
-            <section aria-label="서울의 문화 장면을 스크롤로 감상하기" class="season-film" id="home">
-                <div class="season-film-sticky"><div aria-hidden="true" class="season-scene scene-image-exhibition" data-scene="0"></div><div aria-hidden="true" class="season-scene scene-image-performance" data-scene="1"></div><div aria-hidden="true" class="season-scene scene-image-popup" data-scene="2"></div><div aria-hidden="true" class="season-scene scene-image-event" data-scene="3"></div>
-                    <div class="season-editorial"><h1>나의 서울,<br/><em>SCENE:SEOUL</em></h1><p>서울의 순간을 모아, 나만의 장면으로.</p><a class="season-discover" href="#scene">나만의 서울 만나보기 <span>↗</span></a></div>
-                    <div class="season-bottom-strip"><span>SCENE:SEOUL</span><span>아래로 스크롤 ↓</span></div>
-                    <div aria-hidden="true" class="season-progress"><span></span></div><section class="edition-next" id="discover">
-                        <div class="edition-next-index">SCENE:SEOUL — PERSONAL RECOMMENDATION</div>
-                        <div>
-                            <span class="eyebrow">EDITOR’S NOTE </span>
-                            <h2>나의 취향으로 발견하는,<br/><em>또 다른 서울.</em></h2>
-                            <p>전시부터 공연, 팝업과 이벤트까지.<br/>마음에 드는 장면을 저장해 나만의 문화 탐방을 완성해 보세요.</p>
-                            <a class="edition-text-link" href="../recommend/04_서울을 4로잡다_recommend.html">나만의 문화 추천받기 <span>↗</span></a>
-                        </div>
-                    </section></div>
-            </section>
-
-            <!-- 04 / FIND YOUR SCENE: 전시·공연·팝업·이벤트 카드 -->
-            <section class="scenes section-pad" id="scene">
-                <div class="section-heading reveal">
-                    <div>
-                        <span class="eyebrow">
-
-                        </span>
-                        <h2>
-                            FIND YOUR<br/>
-                            <i>SCENE.</i>
-                        </h2>
-                    </div>
-                    <span class="section-aside">
-
-                    </span>
-                </div>
-                <div class="scene-grid">
-                    <!-- [문화 카드 1] 전시 이미지와 이동 링크 -->
-                    <article class="scene-card exhibition reveal" data-order="0"><a aria-label="전시 페이지로 이동" class="scene-card-link" href="../exhibition/04_서울을 4로잡다_exhibition.html">
-                            <div class="scene-art"><img alt="전시 대표 이미지" loading="lazy" src="../images/index.01.jpg"/></div>
-                            <div class="scene-meta">
-                                <div>
-                                    <span>01 / EXHIBITION</span>
-                                    <h3>전시 <b>EXHIBITIONS</b></h3>
-                                </div>
-                                <span class="arrow">↗</span>
-                            </div>
-                        </a></article>
-                    <!-- [문화 카드 2] 공연 이미지와 이동 링크 -->
-                    <article class="scene-card performance reveal" data-order="1"><a aria-label="공연 페이지로 이동" class="scene-card-link" href="../performance/04_서울을 4로잡다_performance.html">
-                            <div class="scene-art"><img alt="공연 대표 이미지" loading="lazy" src="../images/index.02.jpg"/></div>
-                            <div class="scene-meta">
-                                <div>
-                                    <span>02 / PERFORMANCE</span>
-                                    <h3>공연 <b>PERFORMANCES</b></h3>
-                                </div>
-                                <span class="arrow">↗</span>
-                            </div>
-                        </a></article>
-                    <!-- [문화 카드 3] 팝업 이미지와 이동 링크 -->
-                    <article class="scene-card popup reveal" data-order="2">
-                        <a aria-label="팝업 페이지로 이동" class="scene-card-link" href="../popup/04_서울을 4로잡다_popup.html">
-                            <div class="scene-art"><img alt="팝업 대표 이미지" loading="lazy" src="../images/index.03.jpg"/></div>
-                            <div class="scene-meta">
-                                <div>
-                                    <span>03 / POP-UP</span>
-                                    <h3>팝업 <b>POP-UPS</b></h3>
-                                </div>
-                                <span class="arrow">↗</span>
-                            </div>
-                        </a>
-                    </article>
-                    <!-- [문화 카드 4] 이벤트 이미지와 이동 링크 -->
-                    <article class="scene-card event reveal" data-order="3"><a aria-label="이벤트 페이지로 이동" class="scene-card-link" href="../event/04_서울을 4로잡다_event.html">
-                            <div class="scene-art"><img alt="이벤트 대표 이미지" loading="lazy" src="../images/index.04.jpg"/></div>
-                            <div class="scene-meta">
-                                <div>
-                                    <span>04 / EVENT</span>
-                                    <h3>이벤트 <b>EVENTS</b></h3>
-                                </div>
-                                <span class="arrow">↗</span>
-                            </div>
-                        </a></article>
-                </div>
-            </section>
-
-            <!-- 05 / MY CALENDER: 관심 일정 미리보기, 하트는 :checked로 표현 -->
-            <section class="agenda-section" id="calendar">
-                <div class="agenda-title-line">
-                    <div>
-                        <h2>MY CALENDER<span class="agenda-period">.</span></h2>
-                    </div>
-                    <a class="edition-text-link" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">내 문화 일정 확인하기 ↗</a>
-                </div>
-                <div class="agenda-layout">
-                    <aside class="agenda-aside">
-                        <span>OCTOBER / 2026</span>
-                        <strong>10<span>/</span>26</strong>
-                        <p>관심 있는 문화를 골라 표시하고,<br/>나만의 탐방 일정을 미리 구성해 보세요.</p>
-                        <div class="agenda-month-mini">
-                            <b>MON</b>
-                            <b>TUE</b>
-                            <b>WED</b>
-                            <b>THU</b>
-                            <b>FRI</b>
-                            <b>SAT</b>
-                            <b>SUN</b>
-                            <span>12</span>
-                            <span>13</span>
-                            <span>14</span>
-                            <span>15</span>
-                            <span>16</span>
-                            <span>17</span>
-                            <span>18</span>
-                        </div>
-                        <small>2026.10 / 편집 예시 일정</small>
-                    </aside>
-                    <!-- 달력에 표시되는 10월 예시 일정 3개 + 접히는 상세 내용 -->
-                    <div class="agenda-days" id="calendar-list">
-                        <div class="agenda-day">
-                            <div class="agenda-date">
-                                <span>10월</span>
-                                <strong>13</strong>
-                                <span>화요일</span>
-                            </div>
-                            <div class="agenda-day-body">
-                                <div class="agenda-row">
-                                    <div class="agenda-thumb agenda-thumb-a"><img alt="등록 예정 문화 콘텐츠 포스터" loading="lazy" src="../images/mycalendar.01.jpg"/></div>
-                                    <div class="agenda-description">
-                                        <small>EXHIBITION / 성수</small>
-                                        <h3>이번 주의 전시 노트</h3>
-                                        <p>13:00–19:00 · 성동구</p>
-                                        <span>예시 일정</span>
-                                    </div>
-                                    <input class="agenda-save-input" id="save-a" type="checkbox"/>
-                                    <label aria-label="전시 관심 일정 선택" class="agenda-save" for="save-a">♡</label>
-                                </div>
-                                <div class="agenda-row">
-                                    <div class="agenda-thumb agenda-thumb-b"><img alt="등록 예정 문화 콘텐츠 포스터" loading="lazy" src="../images/mycalendar.02.jpg"/></div>
-                                    <div class="agenda-description">
-                                        <small>PERFORMANCE / 대학로</small>
-                                        <h3>무대 위의 새로운 이야기</h3>
-                                        <p>19:30 · 종로구</p>
-                                        <span>예시 일정</span>
-                                    </div>
-                                    <input class="agenda-save-input" id="save-b" type="checkbox"/>
-                                    <label aria-label="공연 관심 일정 선택" class="agenda-save" for="save-b">♡</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="agenda-day">
-                            <div class="agenda-date">
-                                <span>10월</span>
-                                <strong>14</strong>
-                                <span>수요일</span>
-                            </div>
-                            <div class="agenda-day-body">
-                                <div class="agenda-row">
-                                    <div class="agenda-thumb agenda-thumb-c"><img alt="등록 예정 문화 콘텐츠 포스터" loading="lazy" src="../images/mycalendar.03.jpg"/></div>
-                                    <div class="agenda-description">
-                                        <small>POP-UP / 성수</small>
-                                        <h3>오늘만 만나는 팝업</h3>
-                                        <p>11:00–20:00 · 성동구</p>
-                                        <span>예시 일정</span>
-                                    </div>
-                                    <input class="agenda-save-input" id="save-c" type="checkbox"/>
-                                    <label aria-label="팝업 관심 일정 선택" class="agenda-save" for="save-c">♡</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="agenda-day agenda-fold">
-                            <div class="agenda-date">
-                                <span>10월</span>
-                                <strong>15</strong>
-                                <span>목요일</span>
-                            </div>
-                            <div class="agenda-day-body">
-                                <details>
-                                    <summary>
-                                        다른 날짜의 일정 <span>↘</span>
-                                    </summary>
-                                    <p>
-                                        새로운 일정은 추후 업데이트됩니다.
-                                    </p>
-                                </details>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <p class="agenda-foot">※구성 예시입니다. 하트 선택은 현재 페이지에서만 표시되며 실제 계정에 저장되지 않습니다.</p>
-            </section>
-
-            <!-- 06 / 문화 지도 소개 및 링크 -->
-            <section aria-label="서울 문화 지도 미리보기" class="atlas-section atlas-fullbleed" id="map-section">
-                <div class="atlas-overlay">
-                    <span class="eyebrow">
-
-                    </span>
-                    <h2>
-                        서울의 장면은<br/>
-                        <i>동네마다 다르다.</i>
-                    </h2>
-                    <p>취향에 맞는 전시·공연·팝업·이벤트를 찾아,<br/>내가 저장한 문화와 함께 서울 탐방 동선을 그려보세요.</p>
-                    <a class="atlas-map-cta" href="../map/04_서울을 4로잡다_map.html">
-                        서울 문화 지도 둘러보기
-                        <span aria-hidden="true">↗</span>
-                    </a>
-                    <small>
-
-                    </small>
-                </div>
-            </section>
-
-            <!-- 메인 콘텐츠 끝 -->
-        </main>
-
-        <!-- 07 / 하단 브랜드 소개 -->
-        <footer>
-            <strong>
-                SCENE<span>:</span>SEOUL
-            </strong>
-            <p>서울의 문화를 탐색하고, 저장하고, 나만의 문화 탐방을 설계하는 SCENE:SEOUL · 일정은 예시입니다.</p>
-            <small>
-                © 2026 SCENE.SEOUL
-            </small>
-        </footer>
-
-        <!-- 08 / 우측 하단 상단 이동 버튼: common.css에서 스타일 관리 -->
-        <a aria-label="페이지 맨 위로" class="ss-back-to-top" href="#top" title="맨 위로 이동">
-            <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
-                <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
-            </svg>
+    <!-- 공통 네비게이션 바 -->
+    <header class="ss-header">
+        <a class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html" aria-label="씬 서울 홈">
+            SCENE<span class="ss-accent">:</span>SEOUL
         </a>
-    </body>
+
+        <nav aria-label="메인 메뉴" class="ss-nav">
+            <a class="is-active" aria-current="page" href="../main/index.html">HOME</a>
+            <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
+            <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
+            <a href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
+            <a href="../event/04_서울을 4로잡다_event.html">이벤트</a>
+            <a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
+            <a href="../map/04_서울을 4로잡다_map.html">지도</a>
+        </nav>
+
+        <div class="ss-header-actions">
+            <span class="ss-header-quick-icons">
+                <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
+                    <svg aria-hidden="true" fill="none" stroke="currentColor"
+                         stroke-linecap="round" stroke-width="1.8"
+                         viewBox="0 0 24 24">
+                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
+                        <path d="m16 16 5 5"></path>
+                    </svg>
+                </button>
+
+                <span aria-label="언어: 한국어" class="ss-language">
+                    <svg aria-hidden="true" fill="none" stroke="currentColor"
+                         stroke-width="1.7" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
+                    </svg>
+                    <span>KR</span>
+                </span>
+            </span>
+
+            <a class="header-login" href="#login-required">LOGIN</a>
+            <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html"
+               aria-label="마이캘린더">MY PAGE</a>
+
+            <span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
+                <svg aria-hidden="true" fill="none" stroke="currentColor"
+                     stroke-linecap="round" stroke-linejoin="round"
+                     stroke-width="1.75" viewBox="0 0 24 24">
+                    <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
+                    <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
+                </svg>
+            </span>
+        </div>
+    </header>
+
+    <main>
+    <main>
+        <!-- 메인 영상과 카테고리 -->
+        <section id="video-section">
+            <div id="fixed-wrapper">
+
+                <!-- 영상과 카테고리 사진 -->
+                <div class="video-frame">
+                    <video id="video" muted playsinline preload="auto">
+                        <source src="../images/index_video_01.mp4" type="video/mp4">
+                    </video>
+
+                    <div class="carousel-view">
+                        <div class="carousel-container">
+                            <img src="../images/04_index.01.jpg" alt="전시 공간">
+                            <img src="../images/04_index.02.jpg" alt="공연 무대">
+                            <img src="../images/04_index.03.jpg" alt="팝업 공간">
+                            <img src="../images/04_index.04.jpg" alt="이벤트 현장">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 영상 중간 문구 -->
+                <div class="scroll-text" id="text-one">
+                    <h2>서울의 모든 순간이</h2>
+                </div>
+
+                <div class="scroll-text" id="text-two">
+                    <h2>나만의 장면이 되다.</h2>
+                </div>
+
+                <!-- 서비스 소개 -->
+                <div class="explore-intro">
+                    <h2>SCENE<span>:</span>SEOUL</h2>
+
+                    <p>
+                        전시부터 공연, 팝업, 이벤트까지.<br>
+                        지금 끌리는 걸 골라보세요.
+                    </p>
+
+                    <a href="recommend.html" class="explore-button">
+                        취향에 맞는 곳 찾기
+                        <span class="explore-arrow">→</span>
+                    </a>
+                </div>
+
+                <!-- 카테고리 소개 -->
+                <div class="explore-categories">
+                    <h2 class="category-title">
+                        서울에서 즐길 거리를<br>
+                        한눈에
+                    </h2>
+
+                    <div class="explore-item active">
+                        <h3>전시</h3>
+                        <div class="category-detail">
+                            <p>지금 서울에서 볼 수 있는 전시를 만나보세요.</p>
+                            <a href="exhibition.html" class="category-button">
+                                전시 둘러보기 <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="explore-item">
+                        <h3>공연</h3>
+                        <div class="category-detail">
+                            <p>연극부터 뮤지컬, 콘서트까지.</p>
+                            <a href="performance.html" class="category-button">
+                                공연 둘러보기 <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="explore-item">
+                        <h3>팝업</h3>
+                        <div class="category-detail">
+                            <p>지금 서울에서 열리는 팝업을 찾아보세요.</p>
+                            <a href="popup.html" class="category-button">
+                                팝업 둘러보기 <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="explore-item">
+                        <h3>이벤트</h3>
+                        <div class="category-detail">
+                            <p>이번 주말에 가볼 만한 행사들을 모았어요.</p>
+                            <a href="event.html" class="category-button">
+                                이벤트 둘러보기 <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 마이캘린더 -->
+        <section id="calendar-section">
+            <div class="calendar-visual">
+
+                <!-- 날짜 카드 -->
+                <div class="calendar-grid" aria-hidden="true">
+                    <div class="day-card"><span>1</span></div>
+                    <div class="day-card"><span>2</span></div>
+                    <div class="day-card"><span>3</span></div>
+                    <div class="day-card"><span>4</span></div>
+                    <div class="day-card has-plan">
+                        <span>5</span>
+                        <small>EXHIBITION</small>
+                    </div>
+                    <div class="day-card"><span>6</span></div>
+                    <div class="day-card"><span>7</span></div>
+
+                    <div class="day-card"><span>8</span></div>
+                    <div class="day-card"><span>9</span></div>
+                    <div class="day-card"><span>10</span></div>
+
+                    <!-- 지도 화면으로 연결되는 11일 카드 -->
+                    <div class="day-card is-selected calendar-scene-card">
+                        <span class="day-number">11</span>
+                        <small>MY SCENE</small>
+                    </div>
+
+                    <div class="day-card"><span>12</span></div>
+                    <div class="day-card"><span>13</span></div>
+                    <div class="day-card"><span>14</span></div>
+
+                    <div class="day-card"><span>15</span></div>
+                    <div class="day-card has-plan">
+                        <span>16</span>
+                        <small>PERFORMANCE</small>
+                    </div>
+                    <div class="day-card"><span>17</span></div>
+                    <div class="day-card"><span>18</span></div>
+                    <div class="day-card"><span>19</span></div>
+                    <div class="day-card"><span>20</span></div>
+                    <div class="day-card"><span>21</span></div>
+
+                    <div class="day-card"><span>22</span></div>
+                    <div class="day-card"><span>23</span></div>
+                    <div class="day-card has-plan">
+                        <span>24</span>
+                        <small>POP-UP</small>
+                    </div>
+                    <div class="day-card"><span>25</span></div>
+                    <div class="day-card"><span>26</span></div>
+                    <div class="day-card"><span>27</span></div>
+                    <div class="day-card"><span>28</span></div>
+                </div>
+
+                <!-- 날짜 위에 나타나는 사진 -->
+                <div class="calendar-photos">
+                    <div class="calendar-photo photo-1">
+                        <img src="../images/04_index.01.jpg" alt="전시">
+                        <span>EXHIBITION</span>
+                    </div>
+
+                    <div class="calendar-photo photo-2">
+                        <img src="../images/04_index.02.jpg" alt="공연">
+                        <span>PERFORMANCE</span>
+                    </div>
+
+                    <div class="calendar-photo photo-3">
+                        <img src="../images/04_index.03.jpg" alt="팝업">
+                        <span>POP-UP</span>
+                    </div>
+
+                    <div class="calendar-photo photo-4">
+                        <img src="../images/04_index.04.jpg" alt="이벤트">
+                        <span>EVENT</span>
+                    </div>
+                </div>
+
+                <!-- 캘린더 소개 -->
+                <div class="calendar-content">
+                    <h2>
+                        서울의 순간들을<br>
+                        나만의 일정으로
+                    </h2>
+
+                    <a href="calendar.html" class="calendar-button">
+                        마이캘린더 바로가기
+                        <span>→</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 서울 지도 -->
+        <section id="map-section">
+            <div class="map-sticky">
+
+                <!-- 11일 카드가 확대될 때 나타나는 문구 -->
+                <div class="map-stage-one">
+                    <h2 class="map-hero-text map-hero-left">
+                        나만의 서울을
+                    </h2>
+
+                    <h2 class="map-hero-text map-hero-right">
+                        지도 위에서
+                    </h2>
+                </div>
+
+                <!-- 지도 이미지와 페이지 안내 -->
+                <div class="map-stage-two">
+                    <div class="map-image-wrap" id="map-image-wrap">
+                        <img
+                            src="../images/04_index.map.png"
+                            alt="서울의 여러 지역과 장소를 표시한 지도"
+                        >
+                    </div>
+
+                    <div class="map-content">
+                        <p>
+                            전시부터 공연, 팝업, 이벤트까지.<br>
+                            서울 곳곳의 문화생활을 지도에서 한눈에 찾아보세요.
+                        </p>
+
+                        <a href="map.html" class="map-button">
+                            지도 둘러보기
+                            <span>→</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- 이벤트 사진을 캘린더로 이어주는 이미지 -->
+    <!-- 이벤트 사진을 캘린더로 이어주는 이미지 -->
+    <img
+        id="calendar-bridge"
+        src="../images/04_index.04.jpg"
+        alt=""
+        aria-hidden="true"
+    >
+
+    <!-- 공통 푸터 -->
+    <footer class="ss-site-footer">
+        <strong class="footer-brand">
+            SCENE<span>:</span>SEOUL
+        </strong>
+
+        <p>
+            서울의 문화를 소개하는 웹사이트 콘셉트 ·
+            전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.
+        </p>
+
+        <small class="footer-copyright">
+            © 2026 SCENE.SEOUL
+        </small>
+    </footer>
+
+    <!-- 맨 위로 이동 -->
+    <a class="ss-back-to-top" href="#top"
+       aria-label="페이지 맨 위로" title="맨 위로 이동">
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.7"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+            <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
+        </svg>
+    </a>
+
+</body>
+</html>
+
+</body>
 </html>
