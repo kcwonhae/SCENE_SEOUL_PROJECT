@@ -1,722 +1,131 @@
 <!DOCTYPE html>
-
 <html lang="ko">
 <head>
-<meta charset="utf-8"/>
-<meta content="김안나 (2410639)" name="author"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="#f8f7f2" name="theme-color"/>
-<title>MY CALENDAR — SCENE:SEOUL</title>
-<link href="../css/04_서울을 4로잡다_common.css" rel="stylesheet"/>
-<link href="../css/04_서울을 4로잡다_category.css" rel="stylesheet"/>
-<link href="./04_서울을 4로잡다_mycalendar.css" rel="stylesheet"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="김안나 (2410639)">
+  <meta name="team-number" content="04">
+  <meta name="team-name" content="서울을 4로잡다">
+  <title>MY CALENDAR | SCENE:SEOUL</title>
+  <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
+  <link rel="stylesheet" href="./04_서울을 4로잡다_mycalendar.css">
+  <script src="./mycalendar.js" defer></script>
 </head>
-<body>
-<!-- 공통 헤더: 로고, 메뉴 링크, 검색·언어·날씨 아이콘 -->
-<header class="ss-header" id="header">
-<a aria-label="씬 서울 홈" class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html">SCENE<span class="ss-accent">:</span>SEOUL</a>
-<nav aria-label="메인 메뉴" class="ss-nav">
-<a href="../main/04_서울을 4로잡다_index.html">
-    HOME
-   </a>
-<a href="../exhibition/04_서울을 4로잡다_exhibition.html">
-    전시
-   </a>
-<a href="../performance/04_서울을 4로잡다_performance.html">
-    공연
-   </a>
-<a href="../popup/04_서울을 4로잡다_popup.html">
-    팝업
-   </a>
-<a href="../event/04_서울을 4로잡다_event.html">
-    이벤트
-   </a>
-<a href="../recommend/04_서울을 4로잡다_recommend.html">
-    추천
-   </a>
-<a href="../map/04_서울을 4로잡다_map.html">
-    지도
-   </a>
-</nav>
-<div class="ss-header-actions">
-<span class="ss-header-quick-icons">
-<button aria-label="검색" class="ss-icon-button" title="검색" type="button">
-<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24">
-<circle cx="10.8" cy="10.8" r="6.6">
-</circle>
-<path d="m16 16 5 5">
-</path>
-</svg>
-</button>
-<span aria-label="언어: 한국어" class="ss-language">
-<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24">
-<circle cx="12" cy="12" r="9">
-</circle>
-<path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18">
-</path>
-</svg>
-<span>
-      KR
-     </span>
-</span>
-</span>
-<button class="header-login" type="button">
-    LOGIN
-   </button>
-<a aria-current="page" class="header-mypage" href="./04_서울을 4로잡다_mycalendar.html">
-    MY PAGE
-   </a>
-<span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
-<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewbox="0 0 24 24">
-<path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z">
-</path>
-<path d="M6 3v2M2.5 7l1.4 1.4M10 2v2">
-</path>
-</svg>
-</span>
-</div>
-</header>
-<main class="my-main" id="top">
-<p class="my-eyebrow">
-   YOUR PERSONAL CULTURE ARCHIVE
-  </p>
-<div class="my-title-row">
-<h1>
-    MY CALENDAR
-    <span>
-     .
-    </span>
-</h1>
-<p class="my-caption">
-    마음에 담은 장면들을, 나만의 일정으로.
-    <br/>
-    서울에서 발견한 취향이 한 달에 모입니다.
-   </p>
-</div>
-<!-- 찜 현황: 콘텐츠 수와 찜한 날짜 수 -->
-<div class="saved-overview">
-<div class="saved-intro">
-<span aria-hidden="true" class="saved-heart">
-     ♥
-    </span>
-<div>
-<p class="saved-label">
-      MY SAVED SCENES
-     </p>
-<h2>
-      좋아하는 장면만, 이곳에.
-     </h2>
-<p class="saved-sub">
-      찜한 콘텐츠를 날짜별로 모아두었어요.
-     </p>
-</div>
-</div>
-<div class="saved-metrics">
-<div>
-<strong id="favoriteTotal">11</strong>
-<span>
-      이달의 찜 콘텐츠
-     </span>
-</div>
-<div>
-<strong id="favoriteDays">7</strong>
-<span>
-      취향으로 채운 날짜
-     </span>
-</div>
-</div>
-</div>
-<!-- 계정 메뉴와 선택된 콘텐츠 패널을 배치하는 영역 -->
-<div class="my-layout">
-<aside aria-label="내 계정" class="account-box"><input class="css-tab-radio" id="page-settings" name="my-page-tab" type="radio"/><input class="css-tab-radio" id="page-coupon" name="my-page-tab" type="radio"/><input class="css-tab-radio" id="page-reviews" name="my-page-tab" type="radio"/><input checked="" class="css-tab-radio" id="page-calendar" name="my-page-tab" type="radio"/>
-<div aria-hidden="true" class="account-avatar">
-     ✳
+<body id="top">
+
+  <header class="ss-header" id="header">
+    <a aria-label="씬 서울 홈" class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html">
+      SCENE<span class="ss-accent">:</span>SEOUL
+    </a>
+    <nav aria-label="메인 메뉴" class="ss-nav">
+      <a href="../main/04_서울을 4로잡다_index.html">HOME</a>
+      <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
+      <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
+      <a href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
+      <a href="../event/04_서울을 4로잡다_event.html">이벤트</a>
+      <a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
+      <a href="../map/04_서울을 4로잡다_map.html">지도</a>
+    </nav>
+    <div class="ss-header-actions">
+      <span class="ss-header-quick-icons">
+        <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
+          <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewBox="0 0 24 24">
+            <circle cx="10.8" cy="10.8" r="6.6"></circle>
+            <path d="m16 16 5 5"></path>
+          </svg>
+        </button>
+        <span aria-label="언어: 한국어" class="ss-language">
+          <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
+          </svg>
+          <span>KR</span>
+        </span>
+      </span>
+      <button class="header-login" type="button">LOGIN</button>
+      <a aria-current="page" class="header-mypage" href="./04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
+      <span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
+        <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewBox="0 0 24 24">
+          <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
+          <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
+        </svg>
+      </span>
     </div>
-<small>
-     MY SCENE / ACCOUNT
-    </small>
-<h2 id="accountName">
-     scene_lover
-    </h2>
-<p class="account-handle">
-     scene_lover@example.com
-    </p>
-<div aria-label="마이페이지 메뉴" class="account-nav">
-<label for="page-calendar" role="button" tabindex="0">
-      나의 캘린더
-      <span>
-       ↗
-      </span>
-</label>
-<label for="page-coupon" role="button" tabindex="0">
-      쿠폰함
-      <span>
-<svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="17">
-<path d="M4 11v9h16v-9M3 7h18v4H3zM12 7v13">
-</path>
-<path d="M12 7H8a3 3 0 1 1 3-3l1 3Zm0 0h4a3 3 0 1 0-3-3l-1 3Z">
-</path>
-</svg>
-</span>
-</label>
-<label for="page-reviews" role="button" tabindex="0">나의 후기<span>↗</span></label><label for="page-settings" role="button" tabindex="0">
-      설정
-      <span>
-       ↗
-      </span>
-</label>
-</div>
-<p class="account-note">
-     SAVED MOMENTS, YOUR SCENE.
-     <br/>
-     찜한 콘텐츠를 일정별로 모아 보세요.
-    </p>
-</aside>
-<!-- 월간 캘린더: 날짜별 찜한 포스터와 호버 목록 -->
-<section aria-labelledby="calendarTab" class="tab-panel" id="calendarPanel" role="tabpanel">
-<div class="monthbar">
-<div class="month-heading">
-<small id="monthEnglish">
-       OCTOBER / 2026
-      </small>
-<h2 id="monthTitle">
-       2026. 10
-      </h2>
-<div class="legend month-legend">
-<span>
-        전시
-       </span>
-<span>
-        공연
-       </span>
-<span>
-        팝업
-       </span>
-<span>
-        이벤트
-       </span>
-</div>
-</div>
-<div class="month-actions">
-<button aria-label="이전 달" id="previous">
-       ←
-      </button>
-<button aria-label="다음 달" id="next">
-       →
-      </button>
-</div>
-</div><div class="calendar-meta">
-<span aria-live="polite" id="savedCount">
-</span>
-</div><div aria-hidden="true" class="weekdays">
-<span>
-      SUN
-     </span>
-<span>
-      MON
-     </span>
-<span>
-      TUE
-     </span>
-<span>
-      WED
-     </span>
-<span>
-      THU
-     </span>
-<span>
-      FRI
-     </span>
-<span>
-      SAT
-     </span>
-</div><div aria-label="월간 찜 일정" class="calendar-grid" id="calendar" tabindex="-1">
-<div aria-label="9월 27일" class="day outside sunday">
-<time class="day-number" datetime="2026-09-27">
-       27
-      </time>
-</div>
-<div aria-label="9월 28일" class="day outside">
-<time class="day-number" datetime="2026-09-28">
-       28
-      </time>
-</div>
-<div aria-label="9월 29일" class="day outside">
-<time class="day-number" datetime="2026-09-29">
-       29
-      </time>
-</div>
-<div aria-label="9월 30일" class="day outside">
-<time class="day-number" datetime="2026-09-30">
-       30
-      </time>
-</div>
-<div aria-label="10월 1일" class="day">
-<time class="day-number" datetime="2026-10-01">
-       1
-      </time>
-</div>
-<div aria-label="10월 2일" class="day">
-<time class="day-number" datetime="2026-10-02">
-       2
-      </time>
-</div>
-<div aria-label="10월 3일" class="day has-saved" data-saved-types="3">
-<time class="day-number" datetime="2026-10-03">
-       3
-      </time>
-<div class="day-category-dots">
-<span aria-label="공연" class="category-dot" style="background:var(--cat-show)" title="공연">
-</span>
-<span aria-label="팝업" class="category-dot" style="background:var(--cat-popup)" title="팝업">
-</span>
-<span aria-label="이벤트" class="category-dot" style="background:var(--cat-event)" title="이벤트">
-</span>
-</div>
-<div class="day-posters"><div aria-label="함께 찜한 포스터" class="poster-peeks"><img alt="도심 속 공예 틈에서 피어나다 포스터" class="poster-peek" src="../images/mycalendar.03.jpg"/><img alt="2026 돈화문 야광명월 포스터" class="poster-peek" src="../images/mycalendar.02.jpg"/></div>
-<a aria-label="2026 돈화문 야광명월 상세 창 열기" class="poster-trigger" href="#scene-02" title="포스터 상세 보기">
-<img alt="2026 돈화문 야광명월 포스터" class="poster-mini" src="../images/mycalendar.02.jpg"/>
-<span class="poster-count">
-         +2
-        </span>
-</a>
-<div aria-label="이 날짜에 찜한 콘텐츠" class="day-tray">
-<a aria-label="2026 돈화문 야광명월 상세 창 열기" class="tray-card" href="#scene-02">
-<img alt="2026 돈화문 야광명월 포스터" src="../images/mycalendar.02.jpg"/>
-</a>
-<a aria-label="도심 속 공예 틈에서 피어나다 상세 창 열기" class="tray-card" href="#scene-03">
-<img alt="도심 속 공예 틈에서 피어나다 포스터" src="../images/mycalendar.03.jpg"/>
-</a>
-<a aria-label="2026 돈화문 야광명월 상세 창 열기" class="tray-card" href="#scene-02">
-<img alt="2026 돈화문 야광명월 포스터" src="../images/mycalendar.02.jpg"/>
-</a>
-</div>
-</div>
-</div>
-<div aria-label="10월 4일" class="day sunday">
-<time class="day-number" datetime="2026-10-04">
-       4
-      </time>
-</div>
-<div aria-label="10월 5일" class="day">
-<time class="day-number" datetime="2026-10-05">
-       5
-      </time>
-</div>
-<div aria-label="10월 6일" class="day">
-<time class="day-number" datetime="2026-10-06">
-       6
-      </time>
-</div>
-<div aria-label="10월 7일" class="day has-saved" data-saved-types="1">
-<time class="day-number" datetime="2026-10-07">
-       7
-      </time>
-<div class="day-category-dots">
-<span aria-label="전시" class="category-dot" style="background:var(--cat-exhibit)" title="전시">
-</span>
-</div>
-<div class="day-posters">
-<a aria-label="시간이 쌓이는 집 상세 창 열기" class="poster-trigger" href="#scene-01" title="포스터 상세 보기">
-<img alt="시간이 쌓이는 집 포스터" class="poster-mini" src="../images/mycalendar.01.jpg"/>
-</a>
-<div aria-label="이 날짜에 찜한 콘텐츠" class="day-tray">
-<a aria-label="시간이 쌓이는 집 상세 창 열기" class="tray-card" href="#scene-01">
-<img alt="시간이 쌓이는 집 포스터" src="../images/mycalendar.01.jpg"/>
-</a>
-</div>
-</div>
-</div>
-<div aria-label="10월 8일" class="day">
-<time class="day-number" datetime="2026-10-08">
-       8
-      </time>
-</div>
-<div aria-label="10월 9일" class="day has-saved" data-saved-types="2">
-<time class="day-number" datetime="2026-10-09">
-       9
-      </time>
-<div class="day-category-dots">
-<span aria-label="팝업" class="category-dot" style="background:var(--cat-popup)" title="팝업">
-</span>
-<span aria-label="공연" class="category-dot" style="background:var(--cat-show)" title="공연">
-</span>
-</div>
-<div class="day-posters"><div aria-label="함께 찜한 포스터" class="poster-peeks"><img alt="2026 돈화문 야광명월 포스터" class="poster-peek" src="../images/mycalendar.02.jpg"/></div>
-<a aria-label="도심 속 공예 틈에서 피어나다 상세 창 열기" class="poster-trigger" href="#scene-03" title="포스터 상세 보기">
-<img alt="도심 속 공예 틈에서 피어나다 포스터" class="poster-mini" src="../images/mycalendar.03.jpg"/>
-<span class="poster-count">
-         +1
-        </span>
-</a>
-<div aria-label="이 날짜에 찜한 콘텐츠" class="day-tray">
-<a aria-label="도심 속 공예 틈에서 피어나다 상세 창 열기" class="tray-card" href="#scene-03">
-<img alt="도심 속 공예 틈에서 피어나다 포스터" src="../images/mycalendar.03.jpg"/>
-</a>
-<a aria-label="2026 돈화문 야광명월 상세 창 열기" class="tray-card" href="#scene-02">
-<img alt="2026 돈화문 야광명월 포스터" src="../images/mycalendar.02.jpg"/>
-</a>
-</div>
-</div>
-</div>
-<div aria-label="10월 10일" class="day">
-<time class="day-number" datetime="2026-10-10">
-       10
-      </time>
-</div>
-<div aria-label="10월 11일" class="day sunday">
-<time class="day-number" datetime="2026-10-11">
-       11
-      </time>
-</div>
-<div aria-label="10월 12일" class="day">
-<time class="day-number" datetime="2026-10-12">
-       12
-      </time>
-</div>
-<div aria-label="10월 13일" class="day has-saved tray-align-right" data-saved-types="2">
-<time class="day-number" datetime="2026-10-13">
-       13
-      </time>
-<div class="day-category-dots">
-<span aria-label="전시" class="category-dot" style="background:var(--cat-exhibit)" title="전시">
-</span>
-<span aria-label="공연" class="category-dot" style="background:var(--cat-show)" title="공연">
-</span>
-</div>
-<div class="day-posters"><div aria-label="함께 찜한 포스터" class="poster-peeks"><img alt="2026 돈화문 야광명월 포스터" class="poster-peek" src="../images/mycalendar.02.jpg"/></div>
-<a aria-label="시간이 쌓이는 집 상세 창 열기" class="poster-trigger" href="#scene-01" title="포스터 상세 보기">
-<img alt="시간이 쌓이는 집 포스터" class="poster-mini" src="../images/mycalendar.01.jpg"/>
-<span class="poster-count">
-         +1
-        </span>
-</a>
-<div aria-label="이 날짜에 찜한 콘텐츠" class="day-tray">
-<a aria-label="시간이 쌓이는 집 상세 창 열기" class="tray-card" href="#scene-01">
-<img alt="시간이 쌓이는 집 포스터" src="../images/mycalendar.01.jpg"/>
-</a>
-<a aria-label="2026 돈화문 야광명월 상세 창 열기" class="tray-card" href="#scene-02">
-<img alt="2026 돈화문 야광명월 포스터" src="../images/mycalendar.02.jpg"/>
-</a>
-</div>
-</div>
-</div>
-<div aria-label="10월 14일" class="day">
-<time class="day-number" datetime="2026-10-14">
-       14
-      </time>
-</div>
-<div aria-label="10월 15일 (오늘)" class="day today">
-<time class="day-number" datetime="2026-10-15">
-       15
-      </time>
-</div>
-<div aria-label="10월 16일" class="day">
-<time class="day-number" datetime="2026-10-16">
-       16
-      </time>
-</div>
-<div aria-label="10월 17일" class="day">
-<time class="day-number" datetime="2026-10-17">
-       17
-      </time>
-</div>
-<div aria-label="10월 18일" class="day sunday has-saved" data-saved-types="1">
-<time class="day-number" datetime="2026-10-18">
-       18
-      </time>
-<div class="day-category-dots">
-<span aria-label="팝업" class="category-dot" style="background:var(--cat-popup)" title="팝업">
-</span>
-</div>
-<div class="day-posters">
-<a aria-label="도심 속 공예 틈에서 피어나다 상세 창 열기" class="poster-trigger" href="#scene-03" title="포스터 상세 보기">
-<img alt="도심 속 공예 틈에서 피어나다 포스터" class="poster-mini" src="../images/mycalendar.03.jpg"/>
-</a>
-<div aria-label="이 날짜에 찜한 콘텐츠" class="day-tray">
-<a aria-label="도심 속 공예 틈에서 피어나다 상세 창 열기" class="tray-card" href="#scene-03">
-<img alt="도심 속 공예 틈에서 피어나다 포스터" src="../images/mycalendar.03.jpg"/>
-</a>
-</div>
-</div>
-</div>
-<div aria-label="10월 19일" class="day">
-<time class="day-number" datetime="2026-10-19">
-       19
-      </time>
-</div>
-<div aria-label="10월 20일" class="day">
-<time class="day-number" datetime="2026-10-20">
-       20
-      </time>
-</div>
-<div aria-label="10월 21일" class="day">
-<time class="day-number" datetime="2026-10-21">
-       21
-      </time>
-</div>
-<div aria-label="10월 22일" class="day">
-<time class="day-number" datetime="2026-10-22">
-       22
-      </time>
-</div>
-<div aria-label="10월 23일" class="day">
-<time class="day-number" datetime="2026-10-23">
-       23
-      </time>
-</div>
-<div aria-label="10월 24일" class="day has-saved" data-saved-types="1">
-<time class="day-number" datetime="2026-10-24">
-       24
-      </time>
-<div class="day-category-dots">
-<span aria-label="공연" class="category-dot" style="background:var(--cat-show)" title="공연">
-</span>
-</div>
-<div class="day-posters">
-<a aria-label="2026 돈화문 야광명월 상세 창 열기" class="poster-trigger" href="#scene-02" title="포스터 상세 보기">
-<img alt="2026 돈화문 야광명월 포스터" class="poster-mini" src="../images/mycalendar.02.jpg"/>
-</a>
-<div aria-label="이 날짜에 찜한 콘텐츠" class="day-tray">
-<a aria-label="2026 돈화문 야광명월 상세 창 열기" class="tray-card" href="#scene-02">
-<img alt="2026 돈화문 야광명월 포스터" src="../images/mycalendar.02.jpg"/>
-</a>
-</div>
-</div>
-</div>
-<div aria-label="10월 25일" class="day sunday">
-<time class="day-number" datetime="2026-10-25">
-       25
-      </time>
-</div>
-<div aria-label="10월 26일" class="day">
-<time class="day-number" datetime="2026-10-26">
-       26
-      </time>
-</div>
-<div aria-label="10월 27일" class="day">
-<time class="day-number" datetime="2026-10-27">
-       27
-      </time>
-</div>
-<div aria-label="10월 28일" class="day">
-<time class="day-number" datetime="2026-10-28">
-       28
-      </time>
-</div>
-<div aria-label="10월 29일" class="day has-saved" data-saved-types="1">
-<time class="day-number" datetime="2026-10-29">
-       29
-      </time>
-<div class="day-category-dots">
-<span aria-label="전시" class="category-dot" style="background:var(--cat-exhibit)" title="전시"></span>
-</div>
-<div class="day-posters">
-<a aria-label="시간이 쌓이는 집 상세 창 열기" class="poster-trigger" href="#scene-01" title="포스터 상세 보기">
-<img alt="시간이 쌓이는 집 포스터" class="poster-mini" src="../images/mycalendar.01.jpg"/>
-</a>
-<div aria-label="이 날짜에 찜한 콘텐츠" class="day-tray">
-<a aria-label="시간이 쌓이는 집 상세 창 열기" class="tray-card" href="#scene-01">
-<img alt="시간이 쌓이는 집 포스터" src="../images/mycalendar.01.jpg"/>
-</a>
-</div>
-</div>
-</div>
-<div aria-label="10월 30일" class="day">
-<time class="day-number" datetime="2026-10-30">
-       30
-      </time>
-</div>
-<div aria-label="10월 31일" class="day">
-<time class="day-number" datetime="2026-10-31">
-       31
-      </time>
-</div>
-</div><div class="calendar-bottom">
-<span>
-      날짜에 마우스를 올리면 찜한 포스터를 크게 볼 수 있습니다. 
-     </span>
-<span>
-      SEOUL, SOUTH KOREA / MY ARCHIVE
-     </span>
-</div>
-</section>
-<!-- 나의 후기: 작성된 후기 카드 목록 -->
-<section aria-label="나의 후기" class="tab-panel secondary-panel" id="reviewsPanel"><section class="day-detail-block detail-9"><p class="detail-kicker">MY SCENE / OCTOBER 2026</p><h3>10월 9일의 장면</h3><p class="detail-intro">내가 남긴 후기</p><article class="scene-detail-card"><img alt="도심 속 공예 틈에서 피어나다 포스터" src="../images/mycalendar.03.jpg"/><div class="scene-detail-copy"><small>팝업</small><h4>도심 속 공예 틈에서 피어나다</h4><p>10월 9일 방문</p><div class="scene-review"><strong>나의 후기</strong><span class="vote-mark">♥ 좋아요</span><p>작품을 가까이서 볼 수 있어서 좋았어요.</p></div></div></article><article class="scene-detail-card"><img alt="2026 돈화문 야광명월 포스터" src="../images/mycalendar.02.jpg"/><div class="scene-detail-copy"><small>공연</small><h4>2026 돈화문 야광명월</h4><p>10월 9일 방문</p><div class="scene-review"><strong>나의 후기</strong><span class="vote-mark">♡ 싫어요</span><p>공연 분위기가 인상적이었지만 조금 아쉬운 점도 있었어요.</p></div></div></article></section></section><!-- 쿠폰함: 쿠폰 안내 영역 -->
-<section aria-labelledby="couponTab" class="tab-panel secondary-panel" id="couponPanel" role="tabpanel">
-<p class="my-eyebrow">
-     A LITTLE EXTRA FOR YOUR SCENE
-    </p>
-<h2>
-     쿠폰함
-     <span style="color:var(--blue)">
-      .
-     </span>
-</h2>
-<p>
-     새로운 문화 경험을 위한 혜택을 모아두는 곳.
-    </p>
-<div class="empty-coupon">
-<b>
-      ✳
-     </b>
-<p>
-      보유한 쿠폰이 없습니다.
-      <br/>
-      
-     </p>
-</div>
-</section>
-<!-- 설정: 계정 정보와 입력 항목 -->
-<section aria-labelledby="settingsTab" class="tab-panel secondary-panel" id="settingsPanel" role="tabpanel">
-<p class="my-eyebrow">
-     MAKE IT YOURS
-    </p>
-<h2>
-     설정
-     <span style="color:var(--blue)">
-      .
-     </span>
-</h2>
-<p>
-     이 브라우저에서 사용할 표시 이름과 캘린더 옵션을 설정하세요.
-    </p>
-<form class="settings-form" id="settingsForm">
-<label for="displayName">
-      표시 이름
-     </label>
-<input id="displayName" maxlength="30" required="" type="text" value="scene_lover"/>
-<label class="setting-check">
-<input checked="" id="showDemo" type="checkbox"/>
-      찜한 콘텐츠 표시
-     </label>
-<button class="save-settings" type="submit">
-      변경사항 저장 ↗
-     </button>
-<p class="settings-status" id="settingsStatus" role="status">
-</p>
-</form>
-</section>
-</div>
-</main>
-<section aria-label="시간이 쌓이는 집 상세 정보" class="scene-popup" id="scene-01">
-<a aria-label="상세 창 닫기" class="scene-popup-backdrop" href="#calendarPanel"></a>
-<!-- 포스터 상세 창: 포스터, 제목, 설명과 관련 버튼 -->
-<div aria-labelledby="scene-title-01" aria-modal="true" class="scene-popup-card" role="dialog">
-<a aria-label="상세 창 닫기" class="scene-popup-close" href="#calendarPanel">×</a>
-<div class="scene-popup-content">
-<img alt="시간이 쌓이는 집 포스터" class="scene-popup-poster" src="../images/mycalendar.01.jpg"/>
-<div class="scene-popup-info"><small>MY SAVED SCENE / 전시</small>
-<h2 id="scene-title-01">시간이 쌓이는 집</h2><p>시간과 공간에 관한 이야기를 담은 전시. 일상 속 익숙한 공간을 새로운 시선으로 바라보는 시간을 만나보세요.</p>
-<div class="scene-popup-buttons">
-<a aria-label="찜 취소 확인" class="scene-popup-heart" href="#confirm-01">♥ 찜한 콘텐츠</a>
-<a class="scene-popup-review" href="#write-01">후기 작성 ↗</a>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section aria-label="찜 취소 확인" class="scene-popup scene-confirm" id="confirm-01">
-<a aria-label="확인 창 닫기" class="scene-popup-backdrop" href="#scene-01"></a>
-<div aria-modal="true" class="scene-confirm-card" role="alertdialog">
-<span class="scene-confirm-heart">♥</span><h2>찜을 취소하시겠습니까?</h2>
-<p>선택한 콘텐츠: 시간이 쌓이는 집</p>
-<div class="scene-confirm-actions"><button class="scene-confirm-yes" type="button">예</button><a href="#scene-01">취소</a></div>
+  </header>
 
-</div>
-</section>
-<section aria-label="후기 작성" class="scene-popup scene-write" id="write-01">
-<a aria-label="후기 창 닫기" class="scene-popup-backdrop" href="#scene-01"></a>
-<div aria-modal="true" class="scene-confirm-card" role="dialog">
-<h2>나의 후기 작성</h2><p>시간이 쌓이는 집</p>
-<label class="scene-write-label" for="review-01">관람 후기를 남겨보세요.</label>
-<textarea id="review-01" placeholder="인상 깊었던 장면을 자유롭게 적어주세요."></textarea>
-<div class="scene-confirm-actions"><button class="scene-confirm-yes" type="button">작성 완료</button><a href="#scene-01">취소</a></div>
+  <main class="calendar-page ss-page">
+    <div class="page-width">
+      <h1 class="page-title">MY CALENDAR</h1>
 
-</div>
-</section><section aria-label="2026 돈화문 야광명월 상세 정보" class="scene-popup" id="scene-02">
-<a aria-label="상세 창 닫기" class="scene-popup-backdrop" href="#calendarPanel"></a>
-<div aria-labelledby="scene-title-02" aria-modal="true" class="scene-popup-card" role="dialog">
-<a aria-label="상세 창 닫기" class="scene-popup-close" href="#calendarPanel">×</a>
-<div class="scene-popup-content">
-<img alt="2026 돈화문 야광명월 포스터" class="scene-popup-poster" src="../images/mycalendar.02.jpg"/>
-<div class="scene-popup-info"><small>MY SAVED SCENE / 공연</small>
-<h2 id="scene-title-02">2026 돈화문 야광명월</h2><p>서울의 밤을 배경으로 전통문화의 매력을 느낄 수 있는 공연. 고즈넉한 분위기 속에서 특별한 가을밤을 즐겨보세요.</p>
-<div class="scene-popup-buttons">
-<a aria-label="찜 취소 확인" class="scene-popup-heart" href="#confirm-02">♥ 찜한 콘텐츠</a>
-<a class="scene-popup-review" href="#write-02">후기 작성 ↗</a>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section aria-label="찜 취소 확인" class="scene-popup scene-confirm" id="confirm-02">
-<a aria-label="확인 창 닫기" class="scene-popup-backdrop" href="#scene-02"></a>
-<div aria-modal="true" class="scene-confirm-card" role="alertdialog">
-<span class="scene-confirm-heart">♥</span><h2>찜을 취소하시겠습니까?</h2>
-<p>선택한 콘텐츠: 2026 돈화문 야광명월</p>
-<div class="scene-confirm-actions"><button class="scene-confirm-yes" type="button">예</button><a href="#scene-02">취소</a></div>
+      <!-- 월간 달력 + 선택한 날짜의 콘텐츠 -->
+      <section class="schedule-section" id="calendarArea" aria-label="월간 캘린더">
+        <div class="schedule-layout">
+          <div class="calendar-wrap">
+            <div class="calendar-toolbar">
+              <h2 id="monthTitle" aria-live="polite"></h2>
+              <div class="calendar-actions">
+                <button type="button" id="prevMonth" class="month-button" aria-label="이전 달">&lt;</button>
+                <button type="button" id="nextMonth" class="month-button" aria-label="다음 달">&gt;</button>
+              </div>
+            </div>
+            <div class="weekdays" aria-hidden="true">
+              <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+            </div>
+            <div class="calendar-grid" id="calendarGrid" aria-label="월간 달력"></div>
+          </div>
+          <aside class="day-panel" aria-label="선택한 날짜의 콘텐츠">
+            <div class="day-panel-heading">
+              <h3 id="selectedDate"></h3>
+              <p id="dayCount">저장한 콘텐츠 0개</p>
+            </div>
+            <div id="dayContents" class="day-contents" aria-live="polite"></div>
+          </aside>
+        </div>
+      </section>
 
-</div>
-</section>
-<section aria-label="후기 작성" class="scene-popup scene-write" id="write-02">
-<a aria-label="후기 창 닫기" class="scene-popup-backdrop" href="#scene-02"></a>
-<div aria-modal="true" class="scene-confirm-card" role="dialog">
-<h2>나의 후기 작성</h2><p>2026 돈화문 야광명월</p>
-<label class="scene-write-label" for="review-02">관람 후기를 남겨보세요.</label>
-<textarea id="review-02" placeholder="인상 깊었던 장면을 자유롭게 적어주세요."></textarea>
-<div class="scene-confirm-actions"><button class="scene-confirm-yes" type="button">작성 완료</button><a href="#scene-02">취소</a></div>
+      <!-- 찜한 콘텐츠 목록 -->
+      <section class="saved-section" id="savedArea" aria-labelledby="savedHeading">
+        <div class="section-head">
+          <h2 id="savedHeading">찜한 콘텐츠</h2>
+          <span class="saved-total">총 <b id="savedTotal">0</b>개</span>
+        </div>
+        <div class="filter-controls" id="filterControls" role="group" aria-label="콘텐츠 유형 선택">
+          <button type="button" class="filter-button is-active" data-filter="전체" aria-pressed="true">전체</button>
+          <button type="button" class="filter-button" data-filter="전시" aria-pressed="false">전시</button>
+          <button type="button" class="filter-button" data-filter="공연" aria-pressed="false">공연</button>
+          <button type="button" class="filter-button" data-filter="팝업" aria-pressed="false">팝업</button>
+          <button type="button" class="filter-button" data-filter="이벤트" aria-pressed="false">이벤트</button>
+        </div>
+        <div class="poster-grid" id="savedGrid" aria-live="polite"></div>
+        <div class="more-area">
+          <a href="../recommend/04_서울을 4로잡다_recommend.html" class="more-button">다른 콘텐츠 찜하기 <span aria-hidden="true">＋</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
 
-</div>
-</section><section aria-label="도심 속 공예 틈에서 피어나다 상세 정보" class="scene-popup" id="scene-03">
-<a aria-label="상세 창 닫기" class="scene-popup-backdrop" href="#calendarPanel"></a>
-<div aria-labelledby="scene-title-03" aria-modal="true" class="scene-popup-card" role="dialog">
-<a aria-label="상세 창 닫기" class="scene-popup-close" href="#calendarPanel">×</a>
-<div class="scene-popup-content">
-<img alt="도심 속 공예 틈에서 피어나다 포스터" class="scene-popup-poster" src="../images/mycalendar.03.jpg"/>
-<div class="scene-popup-info"><small>MY SAVED SCENE / 팝업</small>
-<h2 id="scene-title-03">도심 속 공예 틈에서 피어나다</h2><p>도심 속에서 공예 작품과 새로운 감각을 만나는 팝업. 다양한 작품과 창작자의 이야기를 가까이에서 경험해 보세요.</p>
-<div class="scene-popup-buttons">
-<a aria-label="찜 취소 확인" class="scene-popup-heart" href="#confirm-03">♥ 찜한 콘텐츠</a>
-<a class="scene-popup-review" href="#write-03">후기 작성 ↗</a>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section aria-label="찜 취소 확인" class="scene-popup scene-confirm" id="confirm-03">
-<a aria-label="확인 창 닫기" class="scene-popup-backdrop" href="#scene-03"></a>
-<div aria-modal="true" class="scene-confirm-card" role="alertdialog">
-<span class="scene-confirm-heart">♥</span><h2>찜을 취소하시겠습니까?</h2>
-<p>선택한 콘텐츠: 도심 속 공예 틈에서 피어나다</p>
-<div class="scene-confirm-actions"><button class="scene-confirm-yes" type="button">예</button><a href="#scene-03">취소</a></div>
+  <!-- 콘텐츠 상세 창 -->
+  <dialog id="detailDialog" class="detail-dialog" aria-labelledby="dialogTitle">
+    <div class="dialog-top">
+      <strong>콘텐츠 정보</strong>
+      <button type="button" id="closeDialog" class="icon-close" aria-label="닫기">×</button>
+    </div>
+    <div id="dialogContent"></div>
+  </dialog>
 
-</div>
-</section>
-<section aria-label="후기 작성" class="scene-popup scene-write" id="write-03">
-<a aria-label="후기 창 닫기" class="scene-popup-backdrop" href="#scene-03"></a>
-<div aria-modal="true" class="scene-confirm-card" role="dialog">
-<h2>나의 후기 작성</h2><p>도심 속 공예 틈에서 피어나다</p>
-<label class="scene-write-label" for="review-03">관람 후기를 남겨보세요.</label>
-<textarea id="review-03" placeholder="인상 깊었던 장면을 자유롭게 적어주세요."></textarea>
-<div class="scene-confirm-actions"><button class="scene-confirm-yes" type="button">작성 완료</button><a href="#scene-03">취소</a></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-</div>
-</section><!-- 공통 푸터: 사이트 소개 및 저작권 정보 -->
-<footer class="ss-site-footer">
-<strong class="footer-brand">
-   SCENE
-   <span>
-    :
-   </span>
-   SEOUL
-  </strong>
-<p>
-   서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.
-  </p>
-<small class="footer-copyright">
-   © 2026 SCENE.SEOUL
-  </small>
-</footer>
+  <footer class="ss-site-footer">
+    <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
+    <p>서울의 문화를 탐색하고, 저장하고, 나만의 문화 탐방을 설계하는 SCENE:SEOUL · 일정은 예시입니다.</p>
+    <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
+  </footer>
+
+  <a aria-label="페이지 맨 위로" class="ss-back-to-top" href="#top" title="맨 위로 이동">
+    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewBox="0 0 24 24">
+      <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
+    </svg>
+  </a>
+
 </body>
 </html>
