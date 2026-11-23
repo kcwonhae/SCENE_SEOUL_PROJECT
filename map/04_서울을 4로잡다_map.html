@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
     <link rel="stylesheet" href="../map/04_서울을 4로잡다_map.css">
+
+    <!-- 실제 지도: Leaflet + OpenStreetMap (※ 수업 외 라이브러리, 키 발급 불필요) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 
 <body id="page">
@@ -67,7 +70,7 @@
                 </span>
             </span>
 
-            <a class="header-login" href="#login-required">LOGIN</a>
+            <a class="header-login" id="login-link" href="#">LOGIN</a>
             <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
 
             <span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
@@ -119,580 +122,72 @@
 
 
         <!-- 03. 지도 및 콘텐츠 -->
-        <section
-            class="map-section"
-            id="seoul-map-section"
-            aria-labelledby="map-heading"
-        >
+        <section class="map-section" id="seoul-map-section" aria-labelledby="map-heading">
 
             <div class="map-topline">
-
                 <div>
-                    <p class="map-section-label">
-                        EXPLORE BY DISTRICT
-                    </p>
-
-                    <h2 id="map-heading">
-                        서울의 문화 지도
-                    </h2>
+                    <p class="map-section-label">EXPLORE BY DISTRICT</p>
+                    <h2 id="map-heading">서울의 문화 지도</h2>
                 </div>
-
-                <p class="map-hint">
-                    <span class="hint-dot"></span>
-                    각 행정구를 클릭해보세요
-                </p>
-
+                <p class="map-hint">지도의 마커나 구 이름을 눌러보세요</p>
             </div>
 
+            <!-- 지도 -->
+            <div class="map-box">
+                <div id="leaflet-map" role="application" aria-label="서울 문화 지도"></div>
+                <div class="district-chips" id="district-chips" aria-label="서울 자치구 선택"></div>
+            </div>
 
-            <!-- 지도와 선택 지역 패널 -->
-            <div class="map-layout">
+            <!-- 지도 아래 콘텐츠 목록 (map.js가 채움) -->
+            <div class="result-box" aria-live="polite">
 
-                <!-- 서울 지도 (마땅한 svg가 없어서 ai를 통해 구현, 경로가 있는 svg를 찾기 어려웠음.)-->
-                <div class="map-region">
+                <div class="result-head">
+                    <div>
+                        <p class="result-eyebrow">YOUR NEXT SCENE</p>
+                        <h3 id="result-title">서울 전체</h3>
+                        <p class="result-count" id="result-count"></p>
+                    </div>
 
-                    <svg
-                        class="map-svg"
-                        viewBox="0 0 475 332"
-                        role="img"
-                        aria-label="서울 25개 자치구 지도. 성동구를 선택할 수 있습니다."
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-
-                        <g class="district-layer">
-
-                            <!-- 강서구 -->
-                            <g class="district" data-name="강서구">
-                                <path d="M144.2,172.2 L143.0,145.0 L137.0,148.0 L131.0,147.0 L114.0,135.0 L90.0,111.0 L86.0,111.0 L78.0,123.0 L80.0,126.0 L80.0,131.0 L77.0,137.0 L71.0,142.0 L71.0,145.0 L64.0,152.0 L60.0,153.0 L55.0,158.0 L55.0,162.0 L49.0,167.0 L52.0,182.0 L59.0,186.0 L69.0,187.0 L73.0,191.0 L73.0,194.0 L79.0,203.0 L83.0,202.0 L85.0,195.0 L91.0,191.0 L105.9,202.4 L144.2,172.2 Z"/>
-                                <text x="100" y="172">강서구</text>
-                            </g>
-
-                            <!-- 양천구 -->
-                            <g class="district" data-name="양천구">
-                                <path d="M160.0,188.0 L144.2,172.2 L105.9,202.4 L108.0,204.0 L105.6,221.0 L159.7,243.8 L165.1,239.9 L160.0,188.0 Z"/>
-                                <text x="137" y="219">양천구</text>
-                            </g>
-
-                            <!-- 구로구 -->
-                            <g class="district" data-name="구로구">
-                                <path d="M159.7,243.8 L105.6,221.0 L104.0,232.0 L100.0,236.0 L95.0,237.0 L92.0,241.0 L96.0,249.0 L100.0,252.0 L100.0,260.0 L97.0,263.0 L97.0,266.0 L103.0,274.0 L110.0,271.0 L129.0,274.0 L133.0,272.0 L134.0,266.0 L145.0,257.0 L151.0,257.0 L152.3,258.9 L159.7,243.8 Z"/>
-                                <text x="124" y="250">구로구</text>
-                            </g>
-
-                            <!-- 금천구 -->
-                            <g class="district" data-name="금천구">
-                                <path d="M203.2,256.4 L193.4,243.9 L165.1,239.9 L159.7,243.8 L152.3,258.9 L164.0,277.0 L168.0,291.0 L176.0,302.0 L179.0,312.0 L184.0,318.0 L194.0,322.0 L199.0,316.0 L199.4,315.9 L203.2,256.4 Z"/>
-                                <text x="179" y="277">금천구</text>
-                            </g>
-
-                            <!-- 영등포구 -->
-                            <g class="district" data-name="영등포구">
-                                <path d="M165.1,239.9 L193.4,243.9 L224.1,199.0 L222.9,188.0 L160.0,188.0 L165.1,239.9 Z"/>
-                                <text x="188" y="214">영등포구</text>
-                            </g>
-
-                            <!-- 마포구 -->
-                            <g class="district" data-name="마포구">
-                                <path d="M177.3,126.9 L173.0,130.0 L167.0,127.0 L162.0,129.0 L158.0,139.0 L152.0,144.0 L146.0,146.0 L143.0,145.0 L144.2,172.2 L160.0,188.0 L222.9,188.0 L225.1,183.8 L177.3,126.9 Z"/>
-                                <text x="188" y="168">마포구</text>
-                            </g>
-
-                            <!-- 은평구 -->
-                            <g class="district" data-name="은평구">
-                                <path d="M234.8,115.2 L251.1,98.9 L253.0,92.6 L249.8,77.8 L248.0,76.0 L248.0,70.0 L244.0,65.0 L241.0,57.0 L235.0,54.0 L230.0,48.0 L224.0,48.0 L217.0,54.0 L213.0,61.0 L196.0,66.0 L193.0,69.0 L192.0,75.0 L187.0,82.0 L188.0,92.0 L180.0,104.0 L180.0,119.3 L234.8,115.2 Z"/>
-                                <text x="209" y="93">은평구</text>
-                            </g>
-
-                            <!-- 서대문구 -->
-                            <g class="district" data-name="서대문구">
-                                <path d="M225.1,183.8 L238.4,172.7 L234.8,115.2 L180.0,119.3 L180.0,125.0 L177.3,126.9 L225.1,183.8 Z"/>
-                                <text x="213" y="147">서대문구</text>
-                            </g>
-
-                            <!-- 종로구 -->
-                            <g class="district" data-name="종로구">
-                                <path d="M238.4,172.7 L246.0,172.5 L286.6,141.2 L251.1,98.9 L234.8,115.2 L238.4,172.7 Z"/>
-                                <text x="260" y="144">종로구</text>
-                            </g>
-
-                            <!-- 중구 -->
-                            <g class="district" data-name="중구">
-                                <path d="M305.2,151.0 L302.4,144.6 L286.6,141.2 L246.0,172.5 L293.9,196.4 L305.2,151.0 Z"/>
-                                <text x="280" y="170">중구</text>
-                            </g>
-
-                            <!-- 용산구 -->
-                            <g class="district" data-name="용산구">
-                                <path d="M222.9,188.0 L224.1,199.0 L259.4,236.3 L299.1,217.2 L301.1,212.6 L293.9,196.4 L246.0,172.5 L238.4,172.7 L225.1,183.8 L222.9,188.0 Z"/>
-                                <text x="262" y="206">용산구</text>
-                            </g>
-
-                            <!-- 동작구 -->
-                            <g class="district" data-name="동작구">
-                                <path d="M193.4,243.9 L203.2,256.4 L253.1,257.7 L259.4,236.3 L224.1,199.0 L193.4,243.9 Z"/>
-                                <text x="226" y="240">동작구</text>
-                            </g>
-
-                            <!-- 관악구 -->
-                            <g class="district" data-name="관악구">
-                                <path d="M253.1,257.7 L203.2,256.4 L199.4,315.9 L204.0,315.0 L211.0,310.0 L214.0,311.0 L221.0,320.0 L224.0,320.0 L233.0,315.0 L245.0,315.0 L261.0,297.0 L266.2,294.7 L253.1,257.7 Z"/>
-                                <text x="225" y="280">관악구</text>
-                            </g>
-
-                            <!-- 서초구 -->
-                            <g class="district" data-name="서초구">
-                                <path d="M299.1,217.2 L259.4,236.3 L253.1,257.7 L266.2,294.7 L283.0,287.0 L294.0,296.0 L307.0,294.0 L312.0,295.0 L316.0,300.0 L314.0,308.0 L317.0,314.0 L323.0,317.0 L334.0,329.0 L334.0,331.0 L338.0,326.0 L341.0,325.0 L342.8,325.4 L299.1,217.2 Z"/>
-                                <text x="287" y="258">서초구</text>
-                            </g>
-
-                            <!-- 강남구 -->
-                            <g class="district" data-name="강남구">
-                                <path d="M342.8,325.4 L346.0,326.0 L350.0,331.0 L356.0,318.0 L360.0,314.0 L368.0,312.0 L373.0,306.0 L373.0,301.0 L373.2,300.8 L355.7,211.6 L341.5,203.1 L301.1,212.6 L299.1,217.2 L342.8,325.4 Z"/>
-                                <text x="334" y="239">강남구</text>
-                            </g>
-
-                            <!-- 송파구 -->
-                            <g class="district" data-name="송파구">
-                                <path d="M395.7,195.6 L355.7,211.6 L373.2,300.8 L377.0,297.0 L381.0,296.0 L390.0,289.0 L396.0,292.0 L401.0,292.0 L402.0,288.0 L406.0,284.0 L415.0,282.0 L422.0,274.0 L432.0,267.0 L432.0,263.0 L441.0,254.0 L443.0,248.0 L443.0,238.0 L440.0,234.0 L431.0,231.0 L427.0,227.0 L427.0,220.0 L427.4,219.5 L395.7,195.6 Z"/>
-                                <text x="385" y="229">송파구</text>
-                            </g>
-
-                            <!-- 강동구 -->
-                            <g class="district" data-name="강동구">
-                                <path d="M395.7,195.6 L427.4,219.5 L435.0,210.0 L440.0,198.0 L446.0,192.0 L464.0,192.0 L466.0,190.0 L468.0,179.0 L465.0,174.0 L464.0,161.0 L459.0,155.0 L460.0,149.0 L455.0,142.0 L447.0,142.0 L433.0,154.0 L422.0,157.0 L413.0,156.0 L398.0,167.0 L393.6,167.0 L395.7,195.6 Z"/>
-                                <text x="422" y="180">강동구</text>
-                            </g>
-
-                            <!-- 광진구 -->
-                            <g class="district" data-name="광진구">
-                                <path d="M344.5,167.2 L341.5,203.1 L355.7,211.6 L395.7,195.6 L393.6,167.0 L391.0,167.0 L387.0,163.0 L387.0,154.2 L363.2,150.9 L344.5,167.2 Z"/>
-                                <text x="367" y="184">광진구</text>
-                            </g>
-
-                            <!-- 성동구: 이 구역만 클릭 가능 -->
-                            <a
-                                href="#seongdong"
-                                class="district-link"
-                                aria-label="성동구 선택"
-                            >
-                                <g
-                                    id="seongdong"
-                                    class="district district-seongdong"
-                                    data-name="성동구"
-                                >
-                                    <path d="M293.9,196.4 L301.1,212.6 L341.5,203.1 L344.5,167.2 L305.2,151.0 L293.9,196.4 Z"/>
-                                    <text x="320" y="180">성동구</text>
-                                </g>
-                            </a>
-
-                            <!-- 동대문구 -->
-                            <g class="district" data-name="동대문구">
-                                <path d="M305.2,151.0 L344.5,167.2 L363.2,150.9 L338.7,100.6 L332.3,98.6 L302.4,144.6 L305.2,151.0 Z"/>
-                                <text x="334" y="146">동대문구</text>
-                            </g>
-
-                            <!-- 중랑구 -->
-                            <g class="district" data-name="중랑구">
-                                <path d="M363.2,150.9 L387.0,154.2 L387.0,150.0 L394.0,144.0 L394.0,139.0 L401.0,134.0 L401.0,100.0 L395.0,93.0 L395.5,85.4 L338.7,100.6 L363.2,150.9 Z"/>
-                                <text x="375" y="126">중랑구</text>
-                            </g>
-
-                            <!-- 성북구 -->
-                            <g class="district" data-name="성북구">
-                                <path d="M251.1,98.9 L286.6,141.2 L302.4,144.6 L332.3,98.6 L329.1,94.4 L253.0,92.6 L251.1,98.9 Z"/>
-                                <text x="291" y="118">성북구</text>
-                            </g>
-
-                            <!-- 강북구 -->
-                            <g class="district" data-name="강북구">
-                                <path d="M329.1,94.4 L326.6,75.4 L272.7,30.5 L272.0,39.0 L265.0,43.0 L263.0,49.0 L260.0,52.0 L260.0,57.0 L263.0,62.0 L263.0,75.0 L260.0,78.0 L254.0,80.0 L251.0,79.0 L249.8,77.8 L253.0,92.6 L329.1,94.4 Z"/>
-                                <text x="292" y="75">강북구</text>
-                            </g>
-
-                            <!-- 도봉구 -->
-                            <g class="district" data-name="도봉구">
-                                <path d="M326.6,75.4 L361.6,5.3 L355.0,6.0 L348.0,10.0 L342.0,9.0 L335.0,12.0 L329.0,8.0 L315.0,5.0 L312.0,0.0 L291.0,0.0 L290.0,7.0 L287.0,11.0 L287.0,16.0 L284.0,19.0 L279.0,20.0 L273.0,26.0 L272.7,30.5 L326.6,75.4 Z"/>
-                                <text x="317" y="45">도봉구</text>
-                            </g>
-
-                            <!-- 노원구 -->
-                            <g class="district" data-name="노원구">
-                                <path d="M326.6,75.4 L329.1,94.4 L332.3,98.6 L338.7,100.6 L395.5,85.4 L396.0,78.0 L393.0,70.0 L389.0,65.0 L383.0,65.0 L377.0,61.0 L376.0,49.0 L379.0,46.0 L379.0,36.0 L377.0,34.0 L377.0,30.0 L381.0,26.0 L381.0,19.0 L376.0,12.0 L369.0,11.0 L364.0,5.0 L361.6,5.3 L326.6,75.4 Z"/>
-                                <text x="359" y="66">노원구</text>
-                            </g>
-
-                        </g>
-
-                        <!-- 서울 외곽선 -->
-                        <path
-                            class="outline"
-                            d="M364.0,5.0 L355.0,6.0 L348.0,10.0 L342.0,9.0 L335.0,12.0 L329.0,8.0 L315.0,5.0 L312.0,0.0 L291.0,0.0 L290.0,7.0 L287.0,11.0 L287.0,16.0 L284.0,19.0 L279.0,20.0 L273.0,26.0 L272.0,39.0 L265.0,43.0 L263.0,49.0 L260.0,52.0 L260.0,57.0 L263.0,62.0 L263.0,75.0 L260.0,78.0 L254.0,80.0 L251.0,79.0 L248.0,76.0 L248.0,70.0 L244.0,65.0 L241.0,57.0 L235.0,54.0 L230.0,48.0 L224.0,48.0 L217.0,54.0 L213.0,61.0 L196.0,66.0 L193.0,69.0 L192.0,75.0 L187.0,82.0 L188.0,92.0 L180.0,104.0 L180.0,125.0 L173.0,130.0 L167.0,127.0 L162.0,129.0 L158.0,139.0 L152.0,144.0 L146.0,146.0 L143.0,145.0 L137.0,148.0 L131.0,147.0 L114.0,135.0 L90.0,111.0 L86.0,111.0 L78.0,123.0 L80.0,126.0 L80.0,131.0 L77.0,137.0 L71.0,142.0 L71.0,145.0 L64.0,152.0 L60.0,153.0 L55.0,158.0 L55.0,162.0 L49.0,167.0 L52.0,182.0 L59.0,186.0 L69.0,187.0 L73.0,191.0 L73.0,194.0 L79.0,203.0 L83.0,202.0 L85.0,195.0 L91.0,191.0 L108.0,204.0 L104.0,232.0 L100.0,236.0 L95.0,237.0 L92.0,241.0 L96.0,249.0 L100.0,252.0 L100.0,260.0 L97.0,263.0 L97.0,266.0 L103.0,274.0 L110.0,271.0 L129.0,274.0 L133.0,272.0 L134.0,266.0 L145.0,257.0 L151.0,257.0 L164.0,277.0 L168.0,291.0 L176.0,302.0 L179.0,312.0 L184.0,318.0 L194.0,322.0 L199.0,316.0 L204.0,315.0 L211.0,310.0 L214.0,311.0 L221.0,320.0 L224.0,320.0 L233.0,315.0 L245.0,315.0 L261.0,297.0 L283.0,287.0 L294.0,296.0 L307.0,294.0 L312.0,295.0 L316.0,300.0 L314.0,308.0 L317.0,314.0 L323.0,317.0 L334.0,329.0 L334.0,331.0 L338.0,326.0 L341.0,325.0 L346.0,326.0 L350.0,331.0 L356.0,318.0 L360.0,314.0 L368.0,312.0 L373.0,306.0 L373.0,301.0 L377.0,297.0 L381.0,296.0 L390.0,289.0 L396.0,292.0 L401.0,292.0 L402.0,288.0 L406.0,284.0 L415.0,282.0 L422.0,274.0 L432.0,267.0 L432.0,263.0 L441.0,254.0 L443.0,248.0 L443.0,238.0 L440.0,234.0 L431.0,231.0 L427.0,227.0 L427.0,220.0 L435.0,210.0 L440.0,198.0 L446.0,192.0 L464.0,192.0 L466.0,190.0 L468.0,179.0 L465.0,174.0 L464.0,161.0 L459.0,155.0 L460.0,149.0 L455.0,142.0 L447.0,142.0 L433.0,154.0 L422.0,157.0 L413.0,156.0 L398.0,167.0 L391.0,167.0 L387.0,163.0 L387.0,150.0 L394.0,144.0 L394.0,139.0 L401.0,134.0 L401.0,100.0 L395.0,93.0 L396.0,78.0 L393.0,70.0 L389.0,65.0 L383.0,65.0 L377.0,61.0 L376.0,49.0 L379.0,46.0 L379.0,36.0 L377.0,34.0 L377.0,30.0 L381.0,26.0 L381.0,19.0 L376.0,12.0 L369.0,11.0 L364.0,5.0 Z"
-                        />
-
-                    </svg>
-
-                    <p class="map-caption">
-                        SEOUL, 25 DISTRICTS · SELECT SEONGDONG-GU
-                    </p>
-
-                </div>
-
-
-                <!-- 성동구 선택 시 표시되는 콘텐츠 -->
-                <aside
-                    class="district-panel"
-                    aria-labelledby="panel-title"
-                >
-
-                    <div class="panel-top">
-
-                        <div>
-                            <p class="panel-eyebrow">
-                                YOUR NEXT SCENE
-                            </p>
-
-                            <h2 id="panel-title" class="panel-title">
-                                성동구
-                            </h2>
+                    <div class="result-tools">
+                        <div class="search-box">
+                            <input type="search" id="search-input" placeholder="제목으로 검색" aria-label="제목으로 검색">
+                            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="10.8" cy="10.8" r="6.6"></circle>
+                                <path d="m16 16 5 5"></path>
+                            </svg>
                         </div>
-
-                        <a
-                            href="#seoul-map-section"
-                            class="close"
-                            aria-label="성동구 패널 닫기"
-                        >×</a>
-
                     </div>
+                </div>
 
-                    <p class="panel-description">
-                        감각적인 공간과 새로운 문화가 모이는 곳.<br>
-                        성동구에서 발견할 장면을 둘러보세요.
-                    </p>
+                <div class="district-filters" aria-label="콘텐츠 카테고리 필터">
+                    <input type="radio" name="district-filter" id="filter-all" checked>
+                    <label for="filter-all">전체</label>
+                    <input type="radio" name="district-filter" id="filter-exhibition">
+                    <label for="filter-exhibition">전시</label>
+                    <input type="radio" name="district-filter" id="filter-performance">
+                    <label for="filter-performance">공연</label>
+                    <input type="radio" name="district-filter" id="filter-popup">
+                    <label for="filter-popup">팝업</label>
+                    <input type="radio" name="district-filter" id="filter-event">
+                    <label for="filter-event">이벤트</label>
+                    <input type="radio" name="district-filter" id="filter-saved">
+                    <label for="filter-saved">저장한 것</label>
+                </div>
 
+                <p class="status-note" id="status-note"></p>
+                <div class="events" id="events"></div>
 
-                    <!-- 콘텐츠 카테고리 필터 -->
-                    <div class="district-filters" aria-label="콘텐츠 카테고리 필터">
-
-                        <input
-                            type="radio"
-                            name="district-filter"
-                            id="filter-all"
-                            checked
-                        >
-                        <label for="filter-all">전체</label>
-
-                        <input
-                            type="radio"
-                            name="district-filter"
-                            id="filter-exhibition"
-                        >
-                        <label for="filter-exhibition">전시</label>
-
-                        <input
-                            type="radio"
-                            name="district-filter"
-                            id="filter-performance"
-                        >
-                        <label for="filter-performance">공연</label>
-
-                        <input
-                            type="radio"
-                            name="district-filter"
-                            id="filter-popup"
-                        >
-                        <label for="filter-popup">팝업</label>
-
-                        <input
-                            type="radio"
-                            name="district-filter"
-                            id="filter-event"
-                        >
-                        <label for="filter-event">이벤트</label>
-
-                    </div>
-
-
-                    <!-- 지역별 문화 콘텐츠 -->
-                    <div class="events">
-
-                        <!-- 전시 -->
-                        <a
-                            class="event event-exhibition"
-                            href="#"
-                        >
-                            <img
-                                class="event-poster"
-                                src="../images/exhibition01.png"
-                                alt="성동구 전시 포스터"
-                            >
-
-                            <span class="event-content">
-                                <span class="event-type">
-                                    EXHIBITION
-                                </span>
-
-                                <span class="event-title">
-                                    유영국: A Mountain Within Me
-                                </span>
-
-                                <span class="event-description">
-                                    자연의 형태와 색체를 추상적으로 풀어낸 작품
-                                </span>
-                            </span>
-
-                            <span class="event-arrow" aria-hidden="true">
-                                ↗
-                            </span>
-                        </a>
-
-
-                        <!-- 공연 -->
-                        <a
-                            class="event event-performance"
-                            href="#"
-                        >
-                            <img
-                                class="event-poster"
-                                src="../images/poster-sample.jpg"
-                                alt="성동구 공연 포스터"
-                            >
-
-                            <span class="event-content">
-                                <span class="event-type">
-                                    PERFORMANCE
-                                </span>
-
-                                <span class="event-title">
-                                    국립 발레 <호수의 노래>
-                                </span>
-
-                                <span class="event-description">
-                                    일상에 특별함을 더하는 공연과 무대
-                                </span>
-                            </span>
-
-                            <span class="event-arrow" aria-hidden="true">
-                                ↗
-                            </span>
-                        </a>
-
-
-                        <!-- 팝업 -->
-                        <a
-                            class="event event-popup"
-                            href="#"
-                        >
-                            <img
-                                class="event-poster"
-                                src="../images/popup.01.jpg"
-                                alt="성동구 팝업 포스터"
-                            >
-
-                            <span class="event-content">
-                                <span class="event-type">
-                                    POP-UP
-                                </span>
-
-                                <span class="event-title">
-                                    일상 속 작은 발견
-                                </span>
-
-                                <span class="event-description">
-                                    취향이 머무는 공간, 서울의 라이프스타일
-                                </span>
-                            </span>
-
-                            <span class="event-arrow" aria-hidden="true">
-                                ↗
-                            </span>
-                        </a>
-
-
-                        <!-- 이벤트 -->
-                        <a
-                            class="event event-event"
-                            href="#"
-                        >
-                            <img
-                                class="event-poster"
-                                src="../images/event.jpg"
-                                alt="성동구 이벤트 포스터"
-                            >
-
-                            <span class="event-content">
-                                <span class="event-type">
-                                    EVENT
-                                </span>
-
-                                <span class="event-title">
-                                    2026 서울 어텀페스타
-                                </span>
-
-                                <span class="event-description">
-                                    서울의 가을, 도시가 예술이 되다
-                                </span>
-                            </span>
-
-                            <span class="event-arrow" aria-hidden="true">
-                                ↗
-                            </span>
-                        </a>
-
-                    </div>
-
-                </aside>
-
+                <!-- 카드 좌우 이동 버튼 -->
+                <div class="scroll-nav">
+                    <button type="button" class="scroll-btn" id="prev-btn" aria-label="이전">←</button>
+                    <button type="button" class="scroll-btn" id="next-btn" aria-label="다음">→</button>
+                </div>
+                <button type="button" class="more-btn" id="more-btn" hidden>더 보기</button>
             </div>
+
         </section>
 
     </main>
-
-            <!-- 04. 이번 달의 문화 루트 추천 -->
-        <section class="map-route-section"
-                 aria-labelledby="monthly-route-title">
-
-            <!-- 추천 영역 제목 -->
-            <div class="route-heading">
-
-                <div class="route-heading-main">
-                    <p class="route-eyebrow">
-                        THIS MONTH · OCTOBER 2026
-                    </p>
-
-                    <h2 id="monthly-route-title">
-                        이번 달의 문화 루트<span>.</span>
-                    </h2>
-
-                    <p class="route-heading-description">
-                        같은 기간에 즐길 수 있는 서울의 문화 콘텐츠를
-                        하나의 코스로 만나보세요.
-                    </p>
-                </div>
-
-                <span class="route-month-mark" aria-hidden="true">
-                    <strong>10</strong>
-                    <span>OCT</span>
-                </span>
-
-            </div>
-
-
-            <!-- 이달의 추천 코스 -->
-            <div class="route-feature">
-
-                <div class="route-feature-heading">
-                    <div>
-                        <p class="route-pick-label">
-                            SCENE PICK · 01
-                        </p>
-
-                        <h3>성수에서 즐기는 가을 문화 산책</h3>
-                    </div>
-
-                    <p class="route-feature-description">
-                        전시를 감상하고, 새로운 팝업을 발견하고,
-                        주변의 문화 이벤트까지 둘러보는 하루.
-                    </p>
-                </div>
-
-
-                <!-- 방문 순서 -->
-                <div class="route-stops">
-
-                    <!-- 01 전시 -->
-                    <article class="route-stop">
-
-                        <div class="route-stop-top">
-                            <span class="route-number">01</span>
-                            <span class="route-category">EXHIBITION</span>
-                        </div>
-
-                        <h4>전시 공간 둘러보기</h4>
-
-                        <p class="route-stop-description">
-                            관심 있는 전시를 감상하며
-                            문화 산책을 시작해 보세요.
-                        </p>
-
-                        <div class="route-stop-meta">
-                            <span>예시 일정</span>
-                            <strong>10.16 — 10.25</strong>
-                        </div>
-
-                    </article>
-
-
-                    <span class="route-connector" aria-hidden="true">→</span>
-
-
-                    <!-- 02 팝업 -->
-                    <article class="route-stop">
-
-                        <div class="route-stop-top">
-                            <span class="route-number">02</span>
-                            <span class="route-category">POP-UP</span>
-                        </div>
-
-                        <h4>성수 팝업 둘러보기</h4>
-
-                        <p class="route-stop-description">
-                            새로운 브랜드와 공간에서
-                            색다른 취향을 발견해 보세요.
-                        </p>
-
-                        <div class="route-stop-meta">
-                            <span>예시 일정</span>
-                            <strong>10.16 — 10.24</strong>
-                        </div>
-
-                    </article>
-
-
-                    <span class="route-connector" aria-hidden="true">→</span>
-
-
-                    <!-- 03 이벤트 -->
-                    <article class="route-stop">
-
-                        <div class="route-stop-top">
-                            <span class="route-number">03</span>
-                            <span class="route-category">EVENT</span>
-                        </div>
-
-                        <h4>주변 문화 이벤트 즐기기</h4>
-
-                        <p class="route-stop-description">
-                            가까운 문화 콘텐츠를 더해
-                            하루를 여유롭게 마무리해 보세요.
-                        </p>
-
-                        <div class="route-stop-meta">
-                            <span>예시 일정</span>
-                            <strong>10.18 — 10.25</strong>
-                        </div>
-
-                    </article>
-
-                </div>
-
-
-                <!-- 추천 영역 하단 -->
-                <div class="route-feature-footer">
-                    <p>
-                        <span class="route-info-dot"></span>
-                        운영 기간이 겹치는 콘텐츠를 묶은 추천 코스 예시예요.
-                    </p>
-
-                    <a href="#seongdong" class="route-map-link">
-                        성동구 콘텐츠 확인
-                        <span aria-hidden="true">↗</span>
-                    </a>
-                </div>
-
-            </div>
-
-        </section>
-
 
     <!-- 04. 공통 푸터 -->
     <footer class="ss-site-footer">
@@ -720,5 +215,7 @@
         aria-label="맨 위로 이동"
     >↑</a>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="04_서울을 4로잡다_map.js"></script>
 </body>
 </html>
