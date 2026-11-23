@@ -1,24 +1,24 @@
 /* =====================================================
    SCENE.SEOUL - 공연 페이지
-   공통 디자인(폰트, 색 변수, 상단 헤더)은 ../css/common.css 에서 가져옵니다.
+   공통 디자인(폰트, 색 변수, 상단 헤더)은 ../css/04_서울을 4로잡다_common.css 에서 가져옵니다.
    이 파일에는 이 페이지만의 디자인만 있습니다.
+   색은 common.css의 8가지(--ss-...)만 씁니다.
    ===================================================== */
 
 /* ---------- 1. 이 페이지에서 쓰는 이름 → common.css 변수에 연결 ---------- */
 :root {
   --white: var(--ss-white);
-  --bg: #ECE9E1;
+  --bg: var(--ss-paper);
   --line: var(--ss-line);
   --mute: var(--ss-muted);
-  --text: #4B525D;
+  --text: var(--ss-ink);
   --ink: var(--ss-ink);
   --blue: var(--ss-blue);
   --yellow: var(--ss-yellow);
   --radius: 12px;
   --header-h: var(--ss-header-height);
-  /* 히어로 + 추천 배너가 하나로 이어지는 배경: 위(top) → 가운데(mid) → 아래(페이지 배경색) */
-  --stage-top: #F8F3EA;
-  --stage-mid: #F1ECE3;
+  --stage-top: var(--ss-paper);
+  --stage-mid: var(--ss-paper);
   --stage-end: var(--ss-paper);
 }
 
@@ -37,11 +37,12 @@ p {
   margin: 0;
 }
 
-:focus-visible {
+:focus {
   outline: 3px solid var(--blue);
   outline-offset: 3px;
 }
 
+/* '본문 바로가기' 링크: 평소에는 화면 밖에 숨어 있다가 키보드로 선택되면 나타남 */
 .skip {
   position: absolute;
   left: 12px;
@@ -57,21 +58,13 @@ p {
   top: 12px;
 }
 
-/* ---------- 본문 기본 글자 크기: 팀 규칙 14px (common.css에 아직 없어서 여기서 지정) ---------- */
+/* 본문 기본 글자 크기: 팀 규칙 14px */
 .ss-page {
   font-size: 14px;
 }
 
-/* ---------- 카테고리 영역 (구조는 category.css가 담당, 여기는 공연만의 추가 규칙) ---------- */
-.anchor {
-  display: block;
-  height: 0;
-  visibility: hidden;
-}
-
-/* #id 링크용 착지점 (스크롤 위치 보정은 common.css의 scroll-padding-top) */
+/* ---------- 3. 카테고리 영역 (구조는 category.css가 담당, 여기는 공연만의 추가 규칙) ---------- */
 .ss-catalog {
-  counter-reset: shown;
   padding-top: 24px;
 }
 
@@ -91,6 +84,13 @@ p {
   order: 4;
 }
 
+.ss-empty {
+  order: 4;
+  padding: 60px 0;
+  text-align: center;
+  color: var(--mute);
+}
+
 .ss-catalog .ss-catalog-status {
   display: block;
   order: 3;
@@ -100,103 +100,57 @@ p {
   order: 5;
 }
 
-/* 보이는 카드 수 세기: 숨겨진(display:none) 카드는 세지 않음 */
-.ss-card {
-  counter-increment: shown;
-}
-
-.count::before {
-  content: counter(shown);
-}
-
-/* 페이지 번호는 모양만 있음(넘어가지 않음): 평소에는 1페이지 카드 6장만 보임. 장르를 고르면 해당 공연 전체 */
-body:not(:has(.anchor:not(#all):target)) .ss-card:not(.p1) {
-  display: none;
-}
-
-/* 장르/세부 카테고리를 고르면 해당 공연 전체를 보여주고 'ALL' 표시와 페이지 번호는 숨김 */
-body:has(.anchor:not(#all):target) :is(.pager, .hot-label) {
-  display: none;
-}
-
-/* 장르 필터 */
-body:has(#concert:target) .ss-card:not([data-genre="concert"]),
-body:has(#musical:target) .ss-card:not([data-genre="musical"]),
-body:has(#play:target) .ss-card:not([data-genre="play"]),
-body:has(#classic:target) .ss-card:not([data-genre="classic"]) {
-  display: none;
-}
-
-/* 현재 선택된 장르 버튼 = 공통(category.css)의 선택 모양(노란색)과 동일 */
-body:not(:has(:target)) .ss-filter[href="#all"],
-body:has(#all:target) .ss-filter[href="#all"],
-body:has(#concert:target) .ss-filter[href="#concert"],
-body:has(#musical:target) .ss-filter[href="#musical"],
-body:has(#play:target) .ss-filter[href="#play"],
-body:has(#classic:target) .ss-filter[href="#classic"] {
+/* 현재 선택된 장르 버튼: JS가 is-active 클래스를 붙여 줌 (공통 category.css의 선택 모양과 같은 노란색)
+   category.css가 같은 버튼에 더 구체적인 선택자로 색을 정해 둬서, 여기도 같은 길이로 맞춰 써야 덮어써집니다 */
+.ss-catalog .ss-catalog-controls .ss-filter.is-active {
   background: var(--ss-yellow);
   border-color: var(--ss-yellow);
   color: var(--ss-ink);
   font-weight: 800;
 }
 
-/* 카드: 플레이스홀더, 제목 링크 */
+/* 카드 제목 링크 */
 .ss-card-title a:hover,
-.ss-card-title a:focus-visible {
+.ss-card-title a:focus {
   color: var(--blue);
 }
 
-/* 기타 */
 .hot-label {
   color: var(--blue);
 }
 
 /* 페이지 번호: 모양은 공통(category.css)의 .ss-page-nav / .ss-page-numbers / .ss-page-arrow 사용.
-   여기서는 "선택된 번호 색"과 "현재 페이지에 맞는 화살표만 보이기"만 정함 */
-.pg-radio:checked+label {
-  background: var(--blue);
-  color: #fff;
+   category.css는 화살표를 기본으로 숨겨 두므로(display: none), 여기서 보이게 하고 "선택된 번호 색"을 정함 */
+.pager .ss-page-arrow {
+  display: inline-flex;
 }
 
-.pg-radio:focus-visible+label {
+.pg-radio:checked+label {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.pg-radio:focus+label {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
 
-.pager:has(#pg1:checked) .pg-prev-off,
-.pager:has(#pg2:checked) .pg-prev[for="pg1"],
-.pager:has(#pg3:checked) .pg-prev[for="pg2"],
-.pager:has(#pg4:checked) .pg-prev[for="pg3"],
-.pager:has(#pg1:checked) .pg-next[for="pg2"],
-.pager:has(#pg2:checked) .pg-next[for="pg3"],
-.pager:has(#pg3:checked) .pg-next[for="pg4"],
-.pager:has(#pg4:checked) .pg-next-off {
-  display: inline-flex;
-}
-
-.pager .pg-num.is-current {
-  background: var(--blue);
-  color: #fff;
-}
-
-/* ---------- 히어로 + 추천 배너 공통 배경 ---------- */
+/* ---------- 4. 히어로 + 추천 배너 공통 배경 ---------- */
 .stage {
   position: relative;
   overflow: hidden;
   background: var(--ss-paper);
 }
 
-/* ---------- 상단 히어로 (큰 세리프 제목 + 소개 문구) ---------- */
+/* ---------- 5. 상단 히어로 (큰 제목 + 소개 문구) ---------- */
 .perf-hero {
-  --navy: #1b2b5e;
   position: relative;
   max-width: 1470px;
   margin: 0 auto;
-  min-height: clamp(180px, 15vw, 220px);
-  padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
+  min-height: 220px;
+  padding: 82px 72px 42px;
 }
 
-/* 히어로 글자 */
 .perf-hero .ss-hero-crumb {
   color: var(--ss-blue);
   font-size: 11px;
@@ -211,7 +165,7 @@ body:has(#classic:target) .ss-filter[href="#classic"] {
 .perf-hero .ss-hero-title {
   margin: 20px 0 14px;
   color: var(--ss-ink);
-  font-size: clamp(58px, 8vw, 126px);
+  font-size: 105px;
   font-weight: 900;
   line-height: .94;
   letter-spacing: -.075em;
@@ -227,7 +181,7 @@ body:has(#classic:target) .ss-filter[href="#classic"] {
 .perf-tags {
   position: absolute;
   z-index: 2;
-  right: clamp(22px, 5vw, 80px);
+  right: 72px;
   bottom: 78px;
   margin: 0;
   padding: 0;
@@ -237,23 +191,54 @@ body:has(#classic:target) .ss-filter[href="#classic"] {
   font-weight: 800;
   letter-spacing: .16em;
   line-height: 1.7;
-  color: var(--navy);
+  color: var(--ss-ink);
 }
 
-/* 등장 애니메이션은 공통 .ss-entrance 클래스를 HTML에서 붙여 사용 */
+/* 추천 배너 자리: 모양은 공통 .ss-feature-banner--editorial, 여기는 바깥 여백과 이미지 맞춤만 */
+.perf-feature {
+  padding: 8px 72px 64px;
+}
 
-@media (max-width: 670px) {
+/* 이미지가 배너 높이를 늘리지 않도록 칸에 꽉 채움 */
+.perf-feature .ss-feature-banner-art img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- 6. 반응형: 1200px / 800px / 480px ---------- */
+@media (max-width: 1200px) {
+  .perf-hero {
+    padding: 60px 40px 42px;
+  }
+
   .perf-hero .ss-hero-title {
-    font-size: clamp(34px, 11.5vw, 80px);
-    letter-spacing: -.07em;
+    font-size: 90px;
+  }
+
+  .perf-tags {
+    right: 40px;
+  }
+
+  .perf-feature {
+    padding: 8px 40px 64px;
   }
 }
 
-/* ---------- 6. 반응형 ---------- */
-@media (max-width: 760px) {
+@media (max-width: 800px) {
   .perf-hero {
     min-height: 0;
-    padding-bottom: 90px;
+    padding: 42px 22px 90px;
+  }
+
+  .perf-hero .ss-hero-title {
+    font-size: 64px;
   }
 
   /* 좁은 화면에서는 오른쪽 분야 목록 숨김 */
@@ -261,33 +246,17 @@ body:has(#classic:target) .ss-filter[href="#classic"] {
     display: none;
   }
 
+  .perf-feature {
+    padding: 8px 22px 64px;
+  }
+
   .ss-catalog {
     padding-top: 12px;
   }
 }
 
-/* ===== 추천 배너 자리: 모양은 공통(common.css)의 .ss-feature-banner--editorial, 여기는 바깥 여백과 이미지 맞춤만 ===== */
-.perf-feature {
-  padding: 8px clamp(22px, 5vw, 80px) 64px;
-}
-
-/* 이미지가 배너 높이를 늘리지 않도록 칸에 꽉 채움 */
-.perf-feature .ss-feature-banner-art img {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ---------- 7. 모션 줄이기 ---------- */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  * {
-    transition: none !important;
+@media (max-width: 480px) {
+  .perf-hero .ss-hero-title {
+    font-size: 44px;
   }
 }
