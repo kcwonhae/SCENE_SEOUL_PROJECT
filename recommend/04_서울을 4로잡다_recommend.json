@@ -1,0 +1,575 @@
+{
+  "recommendations": [
+    {
+      "id": "rec-01",
+      "genre": "ex",
+      "title": "고요한 빛의 방",
+      "venue": "성수 아트룸",
+      "period": "2026.10.01 ~ 12.20",
+      "price": 0,
+      "place": "in",
+      "who": [
+        "solo",
+        "couple"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "cold"
+      ],
+      "time": [
+        "day",
+        "eve"
+      ],
+      "mood": [
+        "calm",
+        "emo"
+      ],
+      "reason": "조용한 분위기를 좋아하신다고 해서, 오래 머물기 좋은 전시를 골랐어요.",
+      "image": "../images/recommend.01.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-02",
+      "genre": "live",
+      "title": "피아노 솔로 나이트",
+      "venue": "한강아트센터 콘서트홀",
+      "period": "2026.10.24",
+      "price": 25000,
+      "place": "in",
+      "who": [
+        "solo",
+        "couple"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "eve",
+        "night"
+      ],
+      "mood": [
+        "calm",
+        "emo"
+      ],
+      "reason": "좌석 간격이 넉넉해서 오래 앉아 있어도 편해요.",
+      "image": "../images/recommend.02.jpeg",
+      "link": ""
+    },
+    {
+      "id": "rec-03",
+      "genre": "space",
+      "title": "책방 골목 산책",
+      "venue": "연남",
+      "period": "상시 운영",
+      "price": 0,
+      "place": "both",
+      "who": [
+        "solo",
+        "couple"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy"
+      ],
+      "time": [
+        "day"
+      ],
+      "mood": [
+        "calm",
+        "unique"
+      ],
+      "reason": "천천히 둘러보기 좋은 동네 서점 코스예요.",
+      "image": "../images/recommend.03.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-04",
+      "genre": "live",
+      "title": "별을 따라가는 밤",
+      "venue": "서울극장 대극장",
+      "period": "2026.10.24 ~ 11.30",
+      "price": 55000,
+      "place": "in",
+      "who": [
+        "couple"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "eve",
+        "night"
+      ],
+      "mood": [
+        "emo",
+        "lively"
+      ],
+      "reason": "관람 후에도 이야기가 이어지는 창작 뮤지컬이라 둘이 함께 보기 좋아요.",
+      "image": "../images/recommend.03.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-05",
+      "genre": "ex",
+      "title": "물의 정원 야간 미디어아트",
+      "venue": "뚝섬 한강공원",
+      "period": "2026.10.01 ~ 11.15",
+      "price": 15000,
+      "place": "out",
+      "who": [
+        "couple",
+        "friends"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy"
+      ],
+      "time": [
+        "eve",
+        "night"
+      ],
+      "mood": [
+        "emo",
+        "unique"
+      ],
+      "reason": "저녁에 함께 걸으며 보기 좋은 야외 전시예요.",
+      "image": "../images/recommend.01.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-06",
+      "genre": "pop",
+      "title": "젤리 마켓",
+      "venue": "여의도",
+      "period": "2026.10.12 ~ 10.25",
+      "price": 0,
+      "place": "in",
+      "who": [
+        "couple",
+        "friends"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "day",
+        "eve"
+      ],
+      "mood": [
+        "lively",
+        "unique"
+      ],
+      "reason": "함께 소품을 골라 보는 가벼운 팝업이에요.",
+      "image": "../images/recommend.02.jpeg",
+      "link": ""
+    },
+    {
+      "id": "rec-07",
+      "genre": "live",
+      "title": "서울 인디 페스티벌 2026",
+      "venue": "뚝섬 한강공원",
+      "period": "2026.11.01 ~ 11.02",
+      "price": 45000,
+      "place": "out",
+      "who": [
+        "friends"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy"
+      ],
+      "time": [
+        "day",
+        "eve"
+      ],
+      "mood": [
+        "lively"
+      ],
+      "reason": "여러 팀을 하루에 볼 수 있는 야외 공연이라 친구들과 함께하기 좋아요.",
+      "image": "../images/recommend.01.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-08",
+      "genre": "pop",
+      "title": "스티커 하우스",
+      "venue": "홍대",
+      "period": "2026.10.15 ~ 11.10",
+      "price": 0,
+      "place": "in",
+      "who": [
+        "friends",
+        "couple"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "day",
+        "eve"
+      ],
+      "mood": [
+        "lively",
+        "unique"
+      ],
+      "reason": "직접 꾸미는 체험이 있어 함께 하면 더 재밌어요.",
+      "image": "../images/recommend.02.jpeg",
+      "link": ""
+    },
+    {
+      "id": "rec-09",
+      "genre": "ex",
+      "title": "도시의 소리",
+      "venue": "광화문",
+      "period": "2026.10.05 ~ 12.31",
+      "price": 12000,
+      "place": "in",
+      "who": [
+        "friends",
+        "family"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "day"
+      ],
+      "mood": [
+        "unique",
+        "lively"
+      ],
+      "reason": "사진 찍고 이야기 나누기 좋은 체험형 전시예요.",
+      "image": "../images/recommend.03.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-10",
+      "genre": "live",
+      "title": "소년합창단 특별 초청 공연",
+      "venue": "한강아트센터 콘서트홀",
+      "period": "2026.12.20",
+      "price": 30000,
+      "place": "in",
+      "who": [
+        "family"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "day",
+        "eve"
+      ],
+      "mood": [
+        "calm",
+        "emo"
+      ],
+      "reason": "전 연령이 함께 볼 수 있는 구성이라 가족 나들이로 좋아요.",
+      "image": "../images/recommend.01.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-11",
+      "genre": "ex",
+      "title": "종이 숲",
+      "venue": "종로",
+      "period": "2026.10.01 ~ 12.10",
+      "price": 8000,
+      "place": "in",
+      "who": [
+        "family",
+        "friends"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "day"
+      ],
+      "mood": [
+        "unique",
+        "calm"
+      ],
+      "reason": "만지고 체험할 수 있어 함께하기 좋아요.",
+      "image": "../images/recommend.02.jpeg",
+      "link": ""
+    },
+    {
+      "id": "rec-12",
+      "genre": "space",
+      "title": "옥상 정원",
+      "venue": "을지로",
+      "period": "상시 운영",
+      "price": 0,
+      "place": "out",
+      "who": [
+        "family",
+        "solo",
+        "couple"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy"
+      ],
+      "time": [
+        "day",
+        "eve"
+      ],
+      "mood": [
+        "calm"
+      ],
+      "reason": "걷다가 쉬어 가기 좋은 열린 공간이에요.",
+      "image": "../images/recommend.03.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-13",
+      "genre": "ex",
+      "title": "비 오는 날의 미술관",
+      "venue": "종로 아트뮤지엄",
+      "period": "2026.11.01 ~ 12.28",
+      "price": 5000,
+      "place": "in",
+      "who": [
+        "solo",
+        "couple"
+      ],
+      "weather": [
+        "rain",
+        "cloudy",
+        "cold"
+      ],
+      "time": [
+        "day",
+        "eve"
+      ],
+      "mood": [
+        "calm",
+        "emo"
+      ],
+      "reason": "비 오는 날 실내에서 천천히 걷기 좋은 전시예요.",
+      "image": "../images/recommend.01.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-14",
+      "genre": "pop",
+      "title": "한강 야시장 팝업",
+      "venue": "반포 한강공원",
+      "period": "2026.10.20 ~ 11.20",
+      "price": 0,
+      "place": "out",
+      "who": [
+        "friends",
+        "couple"
+      ],
+      "weather": [
+        "sunny"
+      ],
+      "time": [
+        "eve",
+        "night"
+      ],
+      "mood": [
+        "lively"
+      ],
+      "reason": "먹거리와 소품을 구경하며 걷기 좋은 야외 팝업이에요.",
+      "image": "../images/recommend.02.jpeg",
+      "link": ""
+    },
+    {
+      "id": "rec-15",
+      "genre": "live",
+      "title": "재즈 라이브 나이트",
+      "venue": "이태원 재즈 클럽",
+      "period": "2026.11.08 ~ 12.20",
+      "price": 35000,
+      "place": "in",
+      "who": [
+        "couple",
+        "friends",
+        "solo"
+      ],
+      "weather": [
+        "rain",
+        "cold",
+        "cloudy"
+      ],
+      "time": [
+        "night"
+      ],
+      "mood": [
+        "emo",
+        "calm"
+      ],
+      "reason": "쌀쌀한 밤 따뜻한 실내에서 라이브를 들을 수 있어요.",
+      "image": "../images/recommend.03.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-16",
+      "genre": "space",
+      "title": "도자기 원데이 공방",
+      "venue": "서촌",
+      "period": "상시 운영",
+      "price": 40000,
+      "place": "in",
+      "who": [
+        "couple",
+        "family",
+        "solo"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "day"
+      ],
+      "mood": [
+        "calm",
+        "unique"
+      ],
+      "reason": "직접 만들어 보며 하루를 보내기 좋은 체험 공간이에요.",
+      "image": "../images/recommend.01.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-17",
+      "genre": "pop",
+      "title": "레트로 게임 팝업",
+      "venue": "건대입구",
+      "period": "2026.11.05 ~ 12.15",
+      "price": 0,
+      "place": "in",
+      "who": [
+        "friends",
+        "family"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "day",
+        "eve"
+      ],
+      "mood": [
+        "lively",
+        "unique"
+      ],
+      "reason": "오락실 게임을 함께 즐길 수 있어 친구, 가족 모두 좋아해요.",
+      "image": "../images/recommend.02.jpeg",
+      "link": ""
+    },
+    {
+      "id": "rec-18",
+      "genre": "ex",
+      "title": "남산 숲길 야외 갤러리",
+      "venue": "남산",
+      "period": "2026.10.01 ~ 12.31",
+      "price": 0,
+      "place": "out",
+      "who": [
+        "solo",
+        "couple",
+        "family"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy"
+      ],
+      "time": [
+        "day"
+      ],
+      "mood": [
+        "calm",
+        "emo"
+      ],
+      "reason": "산책하며 작품을 만나는 무료 야외 전시예요.",
+      "image": "../images/recommend.03.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-19",
+      "genre": "space",
+      "title": "심야 서점 낭독회",
+      "venue": "연남",
+      "period": "2026.11.10 ~ 12.30",
+      "price": 10000,
+      "place": "in",
+      "who": [
+        "solo",
+        "couple"
+      ],
+      "weather": [
+        "rain",
+        "cold",
+        "cloudy"
+      ],
+      "time": [
+        "night"
+      ],
+      "mood": [
+        "emo",
+        "calm"
+      ],
+      "reason": "늦은 밤 조용히 책 이야기를 듣는 시간이에요.",
+      "image": "../images/recommend.01.jpg",
+      "link": ""
+    },
+    {
+      "id": "rec-20",
+      "genre": "live",
+      "title": "어린이 인형극 페스티벌",
+      "venue": "서울어린이극장",
+      "period": "2026.11.15 ~ 12.24",
+      "price": 20000,
+      "place": "in",
+      "who": [
+        "family"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "day"
+      ],
+      "mood": [
+        "lively"
+      ],
+      "reason": "아이와 함께 보기 좋은 짧은 인형극이 이어져요.",
+      "image": "../images/recommend.02.jpeg",
+      "link": ""
+    }
+  ]
+}
