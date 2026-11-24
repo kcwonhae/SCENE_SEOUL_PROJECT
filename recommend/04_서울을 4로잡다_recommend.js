@@ -1,12 +1,13 @@
 // 추천 페이지: '결과 보기'를 누르면 고른 조건 7개를 JSON 데이터와 비교해서 점수가 높은 3건을 보여준다.
 // 팀 04 서울을 4로잡다 / 신윤정(2411997)
+// * 공통 JS(04_서울을 4로잡다_common.js)를 이 파일보다 먼저 불러와야 한다 (기간 글자에 사용)
 
 const COND_KEY = 'ss-rec-conditions';  // 마지막으로 고른 조건
 
 // 장르 코드 → 화면에 보여줄 이름
 const GENRE_NAME = { ex: '전시', live: '공연', pop: '팝업', space: '공간' };
 
-// 장르 → 상세 보기로 이동할 페이지 (JSON의 link가 비어 있을 때 사용)
+// 장르 → 상세 보기로 이동할 페이지 (JSON의 sourceUrl이 비어 있을 때 사용)
 const GENRE_PAGE = {
   ex: '../exhibition/04_서울을 4로잡다_exhibition.html',
   live: '../performance/04_서울을 4로잡다_performance.html',
@@ -33,7 +34,7 @@ const sendBtn = document.getElementById('send-btn');
 const resultBox = document.getElementById('result-box');
 
 // JSON 불러오기
-fetch('04_서울을 4로잡다_recommend.json')
+fetch('../data/04_서울을 4로잡다_recommend.json')
   .then(response => response.json())
   .then(data => {
     allItems = data.recommendations;
@@ -106,15 +107,15 @@ function priceText(price) {
 function makeCard(row, number) {
   const item = row.item;
   const percent = Math.round(row.score / 7 * 100);
-  const link = item.link || GENRE_PAGE[item.genre];
+  const link = item.sourceUrl || GENRE_PAGE[item.genre];
   return `
     <article class="pick">
       <span class="rank">${number}</span>
       <div class="poster"><img src="${item.image}" alt="${item.title} 포스터"></div>
       <div class="info">
         <h3><a href="${link}"><span class="genre">${GENRE_NAME[item.genre]}</span>${item.title}</a></h3>
-        <p class="period">${item.period}</p>
-        <p class="meta">${item.venue} · ${priceText(item.price)}</p>
+        <p class="period">${SceneSeoul.formatPeriod(item)}</p>
+        <p class="meta">${item.location} · ${priceText(item.price)}</p>
         <p class="reason"><b>추천 이유</b>${item.reason}</p>
         <div class="match"><span>일치율 ${percent}%</span><span class="bar"><i data-percent="${percent}"></i></span></div>
         <div class="actions"><a href="../map/04_서울을 4로잡다_map.html">지도에서 보기</a></div>
