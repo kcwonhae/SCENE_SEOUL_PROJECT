@@ -15,7 +15,7 @@ let timer;
 let frame;
 let cards = [];
 
-fetch('./04_서울을 4로잡다_event.json')
+fetch('../data/04_서울을 4로잡다_event.json')
   .then(response => {
     if (!response.ok) throw new Error('이벤트 데이터를 불러오지 못했습니다.');
     return response.json();
