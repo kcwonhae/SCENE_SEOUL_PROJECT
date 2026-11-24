@@ -10,7 +10,7 @@ body { background: white; }
 }
 .page-title {
     margin: 64px 0 0;
-    font-size: 94px;
+    font-size: 100px;
     font-weight: 900;
     line-height: 1;
     letter-spacing: -0.075em;
@@ -142,7 +142,6 @@ body { background: white; }
 .empty-day { margin: 0; color: var(--ss-muted); font-size: 12px; line-height: 1.7; }
 
 /* ---------- 찜한 콘텐츠 ---------- */
-.saved-section { margin-top: 42px; padding-top: 65px; }
 .section-head {
     display: flex;
     align-items: center;
@@ -200,8 +199,23 @@ body { background: white; }
 .poster-image-wrap { position: relative; }
 .poster-image { display: block; border: 0; padding: 0; width: 100%; background: #f1f1f1; border-radius: 0; }
 .poster-image img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
-.bookmark-button { position: absolute; bottom: 8px; right: 8px; width: 32px; height: 32px; background: rgba(255,255,255,.96); border: 1px solid #ddd; color: #222; border-radius: 0; font-size: 20px; }
-.poster-meta { display: flex; justify-content: space-between; gap: 6px; color: #777; font-size: 11px; margin: 12px 0 8px; }
+.bookmark-button {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ss-yellow);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+}.poster-meta { display: flex; justify-content: space-between; gap: 6px; color: #777; font-size: 11px; margin: 12px 0 8px; }
 .poster-name { display: block; width: 100%; border: 0; background: none; padding: 0; text-align: left; color: #202020; font-size: 15px; font-weight: 700; line-height: 1.45; }
 .poster-name:hover { text-decoration: underline; }
 .poster-location { color: #777; font-size: 12px; margin: 7px 0 0; }
