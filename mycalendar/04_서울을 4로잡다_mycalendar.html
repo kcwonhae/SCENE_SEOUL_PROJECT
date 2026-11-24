@@ -76,7 +76,6 @@
           <aside class="day-panel" aria-label="선택한 날짜의 콘텐츠">
             <div class="day-panel-heading">
               <h3 id="selectedDate"></h3>
-              <p id="dayCount">저장한 콘텐츠 0개</p>
             </div>
             <div id="dayContents" class="day-contents" aria-live="polite"></div>
           </aside>
@@ -86,8 +85,7 @@
       <!-- 찜한 콘텐츠 목록 -->
       <section class="saved-section" id="savedArea" aria-labelledby="savedHeading">
         <div class="section-head">
-          <h2 id="savedHeading">찜한 콘텐츠</h2>
-          <span class="saved-total">총 <b id="savedTotal">0</b>개</span>
+          <h2 id="savedHeading">찜한 콘텐츠 (<span id="savedTotal">0</span>)</h2>
         </div>
         <div class="filter-controls" id="filterControls" role="group" aria-label="콘텐츠 유형 선택">
           <button type="button" class="filter-button is-active" data-filter="전체" aria-pressed="true">전체</button>
@@ -97,6 +95,9 @@
           <button type="button" class="filter-button" data-filter="이벤트" aria-pressed="false">이벤트</button>
         </div>
         <div class="poster-grid" id="savedGrid" aria-live="polite"></div>
+        <div class="slide-bar">
+          <input type="range" id="slideRange" min="0" max="100" value="0" step="1" aria-label="찜한 콘텐츠 슬라이드 이동">
+        </div>
         <div class="more-area">
           <a href="../recommend/04_서울을 4로잡다_recommend.html" class="more-button">다른 콘텐츠 찜하기 <span aria-hidden="true">＋</span></a>
         </div>

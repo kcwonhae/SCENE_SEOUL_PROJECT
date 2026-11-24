@@ -140,7 +140,6 @@ function renderDayPanel() {
   const key = dateKey(selectedDate);
   const todayEvents = getSavedEvents().filter(event => event.date === key);
   document.querySelector('#selectedDate').textContent = `${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일`;
-  document.querySelector('#dayCount').textContent = `저장한 콘텐츠 ${todayEvents.length}개`;
   dayContents.replaceChildren();
 
   if (todayEvents.length === 0) {
@@ -199,11 +198,14 @@ function makeCard(event) {
 function renderSavedList() {
   const list = getSavedEvents().filter(event => currentFilter === '전체' || event.category === currentFilter);
   savedGrid.replaceChildren();
+  savedGrid.scrollLeft = 0;
   if (list.length === 0) {
     savedGrid.append(makeElement('p', 'collection-empty', '저장한 콘텐츠가 없습니다. 다른 콘텐츠를 찜해보세요.'));
+    updateSlideBar();
     return;
   }
   list.forEach(event => savedGrid.append(makeCard(event)));
+  updateSlideBar();
 }
 
 function renderAll() {
@@ -229,6 +231,24 @@ function toggleSaved(id) {
     fillDetail(events.find(event => event.id === id));
   }
 }
+
+/* ---------- 찜 목록 슬라이드 ---------- */
+
+const slideRange = document.querySelector('#slideRange');
+
+function updateSlideBar() {
+  const maxScroll = savedGrid.scrollWidth - savedGrid.clientWidth;
+  slideRange.disabled = maxScroll <= 0;
+  slideRange.value = maxScroll > 0 ? Math.round(savedGrid.scrollLeft / maxScroll * 100) : 0;
+}
+
+slideRange.addEventListener('input', () => {
+  const maxScroll = savedGrid.scrollWidth - savedGrid.clientWidth;
+  savedGrid.scrollLeft = maxScroll * Number(slideRange.value) / 100;
+});
+
+savedGrid.addEventListener('scroll', updateSlideBar);
+window.addEventListener('resize', updateSlideBar);
 
 /* ---------- 상세 창 ---------- */
 
