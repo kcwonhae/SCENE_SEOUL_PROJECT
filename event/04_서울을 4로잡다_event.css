@@ -1,200 +1,22 @@
-/* =====================================================
-   SCENE:SEOUL - 이벤트 페이지
-   공통 디자인(폰트, 색 변수, 상단 헤더)은 ../css/04_서울을 4로잡다_common.css 에서 가져옵니다.
-   이 파일에는 이벤트 페이지에만 필요한 추가 스타일을 정의합니다.
-   ===================================================== */
-
-/* 공통 CSS의 색상 변수를 이벤트 페이지의 짧은 변수명으로 참조한다. */
-:root {
-  --white: var(--ss-white);
-  --ink: var(--ss-ink);
-  --blue: var(--ss-blue);
-}
-
-/* 목록과 제목의 브라우저 기본 여백 및 목록 기호를 제거한다. */
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-h1,
-h2,
-h3,
-p {
-  margin: 0;
-}
-
-:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
-
-.skip {
-  position: absolute;
-  left: 12px;
-  top: -80px;
-  z-index: 200;
-  padding: .6rem 1rem;
-  border-radius: 8px;
-  background: var(--ink);
-  color: var(--white);
-}
-
-.skip:focus {
-  top: 12px;
-}
-
-/* 본문 영역의 기본 글자 크기를 14px로 지정한다. */
-.ss-page {
-  font-size: 14px;
-}
-
-/* URL 해시 이동에 사용하는 앵커를 화면에서 숨기고 높이를 0으로 지정한다. */
-.anchor {
-  display: block;
-  height: 0;
-  visibility: hidden;
-}
-
-/* 카테고리 영역의 결과 카운터를 초기화하고 위쪽 여백을 지정한다. */
-.ss-catalog {
-  counter-reset: shown;
-  padding-top: 24px;
-}
-
-/* 공통 .ss-catalog-controls 안에서 순서(order)로 배치 */
-.ss-catalog-controls {
-  display: flex;
-  flex-direction: column;
-}
-
-.ss-toolbar {
-  order: 2;
-  position: relative;
-  z-index: 20;
-}
-
-.ss-card-grid {
-  order: 4;
-}
-
-.ss-catalog .ss-catalog-status {
-  display: block;
-  order: 3;
-}
-
-.pager {
-  order: 5;
-}
-
-/* 보이는 카드 수 세기: 숨겨진(display:none) 카드는 세지 않음 */
-.ss-card {
-  counter-increment: shown;
-}
-
-.count::before {
-  content: counter(shown);
-}
-
-/* 기본 상태에서는 첫 번째 페이지(p1)의 카드 6개만 표시한다. */
-body:not(:has(.anchor:not(#all):target)) .ss-card:not(.p1) {
-  display: none;
-}
-
-/* 카테고리 선택 시 페이지 번호와 ALL 문구를 숨기고 해당 카테고리의 카드를 표시한다. */
-body:has(.anchor:not(#all):target) :is(.pager, .hot-label) {
-  display: none;
-}
-
-/* 선택한 카테고리의 data-genre 값과 일치하지 않는 카드를 숨긴다. */
-body:has(#festival:target) .ss-card:not([data-genre="festival"]),
-body:has(#flea:target) .ss-card:not([data-genre="flea"]),
-body:has(#film:target) .ss-card:not([data-genre="film"]),
-body:has(#talk:target) .ss-card:not([data-genre="talk"]) {
-  display: none;
-}
-
-/* 현재 선택된 카테고리 버튼의 배경과 테두리를 노란색으로 표시한다. */
-body:not(:has(:target)) .ss-filter[href="#all"],
-body:has(#all:target) .ss-filter[href="#all"],
-body:has(#festival:target) .ss-filter[href="#festival"],
-body:has(#flea:target) .ss-filter[href="#flea"],
-body:has(#film:target) .ss-filter[href="#film"],
-body:has(#talk:target) .ss-filter[href="#talk"] {
-  background: var(--ss-yellow);
-  border-color: var(--ss-yellow);
-  color: var(--ss-ink);
-  font-weight: 800;
-}
-
-/* 카드 지역명: 공통 카드 안의 지역 정보를 작고 굵게 표시하고 줄바꿈을 방지한다. */
-.ss-card-region {
-  color: var(--ss-muted);
-  font-size: 10px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-/* 카드 제목 링크: 마우스 호버 또는 키보드 포커스 시 글자색을 파란색으로 변경한다. */
-.ss-card-title a:hover,
-.ss-card-title a:focus-visible {
-  color: var(--blue);
-}
-
-/* 결과 개수 앞의 ALL 텍스트를 파란색으로 표시한다. */
-.hot-label {
-  color: var(--blue);
-}
-
-/* 페이지 번호: 선택된 번호의 색상을 지정하고 라디오 버튼 상태에 맞는 화살표를 표시한다. */
-.pg-radio:checked+label {
-  background: var(--blue);
-  color: #fff;
-}
-
-.pg-radio:focus-visible+label {
-  outline: 2px solid var(--blue);
-  outline-offset: 2px;
-}
-
-.pager:has(#pg1:checked) .pg-prev-off,
-.pager:has(#pg2:checked) .pg-prev[for="pg1"],
-.pager:has(#pg3:checked) .pg-prev[for="pg2"],
-.pager:has(#pg4:checked) .pg-prev[for="pg3"],
-.pager:has(#pg1:checked) .pg-next[for="pg2"],
-.pager:has(#pg2:checked) .pg-next[for="pg3"],
-.pager:has(#pg3:checked) .pg-next[for="pg4"],
-.pager:has(#pg4:checked) .pg-next-off {
-  display: inline-flex;
-}
-
-/* 히어로와 추천 배너를 감싸는 영역의 배경색 및 넘침 처리를 지정한다. */
+/* 이벤트 페이지 고유 스타일 */
 .stage {
-  position: relative;
   overflow: hidden;
   background: var(--ss-paper);
 }
 
-/* 상단 히어로: 제목과 소개 영역의 최대 너비, 높이 및 여백을 설정한다. */
 .perf-hero {
-  --navy: #1b2b5e;
-  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   max-width: 1470px;
-  margin: 0 auto;
   min-height: clamp(180px, 15vw, 220px);
+  margin: 0 auto;
   padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
 }
 
-/* 히어로 경로 표시: 글자 크기, 굵기, 색상 및 자간을 지정한다. */
 .perf-hero .ss-hero-crumb {
   grid-column: 1 / -1;
   color: var(--ss-blue);
-  font-size: 11px;
   font-weight: 900;
   letter-spacing: .12em;
 }
@@ -207,73 +29,53 @@ body:has(#talk:target) .ss-filter[href="#talk"] {
   grid-column: 1;
   grid-row: 2;
   margin: 20px 0 14px;
-  color: var(--ss-ink);
   font-size: clamp(58px, 8vw, 126px);
-  font-weight: 900;
   line-height: .94;
   letter-spacing: -.075em;
 }
 
-/* EVENT 제목 뒤의 점을 파란색으로 표시한다. */
-.perf-hero .perf-title-dot {
+.perf-title-dot {
   color: var(--ss-blue);
   margin-left: .1em;
 }
 
-/* 히어로 오른쪽에 표시하는 이벤트 분야 목록의 위치와 글자 모양을 설정한다. */
 .perf-tags {
   grid-column: 2;
   grid-row: 2;
-  align-self: center;
   margin: 0;
   padding: 0;
   list-style: none;
   text-align: right;
+  color: #1b2b5e;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: .16em;
   line-height: 1.7;
-  color: var(--navy);
 }
 
-/* 등장 애니메이션은 HTML의 .ss-entrance 클래스와 공통 CSS를 사용한다. */
-
-@media (max-width: 670px) {
-  .perf-hero .ss-hero-title {
-    font-size: clamp(34px, 11.5vw, 80px);
-    letter-spacing: -.07em;
-  }
+.perf-feature {
+  padding: 8px clamp(22px, 5vw, 80px) 64px;
 }
 
-/* 화면 너비 760px 이하: 히어로 높이와 카탈로그 여백을 조정하고 분야 목록을 숨긴다. */
+/* 공통 카테고리 CSS를 사용하고 제목-필터 사이 여백만 조정한다. */
+.ss-catalog .ss-category-heading {
+  margin-bottom: 0;
+}
+
 @media (max-width: 760px) {
   .perf-hero {
     min-height: 0;
     padding-bottom: 90px;
   }
 
-  /* 좁은 화면에서 오른쪽 이벤트 분야 목록을 숨긴다. */
   .perf-tags {
     display: none;
   }
-
-  .ss-catalog {
-    padding-top: 12px;
-  }
 }
 
-/* 추천 배너: 공통 배너 디자인을 유지하며 바깥 영역의 안쪽 여백을 지정한다. */
-.perf-feature {
-  padding: 8px clamp(22px, 5vw, 80px) 64px;
-}
-
-/* 움직임 감소 설정: 부드러운 스크롤과 전환 애니메이션을 비활성화한다. */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  * {
-    transition: none !important;
+@media (max-width: 670px) {
+  .perf-hero .ss-hero-title {
+    font-size: clamp(34px, 11.5vw, 80px);
+    letter-spacing: -.07em;
   }
 }
