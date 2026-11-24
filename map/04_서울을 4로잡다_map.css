@@ -234,7 +234,7 @@ html {
     height: 42px;
     padding: 0 46px 0 18px;     /* 오른쪽은 돋보기 자리 */
     border: 1px solid var(--ss-line);
-    border-radius: 18px;
+    border-radius: 999px;
     background: var(--ss-white);
     color: var(--ss-ink);
     font: inherit;
@@ -370,7 +370,7 @@ html {
     min-width: 0;
     overflow: hidden;
     border: 1px solid #E8E9E7;
-    border-radius: 8px;
+    border-radius: 18px;
     background: #FFFFFF;
     scroll-snap-align: start;
     transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
@@ -518,6 +518,14 @@ html {
 
 .more-btn[hidden] {
     display: none;
+}
+
+.source-note {
+    margin: 26px 0 0;
+    color: var(--ss-muted);
+    font-size: 10px;
+    line-height: 1.7;
+    text-align: center;
 }
 
 .events-empty {
