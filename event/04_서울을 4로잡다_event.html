@@ -10,6 +10,7 @@
 <meta content="김안나(2410639)" name="author"/>
 <link href="../css/04_서울을 4로잡다_common.css" rel="stylesheet"/>
 <link href="../css/04_서울을 4로잡다_category.css" rel="stylesheet"/>
+<link href="../css/04_서울을 4로잡다_carousel.css" rel="stylesheet"/>
 <link href="04_서울을 4로잡다_event.css" rel="stylesheet"/>
 </head>
 <body id="top">
@@ -43,7 +44,6 @@
 </div>
 </header>
 <!-- 본문: 히어로, 추천 이벤트, 필터 및 이벤트 카드 목록을 구성합니다. -->
-<!-- 본문: 페이지별 주요 콘텐츠를 표시하며 공통 헤더와 구분합니다. -->
 <main class="ss-page" id="main">
 <!-- 히어로 + 추천 배너를 하나의 배경(.stage)으로 감쌉니다 -->
 <div class="stage">
@@ -53,35 +53,16 @@
 <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a><span aria-hidden="true">/</span><span aria-current="page">EVENT</span>
 </nav>
 <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="perf-title">Event<span class="perf-title-dot">.</span></h1>
-<div class="perf-hero-bottom">
-<p class="ss-editorial-hero-description ss-entrance ss-entrance--delay-2">서울 곳곳에서 펼쳐지는 특별한 이벤트를 만나보세요.<br/>축제부터 플리마켓, 영화, 강연과 토크까지 새로운 경험을 발견해 보세요.</p>
-<ul aria-hidden="true" class="perf-tags ss-entrance ss-entrance--delay-3">
+<ul aria-hidden="true" class="perf-tags ss-entrance ss-entrance--delay-2">
 <li>FESTIVAL</li>
 <li>FLEA MARKET</li>
 <li>FILM</li>
 <li>TALKS</li>
 </ul>
-</div>
 </section>
-<!-- 공통 추천 배너 (EDITOR'S PICK): 모양은 common.css의 .ss-feature-banner--editorial -->
-<section aria-label="주목할 이벤트" class="perf-feature" id="hot">
-<div class="ss-feature-banner ss-feature-banner--editorial">
-<div class="ss-feature-banner-art">
-<img alt="2026 서울어텀페스타 포스터" src="../images/event.jpg"/>
-</div>
-<div class="ss-feature-banner-copy">
-<span class="ss-feature-banner-index">EDITOR'S PICK / EVENT</span>
-<span class="ss-feature-banner-kicker">축제</span>
-<h2 class="ss-feature-banner-title">2026 서울어텀페스타</h2>
-<p class="ss-feature-banner-description">서울의 가을, 도시가 예술이 되다.<br/>서울 곳곳에서 펼쳐지는 가을 문화예술 축제를 만나보세요.</p>
-<div class="ss-feature-banner-facts">
-<span>2026.09.18 - 11.29</span>
-<span>뚝섬한강공원</span>
-<span>이벤트</span>
-</div>
-<a class="ss-feature-banner-link" href="#all">이벤트 살펴보기 <span aria-hidden="true">↗</span></a>
-</div>
-</div>
+<!-- 주목할 이벤트 캐러셀 -->
+<section class="perf-feature" id="hot" aria-label="주목할 이벤트">
+<div class="ss-carousel" data-src="./04_서울을 4로잡다_event.json" aria-roledescription="캐러셀"></div>
 </section>
 </div><!-- /.stage -->
 <!-- 장르 링크(#id)의 착지점: 카테고리 필터에 사용됩니다 -->
@@ -119,7 +100,7 @@
 <!-- 카드 그리드: 가로 3칸 x 세로 2줄 = 한 페이지 6장 (p1~p4 = 페이지 번호). 카테고리를 고르면 해당 이벤트 전체 -->
 <div class="ss-card-grid ss-catalog-grid">
 <article class="ss-card ss-catalog-card p1" data-genre="festival">
-<a aria-label="2026 한강페스티벌 한강한끼 상세 보기" class="ss-card-image" href="#"><img alt="2026 서울어텀페스타 포스터" src="../images/event.jpg"/></a>
+<a aria-label="2026 한강페스티벌 한강한끼 상세 보기" class="ss-card-image" href="#"><img alt="2026 한강페스티벌 한강한끼 포스터" src="../images/event.jpg"/></a>
 <div class="ss-catalog-card-info">
 <div class="ss-card-topline">
 <span class="ss-card-category">EVENT · FESTIVAL</span>
@@ -255,7 +236,7 @@
 <h3 class="ss-card-title"><a href="#">서울 단편영화의 밤</a></h3>
 <label class="ss-heart ss-heart-toggle"><input aria-label="서울 단편영화의 밤 관심 이벤트에 담기" type="checkbox"/><span aria-hidden="true"></span></label>
 </div>
-<p class="ss-card-description">짧은 영화가 전하는 다양한 이야기를 함께 감상합니다 . 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-description">짧은 영화가 전하는 다양한 이야기를 함께 감상합니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
 <p class="ss-card-meta">서울아트시네마 · 2026.11.15</p>
 <details class="ss-card-details">
 <summary>VIEW EVENT DETAILS <span aria-hidden="true">↗</span></summary>
@@ -309,7 +290,7 @@
 <h3 class="ss-card-title"><a href="#">서울 거리예술 축제</a></h3>
 <label class="ss-heart ss-heart-toggle"><input aria-label="서울 거리예술 축제 관심 이벤트에 담기" type="checkbox"/><span aria-hidden="true"></span></label>
 </div>
-<p class="ss-card-description">도심 곳곳에서 펼쳐지는 거리예술을 즐겨보세요 . 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-description">도심 곳곳에서 펼쳐지는 거리예술을 즐겨보세요. 상세 정보는 추후 업데이트될 예정입니다.</p>
 <p class="ss-card-meta">서울광장 · 2026.11.28</p>
 <details class="ss-card-details">
 <summary>VIEW EVENT DETAILS <span aria-hidden="true">↗</span></summary>
@@ -327,7 +308,7 @@
 <h3 class="ss-card-title"><a href="#">영화로 보는 서울</a></h3>
 <label class="ss-heart ss-heart-toggle"><input aria-label="영화로 보는 서울 관심 이벤트에 담기" type="checkbox"/><span aria-hidden="true"></span></label>
 </div>
-<p class="ss-card-description">서울을 배경으로 한 작품을 함께 보고 이야기를 나눕니다 . 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-description">서울을 배경으로 한 작품을 함께 보고 이야기를 나눕니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
 <p class="ss-card-meta">용산 커뮤니티홀 · 2026.11.29</p>
 <details class="ss-card-details">
 <summary>VIEW EVENT DETAILS <span aria-hidden="true">↗</span></summary>
@@ -345,7 +326,7 @@
 <h3 class="ss-card-title"><a href="#">크리스마스 수공예 마켓</a></h3>
 <label class="ss-heart ss-heart-toggle"><input aria-label="크리스마스 수공예 마켓 관심 이벤트에 담기" type="checkbox"/><span aria-hidden="true"></span></label>
 </div>
-<p class="ss-card-description">연말 선물을 위한 수공예 작품과 소품을 만나보세요 . 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-description">연말 선물을 위한 수공예 작품과 소품을 만나보세요. 상세 정보는 추후 업데이트될 예정입니다.</p>
 <p class="ss-card-meta">홍대 걷고싶은거리 · 2026.12.05</p>
 <details class="ss-card-details">
 <summary>VIEW EVENT DETAILS <span aria-hidden="true">↗</span></summary>
@@ -417,7 +398,7 @@
 <h3 class="ss-card-title"><a href="#">겨울 소품 플리마켓</a></h3>
 <label class="ss-heart ss-heart-toggle"><input aria-label="겨울 소품 플리마켓 관심 이벤트에 담기" type="checkbox"/><span aria-hidden="true"></span></label>
 </div>
-<p class="ss-card-description">작은 브랜드의 겨울 소품과 생활용품을 소개합니다 . 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-description">작은 브랜드의 겨울 소품과 생활용품을 소개합니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
 <p class="ss-card-meta">서울숲 커뮤니티광장 · 2026.12.19</p>
 <details class="ss-card-details">
 <summary>VIEW EVENT DETAILS <span aria-hidden="true">↗</span></summary>
@@ -435,7 +416,7 @@
 <h3 class="ss-card-title"><a href="#">서울 다큐멘터리 상영회</a></h3>
 <label class="ss-heart ss-heart-toggle"><input aria-label="서울 다큐멘터리 상영회 관심 이벤트에 담기" type="checkbox"/><span aria-hidden="true"></span></label>
 </div>
-<p class="ss-card-description">일상과 도시를 기록한 다큐멘터리를 감상합니다 . 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-description">일상과 도시를 기록한 다큐멘터리를 감상합니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
 <p class="ss-card-meta">문화비축기지 · 2026.12.20</p>
 <details class="ss-card-details">
 <summary>VIEW EVENT DETAILS <span aria-hidden="true">↗</span></summary>
@@ -453,7 +434,7 @@
 <h3 class="ss-card-title"><a href="#">새해를 준비하는 강연</a></h3>
 <label class="ss-heart ss-heart-toggle"><input aria-label="새해를 준비하는 강연 관심 이벤트에 담기" type="checkbox"/><span aria-hidden="true"></span></label>
 </div>
-<p class="ss-card-description">새해의 목표와 생활을 주제로 이야기를 나눕니다 . 상세 정보는 추후 업데이트될 예정입니다.</p>
+<p class="ss-card-description">새해의 목표와 생활을 주제로 이야기를 나눕니다. 상세 정보는 추후 업데이트될 예정입니다.</p>
 <p class="ss-card-meta">강남문화센터 · 2026.12.26</p>
 <details class="ss-card-details">
 <summary>VIEW EVENT DETAILS <span aria-hidden="true">↗</span></summary>
@@ -511,5 +492,6 @@
 <a aria-label="페이지 맨 위로" class="ss-back-to-top" href="#top" title="맨 위로 이동"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
 <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
 </svg></a>
+<script src="../js/04_서울을 4로잡다_carousel.js"></script>
 </body>
 </html>
