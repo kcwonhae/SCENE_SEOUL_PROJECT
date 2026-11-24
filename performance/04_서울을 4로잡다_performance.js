@@ -1,14 +1,14 @@
 /* =====================================================
    SCENE:SEOUL - 공연 페이지 JS
-   하는 일
-   1) JSON 파일에서 공연 데이터를 불러온다 (fetch)
-   2) 장르 버튼·검색창으로 공연을 거른다 (이벤트리스너)
-   3) 6개씩 나눠서 카드와 페이지 번호를 보여준다
-   4) 하트와 마지막 장르를 브라우저에 저장한다 (localStorage)
    ===================================================== */
 
 const PER_PAGE = 6;                  // 한 페이지에 보여줄 카드 수
-const SAVED_KEY = 'ss-saved';        // 하트 저장 이름 (팀 공통 약속, 다른 페이지와 같아야 함)
+const GENRE_NAME = {                 // 장르별 카드 위쪽에 보여줄 글자
+  classic: 'PERFORMANCE · CLASSIC · DANCE',
+  concert: 'PERFORMANCE · CONCERT',
+  musical: 'PERFORMANCE · MUSICAL',
+  play: 'PERFORMANCE · PLAY'
+};
 const GENRE_KEY = 'ss-perf-genre';   // 마지막으로 고른 장르 저장 이름
 
 let allItems = [];                   // JSON에서 불러온 공연 전체
@@ -26,7 +26,7 @@ const filterLinks = document.querySelectorAll('.ss-filter');
 
 
 /* ---------- 1. JSON 불러오기 ---------- */
-fetch('04_서울을 4로잡다_performance.json')
+fetch('../data/04_서울을 4로잡다_performance.json')
   .then(response => response.json())
   .then(data => {
     allItems = data.performances;
@@ -40,19 +40,13 @@ fetch('04_서울을 4로잡다_performance.json')
   });
 
 
-/* ---------- 2. 저장된 하트 목록 읽기 ---------- */
-function getSaved() {
-  return JSON.parse(localStorage.getItem(SAVED_KEY)) || [];
-}
-
-
-/* ---------- 3. 장르와 검색어에 맞는 공연만 고르기 ---------- */
+/* ---------- 2. 장르와 검색어에 맞는 공연만 고르기 ---------- */
 function getFilteredItems() {
   const result = [];
   for (let i = 0; i < allItems.length; i++) {
     const item = allItems[i];
     const genreOk = currentGenre === 'all' || item.genre === currentGenre;
-    const text = (item.title + ' ' + item.venue).toLowerCase();
+    const text = (item.title + ' ' + item.location).toLowerCase();
     const keywordOk = text.includes(keyword);
     if (genreOk && keywordOk) {
       result.push(item);
@@ -62,26 +56,25 @@ function getFilteredItems() {
 }
 
 
-/* ---------- 4. 카드 한 장의 HTML 만들기 ---------- */
-function makeCard(item, saved) {
-  const checked = saved.includes(item.id) ? ' checked' : '';
-  const href = item.link ? item.link : '#';
-  const target = item.link ? ' target="_blank" rel="noopener noreferrer"' : '';
+/* ---------- 3. 카드 한 장의 HTML 만들기 ---------- */
+function makeCard(item) {
+  const href = item.sourceUrl ? item.sourceUrl : '#';
+  const target = item.sourceUrl ? ' target="_blank" rel="noopener noreferrer"' : '';
 
   return `
     <article class="ss-card ss-catalog-card" data-genre="${item.genre}">
       <a class="ss-card-image" href="${href}"${target} aria-label="${item.title} 상세 보기"><img src="${item.image}" alt=""></a>
       <div class="ss-catalog-card-info">
         <div class="ss-card-topline">
-          <span class="ss-card-category">${item.category}</span>
-          <span class="ss-card-region">${item.region}</span>
+          <span class="ss-card-category">${GENRE_NAME[item.genre]}</span>
+          <span class="ss-card-region">${item.district}</span>
         </div>
         <div class="ss-card-titleline">
           <h3 class="ss-card-title"><a href="${href}"${target}>${item.title}</a></h3>
-          <label class="ss-heart ss-heart-toggle"><input class="heart-check" type="checkbox" data-id="${item.id}" aria-label="${item.title} 관심 공연에 담기"${checked}><span aria-hidden="true"></span></label>
+          <label class="ss-heart ss-heart-toggle"><input class="heart-check" type="checkbox" data-save-id="${item.id}" aria-label="${item.title} 관심 공연에 담기"><span aria-hidden="true"></span></label>
         </div>
         <p class="ss-card-description">${item.description}</p>
-        <p class="ss-card-meta">${item.venue} · ${item.period}</p>
+        <p class="ss-card-meta">${item.location} · ${SceneSeoul.formatPeriod(item)}</p>
         <details class="ss-card-details">
           <summary>VIEW PERFORMANCE DETAILS <span aria-hidden="true">↗</span></summary>
         </details>
@@ -90,7 +83,7 @@ function makeCard(item, saved) {
 }
 
 
-/* ---------- 5. 화면 그리기 (카드·개수·페이지 번호) ---------- */
+/* ---------- 4. 화면 그리기 (카드·개수·페이지 번호) ---------- */
 function showPage() {
   const items = getFilteredItems();
   const totalPages = Math.ceil(items.length / PER_PAGE);
@@ -101,9 +94,8 @@ function showPage() {
 
   const start = (currentPage - 1) * PER_PAGE;
   const pageItems = items.slice(start, start + PER_PAGE);
-  const saved = getSaved();
 
-  grid.innerHTML = pageItems.map(item => makeCard(item, saved)).join('');
+  grid.innerHTML = pageItems.map(item => makeCard(item)).join('');
   emptyMsg.textContent = '검색 결과가 없습니다.';
   emptyMsg.hidden = items.length !== 0;
   countBox.textContent = items.length;
@@ -111,11 +103,12 @@ function showPage() {
 
   showPager(totalPages);
   markActiveFilter();
+  SceneSeoul.updateHearts();   // 새로 그린 하트에 저장된 상태를 표시
   addHeartEvents();
 }
 
 
-/* ---------- 6. 페이지 번호 그리기 ---------- */
+/* ---------- 5. 페이지 번호 그리기 ---------- */
 function showPager(totalPages) {
   if (totalPages <= 1) {
     pager.innerHTML = '';
@@ -156,7 +149,7 @@ function showPager(totalPages) {
 }
 
 
-/* ---------- 7. 선택된 장르 버튼 표시 ---------- */
+/* ---------- 6. 선택된 장르 버튼 표시 ---------- */
 function markActiveFilter() {
   for (let i = 0; i < filterLinks.length; i++) {
     const genre = filterLinks[i].getAttribute('data-genre');
@@ -169,29 +162,19 @@ function markActiveFilter() {
 }
 
 
-/* ---------- 8. 하트: 누르면 localStorage에 저장 ---------- */
+/* ---------- 7. 하트: 누르면 공통 JS가 localStorage에 저장 ---------- */
 function addHeartEvents() {
   const hearts = grid.querySelectorAll('.heart-check');
   for (let i = 0; i < hearts.length; i++) {
     hearts[i].addEventListener('change', (event) => {
-      const id = event.target.getAttribute('data-id');
-      let saved = getSaved();
-
-      if (event.target.checked) {
-        if (!saved.includes(id)) {
-          saved.push(id);
-        }
-      } else {
-        saved = saved.filter(savedId => savedId !== id);
-      }
-
-      localStorage.setItem(SAVED_KEY, JSON.stringify(saved));
+      const id = event.target.getAttribute('data-save-id');
+      SceneSeoul.toggleSaved(id);
     });
   }
 }
 
 
-/* ---------- 9. 장르 버튼 클릭 ---------- */
+/* ---------- 8. 장르 버튼 클릭 ---------- */
 for (let i = 0; i < filterLinks.length; i++) {
   filterLinks[i].addEventListener('click', (event) => {
     event.preventDefault();
@@ -203,7 +186,7 @@ for (let i = 0; i < filterLinks.length; i++) {
 }
 
 
-/* ---------- 10. 검색창 입력 ---------- */
+/* ---------- 9. 검색창 입력 ---------- */
 searchInput.addEventListener('input', () => {
   keyword = searchInput.value.trim().toLowerCase();
   currentPage = 1;
