@@ -1,7 +1,7 @@
 // 마이캘린더: calendar-events.json을 불러와서 찜한 콘텐츠를 달력과 목록에 보여준다.
 // 찜 목록과 메모는 브라우저 localStorage에 저장한다.
 
-const SAVED_KEY = 'sceneSeoul:saved';
+const SAVED_KEY = 'sceneSeoulSavedEvents:' + (sessionStorage.getItem('sceneSeoulDemoUser') || 'guest');
 const MEMO_KEY = 'sceneSeoul:memos';
 
 const calendarGrid = document.querySelector('#calendarGrid');
@@ -224,8 +224,13 @@ function toggleSaved(id) {
     savedIds.push(id);
     showToast('찜 목록에 저장했어요.');
   }
-  saveStorage(SAVED_KEY, savedIds);
-  renderAll();
+  if (window.SceneSeoul) {
+    // 공통 저장 함수가 각 페이지에 동일한 이벤트를 알린다.
+    SceneSeoul.toggleSaved(id);
+  } else {
+    saveStorage(SAVED_KEY, savedIds);
+    renderAll();
+  }
   // 상세 창이 열려 있으면 버튼 글자(♥/♡)를 바꾸기 위해 다시 그린다.
   if (detailDialog.open) {
     fillDetail(events.find(event => event.id === id));
@@ -369,30 +374,66 @@ detailDialog.addEventListener('click', event => {
 
 /* ---------- 시작 ---------- */
 
+function normalizeItem(item, category) {
+  return {
+    ...item,
+    category,
+    date: item.startDate || item.date,
+    location: item.location || item.venue || '',
+    image: item.image,
+    saved: Boolean(item.saved)
+  };
+}
+
 async function init() {
   try {
-    const response = await fetch('./calendar-events.json');
-    if (!response.ok) throw new Error('HTTP ' + response.status);
-    events = await response.json();
-
-    // 저장된 찜 목록이 없으면(처음 방문) JSON에서 "saved": true인 콘텐츠를 기본 찜으로 쓴다.
-    const stored = loadStorage(SAVED_KEY, null);
-    if (Array.isArray(stored)) {
-      savedIds = stored.filter(id => events.some(event => event.id === id));
+    const [localResponse, eventResponse, popupResponse] = await Promise.all([
+      fetch('./calendar-events.json'),
+      fetch('../event/04_서울을 4로잡다_event.json'),
+      fetch('../data/04_서울을 4로잡다_popup.json')
+    ]);
+    if (!localResponse.ok || !eventResponse.ok || !popupResponse.ok) {
+      throw new Error('JSON 파일을 불러오지 못했습니다.');
+    }
+    const [localData, eventData, popupData] = await Promise.all([
+      localResponse.json(), eventResponse.json(), popupResponse.json()
+    ]);
+    events = localData.concat(
+      eventData.map(item => normalizeItem(item, '이벤트')),
+      popupData.map(item => normalizeItem(item, '팝업'))
+    );
+    const legacySaved = loadStorage('sceneSeoul:saved', null);
+    const sharedSaved = window.SceneSeoul ? SceneSeoul.getSaved() : loadStorage(SAVED_KEY, null);
+    const hasSharedState = localStorage.getItem(SAVED_KEY) !== null;
+    if (hasSharedState && Array.isArray(sharedSaved)) {
+      savedIds = sharedSaved;
+    } else if (Array.isArray(legacySaved)) {
+      savedIds = legacySaved;
+      saveStorage(SAVED_KEY, savedIds);
     } else {
-      savedIds = events.filter(event => event.saved).map(event => event.id);
+      savedIds = localData.filter(item => item.saved).map(item => item.id);
       saveStorage(SAVED_KEY, savedIds);
     }
     memos = loadStorage(MEMO_KEY, {});
     renderAll();
   } catch (error) {
-    const message = '데이터를 불러오지 못했습니다. VS Code Live Server로 실행해 주세요.';
-    dayContents.append(makeElement('p', 'empty-day', message));
-    savedGrid.append(makeElement('p', 'collection-empty', message));
-    renderCalendar();
-    document.querySelector('#selectedDate').textContent = '데이터 로딩 오류';
+    dayContents.append(makeElement('p', 'empty-day', '데이터를 불러오지 못했습니다. Live Server로 실행해 주세요.'));
     console.error(error);
   }
 }
+
+window.addEventListener('scene:saved', function () {
+  if (window.SceneSeoul) {
+    savedIds = SceneSeoul.getSaved();
+    renderAll();
+  }
+});
+
+window.addEventListener('pageshow', function () {
+  if (window.SceneSeoul) {
+    savedIds = SceneSeoul.getSaved();
+    renderAll();
+  }
+});
 
 init();
