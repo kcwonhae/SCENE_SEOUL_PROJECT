@@ -110,7 +110,7 @@ Object.assign(window.SceneSeoul, {
     }
     localStorage.setItem(SceneSeoul.getSavedKey(), JSON.stringify(saved));
     SceneSeoul.updateHearts();
-    window.dispatchEvent(new Event('scene:saved'));   // 찜이 바뀌었다고 알림 (팝업 JS가 듣고 있음)
+    window.dispatchEvent(new Event('scene:saved'));
     return nowSaved;
   },
 

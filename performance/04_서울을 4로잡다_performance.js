@@ -158,6 +158,11 @@ function addHeartEvents() {
   const hearts = grid.querySelectorAll('.heart-check');
   for (let i = 0; i < hearts.length; i++) {
     hearts[i].addEventListener('change', (event) => {
+      if (!SceneSeoul.getUser()) {
+        alert('로그인 후 저장할 수 있어요.');
+        event.target.checked = false;
+        return;
+      }
       const id = event.target.getAttribute('data-save-id');
       SceneSeoul.toggleSaved(id);
     });
@@ -183,3 +188,5 @@ searchInput.addEventListener('input', () => {
   currentPage = 1;
   showPage();
 });
+
+window.addEventListener('scene:saved', SceneSeoul.updateHearts);
