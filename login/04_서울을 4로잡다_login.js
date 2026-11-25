@@ -10,7 +10,7 @@
 
    [사용 기술] querySelector / getElementById, createElement, appendChild, innerHTML,
                addEventListener, 이벤트 객체(key, target, preventDefault),
-               setTimeout, confirm, localStorage(setItem / getItem / removeItem)
+               setTimeout, confirm, alert, localStorage(setItem / getItem / removeItem)
 */
 
 const loginBtn = document.querySelector('.header-login');
@@ -27,16 +27,15 @@ ssOverlay.innerHTML = `
 
         <div class="ss-login-body">
             <span class="ss-login-eyebrow">SCENE:SEOUL / LOGIN</span>
-            <h2 id="ssLoginTitle">나의 서울을<br/>기록해 보세요.</h2>
-            <p class="ss-login-desc">로그인하면 관심 문화를 마이캘린더에서 확인할 수 있습니다.</p>
-            <p class="ss-login-notice">수업 과제용 로그인 시연입니다. 실제 회원 인증 기능은 제공하지 않습니다.</p>
+            <h2 id="ssLoginTitle">SCENE:SEOUL에<br/>기록해 보세요.</h2>
+            <p class="ss-login-desc">로그인 후 관심 문화를 마이캘린더에서 확인해보세요.</p>
 
             <form id="ssLoginForm">
                 <label class="ss-login-label" for="ssLoginId">아이디(닉네임)</label>
                 <input class="ss-login-input" id="ssLoginId" type="text"
-                       placeholder="영문·숫자 2~24자" autocomplete="off"
-                       required minlength="2" maxlength="24" pattern="[A-Za-z0-9]{2,24}"
-                       title="영문과 숫자만 사용해 2~24자로 입력해 주세요."/>
+                       placeholder="한글·영문·숫자 2~15자" autocomplete="off"
+                       required minlength="2" maxlength="15" pattern="[A-Za-z0-9가-힣\\u4E00-\\u9FFF]{2,15}"
+                       title="한글, 한자, 영문, 숫자만 사용해 2~15자로 입력해 주세요."/>
 
                 <label class="ss-login-remember">
                     <input id="ssLoginRemember" type="checkbox"/>
@@ -45,7 +44,6 @@ ssOverlay.innerHTML = `
 
                 <button class="ss-login-submit" type="submit">
                     <span>로그인</span>
-                    <span aria-hidden="true">↗</span>
                 </button>
             </form>
         </div>
@@ -56,7 +54,6 @@ ssOverlay.innerHTML = `
             <p>잠시 후 창이 자동으로 닫힙니다.</p>
             <button class="ss-login-submit" id="ssLoginDoneBtn" type="button">
                 <span>확인</span>
-                <span aria-hidden="true">↗</span>
             </button>
         </div>
     </div>
@@ -98,25 +95,28 @@ function closeLoginModal() {
 /* ================================================================
    03 / 로그인 · 로그아웃
    ================================================================ */
-// 현재 로그인 상태에 맞게 헤더 버튼 문구 변경
+// 현재 로그인 상태에 맞게 헤더 버튼 문구 변경 (로그인 후에는 '로그아웃'만 표시)
 function updateLoginUI() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const username = localStorage.getItem('username');
 
     if (isLoggedIn === 'true' && username) {
-        loginBtn.innerText = username + '님 | LOGOUT';
+        loginBtn.innerText = 'LOGOUT';
     } else {
         loginBtn.innerText = 'LOGIN';
     }
 }
 
 function logout() {
-    const answer = confirm('로그아웃 하시겠습니까?');
+    // 로그아웃 후에는 닉네임이 지워지므로, 먼저 변수에 담아 둠
+    const username = localStorage.getItem('username');
+
+    const answer = confirm(username + '님 로그아웃 하시겠습니까?'); // 취소 / 확인 버튼
     if (!answer) return;
 
     localStorage.removeItem('username');
     localStorage.removeItem('isLoggedIn');
-    alert('로그아웃 되었습니다.');
+    alert(username + '님 로그아웃 되셨습니다.');
     updateLoginUI();
 }
 
@@ -148,7 +148,7 @@ ssForm.addEventListener('submit', (event) => {
         localStorage.removeItem('savedUsername');
     }
 
-    ssDoneText.innerText = nickname + '님, 로그인 되었습니다.';
+    ssDoneText.innerText = nickname + '님, 로그인 되셨습니다.';
     ssDialog.classList.add('is-done');
     updateLoginUI();
 
