@@ -9,23 +9,19 @@ const WAIT_MS = 3000; // 이동 사이의 대기 시간
 // 처음과 끝은 느리게, 중간은 빠르게
 const ease = t => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2);
 
-function cardHtml(item) {
-  const url = item.officialUrl || item.sourceUrl;
-  const content = `
-    <div class="ss-carousel-art">
-      <img class="ss-carousel-backdrop" src="${item.image}" alt="">
-      <img class="ss-carousel-poster" src="${item.image}" alt="${item.title} 포스터">
-    </div>
-    <div class="ss-carousel-info">
-      <h2>${item.title}</h2>
-      <p>${item.startDate} ~ ${item.endDate} · ${item.location}</p>
-    </div>`;
-
-  return `<article class="ss-carousel-card">${url
-    ? `<a href="${url}" target="_blank" rel="noopener noreferrer">${content}</a>`
-    : `<div class="ss-carousel-content">${content}</div>`
-  }</article>`;
-}
+const cardHtml = item => `
+  <article class="ss-carousel-card">
+    <a href="${item.officialUrl}" target="_blank" rel="noopener noreferrer">
+      <div class="ss-carousel-art">
+        <img class="ss-carousel-backdrop" src="${item.image}" alt="">
+        <img class="ss-carousel-poster" src="${item.image}" alt="${item.imageAlt || item.title + ' 포스터'}">
+      </div>
+      <div class="ss-carousel-info">
+        <h2>${item.title}</h2>
+        <p>${item.startDate} ~ ${item.endDate} · ${item.location}</p>
+      </div>
+    </a>
+  </article>`;
 
 async function initCarousel(root) {
   let items;
