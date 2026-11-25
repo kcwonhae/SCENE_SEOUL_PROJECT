@@ -1,5 +1,11 @@
 /* =====================================================
    SCENE:SEOUL - 공연 페이지 JS
+   하는 일
+   1) JSON 파일에서 공연 데이터를 불러온다 (fetch)
+   2) 장르 버튼·검색창으로 공연을 거른다 (이벤트리스너)
+   3) 6개씩 나눠서 카드와 페이지 번호를 보여준다
+   4) 하트는 공통 JS(SceneSeoul)로, 마지막 장르는 localStorage에 저장한다
+   * 공통 JS(04_서울을 4로잡다_common.js)를 이 파일보다 먼저 불러와야 한다
    ===================================================== */
 
 const PER_PAGE = 6;                  // 한 페이지에 보여줄 카드 수
@@ -29,7 +35,7 @@ const filterLinks = document.querySelectorAll('.ss-filter');
 fetch('../data/04_서울을 4로잡다_performance.json')
   .then(response => response.json())
   .then(data => {
-    allItems = data.performances;
+    allItems = data;
     currentGenre = localStorage.getItem(GENRE_KEY) || 'all';
     showPage();
   })

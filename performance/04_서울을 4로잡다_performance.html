@@ -12,6 +12,7 @@
   <meta name="author" content="신윤정(2411997)">
   <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
   <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
+  <link rel="stylesheet" href="../css/04_서울을 4로잡다_carousel.css">
   <link rel="stylesheet" href="04_서울을 4로잡다_performance.css">
 </head>
 
@@ -54,7 +55,7 @@
 
   <main id="main" class="ss-page">
 
-    <!-- 히어로 + 추천 배너 -->
+    <!-- 히어로 + 캐러셀 -->
     <div class="stage">
 
       <!-- 페이지 상단 히어로 -->
@@ -76,26 +77,9 @@
         </div>
       </section>
 
-      <!-- 공통 추천 배너 (EDITOR'S PICK): 모양은 common.css의 .ss-feature-banner--editorial -->
+      <!-- 공통 캐러셀: JSON에서 featured가 true인 공연을 보여줍니다 (carousel.js) -->
       <section class="perf-feature" id="hot" aria-label="주목할 공연">
-        <div class="ss-feature-banner ss-feature-banner--editorial">
-          <div class="ss-feature-banner-art">
-            <img src="../images/poster-sample.jpg" alt="국립발레단 포스터">
-          </div>
-          <div class="ss-feature-banner-copy">
-            <span class="ss-feature-banner-index">EDITOR'S PICK / PERFORMANCE</span>
-            <span class="ss-feature-banner-kicker">클래식·무용</span>
-            <h2 class="ss-feature-banner-title">국립발레단 &lt;지젤&gt;
-            </h2>
-            <p class="ss-feature-banner-description">서울에서 만나는 특별한 공연 프로그램.<br>현대 무용과 사운드가 만나는 무대를 소개합니다.</p>
-            <div class="ss-feature-banner-facts">
-              <span>2026.10.17 - 11.19</span>
-              <span>세종문화회관</span>
-              <span>공연</span>
-            </div>
-            <a class="ss-feature-banner-link" href="#perf-list-title">공연 살펴보기 <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
+        <div class="ss-carousel" data-src="../data/04_서울을 4로잡다_performance.json"></div>
       </section>
 
     </div><!-- /.stage -->
@@ -155,6 +139,7 @@
     </svg></a>
 
   <script src="../js/04_서울을 4로잡다_common.js"></script>
+  <script src="../js/04_서울을 4로잡다_carousel.js"></script>
   <script src="04_서울을 4로잡다_performance.js"></script>
 </body>
 
