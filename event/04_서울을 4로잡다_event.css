@@ -1,64 +1,54 @@
-/* 이벤트 페이지 고유 스타일 */
-.stage {
-  overflow: hidden;
-  background: var(--ss-paper);
+/* 이벤트 페이지 */
+.event-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 1470px;
+    min-height: clamp(180px, 15vw, 220px);
+    margin: 0 auto;
+    padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
 }
 
-.perf-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  max-width: 1470px;
-  min-height: clamp(180px, 15vw, 220px);
-  margin: 0 auto;
-  padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
+.event-hero .ss-hero-crumb {
+    color: var(--ss-blue);
+    font-weight: 900;
+    letter-spacing: .12em;
 }
 
-.perf-hero .ss-hero-crumb {
-  grid-column: 1 / -1;
-  color: var(--ss-blue);
-  font-weight: 900;
-  letter-spacing: .12em;
+.event-hero-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
 }
 
-.perf-hero .ss-hero-crumb [aria-current="page"] {
-  color: inherit;
+.event-hero .ss-hero-title {
+    margin: 20px 0 14px;
+    font-size: clamp(58px, 8vw, 126px);
+    line-height: .94;
+    letter-spacing: -.075em;
 }
 
-.perf-hero .ss-hero-title {
-  grid-column: 1;
-  grid-row: 2;
-  margin: 20px 0 14px;
-  font-size: clamp(58px, 8vw, 126px);
-  line-height: .94;
-  letter-spacing: -.075em;
+.event-title-dot {
+    color: var(--ss-blue);
+    margin-left: .1em;
 }
 
-.perf-title-dot {
-  color: var(--ss-blue);
-  margin-left: .1em;
+.event-tags {
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+    text-align: right;
+    color: #1b2b5e;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .16em;
+    line-height: 1.7;
 }
 
-.perf-tags {
-  grid-column: 2;
-  grid-row: 2;
-  align-self: end;
-  margin: 0 0 14px;
-  padding: 0;
-  list-style: none;
-  text-align: right;
-  color: #1b2b5e;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .16em;
-  line-height: 1.7;
+.event-feature {
+    padding: 8px clamp(22px, 5vw, 80px) 64px;
 }
 
-
-.perf-feature {
-  padding: 8px clamp(22px, 5vw, 80px) 64px;
-}
-
-/* 공통 카테고리 CSS를 사용하고 제목-필터 사이 여백만 조정한다. */
 .ss-catalog .ss-category-heading {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }

@@ -1,137 +1,144 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="김안나 (2410639)">
-  <meta name="team-number" content="04">
-  <meta name="team-name" content="서울을 4로잡다">
-  <title>MY CALENDAR | SCENE:SEOUL</title>
-  <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
-  <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
-  <link rel="stylesheet" href="./04_서울을 4로잡다_mycalendar.css">
-  <script src="../js/04_서울을 4로잡다_site.js" defer></script>
-  <script src="../js/04_서울을 4로잡다_common.js" defer></script>
-  <script src="./04_서울을 4로잡다_mycalendar.js" defer></script>
-<script src="../js/04_서울을 4로잡다_weather.js" defer></script>
-<script src="../login/04_서울을 4로잡다_login.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="project" content="SCENE:SEOUL">
+
+    <meta name="team-number" content="04">
+    <meta name="team-name" content="서울을 4로잡다">
+    <meta name="contributor" content="2410639_김안나">
+    <meta name="description" content="관심 있는 서울 문화행사를 저장하고 달력에서 일정을 확인해 보세요.">
+
+    <title>SCENE:SEOUL | My Calendar</title>
+
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
+    <link rel="stylesheet" href="./04_서울을 4로잡다_mycalendar.css">
+    <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
+    <script src="../js/04_서울을 4로잡다_site.js" defer></script>
+    <script src="../js/04_서울을 4로잡다_common.js" defer></script>
+    <script src="./04_서울을 4로잡다_mycalendar.js" defer></script>
+    <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
+    <script src="../login/04_서울을 4로잡다_login.js" defer></script>
 </head>
+
 <body id="top">
 
-  <header class="ss-header" id="header">
-    <a aria-label="씬 서울 홈" class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html">
-      SCENE<span class="ss-accent">:</span>SEOUL
-    </a>
-    <nav aria-label="메인 메뉴" class="ss-nav">
-      <a href="../main/04_서울을 4로잡다_index.html">HOME</a>
-      <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
-      <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
-      <a href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
-      <a href="../event/04_서울을 4로잡다_event.html">이벤트</a>
-      <a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
-      <a href="../map/04_서울을 4로잡다_map.html">지도</a>
-    </nav>
-    <div class="ss-header-actions">
-      <span class="ss-header-quick-icons">
-        <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
-          <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewBox="0 0 24 24">
-            <circle cx="10.8" cy="10.8" r="6.6"></circle>
-            <path d="m16 16 5 5"></path>
-          </svg>
-        </button>
-        <span aria-label="언어: 한국어" class="ss-language">
-          <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="9"></circle>
-            <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
-          </svg>
-          <span>KR</span>
-        </span>
-      </span>
-      <button class="header-login" type="button">LOGIN</button>
-      <a aria-current="page" class="header-mypage" href="./04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
-      <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중">
-        <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewBox="0 0 24 24">
-          <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
-          <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
+    <header class="ss-header" id="header">
+        <a aria-label="씬 서울 홈" class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html">
+            SCENE<span class="ss-accent">:</span>SEOUL
+        </a>
+        <nav aria-label="메인 메뉴" class="ss-nav">
+            <a href="../main/04_서울을 4로잡다_index.html">HOME</a>
+            <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
+            <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
+            <a href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
+            <a href="../event/04_서울을 4로잡다_event.html">이벤트</a>
+            <a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
+            <a href="../map/04_서울을 4로잡다_map.html">지도</a>
+        </nav>
+        <div class="ss-header-actions">
+            <span class="ss-header-quick-icons">
+                <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
+                    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewBox="0 0 24 24">
+                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
+                        <path d="m16 16 5 5"></path>
+                    </svg>
+                </button>
+                <span aria-label="언어: 한국어" class="ss-language">
+                    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
+                    </svg>
+                    <span>KR</span>
+                </span>
+            </span>
+            <button class="header-login" type="button">LOGIN</button>
+            <a aria-current="page" class="header-mypage" href="./04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
+            <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중">
+                <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewBox="0 0 24 24">
+                    <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
+                    <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
+                </svg>
+            </span>
+        </div>
+    </header>
+
+    <main class="calendar-page ss-page">
+        <div class="page-width">
+            <h1 class="page-title">MY CALENDAR</h1>
+
+            <!-- 월간 달력 + 선택한 날짜의 콘텐츠 -->
+            <section class="schedule-section" id="calendarArea" aria-label="월간 캘린더">
+                <div class="schedule-layout">
+                    <div class="calendar-wrap">
+                        <div class="calendar-toolbar">
+                            <h2 id="monthTitle" aria-live="polite"></h2>
+                            <div class="calendar-actions">
+                                <button type="button" id="prevMonth" class="month-button" aria-label="이전 달">&lt;</button>
+                                <button type="button" id="nextMonth" class="month-button" aria-label="다음 달">&gt;</button>
+                            </div>
+                        </div>
+                        <div class="weekdays" aria-hidden="true">
+                            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid" aria-label="월간 달력"></div>
+                    </div>
+                    <aside class="day-panel" aria-label="선택한 날짜의 콘텐츠">
+                        <div class="day-panel-heading">
+                            <h3 id="selectedDate"></h3>
+                        </div>
+                        <div id="dayContents" class="day-contents" aria-live="polite"></div>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- 찜한 콘텐츠 목록 -->
+            <section class="saved-section" id="savedArea" aria-labelledby="savedHeading">
+                <div class="section-head">
+                    <h2 id="savedHeading">찜한 콘텐츠 (<span id="savedTotal">0</span>)</h2>
+                </div>
+                <div class="filter-controls" id="filterControls" role="group" aria-label="콘텐츠 유형 선택">
+                    <button type="button" class="filter-button is-active" data-filter="전체" aria-pressed="true">전체</button>
+                    <button type="button" class="filter-button" data-filter="전시" aria-pressed="false">전시</button>
+                    <button type="button" class="filter-button" data-filter="공연" aria-pressed="false">공연</button>
+                    <button type="button" class="filter-button" data-filter="팝업" aria-pressed="false">팝업</button>
+                    <button type="button" class="filter-button" data-filter="이벤트" aria-pressed="false">이벤트</button>
+                </div>
+                <div class="poster-grid" id="savedGrid" aria-live="polite"></div>
+                <div class="slide-bar">
+                    <input type="range" id="slideRange" min="0" max="100" value="0" step="1" aria-label="찜한 콘텐츠 슬라이드 이동">
+                </div>
+                <div class="more-area">
+                    <a href="../recommend/04_서울을 4로잡다_recommend.html" class="more-button">다른 콘텐츠 찜하기 <span aria-hidden="true">＋</span></a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 콘텐츠 상세 창 -->
+    <dialog id="detailDialog" class="detail-dialog" aria-labelledby="dialogTitle">
+        <div class="dialog-top">
+            <strong>콘텐츠 정보</strong>
+            <button type="button" id="closeDialog" class="icon-close" aria-label="닫기">×</button>
+        </div>
+        <div id="dialogContent"></div>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <footer class="ss-site-footer">
+        <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
+        <p>서울의 문화를 탐색하고, 저장하고, 나만의 문화 탐방을 설계하는 SCENE:SEOUL</p>
+        <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
+    </footer>
+
+    <a aria-label="페이지 맨 위로" class="ss-back-to-top" href="#top" title="맨 위로 이동">
+        <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewBox="0 0 24 24">
+            <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
         </svg>
-      </span>
-    </div>
-  </header>
-
-  <main class="calendar-page ss-page">
-    <div class="page-width">
-      <h1 class="page-title">MY CALENDAR</h1>
-
-      <!-- 월간 달력 + 선택한 날짜의 콘텐츠 -->
-      <section class="schedule-section" id="calendarArea" aria-label="월간 캘린더">
-        <div class="schedule-layout">
-          <div class="calendar-wrap">
-            <div class="calendar-toolbar">
-              <h2 id="monthTitle" aria-live="polite"></h2>
-              <div class="calendar-actions">
-                <button type="button" id="prevMonth" class="month-button" aria-label="이전 달">&lt;</button>
-                <button type="button" id="nextMonth" class="month-button" aria-label="다음 달">&gt;</button>
-              </div>
-            </div>
-            <div class="weekdays" aria-hidden="true">
-              <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-            </div>
-            <div class="calendar-grid" id="calendarGrid" aria-label="월간 달력"></div>
-          </div>
-          <aside class="day-panel" aria-label="선택한 날짜의 콘텐츠">
-            <div class="day-panel-heading">
-              <h3 id="selectedDate"></h3>
-            </div>
-            <div id="dayContents" class="day-contents" aria-live="polite"></div>
-          </aside>
-        </div>
-      </section>
-
-      <!-- 찜한 콘텐츠 목록 -->
-      <section class="saved-section" id="savedArea" aria-labelledby="savedHeading">
-        <div class="section-head">
-          <h2 id="savedHeading">찜한 콘텐츠 (<span id="savedTotal">0</span>)</h2>
-        </div>
-        <div class="filter-controls" id="filterControls" role="group" aria-label="콘텐츠 유형 선택">
-          <button type="button" class="filter-button is-active" data-filter="전체" aria-pressed="true">전체</button>
-          <button type="button" class="filter-button" data-filter="전시" aria-pressed="false">전시</button>
-          <button type="button" class="filter-button" data-filter="공연" aria-pressed="false">공연</button>
-          <button type="button" class="filter-button" data-filter="팝업" aria-pressed="false">팝업</button>
-          <button type="button" class="filter-button" data-filter="이벤트" aria-pressed="false">이벤트</button>
-        </div>
-        <div class="poster-grid" id="savedGrid" aria-live="polite"></div>
-        <div class="slide-bar">
-          <input type="range" id="slideRange" min="0" max="100" value="0" step="1" aria-label="찜한 콘텐츠 슬라이드 이동">
-        </div>
-        <div class="more-area">
-          <a href="../recommend/04_서울을 4로잡다_recommend.html" class="more-button">다른 콘텐츠 찜하기 <span aria-hidden="true">＋</span></a>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <!-- 콘텐츠 상세 창 -->
-  <dialog id="detailDialog" class="detail-dialog" aria-labelledby="dialogTitle">
-    <div class="dialog-top">
-      <strong>콘텐츠 정보</strong>
-      <button type="button" id="closeDialog" class="icon-close" aria-label="닫기">×</button>
-    </div>
-    <div id="dialogContent"></div>
-  </dialog>
-
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-  <footer class="ss-site-footer">
-    <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
-    <p>서울의 문화를 탐색하고, 저장하고, 나만의 문화 탐방을 설계하는 SCENE:SEOUL</p>
-    <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
-  </footer>
-
-  <a aria-label="페이지 맨 위로" class="ss-back-to-top" href="#top" title="맨 위로 이동">
-    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewBox="0 0 24 24">
-      <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
-    </svg>
-  </a>
+    </a>
 
 </body>
 </html>

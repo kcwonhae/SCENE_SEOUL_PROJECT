@@ -1,107 +1,138 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>이벤트 | SCENE.SEOUL</title>
-    <meta content="서울의 축제, 플리마켓, 영화, 강연·토크 등 다양한 이벤트를 둘러보세요." name="description"/>
-    <meta content="04" name="team-number"/>
-    <meta content="서울을 4로잡다" name="team-name"/>
-    <meta content="김안나(2410639)" name="author"/>
-    <link href="../css/04_서울을 4로잡다_common.css" rel="stylesheet"/>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="project" content="SCENE:SEOUL">
+
+    <meta name="team-number" content="04">
+    <meta name="team-name" content="서울을 4로잡다">
+    <meta name="contributor" content="2410639_김안나">
+    <meta name="description" content="서울의 축제, 플리마켓, 영화, 강연·토크 등 다양한 이벤트를 둘러보세요.">
+
+    <title>SCENE:SEOUL | Events</title>
+
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_carousel.css">
+    <link rel="stylesheet" href="./04_서울을 4로잡다_event.css">
     <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
-    <link href="../css/04_서울을 4로잡다_category.css" rel="stylesheet"/>
-    <link href="../css/04_서울을 4로잡다_carousel.css" rel="stylesheet"/>
-    <link href="04_서울을 4로잡다_event.css" rel="stylesheet"/>
     <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
     <script src="../login/04_서울을 4로잡다_login.js" defer></script>
-  </head>
-  <body id="top">
+</head>
+
+<body id="top">
     <a class="skip" href="#main">본문 바로가기</a>
+
     <header class="ss-header">
-      <a aria-label="씬 서울 홈" class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html">SCENE<span class="ss-accent">:</span>SEOUL</a>
-      <nav aria-label="메인 메뉴" class="ss-nav">
-        <a href="../main/04_서울을 4로잡다_index.html">HOME</a>
-        <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
-        <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
-        <a href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
-        <a aria-current="page" href="../event/04_서울을 4로잡다_event.html">이벤트</a>
-        <a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
-        <a href="../map/04_서울을 4로잡다_map.html">지도</a>
-      </nav>
-      <div class="ss-header-actions">
-        <span class="ss-header-quick-icons"><button aria-label="검색" class="ss-icon-button" title="검색" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24">
-          <circle cx="10.8" cy="10.8" r="6.6"></circle>
-          <path d="m16 16 5 5"></path>
-        </svg></button><span aria-label="언어: 한국어" class="ss-language"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24">
-        <circle cx="12" cy="12" r="9"></circle>
-        <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
-      </svg><span>KR</span></span></span>
-      <button class="header-login" type="button">LOGIN</button>
-      <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
-      <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewbox="0 0 24 24">
-        <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
-        <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
-      </svg></span>
-    </div>
-  </header>
-  <!-- 본문: 히어로, 추천 이벤트, 필터 및 이벤트 카드 목록을 구성합니다. -->
-  <main class="ss-page" id="main">
-    <!-- 히어로 + 추천 배너를 하나의 배경(.stage)으로 감쌉니다 -->
-    <div class="stage">
-      <!-- 페이지 상단 히어로 -->
-      <section aria-labelledby="perf-title" class="perf-hero">
-        <nav aria-label="현재 위치" class="ss-hero-crumb ss-entrance">
-          <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a><span aria-hidden="true">/</span><span aria-current="page">EVENT</span>
+        <a aria-label="씬 서울 홈" class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html">
+            SCENE<span class="ss-accent">:</span>SEOUL
+        </a>
+        <nav aria-label="메인 메뉴" class="ss-nav">
+            <a href="../main/04_서울을 4로잡다_index.html">HOME</a>
+            <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
+            <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
+            <a href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
+            <a aria-current="page" href="../event/04_서울을 4로잡다_event.html">이벤트</a>
+            <a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
+            <a href="../map/04_서울을 4로잡다_map.html">지도</a>
         </nav>
-        <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="perf-title">Event<span class="perf-title-dot">.</span></h1>
-        <ul aria-hidden="true" class="perf-tags ss-entrance ss-entrance--delay-2">
-          <li>FILM</li>
-          <li>TALKS</li>
-          <li>FESTIVAL</li>
-          <li>FLEA MARKET</li>
-        </ul>
-      </section>
-      <!-- 주목할 이벤트 캐러셀 -->
-      <section class="perf-feature" id="hot" aria-label="주목할 이벤트">
-        <div class="ss-carousel" data-src="../data/04_서울을 4로잡다_event.json" aria-roledescription="캐러셀"></div>
-      </section>
-    </div><!-- /.stage -->
-    <!-- 이벤트 목록: 데이터 파일에서 카드를 생성합니다. -->
-    <section aria-label="이벤트 목록" class="ss-catalog" id="event-list">
-      <div class="ss-category-heading">
-        <h2 class="ss-category-title">ALL <em class="ss-category-title-accent">EVENTS.</em></h2>
-        <p class="ss-category-description">서울에서 열리는 축제와 마켓을 만나보세요.</p>
-      </div>
-      <div class="ss-toolbar">
-        <nav class="ss-filters" aria-label="이벤트 카테고리">
-          <button class="ss-filter" type="button" data-filter="all" aria-pressed="true">전체</button>
-          <button class="ss-filter" type="button" data-filter="festival" aria-pressed="false">축제</button>
-          <button class="ss-filter" type="button" data-filter="flea" aria-pressed="false">플리마켓</button>
-          <button class="ss-filter" type="button" data-filter="film" aria-pressed="false">영화</button>
-          <button class="ss-filter" type="button" data-filter="talk" aria-pressed="false">강연/토크</button>
-        </nav>
-        <div class="ss-search" role="search">
-          <label class="ss-visually-hidden" for="event-search">이벤트 검색</label>
-          <input id="event-search" type="search" placeholder="이벤트명, 장소 검색" />
-          <svg class="ss-search-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 5 5"></path></svg>
+        <div class="ss-header-actions">
+            <span class="ss-header-quick-icons">
+                <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
+                    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewBox="0 0 24 24">
+                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
+                        <path d="m16 16 5 5"></path>
+                    </svg>
+                </button>
+                <span aria-label="언어: 한국어" class="ss-language">
+                    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
+                    </svg>
+                    <span>KR</span>
+                </span>
+            </span>
+            <button class="header-login" type="button">LOGIN</button>
+            <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
+            <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중">
+                <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewBox="0 0 24 24">
+                    <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
+                    <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
+                </svg>
+            </span>
         </div>
-      </div>
-      <div id="event-cards" class="ss-card-grid ss-catalog-grid" aria-live="polite"></div>
-      <nav id="event-pagination" class="popup-js-pager" aria-label="이벤트 페이지 이동"></nav>
-    </section>
-  </main>
-  <!-- 공통 푸터: 공통 CSS의 푸터 스타일을 사용합니다. -->
-  <footer class="ss-site-footer">
-    <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
-    <p>서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업·이벤트 정보를 소개합니다.</p>
-    <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
-  </footer>
-  <a aria-label="페이지 맨 위로" class="ss-back-to-top" href="#top" title="맨 위로 이동"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
-    <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
-  </svg></a>
-  <script src="../js/04_서울을 4로잡다_common.js"></script>
-  <script src="../js/04_서울을 4로잡다_carousel.js"></script>
-  <script src="04_서울을 4로잡다_event.js"></script>
+    </header>
+
+    <main class="ss-page" id="main">
+        <div class="stage">
+            <!-- 페이지 상단 -->
+            <section class="event-hero" aria-labelledby="event-title">
+                <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
+                    <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">EVENT</span>
+                </nav>
+                <div class="event-hero-row">
+                    <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="event-title">Event<span class="event-title-dot">.</span></h1>
+                    <ul class="event-tags ss-entrance ss-entrance--delay-2" aria-hidden="true">
+                        <li>FILM</li>
+                        <li>TALKS</li>
+                        <li>FESTIVAL</li>
+                        <li>FLEA MARKET</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 주목할 이벤트 -->
+            <section class="event-feature" id="hot" aria-label="주목할 이벤트">
+                <div class="ss-carousel" data-src="../data/04_서울을 4로잡다_event.json" aria-roledescription="캐러셀"></div>
+            </section>
+        </div>
+
+        <!-- 이벤트 목록 -->
+        <section class="ss-catalog" id="event-list" aria-label="이벤트 목록">
+            <div class="ss-category-heading">
+                <h2 class="ss-category-title">ALL <em class="ss-category-title-accent">EVENTS.</em></h2>
+                <p class="ss-category-description">서울에서 열리는 축제와 마켓을 만나보세요.</p>
+            </div>
+            <div class="ss-toolbar">
+                <nav class="ss-filters" aria-label="이벤트 카테고리">
+                    <button class="ss-filter" type="button" data-filter="all" aria-pressed="true">전체</button>
+                    <button class="ss-filter" type="button" data-filter="festival" aria-pressed="false">축제</button>
+                    <button class="ss-filter" type="button" data-filter="flea" aria-pressed="false">플리마켓</button>
+                    <button class="ss-filter" type="button" data-filter="film" aria-pressed="false">영화</button>
+                    <button class="ss-filter" type="button" data-filter="talk" aria-pressed="false">강연/토크</button>
+                </nav>
+                <div class="ss-search" role="search">
+                    <label class="ss-visually-hidden" for="event-search">이벤트 검색</label>
+                    <input id="event-search" type="search" placeholder="이벤트명, 장소 검색">
+                    <svg class="ss-search-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
+                        <path d="m16 16 5 5"></path>
+                    </svg>
+                </div>
+            </div>
+            <div id="event-cards" class="ss-card-grid ss-catalog-grid" aria-live="polite"></div>
+            <nav id="event-pagination" class="popup-js-pager" aria-label="이벤트 페이지 이동"></nav>
+        </section>
+    </main>
+
+    <footer class="ss-site-footer">
+        <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
+        <p>서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업·이벤트 정보를 소개합니다.</p>
+        <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
+    </footer>
+
+    <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동">
+        <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewBox="0 0 24 24">
+            <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
+        </svg>
+    </a>
+
+    <script src="../js/04_서울을 4로잡다_common.js"></script>
+    <script src="../js/04_서울을 4로잡다_carousel.js"></script>
+    <script src="04_서울을 4로잡다_event.js"></script>
 </body>
 </html>
