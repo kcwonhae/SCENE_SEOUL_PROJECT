@@ -8,13 +8,7 @@
    * 공통 JS(04_서울을 4로잡다_common.js)를 이 파일보다 먼저 불러와야 한다
    ===================================================== */
 
-const PER_PAGE = 6;                  // 한 페이지에 보여줄 카드 수
-const GENRE_NAME = {                 // 장르별 카드 위쪽에 보여줄 글자
-  classic: 'PERFORMANCE · CLASSIC · DANCE',
-  concert: 'PERFORMANCE · CONCERT',
-  musical: 'PERFORMANCE · MUSICAL',
-  play: 'PERFORMANCE · PLAY'
-};
+const PER_PAGE = 8;                  // 한 페이지에 보여줄 카드 수
 const GENRE_KEY = 'ss-perf-genre';   // 마지막으로 고른 장르 저장 이름
 
 let allItems = [];                   // JSON에서 불러온 공연 전체
@@ -24,8 +18,6 @@ let currentPage = 1;                 // 지금 보고 있는 페이지
 
 const grid = document.querySelector('#card-grid');
 const emptyMsg = document.querySelector('#empty-msg');
-const countBox = document.querySelector('#result-count');
-const hotLabel = document.querySelector('.hot-label');
 const pager = document.querySelector('#pager');
 const searchInput = document.querySelector('#perf-search');
 const filterLinks = document.querySelectorAll('.ss-filter');
@@ -63,27 +55,22 @@ function getFilteredItems() {
 
 
 /* ---------- 3. 카드 한 장의 HTML 만들기 ---------- */
+// 공통 카드 모양: 포스터(오른쪽 아래 하트) + 제목 + 장소 + 기간
 function makeCard(item) {
   const href = item.sourceUrl ? item.sourceUrl : '#';
   const target = item.sourceUrl ? ' target="_blank" rel="noopener noreferrer"' : '';
 
   return `
     <article class="ss-card ss-catalog-card" data-genre="${item.genre}">
-      <a class="ss-card-image" href="${href}"${target} aria-label="${item.title} 상세 보기"><img src="${item.image}" alt=""></a>
-      <div class="ss-catalog-card-info">
-        <div class="ss-card-topline">
-          <span class="ss-card-category">${GENRE_NAME[item.genre]}</span>
-          <span class="ss-card-region">${item.district}</span>
-        </div>
-        <div class="ss-card-titleline">
-          <h3 class="ss-card-title"><a href="${href}"${target}>${item.title}</a></h3>
-          <label class="ss-heart ss-heart-toggle"><input class="heart-check" type="checkbox" data-save-id="${item.id}" aria-label="${item.title} 관심 공연에 담기"><span aria-hidden="true"></span></label>
-        </div>
-        <p class="ss-card-description">${item.description}</p>
-        <p class="ss-card-meta">${item.location} · ${SceneSeoul.formatPeriod(item)}</p>
-        <details class="ss-card-details">
-          <summary>VIEW PERFORMANCE DETAILS <span aria-hidden="true">↗</span></summary>
-        </details>
+      <a class="ss-card-link-overlay" href="${href}"${target} aria-label="${item.title} 상세 보기"></a>
+      <div class="ss-card-image">
+        <img src="${item.image}" alt="${item.title} 포스터">
+        <label class="ss-heart ss-heart-toggle"><input class="heart-check" type="checkbox" data-save-id="${item.id}" aria-label="${item.title} 관심 공연에 담기"><span aria-hidden="true"></span></label>
+      </div>
+      <div class="ss-card-info ss-catalog-card-info">
+        <h3 class="ss-card-title">${item.title}</h3>
+        <p class="ss-card-meta">${item.location}</p>
+        <p class="ss-card-period">${SceneSeoul.formatPeriod(item)}</p>
       </div>
     </article>`;
 }
@@ -104,8 +91,6 @@ function showPage() {
   grid.innerHTML = pageItems.map(item => makeCard(item)).join('');
   emptyMsg.textContent = '검색 결과가 없습니다.';
   emptyMsg.hidden = items.length !== 0;
-  countBox.textContent = items.length;
-  hotLabel.textContent = currentGenre === 'all' ? 'ALL · ' : '';
 
   showPager(totalPages);
   markActiveFilter();

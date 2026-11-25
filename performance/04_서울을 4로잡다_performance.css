@@ -91,11 +91,6 @@ p {
   color: var(--mute);
 }
 
-.ss-catalog .ss-catalog-status {
-  display: block;
-  order: 3;
-}
-
 .pager {
   order: 5;
 }
@@ -115,9 +110,6 @@ p {
   color: var(--blue);
 }
 
-.hot-label {
-  color: var(--blue);
-}
 
 /* 페이지 번호: 모양은 공통(category.css)의 .ss-page-nav / .ss-page-numbers / .ss-page-arrow 사용.
    category.css는 화살표를 기본으로 숨겨 두므로(display: none), 여기서 보이게 하고 "선택된 번호 색"을 정함 */
