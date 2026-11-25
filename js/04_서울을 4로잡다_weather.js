@@ -1,6 +1,6 @@
 
 /* SCENE:SEOUL - 네비게이션 날씨 */
-
+/* 적용 방법은 https://github.com/kcwonhae/SCENE_SEOUL_PROJECT/pull/8 참고. */
 const WEATHER_URL =
     "https://scene-seoul-weather.kw064753.workers.dev/api/weather";
 

@@ -8,18 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const pager = document.getElementById("popup-pagination");
 
     const PAGE_SIZE = 8;
+    const DATA_URL = "../data/04_서울을 4로잡다_popup.json";
 
     let popups = [];
     let category = "all";
     let keyword = "";
     let page = 1;
-
-    const kinds = {
-        fashion: "패션",
-        art: "아트",
-        life: "라이프스타일",
-        goods: "굿즈 · 마켓"
-    };
 
     function createElement(tag, className, content) {
         const element = document.createElement(tag);
@@ -36,8 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function dateLabel(item) {
-        return item.startDate.replace(/-/g, ".") +
-            " — " + item.endDate.replace(/-/g, ".");
+        const start = (item.startDate || "").replace(/-/g, ".");
+        const end = (item.endDate || "").replace(/-/g, ".");
+
+        if (!end) {
+            return start || "일정 확인 필요";
+        }
+
+        return start === end ? start : start + " — " + end;
     }
 
     function detailUrl(item) {
@@ -75,12 +75,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const imageWrap = createElement("div", "ss-card-image");
         const image = document.createElement("img");
 
-        image.src = item.image;
+        image.src = item.image || "";
         image.alt = item.title + " 포스터";
         image.loading = "lazy";
         imageWrap.appendChild(image);
 
-        // 관심 팝업 저장
+        // 공통 찜 목록을 기준으로 하트 상태 표시
         const heart = createElement("label", "ss-heart-toggle");
         const checkbox = document.createElement("input");
         const heartIcon = document.createElement("span");
@@ -88,10 +88,14 @@ document.addEventListener("DOMContentLoaded", function () {
         checkbox.type = "checkbox";
         checkbox.dataset.saveId = item.id;
         checkbox.checked = SceneSeoul.getSaved().includes(item.id);
-        checkbox.setAttribute("aria-label", item.title + " 관심 팝업 저장");
+        checkbox.setAttribute(
+            "aria-label",
+            item.title + " 관심 팝업 저장"
+        );
 
         heartIcon.setAttribute("aria-hidden", "true");
         heart.append(checkbox, heartIcon);
+
         imageWrap.appendChild(heart);
         article.appendChild(imageWrap);
 
@@ -112,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
         info.append(title, place, period);
         article.appendChild(info);
 
-        // 카드 클릭 시 상세 페이지 이동
+        // 카드 클릭 시 상세 정보 페이지로 이동
         const url = detailUrl(item);
 
         if (url) {
@@ -128,54 +132,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         return article;
-    }
-
-    /* 상단 추천 팝업 */
-
-    function showFeatured() {
-        const featured = popups.filter(function (item) {
-            return item.featured === true;
-        });
-
-        featured.sort(function (a, b) {
-            return a.featuredOrder - b.featuredOrder;
-        });
-
-        const selected = featured[0] || popups[0];
-
-        if (!selected) {
-            return;
-        }
-
-        const image = document.getElementById("popup-feature-img");
-        const kicker = document.getElementById("popup-feature-kicker");
-        const title = document.getElementById("popup-feature-title");
-        const description = document.getElementById("popup-feature-desc");
-        const facts = document.getElementById("popup-feature-facts");
-        const link = document.getElementById("popup-feature-link");
-
-        image.src = selected.image;
-        image.alt = selected.title + " 관련 이미지";
-
-        kicker.textContent =
-            (kinds[selected.subCategory] || "POP-UP") +
-            " · " + (selected.district || "서울");
-
-        title.textContent = selected.title;
-        description.textContent = selected.description || "";
-
-        facts.replaceChildren(
-            createElement("span", "", dateLabel(selected)),
-            createElement("span", "", selected.location),
-            createElement("span", "", "POP-UP")
-        );
-
-        const url = detailUrl(selected);
-
-        setExternalLink(link, url);
-        link.textContent = url ? "팝업 살펴보기 ↗" : "상세 정보 준비 중";
-
-        document.getElementById("popup-feature").removeAttribute("aria-busy");
     }
 
     /* 페이지 번호 버튼 */
@@ -319,8 +275,20 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        SceneSeoul.toggleSaved(input.dataset.saveId);
+        // 로그인하지 않았다면 저장하지 않음
+        if (!SceneSeoul.getUser()) {
+            input.checked = false;
+            alert("로그인 후 저장할 수 있어요.");
+            return;
+        }
+
+        // 공통 함수에서 찜 추가 또는 취소
+        const saved = SceneSeoul.toggleSaved(input.dataset.saveId);
+
+        input.checked = saved;
     });
+
+    /* 로그인 및 찜 상태 변경 */
 
     function updateHearts() {
         const saved = SceneSeoul.getSaved();
@@ -330,12 +298,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    window.addEventListener("scene:login", updateHearts);
     window.addEventListener("scene:saved", updateHearts);
     window.addEventListener("pageshow", updateHearts);
 
+    // 다른 탭에서 찜이나 로그인 상태를 변경했을 때
+    window.addEventListener("storage", function (event) {
+        if (
+            event.key === SceneSeoul.USER_KEY ||
+            (event.key && event.key.startsWith(SceneSeoul.SAVED_PREFIX))
+        ) {
+            updateHearts();
+        }
+    });
+
     /* JSON 데이터 불러오기 */
 
-    fetch("../data/04_서울을 4로잡다_popup.json")
+    fetch(DATA_URL)
         .then(function (response) {
             if (!response.ok) {
                 throw new Error("JSON 요청 실패: " + response.status);
@@ -349,11 +328,25 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             popups = data;
-            showFeatured();
-            render();
+
+            try {
+                render();
+            } catch (error) {
+                console.error("팝업 카드 표시 오류:", error);
+
+                cards.replaceChildren(
+                    createElement(
+                        "p",
+                        "popup-empty",
+                        "팝업 카드를 표시하는 중 오류가 발생했습니다."
+                    )
+                );
+
+                pager.replaceChildren();
+            }
         })
         .catch(function (error) {
-            console.error("팝업 데이터 오류:", error);
+            console.error("팝업 JSON 불러오기 오류:", error);
 
             cards.replaceChildren(
                 createElement(

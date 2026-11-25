@@ -11,10 +11,16 @@
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
     <link rel="stylesheet" href="04_서울을 4로잡다_popup.css">
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_carousel.css">
+    <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
 
-    <script src="../js/04_서울을 4로잡다_site.js" defer></script>
+   
+    <script src="../js/04_서울을 4로잡다_common.js" defer></script>
+    <script src="../login/04_서울을 4로잡다_login.js" defer></script>
     <script src="04_서울을 4로잡다_popup.js" defer></script>
     <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
+    <script src="../js/04_서울을 4로잡다_carousel.js" defer></script>
+
 </head>
 
 <body id="top">
@@ -59,23 +65,6 @@
 
         <div class="ss-header-actions">
             <span class="ss-header-quick-icons">
-                <button class="ss-icon-button"
-                        type="button"
-                        aria-label="검색"
-                        title="검색">
-                    <svg aria-hidden="true"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-linecap="round"
-                         stroke-width="1.8"
-                         viewBox="0 0 24 24">
-                        <circle cx="10.8"
-                                cy="10.8"
-                                r="6.6"></circle>
-                        <path d="m16 16 5 5"></path>
-                    </svg>
-                </button>
-
                 <span class="ss-language"
                       aria-label="언어: 한국어">
                     <svg aria-hidden="true"
@@ -90,19 +79,19 @@
                 </span>
             </span>
 
-            <a class="header-login" href="#login-required">
+            <button class="header-login" type="button">
                 LOGIN
-            </a>
+            </button>
 
             <a class="header-mypage"
                href="../mycalendar/04_서울을 4로잡다_mycalendar.html">
                 MY PAGE
             </a>
 
-                <span class="ss-weather-icon"
-                     id="header-weather"
-                     aria-label="서울 날씨"
-                     title="날씨 정보 불러오는 중">
+            <span class="ss-weather-icon"
+                  id="header-weather"
+                  aria-label="서울 날씨"
+                  title="날씨 정보 불러오는 중">
                 <svg aria-hidden="true"
                      fill="none"
                      stroke="currentColor"
@@ -121,98 +110,52 @@
 
         <div class="popup-performance-stage">
 
-            <section class="perf-hero"
-                     aria-labelledby="popup-hero-title">
 
-                <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1"
-                    id="popup-hero-title">
-                    Pop-up<span class="perf-title-dot">.</span>
-                </h1>
+      <section class="perf-hero" aria-labelledby="popup-hero-title">
 
-                <div class="perf-hero-bottom">
-                    <p class="ss-editorial-hero-description ss-entrance ss-entrance--delay-2">
-                        잠깐 열렸다 사라지기에 더 특별한 공간.<br>
-                        지금 서울에서 만날 수 있는 팝업의 순간을 발견하세요.
-                    </p>
+          <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
+              <a href="../main/04_서울을 4로잡다_index.html">
+                  SCENE:SEOUL
+              </a>
+              <span aria-hidden="true">/</span>
+              <span aria-current="page">POP-UP</span>
+          </nav>
 
-                    <ul class="perf-tags ss-entrance ss-entrance--delay-3"
-                        aria-hidden="true">
-                        <li>FASHION</li>
-                        <li>ART</li>
-                        <li>LIFESTYLE</li>
-                        <li>GOODS &amp; MARKET</li>
-                    </ul>
-                </div>
-            </section>
+          <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1"
+              id="popup-hero-title">
+              Pop-up<span class="perf-title-dot">.</span>
+          </h1>
 
-            <section class="perf-feature"
-                     aria-label="추천 팝업">
+          <ul class="perf-tags ss-entrance ss-entrance--delay-3"
+              aria-hidden="true">
+              <li>ART</li>
+              <li>FASHION</li>
+              <li>LIFESTYLE</li>
+              <li>GOODS &amp; MARKET</li>
+          </ul>
 
-                <div id="popup-feature"
-                     class="ss-feature-banner ss-feature-banner--editorial"
-                     aria-busy="true">
+      </section>
 
-                    <div class="ss-feature-banner-art">
-                        <img id="popup-feature-img"
-                             src="../images/04_popup.01.jpg"
-                             alt="추천 팝업 관련 이미지">
-                    </div>
 
-                    <div class="ss-feature-banner-copy">
-
-                        <span class="ss-feature-banner-index">
-                            EDITOR'S PICK / SEOUL
-                        </span>
-
-                        <span id="popup-feature-kicker"
-                              class="ss-feature-banner-kicker">
-                            서울 팝업
-                        </span>
-
-                        <h2 id="popup-feature-title"
-                            class="ss-feature-banner-title">
-                            서울의 새로운 공간
-                        </h2>
-
-                        <p id="popup-feature-desc"
-                           class="ss-feature-banner-description">
-                            지금 서울에서 열리는 다양한 팝업 행사를 만나보세요.
-                        </p>
-
-                        <div id="popup-feature-facts"
-                             class="ss-feature-banner-facts">
-                            <span>행사 일정 확인 중</span>
-                            <span>서울</span>
-                        </div>
-
-                        <a id="popup-feature-link"
-                           class="ss-feature-banner-link">
-                            팝업 살펴보기
-                            <span aria-hidden="true">↗</span>
-                        </a>
-
-                    </div>
-                </div>
+            <!-- 공통 추천 캐러셀 -->
+            <section class="perf-feature" aria-label="추천 팝업">
+                <div class="ss-carousel"
+                     data-src="../data/04_서울을 4로잡다_popup.json"></div>
             </section>
 
         </div>
 
+        <!-- 팝업 목록 -->
         <section class="discover ss-catalog popup-catalog"
                  id="discover"
                  aria-labelledby="popup-catalog-title">
 
-                <h2 class="ss-category-title"
-                    id="popup-catalog-title">
-                    ALL
-                    <em class="ss-category-title-accent">
-                        POP-UPS.
-                    </em>
+            <div class="ss-category-heading">
+                <h2 class="ss-category-title" id="popup-catalog-title">
+                    ALL <em class="ss-category-title-accent">POP-UPS.</em>
                 </h2>
 
-                <p class="ss-category-description">
-                    서울에서 열리는 팝업을 찾아보고
-                    관심 있는 일정을 저장해 보세요.
-                </p>
+                    <div class="popup-divider" aria-hidden="true"></div>
             </div>
 
             <div class="pop-catalog-controls ss-catalog-controls">
@@ -282,7 +225,7 @@
                         </svg>
                     </div>
                 </div>
-                
+
                 <div id="cards"
                      class="ss-card-grid pop-catalog-grid ss-catalog-grid"
                      aria-live="polite">
@@ -302,11 +245,6 @@
             <strong class="footer-brand">
                 SCENE<span>:</span>SEOUL
             </strong>
-
-            <p>
-                서울의 문화를 소개하는 웹사이트 콘텐츠.
-                행사 방문 전 공식 채널에서 최신 정보를 확인해 주세요.
-            </p>
 
             <small class="footer-copyright">
                 © 2026 SCENE:SEOUL
@@ -329,72 +267,6 @@
             <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
         </svg>
     </a>
-
-    <section id="login-required"
-             class="login-preview-dialog"
-             role="dialog"
-             aria-modal="true"
-             aria-labelledby="login-title">
-
-        <div class="login-preview-sheet">
-
-            <a class="login-preview-close"
-               href="#top"
-               aria-label="닫기">
-                ×
-            </a>
-
-            <span class="login-eyebrow">
-                SCENE:SEOUL / DEMO
-            </span>
-
-            <h2 id="login-title">
-                나의 서울을<br>
-                기록해 보세요.
-            </h2>
-
-            <p>
-                로그인하면 관심 팝업을
-                마이캘린더에서 확인할 수 있습니다.
-            </p>
-
-            <p class="login-notice">
-                수업 과제용 로그인 시연입니다.
-                실제 회원 인증 기능은 제공하지 않습니다.
-            </p>
-
-            <form id="demo-login-form">
-                <label for="demo-user">
-                    아이디
-                </label>
-
-                <input id="demo-user"
-                       type="text"
-                       name="username"
-                       autocomplete="off"
-                       minlength="2"
-                       maxlength="24"
-                       pattern="[A-Za-z0-9_-]{2,24}"
-                       placeholder="영문·숫자 2~24자"
-                       required>
-
-                <button class="login-submit"
-                        type="submit">
-                    로그인
-                    <span aria-hidden="true">↗</span>
-                </button>
-            </form>
-
-            <p id="login-message" role="status"></p>
-
-            <button id="demo-logout"
-                    class="login-logout"
-                    type="button"
-                    hidden>
-                로그아웃
-            </button>
-        </div>
-    </section>
 
 </body>
 </html>

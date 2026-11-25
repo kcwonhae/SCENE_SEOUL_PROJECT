@@ -284,7 +284,7 @@ a {
 
 .ss-site-footer {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr auto;
     align-items: center;
     gap: 24px;
     min-height: 82px;
