@@ -21,8 +21,7 @@ function renderEventCard(item) {
   imageBox.className = 'ss-card-image';
   const image = document.createElement('img');
   image.src = item.image;
-  image.alt = item.imageIsRepresentative ? '다른 행사 이미지 재사용 · 실제 포스터 아님' : item.title + ' 포스터';
-  if (item.imageIsRepresentative) image.title = '실제 행사 포스터가 아닌 기존 이미지 재사용';
+  image.alt = item.imageAlt || `${item.title} 포스터`;
   image.loading = 'lazy';
   imageBox.append(image);
 

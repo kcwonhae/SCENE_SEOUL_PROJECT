@@ -1,0 +1,201 @@
+/* SCENE:SEOUL | 로그인 창(모달) 스타일 – 전체 페이지 공통 */
+
+.ss-login-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(21, 27, 42, .55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, visibility 0s linear .25s;
+}
+
+.ss-login-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .25s ease, visibility 0s;
+}
+
+/* ---------- 창 본체 ---------- */
+.ss-login-dialog {
+    position: relative;
+    width: min(440px, 100%);
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    padding: 48px 40px 40px;
+    background: #fff;
+    color: #151719;
+    border-radius: 8px;
+    box-shadow: 0 30px 80px rgba(10, 15, 30, .35);
+    transform: translateY(18px) scale(.985);
+    transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+
+.ss-login-overlay.is-open .ss-login-dialog { transform: none; }
+
+.ss-login-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    font-size: 26px;
+    line-height: 1;
+    color: #151719;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.ss-login-close:hover { background: #f0f1f4; }
+
+/* ---------- 문구 ---------- */
+.ss-login-eyebrow {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .18em;
+    color: var(--ss-blue, #4666b0);
+}
+
+.ss-login-dialog h2 {
+    margin: 18px 0 14px;
+    font-size: clamp(30px, 8vw, 38px);
+    font-weight: 800;
+    line-height: 1.22;
+    letter-spacing: -.06em;
+}
+
+.ss-login-desc {
+    margin: 0 0 22px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #7a7f88;
+}
+
+.ss-login-notice {
+    margin: 0 0 28px;
+    padding: 14px 16px;
+    border-radius: 6px;
+    background: #eceff8;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #4f63a8;
+}
+
+/* ---------- 입력 영역 ---------- */
+.ss-login-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.ss-login-input {
+    display: block;
+    width: 100%;
+    height: 56px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    border: 1px solid #b9bdc7;
+    border-radius: 14px;
+    background: #fff;
+    font: inherit;
+    font-size: 15px;
+    color: #151719;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.ss-login-input::placeholder { color: #9a9ea8; }
+
+.ss-login-input:focus {
+    border-color: var(--ss-blue, #4666b0);
+    box-shadow: 0 0 0 4px rgba(70, 102, 176, .16);
+}
+
+.ss-login-remember {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin: 18px 0 24px;
+    font-size: 13px;
+    color: #4d5360;
+    cursor: pointer;
+    user-select: none;
+}
+
+.ss-login-remember input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--ss-blue, #4666b0);
+    cursor: pointer;
+}
+
+/* ---------- 버튼 ---------- */
+.ss-login-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 56px;
+    padding: 0 24px;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 14px;
+    background: var(--ss-blue, #4666b0);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+}
+
+.ss-login-submit:hover { background: #374f8f; transform: translateY(-2px); }
+
+.ss-login-submit:focus-visible,
+.ss-login-close:focus-visible {
+    outline: 3px solid rgba(70, 102, 176, .45);
+    outline-offset: 3px;
+}
+
+/* ---------- 로그인 완료 화면 ---------- */
+.ss-login-done { display: none; text-align: center; padding: 18px 0 4px; }
+
+.ss-login-dialog.is-done .ss-login-body { display: none; }
+
+.ss-login-dialog.is-done .ss-login-done { display: block; }
+
+.ss-login-check {
+    display: inline-grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #eceff8;
+    font-size: 30px;
+    color: var(--ss-blue, #4666b0);
+}
+
+.ss-login-done h2 { margin: 22px 0 10px; font-size: 26px; }
+
+.ss-login-done p { margin: 0 0 28px; font-size: 13px; color: #7a7f88; }
+
+/* ---------- 모바일 ---------- */
+@media (max-width: 480px) {
+    .ss-login-dialog { padding: 52px 24px 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ss-login-overlay, .ss-login-dialog, .ss-login-submit { transition: none !important; }
+}

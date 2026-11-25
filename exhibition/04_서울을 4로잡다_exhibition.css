@@ -1,4 +1,4 @@
-/* ---------- 01. 페이지 기본 설정 및 소개 ---------- */
+/* ---------- 01. 페이지 기본 설정 ---------- */
 
 /* 페이지 내부 링크 이동을 부드럽게 처리 */
 html {scroll-behavior: smooth;}
@@ -64,111 +64,11 @@ p {
     font-size: 14px;   
 }
 
-/* 해당 위치로 이동하는 기능 */
-.anchor {
-  display: block;
-  height: 0;
-  visibility: hidden;
-}
 
-/* 공통 css 재지정 */
-.ss-catalog {
-  counter-reset: shown;
-  padding-top: 24px;
-}
+/* ---------- 02. 히어로 ---------- */
 
-/* 공통 .ss-catalog-controls 안에서 순서(order)로 배치 */
-.ss-catalog-controls {
-  display: flex;
-  flex-direction: column;
-}
-
-.ss-toolbar {
-  order: 2;
-  position: relative;
-  z-index: 20;
-}
-
-.ss-card-grid {
-  order: 4;
-}
-
-/* 카드 상태 */
-.ss-catalog .ss-catalog-status {
-  display: block;
-  order: 3;
-}
-
-.pager {
-  order: 5;
-}
-
-/* 보이는 카드 수 세기: 숨겨진(display:none) 카드는 세지 않음 */
-.ss-card {
-  counter-increment: shown;
-}
-
-.count::before {
-  content: counter(shown);
-}
-
-/* 페이지 번호는 모양만 있음(넘어가지 않음)
-기본 화면에서는 1페이지 카드 6장만 보임. */
-body:not(:has(.anchor:not(#all):target)) .ss-card:not(.p1) {
-  display: none;
-}
-
-/* 장르 필터 */
-body:has(#art:target) .ss-card:not([data-genre="art"]),
-body:has(#photo:target) .ss-card:not([data-genre="photo"]),
-body:has(#media:target) .ss-card:not([data-genre="media"]),
-body:has(#history:target) .ss-card:not([data-genre="history"]) {
-  display: none;
-}
-
-/* 현재 선택된 장르 버튼 = 공통(category.css)의 선택 모양(노란색)과 동일 */
-body:not(:has(:target)) .ss-filter[href="#all"],
-body:has(#all:target) .ss-filter[href="#all"],
-body:has(#art:target) .ss-filter[href="#art"],
-body:has(#photo:target) .ss-filter[href="#photo"],
-body:has(#media:target) .ss-filter[href="#media"],
-body:has(#history:target) .ss-filter[href="#history"] {
-  background: var(--ss-yellow);
-  border-color: var(--ss-yellow);
-  color: var(--ss-ink);
-  font-weight: 800;
-}
-
-/* 결과 목록의 all 표시 */
-.hot-label{
-    color: var(--blue);
-}
-
-/* 필터 */
-.pg-radio:checked+label {
-  background: var(--blue);
-  color: #fff;
-}
-
-.pg-radio:focus-visible+label {
-  outline: 2px solid var(--blue);
-  outline-offset: 2px;
-}
-
-.pager:has(#pg1:checked) .pg-prev-off,
-.pager:has(#pg2:checked) .pg-prev[for="pg1"],
-.pager:has(#pg3:checked) .pg-prev[for="pg2"],
-.pager:has(#pg4:checked) .pg-prev[for="pg3"],
-.pager:has(#pg1:checked) .pg-next[for="pg2"],
-.pager:has(#pg2:checked) .pg-next[for="pg3"],
-.pager:has(#pg3:checked) .pg-next[for="pg4"],
-.pager:has(#pg4:checked) .pg-next-off {
-  display: inline-flex;
-}
-
-/* 히어로 + 대표 전시 베너 */
+/* 히어로 + 주목할 전시 배경 */
 .stage {
-  position: relative;
   overflow: hidden;
   background: var(--ss-paper);
 }
@@ -176,10 +76,11 @@ body:has(#history:target) .ss-filter[href="#history"] {
 /* 히어로 제목 + 소개 */
 .ex-hero {
   --navy: #1b2b5e;
-  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   max-width: 1470px;
-  margin: 0 auto;
   min-height: clamp(180px, 15vw, 220px);
+  margin: 0 auto;
   padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
 }
 
@@ -212,12 +113,16 @@ body:has(#history:target) .ss-filter[href="#history"] {
   margin-left: .1em;
 }
 
+/* 소개 문구(왼쪽) + 분야 목록(오른쪽) */
+.intro-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+
 /* 오른쪽 분야 목록 */
 .intro-tags {
-  position: absolute;
-  z-index: 2;
-  right: clamp(22px, 5vw, 80px);
-  bottom: 78px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -231,51 +136,18 @@ body:has(#history:target) .ss-filter[href="#history"] {
 
 /* 등장 애니메이션은 공통 .ss-entrance 클래스를 HTML에서 붙여 사용 */
 
-@media (max-width: 670px) {
-  .ex-hero .ss-hero-title {
-    font-size: clamp(34px, 11.5vw, 80px);
-    letter-spacing: -.07em;
-  }
-}
 
-/* ---------- 6. 반응형 ---------- */
-@media (max-width: 760px) {
-  .ex-hero {
-    min-height: 0;
-    padding-bottom: 90px;
-  }
+/* ---------- 03. 주목할 전시 ---------- */
 
-  .intro-tags {
-    display: none;
-  }
-
-  .ss-catalog {
-    padding-top: 12px;
-  }
-}
-
-/* 대표전시 */
+/* 공통 캐러셀 CSS를 사용하고 바깥 여백만 조정 */
 .featured-exhibition {
   padding: 8px clamp(22px, 5vw, 80px) 64px;
 }
 
-/* 이미지가 배너 높이를 늘리지 않도록 칸에 꽉 채움 */
-.featured-exhibition .ss-feature-banner-art img {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
-/* ---------- 7. 모션 줄이기 ---------- */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+/* ---------- 04. 전시 목록 ---------- */
 
-  * {
-    transition: none !important;
-  }
+/* 공통 카테고리 CSS를 사용하고 제목-필터 사이 여백만 조정 */
+.ss-catalog .ss-category-heading {
+  margin-bottom: 0;
 }
