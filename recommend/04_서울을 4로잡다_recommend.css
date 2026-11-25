@@ -46,7 +46,6 @@ p {
 }
 
 /* ---------- 첫 화면: 제목 ---------- */
-/* 상단 배경: 종이색 + 서울 스카이라인 (skyline.svg) */
 .intro {
   position: relative;
   overflow: hidden;
@@ -99,12 +98,11 @@ p {
 /* ---------- 선택 칩 (누구와, 날씨, 시간대, 실내외, 분위기, 장르, 예산) ---------- */
 /* 7개 조건 전체를 얇은 테두리 상자 하나로 감쌈 */
 .options {
-  width: 90%;
-  max-width: 900px;
+  width: 900%;
+  max-width: 760px;
   margin: 48px auto 0;
   padding: 0 32px;
-  border: 1px solid var(--line);
-  background: var(--white);
+
 }
 
 .group {
@@ -135,46 +133,55 @@ p {
   color: var(--blue);
 }
 
-/* 옵션을 4칸 열로 맞춰서 나열 (3개짜리 줄은 마지막 칸이 빔) */
+/* 칩들이 가로로 나열되고, 자리가 모자라면 다음 줄로 넘어감 */
 .chips {
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1;
-  row-gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 130px);
+  gap: 10px;
 }
 
 .chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 25%;
+  position: relative;
+  flex: 1 1 90px;
 }
 
-/* 라디오 버튼을 눈에 보이게 (하나만 고르는 조건이라 라디오) */
+/* 실제 라디오 버튼은 투명하게 숨김 (눈에 보이는 것은 label) */
 .chip input {
-  flex: none;
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  accent-color: var(--blue);
-  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
 }
 
+/* 칩 모양 */
 .chip label {
-  color: var(--mute);
-  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  padding: 10px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--text);
+  font-weight: 600;
   cursor: pointer;
-  transition: color .2s;
+  transition: background .2s, color .2s, border-color .2s;
 }
 
 .chip label:hover {
+  background: var(--ss-paper);
+  border-color: var(--blue);
   color: var(--blue);
 }
 
-/* 선택된 칩: 진하고 굵은 글자 */
-.chip input:checked + label {
+.chip input:focus+label {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.chip input:checked+label {
+  background: var(--yellow);
+  border-color: var(--yellow);
   color: var(--ink);
-  font-weight: 800;
 }
 
 /* ---------- AI 추천 결과 ---------- */
@@ -431,10 +438,6 @@ p {
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
-  }
-
-  .chip {
-    width: 50%;
   }
 
   .pick {
