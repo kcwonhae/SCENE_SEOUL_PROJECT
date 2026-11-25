@@ -1,7 +1,12 @@
-// 마이캘린더: calendar-events.json을 불러와서 찜한 콘텐츠를 달력과 목록에 보여준다.
+(() => {
+'use strict';
+
+// 마이캘린더: 공통 데이터 폴더의 콘텐츠에서 찜한 항목을 달력과 목록에 보여준다.
 // 찜 목록과 메모는 브라우저 localStorage에 저장한다.
 
-const SAVED_KEY = 'sceneSeoulSavedEvents:' + (sessionStorage.getItem('sceneSeoulDemoUser') || 'guest');
+const SAVED_KEY = typeof window.SceneSeoul?.getSavedKey === 'function'
+  ? window.SceneSeoul.getSavedKey()
+  : 'sceneSeoulSavedEvents:guest';
 const MEMO_KEY = 'sceneSeoul:memos';
 
 const calendarGrid = document.querySelector('#calendarGrid');
@@ -217,23 +222,19 @@ function renderAll() {
 
 // 찜하기 / 찜 취소
 function toggleSaved(id) {
-  if (savedIds.includes(id)) {
-    savedIds = savedIds.filter(savedId => savedId !== id);
-    showToast('찜 목록에서 제외했어요.');
-  } else {
-    savedIds.push(id);
-    showToast('찜 목록에 저장했어요.');
-  }
-  if (window.SceneSeoul) {
-    // 공통 저장 함수가 각 페이지에 동일한 이벤트를 알린다.
+  const wasSaved = savedIds.includes(id);
+  if (typeof window.SceneSeoul?.toggleSaved === 'function' &&
+      typeof window.SceneSeoul?.getSaved === 'function') {
     SceneSeoul.toggleSaved(id);
   } else {
+    savedIds = wasSaved ? savedIds.filter(savedId => savedId !== id) : [...savedIds, id];
     saveStorage(SAVED_KEY, savedIds);
     renderAll();
   }
-  // 상세 창이 열려 있으면 버튼 글자(♥/♡)를 바꾸기 위해 다시 그린다.
+  showToast(wasSaved ? '찜 목록에서 제외했어요.' : '찜 목록에 저장했어요.');
   if (detailDialog.open) {
-    fillDetail(events.find(event => event.id === id));
+    const item = events.find(event => event.id === id);
+    if (item) fillDetail(item);
   }
 }
 
@@ -374,66 +375,78 @@ detailDialog.addEventListener('click', event => {
 
 /* ---------- 시작 ---------- */
 
+const CONTENT_SOURCES = [
+  { category: '전시', path: '../data/04_서울을 4로잡다_exhibition.json' },
+  { category: '공연', path: '../data/04_서울을 4로잡다_performance.json' },
+  { category: '팝업', path: '../data/04_서울을 4로잡다_popup.json' },
+  { category: '이벤트', path: '../data/04_서울을 4로잡다_event.json' }
+];
+
 function normalizeItem(item, category) {
   return {
     ...item,
     category,
-    date: item.startDate || item.date,
+    date: item.startDate || item.date || '',
     location: item.location || item.venue || '',
-    image: item.image,
-    saved: Boolean(item.saved)
+    image: item.image || '',
+    description: item.description || ''
   };
 }
 
+async function loadCategory(source) {
+  const response = await fetch(source.path);
+  if (!response.ok) throw new Error(`${source.path}: ${response.status}`);
+  const data = await response.json();
+  // 팀별 데이터가 배열 또는 { performances: [...] } 형태여도 처리한다.
+  const list = Array.isArray(data) ? data : Object.values(data).find(Array.isArray);
+  if (!Array.isArray(list)) throw new Error(`${source.path}: 콘텐츠 배열이 없습니다.`);
+  return list.map(item => normalizeItem(item, source.category));
+}
+
 async function init() {
-  try {
-    const [localResponse, eventResponse, popupResponse] = await Promise.all([
-      fetch('./calendar-events.json'),
-      fetch('../event/04_서울을 4로잡다_event.json'),
-      fetch('../data/04_서울을 4로잡다_popup.json')
-    ]);
-    if (!localResponse.ok || !eventResponse.ok || !popupResponse.ok) {
-      throw new Error('JSON 파일을 불러오지 못했습니다.');
+  const results = await Promise.allSettled(CONTENT_SOURCES.map(loadCategory));
+  events = results.flatMap(result => result.status === 'fulfilled' ? result.value : []);
+  results.forEach((result, index) => {
+    if (result.status === 'rejected') {
+      console.error('콘텐츠 불러오기 실패:', CONTENT_SOURCES[index].path, result.reason);
     }
-    const [localData, eventData, popupData] = await Promise.all([
-      localResponse.json(), eventResponse.json(), popupResponse.json()
-    ]);
-    events = localData.concat(
-      eventData.map(item => normalizeItem(item, '이벤트')),
-      popupData.map(item => normalizeItem(item, '팝업'))
+  });
+
+  // 사용자가 이미 찜을 변경했다면 초기 찜을 다시 덮어쓰지 않는다.
+  const prior = loadStorage(SAVED_KEY, null);
+  if (Array.isArray(prior)) {
+    savedIds = prior;
+  } else {
+    // 시연용: 처음 방문할 때에만 종류별로 최대 2개씩 찜해 둔다.
+    savedIds = CONTENT_SOURCES.flatMap(source =>
+      events.filter(item => item.category === source.category).slice(0, 2).map(item => item.id)
     );
-    const legacySaved = loadStorage('sceneSeoul:saved', null);
-    const sharedSaved = window.SceneSeoul ? SceneSeoul.getSaved() : loadStorage(SAVED_KEY, null);
-    const hasSharedState = localStorage.getItem(SAVED_KEY) !== null;
-    if (hasSharedState && Array.isArray(sharedSaved)) {
-      savedIds = sharedSaved;
-    } else if (Array.isArray(legacySaved)) {
-      savedIds = legacySaved;
-      saveStorage(SAVED_KEY, savedIds);
-    } else {
-      savedIds = localData.filter(item => item.saved).map(item => item.id);
-      saveStorage(SAVED_KEY, savedIds);
-    }
-    memos = loadStorage(MEMO_KEY, {});
-    renderAll();
-  } catch (error) {
-    dayContents.append(makeElement('p', 'empty-day', '데이터를 불러오지 못했습니다. Live Server로 실행해 주세요.'));
-    console.error(error);
+    saveStorage(SAVED_KEY, savedIds);
+  }
+  memos = loadStorage(MEMO_KEY, {});
+  renderAll();
+
+  if (events.length === 0) {
+    dayContents.replaceChildren(makeElement('p', 'empty-day', '콘텐츠 데이터를 불러오지 못했습니다. Live Server와 JSON 경로를 확인해 주세요.'));
   }
 }
 
 window.addEventListener('scene:saved', function () {
-  if (window.SceneSeoul) {
+  if (typeof window.SceneSeoul?.getSaved === 'function') {
     savedIds = SceneSeoul.getSaved();
     renderAll();
   }
 });
 
 window.addEventListener('pageshow', function () {
-  if (window.SceneSeoul) {
+  if (typeof window.SceneSeoul?.getSaved === 'function') {
     savedIds = SceneSeoul.getSaved();
     renderAll();
   }
 });
 
+// 월 제목과 날짜는 JSON 응답과 무관하게 먼저 표시한다.
+renderAll();
 init();
+
+})();

@@ -25,7 +25,7 @@ window.SceneSeoul = Object.assign(window.SceneSeoul || {}, {
     '../exhibition/04_서울을 4로잡다_exhibition.json',
     '../performance/04_서울을 4로잡다_performance.json',
     '../popup/04_서울을 4로잡다_popup.json',
-    '../event/04_서울을 4로잡다_event.json'
+    '../data/04_서울을 4로잡다_event.json'
   ],
 
   // category 값 → 화면에 보여줄 이름
