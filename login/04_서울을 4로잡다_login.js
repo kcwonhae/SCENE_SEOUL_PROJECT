@@ -4,14 +4,25 @@
    1) CSS : 04_서울을 4로잡다_login.css 를 각 페이지 <head>에 연결하거나,
             내용을 공통 파일(common.css) 맨 아래에 붙여 넣기
             <link href="../css/04_서울을 4로잡다_login.css" rel="stylesheet"/>
-   2) JS  : 각 페이지 </body> 바로 위에 한 줄 추가
+   2) JS  : 각 페이지 </body> 바로 위에 아래 순서대로 추가 (common.js 가 반드시 먼저!)
+            <script src="../js/04_서울을 4로잡다_common.js"></script>
             <script src="../js/04_서울을 4로잡다_login.js"></script>
    → 로그인 창(모달) HTML은 이 스크립트가 직접 만들어 넣기 때문에 페이지마다 복사할 필요가 없습니다.
+
+   [common.js 와 맞춘 규칙]
+   - 로그인 상태는 common.js 의 SceneSeoul.getUser / login / logout 으로만 읽고 씁니다.
+     (저장 키: sceneSeoulUser → 닉네임이 있으면 로그인 상태)
+   - 로그인/로그아웃 직후 'scene:login' 이벤트를 보내서 찜 하트를 다시 맞춥니다.
 
    [사용 기술] querySelector / getElementById, createElement, appendChild, innerHTML,
                addEventListener, 이벤트 객체(key, target, preventDefault),
                setTimeout, confirm, alert, localStorage(setItem / getItem / removeItem)
 */
+
+// common.js 를 먼저 불러오지 않았을 때 바로 알 수 있게 안내
+if (!window.SceneSeoul || typeof SceneSeoul.getUser !== 'function') {
+    console.error('common.js 를 login.js 보다 먼저 불러와 주세요.');
+}
 
 const loginBtn = document.querySelector('.header-login');
 
@@ -93,31 +104,24 @@ function closeLoginModal() {
 }
 
 /* ================================================================
-   03 / 로그인 · 로그아웃
+   03 / 로그인 · 로그아웃  (저장은 common.js 의 SceneSeoul 이 담당)
    ================================================================ */
-// 현재 로그인 상태에 맞게 헤더 버튼 문구 변경 (로그인 후에는 '로그아웃'만 표시)
+// 현재 로그인 상태에 맞게 헤더 버튼 문구 변경 (로그인 후에는 'LOGOUT'만 표시)
 function updateLoginUI() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    const username = localStorage.getItem('username');
-
-    if (isLoggedIn === 'true' && username) {
-        loginBtn.innerText = 'LOGOUT';
-    } else {
-        loginBtn.innerText = 'LOGIN';
-    }
+    loginBtn.innerText = SceneSeoul.getUser() ? 'LOGOUT' : 'LOGIN';
 }
 
 function logout() {
     // 로그아웃 후에는 닉네임이 지워지므로, 먼저 변수에 담아 둠
-    const username = localStorage.getItem('username');
+    const username = SceneSeoul.getUser();
 
     const answer = confirm(username + '님 로그아웃 하시겠습니까?'); // 취소 / 확인 버튼
     if (!answer) return;
 
-    localStorage.removeItem('username');
-    localStorage.removeItem('isLoggedIn');
+    SceneSeoul.logout();
     alert(username + '님 로그아웃 되셨습니다.');
     updateLoginUI();
+    window.dispatchEvent(new Event('scene:login')); // 사용자가 guest 로 바뀌었으니 하트 다시 맞춤
 }
 
 /* ================================================================
@@ -125,7 +129,7 @@ function logout() {
    ================================================================ */
 // 헤더 버튼: 로그인 상태면 로그아웃, 아니면 로그인 창 열기
 loginBtn.addEventListener('click', () => {
-    if (localStorage.getItem('isLoggedIn') === 'true') {
+    if (SceneSeoul.getUser()) {
         logout();
     } else {
         openLoginModal();
@@ -138,8 +142,8 @@ ssForm.addEventListener('submit', (event) => {
 
     const nickname = ssIdInput.value.trim();
 
-    localStorage.setItem('username', nickname);
-    localStorage.setItem('isLoggedIn', 'true');
+    // 닉네임 저장 (common.js). 빈 값이면 false 를 돌려주므로 여기서 중단
+    if (!SceneSeoul.login(nickname)) return;
 
     // '아이디 저장' 체크 여부에 따라 다음 로그인 때 자동 입력
     if (ssRememberInput.checked) {
@@ -151,6 +155,7 @@ ssForm.addEventListener('submit', (event) => {
     ssDoneText.innerText = nickname + '님, 로그인 되셨습니다.';
     ssDialog.classList.add('is-done');
     updateLoginUI();
+    window.dispatchEvent(new Event('scene:login')); // 내 찜 목록으로 하트 다시 맞춤
 
     ssCloseTimer = setTimeout(closeLoginModal, 1500);
 });
@@ -168,6 +173,10 @@ document.addEventListener('keydown', (event) => {
         closeLoginModal();
     }
 });
+
+// 다른 탭에서 로그인/로그아웃했거나, 뒤로가기로 돌아왔을 때도 버튼 문구를 맞춤
+window.addEventListener('storage', updateLoginUI);
+window.addEventListener('pageshow', updateLoginUI);
 
 // 페이지가 열릴 때 저장된 로그인 상태를 반영 (페이지를 이동해도 유지됨)
 updateLoginUI();
