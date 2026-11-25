@@ -1,11 +1,15 @@
 /* =====================================================
    SCENE:SEOUL | 서울 지도 페이지
-   - 서울 열린데이터광장 "서울시 문화행사 정보" Open API(culturalEventInfo)를 fetch로 불러와
-     지도 마커와 카드 목록에 표시
-   - 로그인(닉네임) 후 하트로 저장 (localStorage)
+   - 전시 · 공연 · 이벤트: 서울 열린데이터광장 "서울시 문화행사 정보" Open API(culturalEventInfo)
+   - 팝업: 서울시 데이터에 팝업 분류가 없어서 우리 팀 팝업 JSON 에서 불러온다
+   - 로그인 / 찜: common.js 의 SceneSeoul 함수 사용 (로그인 화면은 login.js 담당)
+   - 카드: category.css 의 공통 카드(.ss-card) 사용
    - 데이터 출처: 서울특별시 (공공누리 제1유형 · 출처표시)
 
-   ※ 수업 외 = 강의안(9~12주차)에 없던 문법/기능. 해당 줄에 표시해 둠
+   HTML 에서 불러오는 순서
+     leaflet.js → common.js → login.js → map.js
+
+   ※ 수업 외 = 강의안(9~13주차)에 없던 문법/기능. 해당 줄에 표시해 둠
    ===================================================== */
 
 
@@ -20,9 +24,8 @@ const API = {
     pageSize: 1000          // 한 번에 가져올 수 있는 최대 개수
 };
 
-const CACHE_KEY = "sceneEvents_v1";     // 불러온 행사를 하루 동안 브라우저에 저장해 두는 이름
-
-const SAMPLE_URL = "04_서울을 4로잡다_map_data.json";
+const SAMPLE_URL = "04_서울을 4로잡다_map_data.json";              // API 를 못 쓸 때 쓰는 샘플
+const POPUP_URL = "../data/04_서울을 4로잡다_popup.json";          // 팝업은 팀 JSON (common.js 와 같은 경로)
 const FIRST_SHOW = 30;      // 처음에 보여줄 카드 수
 const MORE_SHOW = 30;       // 더 보기를 누를 때마다 추가되는 수
 
@@ -58,13 +61,14 @@ const SEOUL_CENTER = [37.5665, 126.9780];
 
 /* ---------- 02. 상태 변수 ---------- */
 
-let allItems = [];              // 불러온 전체 콘텐츠
+let allItems = [];              // 불러온 전체 콘텐츠 (API + 팝업 JSON)
+let seen = {};                  // 중복 확인용 { id: true }
 let currentDistrict = "";       // 선택한 구 ("" 이면 서울 전체)
 let currentType = "all";        // 선택한 카테고리
 let keyword = "";               // 검색어
 let showCount = FIRST_SHOW;     // 지금 화면에 보여주는 카드 수
-let loginUser = "";             // 로그인한 이름
 let loading = true;             // 데이터를 불러오는 중인지
+let popupError = "";            // 팝업 JSON 을 못 불러왔을 때 보여줄 안내
 let map;                        // Leaflet 지도
 let markerLayer;                // 마커를 모아두는 레이어
 
@@ -81,197 +85,150 @@ const searchInput = document.getElementById("search-input");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
 const filterRadios = document.querySelectorAll("input[name='district-filter']");
-const loginLink = document.getElementById("login-link");
 
 
-/* ---------- 04. 날짜 ---------- */
+/* ---------- 04. 작은 도우미 함수 ---------- */
 
-// "2026-11-10 00:00:00.0" 같은 문자열 → Date
-function parseDate(text) {
-    const num = String(text).replace(/[^0-9]/g, "");    // ※ 수업 외: 정규표현식 (숫자만 남기기)
-    const y = parseInt(num.substring(0, 4));
-    const m = parseInt(num.substring(4, 6));
-    const d = parseInt(num.substring(6, 8));
-    return new Date(y, m - 1, d);
+// text 안에 word 가 들어 있는지 확인
+// replace 로 word 를 지워 봤을 때 글자가 달라지면 들어 있는 것
+function hasText(text, word) {
+    return text.replace(word, "") !== text;
 }
 
-// Date → "2026.11.10"
-function formatDate(date) {
-    const m = String(date.getMonth() + 1).padStart(2, "0");    // ※ 수업 외: padStart
-    const d = String(date.getDate()).padStart(2, "0");
-    return date.getFullYear() + "." + m + "." + d;
-}
-
-// 오늘 날짜 문자열 "2026-11-24" (캐시가 오늘 것인지 확인할 때 사용)
-function todayText() {
-    const t = getToday();
-    return t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate();
-}
-
+// 오늘 날짜 (시간은 0시로)
 function getToday() {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), now.getDate());
 }
 
-
-/* ---------- 05. 데이터 불러오기 (fetch / JSON) ---------- */
-
-// 서울시 Open API 한 번 호출. 주소 형식: /인증키/json/서비스명/시작번호/끝번호/
-// ※ 수업 외: fetch, async/await (13주차 AJAX 내용)
-async function fetchPage(start, end) {
-    // 사이트가 https 일 때 http 요청을 하면 브라우저가 막으므로 프로토콜을 맞춘다
-    const protocol = location.protocol === "https:" ? "https" : "http";
-    const url = protocol + "://openapi.seoul.go.kr:8088/" + API.key + "/json/" +
-                API.service + "/" + start + "/" + end + "/";
-
-    const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error("서버 응답 오류 " + response.status);
-    }
-    const json = await response.json();         // JSON 문자열 → 객체
-    const body = json[API.service];
-    if (!body) {
-        // 인증키 오류 등은 최상위 RESULT 로 내려온다
-        throw new Error(json.RESULT ? json.RESULT.MESSAGE : "응답 형식을 알 수 없어요.");
-    }
-    if (body.RESULT.CODE !== "INFO-000") {
-        throw new Error(body.RESULT.MESSAGE);
-    }
-    return body;
+// "2026-11-10 00:00:00.0" 또는 "2026-11-10" → "2026-11-10"
+function toDateText(text) {
+    return String(text || "").slice(0, 10);
 }
 
-// 전체 데이터는 2만 건 가까이 돼서 1000건씩 차례로 받는다.
-// 첫 묶음을 받자마자 화면에 보여주고, 나머지는 받는 대로 allItems 에 쌓는다.
-async function loadSeoulApi() {
-    const seen = {};                // 중복 확인용
-    let total = API.pageSize;       // 첫 요청 뒤에 진짜 전체 개수로 바뀜
+// "2026-11-10" → Date
+function toDate(dateText) {
+    const y = parseInt(dateText.slice(0, 4));
+    const m = parseInt(dateText.slice(5, 7));
+    const d = parseInt(dateText.slice(8, 10));
+    return new Date(y, m - 1, d);
+}
 
-    for (let start = 1; start <= total; start += API.pageSize) {
-        const end = Math.min(start + API.pageSize - 1, total);
-        const body = await fetchPage(start, end);
-        total = body.list_total_count;
-
-        allItems = allItems.concat(cleanUp(body.row, seen));
-
-        if (start === 1) {          // 첫 묶음은 바로 보여주기
-            render();
-            drawMarkers();
+// 주소 글자에서 구 이름 찾기 ("서울 성동구 성수이로 77" → "성동구")
+function findGu(text) {
+    for (const gu in GU_CENTER) {                // 10주차 for...in 객체 반복
+        if (hasText(text || "", gu)) {
+            return gu;
         }
-        statusNote.innerText = "행사 정보를 불러오는 중이에요... (" +
-            Math.min(end, total).toLocaleString() + " / " + total.toLocaleString() + ")";
     }
-}
-
-// 키가 없거나 API가 막혔을 때 쓰는 샘플 (같은 구조의 JSON 파일)
-async function loadSample() {
-    const response = await fetch(SAMPLE_URL);
-    if (!response.ok) {
-        throw new Error("샘플 데이터를 불러오지 못했어요.");
-    }
-    const json = await response.json();
-    return json[API.service].row;
-}
-
-// 한 번 받은 행사는 하루 동안 브라우저에 저장해 두고 다시 쓴다 (매번 2만 건을 받지 않으려고)
-// 날짜는 숫자(밀리초)로 바꿔 저장했다가 불러올 때 Date 로 되돌린다
-function saveCache() {
-    const items = allItems.map(function (item) {
-        const copy = Object.assign({}, item);   // ※ 수업 외: Object.assign (객체 복사)
-        copy.start = item.start.getTime();
-        copy.end = item.end.getTime();
-        return copy;
-    });
-    try {
-        localStorage.setItem(CACHE_KEY, JSON.stringify({ day: todayText(), items: items }));
-    } catch (error) {
-        console.warn("캐시 저장 실패(용량 초과 등):", error);
-    }
-}
-
-function loadCache() {
-    try {
-        const text = localStorage.getItem(CACHE_KEY);
-        if (!text) return null;
-        const data = JSON.parse(text);
-        if (data.day !== todayText()) return null;      // 어제 것이면 버린다
-        return data.items.map(function (item) {
-            item.start = new Date(item.start);
-            item.end = new Date(item.end);
-            return item;
-        });
-    } catch (error) {
-        return null;
-    }
+    return "";
 }
 
 
-/* ---------- 06. 데이터 정리 ---------- */
+/* ---------- 05. 데이터 정리 ---------- */
 
-// 서울시 분류(CODENAME)와 제목으로 우리 사이트의 4개 카테고리를 정한다
-// 서울시 데이터에는 팝업 분류가 따로 없어서 제목에 "팝업"이 들어간 것을 팝업으로 본다
-function getType(row) {
-    const code = row.CODENAME || "";
-    const title = row.TITLE || "";
-
-    if (/팝업|pop-?up/i.test(title)) return "popup";
-    if (code.indexOf("전시") !== -1) return "exhibition";
+// 서울시 분류(CODENAME)로 전시 / 공연 / 이벤트를 정한다
+// (팝업은 서울시 데이터에 분류가 없어서 팝업 JSON 에서 따로 불러온다)
+function getType(code) {
+    if (hasText(code, "전시")) return "exhibition";
 
     const stage = ["연극", "콘서트", "클래식", "뮤지컬", "오페라", "무용", "국악", "독주", "독창"];
-    for (const word of stage) {
-        if (code.indexOf(word) !== -1) return "performance";
+    for (let i = 0; i < stage.length; i++) {
+        if (hasText(code, stage[i])) return "performance";
     }
     return "event";
 }
 
 // 위도/경도 값이 서로 바뀌어 들어오는 경우가 있어서 값의 범위로 구분한다
-function getLatLng(row) {
-    const a = parseFloat(row.LOT);
-    const b = parseFloat(row.LAT);
+function getLatLng(a, b) {
+    a = parseFloat(a);
+    b = parseFloat(b);
     if (a > 33 && a < 39 && b > 124 && b < 132) return [a, b];
     if (b > 33 && b < 39 && a > 124 && a < 132) return [b, a];
     return null;
 }
 
-function toItem(row) {
-    const point = getLatLng(row);
-
-    // 종료일이 시작일보다 빠른 잘못된 데이터가 있어서 시작일로 맞춘다
-    const start = parseDate(row.STRTDATE);
-    let end = parseDate(row.END_DATE);
-    if (end < start) end = start;
-
-    let img = row.MAIN_IMG || "";
-    if (location.protocol === "https:" && img.indexOf("http://") === 0) {
+// 사이트가 https 일 때 http 이미지는 브라우저가 막으므로 주소를 맞춘다
+function fixImage(img) {
+    img = img || "";
+    if (location.protocol === "https:" && img.slice(0, 7) === "http://") {
         img = img.replace("http://", "https://");
     }
+    return img;
+}
+
+// 서울시 API 한 줄 → 카드 데이터
+// 날짜는 common.js 약속대로 "YYYY-MM-DD" 글자로 맞춰 두고, 기간 글자는 SceneSeoul.formatPeriod 로 만든다
+function fromApi(row) {
+    const point = getLatLng(row.LOT, row.LAT);
+    const startDate = toDateText(row.STRTDATE);
+    let endDate = toDateText(row.END_DATE);
+
+    // 종료일이 시작일보다 빠른 잘못된 데이터가 있어서 시작일로 맞춘다
+    if (endDate < startDate) endDate = startDate;
+
+    // 상시 전시를 "2099-12-31" 로 넣거나 "2626" 처럼 연도를 잘못 적은 데이터가 있어서
+    // 시작일보다 5년 넘게 뒤에 끝나면 "상시 운영" 으로 본다 (endDate 가 "" 이면 formatPeriod 가 "상시 운영")
+    if (parseInt(endDate.slice(0, 4)) - parseInt(startDate.slice(0, 4)) > 5) endDate = "";
+
     return {
         id: (row.TITLE || "") + "|" + row.STRTDATE + "|" + (row.PLACE || ""),
-        type: getType(row),
-        category: row.CODENAME || "",
-        gu: (row.GUNAME || "").trim(),
-        title: (row.TITLE || "").trim(),
+        type: getType(row.CODENAME || ""),
+        gu: (row.GUNAME || "").replace(" ", ""),
+        title: row.TITLE || "",
         place: row.PLACE || "",
-        start: start,
-        end: end,
-        img: img,
+        startDate: startDate,
+        endDate: endDate,
+        img: fixImage(row.MAIN_IMG),
         url: row.ORG_LINK || row.HMPG_ADDR || "",
         lat: point ? point[0] : null,
         lng: point ? point[1] : null
     };
 }
 
-// 이미 끝난 행사와 중복 데이터를 걸러낸다
-function cleanUp(rows, seen) {
-    const today = getToday();
-    const list = [];
-    for (const row of rows) {
-        const item = toItem(row);
-        if (isNaN(item.end.getTime()) || item.end < today) continue;     // 끝난 행사
-        if (seen[item.id]) continue;                                      // 중복
-        seen[item.id] = true;
-        list.push(item);
+// 팝업 JSON 한 개 → 카드 데이터
+// 좌표(lat, lng)가 있으면 그 위치에, 없으면 주소에 있는 구의 중심에 마커를 찍는다
+function fromPopup(data) {
+    let gu = "";
+    if (GU_CENTER[data.district]) {
+        gu = data.district;
+    } else {
+        gu = findGu(data.location);
     }
-    return list;
+
+    let point = getLatLng(data.lat, data.lng);
+    if (!point && gu) point = GU_CENTER[gu];
+
+    return {
+        id: data.id,
+        type: "popup",
+        gu: gu,
+        title: data.title || "",
+        place: data.location || "",
+        startDate: data.startDate || "",
+        endDate: data.endDate || "",
+        img: data.image || "",
+        url: data.officialUrl || data.sourceUrl || "",
+        lat: point ? point[0] : null,
+        lng: point ? point[1] : null
+    };
+}
+
+// 이미 끝난 행사와 중복 데이터를 걸러서 allItems 에 더한다
+function addItems(list) {
+    const today = getToday();
+
+    for (const item of list) {
+        if (item.startDate.length < 10) continue;          // 날짜가 없는 데이터
+        item.start = toDate(item.startDate);
+        // 종료일이 빈 문자열이면 상시 운영 → 아주 먼 날짜로 두고 정렬할 때 맨 뒤로
+        item.end = item.endDate ? toDate(item.endDate) : new Date(9999, 11, 31);
+
+        if (item.end < today) continue;                     // 끝난 행사
+        if (seen[item.id]) continue;                        // 중복
+        seen[item.id] = true;
+        allItems.push(item);
+    }
 }
 
 // 진행 중인 것(곧 끝나는 순) → 예정인 것(곧 시작하는 순)
@@ -286,150 +243,273 @@ function sortItems(list) {
 }
 
 
-/* ---------- 07. 로그인 / 저장 ---------- */
+/* ---------- 06. 데이터 불러오기 (13주차 fetch / JSON) ---------- */
 
-// 서버가 없어서 이름 입력을 로그인으로 대신하고, 저장한 목록은 브라우저(localStorage)에 둔다
-// ※ 수업 외: localStorage (13주차 웹스토리지)
-function getSavedIds() {
-    if (!loginUser) return [];
-    const text = localStorage.getItem("sceneSaved_" + loginUser);
-    return text ? JSON.parse(text) : [];
+// 팝업 JSON 불러오기. 다 읽으면 next() 실행
+function loadPopups(next) {
+    fetch(POPUP_URL)
+        .then(response => response.json())
+        .then(data => {
+            // JSON 이 배열이면 그대로, { "키": [ ... ] } 모양이면 그 안의 배열을 꺼낸다
+            let list = data;
+            if (!data.length) {
+                for (const key in data) {
+                    list = data[key];
+                }
+            }
+            addItems(list.map(fromPopup));
+            next();
+        })
+        .catch(error => {
+            console.error("팝업 JSON 을 불러오지 못했어요.", POPUP_URL, error);
+            if (location.protocol === "file:") {
+                popupError = "팝업 정보를 불러오지 못했어요. HTML 파일을 직접 열면(file://) JSON 을 읽을 수 없으니 Live Server 로 열어 주세요.";
+            } else {
+                popupError = "팝업 정보를 불러오지 못했어요. 파일 경로를 확인해 주세요: " + POPUP_URL;
+            }
+            next();
+        });
 }
 
+// 서울시 Open API 를 1000건씩 차례로 불러온다. 주소 형식: /인증키/json/서비스명/시작번호/끝번호/
+// 전체가 2만 건 가까이 돼서, 첫 묶음을 받자마자 화면에 보여주고 나머지는 받는 대로 쌓는다.
+function loadSeoulApi(start, total) {
+    const end = Math.min(start + API.pageSize - 1, total);
+
+    // 사이트가 https 일 때 http 요청을 하면 브라우저가 막으므로 프로토콜을 맞춘다
+    const protocol = location.protocol === "https:" ? "https" : "http";
+    const url = `${protocol}://openapi.seoul.go.kr:8088/${API.key}/json/${API.service}/${start}/${end}/`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const body = data[API.service];
+
+            // 인증키 오류 등은 culturalEventInfo 없이 RESULT 만 내려온다
+            if (!body || body.RESULT.CODE !== "INFO-000") {
+                console.error("서울시 API 오류:", body ? body.RESULT.MESSAGE : data.RESULT);
+                apiFailed();
+                return;
+            }
+
+            total = body.list_total_count;
+            addItems(body.row.map(fromApi));
+            statusNote.innerText = `행사 정보를 불러오는 중이에요... (${Math.min(end, total)} / ${total})`;
+
+            if (start === 1) {
+                render();               // 첫 묶음은 바로 보여주기
+                drawMarkers();
+            } else {
+                // 나머지 묶음은 개수만 바꾸고 카드는 다 받은 뒤에 다시 그린다
+                // (받는 도중에 카드를 다시 그리면 보고 있던 가로 스크롤 위치가 맨 앞으로 돌아가서)
+                resultCount.innerText = `총 ${getFiltered(true).length}개`;
+            }
+
+            if (end < total) {
+                loadSeoulApi(end + 1, total);    // 다음 1000건
+            } else {
+                finishLoading(false);
+            }
+        })
+        .catch(error => {
+            console.error("서울시 API 호출 실패:", error);
+            apiFailed();
+        });
+}
+
+// API 를 하나도 못 받았으면 샘플로 대체, 일부라도 받았으면 받은 것까지만 보여준다
+function apiFailed() {
+    const fromSeoul = allItems.filter(item => item.type !== "popup");
+    if (fromSeoul.length === 0) {
+        loadSample();
+    } else {
+        finishLoading(false);
+    }
+}
+
+// 키가 없거나 API 가 막혔을 때 쓰는 샘플 (API 와 같은 구조의 JSON 파일)
+function loadSample() {
+    fetch(SAMPLE_URL)
+        .then(response => response.json())
+        .then(data => {
+            addItems(data[API.service].row.map(fromApi));
+            finishLoading(true);
+        })
+        .catch(error => {
+            console.error("샘플 데이터를 불러오지 못했어요.", error);
+            finishLoading(false);
+        });
+}
+
+function finishLoading(isSample) {
+    loading = false;
+    let note = isSample
+        ? "지금은 샘플 데이터를 보여주고 있어요. 실제 행사 정보는 API 인증키를 넣으면 연결돼요."
+        : "";
+    if (popupError) note = note ? note + " / " + popupError : popupError;
+    statusNote.innerText = note;
+    render();
+    drawMarkers();
+}
+
+
+/* ---------- 07. 로그인 / 찜 (common.js 사용) ---------- */
+
+// 로그인 정보는 sceneSeoulUser, 찜 목록은 sceneSeoulSavedEvents:닉네임 (common.js 가 관리)
+// 로그인 창은 login.js 가 담당하므로 지도 페이지에서는 로그인 코드를 따로 두지 않는다
+
+// 찜 상태는 로그인했을 때만 인정한다
+// (common.js 는 로그인 전이면 "guest" 목록을 읽는데, 예전에 로그인 없이 저장된 기록이 남아 있으면
+//  로그아웃 상태에서도 하트가 켜져 보이기 때문)
 function isSaved(id) {
-    return getSavedIds().indexOf(id) !== -1;
+    return SceneSeoul.getUser() !== "" && SceneSeoul.isSaved(id);
 }
 
-function toggleSave(item, button) {
-    if (!loginUser) {
+function toggleSave(item, checkbox) {
+    if (!SceneSeoul.getUser()) {
         alert("로그인 후 저장할 수 있어요.");
+        checkbox.checked = false;       // 체크된 하트를 다시 빈 하트로
         return;
     }
-    let ids = getSavedIds();
-    if (ids.indexOf(item.id) !== -1) {
-        ids = ids.filter(function (id) {
-            return id !== item.id;
-        });
-    } else {
-        ids.push(item.id);
-    }
-    localStorage.setItem("sceneSaved_" + loginUser, JSON.stringify(ids));
+    // common.js 가 닉네임별 찜 목록에 저장하고 "scene:saved" 이벤트를 보낸다
+    SceneSeoul.toggleSaved(item.id);
+}
 
+// 로그아웃 상태면 화면의 하트를 모두 끈다
+// (common.js 의 updateHearts() 가 guest 목록으로 하트를 켠 뒤에 실행되도록 이벤트 마지막에 부른다)
+function clearGuestHearts() {
+    if (SceneSeoul.getUser()) return;
+    for (const input of eventsBox.querySelectorAll("input[data-save-id]")) {
+        input.checked = false;
+    }
+}
+
+// 로그인 / 로그아웃 / 찜 변경 / 다른 탭에서 변경되었을 때
+// 하트 모양은 common.js 의 updateHearts() 가 맞춰 주므로,
+// 카드를 다시 그려야 하는 건 "저장한 것" 을 보고 있을 때뿐이다
+function refreshSavedCards() {
     if (currentType === "saved") {
-        render();                   // 저장한 것만 보는 중이면 목록에서 바로 빠지게
-    } else {
-        button.classList.toggle("is-saved", ids.indexOf(item.id) !== -1);
-        button.setAttribute("aria-label", button.classList.contains("is-saved") ? "저장 취소" : "저장");
+        render();
+        drawMarkers();
     }
-}
-
-function updateLoginLink() {
-    loginLink.innerText = loginUser ? "LOGOUT · " + loginUser : "LOGIN";
-}
-
-function handleLogin(event) {
-    event.preventDefault();
-    if (loginUser) {
-        if (confirm(loginUser + "님, 로그아웃할까요?")) {
-            loginUser = "";
-            localStorage.removeItem("sceneUser");
-        }
-    } else {
-        const name = prompt("이름(닉네임)을 입력해 로그인하세요.", "");
-        if (name && name.trim() !== "") {
-            loginUser = name.trim();
-            localStorage.setItem("sceneUser", loginUser);
-        }
-    }
-    updateLoginLink();
-    render();
+    clearGuestHearts();
 }
 
 
 /* ---------- 08. 목록 걸러내기 ---------- */
 
 function getFiltered(withDistrict) {
-    const saved = getSavedIds();
     return allItems.filter(function (item) {
         if (withDistrict && currentDistrict && item.gu !== currentDistrict) return false;
+
         if (currentType === "saved") {
-            if (saved.indexOf(item.id) === -1) return false;
+            if (!isSaved(item.id)) return false;
         } else if (currentType !== "all" && item.type !== currentType) {
             return false;
         }
-        if (keyword && item.title.toLowerCase().indexOf(keyword) === -1) return false;
+
+        if (keyword && !hasText(item.title, keyword)) return false;
         return true;
     });
 }
 
 
-/* ---------- 09. 카드 만들기 ---------- */
+/* ---------- 09. 카드 만들기 (category.css 공통 카드) ---------- */
 
-const HEART = "<svg viewBox='0 0 24 24' aria-hidden='true'><path d='M12 20.5s-7.5-4.6-9.3-9.2C1.5 8 3.4 4.8 6.6 4.8c2 0 3.5 1.1 5.4 3.2 1.9-2.1 3.4-3.2 5.4-3.2 3.2 0 5.1 3.2 3.9 6.5-1.8 4.6-9.3 9.2-9.3 9.2z'/></svg>";
-
+// 공통 카드 구조
+//   <article class="ss-card">
+//     <div class="ss-card-image"> 포스터 + 오른쪽 아래 하트(.ss-heart-toggle) </div>
+//     <div class="ss-card-info"> 카테고리 / 제목 / 장소 / 기간 </div>
+//     <a class="pop-card-link"> 카드 전체 링크 </a>
+//   </article>
 function makeCard(item) {
     const card = document.createElement("article");
-    card.className = "event event-" + item.type;
+    card.className = "ss-card";
+
+    // 포스터 + 하트
+    const imageBox = document.createElement("div");
+    imageBox.className = "ss-card-image";
 
     const img = document.createElement("img");
-    img.className = "event-poster";
-    img.alt = item.img ? item.title + " 포스터" : "";
-    img.loading = "lazy";               // 화면에 가까워질 때 불러오기
-    if (item.img) img.src = item.img;
-    img.onerror = function () {
-        img.removeAttribute("src");     // 이미지가 깨지면 회색 배경만 보이게
-        img.alt = "";                   // 깨진 이미지 글자가 보이지 않도록
-    };
-
-    const content = document.createElement("div");
-    content.className = "event-content";
-
-    // 카테고리 + 하트
-    const top = document.createElement("div");
-    top.className = "event-top";
-
-    const type = document.createElement("span");
-    type.className = "event-type";
-    type.innerText = TYPE_LABEL[item.type];
-
-    const save = document.createElement("button");
-    save.type = "button";
-    save.className = "event-save";
-    save.innerHTML = HEART;
-    const saved = isSaved(item.id);
-    save.classList.toggle("is-saved", saved);
-    save.setAttribute("aria-label", saved ? "저장 취소" : "저장");
-    save.addEventListener("click", function () {
-        toggleSave(item, save);
+    img.setAttribute("loading", "lazy");                // 화면에 가까워질 때 불러오기
+    img.alt = item.title + " 포스터";
+    if (item.img) {
+        img.src = item.img;
+    } else {
+        img.style.visibility = "hidden";                // 포스터가 없으면 회색 배경만
+    }
+    img.addEventListener("error", function () {
+        img.style.visibility = "hidden";                // 이미지가 깨지면 회색 배경만
     });
 
-    top.appendChild(type);
-    top.appendChild(save);
+    // 공통 하트: data-save-id 가 있으면 common.js 의 updateHearts() 가 체크 상태를 맞춰준다
+    const heart = document.createElement("label");
+    heart.className = "ss-heart-toggle";
 
-    const title = document.createElement("a");
-    title.className = "event-title";
+    const check = document.createElement("input");
+    check.type = "checkbox";
+    check.setAttribute("data-save-id", item.id);
+    check.setAttribute("aria-label", item.title + " 저장");
+    check.checked = isSaved(item.id);
+    check.addEventListener("change", function () {
+        toggleSave(item, check);
+    });
+
+    const mark = document.createElement("span");
+    mark.setAttribute("aria-hidden", "true");
+
+    heart.appendChild(check);
+    heart.appendChild(mark);
+    imageBox.appendChild(img);
+    imageBox.appendChild(heart);
+
+    // 글자 정보
+    const info = document.createElement("div");
+    info.className = "ss-card-info";
+
+    const top = document.createElement("div");
+    top.className = "ss-card-topline";
+    const type = document.createElement("span");
+    type.className = "ss-card-category";
+    type.innerText = TYPE_LABEL[item.type];
+    top.appendChild(type);
+
+    // 제목에 < > 가 들어간 경우가 있어서 innerHTML 대신 innerText 로 넣는다
+    const title = document.createElement("h4");
+    title.className = "ss-card-title";
     title.innerText = item.title;
-    if (item.url) {
-        title.href = item.url;
-        title.target = "_blank";
-        title.rel = "noopener";
+
+    // 장소 앞에 구 이름을 붙인다 (주소에 이미 구 이름이 있으면 그대로)
+    const place = document.createElement("p");
+    place.className = "pop-card-place";
+    if (item.gu && !hasText(item.place, item.gu)) {
+        place.innerText = item.gu + " · " + item.place;
+    } else {
+        place.innerText = item.place;
     }
 
-    const place = document.createElement("span");
-    place.className = "event-place";
-    place.innerText = (item.gu ? item.gu + " · " : "") + item.place;
+    const period = document.createElement("p");
+    period.className = "pop-card-period";
+    period.innerText = SceneSeoul.formatPeriod(item);
 
-    const period = document.createElement("span");
-    period.className = "event-period";
-    period.innerText = formatDate(item.start) + " — " + formatDate(item.end);
+    info.appendChild(top);
+    info.appendChild(title);
+    info.appendChild(place);
+    info.appendChild(period);
 
-    content.appendChild(top);
-    content.appendChild(title);
-    content.appendChild(place);
-    content.appendChild(period);
+    card.appendChild(imageBox);
+    card.appendChild(info);
 
-    card.appendChild(img);
-    card.appendChild(content);
+    // 카드 전체를 누르면 원문 페이지로 (하트는 링크보다 위에 있어서 따로 눌린다)
+    if (item.url) {
+        const link = document.createElement("a");
+        link.className = "pop-card-link";
+        link.href = item.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.setAttribute("aria-label", item.title + " 자세히 보기");
+        card.appendChild(link);
+    }
     return card;
 }
 
@@ -437,7 +517,7 @@ function render() {
     const list = sortItems(getFiltered(true));
 
     resultTitle.innerText = currentDistrict || "서울 전체";
-    resultCount.innerText = (loading && list.length === 0) ? "" : "총 " + list.length.toLocaleString() + "개";
+    resultCount.innerText = (loading && list.length === 0) ? "" : `총 ${list.length}개`;
 
     eventsBox.innerHTML = "";
     if (list.length === 0) {
@@ -446,7 +526,7 @@ function render() {
         if (loading) {
             empty.innerText = "행사 정보를 불러오는 중이에요...";
         } else if (currentType === "saved") {
-            empty.innerText = loginUser
+            empty.innerText = SceneSeoul.getUser()
                 ? "저장한 콘텐츠가 없어요. 마음에 드는 카드의 하트를 눌러보세요."
                 : "로그인하면 하트로 저장한 콘텐츠를 모아볼 수 있어요.";
         } else {
@@ -477,6 +557,36 @@ function initMap() {
     markerLayer = L.layerGroup().addTo(map);
 }
 
+// 마커를 눌렀을 때 뜨는 말풍선 내용 (요소로 만들어 넣으면 제목에 태그가 있어도 실행되지 않는다)
+function makeMarkerPopup(item) {
+    const box = document.createElement("div");
+
+    const label = document.createElement("span");
+    label.className = "popup-type";
+    label.innerText = TYPE_LABEL[item.type];
+
+    const name = document.createElement("strong");
+    name.innerText = item.title;
+
+    const date = document.createElement("div");
+    date.innerText = SceneSeoul.formatPeriod(item);
+
+    box.appendChild(label);
+    box.appendChild(name);
+    box.appendChild(date);
+
+    if (item.url) {
+        const link = document.createElement("a");
+        link.className = "popup-link";
+        link.href = item.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.innerText = "자세히 보기 ↗";
+        box.appendChild(link);
+    }
+    return box;
+}
+
 // 카테고리/검색어에 맞는 항목을 마커로 찍는다 (구 선택과는 상관없이 서울 전체)
 function drawMarkers() {
     markerLayer.clearLayers();
@@ -491,30 +601,9 @@ function drawMarkers() {
             fillOpacity: 0.95
         });
 
-        // 팝업 내용은 마커를 눌렀을 때 만든다 (마커가 수천 개라 미리 만들면 느려서)
-        // 요소로 만들어 넣으면 제목에 태그가 있어도 실행되지 않는다
+        // 말풍선 내용은 마커를 눌렀을 때 만든다 (마커가 수천 개라 미리 만들면 느려서)
         marker.bindPopup(function () {
-            const box = document.createElement("div");
-            const label = document.createElement("span");
-            label.className = "popup-type";
-            label.innerText = TYPE_LABEL[item.type];
-            const name = document.createElement("strong");
-            name.innerText = item.title;
-            const date = document.createElement("div");
-            date.innerText = formatDate(item.start) + " — " + formatDate(item.end);
-            box.appendChild(label);
-            box.appendChild(name);
-            box.appendChild(date);
-            if (item.url) {
-                const link = document.createElement("a");
-                link.className = "popup-link";
-                link.href = item.url;
-                link.target = "_blank";
-                link.rel = "noopener";
-                link.innerText = "자세히 보기 ↗";
-                box.appendChild(link);
-            }
-            return box;
+            return makeMarkerPopup(item);
         });
 
         marker.on("click", function () {
@@ -529,25 +618,21 @@ function drawMarkers() {
 
 /* ---------- 11. 구 선택 ---------- */
 
-function makeChips() {
-    const all = document.createElement("button");
-    all.type = "button";
-    all.innerText = "서울 전체";
-    all.setAttribute("data-name", "");
-    all.addEventListener("click", function () {
-        selectDistrict("");
+function makeChip(text, gu) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.innerText = text;
+    btn.setAttribute("data-name", gu);
+    btn.addEventListener("click", function () {
+        selectDistrict(gu);
     });
-    chipBox.appendChild(all);
+    chipBox.appendChild(btn);
+}
 
-    for (const gu in GU_CENTER) {                // ※ for...in 은 10주차 객체 반복
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.innerText = gu;
-        btn.setAttribute("data-name", gu);
-        btn.addEventListener("click", function () {
-            selectDistrict(gu);
-        });
-        chipBox.appendChild(btn);
+function makeChips() {
+    makeChip("서울 전체", "");
+    for (const gu in GU_CENTER) {                // 10주차 for...in 객체 반복
+        makeChip(gu, gu);
     }
 }
 
@@ -555,13 +640,13 @@ function selectDistrict(gu, fromMarker) {
     currentDistrict = gu;
     showCount = FIRST_SHOW;
 
-    chipBox.querySelectorAll("button").forEach(function (btn) {
-        btn.classList.toggle("is-selected", btn.getAttribute("data-name") === gu);
-    });
+    for (const btn of chipBox.querySelectorAll("button")) {
+        btn.className = btn.getAttribute("data-name") === gu ? "is-selected" : "";
+    }
     render();
     eventsBox.scrollLeft = 0;
 
-    if (!fromMarker) {                           // 마커를 눌렀을 땐 팝업이 열려 있으니 지도를 움직이지 않는다
+    if (!fromMarker) {                           // 마커를 눌렀을 땐 말풍선이 열려 있으니 지도를 움직이지 않는다
         if (gu) {
             map.flyTo(GU_CENTER[gu], 13);
         } else {
@@ -573,25 +658,26 @@ function selectDistrict(gu, fromMarker) {
 
 /* ---------- 12. 이벤트 ---------- */
 
-loginLink.addEventListener("click", handleLogin);
-
-filterRadios.forEach(function (radio) {
+for (const radio of filterRadios) {
     radio.addEventListener("change", function () {
         currentType = radio.id.replace("filter-", "");      // "filter-popup" → "popup"
         showCount = FIRST_SHOW;
         render();
+        eventsBox.scrollLeft = 0;
         drawMarkers();
     });
-});
+}
 
-// 검색은 타이핑이 멈춘 뒤에 한 번만 실행 ※ 수업 외: setTimeout 으로 지연시키기
+// 검색은 타이핑이 멈춘 뒤에 한 번만 실행 (마커가 많아서 글자마다 다시 그리면 느림)
+// ※ 수업 외: clearTimeout (setTimeout 으로 예약해 둔 것을 취소)
 let searchTimer;
 searchInput.addEventListener("input", function () {
     clearTimeout(searchTimer);
     searchTimer = setTimeout(function () {
-        keyword = searchInput.value.trim().toLowerCase();
+        keyword = searchInput.value;
         showCount = FIRST_SHOW;
         render();
+        eventsBox.scrollLeft = 0;
         drawMarkers();
     }, 250);
 });
@@ -601,65 +687,45 @@ moreBtn.addEventListener("click", function () {
     render();
 });
 
+// 카드 좌우 이동 (부드럽게 움직이는 건 CSS scroll-behavior: smooth)
 prevBtn.addEventListener("click", function () {
-    eventsBox.scrollBy({ left: -480, behavior: "smooth" });
+    eventsBox.scrollLeft -= 480;
 });
 nextBtn.addEventListener("click", function () {
-    eventsBox.scrollBy({ left: 480, behavior: "smooth" });
+    eventsBox.scrollLeft += 480;
 });
+
+// common.js 가 보내는 이벤트 (안내문 4·5번)
+window.addEventListener("scene:login", refreshSavedCards);   // 로그인 / 로그아웃
+window.addEventListener("scene:saved", refreshSavedCards);   // 찜 / 찜 취소
+window.addEventListener("storage", refreshSavedCards);       // 다른 탭에서 바꿨을 때
+window.addEventListener("pageshow", clearGuestHearts);       // 뒤로가기로 돌아왔을 때
 
 
 /* ---------- 13. 시작 ---------- */
 
-async function start() {
-    loginUser = localStorage.getItem("sceneUser") || "";
-    updateLoginLink();
+function start() {
     initMap();
     makeChips();
     selectDistrict("", true);
 
-    let isSample = false;
+    // 팝업 JSON 을 먼저 읽고, 그다음 서울시 API (키가 없으면 샘플)
+    loadPopups(function () {
+        render();
+        drawMarkers();
 
-    if (!API.key) {
-        // 인증키가 없으면 샘플 데이터
-        allItems = cleanUp(await loadSample(), {});
-        isSample = true;
-    } else {
-        const cached = loadCache();
-        if (cached) {
-            allItems = cached;                  // 오늘 이미 받아 둔 게 있으면 그대로 사용
-        } else {
+        if (API.key) {
             statusNote.innerText = "행사 정보를 불러오는 중이에요...";
-            try {
-                await loadSeoulApi();
-                saveCache();
-            } catch (error) {
-                console.warn("서울시 API 호출 실패:", error);
-                if (allItems.length === 0) {    // 하나도 못 받았으면 샘플로 대체
-                    allItems = cleanUp(await loadSample(), {});
-                    isSample = true;
-                }
-            }
+            loadSeoulApi(1, API.pageSize);       // 전체 개수는 첫 응답을 받은 뒤에 알 수 있다
+        } else {
+            loadSample();
         }
-    }
-
-    loading = false;
-
-    if (isSample) {
-        statusNote.innerText = "지금은 샘플 데이터를 보여주고 있어요. 실제 행사 정보는 API 인증키를 넣으면 연결돼요.";
-    } else {
-        statusNote.innerText = "";
-    }
-
-    render();
-    drawMarkers();
+    });
 
     // 주소 뒤에 #성동구 처럼 붙어 있으면 그 구를 바로 선택
+    // ※ 수업 외: location.hash, decodeURIComponent (한글 주소 되돌리기)
     const name = decodeURIComponent(location.hash.replace("#", ""));
     if (GU_CENTER[name]) selectDistrict(name);
 }
 
-start().catch(function (error) {
-    console.error(error);
-    statusNote.innerText = "콘텐츠를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.";
-});
+start();
