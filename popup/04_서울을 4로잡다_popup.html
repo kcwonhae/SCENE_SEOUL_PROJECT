@@ -14,6 +14,7 @@
 
     <script src="../js/04_서울을 4로잡다_site.js" defer></script>
     <script src="04_서울을 4로잡다_popup.js" defer></script>
+    <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
 </head>
 
 <body id="top">
@@ -98,8 +99,10 @@
                 MY PAGE
             </a>
 
-            <span class="ss-weather-icon"
-                  aria-label="날씨 아이콘">
+                <span class="ss-weather-icon"
+                     id="header-weather"
+                     aria-label="서울 날씨"
+                     title="날씨 정보 불러오는 중">
                 <svg aria-hidden="true"
                      fill="none"
                      stroke="currentColor"
