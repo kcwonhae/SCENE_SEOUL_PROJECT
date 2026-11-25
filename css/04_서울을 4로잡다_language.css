@@ -9,9 +9,9 @@
     top: calc(100% + 4px);
     right: 0;
     z-index: 110;
-    width: 92px;
+    width: 110px;
     margin: 0;
-    padding: 4px 6px;
+    padding: 5px 7px;
     border-radius: 3px;
     background: rgba(155, 164, 177, .30);
     color: var(--ss-ink);
