@@ -73,15 +73,13 @@ p {
   background: var(--ss-paper);
 }
 
-/* 히어로 제목 + 소개 */
+/* 히어로: 공연 페이지와 같은 크기·여백 */
 .ex-hero {
-  --navy: #1b2b5e;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  position: relative;
   max-width: 1470px;
-  min-height: clamp(180px, 15vw, 220px);
+  min-height: 220px;
   margin: 0 auto;
-  padding: clamp(42px, 6vw, 82px) clamp(22px, 5vw, 80px) 42px;
+  padding: 82px 72px 42px;
 }
 
 /* 히어로 글자 + 공통 재지정 */
@@ -101,7 +99,7 @@ p {
 .ex-hero .ss-hero-title {
   margin: 20px 0 14px;
   color: var(--ss-ink);
-  font-size: clamp(58px, 8vw, 126px);
+  font-size: 105px;
   font-weight: 900;
   line-height: .94;
   letter-spacing: -.075em;
@@ -113,16 +111,12 @@ p {
   margin-left: .1em;
 }
 
-/* 소개 문구(왼쪽) + 분야 목록(오른쪽) */
-.intro-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 24px;
-}
-
-/* 오른쪽 분야 목록 */
+/* 오른쪽 분야 목록: 제목 오른쪽 끝에 붙여 둠 */
 .intro-tags {
+  position: absolute;
+  z-index: 2;
+  right: 72px;
+  bottom: 78px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -131,7 +125,7 @@ p {
   font-weight: 800;
   letter-spacing: .16em;
   line-height: 1.7;
-  color: var(--navy);
+  color: var(--ss-ink);
 }
 
 /* 등장 애니메이션은 공통 .ss-entrance 클래스를 HTML에서 붙여 사용 */
@@ -141,13 +135,13 @@ p {
 
 /* 공통 캐러셀 CSS를 사용하고 바깥 여백만 조정 */
 .featured-exhibition {
-  padding: 8px clamp(22px, 5vw, 80px) 64px;
+  padding: 8px 72px 64px;
 }
 
 
 /* ---------- 04. 전시 목록 ---------- */
 
-/* 공통 카테고리 CSS를 사용하고 제목-필터 사이 여백만 조정 */
-.ss-catalog .ss-category-heading {
-  margin-bottom: 0;
+/* 공통 카테고리 CSS를 사용하고 위쪽 여백만 조정 (공연 페이지와 같음) */
+.ss-catalog {
+  padding-top: 24px;
 }
