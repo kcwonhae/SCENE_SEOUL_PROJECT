@@ -8,10 +8,13 @@
   <meta name="team-name" content="서울을 4로잡다">
   <title>MY CALENDAR | SCENE:SEOUL</title>
   <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
+  <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
   <link rel="stylesheet" href="./04_서울을 4로잡다_mycalendar.css">
   <script src="../js/04_서울을 4로잡다_site.js" defer></script>
   <script src="../js/04_서울을 4로잡다_common.js" defer></script>
   <script src="./04_서울을 4로잡다_mycalendar.js" defer></script>
+<script src="../js/04_서울을 4로잡다_weather.js" defer></script>
+<script src="../login/04_서울을 4로잡다_login.js" defer></script>
 </head>
 <body id="top">
 
@@ -46,7 +49,7 @@
       </span>
       <button class="header-login" type="button">LOGIN</button>
       <a aria-current="page" class="header-mypage" href="./04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
-      <span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
+      <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중">
         <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewBox="0 0 24 24">
           <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
           <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>

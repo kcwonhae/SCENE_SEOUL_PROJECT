@@ -7,7 +7,6 @@
 .perf-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
   max-width: 1470px;
   min-height: clamp(180px, 15vw, 220px);
   margin: 0 auto;
@@ -42,7 +41,8 @@
 .perf-tags {
   grid-column: 2;
   grid-row: 2;
-  margin: 0;
+  align-self: end;
+  margin: 0 0 14px;
   padding: 0;
   list-style: none;
   text-align: right;
@@ -53,6 +53,7 @@
   line-height: 1.7;
 }
 
+
 .perf-feature {
   padding: 8px clamp(22px, 5vw, 80px) 64px;
 }
@@ -60,22 +61,4 @@
 /* 공통 카테고리 CSS를 사용하고 제목-필터 사이 여백만 조정한다. */
 .ss-catalog .ss-category-heading {
   margin-bottom: 0;
-}
-
-@media (max-width: 760px) {
-  .perf-hero {
-    min-height: 0;
-    padding-bottom: 90px;
-  }
-
-  .perf-tags {
-    display: none;
-  }
-}
-
-@media (max-width: 670px) {
-  .perf-hero .ss-hero-title {
-    font-size: clamp(34px, 11.5vw, 80px);
-    letter-spacing: -.07em;
-  }
 }

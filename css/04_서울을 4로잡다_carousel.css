@@ -32,6 +32,8 @@
 .ss-carousel-card {
   flex: 0 0 54%;
   min-width: 0;
+  overflow: hidden;
+  border-radius: 9px;
   opacity: .7;
   transform: scale(.9);
 }
@@ -39,8 +41,6 @@
 .ss-carousel-card a,
 .ss-carousel-content {
   display: block;
-  overflow: hidden;
-  border-radius: 9px;
   background: #f0f0f0;
 }
 
@@ -125,11 +125,4 @@
 .ss-carousel-dot.is-active {
   width: 34px;
   background: #565668;
-}
-
-@media (max-width: 760px) {
-  .ss-carousel-main { gap: 2px; }
-  .ss-carousel-card { flex-basis: 76%; }
-  .ss-carousel-art { height: 260px; }
-  .ss-carousel-btn { width: 24px; }
 }
