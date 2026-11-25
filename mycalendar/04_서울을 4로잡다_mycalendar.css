@@ -17,6 +17,11 @@
     letter-spacing: -0.075em;
 }
 
+.page-title-dot {
+    color: var(--ss-blue);
+    margin-left: .1em;
+}
+
 /* ---------- 달력 ---------- */
 .schedule-layout {
     display: grid;
