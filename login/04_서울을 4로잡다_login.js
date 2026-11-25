@@ -6,7 +6,7 @@
             <link href="../css/04_서울을 4로잡다_login.css" rel="stylesheet"/>
    2) JS  : 각 페이지 </body> 바로 위에 아래 순서대로 추가 (common.js 가 반드시 먼저!)
             <script src="../js/04_서울을 4로잡다_common.js"></script>
-            <script src="../js/04_서울을 4로잡다_login.js"></script>
+            <script src="../login/04_서울을 4로잡다_login.js"></script>
    → 로그인 창(모달) HTML은 이 스크립트가 직접 만들어 넣기 때문에 페이지마다 복사할 필요가 없습니다.
 
    [common.js 와 맞춘 규칙]
