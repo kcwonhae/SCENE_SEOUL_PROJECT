@@ -156,7 +156,11 @@ a {
 }
 
 .ss-header-actions a:hover,
-.ss-header-actions button:hover {
+.ss-header-actions button:hover,
+.ss-language[role="button"]:hover,
+.ss-language[role="button"]:focus-visible,
+.ss-language.is-open,
+.ss-header-actions .header-mypage[aria-current="page"] {
     color: var(--ss-header-accent);
 }
 
@@ -199,6 +203,10 @@ a {
     white-space: nowrap;
 }
 
+.ss-language[role="button"] {
+    cursor: pointer;
+}
+
 .ss-weather-icon {
     display: inline-grid;
     place-items: center;
@@ -236,7 +244,8 @@ a {
 .ss-header-logo:focus-visible,
 .ss-nav a:focus-visible,
 .ss-header-actions a:focus-visible,
-.ss-header-actions button:focus-visible {
+.ss-header-actions button:focus-visible,
+.ss-language[role="button"]:focus-visible {
     outline: 2px solid var(--ss-header-accent);
     outline-offset: 4px;
 }

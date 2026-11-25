@@ -16,19 +16,23 @@
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="./04_서울을 4로잡다_mycalendar.css">
     <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
+
     <script src="../js/04_서울을 4로잡다_common.js" defer></script>
+    <script src="../login/04_서울을 4로잡다_login.js" defer></script>
     <script src="./04_서울을 4로잡다_mycalendar.js" defer></script>
     <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
-    <script src="../login/04_서울을 4로잡다_login.js" defer></script>
+    <script src="../js/04_서울을 4로잡다_language.js" defer></script>
 </head>
 
 <body id="top">
 
     <header class="ss-header" id="header">
         <a aria-label="씬 서울 홈" class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html">
-            SCENE<span class="ss-accent">:</span>SEOUL
+            SCENE<b class="ss-accent">:</b>SEOUL
         </a>
-        <nav aria-label="메인 메뉴" class="ss-nav">
+
+        <nav class="ss-nav" aria-label="주요 메뉴">
             <a href="../main/04_서울을 4로잡다_index.html">HOME</a>
             <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
             <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
@@ -37,24 +41,28 @@
             <a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
             <a href="../map/04_서울을 4로잡다_map.html">지도</a>
         </nav>
+
         <div class="ss-header-actions">
             <span class="ss-header-quick-icons">
-                <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
-                    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewBox="0 0 24 24">
-                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
-                        <path d="m16 16 5 5"></path>
-                    </svg>
-                </button>
-                <span aria-label="언어: 한국어" class="ss-language">
+                <span class="ss-language" role="button" tabindex="0" aria-label="언어 선택" aria-expanded="false" aria-haspopup="true">
                     <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9"></circle>
                         <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
                     </svg>
                     <span>KR</span>
+                    <ul class="ss-language-menu" aria-label="언어 목록" hidden>
+                        <li class="ss-language-option is-current">한국어 <span aria-hidden="true">✓</span></li>
+                        <li class="ss-language-option">English</li>
+                        <li class="ss-language-option">日本語</li>
+                        <li class="ss-language-option">中文</li>
+                    </ul>
                 </span>
             </span>
+
             <button class="header-login" type="button">LOGIN</button>
+
             <a aria-current="page" class="header-mypage" href="./04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
+
             <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중">
                 <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" viewBox="0 0 24 24">
                     <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
