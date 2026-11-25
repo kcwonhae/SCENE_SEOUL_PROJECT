@@ -13,10 +13,12 @@
 
     <title>SCENE:SEOUL | Exhibitions</title>
 
-    <!-- 공통 디자인 → 카테고리 공통 → 전시 전용 CSS -->
+    <!-- 공통 디자인 → 카테고리 공통 → 캐러셀 → 전시 전용 → 로그인 CSS -->
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_carousel.css">
     <link rel="stylesheet" href="../exhibition/04_서울을 4로잡다_exhibition.css">
+    <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
 </head>
 
 <body id="top">
@@ -24,11 +26,11 @@
     <a class="skip" href="#main">본문 바로가기</a>
 
     <!-- 01. 공통 헤더 -->
-     <header class="ss-header">
+    <header class="ss-header">
         <a class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html" aria-label="씬 서울 홈">
             SCENE<span class="ss-accent">:</span>SEOUL
         </a>
-       
+
         <nav aria-label="메인 메뉴" class="ss-nav">
             <a href="../main/04_서울을 4로잡다_index.html">HOME</a>
             <a class="is-active" aria-current="page" href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
@@ -93,10 +95,10 @@
 
     <main id="main" class="ss-page">
 
-        <!-- 상단 베너를 stage로 묶기 -->
+        <!-- 상단 배너를 stage로 묶기 -->
         <div class="stage">
 
-        <!-- 02. 페이지 소개 -->
+            <!-- 02. 페이지 소개 -->
             <section class="ex-hero"
                     aria-labelledby="ex-title">
                 <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
@@ -126,314 +128,49 @@
             </section>
 
 
-            <!-- 03. 대표 전시 -->
-            <section class="featured-exhibition" id="hot" aria-labelledby="featured-title">
-                <div class="ss-feature-banner ss-feature-banner--editorial">
-                    <div class="ss-feature-banner-art">
-                        <img src="../images/exhibition01.png"
-                             alt="유영국 대표 전시 포스터">
-                    </div>
+            <!-- 03. 주목할 전시: 데이터 파일에서 캐러셀을 생성 -->
+            <section class="featured-exhibition" id="hot" aria-label="주목할 전시">
+                <div class="ss-carousel" data-src="../data/04_서울을 4로잡다_exhibition.json" aria-roledescription="캐러셀"></div>
+            </section>
 
-                    <div class="ss-feature-banner-copy">
-                        <span class="ss-feature-banner-index">EDITOR'S PICK / EXHIBITION</span>
-                        <span class="ss-feature-banner-kicker">미술</span>
-
-                        <h2 class="ss-feature-banner-title">
-                            Yoo Youngkuk:<br>
-                            A Mountain Within Me
-                        </h2>
-
-                        <p class="ss-feature-banner-description">
-                            자연의 형태와 색채를 추상적으로 풀어낸
-                            유영국의 작품을 만나보세요.
-                        </p>
-
-                        <div class="ss-feature-banner-facts">
-                            <span>2026.05.19 — 10.25</span>
-                            <span>서울시립미술관 서소문본관</span>
-                            <span>전시</span>
-                        </div>
-
-                        <a class="ss-feature-banner-link" href="#all"> 
-                            전시 살펴보기
-                            <span aria-hidden="true">↗</span>
-                        </a>
-                    </div>
-                </section>
-            </div>
+        </div>
 
 
-            <!-- 세부 필터 -->
-            <span class="anchor" id="all"></span>
-            <span class="anchor" id="art"></span>
-            <span class="anchor" id="photo"></span>
-            <span class="anchor" id="media"></span>
-            <span class="anchor" id="history"></span>
-
-            <!-- 04. 전시 카탈로그 -->
-            <section class="ss-catalog" aria-labelledby="ex-list-title">
-                <div class="ss-catalog-heading">
-                    <span class="ss-category-eyebrow">SCENE:SEOUL / EXHIBITION</span>
-                
-                    <h2 class="ss-category-title" id="ex-list-title">ALL
+        <!-- 04. 전시 카탈로그 -->
+        <section class="ss-catalog" id="ex-list" aria-labelledby="ex-list-title">
+            <div class="ss-category-heading">
+                <h2 class="ss-category-title" id="ex-list-title">ALL
                     <em class="ss-category-title-accent">EXHIBITIONS.</em>
-                    </h2>
-
-                    <p class="ss-card-description">
-                        전시를 둘러보고 마음에 드는 장면을 찾아보세요.
-                    </p>
-                </div>
-
-                <!-- 04-1. 전시 분류 필터와 검색창 -->
-                <div class="ss-catalog-controls">
-                    <div class="ss-toolbar">
-                        <nav class="ss-filters" aria-label="전시 필터">
-                            <a class="ss-filter" href="#all">전체</a>
-                            <a class="ss-filter" href="#art">미술</a>
-                            <a class="ss-filter" href="#photo">사진</a>
-                            <a class="ss-filter" href="#media">미디어</a>
-                            <a class="ss-filter" href="#history">역사·문화</a>
-                        </nav>
-
-                        <div class="ss-search" role="search">
-                            <label class="ss-visually-hidden" for="ex-search">전시 검색</label>
-                            <input id="ex-search" type="search" placeholder="전시명, 장소 검색">
-                            <svg class="ss-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                            <circle cx="10.8" cy="10.8" r="6.6" />
-                            <path d="m16 16 5 5"></path>
-                        </svg>
-                    </div>
-                </div>
-                
-                <!-- 04-2. 전시 카드 목록 그리드 -->
-                <div class="ss-card-grid ss-catalog-grid">
-
-                    <!-- 카드 01: 미술 / 중구 -->
-                     
-                    <article class="ss-card ss-catalog-card p1" data-genre="art" data-sub="jung">
-                        <a class="ss-card-image" href="#" aria-label="Yoo Youngkuk: A Mountain Within Me 전시 정보 열기">
-                            <img src="../images/exhibition01.png"
-                                 alt="Yoo Youngkuk: A Mountain Within Me 전시 포스터">
-                        </a>
-
-                        <div class="ss-catalog-card-info">
-                            <div class="ss-card-topline">
-                                <span class="ss-card-category">ART</span>
-                                <span class="ss-card-region">중구</span>
-                            </div>
-
-                            <div class="ss-card-titleline">
-                                <h3 class="ss-card-title">
-                                    <a href="#">Yoo Youngkuk: A Mountain Within Me</a>
-                                </h3>
-                                <label class="ss-heart ss-heart-toggle">
-                                    <input type="checkbox" aria-label="전시 찜하기">
-                                    <span aria-hidden="true"></span>
-                                </label>
-                            </div>
-
-                            <p class="ss-card-description">한국 추상미술의 거장 유영국의 작품을 통해 만나는 자연과 색채.</p>
-                            <p class="ss-card-meta">서울시립미술관 서소문본관 · 2026.05.19 — 10.25</p>
-                            <details class="ss-card-details">
-                                <summary>VIEW EXHIBITION DETAILS
-                                    <span aria-hidden="true">↗</span>
-                                </summary>
-                            </details>
-                        </div>
-                    </article>
-
-                    <!-- 카드 02: 사진 / 노원구 -->
-                    <article class="ss-card ss-catalog-card p1" data-genre="photo" data-sub="nowon">
-                        <a class="ss-card-image" href="#" aria-label="Human Error 전시 정보 열기">
-                            <img src="../images/exhibition01.png"
-                                alt="Human Error 전시 포스터">
-                        </a>
-
-                        <div class="ss-catalog-card-info">
-                            <div class="ss-card-topline">
-                                <span class="ss-card-category">PHOTO</span>
-                                <span class="ss-card-region">노원구</span>
-                            </div>
-
-                            <div class="ss-card-titleline">
-                                <h3 class="ss-card-title">
-                                    <a href="#">Human Error</a>
-                                </h3>
-                                <label class="ss-heart ss-heart-toggle">
-                                    <input type="checkbox" aria-label="전시 찜하기">
-                                    <span aria-hidden="true"></span>
-                                </label>
-                            </div>
-
-                            <p class="ss-card-description">오인환과 장서영의 작업을 통해 인간과 감각의 관계를 탐색하는 전시.</p>
-                            <p class="ss-card-meta">북서울미술관 · 2026.08.13 — 10.25</p>
-                            <details class="ss-card-details">
-                                <summary>VIEW EXHIBITION DETAILS
-                                    <span aria-hidden="true">↗</span>
-                                </summary>
-                            </details>
-                        </div>
-                    </article>
-
-                    <!-- 카드 03. 미디어 아트 / 종로구 -->
-                    <article class="ss-card ss-catalog-card p1" data-genre="media" data-sub="jongno">
-                        <a class="ss-card-image" href="#" aria-label="Light Resting in the Grain 전시 정보">
-                            <img src="../images/exhibition01.png"
-                                 alt="Light Resting in the Grain 전시 포스터">
-                        </a>
-
-                        <div class="ss-catalog-card-info">
-                            <div class="ss-card-topline">
-                                <span class="ss-card-category">MEDIA</span>
-                                <span class="ss-card-region">종로구</span>
-                            </div>
-
-                            <div class="ss-card-titleline">
-                                <h3 class="ss-card-title">
-                                    <a href="#">Light Resting in the Grain</a>
-                                </h3>
-                                <label class="ss-heart ss-heart-toggle">
-                                    <input type="checkbox" aria-label="전시 찜하기">
-                                    <span aria-hidden="true"></span>
-                                </label>
-                            </div>
-
-                            <p class="ss-card-description">김덕용과 변용국의 작품에서 발견하는 재료와 빛의 감각.</p>
-                            <p class="ss-card-meta">서울 전시 공간 · 2026.08.28 — 10.31</p>
-                            <details class="ss-card-details">
-                                <summary>VIEW EXHIBITION DETAILS
-                                    <span aria-hidden="true">↗</span>
-                                </summary>
-                            </details>
-                        </div>
-                    </article>
-
-                    <!-- 카드 04: 역사·문화 / 종로구 -->
-                    <article class="ss-card ss-catalog-card p1" data-genre="history" data-sub="jongno">
-                        <a class="ss-card-image" href="#" aria-label="Light Resting in the Grain 전시 정보">
-                            <img src="../images/exhibition01.png"
-                                alt="Evergreen Through the Ages 전시">
-                        </a>
-
-                        <div class="ss-catalog-card-info">
-                            <div class="ss-card-topline">
-                                <span class="ss-card-category">HISTORY</span>
-                                <span class="ss-card-region">종로구</span>
-                            </div>
-
-                            <div class="ss-card-titleline">
-                                <h3 class="ss-card-title">
-                                    <a href="#">Evergreen Through the Ages</a>
-                                </h3>
-                                <label class="ss-heart ss-heart-toggle">
-                                    <input type="checkbox" aria-label="전시 찜하기">
-                                    <span aria-hidden="true"></span>
-                                </label>
-                            </div>
-
-                            <p class="ss-card-description">고희동 가옥에서 만나는 선비의 품격과 전통문화의 아름다움.</p>
-                            <p class="ss-card-meta">종로구 고희동 가옥 미술관 · 2026.09.05 — 12.27</p>
-                            <details class="ss-card-details">
-                                <summary>VIEW EXHIBITION DETAILS
-                                    <span aria-hidden="true">↗</span>
-                                </summary>
-                            </details>
-                        </div>
-                    </article>
-
-                    <!-- 카드 05: 미술 / 성북구 -->
-                    <article class="ss-card ss-catalog-card p1" data-genre="art" data-sub="seongbuk">
-                        <a class="ss-card-image" href="#" aria-label="Singing Ornaments in the House 전시">
-                            <img src="../images/exhibition01.png"
-                                alt="Singing Ornaments in the House 전시 포스터">
-                        </a>
-
-                        <div class="ss-catalog-card-info">
-                            <div class="ss-card-topline">
-                                <span class="ss-card-category">ART</span>
-                                <span class="ss-card-region">성북구</span>
-                            </div>
-
-                            <div class="ss-card-titleline">
-                                <h3 class="ss-card-title">
-                                    <a href="#">Singing Ornaments in the House</a>
-                                </h3>
-                                <label class="ss-heart ss-heart-toggle">
-                                    <input type="checkbox" aria-label="전시 찜하기">
-                                    <span aria-hidden="true"></span>
-                                </label>
-                            </div>
-
-                            <p class="ss-card-description">집과 장식, 일상 속 예술의 관계를 새롭게 바라보는 특별전.</p>
-                            <p class="ss-card-meta">성북구립미술관 · 2026.04.17 — 11.21</p>
-                            <details class="ss-card-details">
-                                <summary>VIEW EXHIBITION DETAILS
-                                    <span aria-hidden="true">↗</span>
-                                </summary>
-                            </details>
-                        </div>
-                    </article>
-
-                    <!-- 카드 06: 사진 / 중구 -->
-                    <article class="ss-card ss-catalog-card p1" data-genre="photo" data-sub="jung">
-                        <a class="ss-card-image" href="#" aria-label="Martin Parr: We Are Martin Parr 전시">
-                            <img src="../images/exhibition01.png"
-                                alt="Martin Parr: We Are Martin Parr 전시 포스터">
-                        </a>
-
-                        <div class="ss-catalog-card-info">
-                            <div class="ss-card-topline">
-                                <span class="ss-card-category">PHOTO</span>
-                                <span class="ss-card-region">중구</span>
-                            </div>
-
-                            <div class="ss-card-titleline">
-                                <h3 class="ss-card-title">
-                                    <a href="#">Martin Parr: We Are Martin Parr</a>
-                                </h3>
-                                <label class="ss-heart ss-heart-toggle">
-                                    <input type="checkbox" aria-label="전시 찜하기">
-                                    <span aria-hidden="true"></span>
-                                </label>
-                            </div>
-
-                            <p class="ss-card-description">일상과 사회를 독특한 색채로 포착하는 사진작가 마틴 파의 시선.</p>
-                            <p class="ss-card-meta">서울시립 사진미술관 · 2026.07.16 — 10.18</p>
-                            <details class="ss-card-details">
-                                <summary>VIEW EXHIBITION DETAILS
-                                    <span aria-hidden="true">↗</span>
-                                </summary>
-                            </details>
-                        </div>
-                    </article>
-                </div>
-
-                <p class="ss-catalog-status">
-                    <span class="hot-label">ALL · </span>SHOWING <span class="count"></span> RESULTS
-                </p>
-
-                <!-- 페이지네이션 -->
-
-                <nav class="ss-page-nav pager" aria-label="전시 목록 페이지">
-                    <span class="ss-page-arrow is-disabled pg-prev-off" aria-hidden="true">‹</span>
-                    <label class="ss-page-arrow pg-prev" for="pg1" aria-label="이전 페이지">‹</label>
-                    <label class="ss-page-arrow pg-prev" for="pg2" aria-label="이전 페이지">‹</label>
-                    <label class="ss-page-arrow pg-prev" for="pg3" aria-label="이전 페이지">‹</label>
-
-                    <div class="ss-page-numbers">
-                        <input class="ss-page-radio pg-radio" type="radio" name="pg" id="pg1" checked><label for="pg1">1</label>
-                        <input class="ss-page-radio pg-radio" type="radio" name="pg" id="pg2"><label for="pg2">2</label>
-                        <input class="ss-page-radio pg-radio" type="radio" name="pg" id="pg3"><label for="pg3">3</label>
-                        <input class="ss-page-radio pg-radio" type="radio" name="pg" id="pg4"><label for="pg4">4</label>
-                    </div>
-
-                    <label class="ss-page-arrow pg-next" for="pg2" aria-label="다음 페이지">›</label>
-                    <label class="ss-page-arrow pg-next" for="pg3" aria-label="다음 페이지">›</label>
-                    <label class="ss-page-arrow pg-next" for="pg4" aria-label="다음 페이지">›</label>
-                    <span class="ss-page-arrow is-disabled pg-next-off" aria-hidden="true">›</span>
-                </nav>
+                </h2>
+                <p class="ss-category-description">전시를 둘러보고 마음에 드는 장면을 찾아보세요.</p>
             </div>
+
+            <!-- 04-1. 전시 분류 필터와 검색창 -->
+            <div class="ss-toolbar">
+                <nav class="ss-filters" aria-label="전시 카테고리">
+                    <button class="ss-filter" type="button" data-filter="all" aria-pressed="true">전체</button>
+                    <button class="ss-filter" type="button" data-filter="art" aria-pressed="false">미술</button>
+                    <button class="ss-filter" type="button" data-filter="photo" aria-pressed="false">사진</button>
+                    <button class="ss-filter" type="button" data-filter="media" aria-pressed="false">미디어</button>
+                    <button class="ss-filter" type="button" data-filter="history" aria-pressed="false">역사·문화</button>
+                </nav>
+
+                <div class="ss-search" role="search">
+                    <label class="ss-visually-hidden" for="ex-search">전시 검색</label>
+                    <input id="ex-search" type="search" placeholder="전시명, 장소 검색">
+                    <svg class="ss-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <circle cx="10.8" cy="10.8" r="6.6" />
+                        <path d="m16 16 5 5"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- 04-2. 전시 카드 목록: 자바스크립트에서 생성 -->
+            <div id="ex-cards" class="ss-card-grid ss-catalog-grid" aria-live="polite"></div>
+
+            <!-- 04-3. 페이지 이동: 자바스크립트에서 생성 -->
+            <nav id="ex-pagination" class="popup-js-pager" aria-label="전시 목록 페이지 이동"></nav>
         </section>
 
     </main>
@@ -452,6 +189,10 @@
         </svg>
     </a>
 
+    <script src="../js/04_서울을 4로잡다_common.js"></script>
+    <script src="../js/04_서울을 4로잡다_carousel.js"></script>
+    <script src="04_서울을 4로잡다_exhibition.js"></script>
+    <script src="../login/04_서울을 4로잡다_login.js"></script>
 </body>
 
 </html>
