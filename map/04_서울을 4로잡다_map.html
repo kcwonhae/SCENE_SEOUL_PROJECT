@@ -15,6 +15,7 @@
     <!-- 공통 CSS -->
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
+    <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
     <link rel="stylesheet" href="../map/04_서울을 4로잡다_map.css">
 
     <!-- 실제 지도: Leaflet + OpenStreetMap (※ 수업 외 라이브러리, 키 발급 불필요) -->
@@ -93,30 +94,22 @@
     <!-- 02. 메인 콘텐츠 -->
     <main class="ss-page map-page">
 
-        <!-- 페이지 소개 -->
+        <!-- 페이지 소개 (공연 페이지 상단 히어로와 같은 구조 · 공통 클래스 함께 사용) -->
         <section class="map-intro" aria-labelledby="page-title">
 
-            <p class="map-eyebrow">
-                SCENE:SEOUL / CULTURE ARCHIVE
-            </p>
+            <nav class="map-eyebrow ss-hero-crumb ss-entrance" aria-label="현재 위치">
+                <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a><span aria-hidden="true">/</span><span
+                    aria-current="page">MAP</span>
+            </nav>
 
-            <h1 id="page-title">
-                Seoul Map
-                <span class="title-accent">.</span>
-            </h1>
+            <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="page-title">Seoul Map<span
+                    class="title-accent">.</span></h1>
 
             <div class="intro-bottom">
-
-                <p>
-                    서울의 어느 동네에서 새로운 장면을 발견하고 싶나요?<br>
-                    지도를 클릭해 그 지역의 전시, 팝업, 공연과 이벤트를 만나보세요.
-                </p>
-
-                <p class="edition">
+                <p class="edition ss-entrance ss-entrance--delay-3" aria-hidden="true">
                     SEOUL, KOREA<br>
                     MAP GUIDE · 2026
                 </p>
-
             </div>
         </section>
 
@@ -126,10 +119,18 @@
 
             <div class="map-topline">
                 <div>
-                    <p class="map-section-label">EXPLORE BY DISTRICT</p>
                     <h2 id="map-heading">서울의 문화 지도</h2>
                 </div>
-                <p class="map-hint">지도의 마커나 구 이름을 눌러보세요</p>
+                <div class="map-topline-side">
+                    <!-- 마커 색 안내 (색은 map.js 의 TYPE_COLOR 와 같게) -->
+                    <ul class="map-legend" aria-label="지도 마커 색 안내">
+                        <li><span class="map-legend-dot is-exhibition" aria-hidden="true"></span>전시</li>
+                        <li><span class="map-legend-dot is-performance" aria-hidden="true"></span>공연</li>
+                        <li><span class="map-legend-dot is-popup" aria-hidden="true"></span>팝업</li>
+                        <li><span class="map-legend-dot is-event" aria-hidden="true"></span>이벤트</li>
+                    </ul>
+                    <p class="map-hint">지도의 마커나 구 이름을 눌러보세요</p>
+                </div>
             </div>
 
             <!-- 지도 -->
@@ -195,21 +196,16 @@
 
     <!-- 04. 공통 푸터 -->
     <footer class="ss-site-footer">
-
-        <strong>
-            SCENE<span>:</span>SEOUL
-        </strong>
-
-        <p>
-            서울의 문화를 소개하는 웹사이트 콘셉트 ·
-            지도 페이지의 행사 정보는 서울 열린데이터광장 자료입니다.
-        </p>
-
-        <small>
-            © 2026 SCENE.SEOUL
-        </small>
-
+        <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
+        <p>서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p>
+        <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
     </footer>
+
+    <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동"><svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m12 19 0-14m-6 6 6-6 6 6" />
+        </svg>
+    </a>
 
 
     <!-- 페이지 상단으로 이동 -->
@@ -219,7 +215,10 @@
         aria-label="맨 위로 이동"
     >↑</a>
 
+    <!-- 순서: Leaflet → 공통 JS → 로그인 JS → 지도 JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="04_서울을 4로잡다_map.js"></script>
+    <script src="../js/04_서울을 4로잡다_common.js" defer></script>
+    <script src="../login/04_서울을 4로잡다_login.js" defer></script>
+    <script src="04_서울을 4로잡다_map.js" defer></script>
 </body>
 </html>
