@@ -3,6 +3,7 @@
    전시, 공연, 팝업, 이벤트 페이지에서 함께 사용한다.
    페이지별로 다른 내용은 각 페이지 CSS에서 관리한다. */
 
+
 /* 1. 페이지 상단 */
 
 .ss-hero-crumb {
@@ -129,6 +130,7 @@
 .ss-editorial-page-spacing {
     padding-top: 65px;
 }
+
 
 /* 2. 추천 배너 */
 
@@ -272,6 +274,7 @@
 .ss-entrance--delay-3 {
     animation-delay: 0.3s;
 }
+
 
 /* 3. 목록 제목과 검색 */
 
@@ -453,6 +456,7 @@
     opacity: 0;
 }
 
+
 /* 4. 카드 */
 
 .ss-card-grid,
@@ -625,6 +629,7 @@
     display: none;
 }
 
+
 /* 5. 카드 전체 링크 및 찜하기 */
 
 .pop-card-link,
@@ -704,6 +709,7 @@
     outline: 2px solid var(--ss-blue);
     outline-offset: 3px;
 }
+
 
 /* 6. 페이지네이션 */
 
@@ -793,98 +799,4 @@
     color: var(--ss-muted);
     font-size: 14px;
     text-align: center;
-}
-
-/* 7. 화면 너비에 따른 카드 배치 */
-
-@media (max-width: 1100px) {
-    .ss-card-grid,
-    .ss-catalog-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .ss-hero-title {
-        font-size: 72px;
-    }
-
-    .ss-editorial-hero-title {
-        font-size: 80px;
-    }
-
-    .ss-editorial-hero-title--balanced {
-        font-size: 76px;
-    }
-}
-
-@media (max-width: 670px) {
-    .ss-card-grid,
-    .ss-catalog-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-
-    .ss-catalog {
-        padding: 0 20px 75px;
-    }
-
-    .ss-catalog-head {
-        display: block;
-    }
-
-    .ss-catalog-desc {
-        margin-top: 12px;
-    }
-
-    .ss-category-heading {
-        margin-bottom: 25px;
-    }
-
-    .ss-category-title,
-    .ss-catalog-title {
-        font-size: 38px;
-    }
-
-    .ss-hero-title {
-        font-size: 52px;
-        letter-spacing: -2px;
-    }
-
-    .ss-editorial-hero-title,
-    .ss-editorial-hero-title--balanced {
-        font-size: 56px;
-        letter-spacing: -3px;
-    }
-
-    .ss-editorial-hero-description {
-        font-size: 13px;
-    }
-
-    .ss-editorial-page-spacing {
-        padding-top: 40px;
-    }
-
-    .ss-feature-banner,
-    .ss-feature-banner--editorial {
-        grid-template-columns: 1fr;
-    }
-
-    .ss-feature-banner-art,
-    .ss-feature-banner--editorial .ss-feature-banner-art {
-        min-height: 210px;
-        border-right: 0;
-        border-bottom: 2px solid var(--ss-ink);
-    }
-
-    .ss-feature-banner-title {
-        font-size: 36px;
-    }
-
-    .ss-toolbar {
-        gap: 16px;
-    }
-
-    .ss-search,
-    .ss-search input {
-        width: 100%;
-    }
 }
