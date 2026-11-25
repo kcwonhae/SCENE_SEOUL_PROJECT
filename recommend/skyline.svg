@@ -2,7 +2,7 @@
   <defs>
     <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#F6F4EF" stop-opacity="0"/>
-      <stop offset="1" stop-color="#F6F4EF" stop-opacity="1"/>
+      <stop offset="1" stop-color="#F6F4EF" stop-opacity="0"/>
     </linearGradient>
   </defs>
   <!-- 해(달) -->

@@ -22,10 +22,11 @@ window.SceneSeoul = Object.assign(window.SceneSeoul || {}, {
 
   // 4개 JSON 파일 위치 (모든 페이지 폴더가 같은 위치에 있어서 ../ 로 시작하기)
   DATA_FILES: [
-    '../exhibition/04_서울을 4로잡다_exhibition.json',
-    '../performance/04_서울을 4로잡다_performance.json',
-    '../popup/04_서울을 4로잡다_popup.json',
-    '../data/04_서울을 4로잡다_event.json'
+    '../data/04_서울을 4로잡다_exhibition.json',
+    '../data/04_서울을 4로잡다_performance.json',
+    '../data/04_서울을 4로잡다_popup.json',
+    '../data/04_서울을 4로잡다_event.json',
+    '../data/04_서울을 4로잡다_recommend.json'
   ],
 
   // category 값 → 화면에 보여줄 이름
@@ -119,6 +120,7 @@ Object.assign(window.SceneSeoul, {
     const saved = SceneSeoul.getSaved().filter(savedId => savedId !== id);
     localStorage.setItem(SceneSeoul.getSavedKey(), JSON.stringify(saved));
     SceneSeoul.updateHearts();
+    window.dispatchEvent(new Event('scene:saved'));
   },
 
   // 화면에 있는 하트(data-save-id 가 붙은 체크박스)를 찜 상태에 맞게 체크/해제

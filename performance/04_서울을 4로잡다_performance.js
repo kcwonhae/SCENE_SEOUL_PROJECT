@@ -101,42 +101,45 @@ function showPage() {
 
 /* ---------- 5. 페이지 번호 그리기 ---------- */
 function showPager(totalPages) {
+  pager.innerHTML = '';
   if (totalPages <= 1) {
-    pager.innerHTML = '';
     return;
   }
 
-  let html = '';
+  pager.appendChild(makeArrow('‹', currentPage - 1, currentPage === 1));
 
-  if (currentPage > 1) {
-    html += `<label class="ss-page-arrow" for="pg${currentPage - 1}" aria-label="이전 페이지">‹</label>`;
-  } else {
-    html += '<span class="ss-page-arrow is-disabled" aria-hidden="true">‹</span>';
-  }
-
-  html += '<div class="ss-page-numbers">';
   for (let p = 1; p <= totalPages; p++) {
-    const checked = p === currentPage ? ' checked' : '';
-    html += `<input class="ss-page-radio pg-radio" type="radio" name="pg" id="pg${p}" value="${p}"${checked}><label for="pg${p}">${p}</label>`;
-  }
-  html += '</div>';
-
-  if (currentPage < totalPages) {
-    html += `<label class="ss-page-arrow" for="pg${currentPage + 1}" aria-label="다음 페이지">›</label>`;
-  } else {
-    html += '<span class="ss-page-arrow is-disabled" aria-hidden="true">›</span>';
-  }
-
-  pager.innerHTML = html;
-
-  // 번호가 바뀌면(라디오 버튼 change) 그 페이지를 보여준다
-  const radios = pager.querySelectorAll('.pg-radio');
-  for (let i = 0; i < radios.length; i++) {
-    radios[i].addEventListener('change', (event) => {
-      currentPage = Number(event.target.value);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'popup-page-button';
+    button.textContent = p;
+    button.setAttribute('aria-label', p + '페이지');
+    if (p === currentPage) {
+      button.setAttribute('aria-current', 'page');
+    }
+    button.addEventListener('click', () => {
+      currentPage = p;
       showPage();
     });
+    pager.appendChild(button);
   }
+
+  pager.appendChild(makeArrow('›', currentPage + 1, currentPage === totalPages));
+}
+
+// 이전/다음 화살표 버튼 만들기
+function makeArrow(label, targetPage, disabled) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'popup-page-arrow';
+  button.textContent = label;
+  button.disabled = disabled;
+  button.setAttribute('aria-label', label === '‹' ? '이전 페이지' : '다음 페이지');
+  button.addEventListener('click', () => {
+    currentPage = targetPage;
+    showPage();
+  });
+  return button;
 }
 
 

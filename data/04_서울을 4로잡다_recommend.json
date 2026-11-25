@@ -4,13 +4,13 @@
       "id": "recommend-001",
       "category": "exhibition",
       "genre": "ex",
-      "title": "고요한 빛의 방",
-      "startDate": "2026-10-01",
-      "endDate": "2026-12-20",
-      "location": "성수 아트룸",
-      "image": "../images/recommend.01.jpg",
-      "description": "조용한 분위기를 좋아하신다고 해서, 오래 머물기 좋은 전시를 골랐어요.",
-      "sourceUrl": "",
+      "title": "[서울시립 서서울미술관] 뉴미디어 국제전 《셰자드 다우드: 미래의 기억》",
+      "startDate": "2026-12-03",
+      "endDate": "2027-02-28",
+      "location": "서울시립 서서울미술관 B1",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=585feabbd8d54db28e0c7aa25dbe35ef&thumb=Y",
+      "description": "미디어아트로 빛과 이미지를 천천히 감상할 수 있고 무료라서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=160262&menuNo=200009",
       "price": 0,
       "place": "in",
       "who": [
@@ -20,6 +20,7 @@
       "weather": [
         "sunny",
         "cloudy",
+        "rain",
         "cold"
       ],
       "time": [
@@ -30,20 +31,20 @@
         "calm",
         "emo"
       ],
-      "reason": "조용한 분위기를 좋아하신다고 해서, 오래 머물기 좋은 전시를 골랐어요."
+      "reason": "미디어아트로 빛과 이미지를 천천히 감상할 수 있고 무료라서 골랐어요."
     },
     {
       "id": "recommend-002",
       "category": "performance",
       "genre": "live",
-      "title": "피아노 솔로 나이트",
-      "startDate": "2026-10-24",
-      "endDate": "2026-10-24",
-      "location": "한강아트센터 콘서트홀",
-      "image": "../images/recommend.02.jpeg",
-      "description": "좌석 간격이 넉넉해서 오래 앉아 있어도 편해요.",
-      "sourceUrl": "",
-      "price": 25000,
+      "title": "양수연 가야금 독주회 [기록: 가즌회상]",
+      "startDate": "2026-11-29",
+      "endDate": "2026-11-29",
+      "location": "한국문화의집 KOUS",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=8c709d61a1074261b68c884b81f16239&thumb=Y",
+      "description": "혼자 조용히 집중해서 듣기 좋은 독주회라서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=160087&menuNo=200008",
+      "price": 10000,
       "place": "in",
       "who": [
         "solo",
@@ -63,174 +64,181 @@
         "calm",
         "emo"
       ],
-      "reason": "좌석 간격이 넉넉해서 오래 앉아 있어도 편해요."
+      "reason": "혼자 조용히 집중해서 듣기 좋은 독주회라서 골랐어요."
     },
     {
       "id": "recommend-003",
-      "category": "space",
+      "category": "event",
       "genre": "space",
-      "title": "책방 골목 산책",
-      "startDate": "2026-10-01",
-      "endDate": "",
-      "location": "연남",
-      "image": "../images/recommend.03.jpg",
-      "description": "천천히 둘러보기 좋은 동네 서점 코스예요.",
-      "sourceUrl": "",
+      "title": "2026 광화문마켓",
+      "startDate": "2026-12-11",
+      "endDate": "2027-01-10",
+      "location": "광화문광장 및 세종로공원 일대",
+      "image": "https://festival.seoul.go.kr/cmmn/file/getImage.do?atchFileId=901c56fa0d88487cb337cec465229cbc&thumb=Y",
+      "description": "광장에서 크리스마스 트리와 마켓을 저녁에 둘러보기 좋아서 골랐어요.",
+      "sourceUrl": "https://festival.seoul.go.kr/festival/main/festivalView.do?festacode=984",
       "price": 0,
-      "place": "both",
-      "who": [
-        "solo",
-        "couple"
-      ],
-      "weather": [
-        "sunny",
-        "cloudy"
-      ],
-      "time": [
-        "day"
-      ],
-      "mood": [
-        "calm",
-        "unique"
-      ],
-      "reason": "천천히 둘러보기 좋은 동네 서점 코스예요."
-    },
-    {
-      "id": "recommend-004",
-      "category": "performance",
-      "genre": "live",
-      "title": "별을 따라가는 밤",
-      "startDate": "2026-10-24",
-      "endDate": "2026-11-30",
-      "location": "서울극장 대극장",
-      "image": "../images/recommend.03.jpg",
-      "description": "관람 후에도 이야기가 이어지는 창작 뮤지컬이라 둘이 함께 보기 좋아요.",
-      "sourceUrl": "",
-      "price": 55000,
-      "place": "in",
-      "who": [
-        "couple"
-      ],
-      "weather": [
-        "sunny",
-        "cloudy",
-        "rain",
-        "cold"
-      ],
-      "time": [
-        "eve",
-        "night"
-      ],
-      "mood": [
-        "emo",
-        "lively"
-      ],
-      "reason": "관람 후에도 이야기가 이어지는 창작 뮤지컬이라 둘이 함께 보기 좋아요."
-    },
-    {
-      "id": "recommend-005",
-      "category": "exhibition",
-      "genre": "ex",
-      "title": "물의 정원 야간 미디어아트",
-      "startDate": "2026-10-01",
-      "endDate": "2026-11-15",
-      "location": "뚝섬 한강공원",
-      "image": "../images/recommend.01.jpg",
-      "description": "저녁에 함께 걸으며 보기 좋은 야외 전시예요.",
-      "sourceUrl": "",
-      "price": 15000,
       "place": "out",
       "who": [
-        "couple",
-        "friends"
-      ],
-      "weather": [
-        "sunny",
-        "cloudy"
-      ],
-      "time": [
-        "eve",
-        "night"
-      ],
-      "mood": [
-        "emo",
-        "unique"
-      ],
-      "reason": "저녁에 함께 걸으며 보기 좋은 야외 전시예요."
-    },
-    {
-      "id": "recommend-006",
-      "category": "popup",
-      "genre": "pop",
-      "title": "젤리 마켓",
-      "startDate": "2026-10-12",
-      "endDate": "2026-10-25",
-      "location": "여의도",
-      "image": "../images/recommend.02.jpeg",
-      "description": "함께 소품을 골라 보는 가벼운 팝업이에요.",
-      "sourceUrl": "",
-      "price": 0,
-      "place": "in",
-      "who": [
+        "solo",
         "couple",
         "friends"
       ],
       "weather": [
         "sunny",
         "cloudy",
-        "rain",
         "cold"
       ],
       "time": [
-        "day",
-        "eve"
+        "eve",
+        "night"
       ],
       "mood": [
         "lively",
         "unique"
       ],
-      "reason": "함께 소품을 골라 보는 가벼운 팝업이에요."
+      "reason": "광장에서 크리스마스 트리와 마켓을 저녁에 둘러보기 좋아서 골랐어요."
     },
     {
-      "id": "recommend-007",
+      "id": "recommend-004",
       "category": "performance",
       "genre": "live",
-      "title": "서울 인디 페스티벌 2026",
-      "startDate": "2026-11-01",
-      "endDate": "2026-11-02",
-      "location": "뚝섬 한강공원",
-      "image": "../images/recommend.01.jpg",
-      "description": "여러 팀을 하루에 볼 수 있는 야외 공연이라 친구들과 함께하기 좋아요.",
-      "sourceUrl": "",
-      "price": 45000,
-      "place": "out",
+      "title": "오페레타 [유쾌한 미망인]",
+      "startDate": "2026-11-27",
+      "endDate": "2026-11-28",
+      "location": "소월아트홀",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=4ff5f946ba434aa9afaef185b6f880a1&thumb=Y",
+      "description": "가볍게 즐기는 오페레타 무대라 둘이 함께 보기 좋아요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=159872&menuNo=200008",
+      "price": 30000,
+      "place": "in",
       "who": [
+        "couple"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "eve",
+        "night"
+      ],
+      "mood": [
+        "emo",
+        "lively"
+      ],
+      "reason": "가볍게 즐기는 오페레타 무대라 둘이 함께 보기 좋아요."
+    },
+    {
+      "id": "recommend-005",
+      "category": "exhibition",
+      "genre": "ex",
+      "title": "[서울시립 사진미술관] 확산의 물결",
+      "startDate": "2026-11-25",
+      "endDate": "2027-03-21",
+      "location": "서울시립 사진미술관 2층",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=d542a6a313664bb6bb2504ed4bbf103f&thumb=Y",
+      "description": "사진으로 만나는 전시라 이야기 나누며 보기 좋고 무료라서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=160260&menuNo=200009",
+      "price": 0,
+      "place": "in",
+      "who": [
+        "couple",
         "friends"
       ],
       "weather": [
         "sunny",
-        "cloudy"
+        "cloudy",
+        "rain",
+        "cold"
       ],
       "time": [
         "day",
         "eve"
       ],
       "mood": [
-        "lively"
+        "emo",
+        "unique"
       ],
-      "reason": "여러 팀을 하루에 볼 수 있는 야외 공연이라 친구들과 함께하기 좋아요."
+      "reason": "사진으로 만나는 전시라 이야기 나누며 보기 좋고 무료라서 골랐어요."
+    },
+    {
+      "id": "recommend-006",
+      "category": "popup",
+      "genre": "pop",
+      "title": "토마쓰리 뒹굴뒹굴 겨울일기",
+      "startDate": "2026-11-17",
+      "endDate": "2026-12-30",
+      "location": "서울 마포구 와우산로37길 30, 오브젝트 서교점",
+      "image": "../images/04_popup.01.jpg",
+      "description": "일러스트 원화를 보며 겨울 분위기를 느끼기 좋아서 골랐어요.",
+      "sourceUrl": "https://www.thewklyn.com/schedule/?bmode=view&idx=175660810&q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&t=board",
+      "price": 0,
+      "place": "in",
+      "who": [
+        "couple",
+        "friends"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "day",
+        "eve"
+      ],
+      "mood": [
+        "unique",
+        "calm"
+      ],
+      "reason": "일러스트 원화를 보며 겨울 분위기를 느끼기 좋아서 골랐어요."
+    },
+    {
+      "id": "recommend-007",
+      "category": "performance",
+      "genre": "live",
+      "title": "[성북문화재단] 꿈빛극장 기획공연 윈터콘서트 [소란: 눈이 부신 우리]",
+      "startDate": "2026-12-12",
+      "endDate": "2026-12-12",
+      "location": "꿈빛극장",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=09fc850cf00b49369308633cc92c6225&thumb=Y",
+      "description": "친구와 겨울 분위기를 느끼며 즐기기 좋은 콘서트라서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=160119&menuNo=200008",
+      "price": 50000,
+      "place": "in",
+      "who": [
+        "friends"
+      ],
+      "weather": [
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
+      ],
+      "time": [
+        "eve"
+      ],
+      "mood": [
+        "lively",
+        "emo"
+      ],
+      "reason": "친구와 겨울 분위기를 느끼며 즐기기 좋은 콘서트라서 골랐어요."
     },
     {
       "id": "recommend-008",
       "category": "popup",
       "genre": "pop",
-      "title": "스티커 하우스",
-      "startDate": "2026-10-15",
-      "endDate": "2026-11-10",
-      "location": "홍대",
-      "image": "../images/recommend.02.jpeg",
-      "description": "직접 꾸미는 체험이 있어 함께 하면 더 재밌어요.",
-      "sourceUrl": "",
+      "title": "퍼펫순순 POP-UP STORE IN HONGDAE",
+      "startDate": "2026-11-27",
+      "endDate": "2026-12-10",
+      "location": "서울 마포구 양화로 188, AK플라자 홍대 1층",
+      "image": "../images/04_popup.01.jpg",
+      "description": "친구와 굿즈와 포토존을 구경하기 좋아서 골랐어요.",
+      "sourceUrl": "https://www.thewklyn.com/schedule/?bmode=view&idx=175789723&q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&t=board",
       "price": 0,
       "place": "in",
       "who": [
@@ -251,20 +259,20 @@
         "lively",
         "unique"
       ],
-      "reason": "직접 꾸미는 체험이 있어 함께 하면 더 재밌어요."
+      "reason": "친구와 굿즈와 포토존을 구경하기 좋아서 골랐어요."
     },
     {
       "id": "recommend-009",
       "category": "exhibition",
       "genre": "ex",
-      "title": "도시의 소리",
-      "startDate": "2026-10-05",
-      "endDate": "2026-12-31",
-      "location": "광화문",
-      "image": "../images/recommend.03.jpg",
-      "description": "사진 찍고 이야기 나누기 좋은 체험형 전시예요.",
-      "sourceUrl": "",
-      "price": 12000,
+      "title": "한불수교 140주년 [기념에서 풍경으로 From Monument to Landscape]",
+      "startDate": "2026-10-17",
+      "endDate": "2027-02-14",
+      "location": "소마미술관",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=5c44547e21374678b30b5a5886f40c57&thumb=Y",
+      "description": "미술관에서 5천 원 이하로 풍경 전시를 함께 볼 수 있어서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=159976&menuNo=200009",
+      "price": 5000,
       "place": "in",
       "who": [
         "friends",
@@ -283,20 +291,20 @@
         "unique",
         "lively"
       ],
-      "reason": "사진 찍고 이야기 나누기 좋은 체험형 전시예요."
+      "reason": "미술관에서 5천 원 이하로 풍경 전시를 함께 볼 수 있어서 골랐어요."
     },
     {
       "id": "recommend-010",
       "category": "performance",
       "genre": "live",
-      "title": "소년합창단 특별 초청 공연",
-      "startDate": "2026-12-20",
-      "endDate": "2026-12-20",
-      "location": "한강아트센터 콘서트홀",
-      "image": "../images/recommend.01.jpg",
-      "description": "전 연령이 함께 볼 수 있는 구성이라 가족 나들이로 좋아요.",
-      "sourceUrl": "",
-      "price": 30000,
+      "title": "[2026공연봄날 공식선정작] 화이트 라이 크리스마스",
+      "startDate": "2026-12-10",
+      "endDate": "2026-12-12",
+      "location": "소월아트홀",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=49cc1453e49b4428927c847e89865a34&thumb=Y",
+      "description": "가족과 크리스마스 분위기를 즐기기 좋고 무료라서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=160239&menuNo=200008",
+      "price": 0,
       "place": "in",
       "who": [
         "family"
@@ -315,19 +323,19 @@
         "calm",
         "emo"
       ],
-      "reason": "전 연령이 함께 볼 수 있는 구성이라 가족 나들이로 좋아요."
+      "reason": "가족과 크리스마스 분위기를 즐기기 좋고 무료라서 골랐어요."
     },
     {
       "id": "recommend-011",
       "category": "exhibition",
       "genre": "ex",
-      "title": "종이 숲",
-      "startDate": "2026-10-01",
-      "endDate": "2026-12-10",
-      "location": "종로",
-      "image": "../images/recommend.02.jpeg",
-      "description": "만지고 체험할 수 있어 함께하기 좋아요.",
-      "sourceUrl": "",
+      "title": "[소마미술관] 국립현대미술관미술은행 소장품기획전 《군락: 여섯 개의 뜰》",
+      "startDate": "2026-10-09",
+      "endDate": "2027-05-30",
+      "location": "소마미술관 2관 기획전시실",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=5b75eb5a5d864fbeb0319b68bf2c9c20&thumb=Y",
+      "description": "소장품 기획전이라 차분하게 둘러보기 좋아서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=159729&menuNo=200009",
       "price": 8000,
       "place": "in",
       "who": [
@@ -347,19 +355,19 @@
         "unique",
         "calm"
       ],
-      "reason": "만지고 체험할 수 있어 함께하기 좋아요."
+      "reason": "소장품 기획전이라 차분하게 둘러보기 좋아서 골랐어요."
     },
     {
       "id": "recommend-012",
-      "category": "space",
+      "category": "event",
       "genre": "space",
-      "title": "옥상 정원",
-      "startDate": "2026-10-01",
-      "endDate": "",
-      "location": "을지로",
-      "image": "../images/recommend.03.jpg",
-      "description": "걷다가 쉬어 가기 좋은 열린 공간이에요.",
-      "sourceUrl": "",
+      "title": "커튼 콜 가든 겨울시즌",
+      "startDate": "2026-11-17",
+      "endDate": "2027-01-03",
+      "location": "세종문화회관 예술의 정원",
+      "image": "https://festival.seoul.go.kr/cmmn/file/getImage.do?atchFileId=62743257cf3d48e1bb151ba55de78ae4&thumb=Y",
+      "description": "정원에서 겨울 마켓과 크리스마스 분위기를 가볍게 즐길 수 있어서 골랐어요.",
+      "sourceUrl": "https://festival.seoul.go.kr/festival/main/festivalView.do?festacode=987",
       "price": 0,
       "place": "out",
       "who": [
@@ -376,22 +384,23 @@
         "eve"
       ],
       "mood": [
-        "calm"
+        "calm",
+        "lively"
       ],
-      "reason": "걷다가 쉬어 가기 좋은 열린 공간이에요."
+      "reason": "정원에서 겨울 마켓과 크리스마스 분위기를 가볍게 즐길 수 있어서 골랐어요."
     },
     {
       "id": "recommend-013",
       "category": "exhibition",
       "genre": "ex",
-      "title": "비 오는 날의 미술관",
-      "startDate": "2026-11-01",
-      "endDate": "2026-12-28",
-      "location": "종로 아트뮤지엄",
-      "image": "../images/recommend.01.jpg",
-      "description": "비 오는 날 실내에서 천천히 걷기 좋은 전시예요.",
-      "sourceUrl": "",
-      "price": 5000,
+      "title": "[서울시립미술관 서소문본관] 린 허쉬만 리슨: 나의 [나]들",
+      "startDate": "2026-10-21",
+      "endDate": "2027-02-21",
+      "location": "서울시립미술관 서소문본관",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=8be072d96c9a429c80bc789679727b47&thumb=Y",
+      "description": "비 오는 날 실내에서 조용히 둘러보기 좋고 무료라서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=159756&menuNo=200009",
+      "price": 0,
       "place": "in",
       "who": [
         "solo",
@@ -410,49 +419,53 @@
         "calm",
         "emo"
       ],
-      "reason": "비 오는 날 실내에서 천천히 걷기 좋은 전시예요."
+      "reason": "비 오는 날 실내에서 조용히 둘러보기 좋고 무료라서 골랐어요."
     },
     {
       "id": "recommend-014",
       "category": "popup",
       "genre": "pop",
-      "title": "한강 야시장 팝업",
-      "startDate": "2026-10-20",
-      "endDate": "2026-11-20",
-      "location": "반포 한강공원",
-      "image": "../images/recommend.02.jpeg",
-      "description": "먹거리와 소품을 구경하며 걷기 좋은 야외 팝업이에요.",
-      "sourceUrl": "",
+      "title": "더현대 서울 크리스마스 빌리지",
+      "startDate": "2026-11-10",
+      "endDate": "2026-12-31",
+      "location": "서울 영등포구 여의대로 108, 더현대 서울 5층 사운즈포레스트",
+      "image": "../images/04_popup.01.jpg",
+      "description": "크리스마스 빌리지에서 사진 찍으며 데이트하기 좋아서 골랐어요.",
+      "sourceUrl": "https://popga.co.kr/popup/15537",
       "price": 0,
-      "place": "out",
+      "place": "in",
       "who": [
-        "friends",
-        "couple"
+        "couple",
+        "friends"
       ],
       "weather": [
-        "sunny"
+        "sunny",
+        "cloudy",
+        "rain",
+        "cold"
       ],
       "time": [
-        "eve",
-        "night"
+        "day",
+        "eve"
       ],
       "mood": [
-        "lively"
+        "lively",
+        "emo"
       ],
-      "reason": "먹거리와 소품을 구경하며 걷기 좋은 야외 팝업이에요."
+      "reason": "크리스마스 빌리지에서 사진 찍으며 데이트하기 좋아서 골랐어요."
     },
     {
       "id": "recommend-015",
       "category": "performance",
       "genre": "live",
-      "title": "재즈 라이브 나이트",
-      "startDate": "2026-11-08",
-      "endDate": "2026-12-20",
-      "location": "이태원 재즈 클럽",
-      "image": "../images/recommend.03.jpg",
-      "description": "쌀쌀한 밤 따뜻한 실내에서 라이브를 들을 수 있어요.",
-      "sourceUrl": "",
-      "price": 35000,
+      "title": "2026 카즈미 타테이시 트리오 내한공연-지브리, 재즈를 만나다-(서울)",
+      "startDate": "2026-12-22",
+      "endDate": "2026-12-22",
+      "location": "영등포아트홀",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=ae89ba10b5c64459b3e2fe3942048f84&thumb=Y",
+      "description": "저녁에 재즈 라이브로 차분한 분위기를 즐기기 좋아서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=158691&menuNo=200008",
+      "price": 66000,
       "place": "in",
       "who": [
         "couple",
@@ -465,26 +478,27 @@
         "cloudy"
       ],
       "time": [
+        "eve",
         "night"
       ],
       "mood": [
         "emo",
         "calm"
       ],
-      "reason": "쌀쌀한 밤 따뜻한 실내에서 라이브를 들을 수 있어요."
+      "reason": "저녁에 재즈 라이브로 차분한 분위기를 즐기기 좋아서 골랐어요."
     },
     {
       "id": "recommend-016",
-      "category": "space",
+      "category": "event",
       "genre": "space",
-      "title": "도자기 원데이 공방",
-      "startDate": "2026-10-01",
-      "endDate": "",
-      "location": "서촌",
-      "image": "../images/recommend.01.jpg",
-      "description": "직접 만들어 보며 하루를 보내기 좋은 체험 공간이에요.",
-      "sourceUrl": "",
-      "price": 40000,
+      "title": "용산 크리스마스 아틀리에",
+      "startDate": "2026-12-11",
+      "endDate": "2026-12-20",
+      "location": "용산문화재단 복합문화공간",
+      "image": "https://festival.seoul.go.kr/cmmn/file/editorImage/3ef9584b-0707-40d3-b154-4eb66f6cb9c1/jpg.do",
+      "description": "아트마켓과 체험 프로그램을 실내에서 천천히 즐길 수 있어서 골랐어요.",
+      "sourceUrl": "https://festival.seoul.go.kr/festival/main/festivalView.do?festacode=989",
+      "price": 0,
       "place": "in",
       "who": [
         "couple",
@@ -504,19 +518,19 @@
         "calm",
         "unique"
       ],
-      "reason": "직접 만들어 보며 하루를 보내기 좋은 체험 공간이에요."
+      "reason": "아트마켓과 체험 프로그램을 실내에서 천천히 즐길 수 있어서 골랐어요."
     },
     {
       "id": "recommend-017",
       "category": "popup",
       "genre": "pop",
-      "title": "레트로 게임 팝업",
-      "startDate": "2026-11-05",
-      "endDate": "2026-12-15",
-      "location": "건대입구",
-      "image": "../images/recommend.02.jpeg",
-      "description": "오락실 게임을 함께 즐길 수 있어 친구, 가족 모두 좋아해요.",
-      "sourceUrl": "",
+      "title": "산리오캐릭터즈 물음표 상점",
+      "startDate": "2026-11-25",
+      "endDate": "2026-12-27",
+      "location": "서울 용산구 한강대로23길 55, 아이파크몰 용산점 리빙파크 6층",
+      "image": "../images/04_popup.01.jpg",
+      "description": "캐릭터 굿즈와 크리스마스 포토존을 함께 즐기기 좋아서 골랐어요.",
+      "sourceUrl": "https://www.thewklyn.com/schedule/?bmode=view&idx=175789754&q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&t=board",
       "price": 0,
       "place": "in",
       "who": [
@@ -537,19 +551,19 @@
         "lively",
         "unique"
       ],
-      "reason": "오락실 게임을 함께 즐길 수 있어 친구, 가족 모두 좋아해요."
+      "reason": "캐릭터 굿즈와 크리스마스 포토존을 함께 즐기기 좋아서 골랐어요."
     },
     {
       "id": "recommend-018",
       "category": "exhibition",
       "genre": "ex",
-      "title": "남산 숲길 야외 갤러리",
-      "startDate": "2026-10-01",
-      "endDate": "2026-12-31",
-      "location": "남산",
-      "image": "../images/recommend.03.jpg",
-      "description": "산책하며 작품을 만나는 무료 야외 전시예요.",
-      "sourceUrl": "",
+      "title": "[서울시] 서울시 공공미술 작품전시 《평화의 잔상》",
+      "startDate": "2026-10-24",
+      "endDate": "2026-12-13",
+      "location": "서울창포원 일대",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=4288a41a51cd4153b5d35893ab719984&thumb=Y",
+      "description": "서울창포원을 걸으며 야외 작품을 볼 수 있고 무료라서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=159911&menuNo=200009",
       "price": 0,
       "place": "out",
       "who": [
@@ -568,29 +582,29 @@
         "calm",
         "emo"
       ],
-      "reason": "산책하며 작품을 만나는 무료 야외 전시예요."
+      "reason": "서울창포원을 걸으며 야외 작품을 볼 수 있고 무료라서 골랐어요."
     },
     {
       "id": "recommend-019",
-      "category": "space",
+      "category": "event",
       "genre": "space",
-      "title": "심야 서점 낭독회",
-      "startDate": "2026-11-10",
-      "endDate": "2026-12-30",
-      "location": "연남",
-      "image": "../images/recommend.01.jpg",
-      "description": "늦은 밤 조용히 책 이야기를 듣는 시간이에요.",
-      "sourceUrl": "",
-      "price": 10000,
-      "place": "in",
+      "title": "2026 서울라이트 광화문 [윤슬 : 시간의 수면]",
+      "startDate": "2026-12-11",
+      "endDate": "2027-01-10",
+      "location": "광화문광장",
+      "image": "https://festival.seoul.go.kr/cmmn/file/getImage.do?atchFileId=e58f817a3fa54a1e8f2373ec9f9bf51f&thumb=Y",
+      "description": "밤에 빛과 음악이 어우러지는 미디어아트를 보기 좋아서 골랐어요.",
+      "sourceUrl": "https://festival.seoul.go.kr/festival/main/festivalView.do?festacode=372",
+      "price": 0,
+      "place": "out",
       "who": [
         "solo",
         "couple"
       ],
       "weather": [
-        "rain",
-        "cold",
-        "cloudy"
+        "sunny",
+        "cloudy",
+        "cold"
       ],
       "time": [
         "night"
@@ -599,20 +613,20 @@
         "emo",
         "calm"
       ],
-      "reason": "늦은 밤 조용히 책 이야기를 듣는 시간이에요."
+      "reason": "밤에 빛과 음악이 어우러지는 미디어아트를 보기 좋아서 골랐어요."
     },
     {
       "id": "recommend-020",
       "category": "performance",
       "genre": "live",
-      "title": "어린이 인형극 페스티벌",
-      "startDate": "2026-11-15",
-      "endDate": "2026-12-24",
-      "location": "서울어린이극장",
-      "image": "../images/recommend.02.jpeg",
-      "description": "아이와 함께 보기 좋은 짧은 인형극이 이어져요.",
-      "sourceUrl": "",
-      "price": 20000,
+      "title": "[2026공연봄날 공식선정작] 수상한 외갓집",
+      "startDate": "2026-12-01",
+      "endDate": "2026-12-03",
+      "location": "예림당 아트홀",
+      "image": "https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=05ecad1d1f3e41f9a62322edc19e2fb2&thumb=Y",
+      "description": "가족과 함께 낮에 보기 좋은 연극이고 무료라서 골랐어요.",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureEvent/view.do?cultcode=160236&menuNo=200008",
+      "price": 0,
       "place": "in",
       "who": [
         "family"
@@ -629,7 +643,7 @@
       "mood": [
         "lively"
       ],
-      "reason": "아이와 함께 보기 좋은 짧은 인형극이 이어져요."
+      "reason": "가족과 함께 낮에 보기 좋은 연극이고 무료라서 골랐어요."
     }
   ]
 }
