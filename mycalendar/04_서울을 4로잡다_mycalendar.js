@@ -403,8 +403,10 @@ const CONTENT_SOURCES = [
     { category: '전시', path: '../data/04_서울을 4로잡다_exhibition.json' },
     { category: '공연', path: '../data/04_서울을 4로잡다_performance.json' },
     { category: '팝업', path: '../data/04_서울을 4로잡다_popup.json' },
-    { category: '이벤트', path: '../data/04_서울을 4로잡다_event.json' }
+    { category: '이벤트', path: '../data/04_서울을 4로잡다_event.json' },
+    { category: '', path: '../data/04_서울을 4로잡다_recommend.json' }
 ];
+
 
 function normalizeItem(item, category) {
     return {
