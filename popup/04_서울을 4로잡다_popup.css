@@ -1,112 +1,23 @@
 
-/* SCENE:SEOUL - 팝업 페이지 전용 스타일
-   카드, 필터, 페이지네이션은 category.css에서 관리한다.
-   상단 추천 콘텐츠는 공통 carousel.css를 사용한다. */
-
-/* 1. 페이지 상단 */
+/* 팝업 페이지 */
 
 .popup-performance-stage {
     background: var(--ss-paper);
 }
 
-
-/* 팝업 페이지 상단 */
-
-.perf-hero {
-    position: relative;
-    max-width: 1470px;
-    min-height: 220px;
-    margin: 0 auto;
-    padding: 82px 72px 42px;
-}
-
-/* 상단 파란색 경로 */
-
-.perf-hero .ss-hero-crumb {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--ss-blue);
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 0.12em;
-}
-
-.perf-hero .ss-hero-crumb [aria-current="page"] {
-    color: inherit;
-}
-
-/* Pop-up 제목 */
-
-.perf-hero .ss-hero-title {
-    margin: 20px 0 14px;
-    color: var(--ss-ink);
-    font-size: 105px;
-    font-weight: 900;
-    line-height: 0.94;
-    letter-spacing: -0.075em;
-}
-
-/* 제목 끝 파란색 점 */
-
-.perf-hero .perf-title-dot {
-    margin-left: 0.1em;
-    color: var(--ss-blue);
-}
-
-/* 오른쪽 카테고리 텍스트 */
-
-.perf-tags {
-    position: absolute;
-    z-index: 2;
-    right: 72px;
-    bottom: 78px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-align: right;
-    color: var(--ss-ink);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.16em;
-    line-height: 1.7;
-}
-
-
-/* 2. 공통 캐러셀과 카탈로그 간격 */
-
-.perf-feature {
-    max-width: 1470px;
-    margin: 0 auto;
-    padding: 10px 5% 65px;
-}
+/* 팝업 목록 */
 
 .popup-catalog.ss-catalog {
     padding-top: 76px;
     padding-bottom: 100px;
 }
 
-/* 3. 행사 정보 안내 */
-
-.popup-sample-note {
-    max-width: 1470px;
-    margin: 0 auto;
-    padding: 0 5% 20px;
-    color: var(--ss-muted);
-    font-size: 11px;
-    line-height: 1.7;
-}
-
-/* 팝업 목록 제목 아래 구분선 */
-
 .popup-divider {
     width: 100%;
     height: 1px;
     margin-top: 24px;
-    background-color: var(--ss-ink);
+    background: var(--ss-ink);
 }
-
-/* 구분선과 필터 사이 여백 줄이기 */
 
 .popup-catalog .ss-category-heading {
     margin-bottom: 10px;
