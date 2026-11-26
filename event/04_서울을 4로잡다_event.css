@@ -1,14 +1,12 @@
-
 /* 이벤트 페이지 */
-
 .stage {
     position: relative;
     overflow: hidden;
     background: var(--ss-paper);
 }
 
-/* 페이지 상단 */
-.event-hero {
+/* 상단 영역 */
+.ss-category-hero {
     position: relative;
     max-width: 1470px;
     min-height: 220px;
@@ -16,30 +14,29 @@
     padding: 82px 72px 42px;
 }
 
-.event-hero .ss-hero-crumb {
+.ss-category-hero .ss-hero-crumb {
     color: var(--ss-blue);
     font-weight: 900;
     letter-spacing: .12em;
 }
 
-.event-hero .ss-hero-crumb [aria-current="page"] {
+.ss-category-hero .ss-hero-crumb [aria-current="page"] {
     color: inherit;
 }
 
-.event-hero .ss-hero-title {
+.ss-category-hero .ss-hero-title {
     margin: 20px 0 14px;
     font-size: 105px;
     line-height: .94;
     letter-spacing: -.075em;
 }
 
-.event-title-dot {
+.ss-hero-title-dot {
     color: var(--ss-blue);
     margin-left: .1em;
 }
 
-/* 오른쪽 영문 목록 */
-.event-tags {
+.ss-hero-tags {
     position: absolute;
     right: 72px;
     bottom: 78px;
@@ -54,8 +51,8 @@
     line-height: 1.7;
 }
 
-/* 캐러셀 */
-.event-feature {
+/* 추천 캐러셀 */
+.ss-category-feature {
     padding: 8px 72px 64px;
 }
 
@@ -63,7 +60,6 @@
 .ss-catalog .ss-category-heading {
     margin-bottom: 0;
 }
-
 
 /* 본문 바로가기 */
 .skip {

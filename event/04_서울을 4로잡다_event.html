@@ -38,7 +38,7 @@
             <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
             <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
             <a href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
-            <a aria-current="page" href="../event/04_서울을 4로잡다_event.html">이벤트</a>
+            <a class="is-active" aria-current="page" href="../event/04_서울을 4로잡다_event.html">이벤트</a>
             <a href="../recommend/04_서울을 4로잡다_recommend.html">추천</a>
             <a href="../map/04_서울을 4로잡다_map.html">지도</a>
         </nav>
@@ -76,17 +76,25 @@
     <main class="ss-page" id="main">
         <div class="stage">
             <!-- 페이지 상단 -->
-            <section class="event-hero" aria-labelledby="event-title">
+            <section class="ss-category-hero" aria-labelledby="event-title">
                 <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
                     <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a>
                     <span aria-hidden="true">/</span>
                     <span aria-current="page">EVENT</span>
                 </nav>
-                <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="event-title">Event<span class="event-title-dot">.</span></h1>
+                <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="event-title">Event<span class="ss-hero-title-dot">.</span></h1>
+                <div class="event-hero-bottom">
+                    <ul class="ss-hero-tags ss-entrance ss-entrance--delay-2" aria-hidden="true">
+                        <li>FILM</li>
+                        <li>TALKS</li>
+                        <li>FESTIVAL</li>
+                        <li>FLEA MARKET</li>
+                    </ul>
+                </div>
             </section>
 
             <!-- 주목할 이벤트 -->
-            <section class="event-feature" id="hot" aria-label="주목할 이벤트">
+            <section class="ss-category-feature" id="hot" aria-label="주목할 이벤트">
                 <div class="ss-carousel" data-src="../data/04_서울을 4로잡다_event.json" aria-roledescription="캐러셀"></div>
             </section>
         </div>
