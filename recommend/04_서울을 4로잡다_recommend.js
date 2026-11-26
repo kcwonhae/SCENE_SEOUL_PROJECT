@@ -2,39 +2,49 @@
 // 팀 04 서울을 4로잡다 / 신윤정(2411997)
 // * 공통 JS(04_서울을 4로잡다_common.js)를 이 파일보다 먼저 불러와야 한다 (기간 글자에 사용)
 
-const COND_KEY = 'ss-rec-conditions-v2';  // 마지막으로 고른 조건 (칩을 여러 개 고를 수 있어서 v2)
-
 // 장르 코드 → 화면에 보여줄 이름
-const GENRE_NAME = { ex: '전시', live: '공연', pop: '팝업', space: '공간' };
+const GENRE_NAME = { ex: '전시', live: '공연', pop: '팝업', space: '이벤트' };
 
 // 장르 → 상세 보기로 이동할 페이지 (JSON의 sourceUrl이 비어 있을 때 사용)
 const GENRE_PAGE = {
   ex: '../exhibition/04_서울을 4로잡다_exhibition.html',
   live: '../performance/04_서울을 4로잡다_performance.html',
   pop: '../popup/04_서울을 4로잡다_popup.html',
-  space: '../map/04_서울을 4로잡다_map.html'
+  space: '../event/04_서울을 4로잡다_event.html'
 };
 
-// 결과 제목 / 안내 문장 (누구와 기준)
+// 결과 제목에 쓸 말 (누구와 기준)
 const WHO_TITLE = { solo: '혼자', couple: '연인과', friends: '친구와', family: '가족과' };
-const WHO_DESC = {
-  solo: '조용히 머물다 올 수 있는 곳 위주로 골랐어요.',
-  couple: '다녀와서 이야기 나누기 좋은 곳 위주로 골랐어요.',
-  friends: '여럿이 함께 즐길 수 있는 곳 위주로 골랐어요.',
-  family: '아이도 어른도 편하게 즐길 수 있는 곳 위주로 골랐어요.'
-};
 
 // 예산 코드 → 가격 상한 (0이면 무료만)
 const BUDGET_LIMIT = { free: 0, 30: 30000, 50: 50000 };
 
 let allItems = [];
+let shownIds = [];        // 지금 화면에 보이는 3건의 id (하트 누를 때 사용)
 
 const chips = document.querySelectorAll('.chip input');
 const sendBtn = document.getElementById('send-btn');
 const resultBox = document.getElementById('result-box');
 
-// 새로고침해도 칩이 그대로 있도록, 저장해 둔 조건을 먼저 칩에 되돌려 놓음 (JSON 불러오기와 상관없음)
-restoreConditions();
+// 배열(list) 안에 값(value)이 있으면 true
+function hasValue(list, value) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i] === value) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// 새로고침하면 칩을 모두 선택 안 된 상태로 되돌린다
+// (브라우저가 새로고침 때 체크 상태를 기억해 주는 경우도 있어서, 다 불러온 뒤에 한 번 더 맞춘다)
+function resetChips() {
+  for (let i = 0; i < chips.length; i++) {
+    chips[i].checked = false;
+  }
+}
+resetChips();
+window.addEventListener('load', resetChips);
 
 // JSON 불러오기
 fetch('../data/04_서울을 4로잡다_recommend.json')
@@ -48,43 +58,34 @@ fetch('../data/04_서울을 4로잡다_recommend.json')
   });
 
 // 지금 선택된 조건을 객체로 모으기 (예산만 하나, 나머지는 여러 개를 배열로)
+// 예산을 안 골랐으면 'any'(제한 없음)로 본다
 function getConditions() {
-  const conds = { who: [], weather: [], time: [], place: [], mood: [], genre: [], budget: 'free' };
-  chips.forEach(input => {
-    if (!input.checked) {
-      return;
+  const conds = { who: [], weather: [], time: [], place: [], mood: [], genre: [], budget: 'any' };
+  for (let i = 0; i < chips.length; i++) {
+    const input = chips[i];
+    if (input.checked) {
+      if (input.name === 'budget') {
+        conds.budget = input.value;
+      } else {
+        conds[input.name].push(input.value);
+      }
     }
-    if (input.name === 'budget') {
-      conds.budget = input.value;
-    } else {
-      conds[input.name].push(input.value);
-    }
-  });
-  return conds;
-}
-
-// 저장해 둔 조건이 있으면 칩에 다시 체크
-function restoreConditions() {
-  const saved = JSON.parse(localStorage.getItem(COND_KEY));
-  if (!saved) {
-    return;
   }
-  chips.forEach(input => {
-    if (input.name === 'budget') {
-      input.checked = (saved.budget === input.value);
-    } else {
-      input.checked = saved[input.name].includes(input.value);
-    }
-  });
+  return conds;
 }
 
 // 고른 값(selected) 중 하나라도 항목의 값(values)에 있으면 true
 // 아무것도 안 골랐거나 '상관없음(any)'이면 조건이 없는 것이라 항상 true
 function isMatch(selected, values) {
-  if (selected.length === 0 || selected.includes('any')) {
+  if (selected.length === 0 || hasValue(selected, 'any')) {
     return true;
   }
-  return selected.some(value => values.includes(value));
+  for (let i = 0; i < selected.length; i++) {
+    if (hasValue(values, selected[i])) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // 항목 하나가 조건과 몇 개 맞는지 세기 (최대 7점)
@@ -93,8 +94,13 @@ function getScore(item, conds) {
   if (isMatch(conds.who, item.who)) score++;
   if (isMatch(conds.weather, item.weather)) score++;
   if (isMatch(conds.time, item.time)) score++;
-  const placeValues = item.place === 'both' ? ['in', 'out'] : [item.place];
+
+  let placeValues = [item.place];
+  if (item.place === 'both') {
+    placeValues = ['in', 'out'];
+  }
   if (isMatch(conds.place, placeValues)) score++;
+
   if (isMatch(conds.mood, item.mood)) score++;
   if (isMatch(conds.genre, [item.genre])) score++;
   if (conds.budget === 'any' || item.price <= BUDGET_LIMIT[conds.budget]) score++;
@@ -103,32 +109,44 @@ function getScore(item, conds) {
 
 // 예산 안에 드는 것만 남기고, 점수가 높은 순으로 3건 고르기
 function pickTop3(conds) {
+  // 1) 예산 안에 드는 항목만 점수를 매겨 모은다
   const scored = [];
   for (let i = 0; i < allItems.length; i++) {
-    // 예산보다 비싼 것은 처음부터 빼 둔다
-    if (conds.budget !== 'any' && allItems[i].price > BUDGET_LIMIT[conds.budget]) {
-      continue;
+    if (conds.budget === 'any' || allItems[i].price <= BUDGET_LIMIT[conds.budget]) {
+      scored.push({ item: allItems[i], score: getScore(allItems[i], conds) });
     }
-    scored.push({ item: allItems[i], score: getScore(allItems[i], conds) });
   }
-  scored.sort((a, b) => b.score - a.score);
-  return scored.slice(0, 3);
-}
 
-function priceText(price) {
-  if (price === 0) {
-    return '무료';
+  // 2) 점수가 가장 높은 것을 하나씩 3번 뽑는다 (점수가 같으면 앞에 있는 것 먼저)
+  const used = [];
+  for (let i = 0; i < scored.length; i++) {
+    used.push(false);
   }
-  return price.toLocaleString() + '원';
+  const top3 = [];
+  for (let round = 0; round < 3; round++) {
+    let best = -1;
+    for (let i = 0; i < scored.length; i++) {
+      if (used[i] === false && (best === -1 || scored[i].score > scored[best].score)) {
+        best = i;
+      }
+    }
+    if (best !== -1) {
+      used[best] = true;
+      top3.push(scored[best]);
+    }
+  }
+  return top3;
 }
 
 // 추천 카드 1장
 function makeCard(row, number) {
   const item = row.item;
-  const percent = Math.round(row.score / 7 * 100);
-  const hasUrl = item.sourceUrl !== '';
-  const link = hasUrl ? item.sourceUrl : GENRE_PAGE[item.genre];
-  const target = hasUrl ? ' target="_blank" rel="noopener noreferrer"' : '';
+  let link = GENRE_PAGE[item.genre];
+  let target = '';
+  if (item.sourceUrl !== '') {
+    link = item.sourceUrl;
+    target = ' target="_blank" rel="noopener noreferrer"';
+  }
   return `
     <article class="pick">
       <span class="rank">${number}</span>
@@ -136,9 +154,7 @@ function makeCard(row, number) {
       <div class="info">
         <h3><a href="${link}"${target}><span class="genre">${GENRE_NAME[item.genre]}</span>${item.title}</a></h3>
         <p class="period">${SceneSeoul.formatPeriod(item)}</p>
-        <p class="meta">${item.location} · ${priceText(item.price)}</p>
-        <p class="reason"><b>추천 이유</b>${item.reason}</p>
-        <div class="match"><span>일치율 ${percent}%</span><span class="bar"><i data-percent="${percent}"></i></span></div>
+        <p class="meta">${item.location}</p>
       </div>
       <label class="pick-save">
         <input class="heart-check" type="checkbox" data-save-id="${item.id}" aria-label="${item.title} 관심 목록에 담기">
@@ -152,79 +168,74 @@ function showResult() {
   const conds = getConditions();
   const top3 = pickTop3(conds);
 
-  let cards = top3.map((row, index) => makeCard(row, index + 1)).join('');
+  // 카드를 하나씩 만들어 이어 붙이고, id는 따로 기억해 둔다
+  let cards = '';
+  shownIds = [];
+  for (let i = 0; i < top3.length; i++) {
+    shownIds.push(top3[i].item.id);
+    cards += makeCard(top3[i], i + 1);
+  }
 
   // 누구와를 여러 개 골랐으면 '혼자·연인과'처럼 이어 붙임
-  const whoText = conds.who.length === 0 ? '누구와든' : conds.who.map(w => WHO_TITLE[w]).join('·');
-  const whoDesc = conds.who.length === 1 ? WHO_DESC[conds.who[0]] : '고른 조건에 가장 잘 맞는 곳 위주로 골랐어요.';
+  let whoText = '누구와든';
+  if (conds.who.length > 0) {
+    whoText = '';
+    for (let i = 0; i < conds.who.length; i++) {
+      if (i > 0) {
+        whoText += '·';
+      }
+      whoText += WHO_TITLE[conds.who[i]];
+    }
+  }
 
   resultBox.innerHTML = `
     <div class="result-head">
       <h2>${whoText} 가기 좋은 곳 3건</h2>
-      <p>${whoDesc}</p>
     </div>
     <div class="picks">${cards}</div>`;
 
-  fillBars();
   SceneSeoul.updateHearts();
   addHeartEvents();
 }
 
-// 일치율 막대: 처음엔 0이었다가 잠깐 뒤에 채워져서 transition으로 차오른다
-function fillBars() {
-  setTimeout(() => {
-    document.querySelectorAll('.bar i').forEach(bar => {
-      bar.style.width = bar.dataset.percent + '%';
-    });
-  }, 50);
-}
-
 // '결과 보기'를 누르면 잠깐 생각하는 척 한 뒤 결과가 바뀐다
 sendBtn.addEventListener('click', () => {
-  localStorage.setItem(COND_KEY, JSON.stringify(getConditions()));
   resultBox.innerHTML = '<p class="think">추천을 고르는 중이에요...</p>';
   location.href = '#result';
   setTimeout(showResult, 800);
 });
 
 // 시간대, 실내외에서 '상관없음'을 고르면 다른 칩이 풀리고, 다른 칩을 고르면 '상관없음'이 풀린다
-chips.forEach(input => {
+function addAnyEvent(input) {
   input.addEventListener('change', () => {
     if (input.name === 'budget' || !input.checked) {
       return;
     }
-    chips.forEach(other => {
-      if (other.name !== input.name || other === input) {
-        return;
+    for (let i = 0; i < chips.length; i++) {
+      const other = chips[i];
+      if (other.name === input.name && other !== input) {
+        if (input.value === 'any' || other.value === 'any') {
+          other.checked = false;
+        }
       }
-      if (input.value === 'any' || other.value === 'any') {
-        other.checked = false;
-      }
-    });
+    }
   });
-});
+}
 
-// 칩을 누를 때마다 조건을 저장 (결과 보기를 안 눌러도 새로고침 후에 유지됨)
-// 위의 '상관없음' 처리보다 나중에 등록해서, 정리된 선택 상태가 저장됨
-chips.forEach(input => {
-  input.addEventListener('change', () => {
-    localStorage.setItem(COND_KEY, JSON.stringify(getConditions()));
+for (let i = 0; i < chips.length; i++) {
+  addAnyEvent(chips[i]);
+}
+
+// 하트: 누르면 찜을 바꾼다 (로그인 확인과 안내 문구는 공통 JS의 toggleSaved가 처리한다)
+function addHeartEvent(heart, id) {
+  heart.addEventListener('change', () => {
+    SceneSeoul.toggleSaved(id);
   });
-});
+}
 
-// 로그인 전 저장 막기 포함
 function addHeartEvents() {
   const hearts = resultBox.querySelectorAll('.heart-check');
   for (let i = 0; i < hearts.length; i++) {
-    hearts[i].addEventListener('change', (event) => {
-      if (!SceneSeoul.getUser()) {
-        alert('로그인 후 저장할 수 있어요.');
-        event.target.checked = false;
-        return;
-      }
-      SceneSeoul.toggleSaved(event.target.getAttribute('data-save-id'));
-    });
+    addHeartEvent(hearts[i], shownIds[i]);
   }
 }
-
-window.addEventListener('scene:saved', SceneSeoul.updateHearts);

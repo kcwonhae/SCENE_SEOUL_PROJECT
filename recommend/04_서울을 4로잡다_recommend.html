@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>추천 | SCENE.SEOUL</title>
-  <meta name="description" content="누구와 가는지, 어떤 분위기인지 고르면 서울의 전시·공연·팝업·문화공간을 추천해 드려요.">
+  <meta name="description" content="누구와 가는지, 어떤 분위기인지 고르면 서울의 전시·공연·팝업·이벤트를 추천해 드려요.">
 
   <meta name="team-number" content="04">
   <meta name="team-name" content="서울을 4로잡다">
@@ -12,13 +13,18 @@
   <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
   <link rel="stylesheet" href="04_서울을 4로잡다_recommend.css">
   <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
+  <script src="../login/04_서울을 4로잡다_login.js" defer></script>
+  <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
+  <script src="../js/04_서울을 4로잡다_language.js" defer></script>
 </head>
+
 <body id="top">
   <a class="skip" href="#main">본문 바로가기</a>
 
   <!-- 팀 공통 헤더 -->
   <header class="ss-header">
-    <a class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html" aria-label="씬 서울 홈">SCENE<span class="ss-accent">:</span>SEOUL</a>
+    <a class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html" aria-label="씬 서울 홈">SCENE<span
+        class="ss-accent">:</span>SEOUL</a>
     <nav class="ss-nav" aria-label="메인 메뉴">
       <a href="../main/04_서울을 4로잡다_index.html">HOME</a>
       <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
@@ -29,10 +35,30 @@
       <a href="../map/04_서울을 4로잡다_map.html">지도</a>
     </nav>
     <div class="ss-header-actions">
-      <span class="ss-header-quick-icons"><button class="ss-icon-button" type="button" aria-label="검색" title="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 5 5"/></svg></button><span class="ss-language" aria-label="언어: 한국어"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"/></svg><span>KR</span></span></span>
+      <span class="ss-header-quick-icons">
+        <span class="ss-language" role="button" tabindex="0" aria-label="언어 선택" aria-expanded="false"
+          aria-haspopup="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
+          </svg>
+          <span>KR</span>
+          <ul class="ss-language-menu" aria-label="언어 목록" hidden>
+            <li class="ss-language-option is-current">한국어 <span aria-hidden="true">✓</span></li>
+            <li class="ss-language-option">English</li>
+            <li class="ss-language-option">日本語</li>
+            <li class="ss-language-option">中文</li>
+          </ul>
+        </span>
+      </span>
       <button class="header-login" type="button">LOGIN</button>
       <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
-      <span class="ss-weather-icon" title="날씨 아이콘 (표시용)" aria-label="날씨 아이콘"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"/><path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"/></svg></span>
+      <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중"><svg viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+          aria-hidden="true">
+          <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z" />
+          <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2" />
+        </svg></span>
     </div>
   </header>
 
@@ -42,77 +68,132 @@
       <!-- 질문 입력창 -->
       <section class="intro" aria-labelledby="ai-title">
         <h1 id="ai-title">SCENE<span class="intro-colon">:</span>SEOUL PICK</h1>
-        <p class="lead">오늘의 조건을 고르면 어울리는 서울의 장면을 추천해 드려요</p>
       </section>
 
       <!-- 선택 칩: 7개 조건을 고르고 '결과 보기'를 누르면 결과가 바뀝니다 -->
       <section class="options" aria-label="추천 조건 선택">
         <div class="group" role="group" aria-labelledby="gn-who">
-          <span class="group-name" id="gn-who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 19v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1"/><circle cx="10" cy="7.5" r="3.5"/><path d="M20 19v-1a4 4 0 0 0-3-3.9M16 4.2a3.5 3.5 0 0 1 0 6.6"/></svg>누구와</span>
+          <span class="group-name" id="gn-who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 19v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1" />
+              <circle cx="10" cy="7.5" r="3.5" />
+              <path d="M20 19v-1a4 4 0 0 0-3-3.9M16 4.2a3.5 3.5 0 0 1 0 6.6" />
+            </svg>누구와</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="who" id="who-solo" value="solo" checked><label for="who-solo">혼자</label></span>
-            <span class="chip"><input type="checkbox" name="who" id="who-couple" value="couple"><label for="who-couple">연인</label></span>
-            <span class="chip"><input type="checkbox" name="who" id="who-friends" value="friends"><label for="who-friends">친구</label></span>
-            <span class="chip"><input type="checkbox" name="who" id="who-family" value="family"><label for="who-family">가족</label></span>
+            <span class="chip"><input type="checkbox" name="who" id="who-solo" value="solo" checked><label
+                for="who-solo">혼자</label></span>
+            <span class="chip"><input type="checkbox" name="who" id="who-couple" value="couple"><label
+                for="who-couple">연인</label></span>
+            <span class="chip"><input type="checkbox" name="who" id="who-friends" value="friends"><label
+                for="who-friends">친구</label></span>
+            <span class="chip"><input type="checkbox" name="who" id="who-family" value="family"><label
+                for="who-family">가족</label></span>
           </div>
         </div>
 
         <div class="group" role="group" aria-labelledby="gn-weather">
-          <span class="group-name" id="gn-weather"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18h10a4 4 0 0 0 .3-8 6 6 0 0 0-11.5 1.8A3.2 3.2 0 0 0 7 18Z"/></svg>날씨</span>
+          <span class="group-name" id="gn-weather"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 18h10a4 4 0 0 0 .3-8 6 6 0 0 0-11.5 1.8A3.2 3.2 0 0 0 7 18Z" />
+            </svg>날씨</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="weather" id="wx-sunny" value="sunny" checked><label for="wx-sunny">맑음</label></span>
-            <span class="chip"><input type="checkbox" name="weather" id="wx-cloudy" value="cloudy"><label for="wx-cloudy">흐림</label></span>
-            <span class="chip"><input type="checkbox" name="weather" id="wx-rain" value="rain"><label for="wx-rain">비</label></span>
-            <span class="chip"><input type="checkbox" name="weather" id="wx-cold" value="cold"><label for="wx-cold">쌀쌀함</label></span>
+            <span class="chip"><input type="checkbox" name="weather" id="wx-sunny" value="sunny" checked><label
+                for="wx-sunny">맑음</label></span>
+            <span class="chip"><input type="checkbox" name="weather" id="wx-cloudy" value="cloudy"><label
+                for="wx-cloudy">흐림</label></span>
+            <span class="chip"><input type="checkbox" name="weather" id="wx-rain" value="rain"><label
+                for="wx-rain">비</label></span>
+            <span class="chip"><input type="checkbox" name="weather" id="wx-cold" value="cold"><label
+                for="wx-cold">쌀쌀함</label></span>
           </div>
         </div>
 
         <div class="group" role="group" aria-labelledby="gn-time">
-          <span class="group-name" id="gn-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>시간대</span>
+          <span class="group-name" id="gn-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>시간대</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="time" id="t-day" value="day" checked><label for="t-day">낮</label></span>
-            <span class="chip"><input type="checkbox" name="time" id="t-eve" value="eve"><label for="t-eve">저녁</label></span>
-            <span class="chip"><input type="checkbox" name="time" id="t-night" value="night"><label for="t-night">밤</label></span>
-            <span class="chip"><input type="checkbox" name="time" id="t-any" value="any"><label for="t-any">상관없음</label></span>
+            <span class="chip"><input type="checkbox" name="time" id="t-day" value="day" checked><label
+                for="t-day">낮</label></span>
+            <span class="chip"><input type="checkbox" name="time" id="t-eve" value="eve"><label
+                for="t-eve">저녁</label></span>
+            <span class="chip"><input type="checkbox" name="time" id="t-night" value="night"><label
+                for="t-night">밤</label></span>
+            <span class="chip"><input type="checkbox" name="time" id="t-any" value="any"><label
+                for="t-any">상관없음</label></span>
           </div>
         </div>
 
         <div class="group" role="group" aria-labelledby="gn-place">
-          <span class="group-name" id="gn-place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>실내외</span>
+          <span class="group-name" id="gn-place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>실내외</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="place" id="p-in" value="in" checked><label for="p-in">실내</label></span>
-            <span class="chip"><input type="checkbox" name="place" id="p-out" value="out"><label for="p-out">야외</label></span>
-            <span class="chip"><input type="checkbox" name="place" id="p-any" value="any"><label for="p-any">상관없음</label></span>
+            <span class="chip"><input type="checkbox" name="place" id="p-in" value="in" checked><label
+                for="p-in">실내</label></span>
+            <span class="chip"><input type="checkbox" name="place" id="p-out" value="out"><label
+                for="p-out">야외</label></span>
+            <span class="chip"><input type="checkbox" name="place" id="p-any" value="any"><label
+                for="p-any">상관없음</label></span>
           </div>
         </div>
 
         <div class="group" role="group" aria-labelledby="gn-mood">
-          <span class="group-name" id="gn-mood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.2 5.6L20 11l-5.8 2.4L12 19l-2.2-5.6L4 11l5.8-2.4L12 3Z"/></svg>분위기</span>
+          <span class="group-name" id="gn-mood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3l2.2 5.6L20 11l-5.8 2.4L12 19l-2.2-5.6L4 11l5.8-2.4L12 3Z" />
+            </svg>분위기</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="mood" id="mood-calm" value="calm" checked><label for="mood-calm">차분한</label></span>
-            <span class="chip"><input type="checkbox" name="mood" id="mood-lively" value="lively"><label for="mood-lively">신나는</label></span>
-            <span class="chip"><input type="checkbox" name="mood" id="mood-emo" value="emo"><label for="mood-emo">감성적인</label></span>
-            <span class="chip"><input type="checkbox" name="mood" id="mood-unique" value="unique"><label for="mood-unique">이색적인</label></span>
+            <span class="chip"><input type="checkbox" name="mood" id="mood-calm" value="calm" checked><label
+                for="mood-calm">차분한</label></span>
+            <span class="chip"><input type="checkbox" name="mood" id="mood-lively" value="lively"><label
+                for="mood-lively">신나는</label></span>
+            <span class="chip"><input type="checkbox" name="mood" id="mood-emo" value="emo"><label
+                for="mood-emo">감성적인</label></span>
+            <span class="chip"><input type="checkbox" name="mood" id="mood-unique" value="unique"><label
+                for="mood-unique">이색적인</label></span>
           </div>
         </div>
 
         <div class="group" role="group" aria-labelledby="gn-genre">
-          <span class="group-name" id="gn-genre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8Z"/><path d="M14 6v2M14 11v2M14 16v2"/></svg>장르</span>
+          <span class="group-name" id="gn-genre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path
+                d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8Z" />
+              <path d="M14 6v2M14 11v2M14 16v2" />
+            </svg>장르</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="genre" id="g-ex" value="ex" checked><label for="g-ex">전시</label></span>
-            <span class="chip"><input type="checkbox" name="genre" id="g-live" value="live"><label for="g-live">공연</label></span>
-            <span class="chip"><input type="checkbox" name="genre" id="g-pop" value="pop"><label for="g-pop">팝업</label></span>
-            <span class="chip"><input type="checkbox" name="genre" id="g-space" value="space"><label for="g-space">이벤트</label></span>
+            <span class="chip"><input type="checkbox" name="genre" id="g-ex" value="ex" checked><label
+                for="g-ex">전시</label></span>
+            <span class="chip"><input type="checkbox" name="genre" id="g-live" value="live"><label
+                for="g-live">공연</label></span>
+            <span class="chip"><input type="checkbox" name="genre" id="g-pop" value="pop"><label
+                for="g-pop">팝업</label></span>
+            <span class="chip"><input type="checkbox" name="genre" id="g-space" value="space"><label
+                for="g-space">이벤트</label></span>
           </div>
         </div>
 
         <div class="group" role="radiogroup" aria-labelledby="gn-budget">
-          <span class="group-name" id="gn-budget"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 10c.5-1 1.4-1.5 2.5-1.5 1.5 0 2.5.8 2.5 2s-1 1.7-2.5 2-2.5.8-2.5 2 1 2 2.5 2c1.1 0 2-.5 2.5-1.5"/></svg>예산</span>
+          <span class="group-name" id="gn-budget"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path
+                d="M12 7v10M9.5 10c.5-1 1.4-1.5 2.5-1.5 1.5 0 2.5.8 2.5 2s-1 1.7-2.5 2-2.5.8-2.5 2 1 2 2.5 2c1.1 0 2-.5 2.5-1.5" />
+            </svg>예산</span>
           <div class="chips">
-            <span class="chip"><input type="radio" name="budget" id="b-free" value="free" checked><label for="b-free">무료</label></span>
-            <span class="chip"><input type="radio" name="budget" id="b-30" value="30"><label for="b-30">3만 원 이하</label></span>
-            <span class="chip"><input type="radio" name="budget" id="b-50" value="50"><label for="b-50">5만 원 이하</label></span>
-            <span class="chip"><input type="radio" name="budget" id="b-any" value="any"><label for="b-any">제한 없음</label></span>
+            <span class="chip"><input type="radio" name="budget" id="b-free" value="free" checked><label
+                for="b-free">무료</label></span>
+            <span class="chip"><input type="radio" name="budget" id="b-30" value="30"><label for="b-30">3만 원
+                이하</label></span>
+            <span class="chip"><input type="radio" name="budget" id="b-50" value="50"><label for="b-50">5만 원
+                이하</label></span>
+            <span class="chip"><input type="radio" name="budget" id="b-any" value="any"><label for="b-any">제한
+                없음</label></span>
           </div>
         </div>
       </section>
@@ -131,23 +212,26 @@
     <section class="more" aria-labelledby="more-title">
       <h2 id="more-title">직접 찾아보세요</h2>
       <ul>
-        <li><a href="../exhibition/04_서울을 4로잡다_exhibition.html"><strong>전시</strong><span>지금 열리는 전시 모아 보기</span></a></li>
-        <li><a href="../performance/04_서울을 4로잡다_performance.html"><strong>공연</strong><span>콘서트, 뮤지컬, 연극, 클래식/무용</span></a></li>
-        <li><a href="../popup/04_서울을 4로잡다_popup.html"><strong>팝업</strong><span>이번 달 팝업스토어와 행사</span></a></li>
-        <li><a href="../map/04_서울을 4로잡다_map.html"><strong>지도</strong><span>내 주변 행사 찾기</span></a></li>
+        <li><a href="../exhibition/04_서울을 4로잡다_exhibition.html"><strong>전시</strong><span>지금 열리는 전시</span></a></li>
+        <li><a href="../performance/04_서울을 4로잡다_performance.html"><strong>공연</strong><span>콘서트·뮤지컬·연극·무용</span></a></li>
+        <li><a href="../popup/04_서울을 4로잡다_popup.html"><strong>팝업</strong><span>이번 달 팝업스토어</span></a></li>
+        <li><a href="../event/04_서울을 4로잡다_event.html"><strong>이벤트</strong><span>내 주변 문화 찾기</span></a></li>
+        <li><a href="../map/04_서울을 4로잡다_map.html"><strong>지도</strong><span>지도로 한눈에 보기</span></a></li>
       </ul>
     </section>
   </main>
 
   <footer class="ss-site-footer">
     <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
-    <p>서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p>
     <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
   </footer>
 
-  <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19 0-14m-6 6 6-6 6 6"/></svg></a>
+  <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동"><svg viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m12 19 0-14m-6 6 6-6 6 6" />
+    </svg></a>
   <script src="../js/04_서울을 4로잡다_common.js"></script>
   <script src="04_서울을 4로잡다_recommend.js"></script>
-  <script src="../login/04_서울을 4로잡다_login.js"></script>
 </body>
+
 </html>

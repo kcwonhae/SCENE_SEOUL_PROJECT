@@ -107,10 +107,8 @@ p {
   border: 0;
   background: var(--blue);
   color: var(--white);
-  font: inherit;
   font-weight: 700;
   white-space: nowrap;
-  cursor: pointer;
   transition: transform .3s ease, background .2s, color .2s;
 }
 
@@ -228,11 +226,6 @@ p {
   letter-spacing: -.5px;
 }
 
-.result-head p {
-  margin-top: 6px;
-  color: var(--mute);
-}
-
 /* 결과 목록: 박스 없이 가로줄로만 나눈 순위 목록 */
 .picks {
   margin-top: 28px;
@@ -245,31 +238,35 @@ p {
   gap: 24px;
   padding: 28px 0;
   border-bottom: 1px solid var(--line);
+  align-items: center;
 }
 
 /* 큰 순위 숫자 */
 .rank {
   flex: none;
-  width: 48px;
+  align-self: flex-start;
+  width: 70px;
   color: var(--ink);
-  font-size: 40px;
+  font-size: 60px;
   font-weight: 800;
-  line-height: 1;
+  line-height: .8;
   text-align: center;
 }
 
 /* 포스터 */
 .poster {
   flex: none;
-  align-self: flex-start;
+  align-self: center;
   width: 120px;
+  aspect-ratio: 3 / 4;
 }
 
 /* 포스터 이미지: 칸 폭에 맞추고 비율 유지 */
 .poster img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* 포스터 오른쪽 정보 영역 (세로로 쌓임) */
@@ -310,48 +307,11 @@ p {
   font-size: 17px;
 }
 
-.reason {
-  margin-top: 14px;
-  color: var(--text);
-  font-size: 15px;
-}
-
-.reason b {
-  margin-right: 6px;
-  color: var(--ink);
-}
-
-/* 일치율: 글자 + 막대 */
-.match {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 12px;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.match .bar {
-  flex: 1;
-  max-width: 220px;
-  height: 6px;
-  background: var(--line);
-  overflow: hidden;
-}
-
-/* 막대 안쪽: 처음엔 폭 0, JS가 폭을 넣으면 transition 때문에 천천히 차오름 */
-.match .bar i {
-  display: block;
-  width: 0;
-  height: 100%;
-  background: var(--blue);
-  transition: width .8s ease;
-}
-
-/* 관심 하트: 각 결과의 오른쪽 위. 체크하면 빨간 하트 */
+/* 관심 하트: 각 결과의 오른쪽 가운데. 체크하면 빨간 하트 */
 .pick-save {
   position: absolute;
-  top: 28px;
+  top: 50%;
+  transform: translateY(-50%);
   right: 0;
   width: 40px;
   height: 40px;
@@ -399,19 +359,21 @@ p {
   font-weight: 800;
 }
 
-/* 4칸이 가로로 놓이고, 좁아지면 저절로 다음 줄로 넘어감 */
+/* 5칸이 가로로 놓이고, 좁아지면 저절로 다음 줄로 넘어감 */
 .more ul {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 16px;
   margin-top: 20px;
 }
 
 .more li {
+  display: flex;
   flex: 1 1 200px;
 }
 
 .more a {
+  flex: 1;
   display: block;
   padding: 22px 24px;
   border: 1px solid var(--line);
@@ -439,15 +401,4 @@ p {
 /* ---------- 푸터 간격 ---------- */
 .ss-site-footer {
   margin-top: 96px;
-}
-
-/* ---------- 반응형 (common.css와 같은 1200 / 800 기준) ---------- */
-@media (max-width: 1200px) {
-  .intro h1 {
-    font-size: 44px;
-  }
-
-  .result-head h2 {
-    font-size: 28px;
-  }
 }

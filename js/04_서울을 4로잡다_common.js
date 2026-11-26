@@ -1,5 +1,5 @@
 // SCENE:SEOUL 공통 JS (팀 04 서울을 4로잡다)
-// 모든 페이지가 같이 쓰는 함수 모음입니다. 각 HTML에서 페이지 JS보다 먼저 불러와야함
+// 모든 페이지가 같이 쓰는 함수 모음입니다. 각 HTML에서 페이지 JS보다 먼저 불러와야 합니다.
 //   <script src="../js/04_서울을 4로잡다_common.js"></script>
 //   <script src="04_서울을 4로잡다_공연.js"></script>
 //
@@ -10,7 +10,10 @@
 //   - 찜 저장 키: sceneSeoulSavedEvents:사용자ID (로그인 전에는 guest), 값은 콘텐츠 id 배열
 //   - 로그인 상태 키: sceneSeoulUser (닉네임 문자열)
 //   - 이미지 경로: ../images/파일명
-//   - 찜 하트: <input type="checkbox" data-save-id="콘텐츠id"> 로 만들면 updateHearts()가 상태를 맞추기
+//   - 찜 하트: <input type="checkbox" data-save-id="콘텐츠id"> 로 만들면 updateHearts()가 상태를 맞춰 줍니다
+//
+// window.SceneSeoul 하나에 함수들을 붙이는 방식입니다. 다른 파일에서도 같은 객체에 함수를 더 붙일 수 있습니다.
+
 
 // ---------- 기본 설정값 ----------
 
@@ -18,38 +21,13 @@ window.SceneSeoul = Object.assign(window.SceneSeoul || {}, {
 
   SAVED_PREFIX: 'sceneSeoulSavedEvents:',
   USER_KEY: 'sceneSeoulUser',
-  GUEST_ID: 'guest',
-
-  // 4개 JSON 파일 위치 (모든 페이지 폴더가 같은 위치에 있어서 ../ 로 시작하기)
-  DATA_FILES: [
-    '../data/04_서울을 4로잡다_exhibition.json',
-    '../data/04_서울을 4로잡다_performance.json',
-    '../data/04_서울을 4로잡다_popup.json',
-    '../data/04_서울을 4로잡다_event.json',
-    '../data/04_서울을 4로잡다_recommend.json'
-  ],
-
-  // category 값 → 화면에 보여줄 이름
-  CATEGORY_NAME: {
-    exhibition: '전시',
-    performance: '공연',
-    popup: '팝업',
-    event: '이벤트'
-  },
-
-  // category 값 → 그 종류의 목록 페이지
-  CATEGORY_PAGE: {
-    exhibition: '../exhibition/04_서울을 4로잡다_exhibition.html',
-    performance: '../performance/04_서울을 4로잡다_performance.html',
-    popup: '../popup/04_서울을 4로잡다_popup.html',
-    event: '../event/04_서울을 4로잡다_event.html'
-  }
+  GUEST_ID: 'guest'
 });
 
 
 // ---------- 로그인 상태 ----------
 // 로그인 담당자가 getUser / login / logout 을 따로 만들었으면 그것을 씁니다.
-// (아직 없을 때만 아래 기본 버전 사용. 수정 예정)
+// (아직 없을 때만 아래 기본 버전을 붙입니다)
 
 if (typeof window.SceneSeoul.getUser !== 'function') {
   Object.assign(window.SceneSeoul, {
@@ -90,7 +68,11 @@ Object.assign(window.SceneSeoul, {
   },
 
   // 찜한 콘텐츠 id 배열
+  // 로그인 전(guest)에는 찜을 저장하지 않으므로 항상 빈 배열
   getSaved() {
+    if (SceneSeoul.getUser() === '') {
+      return [];
+    }
     return JSON.parse(localStorage.getItem(SceneSeoul.getSavedKey())) || [];
   },
 
@@ -100,6 +82,12 @@ Object.assign(window.SceneSeoul, {
 
   // 찜이 아니면 넣고, 찜이면 뺀다. 바꾼 뒤에 찜 상태이면 true를 돌려준다
   toggleSaved(id) {
+    // 로그인 전에는 찜할 수 없다. 안내만 하고 하트를 원래대로 돌린다
+    if (SceneSeoul.getUser() === '') {
+      alert('로그인 후에 찜할 수 있어요.');
+      SceneSeoul.updateHearts();
+      return false;
+    }
     let saved = SceneSeoul.getSaved();
     let nowSaved;
     if (saved.includes(id)) {
@@ -111,16 +99,7 @@ Object.assign(window.SceneSeoul, {
     }
     localStorage.setItem(SceneSeoul.getSavedKey(), JSON.stringify(saved));
     SceneSeoul.updateHearts();
-    window.dispatchEvent(new Event('scene:saved'));
     return nowSaved;
-  },
-
-  // 찜에서 빼기 (마이페이지의 삭제 버튼 등에서 사용)
-  removeSaved(id) {
-    const saved = SceneSeoul.getSaved().filter(savedId => savedId !== id);
-    localStorage.setItem(SceneSeoul.getSavedKey(), JSON.stringify(saved));
-    SceneSeoul.updateHearts();
-    window.dispatchEvent(new Event('scene:saved'));
   },
 
   // 화면에 있는 하트(data-save-id 가 붙은 체크박스)를 찜 상태에 맞게 체크/해제
@@ -129,53 +108,6 @@ Object.assign(window.SceneSeoul, {
     document.querySelectorAll('input[data-save-id]').forEach(input => {
       input.checked = saved.includes(input.dataset.saveId);
     });
-  }
-});
-
-
-// ---------- 데이터 불러오기 ----------
-
-Object.assign(window.SceneSeoul, {
-
-  // 4개 JSON을 하나씩 순서대로 읽어서 하나의 배열로 합친 뒤 callback(배열)로 넘기기
-  // 아직 만들어지지 않은 JSON이 있으면 건너뛰고 나머지만 합침
-  loadAllItems(callback) {
-    const files = SceneSeoul.DATA_FILES;
-    const result = [];
-
-    function loadNext(index) {
-      if (index === files.length) {
-        callback(result);
-        return;
-      }
-      fetch(files[index])
-        .then(response => response.json())
-        .then(data => {
-          // JSON이 배열이면 그대로, { "키": [ ... ] } 모양이면 그 안의 배열을 꺼냄
-          let list = data;
-          if (!Array.isArray(data)) {
-            list = Object.values(data)[0];
-          }
-          list.forEach(item => result.push(item));
-          loadNext(index + 1);
-        })
-        .catch(error => {
-          console.log(files[index] + ' 을(를) 불러오지 못해서 건너뜁니다.', error);
-          loadNext(index + 1);
-        });
-    }
-
-    loadNext(0);
-  },
-
-  // 합친 배열에서 id로 하나 찾기 (없으면 undefined)
-  findById(items, id) {
-    for (let i = 0; i < items.length; i++) {
-      if (items[i].id === id) {
-        return items[i];
-      }
-    }
-    return undefined;
   }
 });
 
@@ -202,15 +134,11 @@ Object.assign(window.SceneSeoul, {
       return startText + ' ~ ' + end[1] + '.' + end[2];
     }
     return startText + ' ~ ' + end[0] + '.' + end[1] + '.' + end[2];
-  },
-
-  categoryName(category) {
-    return SceneSeoul.CATEGORY_NAME[category] || '';
   }
 });
 
 
-// ---------- 이벤트: 찜 상태가 바뀔 수 있는 때 하트를 다시 맞춤 ----------
+// ---------- 이벤트: 찜 상태가 바뀔 수 있는 때 하트를 다시 맞춘다 ----------
 
 // 페이지가 처음 열렸을 때
 document.addEventListener('DOMContentLoaded', SceneSeoul.updateHearts);
@@ -223,3 +151,6 @@ window.addEventListener('storage', SceneSeoul.updateHearts);
 
 // 로그인 담당자가 로그인할 때 'scene:login' 이벤트를 보내면 사용자가 바뀐 것이니 하트를 다시 맞춘다
 window.addEventListener('scene:login', SceneSeoul.updateHearts);
+
+// 찜이 바뀌었다는 'scene:saved' 이벤트가 오면 하트를 다시 맞춘다 (공연·추천 페이지가 각자 쓰던 것을 여기로 모음)
+window.addEventListener('scene:saved', SceneSeoul.updateHearts);

@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="../css/04_서울을 4로잡다_carousel.css">
   <link rel="stylesheet" href="04_서울을 4로잡다_performance.css">
   <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
+  <script src="../login/04_서울을 4로잡다_login.js" defer></script>
+  <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
+  <script src="../js/04_서울을 4로잡다_language.js" defer></script>
 </head>
 
 <body id="top">
@@ -34,20 +37,27 @@
       <a href="../map/04_서울을 4로잡다_map.html">지도</a>
     </nav>
     <div class="ss-header-actions">
-      <span class="ss-header-quick-icons"><button class="ss-icon-button" type="button" aria-label="검색" title="검색"><svg
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-            aria-hidden="true">
-            <circle cx="10.8" cy="10.8" r="6.6" />
-            <path d="m16 16 5 5" />
-          </svg></button><span class="ss-language" aria-label="언어: 한국어"><svg viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="1.7" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" />
-            <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18" />
-          </svg><span>KR</span></span></span>
+      <span class="ss-header-quick-icons">
+        <span class="ss-language" role="button" tabindex="0" aria-label="언어 선택" aria-expanded="false"
+          aria-haspopup="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
+          </svg>
+          <span>KR</span>
+          <ul class="ss-language-menu" aria-label="언어 목록" hidden>
+            <li class="ss-language-option is-current">한국어 <span aria-hidden="true">✓</span></li>
+            <li class="ss-language-option">English</li>
+            <li class="ss-language-option">日本語</li>
+            <li class="ss-language-option">中文</li>
+          </ul>
+        </span>
+      </span>
       <button class="header-login" type="button">LOGIN</button>
       <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
-      <span class="ss-weather-icon" title="날씨 아이콘 (표시용)" aria-label="날씨 아이콘"><svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중"><svg viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+          aria-hidden="true">
           <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z" />
           <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2" />
         </svg></span>
@@ -60,21 +70,19 @@
     <div class="stage">
 
       <!-- 페이지 상단 히어로 -->
-      <section class="perf-hero" aria-labelledby="perf-title">
+      <section class="ss-category-hero" aria-labelledby="perf-title">
         <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
           <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a><span aria-hidden="true">/</span><span
             aria-current="page">PERFORMANCE</span>
         </nav>
         <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="perf-title">Performance<span
-            class="perf-title-dot">.</span></h1>
-        <div class="perf-hero-bottom">
-          <ul class="perf-tags ss-entrance ss-entrance--delay-3" aria-hidden="true">
-            <li>LIVE</li>
-            <li>MUSIC</li>
-            <li>DANCE</li>
-            <li>CLASSICAL</li>
-          </ul>
-        </div>
+            class="ss-hero-title-dot">.</span></h1>
+        <ul class="ss-hero-tags ss-entrance ss-entrance--delay-3" aria-hidden="true">
+          <li>LIVE</li>
+          <li>MUSIC</li>
+          <li>DANCE</li>
+          <li>CLASSICAL</li>
+        </ul>
       </section>
 
       <!-- 공통 캐러셀: JSON에서 featured가 true인 공연을 보여줍니다 (carousel.js) -->
@@ -123,7 +131,6 @@
 
   <footer class="ss-site-footer">
     <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
-    <p>서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p>
     <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
   </footer>
 
@@ -135,7 +142,6 @@
   <script src="../js/04_서울을 4로잡다_common.js"></script>
   <script src="../js/04_서울을 4로잡다_carousel.js"></script>
   <script src="04_서울을 4로잡다_performance.js"></script>
-  <script src="../login/04_서울을 4로잡다_login.js"></script>
 </body>
 
 </html>

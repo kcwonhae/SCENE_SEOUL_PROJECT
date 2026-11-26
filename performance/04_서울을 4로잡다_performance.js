@@ -3,7 +3,7 @@
    하는 일
    1) JSON 파일에서 공연 데이터를 불러온다 (fetch)
    2) 장르 버튼·검색창으로 공연을 거른다 (이벤트리스너)
-   3) 6개씩 나눠서 카드와 페이지 번호를 보여준다
+   3) 8개씩 나눠서 카드와 페이지 번호를 보여준다
    4) 하트는 공통 JS(SceneSeoul)로, 마지막 장르는 localStorage에 저장한다
    * 공통 JS(04_서울을 4로잡다_common.js)를 이 파일보다 먼저 불러와야 한다
    ===================================================== */
@@ -157,15 +157,11 @@ function markActiveFilter() {
 
 
 /* ---------- 7. 하트: 누르면 공통 JS가 localStorage에 저장 ---------- */
+// 로그인 확인과 안내 문구도 공통 JS의 toggleSaved가 처리한다
 function addHeartEvents() {
   const hearts = grid.querySelectorAll('.heart-check');
   for (let i = 0; i < hearts.length; i++) {
     hearts[i].addEventListener('change', (event) => {
-      if (!SceneSeoul.getUser()) {
-        alert('로그인 후 저장할 수 있어요.');
-        event.target.checked = false;
-        return;
-      }
       const id = event.target.getAttribute('data-save-id');
       SceneSeoul.toggleSaved(id);
     });
@@ -191,5 +187,3 @@ searchInput.addEventListener('input', () => {
   currentPage = 1;
   showPage();
 });
-
-window.addEventListener('scene:saved', SceneSeoul.updateHearts);

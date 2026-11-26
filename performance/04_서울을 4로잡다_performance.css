@@ -8,18 +8,10 @@
 /* ---------- 1. 이 페이지에서 쓰는 이름 → common.css 변수에 연결 ---------- */
 :root {
   --white: var(--ss-white);
-  --bg: var(--ss-paper);
-  --line: var(--ss-line);
   --mute: var(--ss-muted);
-  --text: var(--ss-ink);
   --ink: var(--ss-ink);
   --blue: var(--ss-blue);
   --yellow: var(--ss-yellow);
-  --radius: 12px;
-  --header-h: var(--ss-header-height);
-  --stage-top: var(--ss-paper);
-  --stage-mid: var(--ss-paper);
-  --stage-end: var(--ss-paper);
 }
 
 /* ---------- 2. 기본 ---------- */
@@ -95,15 +87,6 @@ p {
   order: 5;
 }
 
-/* 현재 선택된 장르 버튼: JS가 is-active 클래스를 붙여 줌 (공통 category.css의 선택 모양과 같은 노란색)
-   category.css가 같은 버튼에 더 구체적인 선택자로 색을 정해 둬서, 여기도 같은 길이로 맞춰 써야 덮어써집니다 */
-.ss-catalog .ss-catalog-controls .ss-filter.is-active {
-  background: var(--ss-yellow);
-  border-color: var(--ss-yellow);
-  color: var(--ss-ink);
-  font-weight: 800;
-}
-
 /* 카드 제목 링크 */
 .ss-card-title a:hover,
 .ss-card-title a:focus {
@@ -120,121 +103,10 @@ p {
   background: var(--ss-paper);
 }
 
-/* ---------- 5. 상단 히어로 (큰 제목 + 소개 문구) ---------- */
-.perf-hero {
-  position: relative;
-  max-width: 1470px;
-  margin: 0 auto;
-  min-height: 220px;
-  padding: 82px 72px 42px;
-}
+/* ---------- 5. 상단 히어로 ----------
+   모양은 category.css의 .ss-category-hero / .ss-hero-title-dot / .ss-hero-tags 를 그대로 사용 */
 
-.perf-hero .ss-hero-crumb {
-  color: var(--ss-blue);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .12em;
-}
-
-.perf-hero .ss-hero-crumb [aria-current="page"] {
-  color: inherit;
-}
-
-.perf-hero .ss-hero-title {
-  margin: 20px 0 14px;
-  color: var(--ss-ink);
-  font-size: 105px;
-  font-weight: 900;
-  line-height: .94;
-  letter-spacing: -.075em;
-}
-
-/* 제목 끝의 점 */
-.perf-hero .perf-title-dot {
-  color: var(--ss-blue);
-  margin-left: .1em;
-}
-
-/* 오른쪽 분야 목록 */
-.perf-tags {
-  position: absolute;
-  z-index: 2;
-  right: 72px;
-  bottom: 78px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-align: right;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .16em;
-  line-height: 1.7;
-  color: var(--ss-ink);
-}
-
-/* 추천 배너 자리: 모양은 공통 .ss-feature-banner--editorial, 여기는 바깥 여백과 이미지 맞춤만 */
+/* 캐러셀 자리: 바깥 여백만 정한다 (캐러셀 모양은 carousel.css) */
 .perf-feature {
   padding: 8px 72px 64px;
-}
-
-/* 이미지가 배너 높이를 늘리지 않도록 칸에 꽉 채움 */
-.perf-feature .ss-feature-banner-art img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ---------- 6. 반응형: 1200px / 800px / 480px ---------- */
-@media (max-width: 1200px) {
-  .perf-hero {
-    padding: 60px 40px 42px;
-  }
-
-  .perf-hero .ss-hero-title {
-    font-size: 90px;
-  }
-
-  .perf-tags {
-    right: 40px;
-  }
-
-  .perf-feature {
-    padding: 8px 40px 64px;
-  }
-}
-
-@media (max-width: 800px) {
-  .perf-hero {
-    min-height: 0;
-    padding: 42px 22px 90px;
-  }
-
-  .perf-hero .ss-hero-title {
-    font-size: 64px;
-  }
-
-  /* 좁은 화면에서는 오른쪽 분야 목록 숨김 */
-  .perf-tags {
-    display: none;
-  }
-
-  .perf-feature {
-    padding: 8px 22px 64px;
-  }
-
-  .ss-catalog {
-    padding-top: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .perf-hero .ss-hero-title {
-    font-size: 44px;
-  }
 }
