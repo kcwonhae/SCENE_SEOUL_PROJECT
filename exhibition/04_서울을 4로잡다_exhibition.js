@@ -16,6 +16,7 @@ fetch('../data/04_서울을 4로잡다_exhibition.json')
   .then(items => {
     // JSON이 배열이면 그대로, { "exhibitions": [ ... ] } 모양이면 그 안의 배열을 꺼낸다
     exhibitionItems = items.length ? items : (items.exhibitions || []);
+    sortExhibitions(exhibitionItems);   // 진행 중인 전시 먼저
     selectedGenre = localStorage.getItem(EXHIBITION_GENRE_KEY) || 'all';
     renderExhibitionList();
   })
@@ -25,6 +26,56 @@ fetch('../data/04_서울을 4로잡다_exhibition.json')
   });
 
 
+/* ---------- 1-1. 진행 중인 전시 먼저 보이게 정렬 ---------- */
+// 오늘 날짜를 JSON 과 같은 "2026-11-27" 모양의 글자로 만든다
+function getTodayText() {
+  const now = new Date();
+  let month = String(now.getMonth() + 1);
+  let day = String(now.getDate());
+  if (month.length === 1) {
+    month = '0' + month;
+  }
+  if (day.length === 1) {
+    day = '0' + day;
+  }
+  return now.getFullYear() + '-' + month + '-' + day;
+}
+
+// 순서: ① 진행 중 (곧 끝나는 순) → ② 개막 예정 (곧 시작하는 순)
+// 날짜가 "2026-11-27" 모양이라 글자끼리 크기 비교만 해도 날짜 순서와 같다
+function sortExhibitions(list) {
+  const today = getTodayText();
+
+  list.sort(function (a, b) {
+    const aOpen = a.startDate <= today;   // 이미 시작했으면 진행 중
+    const bOpen = b.startDate <= today;
+
+    // 진행 중인 전시를 앞으로
+    if (aOpen && !bOpen) {
+      return -1;
+    }
+    if (!aOpen && bOpen) {
+      return 1;
+    }
+
+    // 둘 다 진행 중이면 종료일이 빠른 순, 둘 다 예정이면 시작일이 빠른 순
+    let aDate = a.startDate;
+    let bDate = b.startDate;
+    if (aOpen) {
+      aDate = a.endDate;
+      bDate = b.endDate;
+    }
+    if (aDate < bDate) {
+      return -1;
+    }
+    if (aDate > bDate) {
+      return 1;
+    }
+    return 0;
+  });
+}
+
+
 /* ---------- 2. 분류와 검색어에 맞는 전시만 고르기 ---------- */
 function getFilteredExhibitions() {
   const result = [];
@@ -32,7 +83,7 @@ function getFilteredExhibitions() {
     const item = exhibitionItems[i];
     const genre = item.subCategory || '';
     const matchesGenre = selectedGenre === 'all' || genre === selectedGenre;
-    const text = (item.title + ' ' + item.location + ' ' + item.district + ' ' + item.description).toLowerCase();
+    const text = (item.title + ' ' + item.location + ' ' + item.district).toLowerCase();
     if (matchesGenre && text.includes(searchWord)) {
       result.push(item);
     }
@@ -55,8 +106,17 @@ function renderExhibitionCard(item) {
   imageBox.className = 'ss-card-image';
   const image = document.createElement('img');
   image.src = item.image;
-  image.alt = item.imageAlt || `${item.title} 포스터`;
+  // 이미지 설명: JSON 에 imageAlt 가 있으면 그것을, 없으면 "제목 포스터"
+  if (item.imageAlt) {
+    image.alt = item.imageAlt;
+  } else {
+    image.alt = item.title + ' 포스터';
+  }
   image.setAttribute('loading', 'lazy');
+  // 외부 이미지 주소가 막히면 깨진 아이콘 대신 회색 배경만 보이게
+  image.addEventListener('error', () => {
+    image.style.visibility = 'hidden';
+  });
   imageBox.appendChild(image);
 
   const heartLabel = document.createElement('label');
