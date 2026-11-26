@@ -12,24 +12,29 @@
 
     <title>SCENE:SEOUL | SEOUL MAP</title>
 
-    <!-- 공통 CSS -->
+    <!-- 공통 CSS → 카테고리 공통 → 언어 메뉴 → 로그인 → 지도 전용 -->
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
     <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
     <link rel="stylesheet" href="../map/04_서울을 4로잡다_map.css">
 
     <!-- 실제 지도: Leaflet + OpenStreetMap (※ 수업 외 라이브러리, 키 발급 불필요) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- 헤더 공통 기능: 언어 메뉴 열기/닫기, 날씨 아이콘 -->
+    <script src="../js/04_서울을 4로잡다_language.js" defer></script>
+    <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
 </head>
 
-<body id="page">
+<body id="top">
 
     <!-- 01. 공통 헤더 -->
-     <header class="ss-header">
+    <header class="ss-header">
         <a class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html" aria-label="씬 서울 홈">
             SCENE<span class="ss-accent">:</span>SEOUL
         </a>
-       
+
         <nav aria-label="메인 메뉴" class="ss-nav">
             <a href="../main/04_서울을 4로잡다_index.html">HOME</a>
             <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
@@ -42,75 +47,54 @@
 
         <div class="ss-header-actions">
             <span class="ss-header-quick-icons">
-                <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
-                    <svg
-                        aria-hidden="true"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-width="1.8"
-                        viewBox="0 0 24 24">
-
-                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
-                        <path d="m16 16 5 5"></path>
-                    </svg>
-                </button>
-
-                <span aria-label="언어: 한국어" class="ss-language">
-                    <svg
-                        aria-hidden="true"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        viewBox="0 0 24 24"
-                        >
+                <!-- 언어 선택 (language.js 가 열기/닫기, 실제 번역 없음) -->
+                <span class="ss-language" role="button" tabindex="0" aria-label="언어 선택" aria-expanded="false" aria-haspopup="true">
+                    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9"></circle>
                         <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
                     </svg>
                     <span>KR</span>
+                    <ul class="ss-language-menu" aria-label="언어 목록" hidden>
+                        <li class="ss-language-option is-current">한국어 <span aria-hidden="true">✓</span></li>
+                        <li class="ss-language-option">English</li>
+                        <li class="ss-language-option">日本語</li>
+                        <li class="ss-language-option">中文</li>
+                    </ul>
                 </span>
             </span>
 
-            <a class="header-login" id="login-link" href="#">LOGIN</a>
+            <button class="header-login" type="button">LOGIN</button>
             <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
 
-            <span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
-                <svg
-                    aria-hidden="true"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.75"
-                    viewBox="0 0 24 24"
-                >
+            <!-- 날씨 (weather.js 가 id 로 찾아서 아이콘과 설명을 바꿈) -->
+            <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중">
+                <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="1.75" viewBox="0 0 24 24">
                     <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
                     <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
                 </svg>
             </span>
         </div>
     </header>
-    
+
     <!-- 02. 메인 콘텐츠 -->
     <main class="ss-page map-page">
 
-        <!-- 페이지 소개 (공연 페이지 상단 히어로와 같은 구조 · 공통 클래스 함께 사용) -->
-        <section class="map-intro" aria-labelledby="page-title">
-
-            <nav class="map-eyebrow ss-hero-crumb ss-entrance" aria-label="현재 위치">
-                <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a><span aria-hidden="true">/</span><span
-                    aria-current="page">MAP</span>
+        <!-- 페이지 소개 (공통 카테고리 상단: category.css 의 .ss-category-hero) -->
+        <section class="ss-category-hero map-intro" aria-labelledby="page-title">
+            <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
+                <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">MAP</span>
             </nav>
 
             <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="page-title">Seoul Map<span
-                    class="title-accent">.</span></h1>
+                    class="ss-hero-title-dot">.</span></h1>
 
-            <div class="intro-bottom">
-                <p class="edition ss-entrance ss-entrance--delay-3" aria-hidden="true">
-                    SEOUL, KOREA<br>
-                    MAP GUIDE · 2026
-                </p>
-            </div>
+            <ul class="ss-hero-tags ss-entrance ss-entrance--delay-3" aria-hidden="true">
+                <li>SEOUL, KOREA</li>
+                <li>MAP GUIDE · 2026</li>
+            </ul>
         </section>
 
 
@@ -118,9 +102,7 @@
         <section class="map-section" id="seoul-map-section" aria-labelledby="map-heading">
 
             <div class="map-topline">
-                <div>
-                    <h2 id="map-heading">서울의 문화 지도</h2>
-                </div>
+                <h2 id="map-heading">서울의 문화 지도</h2>
                 <div class="map-topline-side">
                     <!-- 마커 색 안내 (색은 map.js 의 TYPE_COLOR 와 같게) -->
                     <ul class="map-legend" aria-label="지도 마커 색 안내">
@@ -143,36 +125,34 @@
             <div class="result-box" aria-live="polite">
 
                 <div class="result-head">
-                    <div>
-                        <p class="result-eyebrow">YOUR NEXT SCENE</p>
-                        <h3 id="result-title">서울 전체</h3>
-                        <p class="result-count" id="result-count"></p>
-                    </div>
-
-                    <div class="result-tools">
-                        <div class="search-box">
-                            <input type="search" id="search-input" placeholder="제목으로 검색" aria-label="제목으로 검색">
-                            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <circle cx="10.8" cy="10.8" r="6.6"></circle>
-                                <path d="m16 16 5 5"></path>
-                            </svg>
-                        </div>
-                    </div>
+                    <h3 id="result-title">서울 전체</h3>
+                    <p class="result-count" id="result-count"></p>
                 </div>
 
-                <div class="district-filters" aria-label="콘텐츠 카테고리 필터">
-                    <input type="radio" name="district-filter" id="filter-all" checked>
-                    <label for="filter-all">전체</label>
-                    <input type="radio" name="district-filter" id="filter-exhibition">
-                    <label for="filter-exhibition">전시</label>
-                    <input type="radio" name="district-filter" id="filter-performance">
-                    <label for="filter-performance">공연</label>
-                    <input type="radio" name="district-filter" id="filter-popup">
-                    <label for="filter-popup">팝업</label>
-                    <input type="radio" name="district-filter" id="filter-event">
-                    <label for="filter-event">이벤트</label>
-                    <input type="radio" name="district-filter" id="filter-saved">
-                    <label for="filter-saved">저장한 것</label>
+                <!-- 카테고리 필터(왼쪽) + 검색(오른쪽)을 한 줄에: 공통 .ss-toolbar -->
+                <div class="ss-toolbar">
+                    <div class="district-filters" aria-label="콘텐츠 카테고리 필터">
+                        <input type="radio" name="district-filter" id="filter-all" checked>
+                        <label for="filter-all">전체</label>
+                        <input type="radio" name="district-filter" id="filter-exhibition">
+                        <label for="filter-exhibition">전시</label>
+                        <input type="radio" name="district-filter" id="filter-performance">
+                        <label for="filter-performance">공연</label>
+                        <input type="radio" name="district-filter" id="filter-popup">
+                        <label for="filter-popup">팝업</label>
+                        <input type="radio" name="district-filter" id="filter-event">
+                        <label for="filter-event">이벤트</label>
+                        <input type="radio" name="district-filter" id="filter-saved">
+                        <label for="filter-saved">저장한 것</label>
+                    </div>
+
+                    <div class="search-box">
+                        <input type="search" id="search-input" placeholder="제목으로 검색" aria-label="제목으로 검색">
+                        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="10.8" cy="10.8" r="6.6"></circle>
+                            <path d="m16 16 5 5"></path>
+                        </svg>
+                    </div>
                 </div>
 
                 <p class="status-note" id="status-note"></p>
@@ -183,11 +163,6 @@
                     <button type="button" class="scroll-btn" id="prev-btn" aria-label="이전">←</button>
                     <button type="button" class="scroll-btn" id="next-btn" aria-label="다음">→</button>
                 </div>
-                <button type="button" class="more-btn" id="more-btn" hidden>더 보기</button>
-
-                <p class="source-note">
-                    행사 정보 출처: 서울특별시 「서울시 문화행사 정보」 (서울 열린데이터광장 · 공공누리 제1유형)
-                </p>
             </div>
 
         </section>
@@ -197,23 +172,16 @@
     <!-- 04. 공통 푸터 -->
     <footer class="ss-site-footer">
         <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
-        <p>서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p>
         <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
     </footer>
 
-    <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동"><svg viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="m12 19 0-14m-6 6 6-6 6 6" />
+    <!-- 맨 위로 이동 -->
+    <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m12 19 0-14m-6 6 6-6 6 6" />
         </svg>
     </a>
-
-
-    <!-- 페이지 상단으로 이동 -->
-    <a
-        class="ss-back-to-top"
-        href="#"
-        aria-label="맨 위로 이동"
-    >↑</a>
 
     <!-- 순서: Leaflet → 공통 JS → 로그인 JS → 지도 JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

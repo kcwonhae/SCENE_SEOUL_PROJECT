@@ -1,10 +1,11 @@
 /* =====================================================
    SCENE:SEOUL | 서울 지도 페이지
-   - 전시 · 공연 · 이벤트: 서울 열린데이터광장 "서울시 문화행사 정보" Open API(culturalEventInfo)
-   - 팝업: 서울시 데이터에 팝업 분류가 없어서 우리 팀 팝업 JSON 에서 불러온다
+   - 데이터: 팀 JSON 4개 (전시 · 공연 · 팝업 · 이벤트)
+             common.js 의 SceneSeoul.loadAllItems() 로 불러온다 (추천 JSON 은 다른 페이지 항목과 겹쳐서 뺀다)
+   - 지도 위치: 장소 이름 → 좌표 표(VENUES)로 정확한 위치에 마커를 찍고,
+                표에 없는 장소는 구 중심 근처에 찍는다 (말풍선에 "구 단위 위치" 표시)
    - 로그인 / 찜: common.js 의 SceneSeoul 함수 사용 (로그인 화면은 login.js 담당)
    - 카드: category.css 의 공통 카드(.ss-card) 사용
-   - 데이터 출처: 서울특별시 (공공누리 제1유형 · 출처표시)
 
    HTML 에서 불러오는 순서
      leaflet.js → common.js → login.js → map.js
@@ -15,19 +16,6 @@
 
 /* ---------- 01. 설정 ---------- */
 
-const API = {
-    // 서울 열린데이터광장(data.seoul.go.kr)에서 발급받은 일반 인증키를 넣는다.
-    // 비어 있으면 아래 SAMPLE_URL 의 샘플 데이터를 사용한다.
-    // (GitHub 같은 공개 저장소에 올릴 때는 키를 지우고 올리기)
-    key: "7a6f6761786e69633634534b78674f",
-    service: "culturalEventInfo",
-    pageSize: 1000          // 한 번에 가져올 수 있는 최대 개수
-};
-
-const SAMPLE_URL = "04_서울을 4로잡다_map_data.json";              // API 를 못 쓸 때 쓰는 샘플
-const POPUP_URL = "../data/04_서울을 4로잡다_popup.json";          // 팝업은 팀 JSON (common.js 와 같은 경로)
-const FIRST_SHOW = 30;      // 처음에 보여줄 카드 수
-const MORE_SHOW = 30;       // 더 보기를 누를 때마다 추가되는 수
 
 const TYPE_LABEL = {
     exhibition: "EXHIBITION",
@@ -58,17 +46,81 @@ const GU_CENTER = {
 };
 const SEOUL_CENTER = [37.5665, 126.9780];
 
+// 장소 이름(일부) → [구, 위도, 경도]
+// JSON 의 location 글자 안에 이 이름이 들어 있으면 그 좌표에 마커를 찍는다 (위에서부터 먼저 맞는 것)
+const VENUES = [
+    // 전시
+    ["국립현대미술관 덕수궁", "중구", 37.5659, 126.9749],
+    ["국립현대미술관 서울", "종로구", 37.5788, 126.9802],
+    ["서울시립미술관 서소문", "중구", 37.5640, 126.9737],
+    ["북서울미술관", "노원구", 37.6407, 127.0665],
+    ["사진미술관", "도봉구", 37.6536, 127.0472],
+    ["예술의전당", "서초구", 37.4786, 127.0117],
+    ["롯데뮤지엄", "송파구", 37.5126, 127.1025],
+    ["퐁피두센터 한화", "영등포구", 37.5198, 126.9403],
+    ["아트조선스페이스", "중구", 37.5683, 126.9764],
+    ["세화미술관", "종로구", 37.5703, 126.9726],
+    ["해치마당", "종로구", 37.5730, 126.9768],
+    ["세종문화회관", "종로구", 37.5726, 126.9760],
+    ["세종대극장", "종로구", 37.5726, 126.9760],
+    ["광화문광장", "종로구", 37.5720, 126.9769],
+    ["국립고궁박물관", "종로구", 37.5765, 126.9752],
+    ["국립민속박물관", "종로구", 37.5813, 126.9792],
+    ["서울공예박물관", "종로구", 37.5764, 126.9840],
+    ["고희동미술관", "종로구", 37.5826, 126.9890],
+    ["오간수교", "중구", 37.5705, 127.0087],
+    ["국립중앙박물관", "용산구", 37.5240, 126.9804],
+    ["리움미술관", "용산구", 37.5384, 126.9990],
+    ["성북구립미술관", "성북구", 37.5915, 126.9946],
+    ["서소문성지", "중구", 37.5613, 126.9690],
+    ["스페이스K", "강서구", 37.5610, 126.8320],
+    // 공연
+    ["롯데콘서트홀", "송파구", 37.5130, 127.1020],
+    ["대학로극장 쿼드", "종로구", 37.5822, 127.0030],
+    ["예술공간 혜화", "종로구", 37.5826, 127.0019],
+    ["창경궁로 303", "종로구", 37.5830, 127.0010],
+    ["소월아트홀", "성동구", 37.5634, 127.0369],
+    ["용산아트홀", "용산구", 37.5323, 126.9905],
+    ["꿈의숲아트센터", "강북구", 37.6205, 127.0405],
+    ["어린이대공원", "광진구", 37.5480, 127.0750],
+    ["금호아트홀연세", "서대문구", 37.5650, 126.9385],
+    ["국립국악원", "서초구", 37.4775, 127.0090],
+    ["남산국악당", "중구", 37.5580, 126.9940],
+    ["구로아트밸리", "구로구", 37.4950, 126.8864],
+    ["중랑구청", "중랑구", 37.6063, 127.0926],
+    // 이벤트
+    ["서울광장", "중구", 37.5658, 126.9780],
+    ["레드로드", "마포구", 37.5548, 126.9225],
+    ["발산역", "강서구", 37.5585, 126.8375],
+    ["뚝섬한강공원", "광진구", 37.5292, 127.0670],
+    ["눈스퀘어", "중구", 37.5636, 126.9826],
+    ["서울상상나라", "광진구", 37.5490, 127.0790],
+    ["서울식물원", "강서구", 37.5694, 126.8350],
+    ["보신각", "종로구", 37.5700, 126.9835],
+    ["DDP", "중구", 37.5665, 127.0092],
+    // 팝업 (주소)
+    ["성수이로7가길", "성동구", 37.5440, 127.0555],
+    ["서울숲2길", "성동구", 37.5450, 127.0420],
+    ["아차산로5길", "성동구", 37.5444, 127.0552],
+    ["연무장길", "성동구", 37.5435, 127.0560],
+    ["성수일로4길", "성동구", 37.5437, 127.0550],
+    ["더현대 서울", "영등포구", 37.5259, 126.9284],
+    ["IFC몰", "영등포구", 37.5251, 126.9255],
+    ["아이파크몰", "용산구", 37.5296, 126.9645],
+    ["하이브", "용산구", 37.5245, 126.9645],
+    ["롯데월드몰", "송파구", 37.5126, 127.1025],
+    ["AK플라자 홍대", "마포구", 37.5576, 126.9245],
+    ["와우산로37길", "마포구", 37.5535, 126.9230]
+];
+
 
 /* ---------- 02. 상태 변수 ---------- */
 
-let allItems = [];              // 불러온 전체 콘텐츠 (API + 팝업 JSON)
-let seen = {};                  // 중복 확인용 { id: true }
+let allItems = [];              // 불러온 전체 콘텐츠 (전시 · 공연 · 팝업 · 이벤트 JSON)
 let currentDistrict = "";       // 선택한 구 ("" 이면 서울 전체)
 let currentType = "all";        // 선택한 카테고리
 let keyword = "";               // 검색어
-let showCount = FIRST_SHOW;     // 지금 화면에 보여주는 카드 수
 let loading = true;             // 데이터를 불러오는 중인지
-let popupError = "";            // 팝업 JSON 을 못 불러왔을 때 보여줄 안내
 let map;                        // Leaflet 지도
 let markerLayer;                // 마커를 모아두는 레이어
 
@@ -80,7 +132,6 @@ const resultTitle = document.getElementById("result-title");
 const resultCount = document.getElementById("result-count");
 const eventsBox = document.getElementById("events");
 const statusNote = document.getElementById("status-note");
-const moreBtn = document.getElementById("more-btn");
 const searchInput = document.getElementById("search-input");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
@@ -99,11 +150,6 @@ function hasText(text, word) {
 function getToday() {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), now.getDate());
-}
-
-// "2026-11-10 00:00:00.0" 또는 "2026-11-10" → "2026-11-10"
-function toDateText(text) {
-    return String(text || "").slice(0, 10);
 }
 
 // "2026-11-10" → Date
@@ -127,81 +173,60 @@ function findGu(text) {
 
 /* ---------- 05. 데이터 정리 ---------- */
 
-// 서울시 분류(CODENAME)로 전시 / 공연 / 이벤트를 정한다
-// (팝업은 서울시 데이터에 분류가 없어서 팝업 JSON 에서 따로 불러온다)
-function getType(code) {
-    if (hasText(code, "전시")) return "exhibition";
-
-    const stage = ["연극", "콘서트", "클래식", "뮤지컬", "오페라", "무용", "국악", "독주", "독창"];
-    for (let i = 0; i < stage.length; i++) {
-        if (hasText(code, stage[i])) return "performance";
+// 장소 이름으로 좌표 표(VENUES)에서 찾기 (없으면 null)
+function findVenue(text) {
+    for (const venue of VENUES) {
+        if (hasText(text || "", venue[0])) {
+            return venue;
+        }
     }
-    return "event";
-}
-
-// 위도/경도 값이 서로 바뀌어 들어오는 경우가 있어서 값의 범위로 구분한다
-function getLatLng(a, b) {
-    a = parseFloat(a);
-    b = parseFloat(b);
-    if (a > 33 && a < 39 && b > 124 && b < 132) return [a, b];
-    if (b > 33 && b < 39 && a > 124 && a < 132) return [b, a];
     return null;
 }
 
-// 사이트가 https 일 때 http 이미지는 브라우저가 막으므로 주소를 맞춘다
-function fixImage(img) {
-    img = img || "";
-    if (location.protocol === "https:" && img.slice(0, 7) === "http://") {
-        img = img.replace("http://", "https://");
-    }
-    return img;
+// 좌표를 모르는 콘텐츠는 구 중심에 찍는데, 한 점에 겹치면 하나만 보이므로
+// 같은 구 안에서 순서대로 바둑판처럼 조금씩 옮겨 찍는다 (한 줄에 5개, 간격 약 150m)
+const guCount = {};
+
+function spreadPoint(gu) {
+    const n = guCount[gu] || 0;
+    guCount[gu] = n + 1;
+
+    const row = Math.floor(n / 5);
+    const col = n % 5;
+    const gap = 0.0015;
+    return [GU_CENTER[gu][0] - row * gap, GU_CENTER[gu][1] + (col - 2) * gap];
 }
 
-// 서울시 API 한 줄 → 카드 데이터
-// 날짜는 common.js 약속대로 "YYYY-MM-DD" 글자로 맞춰 두고, 기간 글자는 SceneSeoul.formatPeriod 로 만든다
-function fromApi(row) {
-    const point = getLatLng(row.LOT, row.LAT);
-    const startDate = toDateText(row.STRTDATE);
-    let endDate = toDateText(row.END_DATE);
+// JSON 한 개 → 지도에서 쓰는 데이터
+// (common.js 약속: id, category, title, startDate, endDate, location, image, description, sourceUrl)
+function toItem(data) {
+    const venue = findVenue(data.location);
 
-    // 종료일이 시작일보다 빠른 잘못된 데이터가 있어서 시작일로 맞춘다
-    if (endDate < startDate) endDate = startDate;
-
-    // 상시 전시를 "2099-12-31" 로 넣거나 "2626" 처럼 연도를 잘못 적은 데이터가 있어서
-    // 시작일보다 5년 넘게 뒤에 끝나면 "상시 운영" 으로 본다 (endDate 가 "" 이면 formatPeriod 가 "상시 운영")
-    if (parseInt(endDate.slice(0, 4)) - parseInt(startDate.slice(0, 4)) > 5) endDate = "";
-
-    return {
-        id: (row.TITLE || "") + "|" + row.STRTDATE + "|" + (row.PLACE || ""),
-        type: getType(row.CODENAME || ""),
-        gu: (row.GUNAME || "").replace(" ", ""),
-        title: row.TITLE || "",
-        place: row.PLACE || "",
-        startDate: startDate,
-        endDate: endDate,
-        img: fixImage(row.MAIN_IMG),
-        url: row.ORG_LINK || row.HMPG_ADDR || "",
-        lat: point ? point[0] : null,
-        lng: point ? point[1] : null
-    };
-}
-
-// 팝업 JSON 한 개 → 카드 데이터
-// 좌표(lat, lng)가 있으면 그 위치에, 없으면 주소에 있는 구의 중심에 마커를 찍는다
-function fromPopup(data) {
+    // 구 이름: district 가 "중구" 처럼 구 이름이면 그대로, 아니면 장소 표 → 주소 순서로 찾는다
     let gu = "";
     if (GU_CENTER[data.district]) {
         gu = data.district;
+    } else if (venue) {
+        gu = venue[1];
     } else {
         gu = findGu(data.location);
     }
 
-    let point = getLatLng(data.lat, data.lng);
-    if (!point && gu) point = GU_CENTER[gu];
+    // 위치: JSON 의 lat/lng → 장소 표 → 구 중심 근처 순서
+    let point = null;
+    let exact = true;
+    if (data.lat && data.lng) {
+        point = [parseFloat(data.lat), parseFloat(data.lng)];
+    } else if (venue) {
+        point = [venue[2], venue[3]];
+    } else if (gu) {
+        point = spreadPoint(gu);
+        exact = false;
+    }
 
     return {
         id: data.id,
-        type: "popup",
+        type: data.category,
         gu: gu,
         title: data.title || "",
         place: data.location || "",
@@ -210,25 +235,27 @@ function fromPopup(data) {
         img: data.image || "",
         url: data.officialUrl || data.sourceUrl || "",
         lat: point ? point[0] : null,
-        lng: point ? point[1] : null
+        lng: point ? point[1] : null,
+        exact: exact
     };
 }
 
-// 이미 끝난 행사와 중복 데이터를 걸러서 allItems 에 더한다
-function addItems(list) {
+// 추천 항목 · 지도에서 쓰지 않는 분류 · 날짜가 없는 데이터 · 이미 끝난 콘텐츠를 거른다
+function cleanUp(list) {
     const today = getToday();
+    const result = [];
 
     for (const item of list) {
-        if (item.startDate.length < 10) continue;          // 날짜가 없는 데이터
+        if (!item.id || item.id.slice(0, 10) === "recommend-") continue;
+        if (!TYPE_LABEL[item.type] || item.startDate.length < 10) continue;
         item.start = toDate(item.startDate);
         // 종료일이 빈 문자열이면 상시 운영 → 아주 먼 날짜로 두고 정렬할 때 맨 뒤로
         item.end = item.endDate ? toDate(item.endDate) : new Date(9999, 11, 31);
 
-        if (item.end < today) continue;                     // 끝난 행사
-        if (seen[item.id]) continue;                        // 중복
-        seen[item.id] = true;
-        allItems.push(item);
+        if (item.end < today) continue;         // 끝난 콘텐츠
+        result.push(item);
     }
+    return result;
 }
 
 // 진행 중인 것(곧 끝나는 순) → 예정인 것(곧 시작하는 순)
@@ -240,116 +267,6 @@ function sortItems(list) {
         if (aOn !== bOn) return aOn ? -1 : 1;
         return aOn ? a.end - b.end : a.start - b.start;
     });
-}
-
-
-/* ---------- 06. 데이터 불러오기 (13주차 fetch / JSON) ---------- */
-
-// 팝업 JSON 불러오기. 다 읽으면 next() 실행
-function loadPopups(next) {
-    fetch(POPUP_URL)
-        .then(response => response.json())
-        .then(data => {
-            // JSON 이 배열이면 그대로, { "키": [ ... ] } 모양이면 그 안의 배열을 꺼낸다
-            let list = data;
-            if (!data.length) {
-                for (const key in data) {
-                    list = data[key];
-                }
-            }
-            addItems(list.map(fromPopup));
-            next();
-        })
-        .catch(error => {
-            console.error("팝업 JSON 을 불러오지 못했어요.", POPUP_URL, error);
-            if (location.protocol === "file:") {
-                popupError = "팝업 정보를 불러오지 못했어요. HTML 파일을 직접 열면(file://) JSON 을 읽을 수 없으니 Live Server 로 열어 주세요.";
-            } else {
-                popupError = "팝업 정보를 불러오지 못했어요. 파일 경로를 확인해 주세요: " + POPUP_URL;
-            }
-            next();
-        });
-}
-
-// 서울시 Open API 를 1000건씩 차례로 불러온다. 주소 형식: /인증키/json/서비스명/시작번호/끝번호/
-// 전체가 2만 건 가까이 돼서, 첫 묶음을 받자마자 화면에 보여주고 나머지는 받는 대로 쌓는다.
-function loadSeoulApi(start, total) {
-    const end = Math.min(start + API.pageSize - 1, total);
-
-    // 사이트가 https 일 때 http 요청을 하면 브라우저가 막으므로 프로토콜을 맞춘다
-    const protocol = location.protocol === "https:" ? "https" : "http";
-    const url = `${protocol}://openapi.seoul.go.kr:8088/${API.key}/json/${API.service}/${start}/${end}/`;
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            const body = data[API.service];
-
-            // 인증키 오류 등은 culturalEventInfo 없이 RESULT 만 내려온다
-            if (!body || body.RESULT.CODE !== "INFO-000") {
-                console.error("서울시 API 오류:", body ? body.RESULT.MESSAGE : data.RESULT);
-                apiFailed();
-                return;
-            }
-
-            total = body.list_total_count;
-            addItems(body.row.map(fromApi));
-            statusNote.innerText = `행사 정보를 불러오는 중이에요... (${Math.min(end, total)} / ${total})`;
-
-            if (start === 1) {
-                render();               // 첫 묶음은 바로 보여주기
-                drawMarkers();
-            } else {
-                // 나머지 묶음은 개수만 바꾸고 카드는 다 받은 뒤에 다시 그린다
-                // (받는 도중에 카드를 다시 그리면 보고 있던 가로 스크롤 위치가 맨 앞으로 돌아가서)
-                resultCount.innerText = `총 ${getFiltered(true).length}개`;
-            }
-
-            if (end < total) {
-                loadSeoulApi(end + 1, total);    // 다음 1000건
-            } else {
-                finishLoading(false);
-            }
-        })
-        .catch(error => {
-            console.error("서울시 API 호출 실패:", error);
-            apiFailed();
-        });
-}
-
-// API 를 하나도 못 받았으면 샘플로 대체, 일부라도 받았으면 받은 것까지만 보여준다
-function apiFailed() {
-    const fromSeoul = allItems.filter(item => item.type !== "popup");
-    if (fromSeoul.length === 0) {
-        loadSample();
-    } else {
-        finishLoading(false);
-    }
-}
-
-// 키가 없거나 API 가 막혔을 때 쓰는 샘플 (API 와 같은 구조의 JSON 파일)
-function loadSample() {
-    fetch(SAMPLE_URL)
-        .then(response => response.json())
-        .then(data => {
-            addItems(data[API.service].row.map(fromApi));
-            finishLoading(true);
-        })
-        .catch(error => {
-            console.error("샘플 데이터를 불러오지 못했어요.", error);
-            finishLoading(false);
-        });
-}
-
-function finishLoading(isSample) {
-    loading = false;
-    let note = isSample
-        ? "지금은 샘플 데이터를 보여주고 있어요. 실제 행사 정보는 API 인증키를 넣으면 연결돼요."
-        : "";
-    if (popupError) note = note ? note + " / " + popupError : popupError;
-    statusNote.innerText = note;
-    render();
-    drawMarkers();
 }
 
 
@@ -431,7 +348,6 @@ function makeCard(item) {
     imageBox.className = "ss-card-image";
 
     const img = document.createElement("img");
-    img.setAttribute("loading", "lazy");                // 화면에 가까워질 때 불러오기
     img.alt = item.title + " 포스터";
     if (item.img) {
         img.src = item.img;
@@ -524,7 +440,7 @@ function render() {
         const empty = document.createElement("p");
         empty.className = "events-empty";
         if (loading) {
-            empty.innerText = "행사 정보를 불러오는 중이에요...";
+            empty.innerText = "콘텐츠를 불러오는 중이에요...";
         } else if (currentType === "saved") {
             empty.innerText = SceneSeoul.getUser()
                 ? "저장한 콘텐츠가 없어요. 마음에 드는 카드의 하트를 눌러보세요."
@@ -533,15 +449,13 @@ function render() {
             empty.innerText = "조건에 맞는 콘텐츠가 없어요.";
         }
         eventsBox.appendChild(empty);
-        moreBtn.hidden = true;
         return;
     }
 
-    const shown = list.slice(0, showCount);
-    for (const item of shown) {
+    // JSON 데이터는 100개 정도라 전부 한 줄에 그리고, 좌우 스크롤로 본다
+    for (const item of list) {
         eventsBox.appendChild(makeCard(item));
     }
-    moreBtn.hidden = list.length <= showCount;
 }
 
 
@@ -575,6 +489,14 @@ function makeMarkerPopup(item) {
     box.appendChild(name);
     box.appendChild(date);
 
+    // 정확한 좌표가 없는 장소는 구 단위 위치라는 것을 알려준다
+    if (!item.exact) {
+        const note = document.createElement("div");
+        note.className = "popup-note";
+        note.innerText = item.gu + " 안 대략적인 위치예요";
+        box.appendChild(note);
+    }
+
     if (item.url) {
         const link = document.createElement("a");
         link.className = "popup-link";
@@ -591,7 +513,7 @@ function makeMarkerPopup(item) {
 function drawMarkers() {
     markerLayer.clearLayers();
     for (const item of getFiltered(false)) {
-        if (item.lat === null) continue;        // 좌표가 없는 행사는 목록에만 나온다
+        if (item.lat === null) continue;        // 위치를 모르는 콘텐츠는 목록에만 나온다
 
         const marker = L.circleMarker([item.lat, item.lng], {
             radius: 7,
@@ -638,7 +560,6 @@ function makeChips() {
 
 function selectDistrict(gu, fromMarker) {
     currentDistrict = gu;
-    showCount = FIRST_SHOW;
 
     for (const btn of chipBox.querySelectorAll("button")) {
         btn.className = btn.getAttribute("data-name") === gu ? "is-selected" : "";
@@ -661,7 +582,6 @@ function selectDistrict(gu, fromMarker) {
 for (const radio of filterRadios) {
     radio.addEventListener("change", function () {
         currentType = radio.id.replace("filter-", "");      // "filter-popup" → "popup"
-        showCount = FIRST_SHOW;
         render();
         eventsBox.scrollLeft = 0;
         drawMarkers();
@@ -675,16 +595,10 @@ searchInput.addEventListener("input", function () {
     clearTimeout(searchTimer);
     searchTimer = setTimeout(function () {
         keyword = searchInput.value;
-        showCount = FIRST_SHOW;
         render();
         eventsBox.scrollLeft = 0;
         drawMarkers();
     }, 250);
-});
-
-moreBtn.addEventListener("click", function () {
-    showCount += MORE_SHOW;
-    render();
 });
 
 // 카드 좌우 이동 (부드럽게 움직이는 건 CSS scroll-behavior: smooth)
@@ -709,23 +623,23 @@ function start() {
     makeChips();
     selectDistrict("", true);
 
-    // 팝업 JSON 을 먼저 읽고, 그다음 서울시 API (키가 없으면 샘플)
-    loadPopups(function () {
+    // common.js 가 팀 JSON 들을 차례로 읽어서 하나의 배열로 넘겨준다
+    SceneSeoul.loadAllItems(function (list) {
+        allItems = cleanUp(list.map(toItem));
+        loading = false;
+
+        if (allItems.length === 0 && location.protocol === "file:") {
+            statusNote.innerText = "HTML 파일을 직접 열면(file://) JSON 을 읽을 수 없어요. Live Server 로 열어 주세요.";
+        }
+
         render();
         drawMarkers();
 
-        if (API.key) {
-            statusNote.innerText = "행사 정보를 불러오는 중이에요...";
-            loadSeoulApi(1, API.pageSize);       // 전체 개수는 첫 응답을 받은 뒤에 알 수 있다
-        } else {
-            loadSample();
-        }
+        // 주소 뒤에 #성동구 처럼 붙어 있으면 그 구를 바로 선택
+        // ※ 수업 외: location.hash, decodeURIComponent (한글 주소 되돌리기)
+        const name = decodeURIComponent(location.hash.replace("#", ""));
+        if (GU_CENTER[name]) selectDistrict(name);
     });
-
-    // 주소 뒤에 #성동구 처럼 붙어 있으면 그 구를 바로 선택
-    // ※ 수업 외: location.hash, decodeURIComponent (한글 주소 되돌리기)
-    const name = decodeURIComponent(location.hash.replace("#", ""));
-    if (GU_CENTER[name]) selectDistrict(name);
 }
 
 start();
