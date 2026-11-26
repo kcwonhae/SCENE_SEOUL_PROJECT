@@ -1,9 +1,9 @@
 /* =====================================================
    SCENE:SEOUL | 서울 지도 페이지
    - 데이터: 팀 JSON 4개 (전시 · 공연 · 팝업 · 이벤트)
-             common.js 의 SceneSeoul.loadAllItems() 로 불러온다 (추천 JSON 은 다른 페이지 항목과 겹쳐서 뺀다)
+             이 파일의 loadAllItems() 가 fetch 로 직접 불러온다.
    - 지도 위치: 장소 이름 → 좌표 표(VENUES)로 정확한 위치에 마커를 찍고,
-                표에 없는 장소는 구 중심 근처에 찍는다
+                표에 없는 장소는 구 중심 근처에 찍는다.
    - 로그인 / 찜: common.js 의 SceneSeoul 함수 사용 (로그인 화면은 login.js 담당)
    - 카드: category.css 의 공통 카드(.ss-card) 사용
 
@@ -626,15 +626,48 @@ window.addEventListener("storage", refreshSavedCards);       // 다른 탭에서
 window.addEventListener("pageshow", clearGuestHearts);       // 뒤로가기로 돌아왔을 때
 
 
-/* ---------- 13. 시작 ---------- */
+/* ---------- 13. 데이터 불러오기 (13주차 fetch) ---------- */
+
+// 지도에 쓰는 팀 JSON 4개 (전시 페이지와 같은 ../data 폴더)
+const DATA_FILES = [
+    "../data/04_서울을 4로잡다_exhibition.json",
+    "../data/04_서울을 4로잡다_performance.json",
+    "../data/04_서울을 4로잡다_popup.json",
+    "../data/04_서울을 4로잡다_event.json"
+];
+
+// JSON 4개를 모두 읽어서 하나의 배열로 합친 뒤 done(배열) 을 부른다
+// 파일 하나가 실패해도 나머지는 그대로 보여준다
+function loadAllItems(done) {
+    let all = [];
+    let left = DATA_FILES.length;          // 아직 다 읽지 못한 파일 수
+
+    for (const file of DATA_FILES) {
+        fetch(file)
+            .then(response => response.json())
+            .then(list => {
+                all = all.concat(list);
+            })
+            .catch(error => {
+                console.error("데이터를 불러오지 못했어요:", file, error);
+            })
+            .then(() => {
+                left--;
+                if (left === 0) done(all);   // 4개 모두 끝나면 한 번만 실행
+            });
+    }
+}
+
+
+/* ---------- 14. 시작 ---------- */
 
 function start() {
     initMap();
     makeOptions();
     selectDistrict("", true);
 
-    // common.js 가 팀 JSON 들을 차례로 읽어서 하나의 배열로 넘겨준다
-    SceneSeoul.loadAllItems(function (list) {
+    // 팀 JSON 들을 모두 읽어서 하나의 배열로 넘겨받는다
+    loadAllItems(function (list) {
         allItems = cleanUp(list.map(toItem));
         loading = false;
 
