@@ -99,10 +99,11 @@
 
 
         <!-- 03. 지도 및 콘텐츠 -->
-        <section class="map-section" id="seoul-map-section" aria-labelledby="map-heading">
+        <section class="map-section" id="seoul-map-section" aria-label="서울의 문화 지도">
 
             <div class="map-topline">
-                <h2 id="map-heading">서울의 문화 지도</h2>
+                <!-- 구 선택 드롭다운 (map.js 가 서울 전체 + 25개 구 옵션을 채움) -->
+                <select class="district-select" id="district-select" aria-label="서울 자치구 선택"></select>
                 <div class="map-topline-side">
                     <!-- 마커 색 안내 (색은 map.js 의 TYPE_COLOR 와 같게) -->
                     <ul class="map-legend" aria-label="지도 마커 색 안내">
@@ -111,15 +112,12 @@
                         <li><span class="map-legend-dot is-popup" aria-hidden="true"></span>팝업</li>
                         <li><span class="map-legend-dot is-event" aria-hidden="true"></span>이벤트</li>
                     </ul>
-                    <p class="map-hint">지도의 마커나 구 이름을 눌러보세요</p>
+                    <p class="map-hint">지도의 마커를 누르거나 구를 골라보세요</p>
                 </div>
             </div>
 
-            <!-- 지도 -->
-            <div class="map-box">
-                <div id="leaflet-map" role="application" aria-label="서울 문화 지도"></div>
-                <div class="district-chips" id="district-chips" aria-label="서울 자치구 선택"></div>
-            </div>
+            <!-- 지도 (테두리 없이 섹션 폭 전체) -->
+            <div id="leaflet-map" role="application" aria-label="서울 문화 지도"></div>
 
             <!-- 지도 아래 콘텐츠 목록 (map.js가 채움) -->
             <div class="result-box" aria-live="polite">
