@@ -1,5 +1,5 @@
-/* SCENE:SEOUL | 로그인 / 로그아웃 (전체 페이지 공통)
-// common.js 를 먼저 불러오지 않았을 때 바로 알 수 있게 안내
+/* SCENE:SEOUL | 로그인 / 로그아웃 (전체 페이지 공통) */
+// common.js 를 먼저 불러오지 않았을 때 바로 알 수 있게 안내 //
 if (!window.SceneSeoul || typeof SceneSeoul.getUser !== 'function') {
     console.error('common.js 를 login.js 보다 먼저 불러와 주세요.');
 }
