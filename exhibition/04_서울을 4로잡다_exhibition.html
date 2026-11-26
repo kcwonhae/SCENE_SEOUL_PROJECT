@@ -12,12 +12,17 @@
 
     <title>SCENE:SEOUL | Exhibitions</title>
 
-    <!-- 공통 디자인 → 카테고리 공통 → 캐러셀 → 전시 전용 → 로그인 CSS -->
+    <!-- 공통 디자인 → 카테고리 공통 → 언어 메뉴 → 캐러셀 → 전시 전용 → 로그인 CSS -->
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_carousel.css">
     <link rel="stylesheet" href="../exhibition/04_서울을 4로잡다_exhibition.css">
     <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
+
+    <!-- 헤더 공통 기능: 언어 메뉴 열기/닫기, 날씨 아이콘 -->
+    <script src="../js/04_서울을 4로잡다_language.js" defer></script>
+    <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
 </head>
 
 <body id="top">
@@ -42,48 +47,29 @@
 
         <div class="ss-header-actions">
             <span class="ss-header-quick-icons">
-                <button aria-label="검색" class="ss-icon-button" title="검색" type="button">
-                    <svg
-                        aria-hidden="true"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-width="1.8"
-                        viewBox="0 0 24 24">
-
-                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
-                        <path d="m16 16 5 5"></path>
-                    </svg>
-                </button>
-
-                <span aria-label="언어: 한국어" class="ss-language">
-                    <svg
-                        aria-hidden="true"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        viewBox="0 0 24 24"
-                        >
+                <!-- 언어 선택 (language.js 가 열기/닫기, 실제 번역 없음) -->
+                <span class="ss-language" role="button" tabindex="0" aria-label="언어 선택" aria-expanded="false" aria-haspopup="true">
+                    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9"></circle>
                         <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
                     </svg>
                     <span>KR</span>
+                    <ul class="ss-language-menu" aria-label="언어 목록" hidden>
+                        <li class="ss-language-option is-current">한국어 <span aria-hidden="true">✓</span></li>
+                        <li class="ss-language-option">English</li>
+                        <li class="ss-language-option">日本語</li>
+                        <li class="ss-language-option">中文</li>
+                    </ul>
                 </span>
             </span>
 
             <button class="header-login" type="button">LOGIN</button>
             <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
 
-            <span aria-label="날씨 아이콘" class="ss-weather-icon" title="날씨 아이콘 (표시용)">
-                <svg
-                    aria-hidden="true"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.75"
-                    viewBox="0 0 24 24"
-                >
+            <!-- 날씨 (weather.js 가 id 로 찾아서 아이콘과 설명을 바꿈) -->
+            <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중">
+                <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="1.75" viewBox="0 0 24 24">
                     <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
                     <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
                 </svg>
@@ -131,11 +117,11 @@
         <!-- 04. 전시 카탈로그 -->
         <section class="ss-catalog" id="ex-list" aria-labelledby="ex-list-title">
             <div class="ss-category-heading">
-                <span class="ss-category-eyebrow">SCENE:SEOUL / EXHIBITION</span>
                 <h2 class="ss-category-title" id="ex-list-title">ALL
                     <em class="ss-category-title-accent">EXHIBITIONS.</em>
                 </h2>
-                <p class="ss-category-description">전시를 둘러보고 마음에 드는 장면을 찾아보세요.</p>
+                <!-- 제목 아래 구분선 (설명 문구가 있던 자리) -->
+                <hr class="ex-divider">
             </div>
 
             <!-- 04-1. 전시 분류 필터와 검색창 -->
@@ -168,11 +154,9 @@
 
     </main>
 
-    <!-- 05. 공통 푸터 -->
-
+    <!-- 05. 공통 푸터 (common.css: 왼쪽 로고 · 오른쪽 저작권 2칸) -->
     <footer class="ss-site-footer">
         <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
-        <p>서울의 문화를 소개하는 웹사이트 콘셉트 · 전시·공연·팝업 예시 콘텐츠는 가상 정보입니다.</p>
         <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
     </footer>
 
