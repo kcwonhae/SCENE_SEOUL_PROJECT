@@ -6,6 +6,61 @@
 
 /* 1. 페이지 상단 */
 
+/* 카테고리 공통 상단 */
+
+.ss-category-hero {
+    position: relative;
+    max-width: 1470px;
+    min-height: 220px;
+    margin: 0 auto;
+    padding: 82px 72px 42px;
+}
+
+.ss-category-hero .ss-hero-crumb {
+    color: var(--ss-blue);
+    font-weight: 900;
+    letter-spacing: 0.12em;
+}
+
+.ss-category-hero .ss-hero-crumb [aria-current="page"] {
+    color: inherit;
+}
+
+.ss-category-hero .ss-hero-title {
+    margin: 20px 0 14px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 105px;
+    line-height: 0.94;
+    letter-spacing: -0.075em;
+}
+
+.ss-hero-title-dot {
+    margin-left: 0.1em;
+    color: var(--ss-blue);
+}
+
+.ss-hero-tags {
+    position: absolute;
+    z-index: 2;
+    right: 72px;
+    bottom: 78px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--ss-ink);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    line-height: 1.7;
+    text-align: right;
+}
+
+.ss-category-feature {
+    max-width: 1470px;
+    margin: 0 auto;
+    padding: 10px 5% 65px;
+}
+
 .ss-hero-crumb {
     display: flex;
     align-items: center;
