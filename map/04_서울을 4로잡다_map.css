@@ -29,12 +29,30 @@
     margin-bottom: 22px;
 }
 
-.map-topline h2 {
-    margin: 0;
+/* 왼쪽: 구 선택 드롭다운 (예전 부제 자리) */
+.district-select {
+    min-width: 180px;
+    height: 42px;
+    padding: 0 42px 0 18px;         /* 오른쪽은 화살표 자리 */
+    border: 1px solid var(--ss-line);
+    border-radius: 999px;
+    background: var(--ss-white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center / 14px 14px;
     color: var(--ss-ink);
-    font-size: 34px;
-    font-weight: 900;
-    letter-spacing: -.055em;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    appearance: none;               /* 브라우저 기본 화살표 숨기기 */
+    -webkit-appearance: none;
+}
+
+.district-select:hover {
+    border-color: #C5D2F0;
+}
+
+.district-select:focus-visible {
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 2px;
 }
 
 /* 오른쪽: 마커 색 안내 + 안내 문구 */
@@ -49,7 +67,7 @@
     margin: 0;
     color: var(--ss-muted);
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 /* 마커 색 안내 (지도 마커와 같은 색 · 같은 모양의 작은 동그라미) */
@@ -85,20 +103,16 @@
 .map-legend-dot.is-event       { background: #3E8E6B; }
 
 
-/* 지도 박스 */
-
-.map-box {
-    padding: 24px;
-    border: 1px solid var(--ss-line);
-    border-radius: 28px;
-    background: var(--ss-paper);
-}
+/* 지도
+   예전 지도 박스(.map-box)의 안쪽 여백 24px × 2 + 테두리 1px × 2 = 50px 를 없앤 만큼
+   폭은 섹션 전체로 넓어지고, 높이도 540px → 590px 로 늘린다 */
 
 #leaflet-map {
     width: 100%;
-    height: 540px;
+    height: 630px;
     border-radius: 18px;
     background: #E8E9E7;
+    box-shadow: 0 0 24px rgba(17, 17, 17, .11);     /* 사방으로 옅게 퍼지는 그림자 */
     z-index: 0;
 }
 
@@ -120,49 +134,15 @@
     letter-spacing: .08em;
 }
 
-.popup-note {
+.popup-place {
+    margin-top: 2px;
     color: var(--ss-muted);
-    font-size: 10px;
 }
 
 .popup-link {
     display: inline-block;
     margin-top: 4px;
     color: var(--ss-blue);
-    font-weight: 700;
-}
-
-
-/* 구 선택 버튼 */
-
-.district-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 16px;
-}
-
-.district-chips button {
-    padding: 7px 12px;
-    border: 1px solid var(--ss-line);
-    border-radius: 999px;
-    background: var(--ss-white);
-    color: var(--ss-ink);
-    font-size: 11px;
-    font-weight: 600;
-    transition: background .2s ease, color .2s ease, border-color .2s ease;
-}
-
-.district-chips button:hover {
-    background: #EAF0FC;
-    border-color: #C5D2F0;
-    color: var(--ss-blue);
-}
-
-.district-chips button.is-selected {
-    background: var(--ss-ink);
-    border-color: var(--ss-ink);
-    color: var(--ss-white);
     font-weight: 700;
 }
 
