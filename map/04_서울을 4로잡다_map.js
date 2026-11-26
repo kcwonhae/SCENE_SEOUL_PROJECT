@@ -3,7 +3,7 @@
    - 데이터: 팀 JSON 4개 (전시 · 공연 · 팝업 · 이벤트)
              common.js 의 SceneSeoul.loadAllItems() 로 불러온다 (추천 JSON 은 다른 페이지 항목과 겹쳐서 뺀다)
    - 지도 위치: 장소 이름 → 좌표 표(VENUES)로 정확한 위치에 마커를 찍고,
-                표에 없는 장소는 구 중심 근처에 찍는다 (말풍선에 "구 단위 위치" 표시)
+                표에 없는 장소는 구 중심 근처에 찍는다
    - 로그인 / 찜: common.js 의 SceneSeoul 함수 사용 (로그인 화면은 login.js 담당)
    - 카드: category.css 의 공통 카드(.ss-card) 사용
 
@@ -74,6 +74,17 @@ const VENUES = [
     ["성북구립미술관", "성북구", 37.5915, 126.9946],
     ["서소문성지", "중구", 37.5613, 126.9690],
     ["스페이스K", "강서구", 37.5610, 126.8320],
+    ["아트선재센터", "종로구", 37.5797, 126.9814],
+    ["국제갤러리", "종로구", 37.5802, 126.9808],
+    ["대림미술관", "종로구", 37.5765, 126.9733],
+    ["일민미술관", "종로구", 37.5701, 126.9780],
+    ["미술아카이브", "종로구", 37.6118, 126.9741],
+    ["서울시청", "중구", 37.5663, 126.9779],
+    ["피크닉", "중구", 37.5559, 126.9787],
+    ["김영섭사진화랑", "중구", 37.5612, 126.9922],
+    ["그라운드시소 용산", "용산구", 37.5296, 126.9645],
+    ["서울기록원", "은평구", 37.6110, 126.9338],
+    ["서서울미술관", "금천구", 37.4573, 126.8951],
     // 공연
     ["롯데콘서트홀", "송파구", 37.5130, 127.1020],
     ["대학로극장 쿼드", "종로구", 37.5822, 127.0030],
@@ -127,7 +138,7 @@ let markerLayer;                // 마커를 모아두는 레이어
 
 /* ---------- 03. 요소 가져오기 ---------- */
 
-const chipBox = document.getElementById("district-chips");
+const districtSelect = document.getElementById("district-select");
 const resultTitle = document.getElementById("result-title");
 const resultCount = document.getElementById("result-count");
 const eventsBox = document.getElementById("events");
@@ -214,14 +225,12 @@ function toItem(data) {
 
     // 위치: JSON 의 lat/lng → 장소 표 → 구 중심 근처 순서
     let point = null;
-    let exact = true;
     if (data.lat && data.lng) {
         point = [parseFloat(data.lat), parseFloat(data.lng)];
     } else if (venue) {
         point = [venue[2], venue[3]];
     } else if (gu) {
         point = spreadPoint(gu);
-        exact = false;
     }
 
     return {
@@ -235,8 +244,7 @@ function toItem(data) {
         img: data.image || "",
         url: data.officialUrl || data.sourceUrl || "",
         lat: point ? point[0] : null,
-        lng: point ? point[1] : null,
-        exact: exact
+        lng: point ? point[1] : null
     };
 }
 
@@ -482,20 +490,22 @@ function makeMarkerPopup(item) {
     const name = document.createElement("strong");
     name.innerText = item.title;
 
+    // 장소 (카드와 같이 주소에 구 이름이 없으면 앞에 붙인다)
+    const place = document.createElement("div");
+    place.className = "popup-place";
+    if (item.gu && !hasText(item.place, item.gu)) {
+        place.innerText = item.gu + " · " + item.place;
+    } else {
+        place.innerText = item.place;
+    }
+
     const date = document.createElement("div");
     date.innerText = SceneSeoul.formatPeriod(item);
 
     box.appendChild(label);
     box.appendChild(name);
+    if (item.place || item.gu) box.appendChild(place);
     box.appendChild(date);
-
-    // 정확한 좌표가 없는 장소는 구 단위 위치라는 것을 알려준다
-    if (!item.exact) {
-        const note = document.createElement("div");
-        note.className = "popup-note";
-        note.innerText = item.gu + " 안 대략적인 위치예요";
-        box.appendChild(note);
-    }
 
     if (item.url) {
         const link = document.createElement("a");
@@ -540,30 +550,25 @@ function drawMarkers() {
 
 /* ---------- 11. 구 선택 ---------- */
 
-function makeChip(text, gu) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.innerText = text;
-    btn.setAttribute("data-name", gu);
-    btn.addEventListener("click", function () {
-        selectDistrict(gu);
-    });
-    chipBox.appendChild(btn);
+// 드롭다운에 옵션 하나 추가 (value 가 "" 이면 서울 전체)
+function makeOption(text, gu) {
+    const option = document.createElement("option");
+    option.value = gu;
+    option.innerText = text;
+    districtSelect.appendChild(option);
 }
 
-function makeChips() {
-    makeChip("서울 전체", "");
+function makeOptions() {
+    makeOption("서울 전체", "");
     for (const gu in GU_CENTER) {                // 10주차 for...in 객체 반복
-        makeChip(gu, gu);
+        makeOption(gu, gu);
     }
 }
 
 function selectDistrict(gu, fromMarker) {
     currentDistrict = gu;
 
-    for (const btn of chipBox.querySelectorAll("button")) {
-        btn.className = btn.getAttribute("data-name") === gu ? "is-selected" : "";
-    }
+    districtSelect.value = gu;                   // 마커로 고른 경우에도 드롭다운 표시를 맞춘다
     render();
     eventsBox.scrollLeft = 0;
 
@@ -578,6 +583,11 @@ function selectDistrict(gu, fromMarker) {
 
 
 /* ---------- 12. 이벤트 ---------- */
+
+// 드롭다운에서 구를 고르면 그 구로 이동
+districtSelect.addEventListener("change", function () {
+    selectDistrict(districtSelect.value);
+});
 
 for (const radio of filterRadios) {
     radio.addEventListener("change", function () {
@@ -620,7 +630,7 @@ window.addEventListener("pageshow", clearGuestHearts);       // 뒤로가기로 
 
 function start() {
     initMap();
-    makeChips();
+    makeOptions();
     selectDistrict("", true);
 
     // common.js 가 팀 JSON 들을 차례로 읽어서 하나의 배열로 넘겨준다
