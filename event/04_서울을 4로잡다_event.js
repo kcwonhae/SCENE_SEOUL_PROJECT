@@ -126,6 +126,11 @@ fetch('../data/04_서울을 4로잡다_event.json')
     })
     .then(items => {
         eventItems = Array.isArray(items) ? items : (items.events || []);
+        eventItems.sort((a, b) => {
+            const aDate = a.startDate || a.date || '9999-12-31';
+            const bDate = b.startDate || b.date || '9999-12-31';
+            return aDate.localeCompare(bDate);
+        });
         renderEventList();
     })
     .catch(error => {

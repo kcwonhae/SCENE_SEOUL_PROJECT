@@ -436,6 +436,11 @@ window.addEventListener('storage', event => {
   if (event.key === SceneSeoul.USER_KEY || event.key === SceneSeoul.getSavedKey()) refreshSaved();
 });
 
+// 로그인하지 않은 상태로 들어오면 안내한다.
+window.addEventListener('load', () => {
+  if (!SceneSeoul.getUser()) alert('마이캘린더를 이용하려면 로그인해 주세요.');
+});
+
 // 월 제목과 날짜는 JSON 응답과 무관하게 먼저 표시한다.
 refreshSaved();
 init();
