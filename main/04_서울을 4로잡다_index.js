@@ -426,13 +426,13 @@ document.addEventListener("DOMContentLoaded", function () {
         { category: "이벤트", path: "../data/04_서울을 4로잡다_event.json", page: "../event/04_서울을 4로잡다_event.html" }
     ];
 
-    // 홈의 FIND YOUR SCENE 카테고리 카드로 직접 이동한다.
-    // 각 카테고리 페이지 내부의 미확인 앵커는 사용하지 않는다.
+    // 카테고리 페이지 원본 HTML의 실제 목록 앵커를 사용한다.
+    // 전시 #ex-list / 공연 #perf-list-title / 팝업 #discover / 이벤트 #event-list
     const categoryAnchors = {
-        "전시": "#scene-exhibition",
-        "공연": "#scene-performance",
-        "팝업": "#scene-popup",
-        "이벤트": "#scene-event"
+        "전시": "#ex-list",
+        "공연": "#perf-list-title",
+        "팝업": "#discover",
+        "이벤트": "#event-list"
     };
 
     // 홈 히어로에서 실제 사용하는 네 장의 이미지 중 하나를 대체 이미지로 사용.
@@ -470,7 +470,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderToday() {
         const now = new Date();
         todayNumber.textContent = String(now.getDate()).padStart(2, "0");
-        monthLabel.textContent = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(now).toUpperCase();
+        monthLabel.textContent = String(now.getMonth() + 1);
         weekdayLabel.textContent = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(now).toUpperCase();
         lastDateKey = localDateKey(now);
     }
@@ -499,6 +499,17 @@ document.addEventListener("DOMContentLoaded", function () {
         return "../images/" + path;
     }
 
+    function safeEventUrl(value) {
+        const raw = String(value || "").trim();
+        if (!raw) return "";
+        try {
+            const url = new URL(raw, document.baseURI);
+            return url.protocol === "https:" || url.protocol === "http:" ? url.href : "";
+        } catch (_) {
+            return "";
+        }
+    }
+
     async function loadSource(source) {
         const response = await fetch(source.path);
         if (!response.ok) throw new Error(source.path + ": " + response.status);
@@ -516,6 +527,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 title: String(row.title),
                 category: source.category,
                 page: source.page,
+                // JSON에 실제로 제공된 행사 원본 링크 우선 사용
+                url: safeEventUrl(row.officialUrl || row.sourceUrl || row.url || row.link),
                 startDate: begin,
                 endDate: finish < begin ? begin : finish,
                 location: String(row.location || row.venue || ""),
@@ -573,16 +586,20 @@ document.addEventListener("DOMContentLoaded", function () {
         const b = event.endDate;
         function compact(d) { return String(d.getMonth() + 1).padStart(2, "0") + "." + String(d.getDate()).padStart(2, "0"); }
         return compact(a) === compact(b) && a.getFullYear() === b.getFullYear()
-            ? compact(a) : compact(a) + " – " + compact(b);
+            ? compact(a) : compact(a) + " ~ " + compact(b);
     }
 
-    // 문화행사 카드: 상단 포스터 + 하단 정보. 클릭은 홈의 해당 카테고리 카드로 이동.
+    // 행사 카드: JSON의 공식/출처 URL로 이동, URL이 없는 경우만 기존 목록 사용.
     function makeItem(event) {
         const article = element("article", "agenda-item");
-        const target = categoryAnchors[event.category] || "#scene";
+        const target = event.url || (event.page + (categoryAnchors[event.category] || ""));
         const thumb = element("a", "agenda-thumb-link");
         thumb.href = target;
-        thumb.setAttribute("aria-label", event.title + " — " + event.category + " 카테고리로 이동");
+        thumb.setAttribute("aria-label", event.title + (event.url ? " 상세 페이지로 이동" : " 전체 목록으로 이동"));
+        if (event.url && new URL(target).origin !== window.location.origin) {
+            thumb.target = "_blank";
+            thumb.rel = "noopener noreferrer";
+        }
 
         const img = element("img");
         const fallbackSrc = fallbackImageFor(event.id);
@@ -603,11 +620,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         thumb.append(img);
 
+        const poster = element("div", "agenda-poster");
+
         const info = element("div", "agenda-info");
         const categoryNames = { "전시": "EXHIBITION", "공연": "PERFORMANCE", "팝업": "POP-UP", "이벤트": "EVENT" };
         const category = element("span", "agenda-item-category", categoryNames[event.category] || event.category);
         const title = element("a", "agenda-item-title", event.title);
         title.href = target;
+        if (event.url && new URL(target).origin !== window.location.origin) {
+            title.target = "_blank";
+            title.rel = "noopener noreferrer";
+        }
         const location = element("p", "agenda-item-location", event.location || "서울");
         const date = element("time", "agenda-item-date", dateRange(event));
         date.dateTime = localDateKey(event.startDate);
@@ -620,9 +643,10 @@ document.addEventListener("DOMContentLoaded", function () {
         heart.addEventListener("click", function () { toggleHeart(event.id); });
 
         const top = element("div", "agenda-info-top");
-        top.append(category, heart);
+        top.append(category);
         info.append(top, title, location, date);
-        article.append(thumb, info);
+        poster.append(thumb, heart);
+        article.append(poster, info);
         return article;
     }
 
@@ -635,8 +659,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         list.setAttribute("aria-busy", "false");
         updateHearts();
-        requestReveal();
-        requestAnimationFrame(updateCarouselButtons);
+        requestAnimationFrame(function () {
+            updateCarouselButtons();
+            requestScrollDrivenCarousel();
+        });
     }
 
     // 랜덤 선택 없음: 현재 진행 중인 행사 + 앞으로 열릴 모든 행사를 날짜순으로 나열.
@@ -659,26 +685,58 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevButton = document.querySelector("#agendaPrev");
     const nextButton = document.querySelector("#agendaNext");
 
-    function updateCarouselButtons() {
-        if (!viewport || !prevButton || !nextButton) return;
-        const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
-        prevButton.disabled = viewport.scrollLeft < 3;
-        nextButton.disabled = maxScroll < 3 || viewport.scrollLeft >= maxScroll - 3;
+    // COMING UP 섹션 전체가 화면에 들어왔을 때만 스티키 고정:
+    // 제목·날짜·내 일정 보기는 정지, 카드는 한 칸만 옆으로 이동한다.
+    // 마지막에는 스티키가 자연스럽게 풀리고 다음 지도 섹션으로 넘어간다.
+    const stickyAgenda = area.querySelector(".agenda-sticky");
+    let userControlledCarousel = false;
+    let carouselScrollTicking = false;
+    let scrollBase = null;
+
+    function carouselMetrics() {
+        if (!viewport) return { max: 0, step: 0 };
+        const card = list.querySelector(".agenda-item");
+        const gap = parseFloat(getComputedStyle(list).columnGap) || 0;
+        return {
+            max: Math.max(0, viewport.scrollWidth - viewport.clientWidth),
+            step: card ? card.getBoundingClientRect().width + gap : 0
+        };
     }
 
+    function updateCarouselButtons() {
+        if (!viewport || !prevButton || !nextButton) return;
+        const canMove = carouselMetrics().max > 3;
+        prevButton.disabled = !canMove;
+        nextButton.disabled = !canMove;
+    }
+
+    function markManualControl() {
+        userControlledCarousel = true;
+        if (viewport) viewport.classList.remove("is-scroll-driven");
+    }
+
+    // 화살표 조작만 순환: 끝에서 다음 클릭 시 처음, 처음에서 이전 클릭 시 끝.
     function stepCarousel(direction) {
-        const card = list.querySelector(".agenda-item");
-        if (!card || !viewport) return;
-        const gap = parseFloat(getComputedStyle(list).columnGap) || 0;
-        const step = card.getBoundingClientRect().width + gap;
-        viewport.scrollBy({ left: step * direction, behavior: reduceMotion ? "instant" : "smooth" });
+        if (!viewport) return;
+        const { max, step } = carouselMetrics();
+        if (!step || max <= 3) return;
+        markManualControl();
+        const current = viewport.scrollLeft;
+        let target;
+        if (direction > 0) {
+            target = current >= max - step * 0.45 ? 0 : Math.min(max, current + step);
+        } else {
+            target = current <= step * 0.45 ? max : Math.max(0, current - step);
+        }
+        viewport.scrollTo({ left: target, behavior: reduceMotion ? "instant" : "smooth" });
     }
 
     if (prevButton) prevButton.addEventListener("click", function () { stepCarousel(-1); });
     if (nextButton) nextButton.addEventListener("click", function () { stepCarousel(1); });
     if (viewport) {
         viewport.addEventListener("scroll", updateCarouselButtons, { passive: true });
-        // 스크롤을 지원하지 않는 마우스를 위한 키보드 조작
+        viewport.addEventListener("pointerdown", markManualControl, { passive: true });
+        viewport.addEventListener("touchstart", markManualControl, { passive: true });
         viewport.addEventListener("keydown", function (event) {
             if (event.target !== viewport) return;
             if (event.key === "ArrowRight") { event.preventDefault(); stepCarousel(1); }
@@ -686,29 +744,43 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
-    const easing = (t) => { const v = clamp(t, 0, 1); return v * v * (3 - 2 * v); };
-    let ticking = false;
+    function updateScrollDrivenCarousel() {
+        carouselScrollTicking = false;
+        if (!area || !viewport || !stickyAgenda) return;
 
-    function reveal() {
-        ticking = false;
-        if (reduceMotion) return;
-        const height = window.innerHeight;
-        const rows = list.querySelectorAll(".agenda-item");
-        rows.forEach(function (row, index) {
-            const rect = row.getBoundingClientRect();
-            const open = easing((height * (0.96 - Math.min(index, 3) * 0.04) - rect.top) / (height * 0.22));
-            const close = easing((rect.bottom + height * 0.10) / (height * 0.28));
-            const progress = Math.min(open, close);
-            row.style.opacity = progress.toFixed(4);
-            row.style.transform = "translate3d(0," + ((1 - progress) * 12).toFixed(2) + "px,0)";
-        });
+        const { max, step } = carouselMetrics();
+        const enabled = !reduceMotion && max > 3 && step > 0 && displayed.length > 3;
+        area.classList.toggle("has-carousel-motion", enabled);
+        if (!enabled) {
+            area.classList.remove("is-carousel-pinned");
+            viewport.classList.remove("is-scroll-driven");
+            return;
+        }
+
+        const rect = area.getBoundingClientRect();
+        // 고정은 섹션의 상단이 헤더 하단에 도달한 순간부터 시작.
+        const headerHeight = parseFloat(getComputedStyle(document.documentElement)
+            .getPropertyValue("--ss-header-height")) || 76;
+        const scrollDistance = Math.max(1, area.offsetHeight - stickyAgenda.offsetHeight);
+        const progress = Math.max(0, Math.min(1, (headerHeight - rect.top) / scrollDistance));
+        const pinned = rect.top <= headerHeight + 1 && rect.bottom > headerHeight + stickyAgenda.offsetHeight + 1;
+        // 고정 중에는 마우스를 올리지 않아도 기존 < > 버튼을 표시.
+        area.classList.toggle("is-carousel-pinned", pinned);
+
+        if (userControlledCarousel) {
+            viewport.classList.remove("is-scroll-driven");
+            return;
+        }
+        if (scrollBase === null) scrollBase = viewport.scrollLeft;
+        const eased = progress * progress * (3 - 2 * progress);
+        viewport.classList.add("is-scroll-driven");
+        viewport.scrollLeft = Math.min(max, scrollBase + step * eased);
     }
 
-    function requestReveal() {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(reveal);
+    function requestScrollDrivenCarousel() {
+        if (carouselScrollTicking) return;
+        carouselScrollTicking = true;
+        window.requestAnimationFrame(updateScrollDrivenCarousel);
     }
 
     async function init() {
@@ -733,9 +805,10 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("scene:saved", updateHearts);
     window.addEventListener("pageshow", updateHearts);
     window.addEventListener("storage", updateHearts);
-    window.addEventListener("scroll", requestReveal, { passive: true });
+    window.addEventListener("scroll", requestScrollDrivenCarousel, { passive: true });
     window.addEventListener("resize", function () {
-        requestReveal();
+        scrollBase = userControlledCarousel ? scrollBase : null;
+        requestScrollDrivenCarousel();
         updateCarouselButtons();
     });
     window.addEventListener("focus", function () {
@@ -744,3 +817,77 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     init();
 });
+
+
+/* ==========================================
+   HEADER — 서울 날씨 (Cloudflare Worker API)
+========================================== */
+const WEATHER_URL = 'https://scene-seoul-weather.kw064753.workers.dev/api/weather';
+
+document.addEventListener('DOMContentLoaded', function () {
+    const weatherIcon = document.getElementById('header-weather');
+    if (!weatherIcon) return;
+
+    const icons = {
+        sun: `<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>`,
+        'partly-cloudy': `<path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path><path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>`,
+        cloud: `<path d="M6.5 18h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 18Z"></path>`,
+        rain: `<path d="M6.5 15h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 15Z"></path><path d="m8 18-1 3M13 18l-1 3M18 18l-1 3"></path>`,
+        snow: `<path d="M6.5 14h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 14Z"></path><path d="M8 17v5M5.5 19.5h5M16 17v5M13.5 19.5h5"></path>`
+    };
+
+    async function updateWeather() {
+        try {
+            const response = await fetch(WEATHER_URL);
+            if (!response.ok) throw new Error('HTTP 오류: ' + response.status);
+            const weather = await response.json();
+            const svg = weatherIcon.querySelector('svg');
+            const icon = icons[weather.condition];
+            if (!svg || !icon) throw new Error('날씨 아이콘 정보가 올바르지 않습니다.');
+            svg.innerHTML = icon;
+            const message = `${weather.city} ${weather.description}, ${weather.temperature}°C`;
+            weatherIcon.title = message;
+            weatherIcon.setAttribute('aria-label', message);
+        } catch (error) {
+            console.error('날씨 연동 오류:', error);
+            weatherIcon.title = '날씨 정보를 불러올 수 없습니다.';
+        }
+    }
+    updateWeather();
+    setInterval(updateWeather, 600000);
+});
+
+
+/* LANGUAGE DROPDOWN — embedded from team language.js (no translation) */
+// 언어 선택 창 표시 기능 (번역 기능 없음)
+(() => {
+    const trigger = document.querySelector('.ss-language[aria-expanded]');
+    if (!trigger) return;
+
+    const menu = trigger.querySelector('.ss-language-menu');
+    if (!menu) return;
+
+    function setOpen(open) {
+        trigger.setAttribute('aria-expanded', String(open));
+        trigger.classList.toggle('is-open', open);
+        menu.hidden = !open;
+    }
+    trigger.addEventListener('click', event => {
+        if (event.target.closest('.ss-language-menu')) return;
+        setOpen(menu.hidden);
+    });
+
+    trigger.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            setOpen(false);
+            trigger.focus();
+        } else if (event.target === trigger && (event.key === 'Enter' || event.key === ' ')) {
+            event.preventDefault();
+            setOpen(menu.hidden);
+        }
+    });
+    document.addEventListener('click', event => {
+        if (!trigger.contains(event.target)) setOpen(false);
+    });
+})();
+

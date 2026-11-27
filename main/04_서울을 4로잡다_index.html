@@ -33,38 +33,30 @@
         </nav>
 
         <div class="ss-header-actions">
-            <span class="ss-header-quick-icons">
-                <button class="ss-icon-button"
-                        type="button" aria-label="검색">
-                    <svg viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="1.8"
-                         stroke-linecap="round" aria-hidden="true">
-                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
-                        <path d="m16 16 5 5"></path>
-                    </svg>
-                </button>
+            <button class="header-login" type="button">LOGIN</button>
 
-                <span class="ss-language" aria-label="한국어">
-                    <svg viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="1.7"
-                         aria-hidden="true">
+            <span class="ss-header-quick-icons">
+                <span class="ss-language" role="button" tabindex="0" aria-label="언어 선택" aria-expanded="false" aria-haspopup="true">
+                    <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9"></circle>
-                        <path d="M3 12h18"></path>
-                        <path d="M12 3c-5.7 5.3-5.7 12.7 0 18"></path>
-                        <path d="M12 3c5.7 5.3 5.7 12.7 0 18"></path>
+                        <path d="M3 12h18M12 3c-5.7 5.3-5.7 12.7 0 18M12 3c5.7 5.3 5.7 12.7 0 18"></path>
                     </svg>
                     <span>KR</span>
+                    <ul class="ss-language-menu" aria-label="언어 목록" hidden>
+                        <li class="ss-language-option is-current">한국어 <span aria-hidden="true">✓</span></li>
+                        <li class="ss-language-option">English</li>
+                        <li class="ss-language-option">日本語</li>
+                        <li class="ss-language-option">中文</li>
+                    </ul>
                 </span>
             </span>
-
-            <button class="header-login" type="button">LOGIN</button>
 
             <a class="header-mypage"
                href="../mycalendar/04_서울을 4로잡다_mycalendar.html">
                 MY CALENDER
             </a>
 
-            <span class="ss-weather-icon" aria-label="날씨">
+            <span class="ss-weather-icon" id="header-weather" aria-label="날씨">
                 <svg viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="1.75"
                      stroke-linecap="round" stroke-linejoin="round"
@@ -132,30 +124,21 @@
 
                     <div class="edition-next-content">
 
-                        <span class="edition-next-index">EDIT —</span>
-
                         <h2 class="edition-next-title"
                             id="edition-title">
                             <span class="edition-next-line">
                                 나의 취향으로 발견하는
                             </span>
                             <span class="edition-next-line edition-next-emphasis">
-                                또 다른 서울.
+                                또 다른 서울
                             </span>
                         </h2>
 
                         <a class="edition-next-play-link"
                            href="../recommend/04_서울을 4로잡다_recommend.html"
                            aria-label="나만의 문화 추천받기">
-                            <svg viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="1.8"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 aria-hidden="true">
-                                <path d="M5 19 19 5"></path>
-                                <path d="M8 5h11v11"></path>
+                            <svg class="edition-icon edition-icon-chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="2.7" stroke-linecap="square" stroke-linejoin="miter"></path>
                             </svg>
                         </a>
 
@@ -175,7 +158,7 @@
             <div class="section-heading">
                 <h2>
                     FIND YOUR<br>
-                    <i>SCENE.</i>
+                    <i>SCENE</i>
                 </h2>
             </div>
 
@@ -192,9 +175,9 @@
                         </div>
                         <div class="scene-meta">
                             <div>
-                                <h3>전시</h3>
+                                <h3>전시<span class="scene-label-en">EXHIBITIONS</span></h3>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true">→</span>
                         </div>
                     </a>
                 </article>
@@ -210,9 +193,9 @@
                         </div>
                         <div class="scene-meta">
                             <div>
-                                <h3>공연</h3>
+                                <h3>공연<span class="scene-label-en">PERFORMANCES</span></h3>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true">→</span>
                         </div>
                     </a>
                 </article>
@@ -228,9 +211,9 @@
                         </div>
                         <div class="scene-meta">
                             <div>
-                                <h3>팝업</h3>
+                                <h3>팝업<span class="scene-label-en">POP-UPS</span></h3>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true">→</span>
                         </div>
                     </a>
                 </article>
@@ -246,9 +229,9 @@
                         </div>
                         <div class="scene-meta">
                             <div>
-                                <h3>이벤트</h3>
+                                <h3>이벤트<span class="scene-label-en">EVENTS</span></h3>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true">→</span>
                         </div>
                     </a>
                 </article>
@@ -258,19 +241,19 @@
 
         <!-- 04. MY CALENDAR — 홈 미리보기 / 실제 JSON 연동 -->
         <section class="agenda-section" id="calendar" aria-labelledby="agenda-heading">
+            <div class="agenda-sticky">
             <div class="agenda-title-line">
-                <h2 id="agenda-heading">COMING UP IN SEOUL<span class="agenda-period">.</span></h2>
+                <h2 id="agenda-heading">COMING UP <span class="agenda-title-blue">IN SEOUL</span></h2>
                 <a class="agenda-all-link" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">
-                    MY CALENDAR <span aria-hidden="true">↗</span>
+                    내 일정 보기 <span aria-hidden="true">&gt;</span>
                 </a>
             </div>
 
             <div class="agenda-layout">
                 <div class="agenda-aside">
-                    <p class="agenda-month" id="agendaMonth">—</p>
-                    <p class="agenda-today" id="agendaToday">—</p>
+                    <p class="agenda-today"><span class="agenda-month" id="agendaMonth">—</span><span class="agenda-date-divider" aria-hidden="true">/</span><span id="agendaToday">—</span></p>
                     <p class="agenda-weekday" id="agendaWeekday">—</p>
-                    <p class="agenda-aside-desc">가까운 날짜의 서울 문화 일정을 살펴보세요.</p>
+                
                 </div>
 
                 <div class="agenda-carousel" id="agendaCarousel" aria-label="다가오는 서울 문화 행사">
@@ -287,6 +270,7 @@
                     </button>
                 </div>
             </div>
+            </div>
         </section>
 
         <!-- 05. SEOUL MAP -->
@@ -295,23 +279,11 @@
                  aria-label="서울 문화 지도">
 
             <div class="atlas-overlay">
-
-                <h2>
-                    서울의 장면은<br>
-                    <i>동네마다 다르다.</i>
-                </h2>
-
-                <p>
-                    취향에 맞는 전시·공연·팝업·이벤트를 찾아,<br>
-                    나만의 서울 탐방 동선을 그려보세요.
-                </p>
-
+                <h2>SEOUL<br><span>ON THE MAP</span></h2>
                 <a class="atlas-map-cta"
                    href="../map/04_서울을 4로잡다_map.html">
-                    서울 문화 지도 둘러보기
-                    <span aria-hidden="true">↗</span>
+                    서울 문화 지도 <span aria-hidden="true">&gt;</span>
                 </a>
-
             </div>
 
         </section>
@@ -320,10 +292,6 @@
 
     <footer class="home-footer">
         <strong>SCENE<span>:</span>SEOUL</strong>
-        <p>
-            서울의 문화를 탐색하고 저장하는
-            나만의 문화 큐레이션 플랫폼
-        </p>
         <small>© 2026 SCENE:SEOUL</small>
     </footer>
 
