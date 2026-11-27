@@ -1,9 +1,9 @@
 /* =====================================================
    SCENE:SEOUL | 서울 지도 페이지
-   - 데이터: 팀 JSON 4개 (전시 · 공연 · 팝업 · 이벤트)
-             이 파일의 loadAllItems() 가 fetch 로 직접 불러온다.
-   - 지도 위치: 장소 이름 → 좌표 표(VENUES)로 정확한 위치에 마커를 찍고,
-                표에 없는 장소는 구 중심 근처에 찍는다.
+   - 데이터: 팀 JSON 4개 (전시 · 공연 · 팝업 · 이벤트) + 장소 좌표 JSON 1개
+             이 파일의 loadVenues() · loadAllItems() 가 fetch 로 직접 불러온다.
+   - 지도 위치: 장소 이름 → 좌표 표(venues.json)로 정확한 위치에 마커를 찍는다.
+                표에 없는 장소는 마커 없이 '서울 전체' 목록에만 나온다.
    - 로그인 / 찜: common.js 의 SceneSeoul 함수 사용 (로그인 화면은 login.js 담당)
    - 카드: category.css 의 공통 카드(.ss-card) 사용
 
@@ -15,7 +15,6 @@
 
 
 /* ---------- 01. 설정 ---------- */
-
 
 const TYPE_LABEL = {
     exhibition: "EXHIBITION",
@@ -46,83 +45,9 @@ const GU_CENTER = {
 };
 const SEOUL_CENTER = [37.5665, 126.9780];
 
-// 장소 이름(일부) → [구, 위도, 경도]
-// JSON 의 location 글자 안에 이 이름이 들어 있으면 그 좌표에 마커를 찍는다 (위에서부터 먼저 맞는 것)
-const VENUES = [
-    // 전시
-    ["국립현대미술관 덕수궁", "중구", 37.5659, 126.9749],
-    ["국립현대미술관 서울", "종로구", 37.5788, 126.9802],
-    ["서울시립미술관 서소문", "중구", 37.5640, 126.9737],
-    ["북서울미술관", "노원구", 37.6407, 127.0665],
-    ["사진미술관", "도봉구", 37.6536, 127.0472],
-    ["예술의전당", "서초구", 37.4786, 127.0117],
-    ["롯데뮤지엄", "송파구", 37.5126, 127.1025],
-    ["퐁피두센터 한화", "영등포구", 37.5198, 126.9403],
-    ["아트조선스페이스", "중구", 37.5683, 126.9764],
-    ["세화미술관", "종로구", 37.5703, 126.9726],
-    ["해치마당", "종로구", 37.5730, 126.9768],
-    ["세종문화회관", "종로구", 37.5726, 126.9760],
-    ["세종대극장", "종로구", 37.5726, 126.9760],
-    ["광화문광장", "종로구", 37.5720, 126.9769],
-    ["국립고궁박물관", "종로구", 37.5765, 126.9752],
-    ["국립민속박물관", "종로구", 37.5813, 126.9792],
-    ["서울공예박물관", "종로구", 37.5764, 126.9840],
-    ["고희동미술관", "종로구", 37.5826, 126.9890],
-    ["오간수교", "중구", 37.5705, 127.0087],
-    ["국립중앙박물관", "용산구", 37.5240, 126.9804],
-    ["리움미술관", "용산구", 37.5384, 126.9990],
-    ["성북구립미술관", "성북구", 37.5915, 126.9946],
-    ["서소문성지", "중구", 37.5613, 126.9690],
-    ["스페이스K", "강서구", 37.5610, 126.8320],
-    ["아트선재센터", "종로구", 37.5797, 126.9814],
-    ["국제갤러리", "종로구", 37.5802, 126.9808],
-    ["대림미술관", "종로구", 37.5765, 126.9733],
-    ["일민미술관", "종로구", 37.5701, 126.9780],
-    ["미술아카이브", "종로구", 37.6118, 126.9741],
-    ["서울시청", "중구", 37.5663, 126.9779],
-    ["피크닉", "중구", 37.5559, 126.9787],
-    ["김영섭사진화랑", "중구", 37.5612, 126.9922],
-    ["그라운드시소 용산", "용산구", 37.5296, 126.9645],
-    ["서울기록원", "은평구", 37.6110, 126.9338],
-    ["서서울미술관", "금천구", 37.4573, 126.8951],
-    // 공연
-    ["롯데콘서트홀", "송파구", 37.5130, 127.1020],
-    ["대학로극장 쿼드", "종로구", 37.5822, 127.0030],
-    ["예술공간 혜화", "종로구", 37.5826, 127.0019],
-    ["창경궁로 303", "종로구", 37.5830, 127.0010],
-    ["소월아트홀", "성동구", 37.5634, 127.0369],
-    ["용산아트홀", "용산구", 37.5323, 126.9905],
-    ["꿈의숲아트센터", "강북구", 37.6205, 127.0405],
-    ["어린이대공원", "광진구", 37.5480, 127.0750],
-    ["금호아트홀연세", "서대문구", 37.5650, 126.9385],
-    ["국립국악원", "서초구", 37.4775, 127.0090],
-    ["남산국악당", "중구", 37.5580, 126.9940],
-    ["구로아트밸리", "구로구", 37.4950, 126.8864],
-    ["중랑구청", "중랑구", 37.6063, 127.0926],
-    // 이벤트
-    ["서울광장", "중구", 37.5658, 126.9780],
-    ["레드로드", "마포구", 37.5548, 126.9225],
-    ["발산역", "강서구", 37.5585, 126.8375],
-    ["뚝섬한강공원", "광진구", 37.5292, 127.0670],
-    ["눈스퀘어", "중구", 37.5636, 126.9826],
-    ["서울상상나라", "광진구", 37.5490, 127.0790],
-    ["서울식물원", "강서구", 37.5694, 126.8350],
-    ["보신각", "종로구", 37.5700, 126.9835],
-    ["DDP", "중구", 37.5665, 127.0092],
-    // 팝업 (주소)
-    ["성수이로7가길", "성동구", 37.5440, 127.0555],
-    ["서울숲2길", "성동구", 37.5450, 127.0420],
-    ["아차산로5길", "성동구", 37.5444, 127.0552],
-    ["연무장길", "성동구", 37.5435, 127.0560],
-    ["성수일로4길", "성동구", 37.5437, 127.0550],
-    ["더현대 서울", "영등포구", 37.5259, 126.9284],
-    ["IFC몰", "영등포구", 37.5251, 126.9255],
-    ["아이파크몰", "용산구", 37.5296, 126.9645],
-    ["하이브", "용산구", 37.5245, 126.9645],
-    ["롯데월드몰", "송파구", 37.5126, 127.1025],
-    ["AK플라자 홍대", "마포구", 37.5576, 126.9245],
-    ["와우산로37길", "마포구", 37.5535, 126.9230]
-];
+// 장소 좌표 표 (JSON): { name: 장소 이름(일부), district: 구, lat: 위도, lng: 경도 }
+// JSON 의 location 글자 안에 name 이 들어 있으면 그 좌표에 마커를 찍는다 (위에서부터 먼저 맞는 것)
+const VENUE_FILE = "../data/04_서울을 4로잡다_venues.json";
 
 
 /* ---------- 02. 상태 변수 ---------- */
@@ -132,8 +57,9 @@ let currentDistrict = "";       // 선택한 구 ("" 이면 서울 전체)
 let currentType = "all";        // 선택한 카테고리
 let keyword = "";               // 검색어
 let loading = true;             // 데이터를 불러오는 중인지
-let map;                        // Leaflet 지도
-let markerLayer;                // 마커를 모아두는 레이어
+let map = null;                 // Leaflet 지도 (지도를 불러오지 못하면 null)
+let markerLayer = null;         // 마커를 모아두는 레이어
+let venues = [];                // 장소 좌표 표 (venues.json 에서 불러옴)
 
 
 /* ---------- 03. 요소 가져오기 ---------- */
@@ -141,12 +67,11 @@ let markerLayer;                // 마커를 모아두는 레이어
 const districtSelect = document.getElementById("district-select");
 const resultTitle = document.getElementById("result-title");
 const resultCount = document.getElementById("result-count");
-const eventsBox = document.getElementById("events");
-const statusNote = document.getElementById("status-note");
+const cardBox = document.getElementById("map-cards");
 const searchInput = document.getElementById("search-input");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
-const filterRadios = document.querySelectorAll("input[name='district-filter']");
+const filterButtons = document.querySelectorAll(".ss-filters button[data-filter]");
 
 
 /* ---------- 04. 작은 도우미 함수 ---------- */
@@ -158,12 +83,14 @@ function hasText(text, word) {
 }
 
 // 오늘 날짜 (시간은 0시로)
+// ※ 수업 외: new Date(연, 월, 일) — 괄호 안에 날짜를 넣어 바로 만들기
 function getToday() {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), now.getDate());
 }
 
 // "2026-11-10" → Date
+// ※ 수업 외: new Date(연, 월, 일) / 글자에 slice 사용 (10주차는 배열의 slice)
 function toDate(dateText) {
     const y = parseInt(dateText.slice(0, 4));
     const m = parseInt(dateText.slice(5, 7));
@@ -171,41 +98,25 @@ function toDate(dateText) {
     return new Date(y, m - 1, d);
 }
 
-// 주소 글자에서 구 이름 찾기 ("서울 성동구 성수이로 77" → "성동구")
-function findGu(text) {
-    for (const gu in GU_CENTER) {                // 10주차 for...in 객체 반복
-        if (hasText(text || "", gu)) {
-            return gu;
-        }
+// 장소 앞에 구 이름 붙이기 (주소에 이미 구 이름이 있으면 그대로) — 카드와 말풍선에서 같이 쓴다
+function getPlaceText(item) {
+    if (item.gu && !hasText(item.place, item.gu)) {
+        return item.gu + " · " + item.place;
     }
-    return "";
+    return item.place;
 }
 
 
 /* ---------- 05. 데이터 정리 ---------- */
 
-// 장소 이름으로 좌표 표(VENUES)에서 찾기 (없으면 null)
+// 장소 이름으로 좌표 표(venues)에서 찾기 (없으면 null)
 function findVenue(text) {
-    for (const venue of VENUES) {
-        if (hasText(text || "", venue[0])) {
+    for (const venue of venues) {
+        if (hasText(text || "", venue.name)) {
             return venue;
         }
     }
     return null;
-}
-
-// 좌표를 모르는 콘텐츠는 구 중심에 찍는데, 한 점에 겹치면 하나만 보이므로
-// 같은 구 안에서 순서대로 바둑판처럼 조금씩 옮겨 찍는다 (한 줄에 5개, 간격 약 150m)
-const guCount = {};
-
-function spreadPoint(gu) {
-    const n = guCount[gu] || 0;
-    guCount[gu] = n + 1;
-
-    const row = Math.floor(n / 5);
-    const col = n % 5;
-    const gap = 0.0015;
-    return [GU_CENTER[gu][0] - row * gap, GU_CENTER[gu][1] + (col - 2) * gap];
 }
 
 // JSON 한 개 → 지도에서 쓰는 데이터
@@ -213,24 +124,14 @@ function spreadPoint(gu) {
 function toItem(data) {
     const venue = findVenue(data.location);
 
-    // 구 이름: district 가 "중구" 처럼 구 이름이면 그대로, 아니면 장소 표 → 주소 순서로 찾는다
+    // 구 이름과 위치는 장소 표(venues.json)에서 가져온다 (표에 없으면 목록에만 나온다)
     let gu = "";
-    if (GU_CENTER[data.district]) {
-        gu = data.district;
-    } else if (venue) {
-        gu = venue[1];
-    } else {
-        gu = findGu(data.location);
-    }
-
-    // 위치: JSON 의 lat/lng → 장소 표 → 구 중심 근처 순서
-    let point = null;
-    if (data.lat && data.lng) {
-        point = [parseFloat(data.lat), parseFloat(data.lng)];
-    } else if (venue) {
-        point = [venue[2], venue[3]];
-    } else if (gu) {
-        point = spreadPoint(gu);
+    let lat = null;
+    let lng = null;
+    if (venue) {
+        gu = venue.district;
+        lat = venue.lat;
+        lng = venue.lng;
     }
 
     return {
@@ -243,25 +144,29 @@ function toItem(data) {
         endDate: data.endDate || "",
         img: data.image || "",
         url: data.officialUrl || data.sourceUrl || "",
-        lat: point ? point[0] : null,
-        lng: point ? point[1] : null
+        lat: lat,
+        lng: lng
     };
 }
 
-// 추천 항목 · 지도에서 쓰지 않는 분류 · 날짜가 없는 데이터 · 이미 끝난 콘텐츠를 거른다
+// 정렬에 쓸 날짜를 만들고, 이미 끝난 콘텐츠는 뺀다
 function cleanUp(list) {
     const today = getToday();
     const result = [];
 
     for (const item of list) {
-        if (!item.id || item.id.slice(0, 10) === "recommend-") continue;
-        if (!TYPE_LABEL[item.type] || item.startDate.length < 10) continue;
         item.start = toDate(item.startDate);
-        // 종료일이 빈 문자열이면 상시 운영 → 아주 먼 날짜로 두고 정렬할 때 맨 뒤로
-        item.end = item.endDate ? toDate(item.endDate) : new Date(9999, 11, 31);
 
-        if (item.end < today) continue;         // 끝난 콘텐츠
-        result.push(item);
+        // 종료일이 빈 문자열이면 상시 운영 → 아주 먼 날짜로 두고 정렬할 때 맨 뒤로
+        if (item.endDate) {
+            item.end = toDate(item.endDate);
+        } else {
+            item.end = toDate("9999-12-31");
+        }
+
+        if (item.end >= today) {        // 오늘 이후에 끝나는 것만 담는다
+            result.push(item);
+        }
     }
     return result;
 }
@@ -269,84 +174,61 @@ function cleanUp(list) {
 // 진행 중인 것(곧 끝나는 순) → 예정인 것(곧 시작하는 순)
 function sortItems(list) {
     const today = getToday();
+    // ※ 수업 외: sort 에 비교 함수 넣기 (음수면 a 를 앞으로, 양수면 b 를 앞으로)
     return list.sort(function (a, b) {
         const aOn = a.start <= today;
         const bOn = b.start <= today;
-        if (aOn !== bOn) return aOn ? -1 : 1;
-        return aOn ? a.end - b.end : a.start - b.start;
+
+        if (aOn && !bOn) return -1;             // 진행 중인 것을 앞으로
+        if (!aOn && bOn) return 1;
+        if (aOn) return a.end - b.end;          // 둘 다 진행 중이면 곧 끝나는 순
+        return a.start - b.start;               // 둘 다 예정이면 곧 시작하는 순
     });
 }
 
 
-/* ---------- 07. 로그인 / 찜 (common.js 사용) ---------- */
+/* ---------- 06. 로그인 / 찜 (common.js 사용) ---------- */
 
-// 로그인 정보는 sceneSeoulUser, 찜 목록은 sceneSeoulSavedEvents:닉네임 (common.js 가 관리)
-// 로그인 창은 login.js 가 담당하므로 지도 페이지에서는 로그인 코드를 따로 두지 않는다
-
-// 찜 상태는 로그인했을 때만 인정한다
-// (common.js 는 로그인 전이면 "guest" 목록을 읽는데, 예전에 로그인 없이 저장된 기록이 남아 있으면
-//  로그아웃 상태에서도 하트가 켜져 보이기 때문)
-function isSaved(id) {
-    return SceneSeoul.getUser() !== "" && SceneSeoul.isSaved(id);
-}
-
-function toggleSave(item, checkbox) {
-    if (!SceneSeoul.getUser()) {
-        alert("로그인 후 저장할 수 있어요.");
-        checkbox.checked = false;       // 체크된 하트를 다시 빈 하트로
-        return;
-    }
-    // common.js 가 닉네임별 찜 목록에 저장하고 "scene:saved" 이벤트를 보낸다
-    SceneSeoul.toggleSaved(item.id);
-}
-
-// 로그아웃 상태면 화면의 하트를 모두 끈다
-// (common.js 의 updateHearts() 가 guest 목록으로 하트를 켠 뒤에 실행되도록 이벤트 마지막에 부른다)
-function clearGuestHearts() {
-    if (SceneSeoul.getUser()) return;
-    for (const input of eventsBox.querySelectorAll("input[data-save-id]")) {
-        input.checked = false;
-    }
-}
-
-// 로그인 / 로그아웃 / 찜 변경 / 다른 탭에서 변경되었을 때
-// 하트 모양은 common.js 의 updateHearts() 가 맞춰 주므로,
-// 카드를 다시 그려야 하는 건 "저장한 것" 을 보고 있을 때뿐이다
+// 로그인 · 찜 저장은 common.js(SceneSeoul), 로그인 창은 login.js 가 담당한다
+// 하트 모양도 common.js 의 updateHearts() 가 맞춰 주므로,
+// 여기서는 "저장한 것" 을 보고 있을 때 목록을 다시 그리는 일만 한다
 function refreshSavedCards() {
     if (currentType === "saved") {
-        render();
-        drawMarkers();
+        updateList();
     }
-    clearGuestHearts();
 }
 
 
-/* ---------- 08. 목록 걸러내기 ---------- */
+/* ---------- 07. 목록 걸러내기 ---------- */
 
+// withDistrict: true 면 고른 구까지 거름(카드 목록), false 면 서울 전체(지도 마커)
 function getFiltered(withDistrict) {
     return allItems.filter(function (item) {
         if (withDistrict && currentDistrict && item.gu !== currentDistrict) return false;
 
         if (currentType === "saved") {
-            if (!isSaved(item.id)) return false;
+            if (!SceneSeoul.isSaved(item.id)) return false;
         } else if (currentType !== "all" && item.type !== currentType) {
             return false;
         }
 
-        if (keyword && !hasText(item.title, keyword)) return false;
+        // 검색어가 카드에 보이는 글자(제목 + 구 이름 + 장소)에 들어 있는 것만
+        if (keyword && !hasText(item.title + " " + getPlaceText(item), keyword)) return false;
         return true;
     });
 }
 
 
-/* ---------- 09. 카드 만들기 (category.css 공통 카드) ---------- */
+/* ---------- 08. 카드 만들기 (category.css 공통 카드) ---------- */
 
-// 공통 카드 구조
+// 공통 카드 구조 (클래스는 모두 팀 공통 category.css 에 정의된 것을 그대로 사용)
 //   <article class="ss-card">
 //     <div class="ss-card-image"> 포스터 + 오른쪽 아래 하트(.ss-heart-toggle) </div>
-//     <div class="ss-card-info"> 카테고리 / 제목 / 장소 / 기간 </div>
+//     <div class="ss-card-info"> 카테고리 / 제목 / 장소(.pop-card-place) / 기간(.pop-card-period) </div>
 //     <a class="pop-card-link"> 카드 전체 링크 </a>
 //   </article>
+// pop-card-* 도 category.css 의 공통 카드 클래스다 (팝업 페이지 전용 아님)
+// 장소는 글자가 길면 … 으로 줄여 주는 .pop-card-place 를 쓴다
 function makeCard(item) {
     const card = document.createElement("article");
     card.className = "ss-card";
@@ -355,16 +237,12 @@ function makeCard(item) {
     const imageBox = document.createElement("div");
     imageBox.className = "ss-card-image";
 
+    // 포스터가 없거나 깨지면 브라우저가 alt 글자(제목 + 포스터)를 대신 보여준다
     const img = document.createElement("img");
     img.alt = item.title + " 포스터";
     if (item.img) {
         img.src = item.img;
-    } else {
-        img.style.visibility = "hidden";                // 포스터가 없으면 회색 배경만
     }
-    img.addEventListener("error", function () {
-        img.style.visibility = "hidden";                // 이미지가 깨지면 회색 배경만
-    });
 
     // 공통 하트: data-save-id 가 있으면 common.js 의 updateHearts() 가 체크 상태를 맞춰준다
     const heart = document.createElement("label");
@@ -374,9 +252,12 @@ function makeCard(item) {
     check.type = "checkbox";
     check.setAttribute("data-save-id", item.id);
     check.setAttribute("aria-label", item.title + " 저장");
-    check.checked = isSaved(item.id);
+    check.checked = SceneSeoul.isSaved(item.id);
+
+    // 저장 / 취소는 common.js 가 처리한다 (로그인 전이면 안내하고 하트를 되돌린다)
     check.addEventListener("change", function () {
-        toggleSave(item, check);
+        SceneSeoul.toggleSaved(item.id);
+        refreshSavedCards();                            // "저장한 것" 을 보고 있으면 바로 다시 그림
     });
 
     const mark = document.createElement("span");
@@ -399,18 +280,13 @@ function makeCard(item) {
     top.appendChild(type);
 
     // 제목에 < > 가 들어간 경우가 있어서 innerHTML 대신 innerText 로 넣는다
-    const title = document.createElement("h4");
+    const title = document.createElement("h3");
     title.className = "ss-card-title";
     title.innerText = item.title;
 
-    // 장소 앞에 구 이름을 붙인다 (주소에 이미 구 이름이 있으면 그대로)
     const place = document.createElement("p");
     place.className = "pop-card-place";
-    if (item.gu && !hasText(item.place, item.gu)) {
-        place.innerText = item.gu + " · " + item.place;
-    } else {
-        place.innerText = item.place;
-    }
+    place.innerText = getPlaceText(item);
 
     const period = document.createElement("p");
     period.className = "pop-card-period";
@@ -430,7 +306,6 @@ function makeCard(item) {
         link.className = "pop-card-link";
         link.href = item.url;
         link.target = "_blank";
-        link.rel = "noopener";
         link.setAttribute("aria-label", item.title + " 자세히 보기");
         card.appendChild(link);
     }
@@ -441,37 +316,48 @@ function render() {
     const list = sortItems(getFiltered(true));
 
     resultTitle.innerText = currentDistrict || "서울 전체";
-    resultCount.innerText = (loading && list.length === 0) ? "" : `총 ${list.length}개`;
+    if (loading && list.length === 0) {
+        resultCount.innerText = "";
+    } else {
+        resultCount.innerText = `총 ${list.length}개`;
+    }
 
-    eventsBox.innerHTML = "";
+    cardBox.innerHTML = "";
     if (list.length === 0) {
         const empty = document.createElement("p");
-        empty.className = "events-empty";
+        empty.className = "map-cards-empty";
         if (loading) {
             empty.innerText = "콘텐츠를 불러오는 중이에요...";
+        } else if (currentType === "saved" && SceneSeoul.getUser()) {
+            empty.innerText = "저장한 콘텐츠가 없어요. 마음에 드는 카드의 하트를 눌러보세요.";
         } else if (currentType === "saved") {
-            empty.innerText = SceneSeoul.getUser()
-                ? "저장한 콘텐츠가 없어요. 마음에 드는 카드의 하트를 눌러보세요."
-                : "로그인하면 하트로 저장한 콘텐츠를 모아볼 수 있어요.";
+            empty.innerText = "로그인하면 하트로 저장한 콘텐츠를 모아볼 수 있어요.";
         } else {
             empty.innerText = "조건에 맞는 콘텐츠가 없어요.";
         }
-        eventsBox.appendChild(empty);
+        cardBox.appendChild(empty);
         return;
     }
 
-    // JSON 데이터는 100개 정도라 전부 한 줄에 그리고, 좌우 스크롤로 본다
+    // 카드는 한 줄에 모두 그리고, 좌우 스크롤로 본다
     for (const item of list) {
-        eventsBox.appendChild(makeCard(item));
+        cardBox.appendChild(makeCard(item));
     }
 }
 
+// 카테고리 · 검색어 · 찜이 바뀌었을 때: 목록과 지도 마커를 함께 다시 그린다
+function updateList() {
+    render();
+    cardBox.scrollLeft = 0;                     // ※ 수업 외: scrollLeft (가로 스크롤 위치) — 맨 앞으로
+    drawMarkers();
+}
 
-/* ---------- 10. 지도 ---------- */
 
-// ※ 수업 외: Leaflet 라이브러리 (L.map, L.tileLayer, L.circleMarker)
+/* ---------- 09. 지도 ---------- */
+
+// ※ 수업 외: Leaflet 라이브러리 (L.map, L.tileLayer, L.circleMarker, bindPopup, flyTo)
 function initMap() {
-    map = L.map("leaflet-map", { preferCanvas: true }).setView(SEOUL_CENTER, 11);
+    map = L.map("leaflet-map").setView(SEOUL_CENTER, 11);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution: "&copy; OpenStreetMap contributors"
@@ -484,71 +370,73 @@ function makeMarkerPopup(item) {
     const box = document.createElement("div");
 
     const label = document.createElement("span");
-    label.className = "popup-type";
+    label.className = "marker-type";
     label.innerText = TYPE_LABEL[item.type];
 
     const name = document.createElement("strong");
     name.innerText = item.title;
 
-    // 장소 (카드와 같이 주소에 구 이름이 없으면 앞에 붙인다)
     const place = document.createElement("div");
-    place.className = "popup-place";
-    if (item.gu && !hasText(item.place, item.gu)) {
-        place.innerText = item.gu + " · " + item.place;
-    } else {
-        place.innerText = item.place;
-    }
+    place.className = "marker-place";
+    place.innerText = getPlaceText(item);
 
     const date = document.createElement("div");
     date.innerText = SceneSeoul.formatPeriod(item);
 
     box.appendChild(label);
     box.appendChild(name);
-    if (item.place || item.gu) box.appendChild(place);
+    box.appendChild(place);
     box.appendChild(date);
 
     if (item.url) {
         const link = document.createElement("a");
-        link.className = "popup-link";
+        link.className = "marker-link";
         link.href = item.url;
         link.target = "_blank";
-        link.rel = "noopener";
         link.innerText = "자세히 보기 ↗";
         box.appendChild(link);
     }
     return box;
 }
 
+// 콘텐츠 하나를 마커로 찍는다
+function addMarker(item) {
+    const marker = L.circleMarker([item.lat, item.lng], {
+        radius: 7,
+        color: "#FFFFFF",
+        weight: 2,
+        fillColor: TYPE_COLOR[item.type],
+        fillOpacity: 0.95
+    });
+
+    // 말풍선 내용은 마커를 눌렀을 때 만든다
+    marker.bindPopup(function () {
+        return makeMarkerPopup(item);
+    });
+
+    // 마커를 누르면 그 구의 목록으로 바꾼다 (마커가 있는 콘텐츠는 항상 구 이름이 있다)
+    marker.on("click", function () {
+        if (item.gu !== currentDistrict) {
+            selectDistrict(item.gu, true);
+        }
+    });
+    marker.addTo(markerLayer);
+}
+
 // 카테고리/검색어에 맞는 항목을 마커로 찍는다 (구 선택과는 상관없이 서울 전체)
 function drawMarkers() {
+    if (!markerLayer) return;                   // 지도를 불러오지 못했으면 목록만 보여준다
+
     markerLayer.clearLayers();
     for (const item of getFiltered(false)) {
-        if (item.lat === null) continue;        // 위치를 모르는 콘텐츠는 목록에만 나온다
-
-        const marker = L.circleMarker([item.lat, item.lng], {
-            radius: 7,
-            color: "#FFFFFF",
-            weight: 2,
-            fillColor: TYPE_COLOR[item.type],
-            fillOpacity: 0.95
-        });
-
-        // 말풍선 내용은 마커를 눌렀을 때 만든다 (마커가 수천 개라 미리 만들면 느려서)
-        marker.bindPopup(function () {
-            return makeMarkerPopup(item);
-        });
-
-        marker.on("click", function () {
-            if (item.gu && item.gu !== currentDistrict) {
-                selectDistrict(item.gu, true);
-            }
-        });
-        marker.addTo(markerLayer);
+        if (item.lat !== null) {                // 위치를 모르는 콘텐츠는 목록에만 나온다
+            addMarker(item);
+        }
     }
 }
 
 
-/* ---------- 11. 구 선택 ---------- */
+/* ---------- 10. 구 선택 ---------- */
 
 // 드롭다운에 옵션 하나 추가 (value 가 "" 이면 서울 전체)
 function makeOption(text, gu) {
@@ -570,9 +458,10 @@ function selectDistrict(gu, fromMarker) {
 
     districtSelect.value = gu;                   // 마커로 고른 경우에도 드롭다운 표시를 맞춘다
     render();
-    eventsBox.scrollLeft = 0;
+    cardBox.scrollLeft = 0;                      // ※ 수업 외: scrollLeft
 
-    if (!fromMarker) {                           // 마커를 눌렀을 땐 말풍선이 열려 있으니 지도를 움직이지 않는다
+    // 마커를 눌렀을 땐 말풍선이 열려 있으니 지도를 움직이지 않는다
+    if (!fromMarker && map) {
         if (gu) {
             map.flyTo(GU_CENTER[gu], 13);
         } else {
@@ -582,51 +471,69 @@ function selectDistrict(gu, fromMarker) {
 }
 
 
-/* ---------- 12. 이벤트 ---------- */
+/* ---------- 11. 이벤트 ---------- */
 
 // 드롭다운에서 구를 고르면 그 구로 이동
 districtSelect.addEventListener("change", function () {
     selectDistrict(districtSelect.value);
 });
 
-for (const radio of filterRadios) {
-    radio.addEventListener("change", function () {
-        currentType = radio.id.replace("filter-", "");      // "filter-popup" → "popup"
-        render();
-        eventsBox.scrollLeft = 0;
-        drawMarkers();
+// 선택된 카테고리 버튼 표시 (공통 .ss-filter 는 aria-pressed="true" 면 노란색)
+function markActiveFilter() {
+    for (const button of filterButtons) {
+        if (button.getAttribute("data-filter") === currentType) {
+            button.setAttribute("aria-pressed", "true");
+        } else {
+            button.setAttribute("aria-pressed", "false");
+        }
+    }
+}
+
+// 카테고리 필터 (전시 페이지와 같은 공통 버튼)
+for (const button of filterButtons) {
+    button.addEventListener("click", function () {
+        currentType = button.getAttribute("data-filter");  // all / exhibition / ... / saved
+        markActiveFilter();
+        updateList();
     });
 }
 
-// 검색은 타이핑이 멈춘 뒤에 한 번만 실행 (마커가 많아서 글자마다 다시 그리면 느림)
-// ※ 수업 외: clearTimeout (setTimeout 으로 예약해 둔 것을 취소)
-let searchTimer;
+// 검색 (제목 · 구 이름 · 장소에 검색어가 들어 있는 것만)
+// ※ 수업 외: input 이벤트 (글자를 입력하거나 지울 때마다 발생)
 searchInput.addEventListener("input", function () {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(function () {
-        keyword = searchInput.value;
-        render();
-        eventsBox.scrollLeft = 0;
-        drawMarkers();
-    }, 250);
+    keyword = searchInput.value;
+    updateList();
 });
 
 // 카드 좌우 이동 (부드럽게 움직이는 건 CSS scroll-behavior: smooth)
 prevBtn.addEventListener("click", function () {
-    eventsBox.scrollLeft -= 480;
+    cardBox.scrollLeft -= 480;                  // ※ 수업 외: scrollLeft
 });
 nextBtn.addEventListener("click", function () {
-    eventsBox.scrollLeft += 480;
+    cardBox.scrollLeft += 480;                  // ※ 수업 외: scrollLeft
 });
 
-// common.js 가 보내는 이벤트 (안내문 4·5번)
-window.addEventListener("scene:login", refreshSavedCards);   // 로그인 / 로그아웃
-window.addEventListener("scene:saved", refreshSavedCards);   // 찜 / 찜 취소
-window.addEventListener("storage", refreshSavedCards);       // 다른 탭에서 바꿨을 때
-window.addEventListener("pageshow", clearGuestHearts);       // 뒤로가기로 돌아왔을 때
+// 로그인 / 로그아웃했을 때(login.js 가 보냄) "저장한 것" 목록을 맞춘다
+// ※ 수업 외: 직접 만든 이벤트(scene:login)
+window.addEventListener("scene:login", refreshSavedCards);
 
 
-/* ---------- 13. 데이터 불러오기 (13주차 fetch) ---------- */
+/* ---------- 12. 데이터 불러오기 (13주차 fetch) ---------- */
+
+// 장소 좌표 표를 먼저 읽고 done() 을 부른다 (실패해도 목록은 보여줄 수 있으므로 그대로 진행)
+function loadVenues(done) {
+    fetch(VENUE_FILE)
+        .then(response => response.json())
+        .then(list => {
+            venues = list;
+        })
+        .catch(error => {
+            console.error("장소 좌표를 불러오지 못했어요:", error);
+        })
+        .then(() => {
+            done();
+        });
+}
 
 // 지도에 쓰는 팀 JSON 4개 (전시 페이지와 같은 ../data 폴더)
 const DATA_FILES = [
@@ -659,29 +566,25 @@ function loadAllItems(done) {
 }
 
 
-/* ---------- 14. 시작 ---------- */
+/* ---------- 13. 시작 ---------- */
 
 function start() {
-    initMap();
+    // 지도 라이브러리를 불러오지 못해도(인터넷 연결 끊김 등) 아래 목록은 보이도록
+    if (typeof L !== "undefined") {
+        initMap();
+    }
     makeOptions();
     selectDistrict("", true);
 
-    // 팀 JSON 들을 모두 읽어서 하나의 배열로 넘겨받는다
-    loadAllItems(function (list) {
-        allItems = cleanUp(list.map(toItem));
-        loading = false;
+    // 장소 좌표 → 팀 JSON 4개 순서로 읽은 뒤 목록과 마커를 그린다
+    loadVenues(function () {
+        loadAllItems(function (list) {
+            allItems = cleanUp(list.map(toItem));
+            loading = false;
 
-        if (allItems.length === 0 && location.protocol === "file:") {
-            statusNote.innerText = "HTML 파일을 직접 열면(file://) JSON 을 읽을 수 없어요. Live Server 로 열어 주세요.";
-        }
-
-        render();
-        drawMarkers();
-
-        // 주소 뒤에 #성동구 처럼 붙어 있으면 그 구를 바로 선택
-        // ※ 수업 외: location.hash, decodeURIComponent (한글 주소 되돌리기)
-        const name = decodeURIComponent(location.hash.replace("#", ""));
-        if (GU_CENTER[name]) selectDistrict(name);
+            render();
+            drawMarkers();
+        });
     });
 }
 
