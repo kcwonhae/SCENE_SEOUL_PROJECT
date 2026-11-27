@@ -152,9 +152,3 @@
 }
 
 .ss-login-submit:hover { background: #2A3142; }   /* 마우스를 올리면 살짝 밝게 */
-
-/* 키보드로 이동했을 때 어디에 있는지 보이도록 */
-.ss-login-submit:focus,
-.ss-login-close:focus {
-    box-shadow: 0 0 0 3px rgba(70, 102, 176, .45);
-}
