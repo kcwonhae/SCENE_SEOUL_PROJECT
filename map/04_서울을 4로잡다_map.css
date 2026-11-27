@@ -29,7 +29,7 @@
     margin-bottom: 22px;
 }
 
-/* 왼쪽: 구 선택 드롭다운 (예전 부제 자리) */
+/* 오른쪽: 구 선택 드롭다운 */
 .district-select {
     min-width: 180px;
     height: 42px;
@@ -55,11 +55,11 @@
     outline-offset: 2px;
 }
 
-/* 오른쪽: 마커 색 안내 + 안내 문구 */
+/* 왼쪽: 마커 색 안내 + 안내 문구 (왼쪽으로 옮겨서 왼쪽 정렬) */
 .map-topline-side {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 8px;
 }
 
@@ -92,7 +92,7 @@
     display: inline-block;
     width: 11px;
     height: 11px;
-    border: 2px solid var(--ss-white);
+    border: 1px solid var(--ss-white);
     border-radius: 50%;
     box-shadow: 0 0 0 1px var(--ss-line);
 }
