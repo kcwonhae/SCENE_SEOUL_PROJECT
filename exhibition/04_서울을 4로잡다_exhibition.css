@@ -1,8 +1,5 @@
 /* ---------- 01. 페이지 기본 설정 ---------- */
 
-/* 페이지 내부 링크 이동을 부드럽게 처리 */
-html {scroll-behavior: smooth;}
-
 
 /* 페이지에서 쓰는 이름 변경 -> common.css에서 가져옴. */
 :root {
@@ -149,10 +146,11 @@ p {
 /* 제목 아래 얇은 회색 구분선: 설명 문구(13px × 1.8 ≒ 23px)가 있던 자리 가운데에 두어
    아래 필터 줄 위치는 그대로
    - 위: 제목 아래 10px 와 margin 이 겹치므로(큰 값만 적용) 21px = 10px + 11px
-   - 아래: margin 으로 주면 부모 margin-bottom 과 겹쳐 사라져서 height 로 채운다 (선 1px + 11px) */
+   - 아래: margin 으로 주면 부모 margin-bottom 과 겹쳐 사라져서 height 로 채운다 (선 2px + 10px) */
 .ex-divider {
+  box-sizing: border-box;   /* 선 굵기를 높이 12px 안에 포함 → 아래 필터 줄 위치 그대로 */
   height: 12px;
   margin: 21px 0 0;
   border: 0;
-  border-top: 1px solid var(--ss-line);
+  border-top: 2px solid var(--ss-line);
 }
