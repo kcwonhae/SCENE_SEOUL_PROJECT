@@ -43,12 +43,17 @@ const ssRememberInput = document.getElementById('ssLoginRemember');
 
 /* 02 창 열기 및 닫기 */
 function openLoginModal() {
-    // 저장해 둔 아이디가 있으면 자동으로 채워 줌
+    // 저장해 둔 아이디가 있으면 자동으로 채우고 '아이디 저장'도 체크
     const savedName = localStorage.getItem('savedUsername');
-    ssIdInput.value = savedName || '';
-    ssRememberInput.checked = savedName !== null;
+    if (savedName !== null) {
+        ssIdInput.value = savedName;
+        ssRememberInput.checked = true;
+    } else {
+        ssIdInput.value = '';
+        ssRememberInput.checked = false;
+    }
 
-    ssOverlay.className = 'ss-login-overlay is-open';   // is-open 이 붙으면 CSS 에서 창이 보임
+    ssOverlay.className = 'ss-login-overlay is-open';   // CSS 에서 창이 보임
 }
 
 function closeLoginModal() {
@@ -68,7 +73,7 @@ function fadeOutLoginModal() {
 /* 03 로그인 및 로그아웃 (저장은 common.js 담당) */
 // 현재 로그인 상태에 맞게 헤더 버튼 문구 변경 (로그인 후에는 LOGOUT만 표시)
 function updateLoginUI() {
-    if (SceneSeoul.getUser()) {
+    if (SceneSeoul.getUser() !== '') {
         loginBtn.innerText = 'LOGOUT';
     } else {
         loginBtn.innerText = 'LOGIN';
@@ -85,13 +90,13 @@ function logout() {
     SceneSeoul.logout();
     alert(username + '님 로그아웃 되셨습니다.');
     updateLoginUI();
-    window.dispatchEvent(new Event('scene:login')); // 로그아웃 했으니까 하트 다시 맞춤 (수업 외: common.js 와 약속한 직접 만든 이벤트)
+    window.dispatchEvent(new Event('scene:login')); // 로그아웃했으니 하트 다시 맞춤 (수업 외: common.js 와 약속한 직접 만든 이벤트)
 }
 
 /* 04 이벤트 등록 */
 // 헤더 버튼: 로그인 상태면 로그아웃, 아니면 로그인 창 열기
 loginBtn.addEventListener('click', () => {
-    if (SceneSeoul.getUser()) {
+    if (SceneSeoul.getUser() !== '') {
         logout();
     } else {
         openLoginModal();
@@ -115,7 +120,7 @@ ssForm.addEventListener('submit', (event) => {
     }
 
     updateLoginUI();
-    window.dispatchEvent(new Event('scene:login')); // 내 찜 목록으로 하트 다시 맞춤 (수업 외: common.js 와 약속한 직접 만든 이벤트)
+    window.dispatchEvent(new Event('scene:login')); // 내 찜 목록으로 하트 다시 맞춤 (수업 외: common.js 와 공통으로 작업)
 
     fadeOutLoginModal();   // 천천히 흐려지면서 닫기
 });
