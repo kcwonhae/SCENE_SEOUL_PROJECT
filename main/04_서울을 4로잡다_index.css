@@ -1,237 +1,481 @@
 
-/* SCENE:SEOUL 홈 화면
-   공통 헤더, 글꼴, 기본 색상은 common.css에서 관리한다. */
+/* ==========================================
+   SCENE:SEOUL - HOME
+   04_서울을 4로잡다_index.css
+========================================== */
 
 :root {
-    --home-paper: var(--ss-paper);
-    --home-ink: var(--ss-ink);
-    --home-blue: var(--ss-blue);
-    --home-yellow: var(--ss-yellow);
-    --home-muted: var(--ss-muted);
-    --home-line: var(--ss-line);
-    --home-white: #fff;
+    --home-paper: #FFFFFF;
+    --home-ink: var(--ss-ink, #151B27);
+    --home-blue: var(--ss-blue, #4666B0);
+    --home-blue-hover: var(--ss-blue-hover, #344F94);
+    --home-yellow: var(--ss-yellow, #FFDB63);
+    --home-muted: #737983;
+    --home-line: #E1E2E4;
+    --home-white: #FFFFFF;
+
+    --hero-black: #000000;
+    --hero-header-height: 76px;
 }
 
-/* 1. 첫 화면 */
+/* ==========================================
+   00. HEADER — 고정된 흰색 바
+   메뉴 및 로고: 공통 CSS 위에 홈에서만 정의
+   기존 값과 충돌하지 않도록 선택자를 정리
+========================================== */
+body.home {
+    --ss-header-bg: #FFFFFF;
+    --ss-header-text: #151B27;
+    --ss-header-accent: #4666B0;
+    background: #FFFFFF;
+}
+
+body.home .ss-header,
+body.home.is-hero-dark .ss-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: var(--hero-header-height);
+    box-sizing: border-box;
+    background: #FFFFFF;
+    color: #151B27;
+    border-bottom: 1px solid rgba(21, 27, 39, 0.08);
+}
+
+body.home .ss-header .ss-header-logo,
+body.home.is-hero-dark .ss-header .ss-header-logo {
+    opacity: 1;
+    visibility: visible;
+    color: #151B27;
+    pointer-events: auto;
+}
+
+body.home .ss-header .ss-header-logo .ss-accent,
+body.home.is-hero-dark .ss-header .ss-header-logo .ss-accent {
+    color: #4666B0;
+}
+
+body.home .ss-header .ss-nav a,
+body.home .ss-header .ss-header-actions,
+body.home .ss-header .ss-icon-button,
+body.home .ss-header .ss-language,
+body.home .ss-header .ss-weather-icon,
+body.home .ss-header .header-login,
+body.home .ss-header .header-mypage,
+body.home.is-hero-dark .ss-header .ss-nav a,
+body.home.is-hero-dark .ss-header .ss-header-actions,
+body.home.is-hero-dark .ss-header .ss-icon-button,
+body.home.is-hero-dark .ss-header .ss-language,
+body.home.is-hero-dark .ss-header .ss-weather-icon,
+body.home.is-hero-dark .ss-header .header-login,
+body.home.is-hero-dark .ss-header .header-mypage {
+    color: #151B27;
+}
+
+/* ==========================================
+   01. FULLSCREEN HERO
+========================================== */
 
 .season-film {
     position: relative;
-    height: 480vh;
-    background: var(--home-paper);
+    width: 100%;
+    height: 550vh;
+    margin: var(--hero-header-height) 0 0;
+    padding: 0;
+    background: var(--hero-black);
 }
 
 .season-film-sticky {
     position: sticky;
-    top: 0;
-    height: 100vh;
+    top: var(--hero-header-height);
+
+    width: 100%;
+    height: calc(100vh - var(--hero-header-height));
+    height: calc(100svh - var(--hero-header-height));
+
+    margin: 0;
+    padding: 0;
+
     overflow: hidden;
-    background: var(--home-ink);
+    isolation: isolate;
+
+    background: var(--hero-black);
 }
+
+/* 전체 화면 이미지 영역 */
+
+.season-visual {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+    background: #000;
+}
+
+/* 4장의 이미지 */
 
 .season-scene {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-position: center;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
     background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
     opacity: 0;
-    transform: scale(1.04);
-    transition: opacity 0.12s linear;
+    transform: scale(1.060);
+
+    will-change: opacity, transform;
+    backface-visibility: hidden;
 }
 
+/* 01 전시 */
+
 .scene-image-exhibition {
-    background-image: url('../images/04_index.01.jpg');
+    background-image: url("../images/04_index_01.png");
     opacity: 1;
 }
 
+/* 02 공연 */
+
 .scene-image-performance {
-    background-image: url('../images/04_index.02.jpg');
+    background-image: url("../images/04_index_02.jpg");
 }
+
+/* 03 팝업 */
 
 .scene-image-popup {
-    background-image: url('../images/04_index.03.jpg');
+    background-image: url("../images/04_index_03.png");
 }
+
+/* 04 이벤트 */
 
 .scene-image-event {
-    background-image: url('../images/04_index.04.jpg');
+    background-image: url("../images/04_index_04.png");
 }
 
-.season-film-sticky::after {
-    content: '';
+/* 하단 검은 그라데이션 */
+
+.season-film-overlay {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(
-        90deg,
-        rgba(21, 27, 39, 0.55),
-        rgba(21, 27, 39, 0.07) 85%
-    );
+    inset: 0;
+    z-index: 2;
+    /* 흰 타이포를 읽기 쉽게 하는 좌측 음영 + 사진의 깊이를 주는 하단 그림자.
+       중앙의 사진 디테일은 최대한 유지하며, 영상처럼 화면 가장자리만 눌러 준다. */
+    background:
+        linear-gradient(0deg,
+            rgba(8, 12, 19, 0.72) 0%,
+            rgba(8, 12, 19, 0.25) 20%,
+            rgba(8, 12, 19, 0.02) 53%,
+            rgba(8, 12, 19, 0.09) 100%),
+        linear-gradient(90deg,
+            rgba(10, 15, 23, 0.64) 0%,
+            rgba(10, 15, 23, 0.34) 31%,
+            rgba(10, 15, 23, 0.08) 62%,
+            rgba(10, 15, 23, 0) 100%);
     pointer-events: none;
 }
 
-.season-editorial {
+/* ==========================================
+   02. BOTTOM LEFT TEXT
+========================================== */
+
+/* 첫 화면: 작은 한글 슬로건 + 큰 영문 워드마크 */
+.season-copy-wrap {
     position: absolute;
-    z-index: 2;
-    top: 50%;
+    top: 29%;
     left: 6%;
-    width: 780px;
-    max-width: 85%;
-    color: var(--home-white);
-    transform: translateY(-50%);
+    right: 6%;
+    bottom: auto;
+    z-index: 5;
+    width: auto;
+    max-width: 900px;
+    color: #FFFFFF;
+    pointer-events: none;
 }
 
-.season-editorial h1 {
-    margin: 0 0 22px;
-    font-size: 76px;
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -5px;
+.season-copy-brand {
+    display: block;
+    margin: clamp(15px, 2.4vh, 25px) 0 0;
+    color: rgba(255,255,255,0.90);
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: clamp(12px, 1.05vw, 15px);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    word-break: keep-all;
 }
 
-.season-editorial h1 em {
-    font-style: normal;
-}
-
-.season-editorial p {
+.season-copy-title {
     margin: 0;
-    font-size: 16px;
-    line-height: 1.8;
+    color: #FFFFFF;
+    font-family: "Noto Sans KR", "DM Sans", sans-serif;
+    font-size: clamp(38px, 4.9vw, 76px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.055em;
+    white-space: normal;
 }
 
-.season-discover,
-.edition-text-link {
+/* 히어로 제목은 전체 흰색으로 통일 */
+.season-copy-korean,
+.season-copy-wordmark {
+    display: block;
+}
+
+.season-copy-korean {
+    margin-bottom: 10px;
+}
+
+.season-copy-wordmark {
+    font-family: "DM Sans", sans-serif;
+    font-size: 1em;
+    letter-spacing: -0.067em;
+    white-space: nowrap;
+}
+.season-copy-title .season-copy-colon {
+    color: #FFFFFF;
+}
+
+/* ==========================================
+   03. HERO SCROLL LINK
+   하단 밑줄 없이 흰색 글씨와 아래쪽 화살표
+========================================== */
+.season-skip {
+    position: absolute;
+    right: 5%;
+    bottom: 6%;
+    z-index: 6;
     display: inline-flex;
     align-items: center;
-    gap: 25px;
-    margin-top: 25px;
-    padding: 12px 0;
-    border-bottom: 1px solid currentColor;
-    font-size: 12px;
-    font-weight: 800;
+    gap: 12px;
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    transition: opacity 0.3s ease;
+}
+.season-skip-label { color: inherit; white-space: nowrap; }
+.season-skip-icon {
+    display: grid;
+    place-items: center;
+    width: 17px;
+    height: 17px;
+    color: inherit;
+}
+.season-skip-icon svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.season-skip:hover .season-skip-icon svg,
+.season-skip:focus-visible .season-skip-icon svg {
+    transform: translateY(5px);
+}
+.season-skip:focus-visible {
+    outline: 2px solid #FFFFFF;
+    outline-offset: 6px;
 }
 
-.season-discover:hover {
-    color: var(--home-yellow);
-}
-
-.season-bottom-strip {
-    position: absolute;
-    z-index: 2;
-    right: 6%;
-    bottom: 40px;
-    left: 6%;
-    display: flex;
-    justify-content: space-between;
-    color: var(--home-white);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
+/* ==========================================
+   04. SCROLL PROGRESS
+========================================== */
 
 .season-progress {
     position: absolute;
-    z-index: 3;
+
+    left: 0;
     right: 0;
     bottom: 0;
-    left: 0;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.2);
+
+    z-index: 7;
+
+    height: 3px;
+
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .season-progress span {
     display: block;
+
     width: 0;
     height: 100%;
-    background: var(--home-yellow);
+
+    background: var(--ss-blue, #4666B0);
 }
 
-/* 첫 화면 마지막에 나오는 추천 소개 */
-
+/* ==========================================
+   05. EDIT / WHITE EDITORIAL
+   하얀 지면, 두 줄 타이포, 기존 스카이라인
+========================================== */
 .edition-next {
     position: absolute;
-    z-index: 4;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
+    z-index: 10;
     display: grid;
-    grid-template-columns: 28% 1fr;
     align-items: center;
-    gap: 50px;
-    padding: 90px 8%;
-    background: var(--home-paper);
-    opacity: 0;
+    padding: clamp(56px, 8vh, 110px) 6%;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #FFFFFF;
     visibility: hidden;
     pointer-events: none;
+    opacity: 0;
+    /* 와이프 대신 사진이 사라지면서 EDIT가 자연스럽게 겹친다. */
 }
-
 .edition-next.is-visible {
     visibility: visible;
     pointer-events: auto;
 }
-
-.edition-next-index,
-.eyebrow {
-    color: var(--home-blue);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2px;
+.edition-next-content {
+    position: relative;
+    z-index: 2;
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    padding: 0 0 clamp(65px, 9vh, 105px);
+    box-sizing: border-box;
 }
-
 .edition-next-index {
-    align-self: start;
+    display: block;
+    margin: 0 0 clamp(24px, 4vh, 44px);
+    color: var(--home-ink);
+    font-family: "DM Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.025em;
 }
-
-.edition-next h2 {
-    margin: 20px 0;
-    font-size: 66px;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -4px;
+.edition-next-title {
+    margin: 0;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: clamp(24px, 4vw, 67px);
+    font-weight: 750;
+    line-height: 1.24;
+    letter-spacing: -0.045em;
+    word-break: keep-all;
 }
-
-.edition-next h2 em {
+.edition-next-line {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+    color: var(--home-ink);
+    transition: color 0.35s ease;
+}
+.edition-next-line.edition-next-emphasis {
     color: var(--home-blue);
-    font-style: normal;
 }
-
-.edition-next p {
-    color: var(--home-muted);
-    font-size: 14px;
-    line-height: 2;
+/* 화살표는 텍스트와 분리하지만 한 덩어리로 반응 */
+.edition-next-play-link {
+    position: absolute;
+    right: 0;
+    bottom: -12px;
+    display: grid;
+    place-items: center;
+    width: clamp(64px, 6.1vw, 88px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--home-ink);
+    color: var(--home-blue);
+    text-decoration: none;
+    transition:
+        background-color 0.35s ease,
+        color 0.35s ease,
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
-.edition-text-link:hover {
+.edition-next-play-link svg {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.edition-next-play-link:hover,
+.edition-next-play-link:focus-visible {
+    transform: scale(1.12);
+    background: var(--home-blue);
+    color: var(--home-ink);
+}
+.edition-next-play-link:hover svg,
+.edition-next-play-link:focus-visible svg {
+    transform: translate(3px, -3px);
+}
+.edition-next-content:has(.edition-next-play-link:is(:hover, :focus-visible))
+.edition-next-line:first-child {
     color: var(--home-blue);
 }
+.edition-next-content:has(.edition-next-play-link:is(:hover, :focus-visible))
+.edition-next-line.edition-next-emphasis {
+    color: var(--home-ink);
+}
+.edition-next-play-link:focus-visible {
+    outline: 2px solid var(--home-blue);
+    outline-offset: 7px;
+}
+.edition-next-background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    height: 150px;
+    background-image: url("../recommend/skyline.svg");
+    background-position: center bottom;
+    background-repeat: repeat-x;
+    background-size: 1200px 120px;
+    opacity: 0;
+    pointer-events: none;
+    will-change: opacity;
+}
 
-/* 2. 전시, 공연, 팝업, 이벤트 소개 */
+/* ==========================================
+   06. FIND YOUR SCENE
+========================================== */
 
 .section-pad {
     padding: 95px 5%;
 }
 
 .scenes {
-    background: var(--home-paper);
+    position: relative;
+    background: #FFFFFF;
 }
 
 .section-heading {
     display: flex;
+
     justify-content: space-between;
     align-items: flex-end;
+
     margin-bottom: 45px;
 }
 
 .section-heading h2 {
     margin: 0;
-    font-size: 105px;
+
+    color: var(--home-ink);
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: clamp(60px, 7vw, 105px);
     font-weight: 900;
+
     line-height: 0.95;
-    letter-spacing: -8px;
+    letter-spacing: -0.075em;
 }
 
 .section-heading h2 i {
@@ -239,303 +483,549 @@
     font-style: normal;
 }
 
+/* 비대칭 4열 카드 */
+
 .scene-grid {
     display: grid;
+
     grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    align-items: start;
+
     gap: 18px;
+
+    padding-bottom: 125px;
+    overflow: visible;
 }
 
 .scene-card {
+    position: relative;
     min-width: 0;
+}
+
+.scene-card:nth-child(1) {
+    margin-top: 0;
+}
+
+.scene-card:nth-child(2) {
+    margin-top: 86px;
+}
+
+.scene-card:nth-child(3) {
+    margin-top: 35px;
+}
+
+.scene-card:nth-child(4) {
+    margin-top: 125px;
 }
 
 .scene-card-link {
     display: block;
+
+    color: inherit;
+    text-decoration: none;
 }
+
+/* 이미지 */
 
 .scene-art {
     height: 380px;
+
     overflow: hidden;
-    background: var(--home-line);
+
+    border-radius: 4px;
+    background: #F1F1F1;
 }
 
 .scene-art img {
     display: block;
+
     width: 100%;
     height: 100%;
+
     object-fit: cover;
-    transition: transform 0.35s ease;
+
+    transition:
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.scene-card-link:hover img {
-    transform: scale(1.04);
+.scene-card-link:hover .scene-art img {
+    transform: scale(1.035);
 }
+
+/* 이미지 아래 캡션 */
 
 .scene-meta {
     display: flex;
+
     justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 19px 0;
+    align-items: flex-start;
+
+    gap: 14px;
+    padding: 18px 0;
 }
 
 .scene-meta span:not(.arrow) {
     color: var(--home-blue);
+
     font-size: 10px;
     font-weight: 800;
+
     letter-spacing: 1px;
 }
 
 .scene-meta h3 {
-    margin: 9px 0;
-    font-size: 24px;
-    letter-spacing: -1px;
+    margin: 10px 0;
+
+    color: var(--home-ink);
+
+    font-size: 23px;
+    font-weight: 700;
+
+    letter-spacing: -0.04em;
 }
 
 .scene-meta h3 b {
+    font-family: "DM Sans", sans-serif;
+
     font-size: 12px;
+    font-weight: 700;
+
     letter-spacing: 0;
 }
 
+/* 화살표 위치 유지, 호버 시 표시 */
+
 .scene-meta .arrow {
-    font-size: 34px;
+    display: inline-block;
+    flex-shrink: 0;
+
+    color: var(--home-ink);
+
+    font-size: 30px;
+    line-height: 1;
+
+    opacity: 0;
+
+    transform: translate(-6px, 6px);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* 3. 마이캘린더 미리보기 */
+.scene-card-link:hover .scene-meta .arrow,
+.scene-card-link:focus-visible .scene-meta .arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+}
 
+/* ==========================================
+   07. FIND YOUR SCENE — EDITORIAL IMAGE REVEAL
+   제목: 미세하게 올라오는 타이포
+   카드: 카드 배치는 고정하고 이미지가 아래→위로 개방됨
+   스크롤을 반대로 움직이면 역재생
+========================================== */
+
+.js-ready .scenes .section-heading {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    will-change: opacity, transform;
+    transition: none;
+}
+
+.js-ready .scenes .scene-card.scene-reveal {
+    opacity: 1; /* 카드 전체를 페이드시키지 않음 */
+    transform: none;
+}
+
+.js-ready .scenes .scene-card.scene-reveal .scene-art img {
+    clip-path: inset(100% 0 0 0);
+    -webkit-clip-path: inset(100% 0 0 0);
+    will-change: clip-path;
+}
+
+.js-ready .scenes .scene-card.scene-reveal .scene-meta {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+    will-change: opacity, transform;
+}
+
+
+/* ==========================================
+   08. COMING UP IN SEOUL — CULTURE CARD EDITORIAL
+   상단 사진 / 하단 정보 / 독립적인 찜 버튼
+========================================== */
 .agenda-section {
-    padding: 100px 6%;
-    background: var(--home-white);
+    padding: 104px 5% 118px;
+    background: #FFFFFF;
+    color: var(--home-ink);
 }
 
 .agenda-title-line {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 25px;
-    padding-bottom: 25px;
+    gap: 24px;
+    padding-bottom: 27px;
     border-bottom: 1px solid var(--home-ink);
 }
 
 .agenda-title-line h2 {
     margin: 0;
-    font-size: 75px;
-    letter-spacing: -5px;
+    font-family: "DM Sans", sans-serif;
+    font-size: clamp(38px, 5vw, 78px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.075em;
 }
 
-.agenda-period {
-    color: var(--home-blue);
+.agenda-period { color: var(--home-blue); }
+
+.agenda-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 8px 0;
+    color: var(--home-ink);
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.25s ease;
 }
+
+.agenda-all-link span {
+    font-size: 21px;
+    font-weight: 400;
+    transition: transform 0.3s ease;
+}
+
+.agenda-all-link:hover,
+.agenda-all-link:focus-visible { color: var(--home-blue); }
+.agenda-all-link:hover span,
+.agenda-all-link:focus-visible span { transform: translate(3px, -3px); }
 
 .agenda-layout {
     display: grid;
-    grid-template-columns: 27% 1fr;
-    border-bottom: 1px solid var(--home-line);
+    grid-template-columns: minmax(200px, 30%) minmax(0, 1fr);
+    align-items: start;
+    gap: 0;
+    padding-top: 32px;
 }
 
 .agenda-aside {
-    padding: 38px 25px 30px 0;
-    border-right: 1px solid var(--home-line);
+    min-width: 0;
+    padding: 10px 26px 30px 0;
 }
 
-.agenda-aside > span,
-.agenda-aside small {
-    font-size: 10px;
-    letter-spacing: 1px;
-}
-
-.agenda-aside > strong {
-    display: block;
-    margin: 25px 0;
-    font-size: 105px;
-    line-height: 1;
-    letter-spacing: -8px;
-}
-
-.agenda-aside > strong span {
+.agenda-month {
+    margin: 0;
     color: var(--home-muted);
-}
-
-.agenda-aside p {
-    max-width: 270px;
-    color: var(--home-muted);
+    font-family: "DM Sans", sans-serif;
     font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.045em;
+}
+
+.agenda-today {
+    margin: 14px 0 0;
+    color: var(--home-ink);
+    font-family: "DM Sans", sans-serif;
+    font-size: clamp(90px, 11vw, 164px);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.085em;
+    font-variant-numeric: tabular-nums;
+}
+
+.agenda-weekday {
+    margin: 16px 0 0;
+    color: var(--home-ink);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+.agenda-aside-desc {
+    margin: 58px 0 0;
+    color: var(--home-muted);
+    font-size: 13px;
     line-height: 1.8;
 }
 
-.agenda-month-mini {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
-    max-width: 265px;
-    margin: 50px 0 20px;
+/* 세 장이 완전히 보이고 네 번째 카드가 일부 보이는 슬라이딩 트랙 */
+.agenda-carousel {
+    position: relative;
+    min-width: 0;
 }
 
-.agenda-month-mini > * {
-    font-size: 10px;
-    text-align: center;
+.agenda-viewport {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+}
+.agenda-viewport::-webkit-scrollbar { display: none; }
+.agenda-viewport:focus-visible {
+    outline: 2px solid var(--home-blue);
+    outline-offset: 4px;
 }
 
-.agenda-month-mini b {
-    color: var(--home-muted);
-    font-size: 8px;
-}
-
-.agenda-days {
-    padding-left: 30px;
-}
-
-.agenda-day {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: 15px;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--home-line);
-}
-
-.agenda-day:last-child {
-    border-bottom: 0;
-}
-
-.agenda-date {
+.agenda-list {
+    --agenda-gap: clamp(12px, 1.4vw, 22px);
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    align-items: stretch;
+    gap: var(--agenda-gap);
+    min-width: 100%;
 }
 
-.agenda-date span {
-    font-size: 11px;
+.agenda-carousel .agenda-item {
+    flex: 0 0 calc((100% - 2.2 * var(--agenda-gap)) / 3.2);
+    scroll-snap-align: start;
 }
 
-.agenda-date strong {
-    font-size: 50px;
-    line-height: 1;
-}
-
-.agenda-day-body {
+.agenda-carousel-arrow {
+    position: absolute;
+    z-index: 3;
+    top: 35%;
     display: grid;
-    gap: 16px;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgba(21, 27, 39, 0.12);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.14);
+    color: var(--home-ink);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%) scale(0.92);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease, background-color 0.25s ease;
+}
+.agenda-carousel-arrow svg { width: 20px; height: 20px; }
+.agenda-carousel-prev { left: 12px; }
+.agenda-carousel-next { right: 12px; }
+.agenda-carousel:hover .agenda-carousel-arrow:not(:disabled),
+.agenda-carousel:focus-within .agenda-carousel-arrow:not(:disabled) {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) scale(1);
+}
+.agenda-carousel-arrow:hover:not(:disabled),
+.agenda-carousel-arrow:focus-visible:not(:disabled) {
+    background: #FFFFFF;
+    transform: translateY(-50%) scale(1.07);
+}
+.agenda-carousel-arrow:disabled {
+    pointer-events: none;
 }
 
-.agenda-row {
-    display: grid;
-    grid-template-columns: 175px minmax(0, 1fr) 40px;
-    align-items: start;
-    gap: 16px;
-}
 
-.agenda-thumb {
-    height: 135px;
+.agenda-item {
+    min-width: 0;
     overflow: hidden;
-    background: var(--home-line);
+    border: 1px solid #E1E1E1;
+    border-radius: 8px;
+    background: #FFFFFF;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
 }
 
-.agenda-thumb img {
+.agenda-thumb-link {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 3.35;
+    overflow: hidden;
+    background: #E9E9E9;
+}
+
+.agenda-thumb-link img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.agenda-row:hover .agenda-thumb img {
-    transform: scale(1.04);
+.agenda-thumb-link:hover img,
+.agenda-thumb-link:focus-visible img {
+    transform: scale(1.035);
 }
 
-.agenda-description small,
-.agenda-description p,
-.agenda-description span {
-    color: var(--home-muted);
-    font-size: 11px;
-}
-
-.agenda-description h3 {
-    margin: 12px 0;
-    font-size: 19px;
-    letter-spacing: -1px;
-}
-
-.agenda-save-input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-}
-
-.agenda-save {
-    cursor: pointer;
-    font-size: 27px;
-    line-height: 1;
-}
-
-.agenda-save-input:checked + .agenda-save {
-    color: #d94c56;
-    font-size: 0;
-}
-
-.agenda-save-input:checked + .agenda-save::after {
-    content: '♥';
-    font-size: 27px;
-}
-
-.agenda-save-input:focus-visible + .agenda-save {
+.agenda-thumb-link:focus-visible {
     outline: 2px solid var(--home-blue);
+    outline-offset: -3px;
 }
 
-.agenda-fold summary {
-    cursor: pointer;
-    padding: 15px 0;
-    font-size: 12px;
+.agenda-thumb-link.is-image-unavailable { background: #E9E9E9; }
+
+/* 고정 헤더를 고려해 FIND YOUR SCENE의 해당 카테고리 카드로 이동 */
+.scenes .scene-card[id^="scene-"] {
+    scroll-margin-top: calc(var(--hero-header-height) + 28px);
 }
 
-.agenda-fold p,
-.agenda-foot {
+.agenda-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 158px;
+    padding: 13px 14px 16px;
+    box-sizing: border-box;
+}
+
+.agenda-info-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 25px;
+    margin-bottom: 5px;
+}
+
+.agenda-item-category {
+    color: var(--home-blue);
+    font-family: "DM Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: 0.065em;
+}
+
+.agenda-item-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    color: var(--home-ink);
+    font-size: clamp(13px, 1.18vw, 16px);
+    font-weight: 800;
+    line-height: 1.45;
+    letter-spacing: -0.035em;
+    text-decoration: none;
+    word-break: keep-all;
+}
+
+.agenda-item-title:hover,
+.agenda-item-title:focus-visible { color: var(--home-blue); }
+
+.agenda-item-location {
+    margin: auto 0 0;
+    padding-top: 19px;
     color: var(--home-muted);
     font-size: 11px;
+    line-height: 1.5;
+}
+
+.agenda-item-date {
+    display: block;
+    margin-top: 8px;
+    color: var(--home-ink);
+    font-family: "DM Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.agenda-heart {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--home-ink);
+    cursor: pointer;
+    transition: color 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.agenda-heart:hover,
+.agenda-heart:focus-visible { transform: scale(1.13); }
+.agenda-heart svg { display: block; width: 21px; height: 21px; }
+.agenda-heart.is-saved { color: #FFDB63; }
+.agenda-heart:focus-visible {
+    outline: 2px solid var(--home-blue);
+    outline-offset: 2px;
+}
+
+.agenda-status {
+    flex: 1 0 100%;
+    padding: 62px 0;
+    color: var(--home-muted);
+    font-size: 13px;
     line-height: 1.8;
 }
 
-.agenda-foot {
-    margin-top: 18px;
-}
+.js-ready .agenda-item { will-change: opacity, transform; }
 
-/* 4. 지도 페이지 소개 */
+/* ==========================================
+   09. SEOUL MAP
+========================================== */
 
 .atlas-section {
     position: relative;
+
     display: flex;
     align-items: center;
+
     min-height: 790px;
+
     padding: 100px 7%;
+    box-sizing: border-box;
+
     overflow: hidden;
-    background: #e7e7e0 url('../images/04_index.map.png') center / cover no-repeat;
+
+    background:
+        #E7E7E0
+        url("../images/04_index.map.png")
+        center center / cover no-repeat;
 }
 
 .atlas-section::before {
-    content: '';
+    content: "";
+
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
+
     background: linear-gradient(
-        90deg,
-        rgba(246, 244, 239, 0.98),
-        rgba(246, 244, 239, 0.85) 28%,
-        transparent 85%
+        to right,
+        rgba(246, 244, 239, 0.98) 0%,
+        rgba(246, 244, 239, 0.86) 28%,
+        rgba(246, 244, 239, 0.05) 85%
     );
+
+    pointer-events: none;
 }
 
 .atlas-overlay {
     position: relative;
+    z-index: 1;
+
     max-width: 550px;
 }
 
 .atlas-overlay h2 {
     margin: 20px 0;
-    font-size: 76px;
+
+    color: var(--home-ink);
+
+    font-family: "Noto Sans KR", sans-serif;
+
+    font-size: clamp(42px, 5vw, 76px);
+    font-weight: 800;
+
     line-height: 1.14;
-    letter-spacing: -5px;
+    letter-spacing: -0.065em;
 }
 
 .atlas-overlay h2 i {
@@ -544,6 +1034,8 @@
 }
 
 .atlas-overlay p {
+    color: var(--home-ink);
+
     font-size: 14px;
     line-height: 1.9;
 }
@@ -551,50 +1043,77 @@
 .atlas-map-cta {
     display: inline-flex;
     align-items: center;
+
     gap: 18px;
+
     margin-top: 25px;
     padding: 14px 0;
+
+    color: var(--home-ink);
+
     border-bottom: 1px solid currentColor;
+
     font-size: 13px;
     font-weight: 700;
+
+    text-decoration: none;
 }
 
 .atlas-map-cta:hover {
     color: var(--home-blue);
 }
 
-/* 5. 푸터 */
+/* ==========================================
+   10. FOOTER
+========================================== */
 
-footer {
+.home-footer {
     display: flex;
-    align-items: center;
+
     justify-content: space-between;
+    align-items: center;
+
     gap: 24px;
+
     padding: 25px 5%;
+
     background: var(--home-yellow);
 }
 
-footer strong {
+.home-footer strong {
+    color: var(--home-ink);
+
+    font-family: "DM Sans", sans-serif;
+
     font-size: 28px;
-    letter-spacing: -2px;
+    font-weight: 900;
+
+    letter-spacing: -0.06em;
 }
 
-footer strong span {
+.home-footer strong span {
     color: var(--home-blue);
 }
 
-footer p,
-footer small {
+.home-footer p,
+.home-footer small {
+    color: var(--home-ink);
+
     font-size: 11px;
     line-height: 1.7;
 }
 
-/* 섹션 등장 효과 */
+/* ==========================================
+   11. GENERAL REVEAL
+========================================== */
 
 .js-ready .reveal {
     opacity: 0;
     transform: translateY(22px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
 }
 
 .js-ready .reveal.visible {
