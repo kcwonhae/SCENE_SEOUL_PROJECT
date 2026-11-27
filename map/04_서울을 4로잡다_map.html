@@ -8,22 +8,20 @@
     <meta name="team-number" content="04">
     <meta name="team-name" content="서울을 4로잡다">
     <meta name="contributor" content="2416922_윤서영">
-    <meta name="description" content="서울의 지도를 탐색하고 나만의 장면을 찾아보세요.">
+    <meta name="description" content="서울의 지도를 탐색">
 
     <title>SCENE:SEOUL | SEOUL MAP</title>
 
-    <!-- 실제 지도: Leaflet + OpenStreetMap (※ 수업 외 라이브러리, svg 파일로는 한계가 있어 부득이하게 적용, 키 발급 불필요)
-         지도 전용 CSS 가 Leaflet 기본 모양을 덮어쓸 수 있도록 가장 먼저 불러온다 -->
+    <!-- 실제 지도: Leaflet + OpenStreetMap (수업 외 라이브러리, svg 파일로는 한계가 있어 부득이하게 적용, 키 발급 불필요)
+         지도 전용 CSS 가 Leaflet 기본 모양을 덮어쓸 수 있도록 가장 먼저 불러옴 -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
-    <!-- 공통 CSS → 카테고리 공통 → 언어 메뉴 → 로그인 → 지도 전용 -->
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
     <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
     <link rel="stylesheet" href="04_서울을 4로잡다_map.css">
 
-    <!-- 헤더 공통 기능: 언어 메뉴 열기/닫기, 날씨 아이콘 -->
+    <!-- 헤더 공통 기능: 언어 메뉴 열기 및 닫기, 날씨 아이콘 -->
     <script src="../js/04_서울을 4로잡다_language.js" defer></script>
     <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
 </head>
@@ -50,7 +48,7 @@
             <button class="header-login" type="button">LOGIN</button>
 
             <span class="ss-header-quick-icons">
-                <!-- 언어 선택 (language.js 가 열기/닫기, 실제 번역 없음) -->
+                <!-- 언어 선택 (language.js 가 열기 및 닫기, 실제 번역 없음- 구현 복잡) -->
                 <span class="ss-language" role="button" tabindex="0" aria-label="언어 선택" aria-expanded="false" aria-haspopup="true">
                     <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9"></circle>
@@ -82,7 +80,7 @@
     <!-- 02. 메인 콘텐츠 -->
     <main class="ss-page map-page">
 
-        <!-- 페이지 소개 (공통 카테고리 상단: category.css 의 .ss-category-hero) -->
+        <!-- 페이지 소개 -->
         <section class="ss-category-hero" aria-labelledby="page-title">
             <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
                 <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a>
@@ -113,11 +111,17 @@
                     </ul>
                     <p class="map-hint">지도의 마커를 누르거나 구를 골라보세요</p>
                 </div>
-                <!-- 구 선택 드롭다운 (map.js 가 서울 전체 + 25개 구 옵션을 채움) -->
-                <select class="district-select" id="district-select" aria-label="서울 자치구 선택"></select>
+                <!-- 구 선택 드롭다운 (map.js 가 서울 전체 + 25개 구 옵션을 채움), 오른쪽 화살표는 svg -->
+                <div class="district-box">
+                    <select class="district-select" id="district-select" aria-label="서울 자치구 선택"></select>
+                    <svg class="district-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                </div>
             </div>
 
-            <!-- 지도 (테두리 없이 섹션 폭 전체) -->
+            <!-- 지도 폭 전체 -->
             <div id="leaflet-map" role="region" aria-label="서울 문화 지도"></div>
 
             <!-- 지도 아래 콘텐츠 목록 (map.js가 채움) -->
@@ -125,13 +129,12 @@
 
                 <div class="result-head">
                     <h2 id="result-title">서울 전체</h2>
-                    <!-- 개수가 바뀌면 화면 읽기 프로그램이 읽어 준다 -->
-                    <p class="result-count" id="result-count" aria-live="polite"></p>
+                    <p class="result-count" id="result-count"></p>
                 </div>
 
-                <!-- 카테고리 필터(왼쪽) + 검색(오른쪽)을 한 줄에: 공통 .ss-toolbar -->
+                <!-- 카테고리 필터(왼쪽), 검색(오른쪽)을 한 줄로 공통 .ss-toolbar -->
                 <div class="ss-toolbar">
-                    <!-- 카테고리 필터: 전시 페이지와 같은 공통 버튼 (category.css 의 .ss-filter) -->
+                    <!-- 카테고리 필터 -->
                     <nav class="ss-filters" aria-label="콘텐츠 카테고리 필터">
                         <button class="ss-filter" type="button" data-filter="all" aria-pressed="true">전체</button>
                         <button class="ss-filter" type="button" data-filter="exhibition" aria-pressed="false">전시</button>
@@ -141,7 +144,7 @@
                         <button class="ss-filter" type="button" data-filter="saved" aria-pressed="false">저장한 것</button>
                     </nav>
 
-                    <!-- 검색: 전시 페이지와 같은 공통 검색창 (category.css 의 .ss-search) -->
+                    <!-- 검색 -->
                     <div class="ss-search" role="search">
                         <label class="ss-visually-hidden" for="search-input">제목, 장소, 구 검색</label>
                         <input id="search-input" type="search" placeholder="제목, 장소, 구 검색">
@@ -180,7 +183,7 @@
         </svg>
     </a>
 
-    <!-- 순서: Leaflet → 공통 JS → 로그인 JS → 지도 JS -->
+    <!-- JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="../js/04_서울을 4로잡다_common.js" defer></script>
     <script src="../login/04_서울을 4로잡다_login.js" defer></script>
