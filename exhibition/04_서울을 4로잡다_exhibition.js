@@ -3,7 +3,6 @@ const exhibitionPagination = document.getElementById('ex-pagination');
 const exhibitionSearch = document.getElementById('ex-search');
 const exhibitionFilters = document.querySelector('.ss-filters');
 const EXHIBITION_PAGE_SIZE = 8;          // 한 페이지에 보여줄 카드 수
-const EXHIBITION_GENRE_KEY = 'ss-ex-genre';   // 마지막으로 고른 분류 저장 이름
 let exhibitionItems = [];                // JSON에서 불러온 전시 전체
 let selectedGenre = 'all';               // 지금 선택된 분류
 let searchWord = '';                     // 검색창에 적은 글자
@@ -17,8 +16,7 @@ fetch('../data/04_서울을 4로잡다_exhibition.json')
     // JSON이 배열이면 그대로, { "exhibitions": [ ... ] } 모양이면 그 안의 배열을 꺼낸다
     exhibitionItems = items.length ? items : (items.exhibitions || []);
     sortExhibitions(exhibitionItems);   // 진행 중인 전시 먼저
-    selectedGenre = localStorage.getItem(EXHIBITION_GENRE_KEY) || 'all';
-    renderExhibitionList();
+    resetExhibitionFilter();            // 페이지에 들어올 때마다 '전체'부터 시작
   })
   .catch(error => {
     console.error('전시 데이터를 불러오지 못했습니다.', error);
@@ -262,7 +260,6 @@ for (let i = 0; i < filterButtons.length; i++) {
   filterButtons[i].addEventListener('click', event => {
     selectedGenre = event.currentTarget.getAttribute('data-filter');
     currentPage = 1;
-    localStorage.setItem(EXHIBITION_GENRE_KEY, selectedGenre);
     renderExhibitionList();
   });
 }
@@ -274,5 +271,26 @@ exhibitionSearch.addEventListener('input', () => {
   currentPage = 1;
   renderExhibitionList();
 });
+
+/* ---------- 10. 분류·검색 초기화 ---------- */
+// 다른 페이지에 다녀오면 항상 '전체'·빈 검색창·1페이지로 돌아간다
+function resetExhibitionFilter() {
+  selectedGenre = 'all';
+  searchWord = '';
+  currentPage = 1;
+  exhibitionSearch.value = '';
+  renderExhibitionList();
+}
+
+// 뒤로가기로 돌아오면 브라우저가 이전 화면을 그대로 꺼내 보여줄 때가 있다(bfcache)
+// 그때는 JSON 을 다시 불러오지 않으므로 여기서 한 번 더 초기화한다
+window.addEventListener('pageshow', event => {
+  if (event.persisted) {
+    resetExhibitionFilter();
+  }
+});
+
+// 예전 코드가 저장해 둔 분류 값 지우기
+localStorage.removeItem('ss-ex-genre');
 
 window.addEventListener('scene:saved', SceneSeoul.updateHearts);
