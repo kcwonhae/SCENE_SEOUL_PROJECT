@@ -12,12 +12,11 @@
 
     <title>SCENE:SEOUL | Exhibitions</title>
 
-    <!-- 공통 디자인 → 카테고리 공통 → 언어 메뉴 → 캐러셀 → 전시 전용 → 로그인 CSS -->
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_carousel.css">
-    <link rel="stylesheet" href="../exhibition/04_서울을 4로잡다_exhibition.css">
+    <link rel="stylesheet" href="04_서울을 4로잡다_exhibition.css">
     <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
 
     <!-- 헤더 공통 기능: 언어 메뉴 열기/닫기, 날씨 아이콘 -->
@@ -49,7 +48,7 @@
             <button class="header-login" type="button">LOGIN</button>
 
             <span class="ss-header-quick-icons">
-                <!-- 언어 선택 (language.js 가 열기/닫기, 실제 번역 없음) -->
+                <!-- 언어 선택 (language.js 가 열기 및 닫기, 실제 번역 없음) -->
                 <span class="ss-language" role="button" tabindex="0" aria-label="언어 선택" aria-expanded="false" aria-haspopup="true">
                     <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9"></circle>
@@ -85,25 +84,22 @@
         <div class="stage">
 
             <!-- 02. 페이지 소개 -->
-            <section class="ex-hero"
-                    aria-labelledby="ex-title">
+            <!-- 공통 카테고리 상단 (category.css 의 .ss-category-hero) -->
+            <section class="ss-category-hero" aria-labelledby="ex-title">
                 <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
                     <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a>
                     <span aria-hidden="true">/</span>
                     <span aria-current="page">EXHIBITION</span>
                 </nav>
 
-                <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="ex-title">Exhibition<span
-                    class="ex-title-dot">.</span></h1>
+                <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="ex-title">Exhibition<span class="ss-hero-title-dot">.</span></h1>
 
-                <div class="intro-bottom">
-                    <ul class="intro-tags ss-entrance ss-entrance--delay-3" aria-hidden="true">
-                        <li>ART</li>
-                        <li>PHOTO</li>
-                        <li>MEDIA ART</li>
-                        <li>HISTORY | CULTURE</li>
-                    </ul>
-                </div>
+                <ul class="ss-hero-tags ss-entrance ss-entrance--delay-3" aria-hidden="true">
+                    <li>ART</li>
+                    <li>PHOTO</li>
+                    <li>MEDIA ART</li>
+                    <li>HISTORY | CULTURE</li>
+                </ul>
             </section>
 
 
@@ -140,22 +136,22 @@
                     <input id="ex-search" type="search" placeholder="전시명, 장소 검색">
                     <svg class="ss-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                        <circle cx="10.8" cy="10.8" r="6.6" />
+                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
                         <path d="m16 16 5 5"></path>
                     </svg>
                 </div>
             </div>
 
-            <!-- 04-2. 전시 카드 목록: 자바스크립트에서 생성 -->
-            <div id="ex-cards" class="ss-card-grid ss-catalog-grid" aria-live="polite"></div>
+            <!-- 04-2. 전시 카드 목록 -->
+            <div id="ex-cards" class="ss-card-grid ss-catalog-grid"></div>
 
-            <!-- 04-3. 페이지 이동: 자바스크립트에서 생성 -->
+            <!-- 04-3. 페이지 이동 -->
             <nav id="ex-pagination" class="popup-js-pager" aria-label="전시 목록 페이지 이동"></nav>
         </section>
 
     </main>
 
-    <!-- 05. 공통 푸터 (common.css: 왼쪽 로고 · 오른쪽 저작권 2칸) -->
+    <!-- 05. 공통 푸터 -->
     <footer class="ss-site-footer">
         <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
         <small class="footer-copyright">© 2026 SCENE.SEOUL</small>
@@ -163,7 +159,7 @@
 
     <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동"><svg viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="m12 19 0-14m-6 6 6-6 6 6" />
+        <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
         </svg>
     </a>
 
