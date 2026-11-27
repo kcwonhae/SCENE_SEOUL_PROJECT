@@ -1,677 +1,270 @@
-
-/* ==========================================
-   SCENE:SEOUL - HOME INTERACTION
-   04_서울을 4로잡다_index.js
-========================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    /* ======================================
-       01. ELEMENTS
-    ====================================== */
-
-    const film = document.querySelector(".season-film");
-    const sticky = document.querySelector(".season-film-sticky");
-
-    const scenes = document.querySelectorAll(
-        ".season-film .season-scene"
-    );
-
-    const copyWrap = document.querySelector(
-        ".season-copy-wrap"
-    );
-
-    const skipButton = document.querySelector(
-        ".season-skip"
-    );
-
-    const progressBar = document.querySelector(
-        ".season-progress span"
-    );
-
-    const recommendation = document.querySelector(
-        ".edition-next"
-    );
-
-    const playLink = document.querySelector(
-        ".edition-next-play-link"
-    );
-
-    const revealItems = document.querySelectorAll(
-        ".reveal"
-    );
-
-    const sceneCards = document.querySelectorAll(
-        ".scenes .scene-card"
-    );
-
-    const heading = document.querySelector(
-        ".scenes .section-heading"
-    );
-
-    const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    document.body.classList.add("js-ready");
-
-    /* ======================================
-       02. HELPERS
-    ====================================== */
-
-    function clamp(value, min, max) {
-        return Math.max(min, Math.min(max, value));
-    }
-
-    function smoothstep(value) {
-        const t = clamp(value, 0, 1);
-
-        return t * t * (3 - 2 * t);
-    }
-
-    function fadeBetween(progress, start, end) {
-        return smoothstep(
-            (progress - start) / (end - start)
-        );
-    }
-
-    /* ======================================
-       03. FOUR SCENES — SMOOTH CROSSFADE
-       화면 경계 없이 자연스럽게 겹쳐진다.
-    ====================================== */
-    function showScenes(progress) {
-        if (scenes.length !== 4) return;
-
-        const blend01 = fadeBetween(progress, 0.16, 0.275);
-        const blend12 = fadeBetween(progress, 0.34, 0.455);
-        const blend23 = fadeBetween(progress, 0.52, 0.635);
-
-        const opacities = [
-            1 - blend01,
-            blend01 * (1 - blend12),
-            blend12 * (1 - blend23),
-            blend23
-        ];
-
-        scenes.forEach(function (scene, index) {
-            scene.style.opacity = opacities[index].toFixed(4);
-            const zoom = 1.060 - progress * 0.045;
-            scene.style.transform = "scale(" + zoom.toFixed(4) + ")";
-        });
-    }
-
-    /* ======================================
-       04. EDIT — SCRUBBABLE ENTER / EXIT
-       검정 → 하얀 종이(아래에서 위로 드러남)
-       라벨 → 제목 두 줄 → 화살표 순차 등장
-       FIND YOUR SCENE 진입 직전 SVG만 서서히 옅어짐
-       역방향 스크롤 시 모든 효과가 되돌아간다.
-    ====================================== */
-    const editLabel = document.querySelector(".edition-next-index");
-    const editLines = document.querySelectorAll(".edition-next-line");
-    const skyline = document.querySelector(".edition-next-background");
-    const introOverlay = document.querySelector(".season-film-overlay");
-
-    function setRise(element, amount, distance) {
-        if (!element) return;
-        element.style.opacity = amount.toFixed(4);
-        element.style.transform =
-            "translate3d(0," + ((1 - amount) * distance).toFixed(2) + "px,0)";
-    }
-
-    function showRecommendation(progress) {
-        if (!recommendation) return;
-
-        /* 이벤트 사진이 먼저 천천히 어두워지고,
-           그 자리에 순백 EDIT 지면이 opacity로 등장한다.
-           아래→위 와이프, 프레임 축소, 갑작스러운 display 전환은 없음. */
-        const imageOut = 1 - fadeBetween(progress, 0.755, 0.905);
-        const paperIn = fadeBetween(progress, 0.790, 0.930);
-
-        /* EDIT 타이포 등장 애니메이션은 그대로 유지.
-           FIND YOUR SCENE으로 넘어갈 때 제목과 CTA는 사라지지 않음. */
-        const labelIn = fadeBetween(progress, 0.825, 0.885);
-        const line1In = fadeBetween(progress, 0.845, 0.915);
-        const line2In = fadeBetween(progress, 0.865, 0.935);
-        const ctaIn = fadeBetween(progress, 0.89, 0.95);
-
-        const visual = document.querySelector(".season-visual");
-        if (visual) visual.style.opacity = imageOut.toFixed(4);
-        recommendation.classList.toggle("is-visible", paperIn > 0.001);
-        recommendation.style.opacity = paperIn.toFixed(4);
-        recommendation.style.clipPath = "none";
-
-        setRise(editLabel, labelIn, 18);
-        setRise(editLines[0], line1In, 22);
-        setRise(editLines[1], line2In, 22);
-        setRise(playLink, ctaIn, 18);
-
-        /* 스카이라인만 점점 옅어짐: 등장 직후 뚜렷하게 보였다가
-           EDIT 마지막 구간에서 0으로 감소. 역스크롤도 자연스럽게 복원. */
-        if (skyline) {
-            const skylineOut = 1 - fadeBetween(progress, 0.925, 1.0);
-            skyline.style.opacity = (paperIn * 0.40 * skylineOut).toFixed(4);
-        }
-
-        const introVisible = 1 - fadeBetween(progress, 0.745, 0.855);
-        setRise(copyWrap, introVisible, 10);
-        if (introOverlay) introOverlay.style.opacity = introVisible.toFixed(4);
-
-        if (skipButton) {
-            skipButton.style.opacity = introVisible.toFixed(4);
-            skipButton.style.pointerEvents = introVisible < 0.1 ? "none" : "auto";
-            skipButton.tabIndex = introVisible < 0.1 ? -1 : 0;
-        }
-
-        if (progressBar) {
-            progressBar.style.opacity = (1 - paperIn).toFixed(4);
-        }
-
-        const canClick = paperIn > 0.99 && ctaIn > 0.5;
-        recommendation.style.pointerEvents = canClick ? "auto" : "none";
-        recommendation.setAttribute("aria-hidden", String(!canClick));
-        if (playLink) playLink.tabIndex = canClick ? 0 : -1;
-    }
-
-    /* ======================================
-       05. SKIP BUTTON
-
-       누르면 EDIT 화면으로 이동
-    ====================================== */
-
-    function initSkipButton() {
-        if (!film || !sticky || !skipButton) return;
-
-        /* 안내 문구 그대로 다음 장면으로 한 단계씩 이동한다.
-           마지막 이벤트에서 누르면 EDIT로 이동한다. */
-        const stops = [0.23, 0.41, 0.59, 0.92];
-
-        skipButton.addEventListener("click", function () {
-            const filmTop = film.getBoundingClientRect().top + window.scrollY;
-            const scrollLength = Math.max(1, film.offsetHeight - sticky.offsetHeight);
-            const progress = clamp((window.scrollY - filmTop) / scrollLength, 0, 1);
-            const next = stops.find(function (point) {
-                return point > progress + 0.008;
-            });
-            if (next === undefined) return;
-            window.scrollTo({
-                top: filmTop + scrollLength * next,
-                behavior: reduceMotion ? "auto" : "smooth"
-            });
-        });
-    }
-
-    /* ======================================
-       06. GENERAL SCROLL REVEAL
-    ====================================== */
-
-    function showOtherSections() {
-
-        revealItems.forEach(function (item) {
-
-            const rect = item.getBoundingClientRect();
-
-            if (
-                rect.top <
-                window.innerHeight * 0.88
-            ) {
-
-                item.classList.add("visible");
-            }
-        });
-    }
-
-    /* ======================================
-       07. FIND YOUR SCENE — EDITORIAL IMAGE REVEAL
-
-       화면에 들어올 때 사진이 아래부터 열리고,
-       위로 되돌리면 똑같은 경로로 닫힌다.
-       카드 전체는 움직이지 않아 기존 비대칭 그리드 유지.
-    ====================================== */
-
-    function initSceneReveal() {
-        if (reduceMotion) {
-            if (heading) {
-                heading.style.opacity = "1";
-                heading.style.transform = "none";
-            }
-            sceneCards.forEach(function (card) {
-                card.classList.add("scene-reveal");
-                const img = card.querySelector(".scene-art img");
-                const meta = card.querySelector(".scene-meta");
-                if (img) {
-                    img.style.clipPath = "none";
-                    img.style.webkitClipPath = "none";
-                }
-                if (meta) {
-                    meta.style.opacity = "1";
-                    meta.style.transform = "none";
-                }
-            });
-            return;
-        }
-        sceneCards.forEach(function (card) {
-            card.classList.add("scene-reveal");
-        });
-    }
-
-    function updateSceneReveal() {
-        if (reduceMotion) return;
-
-        const vh = window.innerHeight;
-
-        function revealAmount(element, stagger) {
-            const rect = element.getBoundingClientRect();
-            /* 아래쪽에서 등장, 카드별 5vh의 순차 지연 */
-            const start = vh * (0.98 - stagger);
-            const end = vh * (0.61 - stagger);
-            const entering = 1 - smoothstep(
-                (rect.top - end) / (start - end)
-            );
-            /* 상단을 지나 화면 밖으로 나가면 서서히 가려짐 */
-            const exiting = smoothstep(
-                (rect.bottom + vh * 0.04) / (vh * 0.26)
-            );
-            return clamp(Math.min(entering, exiting), 0, 1);
-        }
-
-        if (heading) {
-            const h = revealAmount(heading, 0);
-            heading.style.opacity = h.toFixed(4);
-            heading.style.transform =
-                "translate3d(0," + ((1 - h) * 18).toFixed(2) + "px,0)";
-        }
-
-        sceneCards.forEach(function (card, index) {
-            const image = card.querySelector(".scene-art img");
-            const meta = card.querySelector(".scene-meta");
-            const amount = revealAmount(card, Math.min(index, 3) * 0.045);
-            /* 상단 100% 가림 -> 0% 가림 */
-            const clip = "inset(" + ((1 - amount) * 100).toFixed(3) + "% 0 0 0)";
-            if (image) {
-                image.style.clipPath = clip;
-                image.style.webkitClipPath = clip;
-            }
-            if (meta) {
-                const textAmount = smoothstep((amount - 0.33) / 0.67);
-                meta.style.opacity = textAmount.toFixed(4);
-                meta.style.transform = "translate3d(0," +
-                    ((1 - textAmount) * 12).toFixed(2) + "px,0)";
-            }
-        });
-    }
-
-    /* ======================================
-       08. SCROLL PROGRESS CALCULATION
-    ====================================== */
-
-    function update() {
-
-        if (
-            film &&
-            sticky &&
-            scenes.length === 4
-        ) {
-
-            const filmTop =
-                film.getBoundingClientRect().top +
-                window.scrollY;
-
-            const scrollLength =
-                film.offsetHeight -
-                sticky.offsetHeight;
-
-            const scrolled =
-                window.scrollY -
-                filmTop;
-
-            const progress = clamp(
-                scrolled / Math.max(1, scrollLength),
-                0,
-                1
-            );
-
-            /* 이미지 */
-
-            showScenes(progress);
-
-            /* EDIT 화면 */
-
-            showRecommendation(progress);
-
-            /* Header always stays on its own light bar above the photographs. */
-
-
-            /* 진행 바 */
-
-            if (progressBar) {
-
-                progressBar.style.width =
-                    (progress * 100) + "%";
-            }
-        }
-
-        showOtherSections();
-        updateSceneReveal();
-    }
-
-    /* ======================================
-       09. SCROLL PERFORMANCE
-    ====================================== */
-
-    let ticking = false;
-
-    function requestUpdate() {
-
-        if (ticking) {
-            return;
-        }
-
-        ticking = true;
-
-        window.requestAnimationFrame(
-            function () {
-
-                update();
-
-                ticking = false;
-            }
-        );
-    }
-
-    /* ======================================
-       10. INITIALIZE
-    ====================================== */
-
-    initSkipButton();
-
-    initSceneReveal();
-
-    window.addEventListener(
-        "scroll",
-        requestUpdate,
-        { passive: true }
-    );
-
-    window.addEventListener(
-        "resize",
-        requestUpdate
-    );
-
-    window.addEventListener(
-        "pageshow",
-        requestUpdate
-    );
-
-    update();
-
-});
-
-
-/* ==========================================
-   HOME / MY CALENDAR — UPCOMING EVENTS
-   기존 SceneSeoul 로그인 및 찜 저장 API 그대로 재사용.
-========================================== */
-document.addEventListener("DOMContentLoaded", function () {
-    "use strict";
-
-    const area = document.querySelector(".agenda-section");
-    const list = document.querySelector("#agendaList");
-    if (!area || !list) return;
-
-    const sources = [
-        { category: "전시", path: "../data/04_서울을 4로잡다_exhibition.json", page: "../exhibition/04_서울을 4로잡다_exhibition.html" },
-        { category: "공연", path: "../data/04_서울을 4로잡다_performance.json", page: "../performance/04_서울을 4로잡다_performance.html" },
-        { category: "팝업", path: "../data/04_서울을 4로잡다_popup.json", page: "../popup/04_서울을 4로잡다_popup.html" },
-        { category: "이벤트", path: "../data/04_서울을 4로잡다_event.json", page: "../event/04_서울을 4로잡다_event.html" }
-    ];
-
-    // 카테고리 페이지 원본 HTML의 실제 목록 앵커를 사용한다.
-    // 전시 #ex-list / 공연 #perf-list-title / 팝업 #discover / 이벤트 #event-list
-    const categoryAnchors = {
-        "전시": "#ex-list",
-        "공연": "#perf-list-title",
-        "팝업": "#discover",
-        "이벤트": "#event-list"
+// SCENE:SEOUL - 메인(index) 페이지
+// 로그인·찜 저장은 common.js(SceneSeoul), 언어 메뉴와 날씨는 공통 language.js, weather.js를 사용함
+
+// HERO, EDIT
+const film = document.querySelector(".season-film");
+const filmSticky = document.querySelector(".season-film-sticky");
+const heroVisual = document.querySelector(".season-visual");
+const heroScenes = document.querySelectorAll(".season-scene");
+const heroOverlay = document.querySelector(".season-film-overlay");
+const heroCopy = document.querySelector(".season-copy-wrap");
+const skipButton = document.querySelector(".season-skip");
+const progressBar = document.querySelector(".season-progress span");
+const edition = document.querySelector(".edition-next");
+const editionContent = document.querySelector(".edition-next-content");
+const editionLines = document.querySelectorAll(".edition-next-line");
+const editionLink = document.querySelector(".edition-next-play-link");
+const skyline = document.querySelector(".edition-next-background");
+
+// FIND YOUR SCENE
+const sceneHeading = document.querySelector(".scenes .section-heading");
+const sceneCards = document.querySelectorAll(".scene-card");
+
+// COMING UP IN SEOUL
+const header = document.querySelector(".ss-header");
+const agenda = document.querySelector(".agenda-section");
+const agendaSticky = document.querySelector(".agenda-sticky");
+const agendaList = document.getElementById("agendaList");
+const agendaViewport = document.getElementById("agendaViewport");
+const prevButton = document.getElementById("agendaPrev");
+const nextButton = document.getElementById("agendaNext");
+const monthText = document.getElementById("agendaMonth");
+const dayText = document.getElementById("agendaToday");
+const weekdayText = document.getElementById("agendaWeekday");
+
+// 운영체제에서 '동작 줄이기'를 켠 사용자는 스크롤 애니메이션 없이 바로 보여 줌
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const sources = [
+    { category: "전시", path: "../data/04_서울을 4로잡다_exhibition.json", page: "../exhibition/04_서울을 4로잡다_exhibition.html#ex-list" },
+    { category: "공연", path: "../data/04_서울을 4로잡다_performance.json", page: "../performance/04_서울을 4로잡다_performance.html#perf-list-title" },
+    { category: "팝업", path: "../data/04_서울을 4로잡다_popup.json", page: "../popup/04_서울을 4로잡다_popup.html#discover" },
+    { category: "이벤트", path: "../data/04_서울을 4로잡다_event.json", page: "../event/04_서울을 4로잡다_event.html#event-list" }
+];
+
+const categoryLabels = { "전시": "EXHIBITION", "공연": "PERFORMANCE", "팝업": "POP-UP", "이벤트": "EVENT" };
+
+// 이미지를 불러오지 못했을 때 쓰는 HERO 이미지 네 장
+const fallbackImages = [
+    "../images/04_index_01.png",
+    "../images/04_index_02.jpg",
+    "../images/04_index_03.png",
+    "../images/04_index_04.png"
+];
+
+const heartSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"/></svg>';
+
+let upcomingEvents = [];
+let todayKey = "";
+let userMovedCarousel = false;
+let carouselStart = null;
+let ticking = false;
+
+
+// 스크롤 계산에 쓰는 값
+
+function limit(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+}
+
+// 0~1 값을 처음과 끝이 부드러운 곡선으로 바꿈 (smoothstep)
+function ease(value) {
+    const t = limit(value, 0, 1);
+    return t * t * (3 - 2 * t);
+}
+
+// progress가 start에서 end로 가는 동안 0에서 1로 바뀌는 값
+function between(progress, start, end) {
+    return ease((progress - start) / (end - start));
+}
+
+// 아래에서 distance(px)만큼 올라오며 나타나는 효과
+function rise(element, amount, distance) {
+    element.style.opacity = amount.toFixed(4);
+    element.style.transform = "translate3d(0," + ((1 - amount) * distance).toFixed(2) + "px,0)";
+}
+
+// HERO 전체 스크롤 길이 중 현재 위치를 0~1로 계산
+function getFilmProgress() {
+    const filmTop = film.getBoundingClientRect().top + window.scrollY;
+    const scrollLength = Math.max(1, film.offsetHeight - filmSticky.offsetHeight);
+    return {
+        top: filmTop,
+        length: scrollLength,
+        progress: limit((window.scrollY - filmTop) / scrollLength, 0, 1)
     };
+}
 
-    // 홈 히어로에서 실제 사용하는 네 장의 이미지 중 하나를 대체 이미지로 사용.
-    // 같은 콘텐츠는 새로고침해도 동일한 대체 사진이 선택된다.
-    const fallbackImages = [
-        "../images/04_index_01.png",
-        "../images/04_index_02.jpg",
-        "../images/04_index_03.png",
-        "../images/04_index_04.png"
+
+// HERO: 네 장면 크로스페이드
+
+function updateHeroScenes(progress) {
+    const blend01 = between(progress, 0.16, 0.275);
+    const blend12 = between(progress, 0.34, 0.455);
+    const blend23 = between(progress, 0.52, 0.635);
+    const opacities = [
+        1 - blend01,
+        blend01 * (1 - blend12),
+        blend12 * (1 - blend23),
+        blend23
     ];
+    // 스크롤할수록 1.06배에서 조금씩 축소됨
+    const zoom = "scale(" + (1.06 - progress * 0.045).toFixed(4) + ")";
 
-    function fallbackImageFor(id) {
-        const value = String(id);
-        let hash = 0;
-        for (const ch of value) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
-        return fallbackImages[hash % fallbackImages.length];
-    }
+    heroScenes.forEach(function (scene, index) {
+        scene.style.opacity = opacities[index].toFixed(4);
+        scene.style.transform = zoom;
+    });
 
-    const todayNumber = document.querySelector("#agendaToday");
-    const monthLabel = document.querySelector("#agendaMonth");
-    const weekdayLabel = document.querySelector("#agendaWeekday");
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let displayed = [];
-    let lastDateKey = "";
+    progressBar.style.width = (progress * 100) + "%";
+}
 
-    function startOfToday() {
-        const d = new Date();
-        return new Date(d.getFullYear(), d.getMonth(), d.getDate());
-    }
 
-    function localDateKey(date) {
-        return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
-    }
+// EDIT: HERO 마지막 구간(약 75% 이후)에서 사진이 사라지고 흰 화면과 글자가 차례로 등장
 
-    function renderToday() {
-        const now = new Date();
-        todayNumber.textContent = String(now.getDate()).padStart(2, "0");
-        monthLabel.textContent = String(now.getMonth() + 1);
-        weekdayLabel.textContent = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(now).toUpperCase();
-        lastDateKey = localDateKey(now);
-    }
+function updateEdition(progress) {
+    const imageOut = 1 - between(progress, 0.755, 0.905);
+    const paperIn = between(progress, 0.79, 0.93);
+    const line1In = between(progress, 0.845, 0.915);
+    const line2In = between(progress, 0.865, 0.935);
+    const linkIn = between(progress, 0.89, 0.95);
+    const introVisible = 1 - between(progress, 0.745, 0.855);
+    const skylineOut = 1 - between(progress, 0.925, 1);
 
-    // Date 생성자에 YYYY-MM-DD 문자열을 직접 넣으면 UTC로 해석될 수 있어
-    // 로컬 자정으로 명시적으로 변환한다.
-    function parseDate(raw) {
-        if (!raw) return null;
-        const value = String(raw).trim();
-        const match = value.match(/^(\d{4})[-./년\s]+(\d{1,2})[-./월\s]+(\d{1,2})/);
-        if (!match) return null;
-        const y = Number(match[1]), m = Number(match[2]), d = Number(match[3]);
-        const date = new Date(y, m - 1, d);
-        return date.getFullYear() === y && date.getMonth() === m - 1 && date.getDate() === d ? date : null;
-    }
+    heroVisual.style.opacity = imageOut.toFixed(4);
+    heroOverlay.style.opacity = introVisible.toFixed(4);
+    rise(heroCopy, introVisible, 10);
 
-    function imageUrl(value) {
-        const path = String(value || "").trim().replace(/\\/g, "/");
-        if (!path) return "";
-        if (/^(https?:|data:|blob:|\/)/i.test(path)) return path;
-        if (path.startsWith("../")) return path;
-        if (path.startsWith("./images/")) return "../" + path.slice(2);
-        if (path.startsWith("images/")) return "../" + path;
-        if (path.startsWith("./")) return path;
-        if (path.includes("/")) return "../" + path;
-        return "../images/" + path;
-    }
+    skipButton.style.opacity = introVisible.toFixed(4);
+    skipButton.style.pointerEvents = introVisible < 0.1 ? "none" : "auto";
+    skipButton.tabIndex = introVisible < 0.1 ? -1 : 0;
+    progressBar.style.opacity = (1 - paperIn).toFixed(4);
 
-    function safeEventUrl(value) {
-        const raw = String(value || "").trim();
-        if (!raw) return "";
-        try {
-            const url = new URL(raw, document.baseURI);
-            return url.protocol === "https:" || url.protocol === "http:" ? url.href : "";
-        } catch (_) {
-            return "";
-        }
-    }
+    edition.classList.toggle("is-visible", paperIn > 0.001);
+    edition.style.opacity = paperIn.toFixed(4);
+    rise(editionLines[0], line1In, 22);
+    rise(editionLines[1], line2In, 22);
+    rise(editionLink, linkIn, 18);
 
-    async function loadSource(source) {
-        const response = await fetch(source.path);
-        if (!response.ok) throw new Error(source.path + ": " + response.status);
-        const json = await response.json();
-        const rows = Array.isArray(json) ? json : Object.values(json).find(Array.isArray);
-        if (!Array.isArray(rows)) throw new Error(source.path + ": 콘텐츠 목록을 찾을 수 없습니다.");
+    // 스카이라인은 최대 0.4까지 보였다가 EDIT 끝부분에서 다시 옅어짐
+    skyline.style.opacity = (paperIn * 0.4 * skylineOut).toFixed(4);
 
-        return rows.map(function (row) {
-            if (!row || typeof row !== "object") return null;
-            const begin = parseDate(row.startDate || row.date);
-            const finish = parseDate(row.endDate || row.end_date || row.end) || begin;
-            if (!begin || !finish || !row.id || !row.title) return null;
-            return {
-                id: row.id,
-                title: String(row.title),
-                category: source.category,
-                page: source.page,
-                // JSON에 실제로 제공된 행사 원본 링크 우선 사용
-                url: safeEventUrl(row.officialUrl || row.sourceUrl || row.url || row.link),
-                startDate: begin,
-                endDate: finish < begin ? begin : finish,
-                location: String(row.location || row.venue || ""),
-                image: imageUrl(row.image)
-            };
-        }).filter(Boolean);
-    }
+    // 흰 화면이 다 나타나기 전에는 추천 링크를 누를 수 없게 함
+    const canClick = paperIn > 0.99 && linkIn > 0.5;
+    edition.style.pointerEvents = canClick ? "auto" : "none";
+    edition.setAttribute("aria-hidden", String(!canClick));
+    editionLink.tabIndex = canClick ? 0 : -1;
+}
 
-    function getSavedIds() {
-        if (!window.SceneSeoul || typeof SceneSeoul.getUser !== "function" || !SceneSeoul.getUser()) return [];
-        try {
-            return (SceneSeoul.getSaved() || []).map(String);
-        } catch (error) {
-            console.error("찜 목록을 읽을 수 없습니다:", error);
-            return [];
-        }
-    }
 
-    function element(tag, className, content) {
-        const el = document.createElement(tag);
-        if (className) el.className = className;
-        if (content !== undefined) el.textContent = content;
-        return el;
-    }
+// FIND YOUR SCENE: 사진이 아래에서 위로 열리고, 반대로 스크롤하면 다시 닫힘
 
-    const heartMarkup = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"/></svg>';
+// 요소가 화면 아래(98%)에서 61% 지점까지 올라오는 동안 0 → 1,
+// 화면 위로 빠져나가면 다시 1 → 0이 되는 값
+function revealAmount(element, delay) {
+    const vh = window.innerHeight;
+    const rect = element.getBoundingClientRect();
+    const start = vh * (0.98 - delay);
+    const end = vh * (0.61 - delay);
+    const entering = 1 - ease((rect.top - end) / (start - end));
+    const exiting = ease((rect.bottom + vh * 0.04) / (vh * 0.26));
+    return Math.min(entering, exiting);
+}
 
-    function updateHearts() {
-        const saved = new Set(getSavedIds());
-        list.querySelectorAll(".agenda-heart").forEach(function (btn) {
-            const active = saved.has(btn.dataset.id);
-            btn.classList.toggle("is-saved", active);
-            btn.setAttribute("aria-pressed", String(active));
-            btn.setAttribute("aria-label", btn.dataset.title + (active ? " 찜 취소" : " 찜하기"));
-            const shape = btn.querySelector("svg");
-            if (shape) shape.setAttribute("fill", active ? "currentColor" : "none");
-        });
-    }
+function updateSceneReveal() {
+    const headingAmount = revealAmount(sceneHeading, 0);
+    sceneHeading.style.opacity = headingAmount.toFixed(4);
+    sceneHeading.style.transform = "translate3d(0," + ((1 - headingAmount) * 18).toFixed(2) + "px,0)";
 
-    function toggleHeart(id) {
-        if (!window.SceneSeoul || typeof SceneSeoul.getUser !== "function" || !SceneSeoul.getUser()) {
-            alert("로그인 후 저장할 수 있어요.");
-            return;
-        }
-        if (typeof SceneSeoul.toggleSaved !== "function") {
-            console.error("SceneSeoul.toggleSaved 함수를 찾을 수 없습니다. common.js를 확인해 주세요.");
-            return;
-        }
-        SceneSeoul.toggleSaved(id);
-        updateHearts();
-    }
+    sceneCards.forEach(function (card, index) {
+        const image = card.querySelector(".scene-art img");
+        const meta = card.querySelector(".scene-meta");
+        // 카드마다 화면 높이의 4.5%씩 늦게 시작
+        const amount = revealAmount(card, index * 0.045);
+        const textAmount = ease((amount - 0.33) / 0.67);
 
-    function dateRange(event) {
-        const a = event.startDate;
-        const b = event.endDate;
-        function compact(d) { return String(d.getMonth() + 1).padStart(2, "0") + "." + String(d.getDate()).padStart(2, "0"); }
-        return compact(a) === compact(b) && a.getFullYear() === b.getFullYear()
-            ? compact(a) : compact(a) + " ~ " + compact(b);
-    }
+        image.style.clipPath = "inset(" + ((1 - amount) * 100).toFixed(3) + "% 0 0 0)";
+        rise(meta, textAmount, 12);
+    });
+}
 
-    // 행사 카드: JSON의 공식/출처 URL로 이동, URL이 없는 경우만 기존 목록 사용.
-    function makeItem(event) {
-        const article = element("article", "agenda-item");
-        const target = event.url || (event.page + (categoryAnchors[event.category] || ""));
-        const thumb = element("a", "agenda-thumb-link");
-        thumb.href = target;
-        thumb.setAttribute("aria-label", event.title + (event.url ? " 상세 페이지로 이동" : " 전체 목록으로 이동"));
-        if (event.url && new URL(target).origin !== window.location.origin) {
-            thumb.target = "_blank";
-            thumb.rel = "noopener noreferrer";
-        }
 
-        const img = element("img");
-        const fallbackSrc = fallbackImageFor(event.id);
-        img.src = event.image || fallbackSrc;
-        img.alt = event.image ? event.title + " 포스터" : event.category + " 대표 이미지";
-        img.loading = "lazy";
-        img.decoding = "async";
-        if (!event.image) img.dataset.fallback = "true";
-        img.addEventListener("error", function () {
-            if (img.dataset.fallback === "true") {
-                img.style.visibility = "hidden";
-                thumb.classList.add("is-image-unavailable");
-                return;
+// COMING UP IN SEOUL: 날짜
+
+function dateKey(date) {
+    return date.getFullYear() + "-" +
+        String(date.getMonth() + 1).padStart(2, "0") + "-" +
+        String(date.getDate()).padStart(2, "0");
+}
+
+function renderToday() {
+    const now = new Date();
+    monthText.textContent = String(now.getMonth() + 1);
+    dayText.textContent = String(now.getDate()).padStart(2, "0");
+    weekdayText.textContent = now.toLocaleDateString("en-US", { weekday: "long" }).toUpperCase();
+    todayKey = dateKey(now);
+}
+
+// "2026-11-28"을 new Date()에 그대로 넣으면 UTC 기준이 되므로 연, 월, 일을 나눠 한국 시간 자정으로 만듦
+function parseDate(text) {
+    const parts = text.split("-");
+    return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+}
+
+function formatShortDate(date) {
+    return String(date.getMonth() + 1).padStart(2, "0") + "." + String(date.getDate()).padStart(2, "0");
+}
+
+function formatRange(item) {
+    const start = formatShortDate(item.startDate);
+    const end = formatShortDate(item.endDate);
+    return start === end && item.startDate.getFullYear() === item.endDate.getFullYear()
+        ? start
+        : start + " ~ " + end;
+}
+
+
+// COMING UP IN SEOUL: JSON 불러오기와 정렬
+
+function loadSource(source) {
+    return fetch(source.path)
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error(source.path + ": " + response.status);
             }
-            img.dataset.fallback = "true";
-            img.alt = event.category + " 대표 이미지";
-            img.src = fallbackSrc;
+            return response.json();
+        })
+        .then(function (rows) {
+            if (!Array.isArray(rows)) {
+                throw new Error(source.path + ": JSON 형식이 배열이 아닙니다.");
+            }
+            return rows.map(function (row) {
+                const url = row.officialUrl || row.sourceUrl || "";
+                return {
+                    id: row.id,
+                    title: row.title,
+                    category: source.category,
+                    page: source.page,
+                    url: url.startsWith("http") ? url : "",
+                    startDate: parseDate(row.startDate),
+                    endDate: parseDate(row.endDate || row.startDate),
+                    location: row.location || "",
+                    image: row.image || ""
+                };
+            });
         });
-        thumb.append(img);
+}
 
-        const poster = element("div", "agenda-poster");
+// 오늘 이전에 끝난 행사는 빼고, 진행 중인 행사(거리 0) → 가까운 시작일 순으로 정렬
+function pickUpcoming(events) {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-        const info = element("div", "agenda-info");
-        const categoryNames = { "전시": "EXHIBITION", "공연": "PERFORMANCE", "팝업": "POP-UP", "이벤트": "EVENT" };
-        const category = element("span", "agenda-item-category", categoryNames[event.category] || event.category);
-        const title = element("a", "agenda-item-title", event.title);
-        title.href = target;
-        if (event.url && new URL(target).origin !== window.location.origin) {
-            title.target = "_blank";
-            title.rel = "noopener noreferrer";
-        }
-        const location = element("p", "agenda-item-location", event.location || "서울");
-        const date = element("time", "agenda-item-date", dateRange(event));
-        date.dateTime = localDateKey(event.startDate);
-
-        const heart = element("button", "agenda-heart");
-        heart.type = "button";
-        heart.dataset.id = event.id;
-        heart.dataset.title = event.title;
-        heart.innerHTML = heartMarkup;
-        heart.addEventListener("click", function () { toggleHeart(event.id); });
-
-        const top = element("div", "agenda-info-top");
-        top.append(category);
-        info.append(top, title, location, date);
-        poster.append(thumb, heart);
-        article.append(poster, info);
-        return article;
-    }
-
-    function renderList() {
-        list.replaceChildren();
-        if (!displayed.length) {
-            list.append(element("p", "agenda-status", "현재 안내할 예정 행사가 없습니다."));
-        } else {
-            displayed.forEach(function (event) { list.append(makeItem(event)); });
-        }
-        list.setAttribute("aria-busy", "false");
-        updateHearts();
-        requestAnimationFrame(function () {
-            updateCarouselButtons();
-            requestScrollDrivenCarousel();
-        });
-    }
-
-    // 랜덤 선택 없음: 현재 진행 중인 행사 + 앞으로 열릴 모든 행사를 날짜순으로 나열.
-    // 진행 중인 행사는 오늘에서의 거리를 0으로 계산한다.
-    function pickUpcoming(events) {
-        const today = startOfToday();
-        return events.filter(function (event) {
-            return event.endDate >= today;
-        }).sort(function (a, b) {
+    return events
+        .filter(function (item) {
+            return item.endDate >= today;
+        })
+        .sort(function (a, b) {
             const distanceA = Math.max(0, a.startDate - today);
             const distanceB = Math.max(0, b.startDate - today);
             return distanceA - distanceB
@@ -679,215 +272,359 @@ document.addEventListener("DOMContentLoaded", function () {
                 || a.endDate - b.endDate
                 || a.title.localeCompare(b.title, "ko");
         });
+}
+
+
+// COMING UP IN SEOUL: 카드 만들기
+
+// 같은 행사는 새로고침해도 같은 대체 이미지가 나오도록 id 글자로 번호를 정함
+function fallbackImageFor(id) {
+    let hash = 0;
+    for (const char of id) {
+        hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
     }
+    return fallbackImages[hash % fallbackImages.length];
+}
 
-    const viewport = document.querySelector("#agendaViewport");
-    const prevButton = document.querySelector("#agendaPrev");
-    const nextButton = document.querySelector("#agendaNext");
-
-    // COMING UP 섹션 전체가 화면에 들어왔을 때만 스티키 고정:
-    // 제목·날짜·내 일정 보기는 정지, 카드는 한 칸만 옆으로 이동한다.
-    // 마지막에는 스티키가 자연스럽게 풀리고 다음 지도 섹션으로 넘어간다.
-    const stickyAgenda = area.querySelector(".agenda-sticky");
-    let userControlledCarousel = false;
-    let carouselScrollTicking = false;
-    let scrollBase = null;
-
-    function carouselMetrics() {
-        if (!viewport) return { max: 0, step: 0 };
-        const card = list.querySelector(".agenda-item");
-        const gap = parseFloat(getComputedStyle(list).columnGap) || 0;
-        return {
-            max: Math.max(0, viewport.scrollWidth - viewport.clientWidth),
-            step: card ? card.getBoundingClientRect().width + gap : 0
-        };
+function makeElement(tag, className, text) {
+    const element = document.createElement(tag);
+    element.className = className;
+    if (text !== undefined) {
+        element.textContent = text;
     }
+    return element;
+}
 
-    function updateCarouselButtons() {
-        if (!viewport || !prevButton || !nextButton) return;
-        const canMove = carouselMetrics().max > 3;
-        prevButton.disabled = !canMove;
-        nextButton.disabled = !canMove;
+// 공식 링크가 있으면 새 탭으로, 없으면 해당 카테고리 목록으로 이동
+function setCardLink(link, item) {
+    if (item.url) {
+        link.href = item.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+    } else {
+        link.href = item.page;
     }
+}
 
-    function markManualControl() {
-        userControlledCarousel = true;
-        if (viewport) viewport.classList.remove("is-scroll-driven");
-    }
+function makeAgendaCard(item) {
+    const card = makeElement("article", "agenda-item");
+    const poster = makeElement("div", "agenda-poster");
+    const thumb = makeElement("a", "agenda-thumb-link");
+    const image = document.createElement("img");
+    const fallbackSrc = fallbackImageFor(item.id);
 
-    // 화살표 조작만 순환: 끝에서 다음 클릭 시 처음, 처음에서 이전 클릭 시 끝.
-    function stepCarousel(direction) {
-        if (!viewport) return;
-        const { max, step } = carouselMetrics();
-        if (!step || max <= 3) return;
-        markManualControl();
-        const current = viewport.scrollLeft;
-        let target;
-        if (direction > 0) {
-            target = current >= max - step * 0.45 ? 0 : Math.min(max, current + step);
-        } else {
-            target = current <= step * 0.45 ? max : Math.max(0, current - step);
+    setCardLink(thumb, item);
+    thumb.setAttribute("aria-label", item.title + (item.url ? " 상세 페이지로 이동" : " 전체 목록으로 이동"));
+
+    let usingFallback = item.image === "";
+
+    image.src = item.image || fallbackSrc;
+    image.alt = item.image ? item.title + " 포스터" : item.category + " 대표 이미지";
+    image.loading = "lazy";
+    image.decoding = "async";
+
+    // 원래 이미지가 안 나오면 대체 이미지로 한 번 바꾸고, 그것도 실패하면 회색 배경만 남김
+    image.addEventListener("error", function () {
+        if (usingFallback) {
+            image.style.visibility = "hidden";
+            thumb.classList.add("is-image-unavailable");
+            return;
         }
-        viewport.scrollTo({ left: target, behavior: reduceMotion ? "instant" : "smooth" });
-    }
+        usingFallback = true;
+        image.alt = item.category + " 대표 이미지";
+        image.src = fallbackSrc;
+    });
+    thumb.appendChild(image);
 
-    if (prevButton) prevButton.addEventListener("click", function () { stepCarousel(-1); });
-    if (nextButton) nextButton.addEventListener("click", function () { stepCarousel(1); });
-    if (viewport) {
-        viewport.addEventListener("scroll", updateCarouselButtons, { passive: true });
-        viewport.addEventListener("pointerdown", markManualControl, { passive: true });
-        viewport.addEventListener("touchstart", markManualControl, { passive: true });
-        viewport.addEventListener("keydown", function (event) {
-            if (event.target !== viewport) return;
-            if (event.key === "ArrowRight") { event.preventDefault(); stepCarousel(1); }
-            if (event.key === "ArrowLeft") { event.preventDefault(); stepCarousel(-1); }
+    const heart = makeElement("button", "agenda-heart");
+    heart.type = "button";
+    heart.dataset.id = item.id;
+    heart.dataset.title = item.title;
+    heart.innerHTML = heartSvg;
+
+    poster.append(thumb, heart);
+
+    const info = makeElement("div", "agenda-info");
+    const infoTop = makeElement("div", "agenda-info-top");
+    const title = makeElement("a", "agenda-item-title", item.title);
+    const location = makeElement("p", "agenda-item-location", item.location || "서울");
+    const date = makeElement("time", "agenda-item-date", formatRange(item));
+
+    infoTop.appendChild(makeElement("span", "agenda-item-category", categoryLabels[item.category]));
+    setCardLink(title, item);
+    date.dateTime = dateKey(item.startDate);
+    info.append(infoTop, title, location, date);
+
+    card.append(poster, info);
+    return card;
+}
+
+function renderAgenda() {
+    agendaList.replaceChildren();
+
+    if (upcomingEvents.length === 0) {
+        agendaList.appendChild(makeElement("p", "agenda-status", "현재 안내할 예정 행사가 없습니다."));
+    } else {
+        upcomingEvents.forEach(function (item) {
+            agendaList.appendChild(makeAgendaCard(item));
         });
     }
 
-    function updateScrollDrivenCarousel() {
-        carouselScrollTicking = false;
-        if (!area || !viewport || !stickyAgenda) return;
+    agendaList.setAttribute("aria-busy", "false");
+    updateAgendaHearts();
 
-        const { max, step } = carouselMetrics();
-        const enabled = !reduceMotion && max > 3 && step > 0 && displayed.length > 3;
-        area.classList.toggle("has-carousel-motion", enabled);
-        if (!enabled) {
-            area.classList.remove("is-carousel-pinned");
-            viewport.classList.remove("is-scroll-driven");
-            return;
-        }
-
-        const rect = area.getBoundingClientRect();
-        // 고정은 섹션의 상단이 헤더 하단에 도달한 순간부터 시작.
-        const headerHeight = parseFloat(getComputedStyle(document.documentElement)
-            .getPropertyValue("--ss-header-height")) || 76;
-        const scrollDistance = Math.max(1, area.offsetHeight - stickyAgenda.offsetHeight);
-        const progress = Math.max(0, Math.min(1, (headerHeight - rect.top) / scrollDistance));
-        const pinned = rect.top <= headerHeight + 1 && rect.bottom > headerHeight + stickyAgenda.offsetHeight + 1;
-        // 고정 중에는 마우스를 올리지 않아도 기존 < > 버튼을 표시.
-        area.classList.toggle("is-carousel-pinned", pinned);
-
-        if (userControlledCarousel) {
-            viewport.classList.remove("is-scroll-driven");
-            return;
-        }
-        if (scrollBase === null) scrollBase = viewport.scrollLeft;
-        const eased = progress * progress * (3 - 2 * progress);
-        viewport.classList.add("is-scroll-driven");
-        viewport.scrollLeft = Math.min(max, scrollBase + step * eased);
-    }
-
-    function requestScrollDrivenCarousel() {
-        if (carouselScrollTicking) return;
-        carouselScrollTicking = true;
-        window.requestAnimationFrame(updateScrollDrivenCarousel);
-    }
-
-    async function init() {
-        renderToday();
-        const results = await Promise.allSettled(sources.map(loadSource));
-        const loaded = results.flatMap(function (result) { return result.status === "fulfilled" ? result.value : []; });
-        results.forEach(function (result, index) {
-            if (result.status === "rejected") console.error("행사 JSON 불러오기 실패:", sources[index].path, result.reason);
-        });
-        const unique = new Map();
-        loaded.forEach(function (event) { if (!unique.has(event.id)) unique.set(event.id, event); });
-        displayed = pickUpcoming(Array.from(unique.values()));
-        if (!loaded.length) {
-            list.replaceChildren(element("p", "agenda-status", "일정 데이터를 불러오지 못했어요. Live Server와 data 폴더의 JSON 경로를 확인해 주세요."));
-            list.setAttribute("aria-busy", "false");
-            return;
-        }
-        renderList();
-    }
-
-    window.addEventListener("scene:login", updateHearts);
-    window.addEventListener("scene:saved", updateHearts);
-    window.addEventListener("pageshow", updateHearts);
-    window.addEventListener("storage", updateHearts);
-    window.addEventListener("scroll", requestScrollDrivenCarousel, { passive: true });
-    window.addEventListener("resize", function () {
-        scrollBase = userControlledCarousel ? scrollBase : null;
-        requestScrollDrivenCarousel();
+    // 카드가 화면에 그려진 뒤에 카드 너비를 측정해야 하므로 다음 프레임에서 계산
+    requestAnimationFrame(function () {
         updateCarouselButtons();
+        requestUpdate();
     });
-    window.addEventListener("focus", function () {
-        if (localDateKey(new Date()) !== lastDateKey) { renderToday(); init(); }
-        else updateHearts();
+}
+
+
+// COMING UP IN SEOUL: 찜하기
+
+// 하트 버튼 모양을 저장된 찜 목록(로그인 사용자 기준)에 맞춤
+function updateAgendaHearts() {
+    const saved = SceneSeoul.getSaved();
+
+    agendaList.querySelectorAll(".agenda-heart").forEach(function (button) {
+        const active = saved.includes(button.dataset.id);
+        button.classList.toggle("is-saved", active);
+        button.setAttribute("aria-pressed", String(active));
+        button.setAttribute("aria-label", button.dataset.title + (active ? " 찜 취소" : " 찜하기"));
+        button.querySelector("svg").setAttribute("fill", active ? "currentColor" : "none");
     });
-    init();
+}
+
+agendaList.addEventListener("click", function (event) {
+    const button = event.target.closest(".agenda-heart");
+    if (!button) {
+        return;
+    }
+    if (SceneSeoul.getUser() === "") {
+        alert("로그인 후 저장할 수 있어요.");
+        return;
+    }
+    SceneSeoul.toggleSaved(button.dataset.id);
+    updateAgendaHearts();
 });
 
 
-/* ==========================================
-   HEADER — 서울 날씨 (Cloudflare Worker API)
-========================================== */
-const WEATHER_URL = 'https://scene-seoul-weather.kw064753.workers.dev/api/weather';
+// COMING UP IN SEOUL: 카드 캐러셀
 
-document.addEventListener('DOMContentLoaded', function () {
-    const weatherIcon = document.getElementById('header-weather');
-    if (!weatherIcon) return;
-
-    const icons = {
-        sun: `<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>`,
-        'partly-cloudy': `<path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path><path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>`,
-        cloud: `<path d="M6.5 18h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 18Z"></path>`,
-        rain: `<path d="M6.5 15h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 15Z"></path><path d="m8 18-1 3M13 18l-1 3M18 18l-1 3"></path>`,
-        snow: `<path d="M6.5 14h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 14Z"></path><path d="M8 17v5M5.5 19.5h5M16 17v5M13.5 19.5h5"></path>`
+// max: 가로로 스크롤할 수 있는 최대 거리, step: 카드 한 장 + 간격 너비
+function getCarouselSize() {
+    const card = agendaList.querySelector(".agenda-item");
+    const gap = parseFloat(getComputedStyle(agendaList).columnGap) || 0;
+    return {
+        max: Math.max(0, agendaViewport.scrollWidth - agendaViewport.clientWidth),
+        step: card ? card.getBoundingClientRect().width + gap : 0
     };
+}
 
-    async function updateWeather() {
-        try {
-            const response = await fetch(WEATHER_URL);
-            if (!response.ok) throw new Error('HTTP 오류: ' + response.status);
-            const weather = await response.json();
-            const svg = weatherIcon.querySelector('svg');
-            const icon = icons[weather.condition];
-            if (!svg || !icon) throw new Error('날씨 아이콘 정보가 올바르지 않습니다.');
-            svg.innerHTML = icon;
-            const message = `${weather.city} ${weather.description}, ${weather.temperature}°C`;
-            weatherIcon.title = message;
-            weatherIcon.setAttribute('aria-label', message);
-        } catch (error) {
-            console.error('날씨 연동 오류:', error);
-            weatherIcon.title = '날씨 정보를 불러올 수 없습니다.';
-        }
+function updateCarouselButtons() {
+    const canMove = getCarouselSize().max > 3;
+    prevButton.disabled = !canMove;
+    nextButton.disabled = !canMove;
+}
+
+// 화살표나 마우스로 직접 움직인 뒤에는 페이지 스크롤이 카드 위치를 다시 바꾸지 않도록 함
+function stopScrollDrivenCarousel() {
+    userMovedCarousel = true;
+    agendaViewport.classList.remove("is-scroll-driven");
+}
+
+// 화살표: 한 칸씩 이동하고, 끝에서 다음을 누르면 처음으로, 처음에서 이전을 누르면 끝으로 순환
+function moveCarousel(direction) {
+    const size = getCarouselSize();
+    if (!size.step || size.max <= 3) {
+        return;
     }
-    updateWeather();
-    setInterval(updateWeather, 600000);
+    stopScrollDrivenCarousel();
+
+    const current = agendaViewport.scrollLeft;
+    let target;
+    if (direction > 0) {
+        target = current >= size.max - size.step * 0.45 ? 0 : Math.min(size.max, current + size.step);
+    } else {
+        target = current <= size.step * 0.45 ? size.max : Math.max(0, current - size.step);
+    }
+    agendaViewport.scrollTo({ left: target, behavior: reduceMotion ? "instant" : "smooth" });
+}
+
+// 섹션이 헤더 아래에 고정된 동안 페이지 스크롤 진행률만큼 카드를 한 칸 옆으로 이동
+function updateAgendaCarousel() {
+    const size = getCarouselSize();
+    const enabled = !reduceMotion && size.max > 3 && size.step > 0 && upcomingEvents.length > 3;
+
+    agenda.classList.toggle("has-carousel-motion", enabled);
+    // 노트북처럼 화면 높이가 낮을 때 카드 크기를 줄이는 클래스
+    agenda.classList.toggle("is-short-screen", window.innerHeight <= 740);
+
+    if (!enabled) {
+        agenda.classList.remove("is-carousel-pinned");
+        agendaViewport.classList.remove("is-scroll-driven");
+        return;
+    }
+
+    const headerHeight = header.offsetHeight;
+    const rect = agenda.getBoundingClientRect();
+    const stickyHeight = agendaSticky.offsetHeight;
+    const scrollDistance = Math.max(1, agenda.offsetHeight - stickyHeight);
+    const progress = limit((headerHeight - rect.top) / scrollDistance, 0, 1);
+    const pinned = rect.top <= headerHeight + 1 && rect.bottom > headerHeight + stickyHeight + 1;
+
+    // 고정된 동안에는 마우스를 올리지 않아도 화살표를 보여 줌
+    agenda.classList.toggle("is-carousel-pinned", pinned);
+
+    if (userMovedCarousel) {
+        return;
+    }
+    if (carouselStart === null) {
+        carouselStart = agendaViewport.scrollLeft;
+    }
+    agendaViewport.classList.add("is-scroll-driven");
+    agendaViewport.scrollLeft = Math.min(size.max, carouselStart + size.step * ease(progress));
+}
+
+prevButton.addEventListener("click", function () {
+    moveCarousel(-1);
+});
+
+nextButton.addEventListener("click", function () {
+    moveCarousel(1);
+});
+
+agendaViewport.addEventListener("pointerdown", stopScrollDrivenCarousel);
+
+agendaViewport.addEventListener("keydown", function (event) {
+    if (event.target !== agendaViewport) {
+        return;
+    }
+    if (event.key === "ArrowRight") {
+        event.preventDefault();
+        moveCarousel(1);
+    } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        moveCarousel(-1);
+    }
 });
 
 
-/* LANGUAGE DROPDOWN — embedded from team language.js (no translation) */
-// 언어 선택 창 표시 기능 (번역 기능 없음)
-(() => {
-    const trigger = document.querySelector('.ss-language[aria-expanded]');
-    if (!trigger) return;
+// 아래로 스크롤 버튼: 다음 장면 위치로 한 단계씩 이동하고 마지막에는 EDIT로 이동
 
-    const menu = trigger.querySelector('.ss-language-menu');
-    if (!menu) return;
+skipButton.addEventListener("click", function () {
+    const stops = [0.23, 0.41, 0.59, 0.92];
+    const hero = getFilmProgress();
+    const next = stops.find(function (point) {
+        return point > hero.progress + 0.008;
+    });
 
-    function setOpen(open) {
-        trigger.setAttribute('aria-expanded', String(open));
-        trigger.classList.toggle('is-open', open);
-        menu.hidden = !open;
+    if (next !== undefined) {
+        window.scrollTo({
+            top: hero.top + hero.length * next,
+            behavior: reduceMotion ? "auto" : "smooth"
+        });
     }
-    trigger.addEventListener('click', event => {
-        if (event.target.closest('.ss-language-menu')) return;
-        setOpen(menu.hidden);
-    });
+});
 
-    trigger.addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
-            setOpen(false);
-            trigger.focus();
-        } else if (event.target === trigger && (event.key === 'Enter' || event.key === ' ')) {
-            event.preventDefault();
-            setOpen(menu.hidden);
+
+// EDIT 화살표에 마우스를 올리면 제목 두 줄의 색을 서로 바꿈
+
+function setEditionLinkActive(event) {
+    editionContent.classList.toggle("is-link-active", event.type === "mouseenter" || event.type === "focus");
+}
+
+editionLink.addEventListener("mouseenter", setEditionLinkActive);
+editionLink.addEventListener("mouseleave", setEditionLinkActive);
+editionLink.addEventListener("focus", setEditionLinkActive);
+editionLink.addEventListener("blur", setEditionLinkActive);
+
+
+// 스크롤 인터랙션: 스크롤 이벤트가 여러 번 와도 화면 갱신은 한 프레임에 한 번만 함
+
+function update() {
+    ticking = false;
+
+    const progress = getFilmProgress().progress;
+    updateHeroScenes(progress);
+    updateEdition(progress);
+
+    if (!reduceMotion) {
+        updateSceneReveal();
+    }
+    updateAgendaCarousel();
+}
+
+function requestUpdate() {
+    if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+    }
+}
+
+window.addEventListener("scroll", requestUpdate, { passive: true });
+
+window.addEventListener("resize", function () {
+    // 창 크기가 바뀌면 카드 너비가 달라지므로 시작 위치를 다시 잡음
+    if (!userMovedCarousel) {
+        carouselStart = null;
+    }
+    updateCarouselButtons();
+    requestUpdate();
+});
+
+// 다른 페이지에서 로그인하거나 찜을 바꾼 뒤 돌아왔을 때 하트 상태를 다시 맞춤
+window.addEventListener("pageshow", function () {
+    updateAgendaHearts();
+    requestUpdate();
+});
+window.addEventListener("scene:login", updateAgendaHearts);
+window.addEventListener("scene:saved", updateAgendaHearts);
+window.addEventListener("storage", updateAgendaHearts);
+
+// 창을 켜 둔 채 날짜가 바뀌었다면 날짜와 카드 목록을 새로 만듦
+window.addEventListener("focus", function () {
+    if (dateKey(new Date()) !== todayKey) {
+        loadAgenda();
+    } else {
+        updateAgendaHearts();
+    }
+});
+
+
+// 초기화
+
+// 하나의 JSON이 실패해도 나머지 카테고리는 보여 주도록 allSettled 사용
+function loadAgenda() {
+    renderToday();
+
+    Promise.allSettled(sources.map(loadSource)).then(function (results) {
+        let loaded = [];
+
+        results.forEach(function (result, index) {
+            if (result.status === "fulfilled") {
+                loaded = loaded.concat(result.value);
+            } else {
+                console.error("행사 JSON 불러오기 실패:", sources[index].path, result.reason);
+            }
+        });
+
+        if (loaded.length === 0) {
+            agendaList.replaceChildren(makeElement("p", "agenda-status", "일정 데이터를 불러오지 못했어요. Live Server와 data 폴더의 JSON 경로를 확인해 주세요."));
+            agendaList.setAttribute("aria-busy", "false");
+            return;
         }
-    });
-    document.addEventListener('click', event => {
-        if (!trigger.contains(event.target)) setOpen(false);
-    });
-})();
 
+        upcomingEvents = pickUpcoming(loaded);
+        renderAgenda();
+    });
+}
+
+if (!reduceMotion) {
+    // JS가 실행될 때만 FIND YOUR SCENE을 숨긴 상태에서 시작 (JS가 없으면 그대로 보임)
+    document.body.classList.add("js-ready");
+}
+
+loadAgenda();
+update();

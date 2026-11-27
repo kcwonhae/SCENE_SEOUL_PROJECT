@@ -1,29 +1,33 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="project" content="SCENE:SEOUL">
+    <meta name="team-number" content="04">
+    <meta name="team-name" content="서울을 4로잡다">
+    <meta name="description" content="서울의 전시, 공연, 팝업, 이벤트를 한곳에서 탐색하는 SCENE:SEOUL 메인 페이지입니다.">
     <title>서울의 순간을 모아, 나만의 장면으로 | SCENE:SEOUL</title>
+
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
     <link rel="stylesheet" href="./04_서울을 4로잡다_index.css">
     <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
+
     <script src="../js/04_서울을 4로잡다_common.js" defer></script>
     <script src="../login/04_서울을 4로잡다_login.js" defer></script>
+    <script src="../js/04_서울을 4로잡다_language.js" defer></script>
+    <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
     <script src="./04_서울을 4로잡다_index.js" defer></script>
 </head>
 <body id="top" class="home">
-
     <header class="ss-header" id="header">
-        <a class="ss-header-logo"
-           href="../main/04_서울을 4로잡다_index.html"
-           aria-label="SCENE:SEOUL 홈">
+        <a class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html" aria-label="SCENE:SEOUL 홈">
             SCENE<span class="ss-accent">:</span>SEOUL
         </a>
 
         <nav class="ss-nav" aria-label="메인 메뉴">
-            <a class="is-active" aria-current="page"
-               href="../main/04_서울을 4로잡다_index.html">HOME</a>
+            <a class="is-active" aria-current="page" href="../main/04_서울을 4로잡다_index.html">HOME</a>
             <a href="../exhibition/04_서울을 4로잡다_exhibition.html">전시</a>
             <a href="../performance/04_서울을 4로잡다_performance.html">공연</a>
             <a href="../popup/04_서울을 4로잡다_popup.html">팝업</a>
@@ -51,16 +55,12 @@
                 </span>
             </span>
 
-            <a class="header-mypage"
-               href="../mycalendar/04_서울을 4로잡다_mycalendar.html">
+            <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">
                 MY CALENDER
             </a>
 
             <span class="ss-weather-icon" id="header-weather" aria-label="날씨">
-                <svg viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="1.75"
-                     stroke-linecap="round" stroke-linejoin="round"
-                     aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
                     <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
                 </svg>
@@ -69,29 +69,18 @@
     </header>
 
     <main>
-
-        <!-- 01. FULLSCREEN HERO -->
-        <section class="season-film"
-                 id="home"
-                 aria-label="서울의 문화 장면">
-
+        <!-- HERO: 스크롤에 따라 네 장면이 바뀌고, 마지막에 EDIT 화면이 겹쳐 나타남 -->
+        <section class="season-film" id="home" aria-label="서울의 문화 장면">
             <div class="season-film-sticky">
-
                 <div class="season-visual" aria-hidden="true">
-                    <div class="season-scene scene-image-exhibition"
-                         data-scene="0"></div>
-                    <div class="season-scene scene-image-performance"
-                         data-scene="1"></div>
-                    <div class="season-scene scene-image-popup"
-                         data-scene="2"></div>
-                    <div class="season-scene scene-image-event"
-                         data-scene="3"></div>
+                    <div class="season-scene scene-image-exhibition"></div>
+                    <div class="season-scene scene-image-performance"></div>
+                    <div class="season-scene scene-image-popup"></div>
+                    <div class="season-scene scene-image-event"></div>
                 </div>
 
-                <div class="season-film-overlay"
-                     aria-hidden="true"></div>
+                <div class="season-film-overlay" aria-hidden="true"></div>
 
-                <!-- 첫 화면 문구: 레퍼런스의 좌측 중앙 배치 -->
                 <div class="season-copy-wrap">
                     <h1 class="season-copy-title">
                         <span class="season-copy-korean">나의 서울,</span>
@@ -100,194 +89,143 @@
                     <p class="season-copy-brand">서울의 순간을 모아, 나만의 장면으로.</p>
                 </div>
 
-                <button class="season-skip" id="season-skip"
-                            type="button" aria-label="다음 장면으로 아래로 스크롤">
-                        <span class="season-skip-label">아래로 스크롤</span>
-                        <span class="season-skip-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none"
-                                 stroke="currentColor" stroke-width="1.7"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 4v16"></path>
-                                <path d="m5 13 7 7 7-7"></path>
-                            </svg>
-                        </span>
-                    </button>
+                <button class="season-skip" type="button" aria-label="다음 장면으로 아래로 스크롤">
+                    <span class="season-skip-label">아래로 스크롤</span>
+                    <span class="season-skip-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 4v16"></path>
+                            <path d="m5 13 7 7 7-7"></path>
+                        </svg>
+                    </span>
+                </button>
 
                 <div class="season-progress" aria-hidden="true">
                     <span></span>
                 </div>
 
-                <!-- 02. EDIT -->
-                <section class="edition-next"
-                         id="discover"
-                         aria-labelledby="edition-title">
-
+                <!-- EDIT -->
+                <section class="edition-next" id="discover" aria-labelledby="edition-title">
                     <div class="edition-next-content">
-
-                        <h2 class="edition-next-title"
-                            id="edition-title">
-                            <span class="edition-next-line">
-                                나의 취향으로 발견하는
-                            </span>
-                            <span class="edition-next-line edition-next-emphasis">
-                                또 다른 서울
-                            </span>
+                        <h2 class="edition-next-title" id="edition-title">
+                            <span class="edition-next-line">나의 취향으로 발견하는</span>
+                            <span class="edition-next-line edition-next-emphasis">또 다른 서울</span>
                         </h2>
 
-                        <a class="edition-next-play-link"
-                           href="../recommend/04_서울을 4로잡다_recommend.html"
-                           aria-label="나만의 문화 추천받기">
-                            <svg class="edition-icon edition-icon-chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <a class="edition-next-play-link" href="../recommend/04_서울을 4로잡다_recommend.html" aria-label="나만의 문화 추천받기">
+                            <svg class="edition-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="2.7" stroke-linecap="square" stroke-linejoin="miter"></path>
                             </svg>
                         </a>
-
                     </div>
 
-                    <div class="edition-next-background"
-                         aria-hidden="true"></div>
-
+                    <div class="edition-next-background" aria-hidden="true"></div>
                 </section>
-
             </div>
         </section>
 
-        <!-- 03. FIND YOUR SCENE -->
-        <section class="scenes section-pad" id="scene">
-
+        <!-- FIND YOUR SCENE -->
+        <section class="scenes" id="scene">
             <div class="section-heading">
-                <h2>
-                    FIND YOUR<br>
-                    <i>SCENE</i>
-                </h2>
+                <h2>FIND YOUR<br><i>SCENE</i></h2>
             </div>
 
             <div class="scene-grid">
-
-                <article class="scene-card exhibition" id="scene-exhibition">
-                    <a class="scene-card-link"
-                       href="../exhibition/04_서울을 4로잡다_exhibition.html"
-                       aria-label="전시 페이지 이동">
+                <article class="scene-card">
+                    <a class="scene-card-link" href="../exhibition/04_서울을 4로잡다_exhibition.html" aria-label="전시 페이지 이동">
                         <div class="scene-art">
-                            <img src="../images/04_index_01.png"
-                                 alt="현대미술 전시 공간"
-                                 loading="lazy">
+                            <img src="../images/04_index_01.png" alt="현대미술 전시 공간" loading="lazy">
                         </div>
                         <div class="scene-meta">
-                            <div>
-                                <h3>전시<span class="scene-label-en">EXHIBITIONS</span></h3>
-                            </div>
+                            <h3>전시<span class="scene-label-en">EXHIBITIONS</span></h3>
                             <span class="arrow" aria-hidden="true">→</span>
                         </div>
                     </a>
                 </article>
 
-                <article class="scene-card performance" id="scene-performance">
-                    <a class="scene-card-link"
-                       href="../performance/04_서울을 4로잡다_performance.html"
-                       aria-label="공연 페이지 이동">
+                <article class="scene-card">
+                    <a class="scene-card-link" href="../performance/04_서울을 4로잡다_performance.html" aria-label="공연 페이지 이동">
                         <div class="scene-art">
-                            <img src="../images/04_index_02.jpg"
-                                 alt="현대 공연 장면"
-                                 loading="lazy">
+                            <img src="../images/04_index_02.jpg" alt="현대 공연 장면" loading="lazy">
                         </div>
                         <div class="scene-meta">
-                            <div>
-                                <h3>공연<span class="scene-label-en">PERFORMANCES</span></h3>
-                            </div>
+                            <h3>공연<span class="scene-label-en">PERFORMANCES</span></h3>
                             <span class="arrow" aria-hidden="true">→</span>
                         </div>
                     </a>
                 </article>
 
-                <article class="scene-card popup" id="scene-popup">
-                    <a class="scene-card-link"
-                       href="../popup/04_서울을 4로잡다_popup.html"
-                       aria-label="팝업 페이지 이동">
+                <article class="scene-card">
+                    <a class="scene-card-link" href="../popup/04_서울을 4로잡다_popup.html" aria-label="팝업 페이지 이동">
                         <div class="scene-art">
-                            <img src="../images/04_index_03.png"
-                                 alt="팝업 공간"
-                                 loading="lazy">
+                            <img src="../images/04_index_03.png" alt="팝업 공간" loading="lazy">
                         </div>
                         <div class="scene-meta">
-                            <div>
-                                <h3>팝업<span class="scene-label-en">POP-UPS</span></h3>
-                            </div>
+                            <h3>팝업<span class="scene-label-en">POP-UPS</span></h3>
                             <span class="arrow" aria-hidden="true">→</span>
                         </div>
                     </a>
                 </article>
 
-                <article class="scene-card event" id="scene-event">
-                    <a class="scene-card-link"
-                       href="../event/04_서울을 4로잡다_event.html"
-                       aria-label="이벤트 페이지 이동">
+                <article class="scene-card">
+                    <a class="scene-card-link" href="../event/04_서울을 4로잡다_event.html" aria-label="이벤트 페이지 이동">
                         <div class="scene-art">
-                            <img src="../images/04_index_04.png"
-                                 alt="문화 이벤트 장면"
-                                 loading="lazy">
+                            <img src="../images/04_index_04.png" alt="문화 이벤트 장면" loading="lazy">
                         </div>
                         <div class="scene-meta">
-                            <div>
-                                <h3>이벤트<span class="scene-label-en">EVENTS</span></h3>
-                            </div>
+                            <h3>이벤트<span class="scene-label-en">EVENTS</span></h3>
                             <span class="arrow" aria-hidden="true">→</span>
                         </div>
                     </a>
                 </article>
-
             </div>
         </section>
 
-        <!-- 04. MY CALENDAR — 홈 미리보기 / 실제 JSON 연동 -->
+        <!-- COMING UP IN SEOUL: JSON 데이터로 다가오는 행사 카드를 만듦 -->
         <section class="agenda-section" id="calendar" aria-labelledby="agenda-heading">
             <div class="agenda-sticky">
-            <div class="agenda-title-line">
-                <h2 id="agenda-heading">COMING UP <span class="agenda-title-blue">IN SEOUL</span></h2>
-                <a class="agenda-all-link" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">
-                    내 일정 보기 <span aria-hidden="true">&gt;</span>
-                </a>
-            </div>
-
-            <div class="agenda-layout">
-                <div class="agenda-aside">
-                    <p class="agenda-today"><span class="agenda-month" id="agendaMonth">—</span><span class="agenda-date-divider" aria-hidden="true">/</span><span id="agendaToday">—</span></p>
-                    <p class="agenda-weekday" id="agendaWeekday">—</p>
-                
+                <div class="agenda-title-line">
+                    <h2 id="agenda-heading">COMING UP <span class="agenda-title-blue">IN SEOUL</span></h2>
+                    <a class="agenda-all-link" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">
+                        내 일정 보기 <span aria-hidden="true">&gt;</span>
+                    </a>
                 </div>
 
-                <div class="agenda-carousel" id="agendaCarousel" aria-label="다가오는 서울 문화 행사">
-                    <div class="agenda-viewport" id="agendaViewport" tabindex="0" aria-label="행사 카드를 가로로 스크롤">
-                        <div class="agenda-list" id="agendaList" aria-live="polite" aria-busy="true">
-                            <p class="agenda-status">문화 일정을 불러오는 중입니다.</p>
-                        </div>
+                <div class="agenda-layout">
+                    <div class="agenda-aside">
+                        <p class="agenda-today"><span id="agendaMonth">—</span><span class="agenda-date-divider" aria-hidden="true">/</span><span id="agendaToday">—</span></p>
+                        <p class="agenda-weekday" id="agendaWeekday">—</p>
                     </div>
-                    <button class="agenda-carousel-arrow agenda-carousel-prev" type="button" id="agendaPrev" aria-label="이전 행사 보기" disabled>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-                    </button>
-                    <button class="agenda-carousel-arrow agenda-carousel-next" type="button" id="agendaNext" aria-label="다음 행사 보기" disabled>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-                    </button>
+
+                    <div class="agenda-carousel" aria-label="다가오는 서울 문화 행사">
+                        <div class="agenda-viewport" id="agendaViewport" tabindex="0" aria-label="행사 카드를 가로로 스크롤">
+                            <div class="agenda-list" id="agendaList" aria-live="polite" aria-busy="true">
+                                <p class="agenda-status">문화 일정을 불러오는 중입니다.</p>
+                            </div>
+                        </div>
+                        <button class="agenda-carousel-arrow agenda-carousel-prev" type="button" id="agendaPrev" aria-label="이전 행사 보기" disabled>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="m15 18-6-6 6-6"></path>
+                            </svg>
+                        </button>
+                        <button class="agenda-carousel-arrow agenda-carousel-next" type="button" id="agendaNext" aria-label="다음 행사 보기" disabled>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="m9 18 6-6-6-6"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-            </div>
             </div>
         </section>
 
-        <!-- 05. SEOUL MAP -->
-        <section class="atlas-section atlas-fullbleed"
-                 id="map-section"
-                 aria-label="서울 문화 지도">
-
+        <!-- SEOUL ON THE MAP -->
+        <section class="atlas-section" id="map-section" aria-label="서울 문화 지도">
             <div class="atlas-overlay">
                 <h2>SEOUL<br><span>ON THE MAP</span></h2>
-                <a class="atlas-map-cta"
-                   href="../map/04_서울을 4로잡다_map.html">
+                <a class="atlas-map-cta" href="../map/04_서울을 4로잡다_map.html">
                     서울 문화 지도 <span aria-hidden="true">&gt;</span>
                 </a>
             </div>
-
         </section>
-
     </main>
 
     <footer class="home-footer">
@@ -295,11 +233,6 @@
         <small>© 2026 SCENE:SEOUL</small>
     </footer>
 
-    <a class="ss-back-to-top"
-       href="#top"
-       aria-label="페이지 맨 위로 이동">
-        ↑
-    </a>
-
+    <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로 이동">↑</a>
 </body>
 </html>

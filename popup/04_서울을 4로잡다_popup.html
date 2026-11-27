@@ -3,24 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="project" content="SCENE:SEOUL">
+    <meta name="team-number" content="04">
+    <meta name="team-name" content="서울을 4로잡다">
+    <meta name="description" content="서울의 아트, 패션, 라이프스타일, 굿즈 팝업을 검색하고 저장해 보세요.">
     <meta name="theme-color" content="#f6f4ef">
     <title>POP-UP — SCENE:SEOUL</title>
+
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
     <link rel="stylesheet" href="04_서울을 4로잡다_popup.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_carousel.css">
     <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
+
     <script src="../js/04_서울을 4로잡다_common.js" defer></script>
     <script src="../login/04_서울을 4로잡다_login.js" defer></script>
-    <script src="04_서울을 4로잡다_popup.js" defer></script>
+    <script src="../js/04_서울을 4로잡다_language.js" defer></script>
     <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
     <script src="../js/04_서울을 4로잡다_carousel.js" defer></script>
+    <script src="04_서울을 4로잡다_popup.js" defer></script>
 </head>
 <body id="top" class="popup-page">
     <header class="ss-header" id="header">
-        <a class="ss-header-logo"
-           href="../main/04_서울을 4로잡다_index.html"
-           aria-label="SCENE:SEOUL 홈">
+        <a class="ss-header-logo" href="../main/04_서울을 4로잡다_index.html" aria-label="SCENE:SEOUL 홈">
             SCENE<span class="ss-accent">:</span>SEOUL
         </a>
 
@@ -53,45 +59,49 @@
                 </span>
             </span>
 
-            <a class="header-mypage"
-               href="../mycalendar/04_서울을 4로잡다_mycalendar.html">
+            <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">
                 MY CALENDER
             </a>
 
             <span class="ss-weather-icon" id="header-weather" aria-label="날씨">
-                <svg viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="1.75"
-                     stroke-linecap="round" stroke-linejoin="round"
-                     aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M6.5 17.5h11a4 4 0 0 0 .1-8 6.2 6.2 0 0 0-11.4 2.1A3 3 0 0 0 6.5 17.5Z"></path>
                     <path d="M6 3v2M2.5 7l1.4 1.4M10 2v2"></path>
                 </svg>
             </span>
         </div>
     </header>
+
     <main class="ss-page">
-        <div class="popup-performance-stage">
-            <section class="ss-category-hero" aria-labelledby="popup-hero-title">
-                <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
-                    <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a>
-                    <span aria-hidden="true">/</span>
-                    <span aria-current="page">POP-UP</span>
-                </nav>
-                <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="popup-hero-title">Pop-up<span class="ss-hero-title-dot">.</span></h1>
-                <ul class="ss-hero-tags ss-entrance ss-entrance--delay-3" aria-hidden="true">
-                    <li>ART</li><li>FASHION</li><li>LIFESTYLE</li><li>GOODS &amp; MARKET</li>
-                </ul>
-            </section>
-            <section class="ss-category-feature" aria-label="추천 팝업">
-                <div class="ss-carousel" data-src="../data/04_서울을 4로잡다_popup.json"></div>
-            </section>
-        </div>
-        <section class="discover ss-catalog popup-catalog" id="discover" aria-labelledby="popup-catalog-title">
+        <!-- INTRO -->
+        <section class="ss-category-hero" aria-labelledby="popup-hero-title">
+            <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
+                <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a>
+                <span aria-hidden="true">/</span>
+                <span aria-current="page">POP-UP</span>
+            </nav>
+            <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="popup-hero-title">Pop-up<span class="ss-hero-title-dot">.</span></h1>
+            <ul class="ss-hero-tags ss-entrance ss-entrance--delay-3" aria-hidden="true">
+                <li>ART</li>
+                <li>FASHION</li>
+                <li>LIFESTYLE</li>
+                <li>GOODS &amp; MARKET</li>
+            </ul>
+        </section>
+
+        <!-- 추천 팝업 캐러셀: 공통 carousel.js가 JSON의 featured 항목으로 만듦 -->
+        <section class="ss-category-feature" aria-label="추천 팝업">
+            <div class="ss-carousel" data-src="../data/04_서울을 4로잡다_popup.json"></div>
+        </section>
+
+        <!-- 팝업 목록: 다른 페이지에서 #discover로 바로 이동함 -->
+        <section class="ss-catalog popup-catalog" id="discover" aria-labelledby="popup-catalog-title">
             <div class="ss-category-heading">
                 <h2 class="ss-category-title" id="popup-catalog-title">ALL <em class="ss-category-title-accent">POP-UPS.</em></h2>
                 <div class="popup-divider" aria-hidden="true"></div>
             </div>
-            <div class="pop-catalog-controls ss-catalog-controls">
+
+            <div class="ss-catalog-controls">
                 <div class="ss-toolbar">
                     <div class="ss-filters" role="group" aria-label="팝업 유형 필터">
                         <button type="button" class="ss-filter" data-filter="all" aria-pressed="true">전체</button>
@@ -100,24 +110,30 @@
                         <button type="button" class="ss-filter" data-filter="life" aria-pressed="false">라이프스타일</button>
                         <button type="button" class="ss-filter" data-filter="goods" aria-pressed="false">굿즈 · 마켓</button>
                     </div>
+
                     <div class="ss-search" role="search">
                         <input id="popup-catalog-search" type="search" autocomplete="off" placeholder="팝업명, 장소 검색" aria-label="팝업 이름 또는 지역 검색">
                         <svg class="ss-search-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" width="20" height="20" viewBox="0 0 24 24">
-                            <circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 5 5"></path>
+                            <circle cx="10.8" cy="10.8" r="6.6"></circle>
+                            <path d="m16 16 5 5"></path>
                         </svg>
                     </div>
                 </div>
-                <div id="cards" class="ss-card-grid pop-catalog-grid ss-catalog-grid" aria-live="polite">
-                    <p class="popup-loading">팝업 정보를 불러오는 중입니다.</p>
+
+                <div class="ss-card-grid" id="cards" aria-live="polite">
+                    <p>팝업 정보를 불러오는 중입니다.</p>
                 </div>
-                <nav id="popup-pagination" class="popup-js-pager" aria-label="팝업 목록 페이지"></nav>
+
+                <nav class="popup-js-pager" id="popup-pagination" aria-label="팝업 목록 페이지"></nav>
             </div>
         </section>
-        <footer class="footer pop-brand-footer ss-site-footer">
+
+        <footer class="ss-site-footer">
             <strong class="footer-brand">SCENE<span>:</span>SEOUL</strong>
             <small class="footer-copyright">© 2026 SCENE:SEOUL</small>
         </footer>
     </main>
+
     <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동">
         <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewBox="0 0 24 24">
             <path d="m12 19 0-14m-6 6 6-6 6 6"></path>

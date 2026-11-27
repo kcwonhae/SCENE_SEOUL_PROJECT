@@ -1,192 +1,83 @@
+/* SCENE:SEOUL - 메인(index) 페이지 스타일
+    공통 색상과 헤더 기본 모양은 common.css의 변수를 그대로 사용 */
 
-/* ==========================================
-   SCENE:SEOUL - HOME
-   04_서울을 4로잡다_index.css
-========================================== */
+
+/* 1. 기본 스타일 */
 
 :root {
-    --home-paper: #FFFFFF;
-    --home-ink: var(--ss-ink, #151B27);
-    --home-blue: var(--ss-blue, #4666B0);
-    --home-blue-hover: var(--ss-blue-hover, #344F94);
-    --home-yellow: var(--ss-yellow, #FFDB63);
-    --home-muted: #737983;
-    --home-line: #E1E2E4;
-    --home-white: #FFFFFF;
-
     --hero-black: #000000;
-    --hero-header-height: 76px;
 }
 
-/* ==========================================
-   00. HEADER — 고정된 흰색 바
-   메뉴 및 로고: 공통 CSS 위에 홈에서만 정의
-   기존 값과 충돌하지 않도록 선택자를 정리
-========================================== */
-body.home {
-    --ss-header-bg: #FFFFFF;
-    --ss-header-text: #151B27;
-    --ss-header-accent: #4666B0;
-    background: #FFFFFF;
-}
 
-body.home .ss-header,
-body.home.is-hero-dark .ss-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+/* 2. 헤더: 공통 헤더 위에 메인 페이지에서 다른 값만 지정 */
+
+.home .ss-header {
     z-index: 1000;
-    height: var(--hero-header-height);
-    box-sizing: border-box;
-    background: #FFFFFF;
-    color: #151B27;
-    border-bottom: 1px solid rgba(21, 27, 39, 0.08);
+    border-bottom-color: rgba(21, 27, 39, 0.08);
 }
 
-body.home .ss-header .ss-header-logo,
-body.home.is-hero-dark .ss-header .ss-header-logo {
-    opacity: 1;
-    visibility: visible;
-    color: #151B27;
-    pointer-events: auto;
-}
 
-body.home .ss-header .ss-header-logo .ss-accent,
-body.home.is-hero-dark .ss-header .ss-header-logo .ss-accent {
-    color: #4666B0;
-}
+/* 3. HERO */
 
-body.home .ss-header .ss-nav a,
-body.home .ss-header .ss-header-actions,
-body.home .ss-header .ss-icon-button,
-body.home .ss-header .ss-language,
-body.home .ss-header .ss-weather-icon,
-body.home .ss-header .header-login,
-body.home .ss-header .header-mypage,
-body.home.is-hero-dark .ss-header .ss-nav a,
-body.home.is-hero-dark .ss-header .ss-header-actions,
-body.home.is-hero-dark .ss-header .ss-icon-button,
-body.home.is-hero-dark .ss-header .ss-language,
-body.home.is-hero-dark .ss-header .ss-weather-icon,
-body.home.is-hero-dark .ss-header .header-login,
-body.home.is-hero-dark .ss-header .header-mypage {
-    color: #151B27;
-}
-
-/* 공통 네비게이션의 기존 hover 및 활성 표시를 유지한다. */
-body.home .ss-header .ss-nav a:hover,
-body.home .ss-header .ss-nav a:focus-visible,
-body.home .ss-header .ss-nav a[aria-current="page"],
-body.home .ss-header .ss-nav a.is-active,
-body.home .ss-header .ss-header-actions a:hover,
-body.home .ss-header .ss-header-actions a:focus-visible,
-body.home .ss-header .ss-header-actions button:hover,
-body.home .ss-header .ss-header-actions button:focus-visible,
-body.home .ss-header .ss-language[role="button"]:hover,
-body.home .ss-header .ss-language[role="button"]:focus-visible,
-body.home .ss-header .ss-language.is-open,
-body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
-    color: var(--ss-header-accent, #4666B0);
-}
-
-/* ==========================================
-   01. FULLSCREEN HERO
-========================================== */
-
+/* 550vh 길이를 스크롤하는 동안 안쪽 화면이 sticky로 고정됨 */
 .season-film {
     position: relative;
-    width: 100%;
     height: 550vh;
-    margin: var(--hero-header-height) 0 0;
-    padding: 0;
+    margin-top: var(--ss-header-height);
     background: var(--hero-black);
 }
 
 .season-film-sticky {
     position: sticky;
-    top: var(--hero-header-height);
-
-    width: 100%;
-    height: calc(100vh - var(--hero-header-height));
-    height: calc(100svh - var(--hero-header-height));
-
-    margin: 0;
-    padding: 0;
-
+    top: var(--ss-header-height);
+    height: calc(100vh - var(--ss-header-height));
     overflow: hidden;
     isolation: isolate;
-
     background: var(--hero-black);
 }
-
-/* 전체 화면 이미지 영역 */
 
 .season-visual {
     position: absolute;
     inset: 0;
     z-index: 1;
-
-    width: 100%;
-    height: 100%;
-
     overflow: hidden;
-    background: #000;
+    background: var(--hero-black);
 }
 
-/* 4장의 이미지 */
-
+/* 네 장의 이미지를 겹쳐 두고 JS가 opacity와 scale을 바꿈 */
 .season-scene {
     position: absolute;
     inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background-size: cover;
-    background-position: center center;
+    background-position: center;
     background-repeat: no-repeat;
-
+    background-size: cover;
     opacity: 0;
-    transform: scale(1.060);
-
+    transform: scale(1.06);
     will-change: opacity, transform;
-    backface-visibility: hidden;
 }
-
-/* 01 전시 */
 
 .scene-image-exhibition {
     background-image: url("../images/04_index_01.png");
     opacity: 1;
 }
 
-/* 02 공연 */
-
 .scene-image-performance {
     background-image: url("../images/04_index_02.jpg");
 }
-
-/* 03 팝업 */
 
 .scene-image-popup {
     background-image: url("../images/04_index_03.png");
 }
 
-/* 04 이벤트 */
-
 .scene-image-event {
     background-image: url("../images/04_index_04.png");
 }
 
-/* 하단 검은 그라데이션 */
-
+/* 흰 글자가 잘 보이도록 하단과 왼쪽에 음영을 줌 */
 .season-film-overlay {
     position: absolute;
     inset: 0;
     z-index: 2;
-    /* 흰 타이포를 읽기 쉽게 하는 좌측 음영 + 사진의 깊이를 주는 하단 그림자.
-       중앙의 사진 디테일은 최대한 유지하며, 영상처럼 화면 가장자리만 눌러 준다. */
     background:
         linear-gradient(0deg,
             rgba(8, 12, 19, 0.72) 0%,
@@ -201,28 +92,41 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     pointer-events: none;
 }
 
-/* ==========================================
-   02. BOTTOM LEFT TEXT
-========================================== */
-
-/* 첫 화면: 작은 한글 슬로건 + 큰 영문 워드마크 */
 .season-copy-wrap {
     position: absolute;
     top: 29%;
-    left: 6%;
     right: 6%;
-    bottom: auto;
+    left: 6%;
     z-index: 5;
-    width: auto;
     max-width: 900px;
-    color: #FFFFFF;
+    color: var(--ss-white);
     pointer-events: none;
 }
 
-.season-copy-brand {
+.season-copy-title {
+    margin: 0;
+    font-family: "Noto Sans KR", "DM Sans", sans-serif;
+    font-size: clamp(38px, 4.9vw, 76px);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.055em;
+}
+
+.season-copy-korean {
     display: block;
+    margin-bottom: 10px;
+}
+
+.season-copy-wordmark {
+    display: block;
+    font-family: "DM Sans", sans-serif;
+    letter-spacing: -0.067em;
+    white-space: nowrap;
+}
+
+.season-copy-brand {
     margin: clamp(15px, 2.4vh, 25px) 0 0;
-    color: rgba(255,255,255,0.90);
+    color: rgba(255, 255, 255, 0.9);
     font-family: "Noto Sans KR", sans-serif;
     font-size: clamp(12px, 1.05vw, 15px);
     font-weight: 400;
@@ -231,41 +135,7 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     word-break: keep-all;
 }
 
-.season-copy-title {
-    margin: 0;
-    color: #FFFFFF;
-    font-family: "Noto Sans KR", "DM Sans", sans-serif;
-    font-size: clamp(38px, 4.9vw, 76px);
-    font-weight: 800;
-    line-height: 1.12;
-    letter-spacing: -0.055em;
-    white-space: normal;
-}
-
-/* 히어로 제목은 전체 흰색으로 통일 */
-.season-copy-korean,
-.season-copy-wordmark {
-    display: block;
-}
-
-.season-copy-korean {
-    margin-bottom: 10px;
-}
-
-.season-copy-wordmark {
-    font-family: "DM Sans", sans-serif;
-    font-size: 1em;
-    letter-spacing: -0.067em;
-    white-space: nowrap;
-}
-.season-copy-title .season-copy-colon {
-    color: #FFFFFF;
-}
-
-/* ==========================================
-   03. HERO SCROLL LINK
-   하단 밑줄 없이 흰색 글씨와 아래쪽 화살표
-========================================== */
+/* 아래로 스크롤 버튼 */
 .season-skip {
     position: absolute;
     right: 5%;
@@ -275,71 +145,66 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     align-items: center;
     gap: 12px;
     padding: 10px 0;
-    border: none;
+    border: 0;
     background: transparent;
-    box-shadow: none;
-    color: #FFFFFF;
-    cursor: pointer;
+    color: var(--ss-white);
     font-family: "Noto Sans KR", sans-serif;
     font-size: 14px;
     font-weight: 500;
     letter-spacing: -0.02em;
     transition: opacity 0.3s ease;
 }
-.season-skip-label { color: inherit; white-space: nowrap; }
+
+.season-skip-label {
+    white-space: nowrap;
+}
+
 .season-skip-icon {
     display: grid;
     place-items: center;
     width: 17px;
     height: 17px;
-    color: inherit;
 }
+
 .season-skip-icon svg {
     display: block;
     width: 15px;
     height: 15px;
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
 .season-skip:hover .season-skip-icon svg,
 .season-skip:focus-visible .season-skip-icon svg {
     transform: translateY(5px);
 }
+
 .season-skip:focus-visible {
-    outline: 2px solid #FFFFFF;
+    outline: 2px solid var(--ss-white);
     outline-offset: 6px;
 }
 
-/* ==========================================
-   04. SCROLL PROGRESS
-========================================== */
-
+/* 스크롤 진행 바: 너비는 JS가 진행률에 맞춰 바꿈 */
 .season-progress {
     position: absolute;
-
-    left: 0;
     right: 0;
     bottom: 0;
-
+    left: 0;
     z-index: 7;
-
     height: 3px;
-
     background: rgba(255, 255, 255, 0.1);
 }
 
 .season-progress span {
     display: block;
-
     width: 0;
     height: 100%;
-
-    background: var(--ss-blue, #4666B0);
+    background: var(--ss-blue);
 }
 
-/* ==========================================
-   05. EDIT / WHITE EDITORIAL
-   하얀 지면, 두 줄 타이포, 기존 스카이라인
-========================================== */
+
+/* 4. EDIT */
+
+/* HERO 마지막 구간에서 사진 위에 흰 화면이 opacity로 겹쳐 나타남 */
 .edition-next {
     position: absolute;
     inset: 0;
@@ -347,25 +212,24 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     display: grid;
     align-items: center;
     padding: clamp(56px, 8vh, 110px) 6%;
-    box-sizing: border-box;
     overflow: hidden;
-    background: #FFFFFF;
+    background: var(--ss-white);
+    opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    opacity: 0;
-    /* 와이프 대신 사진이 사라지면서 EDIT가 자연스럽게 겹친다. */
 }
+
 .edition-next.is-visible {
     visibility: visible;
-    pointer-events: auto;
 }
+
 .edition-next-content {
     position: relative;
     z-index: 2;
-    width: min(1120px, 100%);
+    width: 100%;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 0 0 clamp(65px, 9vh, 105px);
-    box-sizing: border-box;
+    padding-bottom: clamp(65px, 9vh, 105px);
 }
 
 .edition-next-title {
@@ -377,18 +241,27 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     letter-spacing: -0.045em;
     word-break: keep-all;
 }
+
 .edition-next-line {
     display: block;
-    width: max-content;
-    max-width: 100%;
+    color: var(--ss-ink);
     white-space: nowrap;
-    color: var(--home-ink);
     transition: color 0.35s ease;
 }
-.edition-next-line.edition-next-emphasis {
-    color: var(--home-blue);
+
+.edition-next-emphasis {
+    color: var(--ss-blue);
 }
-/* 화살표는 텍스트와 분리하지만 한 덩어리로 반응 */
+
+/* 화살표 버튼에 올리면 JS가 is-link-active를 붙여 두 줄의 색을 서로 바꿈 */
+.edition-next-content.is-link-active .edition-next-line {
+    color: var(--ss-blue);
+}
+
+.edition-next-content.is-link-active .edition-next-emphasis {
+    color: var(--ss-ink);
+}
+
 .edition-next-play-link {
     position: absolute;
     right: 0;
@@ -398,121 +271,90 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     width: clamp(64px, 6.1vw, 88px);
     aspect-ratio: 1;
     border-radius: 50%;
-    background: var(--home-blue);
-    color: #FFFFFF;
-    text-decoration: none;
+    background: var(--ss-blue);
+    color: var(--ss-white);
     transition:
         background-color 0.35s ease,
         color 0.35s ease,
         transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
-/* EDIT 버튼: 기본 화살표, 호버 시 기존 색상 전환 유지 */
-.edition-next-play-link .edition-icon {
+
+.edition-next-play-link:hover,
+.edition-next-play-link:focus-visible {
+    transform: scale(1.12);
+    background: var(--ss-ink);
+    color: var(--ss-blue);
+}
+
+.edition-next-play-link:focus-visible {
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 7px;
+}
+
+.edition-icon {
     width: 30px;
     height: 30px;
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.edition-next-play-link:is(:hover, :focus-visible) .edition-icon {
+
+.edition-next-play-link:hover .edition-icon,
+.edition-next-play-link:focus-visible .edition-icon {
     transform: translateX(3px);
 }
-.edition-next-play-link:hover,
-.edition-next-play-link:focus-visible {
-    transform: scale(1.12);
-    background: var(--home-ink);
-    color: var(--home-blue);
-}
-.edition-next-content:has(.edition-next-play-link:is(:hover, :focus-visible))
-.edition-next-line:first-child {
-    color: var(--home-blue);
-}
-.edition-next-content:has(.edition-next-play-link:is(:hover, :focus-visible))
-.edition-next-line.edition-next-emphasis {
-    color: var(--home-ink);
-}
-.edition-next-play-link:focus-visible {
-    outline: 2px solid var(--home-blue);
-    outline-offset: 7px;
-}
+
+/* 추천 페이지와 같은 스카이라인 이미지, opacity는 JS가 조절 */
 .edition-next-background {
     position: absolute;
-    left: 0;
     right: 0;
     bottom: 0;
+    left: 0;
     z-index: 1;
     height: 150px;
-    background-image: url("../recommend/skyline.svg");
-    background-position: center bottom;
-    background-repeat: repeat-x;
-    background-size: 1200px 120px;
+    background: url("../recommend/skyline.svg") center bottom / 1200px 120px repeat-x;
     opacity: 0;
     pointer-events: none;
-    will-change: opacity;
 }
 
-/* ==========================================
-   06. FIND YOUR SCENE
-========================================== */
 
-.section-pad {
-    padding: clamp(38px, 5.5vh, 70px) 5%;
-}
+/* 5. FIND YOUR SCENE */
 
 .scenes {
     position: relative;
-    background: #FFFFFF;
-    scroll-margin-top: calc(var(--hero-header-height) + 18px);
+    padding: clamp(38px, 5.5vh, 70px) 5%;
+    background: var(--ss-white);
 }
 
 .section-heading {
-    display: flex;
-
-    justify-content: space-between;
-    align-items: flex-end;
-
     margin-bottom: clamp(24px, 3.4vh, 36px);
 }
 
 .section-heading h2 {
     margin: 0;
-
-    color: var(--home-ink);
-
+    color: var(--ss-ink);
     font-family: "DM Sans", sans-serif;
-
     font-size: clamp(44px, min(6vw, 8.8vh), 88px);
     font-weight: 900;
-
     line-height: 0.95;
     letter-spacing: -0.075em;
 }
 
 .section-heading h2 i {
-    color: var(--home-blue);
+    color: var(--ss-blue);
     font-style: normal;
 }
 
-/* 비대칭 4열 카드 */
-
+/* 4열 카드의 위쪽 여백을 다르게 줘서 비대칭으로 배치 */
 .scene-grid {
     display: grid;
-
     grid-template-columns: repeat(4, minmax(0, 1fr));
-
     align-items: start;
-
     gap: 18px;
-
     padding-bottom: clamp(28px, 5vh, 60px);
-    overflow: visible;
 }
 
 .scene-card {
     position: relative;
     min-width: 0;
-}
-
-.scene-card:nth-child(1) {
-    margin-top: 0;
 }
 
 .scene-card:nth-child(2) {
@@ -529,107 +371,63 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
 
 .scene-card-link {
     display: block;
-
-    color: inherit;
-    text-decoration: none;
 }
-
-/* 이미지 */
 
 .scene-art {
     height: clamp(205px, min(27vw, 36vh), 320px);
-
     overflow: hidden;
-
     border-radius: 4px;
     background: #F1F1F1;
 }
 
 .scene-art img {
     display: block;
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
-    transition:
-        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .scene-card-link:hover .scene-art img {
     transform: scale(1.035);
 }
 
-/* 이미지 아래 캡션 */
-
 .scene-meta {
     display: flex;
-
-    justify-content: space-between;
     align-items: flex-start;
-
+    justify-content: space-between;
     gap: 14px;
     padding: 14px 0;
 }
 
-.scene-meta span:not(.arrow):not(.scene-label-en) {
-    color: var(--home-blue);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.scene-meta h3 {
-    margin: 10px 0;
-
-    color: var(--home-ink);
-
-    font-size: clamp(18px, 1.55vw, 23px);
-    font-weight: 700;
-
-    letter-spacing: -0.04em;
-}
-
-/* 카테고리명 옆 영문 표기 */
 .scene-meta h3 {
     display: flex;
     align-items: baseline;
     gap: 10px;
+    margin: 10px 0;
+    color: var(--ss-ink);
+    font-size: clamp(18px, 1.55vw, 23px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
 }
-.scene-meta .scene-label-en {
-    color: #151B27;
+
+.scene-label-en {
+    color: var(--ss-ink);
     font-family: "DM Sans", sans-serif;
-    font-size: clamp(10px, 0.9vw, 12px);
+    font-size: 12px;
     font-weight: 900;
     letter-spacing: -0.025em;
     white-space: nowrap;
 }
 
-.scene-meta h3 b {
-    font-family: "DM Sans", sans-serif;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    letter-spacing: 0;
-}
-
-/* 화살표 위치 유지, 호버 시 표시 */
-
+/* 화살표는 자리를 차지한 채 숨겨 두고 hover 때 나타남 */
 .scene-meta .arrow {
-    display: inline-block;
     flex-shrink: 0;
-
-    color: var(--home-ink);
-
+    color: var(--ss-ink);
     font-size: 30px;
     line-height: 1;
-
     opacity: 0;
-
     transform: translateX(-6px);
-
     transition:
         opacity 0.35s ease,
         transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -641,78 +439,53 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     transform: translateX(0);
 }
 
-/* ==========================================
-   07. FIND YOUR SCENE — EDITORIAL IMAGE REVEAL
-   제목: 미세하게 올라오는 타이포
-   카드: 카드 배치는 고정하고 이미지가 아래→위로 개방됨
-   스크롤을 반대로 움직이면 역재생
-========================================== */
-
-.js-ready .scenes .section-heading {
+/* 스크롤 등장 효과의 시작 상태. JS가 실행될 때만 숨기고(js-ready),
+    이후 스크롤 위치에 맞춰 JS가 opacity, transform, clip-path를 바꿈.
+    will-change는 스크롤 중 계속 바뀌는 속성을 브라우저에 미리 알려 끊김을 줄이는 용도 */
+.js-ready .section-heading {
     opacity: 0;
-    transform: translate3d(0, 18px, 0);
+    transform: translateY(18px);
     will-change: opacity, transform;
-    transition: none;
 }
 
-.js-ready .scenes .scene-card.scene-reveal {
-    opacity: 1; /* 카드 전체를 페이드시키지 않음 */
-    transform: none;
-}
-
-.js-ready .scenes .scene-card.scene-reveal .scene-art img {
+.js-ready .scene-art img {
     clip-path: inset(100% 0 0 0);
-    -webkit-clip-path: inset(100% 0 0 0);
     will-change: clip-path;
 }
 
-.js-ready .scenes .scene-card.scene-reveal .scene-meta {
+.js-ready .scene-meta {
     opacity: 0;
-    transform: translate3d(0, 12px, 0);
+    transform: translateY(12px);
     will-change: opacity, transform;
 }
 
 
-/* ==========================================
-   08. COMING UP IN SEOUL — CULTURE CARD EDITORIAL
-   상단 사진 / 하단 정보 / 독립적인 찜 버튼
-========================================== */
+/* 6. COMING UP IN SEOUL */
+
 .agenda-section {
     position: relative;
     margin-bottom: clamp(40px, 6vh, 78px);
-    background: #FFFFFF;
-    color: var(--home-ink);
+    background: var(--ss-white);
+    color: var(--ss-ink);
 }
 
-/* 콘텐츠 로딩 전에는 일반 섹션, 카드가 충분할 때만 짧은 스티키 구간을 만든다. */
+/* 카드가 충분히 있을 때만 JS가 has-carousel-motion을 붙여 sticky 구간을 만듦 */
 .agenda-sticky {
     padding: 104px 5% 96px;
 }
 
 .agenda-section.has-carousel-motion {
-    height: calc(100svh - var(--hero-header-height) + clamp(250px, 45vh, 430px));
+    height: calc(100vh - var(--ss-header-height) + clamp(250px, 45vh, 430px));
 }
 
 .agenda-section.has-carousel-motion .agenda-sticky {
     position: sticky;
-    top: var(--hero-header-height);
+    top: var(--ss-header-height);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: calc(100svh - var(--hero-header-height));
+    height: calc(100vh - var(--ss-header-height));
     padding: clamp(16px, 3vh, 32px) 5%;
-    box-sizing: border-box;
-}
-
-/* 화면이 짧을 때만 카드의 시각적 비율을 조정해 섹션 전체가 잘리지 않도록 한다. */
-@media (max-height: 740px) {
-    .agenda-section.has-carousel-motion .agenda-poster {
-        height: clamp(150px, 29vh, 225px);
-        aspect-ratio: auto;
-    }
-    .agenda-section.has-carousel-motion .agenda-info { padding: 10px 12px 12px; }
-    .agenda-section.has-carousel-motion .agenda-title-line h2 { font-size: clamp(36px, 4.25vw, 62px); }
-    .agenda-section.has-carousel-motion .agenda-layout { padding-top: 18px; }
 }
 
 .agenda-title-line {
@@ -721,7 +494,7 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     justify-content: space-between;
     gap: 24px;
     padding-bottom: 27px;
-    border-bottom: 1px solid var(--home-ink);
+    border-bottom: 1px solid var(--ss-ink);
 }
 
 .agenda-title-line h2 {
@@ -734,7 +507,7 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
 }
 
 .agenda-title-blue {
-    color: var(--home-blue);
+    color: var(--ss-blue);
 }
 
 .agenda-all-link {
@@ -743,11 +516,9 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     gap: 15px;
     padding: 8px 0 6px;
     border-bottom: 1px solid currentColor;
-    color: var(--home-ink);
     font-family: "DM Sans", sans-serif;
     font-size: 12px;
     font-weight: 700;
-    text-decoration: none;
     white-space: nowrap;
     transition: color 0.25s ease;
 }
@@ -759,15 +530,19 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
 }
 
 .agenda-all-link:hover,
-.agenda-all-link:focus-visible { color: var(--home-blue); }
+.agenda-all-link:focus-visible {
+    color: var(--ss-blue);
+}
+
 .agenda-all-link:hover span,
-.agenda-all-link:focus-visible span { transform: translateX(4px); }
+.agenda-all-link:focus-visible span {
+    transform: translateX(4px);
+}
 
 .agenda-layout {
     display: grid;
     grid-template-columns: minmax(200px, 30%) minmax(0, 1fr);
     align-items: start;
-    gap: 0;
     padding-top: 32px;
 }
 
@@ -776,33 +551,12 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     padding: 10px 26px 30px 0;
 }
 
-.agenda-month {
-    color: var(--home-ink);
-    font-size: 0.90em;
-    font-weight: 700;
-    letter-spacing: -0.06em;
-}
-
-.agenda-date-divider {
-    color: #747B85;
-    font-size: 0.90em;
-    font-weight: 700;
-    letter-spacing: -0.06em;
-}
-
-/* 일(28)을 월(11)과 동일한 서체·크기·두께·자간으로 표시 */
-.agenda-today #agendaToday {
-    font-size: 0.90em;
-    font-weight: 700;
-    letter-spacing: -0.06em;
-}
-
+/* 오늘 날짜: 월, 구분 기호, 일을 같은 크기로 표시 */
 .agenda-today {
     display: flex;
     align-items: baseline;
     gap: 0.025em;
     margin: 0;
-    color: var(--home-ink);
     font-family: "DM Sans", sans-serif;
     font-size: clamp(90px, 11vw, 164px);
     font-weight: 700;
@@ -811,27 +565,31 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     font-variant-numeric: tabular-nums;
 }
 
+.agenda-today span {
+    font-size: 0.9em;
+    letter-spacing: -0.06em;
+}
+
+.agenda-today .agenda-date-divider {
+    color: var(--ss-muted);
+}
+
 .agenda-weekday {
     margin: 16px 0 0;
-    color: var(--home-ink);
     font-family: "DM Sans", sans-serif;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.025em;
 }
 
-
-/* 세 장이 완전히 보이고 네 번째 카드가 일부 보이는 슬라이딩 트랙 */
 .agenda-carousel {
     position: relative;
     min-width: 0;
 }
 
+/* 가로 스크롤 영역. 스크롤바는 숨기고 화살표와 페이지 스크롤로 움직임 */
 .agenda-viewport {
-    width: 100%;
-    min-width: 0;
     padding: 8px 0 20px;
-    box-sizing: border-box;
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
@@ -839,31 +597,42 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     scroll-behavior: smooth;
     overscroll-behavior-x: contain;
 }
-.agenda-viewport::-webkit-scrollbar { display: none; }
+
+.agenda-viewport::-webkit-scrollbar {
+    display: none;
+}
+
 .agenda-viewport:focus-visible {
-    outline: 2px solid var(--home-blue);
+    outline: 2px solid var(--ss-blue);
     outline-offset: 4px;
+}
+
+/* 페이지 스크롤로 움직이는 동안에는 snap과 부드러운 스크롤을 끔 */
+.agenda-viewport.is-scroll-driven {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
 }
 
 .agenda-list {
     --agenda-gap: clamp(12px, 1.4vw, 22px);
     display: flex;
-    align-items: stretch;
     gap: var(--agenda-gap);
     min-width: 100%;
 }
 
-/* 카드 3장과 다음 카드 일부를 노출. flex-shrink가 카드 폭을 0으로 줄이지 못하게 고정. */
-.agenda-carousel .agenda-item {
-    flex: 0 0 calc((100% - 2.2 * var(--agenda-gap)) / 3.2);
-    scroll-snap-align: start;
+.agenda-status {
+    flex: 1 0 100%;
+    padding: 62px 0;
+    color: var(--ss-muted);
+    font-size: 13px;
+    line-height: 1.8;
 }
 
-/* 캐러셀 화살표: 커서 진입 또는 키보드 포커스 시 표시 */
+/* 이전/다음 화살표: 마우스를 올리거나 sticky로 고정된 동안 표시 */
 .agenda-carousel-arrow {
     position: absolute;
-    z-index: 3;
     top: 35%;
+    z-index: 3;
     display: grid;
     place-items: center;
     width: 44px;
@@ -873,65 +642,79 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.96);
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.14);
-    color: var(--home-ink);
-    cursor: pointer;
+    color: var(--ss-ink);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-50%) scale(0.92);
     transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease, background-color 0.25s ease;
 }
-.agenda-carousel-arrow svg { width: 20px; height: 20px; }
-.agenda-carousel-prev { left: 12px; }
-.agenda-carousel-next { right: 12px; }
-.agenda-carousel:hover .agenda-carousel-arrow:not(:disabled),
-.agenda-carousel:focus-within .agenda-carousel-arrow:not(:disabled),
-.agenda-section.is-carousel-pinned .agenda-carousel-arrow:not(:disabled) {
+
+.agenda-carousel-arrow svg {
+    width: 20px;
+    height: 20px;
+}
+
+.agenda-carousel-prev {
+    left: 12px;
+}
+
+.agenda-carousel-next {
+    right: 12px;
+}
+
+.agenda-carousel:hover .agenda-carousel-arrow:enabled,
+.agenda-carousel:focus-within .agenda-carousel-arrow:enabled,
+.agenda-section.is-carousel-pinned .agenda-carousel-arrow:enabled {
     opacity: 1;
     visibility: visible;
     transform: translateY(-50%) scale(1);
 }
-.agenda-carousel-arrow:hover:not(:disabled),
-.agenda-carousel-arrow:focus-visible:not(:disabled) {
-    background: #FFFFFF;
+
+.agenda-carousel-arrow:enabled:hover,
+.agenda-carousel-arrow:enabled:focus-visible {
+    background: var(--ss-white);
     transform: translateY(-50%) scale(1.07);
 }
+
 .agenda-carousel-arrow:disabled {
     pointer-events: none;
 }
 
-/* COMING UP 카드: 팝업 페이지와 같은 포스터 + 정보 구조 */
+/* 행사 카드: 3장과 4번째 카드 일부가 보이도록 너비 계산 */
 .agenda-item {
     position: relative;
     display: flex;
+    flex: 0 0 calc((100% - 2.2 * var(--agenda-gap)) / 3.2);
     flex-direction: column;
     min-width: 0;
     overflow: hidden;
     border: 1px solid #D4D8DE;
     border-radius: 8px;
-    background: #FFFFFF;
-    opacity: 1;
+    background: var(--ss-white);
+    scroll-snap-align: start;
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .agenda-item:hover,
 .agenda-item:focus-within {
     transform: translateY(-3px);
-    border-color: var(--home-blue);
+    border-color: var(--ss-blue);
     box-shadow: 0 10px 24px rgba(70, 102, 176, 0.12);
 }
+
 .agenda-poster {
     position: relative;
-    aspect-ratio: 3 / 3.35;
-    height: auto;
     flex-shrink: 0;
+    aspect-ratio: 3 / 3.35;
     overflow: hidden;
-    background: var(--home-line);
+    background: var(--ss-line);
 }
+
 .agenda-thumb-link {
     display: block;
-    width: 100%;
     height: 100%;
-    overflow: hidden;
 }
+
 .agenda-thumb-link img {
     display: block;
     width: 100%;
@@ -939,15 +722,22 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     object-fit: cover;
     transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
 .agenda-thumb-link:hover img,
 .agenda-thumb-link:focus-visible img {
     transform: scale(1.035);
 }
+
 .agenda-thumb-link:focus-visible {
-    outline: 2px solid var(--home-blue);
+    outline: 2px solid var(--ss-blue);
     outline-offset: -3px;
 }
-.agenda-thumb-link.is-image-unavailable { background: #E9E9E9; }
+
+/* 대체 이미지까지 불러오지 못하면 회색 배경만 표시 */
+.agenda-thumb-link.is-image-unavailable {
+    background: #E9E9E9;
+}
+
 .agenda-info {
     display: flex;
     flex: 1;
@@ -955,57 +745,60 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     gap: 6px;
     min-width: 0;
     padding: 14px 14px 16px;
-    box-sizing: border-box;
 }
+
 .agenda-info-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
 }
+
 .agenda-item-category {
-    color: var(--home-blue);
+    color: var(--ss-blue);
     font-family: "DM Sans", sans-serif;
     font-size: 9px;
     font-weight: 900;
     letter-spacing: 1px;
 }
+
+/* 제목은 두 줄까지만 보여 주고 높이를 고정해 카드 높이를 맞춤 */
 .agenda-item-title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    height: 41px;
     overflow: hidden;
-    min-height: 41px;
-    max-height: 41px;
-    margin: 0;
-    color: var(--home-ink);
     font-size: 14px;
     font-weight: 800;
     line-height: 1.45;
-    text-decoration: none;
     word-break: keep-all;
 }
+
 .agenda-item:hover .agenda-item-title,
-.agenda-item-title:focus-visible { color: var(--home-blue); }
+.agenda-item-title:focus-visible {
+    color: var(--ss-blue);
+}
+
 .agenda-item-location {
     margin: 0;
-    color: var(--home-muted);
+    overflow: hidden;
+    color: var(--ss-muted);
     font-size: 11px;
     line-height: 1.5;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .agenda-item-date {
-    display: block;
-    margin: auto 0 0;
+    margin-top: auto;
     padding-top: 8px;
-    color: var(--home-ink);
     font-family: "DM Sans", sans-serif;
     font-size: 11px;
     font-weight: 700;
 }
-/* 팝업 카드와 같이 하트를 포스터 오른쪽 아래에 배치 */
+
+/* 찜 버튼은 포스터 오른쪽 아래에 배치 */
 .agenda-heart {
     position: absolute;
     right: 12px;
@@ -1018,61 +811,67 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     padding: 0;
     border: 0;
     background: transparent;
-    border-radius: 0;
-    color: #FFFFFF;
-    cursor: pointer;
-    transition: color 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
+    color: var(--ss-white);
+    transition: color 0.25s ease, transform 0.25s ease;
 }
+
 .agenda-heart:hover,
-.agenda-heart:focus-visible { transform: scale(1.08); background: transparent; }
+.agenda-heart:focus-visible {
+    transform: scale(1.08);
+}
+
+.agenda-heart:focus-visible {
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 2px;
+}
+
 .agenda-heart svg {
     display: block;
     width: 25px;
     height: 25px;
     filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
 }
-.agenda-heart.is-saved { color: var(--home-yellow); }
-.agenda-heart:focus-visible { outline: 2px solid var(--home-blue); outline-offset: 2px; }
 
-.agenda-status {
-    flex: 1 0 100%;
-    padding: 62px 0;
-    color: var(--home-muted);
-    font-size: 13px;
-    line-height: 1.8;
+.agenda-heart.is-saved {
+    color: var(--ss-yellow);
 }
 
-/* 카드는 진입/퇴장 페이드 없이 항상 선명하게 표시한다. */
-.agenda-viewport.is-scroll-driven {
-    scroll-behavior: auto;
-    scroll-snap-type: none;
+/* 화면 높이가 740px 이하일 때 JS가 is-short-screen을 붙여 카드가 잘리지 않게 줄임 */
+.agenda-section.has-carousel-motion.is-short-screen .agenda-title-line h2 {
+    font-size: clamp(36px, 4.25vw, 62px);
 }
 
-/* ==========================================
-   09. SEOUL MAP
-   Full-bleed map photo + quiet white transitions
-========================================== */
+.agenda-section.has-carousel-motion.is-short-screen .agenda-layout {
+    padding-top: 18px;
+}
+
+.agenda-section.has-carousel-motion.is-short-screen .agenda-poster {
+    height: clamp(150px, 29vh, 225px);
+    aspect-ratio: auto;
+}
+
+.agenda-section.has-carousel-motion.is-short-screen .agenda-info {
+    padding: 10px 12px 12px;
+}
+
+
+/* 7. SEOUL ON THE MAP */
 
 .atlas-section {
     position: relative;
     display: flex;
     align-items: center;
-    height: calc(100vh - var(--hero-header-height));
-    height: calc(100svh - var(--hero-header-height));
-    min-height: 0;
+    height: calc(100vh - var(--ss-header-height));
     padding: 0 7%;
-    box-sizing: border-box;
     overflow: hidden;
-    background: #E7E7E0 url("../images/04_index.map.png") center center / cover no-repeat;
+    background: #E7E7E0 url("../images/04_index.map.png") center / cover no-repeat;
 }
 
-/* The white upper edge blends into the preceding section;
-   the understated left fade keeps the headline legible. */
+/* 위쪽은 앞 섹션의 흰 배경과 이어지고, 왼쪽은 제목이 잘 보이도록 흐리게 처리 */
 .atlas-section::before {
     content: "";
     position: absolute;
     inset: 0;
-    pointer-events: none;
     background:
         linear-gradient(to bottom,
             rgba(255, 255, 255, 1) 0%,
@@ -1085,6 +884,7 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
             rgba(255, 255, 255, 0.73) 16%,
             rgba(255, 255, 255, 0.35) 38%,
             rgba(255, 255, 255, 0) 72%);
+    pointer-events: none;
 }
 
 .atlas-overlay {
@@ -1095,7 +895,6 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
 
 .atlas-overlay h2 {
     margin: 0;
-    color: var(--home-ink);
     font-family: "DM Sans", sans-serif;
     font-size: clamp(50px, 6.5vw, 92px);
     font-weight: 800;
@@ -1104,7 +903,7 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
 }
 
 .atlas-overlay h2 span {
-    color: var(--home-blue);
+    color: var(--ss-blue);
 }
 
 .atlas-map-cta {
@@ -1112,127 +911,53 @@ body.home .ss-header .ss-header-actions .header-mypage[aria-current="page"] {
     align-items: center;
     gap: 10px;
     margin-top: 37px;
-    padding: 0 0 8px;
+    padding-bottom: 8px;
     border-bottom: 1px solid currentColor;
-    color: var(--home-ink);
     font-family: "Noto Sans KR", sans-serif;
     font-size: 16px;
     font-weight: 700;
-    text-decoration: none;
     transition: color 0.2s ease;
 }
 
-.atlas-map-cta > span {
+.atlas-map-cta span {
     display: inline-block;
     transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .atlas-map-cta:hover,
 .atlas-map-cta:focus-visible {
-    color: var(--home-blue);
+    color: var(--ss-blue);
 }
 
-.atlas-map-cta:hover > span,
-.atlas-map-cta:focus-visible > span {
+.atlas-map-cta:hover span,
+.atlas-map-cta:focus-visible span {
     transform: translateX(5px);
 }
 
-/* ==========================================
-   10. FOOTER
-========================================== */
+
+/* 8. FOOTER */
 
 .home-footer {
     display: flex;
-
-    justify-content: space-between;
     align-items: center;
-
+    justify-content: space-between;
     gap: 24px;
-
     padding: 25px 5%;
-
-    background: var(--home-yellow);
+    background: var(--ss-yellow);
 }
 
 .home-footer strong {
-    color: var(--home-ink);
-
     font-family: "DM Sans", sans-serif;
-
     font-size: 28px;
     font-weight: 900;
-
     letter-spacing: -0.06em;
 }
 
 .home-footer strong span {
-    color: var(--home-blue);
-}
-
-.home-footer p,
-.home-footer small {
-    color: var(--home-ink);
-
-    font-size: 11px;
-    line-height: 1.7;
-}
-
-/* ==========================================
-   11. GENERAL REVEAL
-========================================== */
-
-.js-ready .reveal {
-    opacity: 0;
-    transform: translateY(22px);
-
-    transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
-}
-
-.js-ready .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* LANGUAGE DROPDOWN — embedded from team language.css */
-/* 언어 선택 창 */
-.ss-language {
-    position: relative;
-}
-
-/* 언어 선택 */
-.ss-language-menu {
-    position: absolute;
-    top: calc(100% + 4px);
-    right: 0;
-    z-index: 110;
-    width: 110px;
-    margin: 0;
-    padding: 5px 7px;
-    border-radius: 3px;
-    background: rgba(155, 164, 177, .30);
-    color: var(--ss-ink);
-    box-shadow: 0 3px 8px rgba(21, 27, 39, .05);
-    list-style: none;
-}
-.ss-language-option {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 3px;
-    padding: 5px 2px;
-    color: var(--ss-ink);
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 1.25;
-    white-space: nowrap;
-}
-
-.ss-language-option:hover,
-.ss-language-option.is-current {
     color: var(--ss-blue);
 }
 
-.ss-language-menu[hidden] { display: none; }
+.home-footer small {
+    font-size: 11px;
+    line-height: 1.7;
+}
