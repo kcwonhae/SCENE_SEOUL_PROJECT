@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return start || "일정 확인 필요";
         }
 
-        return start === end ? start : start + " — " + end;
+        return start === end ? start : start + " ~ " + end;
     }
 
     function detailUrl(item) {
