@@ -26,7 +26,7 @@
     display: flex;
 }
 
-/* 로그인 직후: 보이는 상태 그대로 투명도만 0 으로 → 0.5초 동안 흐려짐 */
+/* 로그인 후: 보이는 상태 그대로 투명도만 0 으로 → 0.5초 동안 흐려짐 */
 .ss-login-overlay.is-closing {
     display: flex;
     opacity: 0;
