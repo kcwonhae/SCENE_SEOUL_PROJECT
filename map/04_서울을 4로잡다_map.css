@@ -1,8 +1,9 @@
 /* =====================================================
    SCENE:SEOUL - 지도 페이지
-   헤더 · 푸터 · 상단 히어로(.ss-category-hero) · 카드(.ss-card) · 도구 줄(.ss-toolbar)은
+   헤더 · 푸터 · 상단 히어로(.ss-category-hero) · 카드(.ss-card) · 도구 줄(.ss-toolbar) · 필터(.ss-filter) · 검색창(.ss-search)은
    공통 CSS(common.css, category.css)를 쓰고, 이 파일에는 지도 페이지에만 있는 것만 둔다.
    데스크톱 기준 고정 크기.
+   ※ 수업 외 = 강의안에 없던 속성. 해당 줄에 표시해 둠
    ===================================================== */
 
 
@@ -36,26 +37,28 @@
     padding: 0 42px 0 18px;         /* 오른쪽은 화살표 자리 */
     border: 1px solid var(--ss-line);
     border-radius: 999px;
+    /* ※ 수업 외: 배경 이미지로 SVG 화살표를 글자(data URI)로 넣음 */
     background: var(--ss-white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center / 14px 14px;
     color: var(--ss-ink);
     font-family: inherit;
     font-size: 14px;
     font-weight: 700;
-    cursor: pointer;
-    appearance: none;               /* 브라우저 기본 화살표 숨기기 */
-    -webkit-appearance: none;
+    cursor: pointer;                /* ※ 수업 외: 손가락 모양 커서 */
+    appearance: none;               /* ※ 수업 외: 브라우저 기본 화살표 숨기기 */
+    -webkit-appearance: none;       /* ※ 수업 외: 사파리용 */
 }
 
 .district-select:hover {
-    border-color: #C5D2F0;
+    border-color: var(--ss-blue);      /* 공통 필터 버튼(.ss-filter:hover)과 같은 색 */
 }
 
+/* ※ 수업 외: :focus-visible (키보드로 이동했을 때만 테두리 표시) */
 .district-select:focus-visible {
     outline: 2px solid var(--ss-blue);
     outline-offset: 2px;
 }
 
-/* 왼쪽: 마커 색 안내 + 안내 문구 (왼쪽으로 옮겨서 왼쪽 정렬) */
+/* 왼쪽: 마커 색 안내 + 안내 문구 */
 .map-topline-side {
     display: flex;
     flex-direction: column;
@@ -70,7 +73,7 @@
     font-weight: 400;
 }
 
-/* 마커 색 안내 (지도 마커와 같은 색 · 같은 모양의 작은 동그라미) */
+/* 마커 색 안내 (지도 마커와 같은 모양의 작은 동그라미, 색은 map.js 의 TYPE_COLOR 와 같게) */
 .map-legend {
     display: flex;
     gap: 14px;
@@ -103,9 +106,7 @@
 .map-legend-dot.is-event       { background: #3E8E6B; }
 
 
-/* 지도
-   예전 지도 박스(.map-box)의 안쪽 여백 24px × 2 + 테두리 1px × 2 = 50px 를 없앤 만큼
-   폭은 섹션 전체로 넓어지고, 높이도 540px → 590px 로 늘린다 */
+/* 지도 (섹션 폭 전체) */
 
 #leaflet-map {
     width: 100%;
@@ -116,7 +117,7 @@
     z-index: 0;
 }
 
-/* 지도 마커 말풍선 */
+/* 지도 마커 말풍선 (leaflet.css 보다 뒤에 불러와서 기본 모양을 덮어쓴다) */
 
 .leaflet-popup-content {
     margin: 12px 14px;
@@ -125,7 +126,7 @@
     line-height: 1.6;
 }
 
-.popup-type {
+.marker-type {
     display: block;
     margin-bottom: 2px;
     color: var(--ss-blue);
@@ -134,16 +135,25 @@
     letter-spacing: .08em;
 }
 
-.popup-place {
+.marker-place {
     margin-top: 2px;
     color: var(--ss-muted);
 }
 
-.popup-link {
+/* 말풍선 안 "자세히 보기" 링크
+   leaflet.css 의 링크 색 선택자(.leaflet-container a)가 더 구체적이라서,
+   앞에 .leaflet-popup-content 를 붙여 우리 색이 보이게 한다 */
+.leaflet-popup-content .marker-link {
     display: inline-block;
     margin-top: 4px;
     color: var(--ss-blue);
     font-weight: 700;
+    transition: color .2s ease;
+}
+
+/* 마우스를 올리면 진한 남색(ink)으로 */
+.leaflet-popup-content .marker-link:hover {
+    color: var(--ss-ink);
 }
 
 
@@ -160,7 +170,7 @@
     margin-bottom: 36px;
 }
 
-.result-head h3 {
+.result-head h2 {
     margin: 0;
     color: var(--ss-ink);
     font-size: 42px;
@@ -175,129 +185,27 @@
     font-size: 12px;
 }
 
-/* 카테고리 필터 (줄 배치는 공통 .ss-toolbar: 왼쪽 필터 · 오른쪽 검색, 세로 가운데 맞춤) */
-
-.district-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-}
-
-.district-filters input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.district-filters label {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 36px;
-    padding: 9px 16px;
-    border: 1px solid var(--ss-line);
-    border-radius: 999px;
-    background: var(--ss-white);
-    color: var(--ss-ink);
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.2;
-    white-space: nowrap;
-    cursor: pointer;
-    user-select: none;
-    transition: background .2s ease, border-color .2s ease, color .2s ease;
-}
-
-.district-filters label:hover {
-    background: #EAF0FC;
-    border-color: #C5D2F0;
-    color: var(--ss-blue);
-}
-
-.district-filters input:checked + label {
-    background: var(--ss-yellow);
-    border-color: var(--ss-yellow);
-    color: var(--ss-ink);
-    font-weight: 700;
-}
-
-.district-filters input:focus-visible + label {
-    outline: 2px solid var(--ss-blue);
-    outline-offset: 3px;
-}
-
-/* 검색 */
-
-.search-box {
-    position: relative;
-    width: 300px;
-}
-
-#search-input {
-    width: 100%;
-    height: 42px;
-    padding: 0 46px 0 18px;         /* 오른쪽은 돋보기 자리 */
-    border: 1px solid var(--ss-line);
-    border-radius: 999px;
-    background: var(--ss-white);
-    color: var(--ss-ink);
-    font-size: 13px;
-}
-
-#search-input:focus {
-    outline: 2px solid var(--ss-blue);
-    outline-offset: 2px;
-}
-
-.search-icon {
-    position: absolute;
-    top: 50%;
-    right: 16px;
-    width: 18px;
-    height: 18px;
-    fill: none;
-    stroke: var(--ss-ink);
-    stroke-width: 2;
-    stroke-linecap: round;
-    transform: translateY(-50%);
-    pointer-events: none;           /* 돋보기를 눌러도 입력창이 선택되도록 */
-}
-
-.status-note {
-    margin: 0 0 14px;
-    color: var(--ss-muted);
-    font-size: 11px;
-    line-height: 1.7;
-}
-
-.status-note:empty {
-    display: none;
-}
-
-
 /* 가로로 이어지는 카드
    카드 모양은 공통 .ss-card 그대로, 여기서는 가로 줄 배치와 폭만 정한다.
    가로 스크롤 상자는 바깥으로 나간 부분을 잘라 내므로, 카드가 호버 때 3px 올라가고
    테두리 · 그림자가 생겨도 잘리지 않게 상자 안쪽에 여백을 두고,
    같은 만큼 바깥 여백을 빼서 카드 위치는 그대로 둔다. */
 
-.events {
+.map-cards {
     display: flex;
     gap: 16px;
     margin: -10px -8px 0;
     padding: 10px 8px 28px;
     overflow-x: auto;
-    scroll-behavior: smooth;        /* ← → 버튼으로 움직일 때 부드럽게 */
-    scrollbar-width: thin;
+    scroll-behavior: smooth;        /* ※ 수업 외: ← → 버튼으로 움직일 때 부드럽게 */
+    scrollbar-width: thin;          /* ※ 수업 외: 얇은 스크롤바 */
 }
 
-.events .ss-card {
+.map-cards .ss-card {
     flex: 0 0 232px;
 }
 
-.events-empty {
+.map-cards-empty {
     flex: 1;
     margin: 0;
     padding: 40px 0;
