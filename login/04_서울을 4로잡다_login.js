@@ -54,7 +54,6 @@ function openLoginModal() {
     ssRememberInput.checked = savedName !== null;
 
     ssOverlay.className = 'ss-login-overlay is-open';   // is-open 이 붙으면 CSS 에서 창이 보임
-    document.body.style.overflow = 'hidden'; // 창이 열린 동안 뒤 화면 스크롤 방지
 }
 
 function closeLoginModal() {
