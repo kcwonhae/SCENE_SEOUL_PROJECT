@@ -1,25 +1,15 @@
-/* =====================================================
-   SCENE:SEOUL - 지도 페이지
-   헤더 · 푸터 · 상단 히어로(.ss-category-hero) · 카드(.ss-card) · 도구 줄(.ss-toolbar) · 필터(.ss-filter) · 검색창(.ss-search)은
-   공통 CSS(common.css, category.css)를 쓰고, 이 파일에는 지도 페이지에만 있는 것만 둔다.
-   데스크톱 기준 고정 크기.
-   ※ 수업 외 = 강의안에 없던 속성. 해당 줄에 표시해 둠
-   ===================================================== */
-
-
-/* ---------- 01. 페이지 ---------- */
+/* 01. 페이지 */
 
 .map-page {
-    padding-bottom: 110px;          /* 공연 페이지 목록(.ss-catalog) 아래 여백과 같게 */
+    padding-bottom: 110px;  /* 여백 */
 }
 
-
-/* ---------- 02. 지도 섹션 ---------- */
+/* 02. 지도 부분 */
 
 .map-section {
     max-width: 1470px;
     margin: 0 auto;
-    padding: 0 72px;                /* 상단 히어로(.ss-category-hero) 좌우 여백과 같게 */
+    padding: 0 72px;
 }
 
 .map-topline {
@@ -30,35 +20,50 @@
     margin-bottom: 22px;
 }
 
-/* 오른쪽: 구 선택 드롭다운 */
+/* 오른쪽: 구 선택 드롭다운 (화살표는 HTML 의 svg) */
+.district-box {
+    position: relative;   /* 화살표를 이 상자 기준으로 놓기 */
+}
+
 .district-select {
+    display: block;       /* 상자 높이를 드롭다운에 딱 맞추기 (화살표 세로 가운데) */
     min-width: 180px;
     height: 42px;
-    padding: 0 42px 0 18px;         /* 오른쪽은 화살표 자리 */
+    padding: 0 42px 0 18px;   /* 오른쪽은 화살표 자리 */
     border: 1px solid var(--ss-line);
     border-radius: 999px;
-    /* ※ 수업 외: 배경 이미지로 SVG 화살표를 글자(data URI)로 넣음 */
-    background: var(--ss-white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center / 14px 14px;
+    background: var(--ss-white);
     color: var(--ss-ink);
     font-family: inherit;
     font-size: 14px;
     font-weight: 700;
-    cursor: pointer;                /* ※ 수업 외: 손가락 모양 커서 */
-    appearance: none;               /* ※ 수업 외: 브라우저 기본 화살표 숨기기 */
-    -webkit-appearance: none;       /* ※ 수업 외: 사파리용 */
+    cursor: pointer;    /* 수업 외: 손가락 모양 커서 */
+    appearance: none;   /* 수업 외: 브라우저 기본 화살표 숨기기 */
 }
 
 .district-select:hover {
-    border-color: var(--ss-blue);      /* 공통 필터 버튼(.ss-filter:hover)과 같은 색 */
+    border-color: var(--ss-blue);
 }
 
-/* ※ 수업 외: :focus-visible (키보드로 이동했을 때만 테두리 표시) */
+/* 수업 외: :focus-visible (키보드로 이동했을 때만 테두리 표시) */
 .district-select:focus-visible {
     outline: 2px solid var(--ss-blue);
     outline-offset: 2px;
 }
 
-/* 왼쪽: 마커 색 안내 + 안내 문구 */
+/* 드롭다운 오른쪽 화살표 (윈도우, 맥 어디서나 같은 모양) */
+.district-arrow {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 14px;
+    height: 14px;
+    margin-top: -7px;        /* 높이의 절반만큼 올려서 세로 가운데 */
+    color: var(--ss-ink);
+    pointer-events: none;    /* 수업 외: 화살표를 눌러도 드롭다운이 열리게 */
+}
+
+/* 왼쪽: 마커 색 안내, 안내 문구 */
 .map-topline-side {
     display: flex;
     flex-direction: column;
@@ -106,14 +111,14 @@
 .map-legend-dot.is-event       { background: #3E8E6B; }
 
 
-/* 지도 (섹션 폭 전체) */
+/* 지도 부분 폭 전체 */
 
 #leaflet-map {
     width: 100%;
     height: 630px;
     border-radius: 18px;
     background: #E8E9E7;
-    box-shadow: 0 0 24px rgba(17, 17, 17, .11);     /* 사방으로 옅게 퍼지는 그림자 */
+    box-shadow: 0 0 24px rgba(17, 17, 17, .11);
     z-index: 0;
 }
 
@@ -142,7 +147,7 @@
 
 /* 말풍선 안 "자세히 보기" 링크
    leaflet.css 의 링크 색 선택자(.leaflet-container a)가 더 구체적이라서,
-   앞에 .leaflet-popup-content 를 붙여 우리 색이 보이게 한다 */
+   앞에 .leaflet-popup-content 를 붙여 여기서 지정한 색이 보이게 함 */
 .leaflet-popup-content .marker-link {
     display: inline-block;
     margin-top: 4px;
@@ -157,11 +162,8 @@
 }
 
 
-/* ---------- 03. 지도 아래 콘텐츠 목록 ---------- */
+/* 03. 지도 아래 콘텐츠 목록 */
 
-/* 여백은 공연 페이지 목록(.ss-catalog)과 같게
-   지도 → 제목 92px / 제목 → 개수 10px / 개수 → 필터 56px (36px + 공통 .ss-toolbar 위 20px)
-   필터 → 카드 20px (공통 .ss-toolbar 아래 20px) / 카드 → 이동 버튼 46px */
 .result-box {
     margin-top: 92px;
 }
@@ -185,11 +187,7 @@
     font-size: 12px;
 }
 
-/* 가로로 이어지는 카드
-   카드 모양은 공통 .ss-card 그대로, 여기서는 가로 줄 배치와 폭만 정한다.
-   가로 스크롤 상자는 바깥으로 나간 부분을 잘라 내므로, 카드가 호버 때 3px 올라가고
-   테두리 · 그림자가 생겨도 잘리지 않게 상자 안쪽에 여백을 두고,
-   같은 만큼 바깥 여백을 빼서 카드 위치는 그대로 둔다. */
+/* 가로 스크롤 카드 - 카드 모양은 공통 .ss-card 이용, 여기서는 가로 줄 배치와 폭만 정의 */
 
 .map-cards {
     display: flex;
@@ -197,8 +195,8 @@
     margin: -10px -8px 0;
     padding: 10px 8px 28px;
     overflow-x: auto;
-    scroll-behavior: smooth;        /* ※ 수업 외: ← → 버튼으로 움직일 때 부드럽게 */
-    scrollbar-width: thin;          /* ※ 수업 외: 얇은 스크롤바 */
+    scroll-behavior: smooth;   /* 수업 외: 화살표 버튼으로 움직일 때 부드럽게 */
+    scrollbar-width: thin;     /* 수업 외: 얇은 스크롤바 */
 }
 
 .map-cards .ss-card {
@@ -214,7 +212,7 @@
     text-align: center;
 }
 
-/* 좌우 이동 버튼 (카드 아래 여백 28px + 18px = 46px) */
+/* 좌우 이동 버튼 */
 
 .scroll-nav {
     display: flex;
