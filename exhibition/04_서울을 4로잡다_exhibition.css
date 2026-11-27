@@ -1,29 +1,11 @@
-/* ---------- 01. 페이지 기본 설정 ---------- */
-
-
-/* 페이지에서 쓰는 이름 변경 -> common.css에서 가져옴. */
-:root {
-  --white: var(--ss-white);
-  --bg: #ECE9E1;
-  --line: var(--ss-line);
-  --mute: var(--ss-muted);
-  --text: #4B525D;
-  --ink: var(--ss-ink);
-  --blue: var(--ss-blue);
-  --yellow: var(--ss-yellow);
-  --radius: 12px;
-  --header-h: var(--ss-header-height);
-
-  --stage-top: #F8F3EA;
-  --stage-mid: #F1ECE3;
-  --stage-end: var(--ss-paper);
-}
+/* 01. 페이지 기본 설정 */
+/* 색은 common.css 의 공통 변수(var(--ss-…))를 바로 사용 */
 
 /* 목록 디자인 */
 ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 /* 제목, 문단 여백 조정 */
@@ -31,126 +13,56 @@ h1,
 h2,
 h3,
 p {
-  margin: 0;
-}
-
-/* 키보드 탐색 시 표시 */
-:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
+    margin: 0;
 }
 
 /* 접근성용 링크 평상시 숨기기 */
 .skip {
-  position: absolute; /* 위치를 분리 후 지정 */
-  left: 12px;  /* 기준 위치의 왼쪽에서 12px 떨어짐 */
-  top: -80px;  /* 위쪽으로 올려 화면 밖으로 숨기기 */
-  z-index: 200;  /* 다른 요소와 겹칠 때 앞쪽에 표시 */
-  padding: 10px 16px;  /* 글자 주변 여백 */
-  border-radius: 8px;
-  background: var(--ink);
-  color: var(--white);
+    position: absolute; /* 위치를 분리 후 지정 */
+    left: 12px;  /* 기준 위치의 왼쪽에서 12px 떨어짐 */
+    top: -80px;  /* 위쪽으로 올려 화면 밖으로 숨기기 */
+    z-index: 200;  /* 다른 요소와 겹칠 때 앞쪽에 표시 */
+    padding: 10px 16px;  /* 글자 주변 여백 */
+    border-radius: 8px;
+    background: var(--ss-ink);
+    color: var(--ss-white);
 }
 
 .skip:focus {
-  top: 12px;
+    top: 12px;
 }
 
-/* 본문 글자 크기 재지정 */
+/* 전시 페이지 본문 기본 글자 크기만 조정 (공통 .ss-page 의 다른 값은 그대로) */
 .ss-page {
-    font-size: 14px;   
+    font-size: 14px;
 }
 
 
-/* ---------- 02. 히어로 ---------- */
-
+/* 02. 히어로 */
 /* 히어로 + 주목할 전시 배경 */
 .stage {
-  overflow: hidden;
-  background: var(--ss-paper);
+    overflow: hidden;
+    background: var(--ss-paper);
 }
 
-/* 히어로: 공연 페이지와 같은 크기·여백 */
-.ex-hero {
-  position: relative;
-  max-width: 1470px;
-  min-height: 220px;
-  margin: 0 auto;
-  padding: 82px 72px 42px;
-}
 
-/* 히어로 글자 + 공통 재지정 */
-.ex-hero .ss-hero-crumb {
-  color: var(--ss-blue);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .12em;
-}
-
-/* 히어로 색 + 공통 재지정 */
-.ex-hero .ss-hero-crumb [aria-current="page"] {
-  color: inherit;
-}
-
-/* 히어로 제목 공통 재지정 */
-.ex-hero .ss-hero-title {
-  margin: 20px 0 14px;
-  color: var(--ss-ink);
-  font-size: 105px;
-  font-weight: 900;
-  line-height: .94;
-  letter-spacing: -.075em;
-}
-
-/* 제목 끝의 점 */
-.ex-hero .ex-title-dot {
-  color: var(--ss-blue);
-  margin-left: .1em;
-}
-
-/* 오른쪽 분야 목록: 제목 오른쪽 끝에 붙여 둠 */
-.intro-tags {
-  position: absolute;
-  z-index: 2;
-  right: 72px;
-  bottom: 78px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-align: right;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .16em;
-  line-height: 1.7;
-  color: var(--ss-ink);
-}
-
-/* 등장 애니메이션은 공통 .ss-entrance 클래스를 HTML에서 붙여 사용 */
-
-
-/* ---------- 03. 주목할 전시 ---------- */
-
+/* 03. 주목할 전시 */
 /* 공통 캐러셀 CSS를 사용하고 바깥 여백만 조정 */
 .featured-exhibition {
-  padding: 8px 72px 64px;
+    padding: 8px 72px 64px;
 }
 
 
-/* ---------- 04. 전시 목록 ---------- */
-
-/* 공통 카테고리 CSS를 사용하고 위쪽 여백만 조정 (공연 페이지와 같음) */
+/* 04. 전시 목록 */
+/* 공통 카테고리 CSS를 사용하고 위쪽 여백만 조정 */
 .ss-catalog {
-  padding-top: 24px;
+    padding-top: 24px;
 }
 
-/* 제목 아래 얇은 회색 구분선: 설명 문구(13px × 1.8 ≒ 23px)가 있던 자리 가운데에 두어
-   아래 필터 줄 위치는 그대로
-   - 위: 제목 아래 10px 와 margin 이 겹치므로(큰 값만 적용) 21px = 10px + 11px
-   - 아래: margin 으로 주면 부모 margin-bottom 과 겹쳐 사라져서 height 로 채운다 (선 2px + 10px) */
+/* 제목 아래 얇은 회색 구분선 */
 .ex-divider {
-  box-sizing: border-box;   /* 선 굵기를 높이 12px 안에 포함 → 아래 필터 줄 위치 그대로 */
-  height: 12px;
-  margin: 21px 0 0;
-  border: 0;
-  border-top: 2px solid var(--ss-line);
+    height: 12px;
+    margin: 21px 0 0;
+    border: 0;
+    border-top: 2px solid var(--ss-line);
 }
