@@ -5,52 +5,6 @@
     background: var(--ss-paper);
 }
 
-/* 상단 영역 */
-.ss-category-hero {
-    position: relative;
-    max-width: 1470px;
-    min-height: 220px;
-    margin: 0 auto;
-    padding: 82px 72px 42px;
-}
-
-.ss-category-hero .ss-hero-crumb {
-    color: var(--ss-blue);
-    font-weight: 900;
-    letter-spacing: .12em;
-}
-
-.ss-category-hero .ss-hero-crumb [aria-current="page"] {
-    color: inherit;
-}
-
-.ss-category-hero .ss-hero-title {
-    margin: 20px 0 14px;
-    font-size: 105px;
-    line-height: .94;
-    letter-spacing: -.075em;
-}
-
-.ss-hero-title-dot {
-    color: var(--ss-blue);
-    margin-left: .1em;
-}
-
-.ss-hero-tags {
-    position: absolute;
-    right: 72px;
-    bottom: 78px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-align: right;
-    color: var(--ss-ink);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: .16em;
-    line-height: 1.7;
-}
-
 /* 추천 캐러셀 */
 .ss-category-feature {
     padding: 8px 72px 64px;
