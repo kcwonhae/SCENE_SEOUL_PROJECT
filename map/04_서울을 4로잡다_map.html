@@ -12,15 +12,16 @@
 
     <title>SCENE:SEOUL | SEOUL MAP</title>
 
+    <!-- 실제 지도: Leaflet + OpenStreetMap (※ 수업 외 라이브러리, svg 파일로는 한계가 있어 부득이하게 적용, 키 발급 불필요)
+         지도 전용 CSS 가 Leaflet 기본 모양을 덮어쓸 수 있도록 가장 먼저 불러온다 -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
     <!-- 공통 CSS → 카테고리 공통 → 언어 메뉴 → 로그인 → 지도 전용 -->
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
     <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
-    <link rel="stylesheet" href="../map/04_서울을 4로잡다_map.css">
-
-    <!-- 실제 지도: Leaflet + OpenStreetMap (※ 수업 외 라이브러리, 키 발급 불필요) -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="04_서울을 4로잡다_map.css">
 
     <!-- 헤더 공통 기능: 언어 메뉴 열기/닫기, 날씨 아이콘 -->
     <script src="../js/04_서울을 4로잡다_language.js" defer></script>
@@ -82,15 +83,14 @@
     <main class="ss-page map-page">
 
         <!-- 페이지 소개 (공통 카테고리 상단: category.css 의 .ss-category-hero) -->
-        <section class="ss-category-hero map-intro" aria-labelledby="page-title">
+        <section class="ss-category-hero" aria-labelledby="page-title">
             <nav class="ss-hero-crumb ss-entrance" aria-label="현재 위치">
                 <a href="../main/04_서울을 4로잡다_index.html">SCENE:SEOUL</a>
                 <span aria-hidden="true">/</span>
                 <span aria-current="page">MAP</span>
             </nav>
 
-            <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="page-title">Seoul Map<span
-                    class="ss-hero-title-dot">.</span></h1>
+            <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="page-title">Seoul Map<span class="ss-hero-title-dot">.</span></h1>
 
             <ul class="ss-hero-tags ss-entrance ss-entrance--delay-3" aria-hidden="true">
                 <li>SEOUL, KOREA</li>
@@ -100,7 +100,7 @@
 
 
         <!-- 03. 지도 및 콘텐츠 -->
-        <section class="map-section" id="seoul-map-section" aria-label="서울의 문화 지도">
+        <section class="map-section" aria-label="서울의 문화 지도">
 
             <div class="map-topline">
                 <div class="map-topline-side">
@@ -118,49 +118,47 @@
             </div>
 
             <!-- 지도 (테두리 없이 섹션 폭 전체) -->
-            <div id="leaflet-map" role="application" aria-label="서울 문화 지도"></div>
+            <div id="leaflet-map" role="region" aria-label="서울 문화 지도"></div>
 
             <!-- 지도 아래 콘텐츠 목록 (map.js가 채움) -->
-            <div class="result-box" aria-live="polite">
+            <div class="result-box">
 
                 <div class="result-head">
-                    <h3 id="result-title">서울 전체</h3>
-                    <p class="result-count" id="result-count"></p>
+                    <h2 id="result-title">서울 전체</h2>
+                    <!-- 개수가 바뀌면 화면 읽기 프로그램이 읽어 준다 -->
+                    <p class="result-count" id="result-count" aria-live="polite"></p>
                 </div>
 
                 <!-- 카테고리 필터(왼쪽) + 검색(오른쪽)을 한 줄에: 공통 .ss-toolbar -->
                 <div class="ss-toolbar">
-                    <div class="district-filters" aria-label="콘텐츠 카테고리 필터">
-                        <input type="radio" name="district-filter" id="filter-all" checked>
-                        <label for="filter-all">전체</label>
-                        <input type="radio" name="district-filter" id="filter-exhibition">
-                        <label for="filter-exhibition">전시</label>
-                        <input type="radio" name="district-filter" id="filter-performance">
-                        <label for="filter-performance">공연</label>
-                        <input type="radio" name="district-filter" id="filter-popup">
-                        <label for="filter-popup">팝업</label>
-                        <input type="radio" name="district-filter" id="filter-event">
-                        <label for="filter-event">이벤트</label>
-                        <input type="radio" name="district-filter" id="filter-saved">
-                        <label for="filter-saved">저장한 것</label>
-                    </div>
+                    <!-- 카테고리 필터: 전시 페이지와 같은 공통 버튼 (category.css 의 .ss-filter) -->
+                    <nav class="ss-filters" aria-label="콘텐츠 카테고리 필터">
+                        <button class="ss-filter" type="button" data-filter="all" aria-pressed="true">전체</button>
+                        <button class="ss-filter" type="button" data-filter="exhibition" aria-pressed="false">전시</button>
+                        <button class="ss-filter" type="button" data-filter="performance" aria-pressed="false">공연</button>
+                        <button class="ss-filter" type="button" data-filter="popup" aria-pressed="false">팝업</button>
+                        <button class="ss-filter" type="button" data-filter="event" aria-pressed="false">이벤트</button>
+                        <button class="ss-filter" type="button" data-filter="saved" aria-pressed="false">저장한 것</button>
+                    </nav>
 
-                    <div class="search-box">
-                        <input type="search" id="search-input" placeholder="제목으로 검색" aria-label="제목으로 검색">
-                        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <!-- 검색: 전시 페이지와 같은 공통 검색창 (category.css 의 .ss-search) -->
+                    <div class="ss-search" role="search">
+                        <label class="ss-visually-hidden" for="search-input">제목, 장소, 구 검색</label>
+                        <input id="search-input" type="search" placeholder="제목, 장소, 구 검색">
+                        <svg class="ss-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" aria-hidden="true">
                             <circle cx="10.8" cy="10.8" r="6.6"></circle>
                             <path d="m16 16 5 5"></path>
                         </svg>
                     </div>
                 </div>
 
-                <p class="status-note" id="status-note"></p>
-                <div class="events" id="events"></div>
+                <div class="map-cards" id="map-cards"></div>
 
                 <!-- 카드 좌우 이동 버튼 -->
                 <div class="scroll-nav">
-                    <button type="button" class="scroll-btn" id="prev-btn" aria-label="이전">←</button>
-                    <button type="button" class="scroll-btn" id="next-btn" aria-label="다음">→</button>
+                    <button type="button" class="scroll-btn" id="prev-btn" aria-label="이전 카드">←</button>
+                    <button type="button" class="scroll-btn" id="next-btn" aria-label="다음 카드">→</button>
                 </div>
             </div>
 
@@ -178,7 +176,7 @@
     <a class="ss-back-to-top" href="#top" aria-label="페이지 맨 위로" title="맨 위로 이동">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m12 19 0-14m-6 6 6-6 6 6" />
+            <path d="m12 19 0-14m-6 6 6-6 6 6"></path>
         </svg>
     </a>
 
