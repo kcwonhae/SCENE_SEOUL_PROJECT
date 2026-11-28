@@ -1,5 +1,5 @@
 /* 전시 페이지
-   - 데이터: 전시 JSON 1개 (위쪽 캐러셀과 아래 목록이 같은 파일을 사용)
+   - 데이터: 전시 JSON 1개
    - 로그인 및 찜: common.js 의 SceneSeoul 함수 사용
    - 카드: category.css 의 공통 카드(.ss-card) 사용
    - 정렬: category.css 의 공통 드롭다운(.ss-sort-select) 사용
@@ -10,12 +10,12 @@ const exhibitionPagination = document.getElementById('ex-pagination');
 const exhibitionSearch = document.getElementById('ex-search');
 const exhibitionSort = document.getElementById('ex-sort');
 const filterButtons = document.querySelectorAll('.ss-filters button[data-filter]');
-const EXHIBITION_PAGE_SIZE = 8;          // 한 페이지에 보여줄 카드 수
-let exhibitionItems = [];                // JSON에서 불러온 전시 전체
-let selectedGenre = 'all';               // 지금 선택된 분류
-let searchWord = '';                     // 검색창에 적은 글자
-let selectedSort = 'latest';             // 지금 선택된 정렬 기준
-let currentPage = 1;                     // 지금 보고 있는 페이지
+const EXHIBITION_PAGE_SIZE = 8;      
+let exhibitionItems = [];            // JSON에서 불러온 전시 정보
+let selectedGenre = 'all';           // 지금 선택된 분류
+let searchWord = '';                 // 검색창에 입력한 글자
+let selectedSort = 'latest';         // 선택된 정렬 기준
+let currentPage = 1;                
 
 
 /* 01. JSON 불러오기 */
@@ -23,7 +23,6 @@ fetch('../data/04_서울을 4로잡다_exhibition.json')
     .then(response => response.json())
     .then(items => {
         exhibitionItems = items;            // 전시 JSON 은 전시 목록 배열
-        sortExhibitions(exhibitionItems);   // 진행 중인 전시 먼저
         resetExhibitionFilter();            // 페이지에 들어올 때마다 '전체'부터 시작
     })
     .catch(error => {
@@ -32,9 +31,9 @@ fetch('../data/04_서울을 4로잡다_exhibition.json')
     });
 
 
-/* 02. 작은 도우미 함수 */
+/* 02. 검색어 확인, 오늘 날짜 함수 */
 
-// text 안에 word 가 들어 있는지 확인
+// 글자 안에 검색어가 있는지 확인
 // replace 로 word 를 지워 봤을 때 글자가 달라지면 들어 있는 것
 function hasText(text, word) {
     return text.replace(word, '') !== text;
@@ -56,44 +55,7 @@ function getTodayText() {
 }
 
 
-/* 03. 진행 중인 전시 먼저 보이게 정렬 */
-// 순서: 진행 중 (곧 끝나는 순) -> 개막 예정 (곧 시작하는 순)
-// 날짜가 "2026-11-27" 모양이라 글자끼리 크기 비교만 해도 날짜 순서와 같음
-function sortExhibitions(list) {
-    const today = getTodayText();
-
-    // 수업 외: sort 에 비교 함수 넣기 (음수면 a 를 앞으로, 양수면 b 를 앞으로)
-    list.sort(function (a, b) {
-        const aOpen = a.startDate <= today;   // 이미 시작했으면 진행 중
-        const bOpen = b.startDate <= today;
-
-        // 진행 중인 전시를 앞으로
-        if (aOpen && !bOpen) {
-            return -1;
-        }
-        if (!aOpen && bOpen) {
-            return 1;
-        }
-
-        // 둘 다 진행 중이면 종료일이 빠른 순, 둘 다 예정이면 시작일이 빠른 순
-        let aDate = a.startDate;
-        let bDate = b.startDate;
-        if (aOpen) {
-            aDate = a.endDate;
-            bDate = b.endDate;
-        }
-        if (aDate < bDate) {
-            return -1;
-        }
-        if (aDate > bDate) {
-            return 1;
-        }
-        return 0;
-    });
-}
-
-
-/* 04. 분류, 검색어, 정렬 기준에 맞는 전시만 고르기 */
+/* 03. 분류, 검색어, 정렬 기준에 맞는 전시만 고르기 */
 function getFilteredExhibitions() {
     const today = getTodayText();
     const result = [];
@@ -111,7 +73,7 @@ function getFilteredExhibitions() {
         }
     }
 
-    // 최신순은 처음 불러올 때 정렬한 순서를 그대로 사용
+    // 최신순은 JSON 에 적힌 순서를 그대로 사용 (진행 중 → 개막 예정 순으로 적혀 있음)
     if (selectedSort === 'closing') {
         sortByDate(result, 'endDate');    // 종료일이 가까운 순
     }
@@ -153,7 +115,7 @@ function sortByDate(list, key) {
 }
 
 
-/* 05. 카드 한 장 만들기 (category.css 공통 카드) */
+/* 04. 카드 한 장 만들기 (category.css 공통 카드) */
 function renderExhibitionCard(item) {
     const article = document.createElement('article');
     article.className = 'ss-card ss-catalog-card';
@@ -163,7 +125,7 @@ function renderExhibitionCard(item) {
     imageBox.className = 'ss-card-image';
     const image = document.createElement('img');
     image.src = item.image;
-    // 이미지 설명: JSON 에 imageAlt 가 있으면 그것을, 없으면 "제목 포스터"
+    // 이미지 설명: JSON 에 imageAlt 가 있으면 넣고 없으면 "제목 포스터"
     // 외부 이미지 주소가 막히거나 깨지면 브라우저가 이 alt 글자를 대신 보여줌
     if (item.imageAlt !== undefined) {
         image.alt = item.imageAlt;
@@ -221,7 +183,7 @@ function renderExhibitionCard(item) {
 }
 
 
-/* 06. 화면 그리기 (카드, 페이지 번호) */
+/* 05. 화면 그리기 (카드, 페이지 번호) */
 function renderExhibitionList() {
     const filtered = getFilteredExhibitions();
     const pages = Math.ceil(filtered.length / EXHIBITION_PAGE_SIZE);
@@ -250,13 +212,13 @@ function renderExhibitionList() {
 }
 
 
-/* 07. 페이지 번호 그리기 */
+/* 06. 페이지 번호 그리기 */
 // 공통 category.css 의 페이지 번호 모양
-// ‹ 1 2 3 › (지금 페이지는 aria-current="page", 끝에서는 화살표 disabled)
 function renderExhibitionPager(pages) {
     exhibitionPagination.innerHTML = '';
-    if (pages <= 1) return;
-
+    if (pages <= 1) {
+        return;
+    }
     exhibitionPagination.appendChild(makePageButton('‹', currentPage - 1, true, '이전 페이지', currentPage === 1));
     for (let n = 1; n <= pages; n++) {
         exhibitionPagination.appendChild(makePageButton(n, n, false, n + '페이지', false));
@@ -264,7 +226,7 @@ function renderExhibitionPager(pages) {
     exhibitionPagination.appendChild(makePageButton('›', currentPage + 1, true, '다음 페이지', currentPage === pages));
 }
 
-// isArrow: true 면 ‹ › 화살표 버튼, false 면 숫자 버튼
+// isArrow: true면 화살표 버튼, false면 숫자 버튼
 function makePageButton(text, page, isArrow, label, disabled) {
     const button = document.createElement('button');
     button.type = 'button';
@@ -289,7 +251,7 @@ function makePageButton(text, page, isArrow, label, disabled) {
 }
 
 
-/* 08. 선택된 분류 버튼 표시 */
+/* 07. 선택된 분류 버튼 표시 */
 function markActiveFilter() {
     for (const button of filterButtons) {
         if (button.getAttribute('data-filter') === selectedGenre) {
@@ -301,7 +263,7 @@ function markActiveFilter() {
 }
 
 
-/* 09. 이벤트 등록 */
+/* 08. 이벤트 등록 */
 
 // 분류 버튼 클릭
 for (const button of filterButtons) {
@@ -328,7 +290,7 @@ exhibitionSort.addEventListener('change', function () {
 });
 
 
-/* 10. 분류, 검색, 정렬 초기화 */
+/* 09. 분류, 검색, 정렬 초기화 */
 // 다른 페이지에 다녀오면 항상 '전체', 빈 검색창, 최신순, 1페이지로 돌아가도록 설정(버그 일어나서 수정함)
 function resetExhibitionFilter() {
     selectedGenre = 'all';
