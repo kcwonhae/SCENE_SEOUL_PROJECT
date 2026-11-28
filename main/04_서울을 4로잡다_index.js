@@ -32,7 +32,7 @@ const monthText = document.getElementById("agendaMonth");
 const dayText = document.getElementById("agendaToday");
 const weekdayText = document.getElementById("agendaWeekday");
 
-// 운영체제에서 '동작 줄이기'를 켠 사용자는 스크롤 애니메이션 없이 바로 보여 줌
+// 수업 외: matchMedia로 운영체제의 '동작 줄이기' 설정을 확인해 켠 사용자는 애니메이션 없이 보여 줌
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const sources = [
@@ -85,6 +85,7 @@ function rise(element, amount, distance) {
 }
 
 // HERO 전체 스크롤 길이 중 현재 위치를 0~1로 계산
+// 수업 외: getBoundingClientRect()로 요소의 화면 기준 위치를 구해 스크롤 진행률을 계산함
 function getFilmProgress() {
     const filmTop = film.getBoundingClientRect().top + window.scrollY;
     const scrollLength = Math.max(1, film.offsetHeight - filmSticky.offsetHeight);
@@ -136,6 +137,7 @@ function updateEdition(progress) {
     rise(heroCopy, introVisible, 10);
 
     skipButton.style.opacity = introVisible.toFixed(4);
+    // 수업 외: 조건 ? 참일 때 값 : 거짓일 때 값 (삼항연산자, 이후에도 같은 방식으로 사용)
     skipButton.style.pointerEvents = introVisible < 0.1 ? "none" : "auto";
     skipButton.tabIndex = introVisible < 0.1 ? -1 : 0;
     progressBar.style.opacity = (1 - paperIn).toFixed(4);
@@ -158,6 +160,7 @@ function updateEdition(progress) {
 
 
 // FIND YOUR SCENE: 사진이 아래에서 위로 열리고, 반대로 스크롤하면 다시 닫힘
+// 진행률을 스크롤 위치로만 계산해서 위로 올리면 등장 효과도 반대로 적용됨
 
 // 요소가 화면 아래(98%)에서 61% 지점까지 올라오는 동안 0 → 1,
 // 화면 위로 빠져나가면 다시 1 → 0이 되는 값
@@ -183,6 +186,7 @@ function updateSceneReveal() {
         const amount = revealAmount(card, index * 0.045);
         const textAmount = ease((amount - 0.33) / 0.67);
 
+        // 수업 외: clip-path inset()으로 이미지 위쪽을 가리는 비율을 줄여 아래부터 드러나게 함
         image.style.clipPath = "inset(" + ((1 - amount) * 100).toFixed(3) + "% 0 0 0)";
         rise(meta, textAmount, 12);
     });
@@ -191,12 +195,14 @@ function updateSceneReveal() {
 
 // COMING UP IN SEOUL: 날짜
 
+// 수업 외: padStart(2, "0")로 한 자리 월·일 앞에 0을 붙여 "2026-01-05" 형식으로 맞춤
 function dateKey(date) {
     return date.getFullYear() + "-" +
         String(date.getMonth() + 1).padStart(2, "0") + "-" +
         String(date.getDate()).padStart(2, "0");
 }
 
+// 오늘 날짜를 월/일 형식으로 표시하고 요일은 영어 대문자로 표시함
 function renderToday() {
     const now = new Date();
     monthText.textContent = String(now.getMonth() + 1);
@@ -270,7 +276,7 @@ function pickUpcoming(events) {
             return distanceA - distanceB
                 || a.startDate - b.startDate
                 || a.endDate - b.endDate
-                || a.title.localeCompare(b.title, "ko");
+                || a.title.localeCompare(b.title, "ko");    // 수업 외: 날짜가 같으면 제목을 가나다순으로 비교
         });
 }
 
@@ -281,6 +287,7 @@ function pickUpcoming(events) {
 function fallbackImageFor(id) {
     let hash = 0;
     for (const char of id) {
+        // 수업 외: >>> 0은 계산 결과를 0 이상의 정수로 바꿔 배열 번호로 쓸 수 있게 함
         hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
     }
     return fallbackImages[hash % fallbackImages.length];
@@ -300,7 +307,7 @@ function setCardLink(link, item) {
     if (item.url) {
         link.href = item.url;
         link.target = "_blank";
-        link.rel = "noopener noreferrer";
+        link.rel = "noopener noreferrer";    // 수업 외: 새 탭으로 연 외부 페이지가 이 페이지에 접근하지 못하게 함
     } else {
         link.href = item.page;
     }
@@ -338,6 +345,7 @@ function makeAgendaCard(item) {
 
     const heart = makeElement("button", "agenda-heart");
     heart.type = "button";
+    // 수업 외: dataset은 data-* 속성으로, 클릭한 하트가 어떤 행사인지 id를 저장해 둠
     heart.dataset.id = item.id;
     heart.dataset.title = item.title;
     heart.innerHTML = heartSvg;
@@ -360,7 +368,7 @@ function makeAgendaCard(item) {
 }
 
 function renderAgenda() {
-    agendaList.replaceChildren();
+    agendaList.replaceChildren();    // 수업 외: 기존 카드와 안내 문구를 한 번에 비움
 
     if (upcomingEvents.length === 0) {
         agendaList.appendChild(makeElement("p", "agenda-status", "현재 안내할 예정 행사가 없습니다."));
@@ -396,11 +404,14 @@ function updateAgendaHearts() {
     });
 }
 
+// 카드가 JSON으로 다시 만들어져도 동작하도록 목록에 이벤트를 한 번만 등록함
 agendaList.addEventListener("click", function (event) {
+    // 수업 외: closest()로 클릭한 요소(svg 등)에서 가장 가까운 하트 버튼을 찾음
     const button = event.target.closest(".agenda-heart");
     if (!button) {
         return;
     }
+    // toggleSaved()도 로그인을 확인하지만 안내 문구가 달라서 페이지 문구를 먼저 보여 줌
     if (SceneSeoul.getUser() === "") {
         alert("로그인 후 저장할 수 있어요.");
         return;
@@ -415,7 +426,7 @@ agendaList.addEventListener("click", function (event) {
 // max: 가로로 스크롤할 수 있는 최대 거리, step: 카드 한 장 + 간격 너비
 function getCarouselSize() {
     const card = agendaList.querySelector(".agenda-item");
-    const gap = parseFloat(getComputedStyle(agendaList).columnGap) || 0;
+    const gap = parseFloat(getComputedStyle(agendaList).columnGap) || 0;    // 수업 외: CSS에 적용된 카드 간격(px)을 읽어 옴
     return {
         max: Math.max(0, agendaViewport.scrollWidth - agendaViewport.clientWidth),
         step: card ? card.getBoundingClientRect().width + gap : 0
@@ -449,7 +460,7 @@ function moveCarousel(direction) {
     } else {
         target = current <= size.step * 0.45 ? size.max : Math.max(0, current - size.step);
     }
-    agendaViewport.scrollTo({ left: target, behavior: reduceMotion ? "instant" : "smooth" });
+    agendaViewport.scrollTo({ left: target, behavior: reduceMotion ? "instant" : "smooth" });    // 수업 외: 가로 스크롤 위치를 부드럽게 이동
 }
 
 // 섹션이 헤더 아래에 고정된 동안 페이지 스크롤 진행률만큼 카드를 한 칸 옆으로 이동
@@ -477,6 +488,7 @@ function updateAgendaCarousel() {
     // 고정된 동안에는 마우스를 올리지 않아도 화살표를 보여 줌
     agenda.classList.toggle("is-carousel-pinned", pinned);
 
+    // 화살표로 이동한 경우에는 선택한 카드 위치를 유지함
     if (userMovedCarousel) {
         return;
     }
@@ -559,11 +571,12 @@ function update() {
 function requestUpdate() {
     if (!ticking) {
         ticking = true;
+        // 수업 외: requestAnimationFrame은 다음 화면을 그리기 직전에 update를 실행해 중복 계산을 막음
         requestAnimationFrame(update);
     }
 }
 
-window.addEventListener("scroll", requestUpdate, { passive: true });
+window.addEventListener("scroll", requestUpdate, { passive: true });    // 수업 외: 스크롤을 막지 않는 리스너라고 알려 스크롤 끊김을 줄임
 
 window.addEventListener("resize", function () {
     // 창 크기가 바뀌면 카드 너비가 달라지므로 시작 위치를 다시 잡음
@@ -574,7 +587,9 @@ window.addEventListener("resize", function () {
     requestUpdate();
 });
 
-// 다른 페이지에서 로그인하거나 찜을 바꾼 뒤 돌아왔을 때 하트 상태를 다시 맞춤
+// 홈은 하트 버튼을 사용해서 로그인이나 저장 상태가 바뀌면 따로 갱신함
+// (공통 updateHearts()는 체크박스 하트만 처리함)
+// 수업 외: pageshow는 뒤로가기로 돌아왔을 때, storage는 다른 탭에서 저장했을 때 발생함
 window.addEventListener("pageshow", function () {
     updateAgendaHearts();
     requestUpdate();
@@ -595,7 +610,7 @@ window.addEventListener("focus", function () {
 
 // 초기화
 
-// 하나의 JSON이 실패해도 나머지 카테고리는 보여 주도록 allSettled 사용
+// 수업 외: Promise.allSettled로 JSON 하나를 불러오지 못해도 나머지 행사 목록은 표시함
 function loadAgenda() {
     renderToday();
 

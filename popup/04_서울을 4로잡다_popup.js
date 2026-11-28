@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // "2026-11-04" ~ "2026-12-25" → "2026.11.04 ~ 2026.12.25"
+    // 공통 SceneSeoul.formatPeriod()는 같은 해이면 끝 날짜의 연도를 빼서(2026.11.04 ~ 12.25) 기존 표기를 유지함
     function formatPeriod(item) {
         const start = item.startDate.replace(/-/g, ".");
         const end = (item.endDate || "").replace(/-/g, ".");
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 외부 이미지 주소가 막히면 깨진 이미지 대신 자리표시자를 보여 줌
         image.addEventListener("error", function () {
+            // 수업 외: replaceWith()로 img 요소를 자리표시자 div로 바꿈
             image.replaceWith(makeElement("div", "pop-card-image-placeholder", "이미지 준비 중"));
         });
 
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const heart = makeElement("label", "ss-heart-toggle");
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.dataset.saveId = item.id;
+        checkbox.dataset.saveId = item.id;    // 수업 외: data-save-id 속성으로 행사 id를 저장함
         checkbox.checked = SceneSeoul.isSaved(item.id);
         checkbox.setAttribute("aria-label", item.title + " 관심 팝업 저장");
         const heartIcon = document.createElement("span");
@@ -70,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 제목, 장소, 기간
         const info = makeElement("div", "ss-card-info");
-        const place = (item.district ? item.district + " · " : "") + item.location;
+        const place = (item.district ? item.district + " · " : "") + item.location;    // 수업 외: 삼항연산자로 지역이 있을 때만 앞에 붙임
         info.append(
             makeElement("h3", "pop-card-title", item.title),
             makeElement("p", "pop-card-place", place),
@@ -85,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const link = makeElement("a", "pop-card-link");
             link.href = url;
             link.target = "_blank";
-            link.rel = "noopener noreferrer";
+            link.rel = "noopener noreferrer";    // 수업 외: 새 탭으로 연 외부 페이지가 이 페이지에 접근하지 못하게 함
             link.setAttribute("aria-label", item.title + " 상세 정보 열기 (새 탭)");
             card.appendChild(link);
         }
@@ -125,8 +127,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const searchText = [item.title, item.brand, item.location, item.district, item.description]
                 .concat(item.tags || [])
                 .join(" ")
-                .toLowerCase();
+                .toLowerCase();    // 영문 검색어는 대소문자를 구분하지 않도록 소문자로 맞춤
 
+            // 수업 외: includes()로 검색어가 문자열 안에 들어 있는지 확인함
             return matchesCategory && searchText.includes(keyword);
         });
 
@@ -134,9 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
         page = Math.min(page, totalPages);
 
         const start = (page - 1) * PAGE_SIZE;
-        const pageItems = matched.slice(start, start + PAGE_SIZE);
+        const pageItems = matched.slice(start, start + PAGE_SIZE);    // 현재 페이지에서 보여줄 8개만 잘라서 가져옴
 
-        cards.replaceChildren();
+        cards.replaceChildren();    // 수업 외: 이전에 그린 카드를 한 번에 비움
         if (pageItems.length === 0) {
             cards.appendChild(makeElement("p", "popup-empty", "조건에 맞는 팝업이 없습니다."));
         } else {
@@ -165,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 필터를 바꾸거나 검색어를 입력하면 첫 페이지부터 다시 보여 줌
     filters.addEventListener("click", function (event) {
+        // 수업 외: closest()로 클릭한 요소에서 가장 가까운 필터 버튼을 찾음
         const button = event.target.closest(".ss-filter");
         if (!button) {
             return;
@@ -197,11 +201,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // 하트 저장: 카드가 다시 그려져도 동작하도록 목록 전체에 이벤트를 한 번만 등록
     cards.addEventListener("change", function (event) {
         const checkbox = event.target;
-        if (!checkbox.matches("input[data-save-id]")) {
+        if (!checkbox.matches("input[data-save-id]")) {    // 수업 외: 변경된 요소가 하트 체크박스인지 선택자로 확인함
             return;
         }
 
         // 로그인하지 않았다면 체크를 되돌리고 저장하지 않음
+        // toggleSaved()에도 로그인 확인이 있지만 안내 문구가 달라서 페이지 문구를 먼저 보여 줌
         if (SceneSeoul.getUser() === "") {
             checkbox.checked = false;
             alert("로그인 후 저장할 수 있어요.");
@@ -227,8 +232,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error("JSON 데이터 형식이 올바르지 않습니다.");
             }
 
-            // 오늘 기준으로 종료된 팝업은 빼고, 시작일이 빠른 순서로 정렬
-            // (YYYY-MM-DD 형식이라 문자열 비교만으로 날짜 순서가 맞음)
+            // 종료된 팝업을 먼저 빼고(filter) 남은 팝업을 시작일이 빠른 순서로 정렬함(sort)
+            // YYYY-MM-DD 형식이라 문자열 비교만으로 날짜 순서가 맞음
+            // 수업 외: padStart()로 월·일을 두 자리로 맞추고, localeCompare()로 두 문자열의 순서를 비교함
             const today = new Date();
             const todayText = today.getFullYear() + "-" +
                 String(today.getMonth() + 1).padStart(2, "0") + "-" +

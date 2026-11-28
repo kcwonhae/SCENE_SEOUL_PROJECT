@@ -2,14 +2,8 @@
     공통 색상과 헤더 기본 모양은 common.css의 변수를 그대로 사용 */
 
 
-/* 1. 기본 스타일 */
-
-:root {
-    --hero-black: #000000;
-}
-
-
-/* 2. 헤더: 공통 헤더 위에 메인 페이지에서 다른 값만 지정 */
+/* 1. 헤더: 공통 헤더 위에 메인 페이지에서 다른 값만 지정
+    common.css는 z-index 100, 테두리 #DFE1DF라서 지우면 테두리 색이 달라지므로 유지함 */
 
 .home .ss-header {
     z-index: 1000;
@@ -17,31 +11,31 @@
 }
 
 
-/* 3. HERO */
+/* 2. HERO */
 
 /* 550vh 길이를 스크롤하는 동안 안쪽 화면이 sticky로 고정됨 */
 .season-film {
     position: relative;
     height: 550vh;
     margin-top: var(--ss-header-height);
-    background: var(--hero-black);
+    background: #000;
 }
 
 .season-film-sticky {
-    position: sticky;
+    position: sticky;    /* 수업 외: 스크롤하는 동안 헤더 아래에 화면을 고정함 */
     top: var(--ss-header-height);
-    height: calc(100vh - var(--ss-header-height));
+    height: calc(100vh - var(--ss-header-height));    /* 수업 외: 화면 높이에서 헤더 높이를 빼서 계산 */
     overflow: hidden;
-    isolation: isolate;
-    background: var(--hero-black);
+    isolation: isolate;    /* 수업 외: 안쪽 z-index가 헤더 등 바깥 요소와 섞이지 않게 함 */
+    background: #000;
 }
 
 .season-visual {
     position: absolute;
-    inset: 0;
+    inset: 0;    /* 수업 외: top·right·bottom·left를 모두 0으로 지정하는 축약 속성 */
     z-index: 1;
     overflow: hidden;
-    background: var(--hero-black);
+    background: #000;
 }
 
 /* 네 장의 이미지를 겹쳐 두고 JS가 opacity와 scale을 바꿈 */
@@ -53,7 +47,7 @@
     background-size: cover;
     opacity: 0;
     transform: scale(1.06);
-    will-change: opacity, transform;
+    will-change: opacity, transform;    /* 수업 외: 스크롤 중 계속 바뀌는 속성을 미리 알려 끊김을 줄임 */
 }
 
 .scene-image-exhibition {
@@ -106,7 +100,7 @@
 .season-copy-title {
     margin: 0;
     font-family: "Noto Sans KR", "DM Sans", sans-serif;
-    font-size: clamp(38px, 4.9vw, 76px);
+    font-size: clamp(38px, 4.9vw, 76px);    /* 수업 외: 화면 너비에 따라 바뀌되 최소·최대 크기를 넘지 않게 함 */
     font-weight: 800;
     line-height: 1.12;
     letter-spacing: -0.055em;
@@ -161,7 +155,7 @@
 
 .season-skip-icon {
     display: grid;
-    place-items: center;
+    place-items: center;    /* 수업 외: grid 안의 아이콘을 가로·세로 가운데 정렬 */
     width: 17px;
     height: 17px;
 }
@@ -170,7 +164,7 @@
     display: block;
     width: 15px;
     height: 15px;
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);    /* 수업 외: 처음엔 빠르고 끝에서 천천히 멈추는 속도 곡선 */
 }
 
 .season-skip:hover .season-skip-icon svg,
@@ -178,6 +172,7 @@
     transform: translateY(5px);
 }
 
+/* 수업 외: :focus-visible은 키보드로 이동했을 때만 테두리를 표시함 */
 .season-skip:focus-visible {
     outline: 2px solid var(--ss-white);
     outline-offset: 6px;
@@ -202,7 +197,7 @@
 }
 
 
-/* 4. EDIT */
+/* 3. EDIT */
 
 /* HERO 마지막 구간에서 사진 위에 흰 화면이 opacity로 겹쳐 나타남 */
 .edition-next {
@@ -269,7 +264,7 @@
     display: grid;
     place-items: center;
     width: clamp(64px, 6.1vw, 88px);
-    aspect-ratio: 1;
+    aspect-ratio: 1;    /* 수업 외: 너비가 바뀌어도 정원 비율을 유지함 */
     border-radius: 50%;
     background: var(--ss-blue);
     color: var(--ss-white);
@@ -316,7 +311,7 @@
 }
 
 
-/* 5. FIND YOUR SCENE */
+/* 4. FIND YOUR SCENE */
 
 .scenes {
     position: relative;
@@ -332,7 +327,7 @@
     margin: 0;
     color: var(--ss-ink);
     font-family: "DM Sans", sans-serif;
-    font-size: clamp(44px, min(6vw, 8.8vh), 88px);
+    font-size: clamp(44px, min(6vw, 8.8vh), 88px);    /* 수업 외: min()으로 너비·높이 중 작은 쪽 기준으로 계산 */
     font-weight: 900;
     line-height: 0.95;
     letter-spacing: -0.075em;
@@ -411,6 +406,7 @@
     letter-spacing: -0.04em;
 }
 
+/* 영문 카테고리명은 검정으로 직접 지정해 다른 span 규칙의 영향을 받지 않게 함 */
 .scene-label-en {
     color: var(--ss-ink);
     font-family: "DM Sans", sans-serif;
@@ -440,8 +436,7 @@
 }
 
 /* 스크롤 등장 효과의 시작 상태. JS가 실행될 때만 숨기고(js-ready),
-    이후 스크롤 위치에 맞춰 JS가 opacity, transform, clip-path를 바꿈.
-    will-change는 스크롤 중 계속 바뀌는 속성을 브라우저에 미리 알려 끊김을 줄이는 용도 */
+    이후 스크롤 위치에 맞춰 JS가 opacity, transform, clip-path를 바꿈 */
 .js-ready .section-heading {
     opacity: 0;
     transform: translateY(18px);
@@ -449,7 +444,7 @@
 }
 
 .js-ready .scene-art img {
-    clip-path: inset(100% 0 0 0);
+    clip-path: inset(100% 0 0 0);    /* 수업 외: 위쪽 100%를 가려 이미지가 보이지 않는 상태에서 시작 */
     will-change: clip-path;
 }
 
@@ -460,7 +455,7 @@
 }
 
 
-/* 6. COMING UP IN SEOUL */
+/* 5. COMING UP IN SEOUL */
 
 .agenda-section {
     position: relative;
@@ -562,7 +557,7 @@
     font-weight: 700;
     line-height: 0.95;
     letter-spacing: -0.085em;
-    font-variant-numeric: tabular-nums;
+    font-variant-numeric: tabular-nums;    /* 수업 외: 숫자 폭을 같게 맞춰 날짜가 바뀌어도 위치가 흔들리지 않게 함 */
 }
 
 .agenda-today span {
@@ -592,12 +587,13 @@
     padding: 8px 0 20px;
     overflow-x: auto;
     overflow-y: hidden;
-    scrollbar-width: none;
-    scroll-snap-type: x mandatory;
+    scrollbar-width: none;    /* 수업 외: Firefox에서 스크롤바 숨김 */
+    scroll-snap-type: x mandatory;    /* 수업 외: 직접 스크롤을 멈추면 카드 시작 위치에 맞춰 정렬 */
     scroll-behavior: smooth;
-    overscroll-behavior-x: contain;
+    overscroll-behavior-x: contain;    /* 수업 외: 끝까지 밀어도 뒤로가기 제스처로 이어지지 않게 함 */
 }
 
+/* 수업 외: Chrome·Safari에서 스크롤바 숨김 */
 .agenda-viewport::-webkit-scrollbar {
     display: none;
 }
@@ -614,7 +610,7 @@
 }
 
 .agenda-list {
-    --agenda-gap: clamp(12px, 1.4vw, 22px);
+    --agenda-gap: clamp(12px, 1.4vw, 22px);    /* 카드 너비 계산에도 같은 간격을 쓰기 위해 변수로 둠 */
     display: flex;
     gap: var(--agenda-gap);
     min-width: 100%;
@@ -662,6 +658,7 @@
     right: 12px;
 }
 
+/* 수업 외: :focus-within은 안쪽 요소에 포커스가 있을 때, :enabled는 disabled가 아닌 버튼에만 적용 */
 .agenda-carousel:hover .agenda-carousel-arrow:enabled,
 .agenda-carousel:focus-within .agenda-carousel-arrow:enabled,
 .agenda-section.is-carousel-pinned .agenda-carousel-arrow:enabled {
@@ -684,7 +681,7 @@
 .agenda-item {
     position: relative;
     display: flex;
-    flex: 0 0 calc((100% - 2.2 * var(--agenda-gap)) / 3.2);
+    flex: 0 0 calc((100% - 2.2 * var(--agenda-gap)) / 3.2);    /* 3.2장 기준으로 카드 한 장 너비를 계산 */
     flex-direction: column;
     min-width: 0;
     overflow: hidden;
@@ -766,7 +763,7 @@
 .agenda-item-title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 2;    /* 수업 외: 두 줄을 넘으면 말줄임표(…)로 처리함 */
     height: 41px;
     overflow: hidden;
     font-size: 14px;
@@ -855,7 +852,7 @@
 }
 
 
-/* 7. SEOUL ON THE MAP */
+/* 6. SEOUL ON THE MAP */
 
 .atlas-section {
     position: relative;
@@ -935,7 +932,7 @@
 }
 
 
-/* 8. FOOTER */
+/* 7. FOOTER */
 
 .home-footer {
     display: flex;
