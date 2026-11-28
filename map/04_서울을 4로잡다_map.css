@@ -98,9 +98,9 @@
 
 .map-legend-dot {
     display: inline-block;
-    width: 11px;
-    height: 11px;
-    border: 1.5px solid var(--ss-white);   /* 지도 마커의 흰 테두리 (weight: 1.5) */
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--ss-line);
     border-radius: 50%;
 }
 
