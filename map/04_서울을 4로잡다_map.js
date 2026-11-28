@@ -358,7 +358,10 @@ function makeMarkerPopup(item) {
     label.className = "marker-type";
     label.innerText = TYPE_LABEL[item.type];
 
-    const name = document.createElement("strong");
+    // 제목을 누르면 지도 아래 목록 제목(id="result-title")으로 내려가기
+    const name = document.createElement("a");
+    name.className = "marker-title";
+    name.href = "#result-title";
     name.innerText = item.title;
 
     const place = document.createElement("div");
