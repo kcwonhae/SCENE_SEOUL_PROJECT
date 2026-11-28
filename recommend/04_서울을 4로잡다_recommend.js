@@ -145,22 +145,19 @@ function makeCard(row, number) {
   let target = '';
   if (item.sourceUrl !== '') {
     link = item.sourceUrl;
-    // 수업 외: rel="noopener noreferrer"는 새 창으로 열 때 원래 페이지를 보호하는 링크 속성이다
+    // 수업 외: rel="noopener noreferrer"는 새 창으로 열 때 원래 페이지를 보호하는 링크 속성
     target = ' target="_blank" rel="noopener noreferrer"';
   }
   return `
-    <article class="pick">
+        <article class="pick">
       <span class="rank">${number}</span>
-      <div class="poster"><img src="${item.image}" alt="${item.title} 포스터"></div>
+      <div class="poster ss-card-image"><img src="${item.image}" alt="${item.title} 포스터"></div>
       <div class="info">
         <h3><a href="${link}"${target}><span class="genre">${CATEGORY_NAME[item.category]}</span>${item.title}</a></h3>
         <p class="period">${SceneSeoul.formatPeriod(item)}</p>
         <p class="meta">${item.location}</p>
       </div>
-      <label class="pick-save">
-        <input class="heart-check" type="checkbox" data-save-id="${item.id}" aria-label="${item.title} 관심 목록에 담기">
-        <span aria-hidden="true"></span>
-      </label>
+      <label class="ss-heart-toggle"><input class="heart-check" type="checkbox" data-save-id="${item.id}" aria-label="${item.title} 관심 목록에 담기"><span aria-hidden="true"></span></label>
     </article>`;
 }
 
