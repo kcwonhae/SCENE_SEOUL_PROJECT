@@ -1,10 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 180" width="1600" height="180" preserveAspectRatio="xMidYMax slice">
-  <defs>
-    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#F6F4EF" stop-opacity="0"/>
-      <stop offset="1" stop-color="#F6F4EF" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
+
   <!-- 해(달) -->
   <circle cx="1210" cy="78" r="34" fill="#FFDB63" opacity=".75"/>
   <!-- 먼 산 능선 (북한산/인왕산 느낌) -->
@@ -35,5 +30,4 @@
   </g>
   <!-- 한강 -->
   <path d="M0 158 Q100 150 200 158 T400 158 T600 158 T800 158 T1000 158 T1200 158 T1400 158 T1600 158 L1600 180 L0 180Z" fill="#4666B0" opacity=".14"/>
-  <rect x="0" y="146" width="1600" height="34" fill="url(#fade)"/>
 </svg>
