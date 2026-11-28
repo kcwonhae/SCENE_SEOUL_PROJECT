@@ -90,7 +90,7 @@ function toDate(dateText) {
     return new Date(y, m - 1, d);
 }
 
-// 장소 앞에 구 이름 붙이기 — 카드, 말풍선, 검색에서 같이 쓰기
+// 장소 앞에 구 이름 붙이기 (카드, 말풍선, 검색에서 같이 쓰기)
 function getPlaceText(item) {
     if (item.gu !== "") {
         return item.gu + " / " + item.place;
@@ -147,7 +147,7 @@ function cleanUp(list) {
     for (const item of list) {
         item.start = toDate(item.startDate);
 
-        // 종료일이 빈 문자열이면 상시 운영 → 아주 먼 날짜로 두고 정렬할 때 맨 뒤로
+        // 종료일이 빈 문자열이면 상시 운영 -> 아주 먼 날짜로 두고 정렬할 때 맨 뒤로
         if (item.endDate !== "") {
             item.end = toDate(item.endDate);
         } else {
@@ -223,7 +223,7 @@ function getFiltered(withDistrict) {
 
 // 공통 카드 구조 (클래스는 모두 팀 공통 category.css 에 정의된 것을 그대로 사용)
 // pop-card-* 도 category.css 의 공통 카드 클래스 (팝업 페이지 전용 아님)
-// 장소는 글자가 길면 … 으로 줄여 주는 .pop-card-place 를 쓰기
+// 장소는 글자가 길면 ... 으로 줄여 주는 .pop-card-place 를 쓰기
 function makeCard(item) {
     const card = document.createElement("article");
     card.className = "ss-card";
@@ -250,7 +250,7 @@ function makeCard(item) {
     check.checked = SceneSeoul.isSaved(item.id);
 
     // 찜과 찜 취소는 common.js 가 처리
-    check.addEventListener("change", function () {
+    check.addEventListener("change", () => {
         SceneSeoul.toggleSaved(item.id);
         refreshSavedCards();   // "찜한 것"을 보고 있으면 바로 다시 그림
     });
@@ -417,7 +417,7 @@ function addMarker(item) {
     });
 
     // 마커를 누르면 그 구의 목록으로 바꾸기 (마커가 있는 콘텐츠는 항상 구 이름이 있음.)
-    marker.on("click", function () {
+    marker.on("click", () => {
         if (item.gu !== currentDistrict) {
             selectDistrict(item.gu, true);
         }
@@ -479,7 +479,7 @@ function selectDistrict(gu, fromMarker) {
 /* 11. 이벤트 등록 */
 
 // 드롭다운에서 구를 고르면 그 구로 이동
-districtSelect.addEventListener("change", function () {
+districtSelect.addEventListener("change", () => {
     selectDistrict(districtSelect.value);
 });
 
@@ -496,7 +496,7 @@ function markActiveFilter() {
 
 // 카테고리 필터
 for (const button of filterButtons) {
-    button.addEventListener("click", function () {
+    button.addEventListener("click", () => {
         currentType = button.getAttribute("data-filter");
         markActiveFilter();
         updateList();
@@ -505,16 +505,16 @@ for (const button of filterButtons) {
 
 // 검색
 // 수업 외: input 이벤트 (글자를 입력하거나 지울 때마다 발생)
-searchInput.addEventListener("input", function () {
+searchInput.addEventListener("input", () => {
     keyword = searchInput.value;
     updateList();
 });
 
 // 카드 좌우 이동
-prevBtn.addEventListener("click", function () {
+prevBtn.addEventListener("click", () => {
     cardBox.scrollLeft -= 480;    // 수업 외: scrollLeft
 });
-nextBtn.addEventListener("click", function () {
+nextBtn.addEventListener("click", () => {
     cardBox.scrollLeft += 480;    // 수업 외: scrollLeft
 });
 
@@ -583,7 +583,7 @@ function start() {
     makeOptions();
     selectDistrict("", true);
 
-    // 장소 좌표: 팀 JSON 4개 순서로 읽은 뒤 목록과 마커를 그리기
+    // 장소 좌표를 먼저 읽고, 그다음 팀 JSON 4개를 읽은 뒤 목록과 마커를 그리기
     loadVenues(function () {
         loadAllItems(function (list) {
             allItems = cleanUp(list.map(toItem));
