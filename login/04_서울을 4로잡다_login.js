@@ -85,7 +85,9 @@ function logout() {
     const username = SceneSeoul.getUser();
 
     const answer = confirm(username + '님 로그아웃 하시겠습니까?'); // 취소, 확인 버튼
-    if (!answer) return;
+    if (!answer) {
+        return;
+    }
 
     SceneSeoul.logout();
     alert(username + '님 로그아웃 되셨습니다.');
@@ -110,7 +112,9 @@ ssForm.addEventListener('submit', (event) => {
     const nickname = ssIdInput.value;
 
     // 닉네임 저장 (common.js). 빈 값이면 false를 돌려주므로 여기서 중단
-    if (!SceneSeoul.login(nickname)) return;
+    if (!SceneSeoul.login(nickname)) {
+        return;
+    }
 
     // 아이디 저장 체크 여부에 따라 다음 로그인 때 자동 입력
     if (ssRememberInput.checked) {
@@ -120,7 +124,7 @@ ssForm.addEventListener('submit', (event) => {
     }
 
     updateLoginUI();
-    window.dispatchEvent(new Event('scene:login')); // 내 찜 목록으로 하트 다시 맞춤 (수업 외: common.js 와 공통으로 작업)
+    window.dispatchEvent(new Event('scene:login')); // 내 찜 목록으로 하트 다시 맞춤 (수업 외: common.js 와 약속한 직접 만든 이벤트)
 
     fadeOutLoginModal();   // 천천히 흐려지면서 닫기
 });
@@ -129,7 +133,9 @@ ssForm.addEventListener('submit', (event) => {
 document.getElementById('ssLoginClose').addEventListener('click', closeLoginModal);
 
 ssOverlay.addEventListener('click', (event) => {
-    if (event.target === ssOverlay) closeLoginModal();
+    if (event.target === ssOverlay) {
+        closeLoginModal();
+    }
 });
 
 // ESC 키로 닫기
