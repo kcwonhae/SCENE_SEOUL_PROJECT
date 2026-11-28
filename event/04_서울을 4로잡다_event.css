@@ -10,9 +10,9 @@
     padding: 8px 72px 64px;
 }
 
-/* 이벤트 목록 */
-.ss-catalog .ss-category-heading {
-    margin-bottom: 0;
+/* 이벤트 목록: 전시 페이지와 동일한 제목 및 필터 간격 */
+.ss-catalog {
+    padding-top: 24px;
 }
 
 /* 본문 바로가기 */
@@ -29,4 +29,12 @@
 
 .skip:focus {
     top: 12px;
+}
+
+/* 이벤트 목록 제목 아래 구분선 */
+.event-divider {
+    height: 12px;
+    margin: 21px 0 0;
+    border: 0;
+    border-top: 2px solid var(--ss-line);
 }

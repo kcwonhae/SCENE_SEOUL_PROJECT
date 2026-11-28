@@ -166,34 +166,44 @@ function renderDayPanel() {
 
 /* ---------- 찜한 콘텐츠 목록 ---------- */
 
-function makeCard(event) {
-  const isSaved = savedIds.includes(event.id);
-  const card = makeElement('article', 'poster-card');
+const SAVED_TYPE_LABEL = {
+  '전시': 'EXHIBITION', '공연': 'PERFORMANCE',
+  '팝업': 'POP-UP', '이벤트': 'EVENT'
+};
 
-  const imageButton = makeElement('button', 'poster-image');
-  imageButton.type = 'button';
-  imageButton.setAttribute('aria-label', `${event.title} 상세보기`);
+function makeCard(event) {
+  const card = makeElement('article', 'ss-card ss-catalog-card');
+  const imageBox = makeElement('div', 'ss-card-image');
   const image = makeImage(event);
   image.loading = 'lazy';
-  imageButton.append(image);
-  imageButton.addEventListener('click', () => openDetail(event));
+  imageBox.append(image);
 
-  const heart = makeElement('button', 'bookmark-button', isSaved ? '♥' : '♡');
-  heart.type = 'button';
-  heart.setAttribute('aria-label', `${event.title} ${isSaved ? '찜 취소' : '찜하기'}`);
-  heart.addEventListener('click', () => toggleSaved(event.id));
+  const heart = makeElement('label', 'ss-heart-toggle');
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.dataset.saveId = event.id;
+  checkbox.checked = savedIds.includes(event.id);
+  checkbox.setAttribute('aria-label', event.title + ' 찜 취소');
+  checkbox.addEventListener('change', () => toggleSaved(event.id));
+  const heartShape = makeElement('span');
+  heartShape.setAttribute('aria-hidden', 'true');
+  heart.append(checkbox, heartShape);
+  imageBox.append(heart);
 
-  const imageWrap = makeElement('div', 'poster-image-wrap');
-  imageWrap.append(imageButton, heart);
+  const info = makeElement('div', 'ss-card-info');
+  const topline = makeElement('div', 'ss-card-topline');
+  topline.append(makeElement('span', 'ss-card-category', SAVED_TYPE_LABEL[event.category] || event.category.toUpperCase()));
+  const title = makeElement('h3', 'ss-card-title', event.title);
+  const place = makeElement('p', 'pop-card-place', event.location);
+  const period = makeElement('p', 'pop-card-period', SceneSeoul.formatPeriod(event));
+  info.append(topline, title, place, period);
+  card.append(imageBox, info);
 
-  const meta = makeElement('div', 'poster-meta');
-  meta.append(makeElement('span', '', event.category), makeElement('span', '', formatDate(event.date)));
-
-  const name = makeElement('button', 'poster-name', event.title);
-  name.type = 'button';
-  name.addEventListener('click', () => openDetail(event));
-
-  card.append(imageWrap, meta, name, makeElement('p', 'poster-location', event.location));
+  const detailButton = makeElement('button', 'ss-card-link-overlay');
+  detailButton.type = 'button';
+  detailButton.setAttribute('aria-label', event.title + ' 상세 정보 열기');
+  detailButton.addEventListener('click', () => openDetail(event));
+  card.append(detailButton);
   return card;
 }
 
@@ -201,16 +211,17 @@ function renderSavedList() {
   const list = getSavedEvents().filter(event => currentFilter === '전체' || event.category === currentFilter);
   savedGrid.replaceChildren();
   savedGrid.scrollLeft = 0;
+
   if (list.length === 0) {
     const emptyText = SceneSeoul.getUser()
       ? '저장한 콘텐츠가 없습니다. 다른 콘텐츠를 찜해보세요.'
       : '로그인하면 찜한 콘텐츠를 볼 수 있어요.';
     savedGrid.append(makeElement('p', 'collection-empty', emptyText));
-    updateSlideBar();
-    return;
+  } else {
+    list.forEach(event => savedGrid.append(makeCard(event)));
   }
-  list.forEach(event => savedGrid.append(makeCard(event)));
-  updateSlideBar();
+  updateScrollButtons();
+  requestAnimationFrame(updateScrollButtons);
 }
 
 function renderAll() {
@@ -238,23 +249,28 @@ function toggleSaved(id) {
   }
 }
 
-/* ---------- 찜 목록 슬라이드 ---------- */
+/* ---------- 찜 목록 가로 스크롤 ---------- */
 
-const slideRange = document.querySelector('#slideRange');
+const savedPrev = document.querySelector('#savedPrev');
+const savedNext = document.querySelector('#savedNext');
 
-function updateSlideBar() {
-  const maxScroll = savedGrid.scrollWidth - savedGrid.clientWidth;
-  slideRange.disabled = maxScroll <= 0;
-  slideRange.value = maxScroll > 0 ? Math.round(savedGrid.scrollLeft / maxScroll * 100) : 0;
+function updateScrollButtons() {
+  const maxScroll = Math.max(0, savedGrid.scrollWidth - savedGrid.clientWidth);
+  savedPrev.disabled = savedGrid.scrollLeft <= 1 || maxScroll === 0;
+  savedNext.disabled = savedGrid.scrollLeft >= maxScroll - 1 || maxScroll === 0;
+
 }
 
-slideRange.addEventListener('input', () => {
-  const maxScroll = savedGrid.scrollWidth - savedGrid.clientWidth;
-  savedGrid.scrollLeft = maxScroll * Number(slideRange.value) / 100;
-});
+function scrollSaved(direction) {
+  const firstCard = savedGrid.querySelector('.ss-card');
+  const distance = firstCard ? firstCard.getBoundingClientRect().width + 16 : 248;
+  savedGrid.scrollBy({ left: distance * direction, behavior: 'smooth' });
+}
 
-savedGrid.addEventListener('scroll', updateSlideBar);
-window.addEventListener('resize', updateSlideBar);
+savedPrev.addEventListener('click', () => scrollSaved(-1));
+savedNext.addEventListener('click', () => scrollSaved(1));
+savedGrid.addEventListener('scroll', updateScrollButtons);
+window.addEventListener('resize', updateScrollButtons);
 
 /* ---------- 상세 창 ---------- */
 

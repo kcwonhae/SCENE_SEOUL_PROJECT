@@ -211,164 +211,99 @@
     line-height: 1.7;
 }
 
-/* ---------- 찜한 콘텐츠 ---------- */
+/* ---------- 찜한 콘텐츠: 지도 페이지와 동일한 목록 ---------- */
 .saved-section {
     margin-top: 42px;
     padding-top: 65px;
 }
-.section-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    margin-bottom: 18px;
+
+.saved-section .section-head {
+    margin-bottom: 40px
 }
-.section-head h2 {
+
+.saved-section .section-head h2 {
     margin: 0;
-    font-size: 24px;
-    font-weight: 800;
+    color: var(--ss-ink);
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: -.06em;
+    line-height: 1.1;
 }
-.filter-controls {
+
+.saved-toolbar {
+    margin-bottom: 18px;
+    padding: 0;
+}
+
+.saved-cards {
     display: flex;
-    align-items: center;
-    gap: 0;
-    border-top: 1px solid #dedede;
-    border-bottom: 1px solid #dedede;
-    margin: 24px 0 28px;
-}
-.filter-button {
-    padding: 14px 24px;
-    border: 0;
-    background: none;
-    color: #777;
-    border-radius: 0;
-    font-size: 13px;
-}
-.filter-button:first-child {
-    padding-left: 10px;
-}
-.filter-button:hover, .filter-button.is-active {
-    color: #222;
-    font-weight: 800;
-}
-.filter-button.is-active {
-    box-shadow: inset 0 -2px #222;
-}
-.poster-grid {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: calc((100% - 68px) / 5);
-    gap: 17px;
+    gap: 16px;
+    margin: -10px -8px 0;
+    padding: 10px 8px 28px;
     overflow-x: auto;
     scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
+    scrollbar-width: thin;
+    min-height: 0;
 }
-.poster-grid::-webkit-scrollbar {
-    display: none;
+
+.saved-cards .ss-card {
+    flex: 0 0 232px;
 }
-.slide-bar {
+
+/* 지도 카드와 동일한 구성, 상세보기는 페이지 내 대화상자로 연다. */
+.saved-cards .ss-card-link-overlay {
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.collection-empty {
+    flex: 1 0 100%;
+    width: 100%;
+    margin: 0;
+    padding: 40px 0;
+    color: var(--ss-muted);
+    font-size: 13px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.saved-section .scroll-nav {
     display: flex;
     justify-content: center;
-    margin-top: 24px;
+    gap: 10px;
+    margin-top: 18px;
 }
-.slide-bar input {
-    appearance: none;
-    width: 220px;
-    height: 2px;
-    margin: 0;
-    background: #e0e0e0;
-    cursor: pointer;
-}
-.slide-bar input::-webkit-slider-thumb {
-    appearance: none;
-    width: 56px;
-    height: 5px;
-    border: 0;
-    border-radius: 0;
-    background: #888;
-}
-.slide-bar input::-moz-range-thumb {
-    width: 56px;
-    height: 5px;
-    border: 0;
-    border-radius: 0;
-    background: #888;
-}
-.poster-grid .poster-card {
-    scroll-snap-align: start;
-}
-.poster-card {
-    min-width: 0;
-}
-.poster-image-wrap {
-    position: relative;
-}
-.poster-image {
-    display: block;
-    border: 0;
-    padding: 0;
-    width: 100%;
-    background: #f1f1f1;
-    border-radius: 0;
-}
-.poster-image img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-}
-.bookmark-button {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    width: 32px;
-    height: 32px;
-    background: rgba(255,255,255,.96);
-    border: 1px solid #ddd;
-    color: #222;
-    border-radius: 0;
-    font-size: 20px;
-}
-.poster-meta {
-    display: flex;
-    justify-content: space-between;
-    gap: 6px;
-    color: #777;
-    font-size: 11px;
-    margin: 12px 0 8px;
-}
-.poster-name {
-    display: block;
-    width: 100%;
-    border: 0;
-    background: none;
-    padding: 0;
-    text-align: left;
-    color: #202020;
+
+.saved-section .scroll-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--ss-line);
+    border-radius: 50%;
+    background: var(--ss-white);
+    color: var(--ss-ink);
     font-size: 15px;
-    font-weight: 700;
-    line-height: 1.45;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
 }
-.poster-name:hover {
-    text-decoration: underline;
+
+.saved-section .scroll-btn:hover:not(:disabled) {
+    background: var(--ss-blue);
+    border-color: var(--ss-blue);
+    color: var(--ss-white);
 }
-.poster-location {
-    color: #777;
-    font-size: 12px;
-    margin: 7px 0 0;
+
+.saved-section .scroll-btn:disabled {
+    opacity: .3;
+    cursor: default;
 }
-.collection-empty {
-    grid-column: 1 / -1;
-    color: #777;
-    font-size: 14px;
-    padding: 30px 0;
-}
+
 .more-area {
     display: flex;
     justify-content: center;
     margin-top: 38px;
 }
+
 .more-button {
     border: 1px solid #ccc;
     background: white;
@@ -376,12 +311,9 @@
     font-size: 13px;
     border-radius: 0;
 }
-.more-button:hover {
-    background: #f4f4f4;
-}
-.more-button span {
-    margin-left: 15px;
-}
+
+.more-button:hover { background: #f4f4f4; }
+.more-button span { margin-left: 15px; }
 
 /* ---------- 상세 창 ---------- */
 .detail-dialog {
@@ -509,3 +441,6 @@
 .toast.is-visible {
     opacity: 1;
 }
+
+/* 찜한 콘텐츠: 비어 있어도 유지되는 얇은 슬라이드 바 */
+

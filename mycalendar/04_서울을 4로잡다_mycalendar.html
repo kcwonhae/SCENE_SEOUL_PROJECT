@@ -14,13 +14,14 @@
     <title>SCENE:SEOUL | My Calendar</title>
 
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
+    <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
     <link rel="stylesheet" href="./04_서울을 4로잡다_mycalendar.css">
     <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
     <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
 
     <script src="../js/04_서울을 4로잡다_common.js" defer></script>
     <script src="../login/04_서울을 4로잡다_login.js" defer></script>
-    <script src="./04_서울을 4로잡다_mycalendar.js" defer></script>
+    <script src="./04_서울을 4로잡다_mycalendar.js?v=2" defer></script>
     <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
     <script src="../js/04_서울을 4로잡다_language.js" defer></script>
 </head>
@@ -106,16 +107,19 @@
                 <div class="section-head">
                     <h2 id="savedHeading">찜한 콘텐츠 (<span id="savedTotal">0</span>)</h2>
                 </div>
-                <div class="filter-controls" id="filterControls" role="group" aria-label="콘텐츠 유형 선택">
-                    <button type="button" class="filter-button is-active" data-filter="전체" aria-pressed="true">전체</button>
-                    <button type="button" class="filter-button" data-filter="전시" aria-pressed="false">전시</button>
-                    <button type="button" class="filter-button" data-filter="공연" aria-pressed="false">공연</button>
-                    <button type="button" class="filter-button" data-filter="팝업" aria-pressed="false">팝업</button>
-                    <button type="button" class="filter-button" data-filter="이벤트" aria-pressed="false">이벤트</button>
+                <div class="ss-toolbar saved-toolbar">
+                    <div class="ss-filters" id="filterControls" role="group" aria-label="콘텐츠 유형 선택">
+                        <button type="button" class="ss-filter is-active" data-filter="전체" aria-pressed="true">전체</button>
+                        <button type="button" class="ss-filter" data-filter="전시" aria-pressed="false">전시</button>
+                        <button type="button" class="ss-filter" data-filter="공연" aria-pressed="false">공연</button>
+                        <button type="button" class="ss-filter" data-filter="팝업" aria-pressed="false">팝업</button>
+                        <button type="button" class="ss-filter" data-filter="이벤트" aria-pressed="false">이벤트</button>
+                    </div>
                 </div>
-                <div class="poster-grid" id="savedGrid" aria-live="polite"></div>
-                <div class="slide-bar">
-                    <input type="range" id="slideRange" min="0" max="100" value="0" step="1" aria-label="찜한 콘텐츠 슬라이드 이동">
+                <div class="saved-cards" id="savedGrid" aria-live="polite"></div>
+                <div class="scroll-nav" aria-label="찜한 콘텐츠 좌우 이동">
+                    <button type="button" class="scroll-btn" id="savedPrev" aria-label="왼쪽으로 이동">←</button>
+                    <button type="button" class="scroll-btn" id="savedNext" aria-label="오른쪽으로 이동">→</button>
                 </div>
                 <div class="more-area">
                     <a href="../recommend/04_서울을 4로잡다_recommend.html" class="more-button">다른 콘텐츠 찜하기 <span aria-hidden="true">＋</span></a>

@@ -1,0 +1,40 @@
+/* 이벤트 페이지 */
+.stage {
+    position: relative;
+    overflow: hidden;
+    background: var(--ss-paper);
+}
+
+/* 추천 캐러셀 */
+.ss-category-feature {
+    padding: 8px 72px 64px;
+}
+
+/* 이벤트 목록: 전시 페이지와 동일한 제목 및 필터 간격 */
+.ss-catalog {
+    padding-top: 24px;
+}
+
+/* 본문 바로가기 */
+.skip {
+    position: absolute;
+    top: -80px;
+    left: 12px;
+    z-index: 200;
+    padding: .6rem 1rem;
+    border-radius: 8px;
+    background: var(--ss-ink);
+    color: var(--ss-white);
+}
+
+.skip:focus {
+    top: 12px;
+}
+
+/* 이벤트 목록 제목 아래 구분선 */
+.event-divider {
+    height: 12px;
+    margin: 21px 0 0;
+    border: 0;
+    border-top: 2px solid var(--ss-line);
+}
