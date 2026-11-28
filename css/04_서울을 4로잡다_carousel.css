@@ -1,8 +1,4 @@
-/* =====================================================
-   SCENE:SEOUL - 공통 캐러셀
-   <div class="ss-carousel" data-src="JSON 경로"></div> 로 사용한다.
-   내용과 움직임은 carousel.js가 만들고, 이 파일은 모양만 정의한다.
-   ===================================================== */
+/* 공통 캐러셀 */
 
 .ss-carousel {
     max-width: 1280px;
@@ -28,7 +24,6 @@
     will-change: transform;
 }
 
-/* 크기와 투명도는 JS가 가운데에서 가까운 정도에 따라 바꾼다. */
 .ss-carousel-card {
     flex: 0 0 54%;
     min-width: 0;
@@ -58,7 +53,6 @@
     height: 100%;
 }
 
-/* 포스터 뒤를 같은 이미지로 흐리게 채운다. */
 .ss-carousel-backdrop {
     position: absolute;
     inset: -20px;
@@ -102,7 +96,6 @@
     cursor: pointer;
 }
 
-/* 아래 점: 현재 카드는 길쭉한 알약 모양으로 강조한다. */
 .ss-carousel-dots {
     display: flex;
     justify-content: center;

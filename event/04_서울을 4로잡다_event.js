@@ -10,70 +10,37 @@ let searchWord = '';
 let currentPage = 1;
 let eventSort = 'latest';
 
-// 검색창 위에 정렬 메뉴 배치
-const eventSearchBox = eventSearch.closest('.ss-search');
-const sortSearch = document.createElement('div');
-sortSearch.className = 'ss-sort-search';
-eventSearchBox.before(sortSearch);
-const sortLabel = document.createElement('label');
-sortLabel.className = 'ss-visually-hidden';
-sortLabel.htmlFor = 'event-sort';
-sortLabel.textContent = '이벤트 목록 정렬';
-const sortSelect = document.createElement('select');
-sortSelect.id = 'event-sort';
-sortSelect.className = 'ss-sort-select';
-[
-    ['latest', '최신순'],
-    ['ongoing', '진행 중'],
-    ['closing', '마감 임박'],
-    ['upcoming', '오픈 예정']
-].forEach(([value, label]) => {
-    const option = document.createElement('option');
-    option.value = value;
-    option.textContent = label;
-    sortSelect.append(option);
-});
-sortSearch.append(sortLabel, sortSelect, eventSearchBox);
+const sortSelect = document.getElementById('event-sort');
 
-function eventPeriod(item) {
-    return SceneSeoul.formatPeriod(item);
-}
-
-// 오늘 날짜는 한국 시간대에 해당하는 브라우저 현지 날짜로 비교
-function dateValue(value, fallback) {
+// 날짜 정렬 및 기간별 보기
+function dateValue(value) {
     const date = typeof value === 'string' ? value.slice(0, 10) : '';
-    return /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : fallback;
+    return /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : '';
 }
 
 function todayValue() {
-    const now = new Date();
-    const y = now.getFullYear();
-    const m = String(now.getMonth() + 1).padStart(2, '0');
-    const d = String(now.getDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
 }
 
 function sortEventItems(items) {
     const today = todayValue();
-    const start = item => dateValue(item.startDate || item.date, '9999-12-31');
-    const end = item => dateValue(item.endDate, start(item));
-    const validEnd = item => dateValue(item.endDate, '9999-12-31');
+    const start = item => dateValue(item.startDate || item.date);
+    const end = item => dateValue(item.endDate);
+    let result = [...items];
 
-    let result = items;
     if (eventSort === 'ongoing') {
-        result = items.filter(item => start(item) <= today && validEnd(item) >= today);
-        return result.sort((a, b) => start(a).localeCompare(start(b)));
-    }
-    if (eventSort === 'closing') {
-        result = items.filter(item => validEnd(item) >= today && validEnd(item) !== '9999-12-31');
+        result = result.filter(item => start(item) && end(item) && start(item) <= today && end(item) >= today);
+    } else if (eventSort === 'closing') {
+        result = result.filter(item => end(item) && end(item) >= today);
         return result.sort((a, b) => end(a).localeCompare(end(b)) || start(a).localeCompare(start(b)));
+    } else if (eventSort === 'upcoming') {
+        result = result.filter(item => start(item) > today);
     }
-    if (eventSort === 'upcoming') {
-        result = items.filter(item => start(item) > today && start(item) !== '9999-12-31');
-        return result.sort((a, b) => start(a).localeCompare(start(b)));
-    }
-    // 최신순은 기존 날짜 오름차순 그대로
-    return result.sort((a, b) => start(a).localeCompare(start(b)));
+    return result.sort((a, b) => (start(a) || '9999-12-31').localeCompare(start(b) || '9999-12-31'));
 }
 
 function renderEventCard(item) {
@@ -111,7 +78,7 @@ function renderEventCard(item) {
     place.textContent = item.location;
     const period = document.createElement('p');
     period.className = 'ss-card-period';
-    period.textContent = eventPeriod(item);
+    period.textContent = SceneSeoul.formatPeriod(item);
     info.append(title, place, period);
     article.append(imageBox, info);
 
@@ -139,14 +106,17 @@ function renderEventList() {
     const pages = Math.max(1, Math.ceil(sorted.length / EVENT_PAGE_SIZE));
     currentPage = Math.min(currentPage, pages);
     const from = (currentPage - 1) * EVENT_PAGE_SIZE;
-    eventCards.replaceChildren(...sorted.slice(from, from + EVENT_PAGE_SIZE).map(renderEventCard));
+    eventCards.innerHTML = '';
+    sorted.slice(from, from + EVENT_PAGE_SIZE).forEach(item => {
+        eventCards.appendChild(renderEventCard(item));
+    });
     if (!sorted.length) {
         const empty = document.createElement('p');
         empty.className = 'popup-empty';
         empty.textContent = '해당하는 이벤트가 없습니다.';
         eventCards.append(empty);
     }
-    eventPagination.replaceChildren();
+    eventPagination.innerHTML = '';
     if (pages <= 1) return;
     function addPageButton(text, page, disabled, current, arrow = false) {
         const button = document.createElement('button');
@@ -166,15 +136,15 @@ function renderEventList() {
     addPageButton('›', currentPage + 1, currentPage === pages, false, true);
 }
 
-eventFilters.addEventListener('click', event => {
-    const button = event.target.closest('button[data-filter]');
-    if (!button) return;
-    selectedCategory = button.dataset.filter;
-    currentPage = 1;
-    eventFilters.querySelectorAll('button[data-filter]').forEach(filter => {
-        filter.setAttribute('aria-pressed', String(filter === button));
+eventFilters.querySelectorAll('button[data-filter]').forEach(button => {
+    button.addEventListener('click', () => {
+        selectedCategory = button.getAttribute('data-filter');
+        currentPage = 1;
+        eventFilters.querySelectorAll('button[data-filter]').forEach(filter => {
+            filter.setAttribute('aria-pressed', String(filter === button));
+        });
+        renderEventList();
     });
-    renderEventList();
 });
 
 eventSearch.addEventListener('input', () => {

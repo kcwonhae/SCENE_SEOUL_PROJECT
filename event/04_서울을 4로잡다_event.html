@@ -83,7 +83,7 @@
                     <span aria-current="page">EVENT</span>
                 </nav>
                 <h1 class="ss-hero-title ss-entrance ss-entrance--delay-1" id="event-title">Event<span class="ss-hero-title-dot">.</span></h1>
-                    <ul class="ss-hero-tags ss-entrance ss-entrance--delay-2" aria-hidden="true">
+                <ul class="ss-hero-tags ss-entrance ss-entrance--delay-2" aria-hidden="true">
                         <li>FILM</li>
                         <li>TALKS</li>
                         <li>FESTIVAL</li>
@@ -111,13 +111,22 @@
                     <button class="ss-filter" type="button" data-filter="film" aria-pressed="false">영화</button>
                     <button class="ss-filter" type="button" data-filter="talk" aria-pressed="false">강연/토크</button>
                 </nav>
-                <div class="ss-search" role="search">
-                    <label class="ss-visually-hidden" for="event-search">이벤트 검색</label>
+                <div class="ss-sort-search">
+                    <label class="ss-visually-hidden" for="event-sort">이벤트 목록 정렬</label>
+                    <select id="event-sort" class="ss-sort-select">
+                        <option value="latest">최신순</option>
+                        <option value="ongoing">진행 중</option>
+                        <option value="closing">마감 임박</option>
+                        <option value="upcoming">오픈 예정</option>
+                    </select>
+                    <div class="ss-search" role="search">
+                        <label class="ss-visually-hidden" for="event-search">이벤트 검색</label>
                     <input id="event-search" type="search" placeholder="이벤트명, 장소 검색">
                     <svg class="ss-search-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                         <circle cx="10.8" cy="10.8" r="6.6"></circle>
                         <path d="m16 16 5 5"></path>
                     </svg>
+                    </div>
                 </div>
             </div>
             <div id="event-cards" class="ss-card-grid ss-catalog-grid" aria-live="polite"></div>

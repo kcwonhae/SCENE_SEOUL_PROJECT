@@ -2,7 +2,7 @@
 'use strict';
 
 // 마이캘린더: 공통 데이터 폴더의 콘텐츠에서 찜한 항목을 달력과 목록에 보여준다.
-// 찜 목록은 공통 로그인 상태에 따라 표시하고, 메모는 localStorage에 저장한다.
+// 로그인 상태에 따라 찜을 표시하고 메모를 저장한다.
 
 const MEMO_KEY = 'sceneSeoul:memos';
 
@@ -38,7 +38,7 @@ function saveStorage(key, value) {
   }
 }
 
-/* ---------- 작은 도우미 함수 ---------- */
+/* ---------- 날짜와 공통 함수 ---------- */
 
 // 날짜를 'YYYY-MM-DD' 문자열로 바꾼다.
 function dateKey(date) {
@@ -59,7 +59,6 @@ function formatDate(key) {
   return key.replaceAll('-', '.');
 }
 
-// 태그 하나를 만들어 클래스와 글자를 넣어 돌려준다.
 function makeElement(tag, className, text) {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -258,7 +257,6 @@ function updateScrollButtons() {
   const maxScroll = Math.max(0, savedGrid.scrollWidth - savedGrid.clientWidth);
   savedPrev.disabled = savedGrid.scrollLeft <= 1 || maxScroll === 0;
   savedNext.disabled = savedGrid.scrollLeft >= maxScroll - 1 || maxScroll === 0;
-
 }
 
 function scrollSaved(direction) {
@@ -416,7 +414,7 @@ async function loadCategory(source) {
   const response = await fetch(source.path);
   if (!response.ok) throw new Error(`${source.path}: ${response.status}`);
   const data = await response.json();
-  // 팀별 데이터가 배열 또는 { performances: [...] } 형태여도 처리한다.
+  // 배열 및 객체 형태의 JSON 처리
   const list = Array.isArray(data) ? data : Object.values(data).find(Array.isArray);
   if (!Array.isArray(list)) throw new Error(`${source.path}: 콘텐츠 배열이 없습니다.`);
   return list.map(item => normalizeItem(item, source.category));
@@ -457,7 +455,7 @@ window.addEventListener('load', () => {
   if (!SceneSeoul.getUser()) alert('마이캘린더를 이용하려면 로그인해 주세요.');
 });
 
-// 월 제목과 날짜는 JSON 응답과 무관하게 먼저 표시한다.
+// 데이터 로딩 전 달력 먼저 표시
 refreshSaved();
 init();
 

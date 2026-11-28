@@ -1,12 +1,10 @@
 // 공통 캐러셀
-// 사용법: <div class="ss-carousel" data-src="JSON 경로"></div>
-// JSON에서 featured가 true인 항목을 카드로 만들어 왼쪽으로 한 칸씩 무한 반복한다.
 
 const SHOW_COUNT = 3; // 보여줄 카드 수
 const MOVE_MS = 800;  // 한 번 이동하는 시간
 const WAIT_MS = 3000; // 이동 사이의 대기 시간
 
-// 처음과 끝은 느리게, 중간은 빠르게
+// 이동 속도 조절
 const ease = t => (t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 3 / 2);
 
 const cardHtml = item => {
@@ -42,7 +40,7 @@ async function initCarousel(root) {
   }
   if (!items.length) return;
 
-  // 끊김 없이 반복하도록 같은 카드를 세 번 이어 붙이고, 가운데 묶음에서 시작한다.
+  // 양끝에서 끊기지 않도록 같은 카드를 반복 배치
   const total = items.length;
   const slides = [...items, ...items, ...items];
 
@@ -68,7 +66,7 @@ async function initCarousel(root) {
   let frame;
   let timer;
 
-  // index번째 카드가 화면 가운데 오도록 놓고, 가운데에 가까운 카드를 크고 선명하게 보여준다.
+  // 가운데 카드를 강조
   function draw(index) {
     const step = cards[1].offsetLeft - cards[0].offsetLeft;
     const firstCenter = cards[0].offsetLeft + cards[0].offsetWidth / 2;
@@ -84,7 +82,7 @@ async function initCarousel(root) {
     dots.forEach((dot, i) => dot.classList.toggle('is-active', i === active));
   }
 
-  // steps칸 이동한 뒤, 같은 카드가 있는 가운데 묶음으로 돌아온다.
+  // 다음 카드로 이동
   function move(steps) {
     if (busy || !steps) return;
     busy = true;
@@ -128,7 +126,7 @@ async function initCarousel(root) {
     });
   });
 
-  // 크기가 바뀌거나 다른 탭을 보는 동안에는 이동을 멈추고 제자리에 맞춘다.
+  // 화면 크기 및 탭 전환 처리
   function settle() {
     cancelAnimationFrame(frame);
     busy = false;

@@ -1,4 +1,4 @@
-// 언어 선택 창 표시 기능 (번역 기능 없음)
+// 언어 메뉴 열기 및 닫기
 (() => {
     const trigger = document.querySelector('.ss-language[aria-expanded]');
     if (!trigger) return;
