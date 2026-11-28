@@ -170,10 +170,19 @@ function sortItems(list) {
         const aOn = a.start <= today;
         const bOn = b.start <= today;
 
-        if (aOn && !bOn) return -1;    // 진행 중인 것을 앞으로
-        if (!aOn && bOn) return 1;
-        if (aOn) return a.end - b.end;  // 둘 다 진행 중이면 곧 끝나는 순
-        return a.start - b.start;       // 둘 다 예정이면 곧 시작하는 순
+        // 진행 중인 것을 앞으로
+        if (aOn && !bOn) {
+            return -1;
+        }
+        if (!aOn && bOn) {
+            return 1;
+        }
+        // 둘 다 진행 중이면 곧 끝나는 순
+        if (aOn) {
+            return a.end - b.end;
+        }
+        // 둘 다 예정이면 곧 시작하는 순
+        return a.start - b.start;
     });
 }
 
@@ -191,16 +200,22 @@ function refreshSavedCards() {
 // withDistrict: true 면 고른 구까지 거름(카드 목록), false 면 서울 전체(지도 마커)
 function getFiltered(withDistrict) {
     return allItems.filter(function (item) {
-        if (withDistrict && currentDistrict !== "" && item.gu !== currentDistrict) return false;
+        if (withDistrict && currentDistrict !== "" && item.gu !== currentDistrict) {
+            return false;
+        }
 
         if (currentType === "saved") {
-            if (!SceneSeoul.isSaved(item.id)) return false;
+            if (!SceneSeoul.isSaved(item.id)) {
+                return false;
+            }
         } else if (currentType !== "all" && item.type !== currentType) {
             return false;
         }
 
         // 검색어가 카드에 보이는 글자(제목 + 구 이름 + 장소)에 들어 있는 것만
-        if (keyword !== "" && !hasText(item.title + " " + getPlaceText(item), keyword)) return false;
+        if (keyword !== "" && !hasText(item.title + " " + getPlaceText(item), keyword)) {
+            return false;
+        }
         return true;
     });
 }
@@ -413,7 +428,10 @@ function addMarker(item) {
 
 // 카테고리, 검색어에 맞는 항목을 마커로 찍기 (구 선택과는 상관없이 서울 전체)
 function drawMarkers() {
-    if (markerLayer === null) return;   // 지도를 불러오지 못했으면 목록만 보여줌
+    // 지도를 불러오지 못했으면 목록만 보여줌
+    if (markerLayer === null) {
+        return;
+    }
 
     markerLayer.clearLayers();
     for (const item of getFiltered(false)) {
@@ -547,7 +565,10 @@ function loadAllItems(done) {
             })
             .then(() => {
                 left--;
-                if (left === 0) done(all);   // 4개 모두 끝나면 한 번만 실행
+                // 4개 모두 끝나면 한 번만 실행
+                if (left === 0) {
+                    done(all);
+                }
             });
     }
 }
