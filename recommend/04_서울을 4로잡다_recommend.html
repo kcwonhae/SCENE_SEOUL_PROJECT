@@ -5,14 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>추천 | SCENE.SEOUL</title>
-  <meta name="description" content="누구와 가는지, 어떤 분위기인지 고르면 서울의 전시·공연·팝업·이벤트를 추천해 드려요.">
 
+  <meta name="project" content="SCENE:SEOUL">
   <meta name="team-number" content="04">
   <meta name="team-name" content="서울을 4로잡다">
-  <meta name="author" content="신윤정(2411997)">
+  <meta name="contributor" content="2411997_신윤정">
+  <meta name="description" content="누구와 가는지, 어떤 분위기인지 고르면 서울의 전시·공연·팝업·문화공간을 추천해 드려요.">
+
   <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
   <link rel="stylesheet" href="04_서울을 4로잡다_recommend.css">
   <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
+  <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
   <script src="../login/04_서울을 4로잡다_login.js" defer></script>
   <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
   <script src="../js/04_서울을 4로잡다_language.js" defer></script>
@@ -35,6 +38,8 @@
       <a href="../map/04_서울을 4로잡다_map.html">지도</a>
     </nav>
     <div class="ss-header-actions">
+      <button class="header-login" type="button">LOGIN</button>
+
       <span class="ss-header-quick-icons">
         <span class="ss-language" role="button" tabindex="0" aria-label="언어 선택" aria-expanded="false"
           aria-haspopup="true">
@@ -51,7 +56,7 @@
           </ul>
         </span>
       </span>
-      <button class="header-login" type="button">LOGIN</button>
+
       <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
       <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중"><svg viewBox="0 0 24 24"
           fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
@@ -63,11 +68,10 @@
   </header>
 
   <main id="main" class="ss-page">
-    <div class="ai">
+    <div>
 
-      <!-- 질문 입력창 -->
-      <section class="intro" aria-labelledby="ai-title">
-        <h1 id="ai-title">SCENE<span class="intro-colon">:</span>SEOUL PICK</h1>
+      <section class="intro" aria-labelledby="intro-title">
+        <h1 id="intro-title">SCENE<span class="intro-colon">:</span>SEOUL PICK</h1>
       </section>
 
       <!-- 선택 칩: 7개 조건을 고르고 '결과 보기'를 누르면 결과가 바뀝니다 -->
@@ -80,7 +84,7 @@
               <path d="M20 19v-1a4 4 0 0 0-3-3.9M16 4.2a3.5 3.5 0 0 1 0 6.6" />
             </svg>누구와</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="who" id="who-solo" value="solo" checked><label
+            <span class="chip"><input type="checkbox" name="who" id="who-solo" value="solo"><label
                 for="who-solo">혼자</label></span>
             <span class="chip"><input type="checkbox" name="who" id="who-couple" value="couple"><label
                 for="who-couple">연인</label></span>
@@ -97,7 +101,7 @@
               <path d="M7 18h10a4 4 0 0 0 .3-8 6 6 0 0 0-11.5 1.8A3.2 3.2 0 0 0 7 18Z" />
             </svg>날씨</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="weather" id="wx-sunny" value="sunny" checked><label
+            <span class="chip"><input type="checkbox" name="weather" id="wx-sunny" value="sunny"><label
                 for="wx-sunny">맑음</label></span>
             <span class="chip"><input type="checkbox" name="weather" id="wx-cloudy" value="cloudy"><label
                 for="wx-cloudy">흐림</label></span>
@@ -115,7 +119,7 @@
               <path d="M12 7v5l3 2" />
             </svg>시간대</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="time" id="t-day" value="day" checked><label
+            <span class="chip"><input type="checkbox" name="time" id="t-day" value="day"><label
                 for="t-day">낮</label></span>
             <span class="chip"><input type="checkbox" name="time" id="t-eve" value="eve"><label
                 for="t-eve">저녁</label></span>
@@ -133,7 +137,7 @@
               <circle cx="12" cy="10" r="2.5" />
             </svg>실내외</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="place" id="p-in" value="in" checked><label
+            <span class="chip"><input type="checkbox" name="place" id="p-in" value="in"><label
                 for="p-in">실내</label></span>
             <span class="chip"><input type="checkbox" name="place" id="p-out" value="out"><label
                 for="p-out">야외</label></span>
@@ -148,7 +152,7 @@
               <path d="M12 3l2.2 5.6L20 11l-5.8 2.4L12 19l-2.2-5.6L4 11l5.8-2.4L12 3Z" />
             </svg>분위기</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="mood" id="mood-calm" value="calm" checked><label
+            <span class="chip"><input type="checkbox" name="mood" id="mood-calm" value="calm"><label
                 for="mood-calm">차분한</label></span>
             <span class="chip"><input type="checkbox" name="mood" id="mood-lively" value="lively"><label
                 for="mood-lively">신나는</label></span>
@@ -167,13 +171,13 @@
               <path d="M14 6v2M14 11v2M14 16v2" />
             </svg>장르</span>
           <div class="chips">
-            <span class="chip"><input type="checkbox" name="genre" id="g-ex" value="ex" checked><label
+            <span class="chip"><input type="checkbox" name="category" id="g-ex" value="exhibition"><label
                 for="g-ex">전시</label></span>
-            <span class="chip"><input type="checkbox" name="genre" id="g-live" value="live"><label
+            <span class="chip"><input type="checkbox" name="category" id="g-live" value="performance"><label
                 for="g-live">공연</label></span>
-            <span class="chip"><input type="checkbox" name="genre" id="g-pop" value="pop"><label
+            <span class="chip"><input type="checkbox" name="category" id="g-pop" value="popup"><label
                 for="g-pop">팝업</label></span>
-            <span class="chip"><input type="checkbox" name="genre" id="g-space" value="space"><label
+            <span class="chip"><input type="checkbox" name="category" id="g-space" value="event"><label
                 for="g-space">이벤트</label></span>
           </div>
         </div>
@@ -186,7 +190,7 @@
                 d="M12 7v10M9.5 10c.5-1 1.4-1.5 2.5-1.5 1.5 0 2.5.8 2.5 2s-1 1.7-2.5 2-2.5.8-2.5 2 1 2 2.5 2c1.1 0 2-.5 2.5-1.5" />
             </svg>예산</span>
           <div class="chips">
-            <span class="chip"><input type="radio" name="budget" id="b-free" value="free" checked><label
+            <span class="chip"><input type="radio" name="budget" id="b-free" value="free"><label
                 for="b-free">무료</label></span>
             <span class="chip"><input type="radio" name="budget" id="b-30" value="30"><label for="b-30">3만 원
                 이하</label></span>
@@ -199,11 +203,11 @@
       </section>
 
       <div class="send-wrap">
-        <button class="send" id="send-btn" type="button">결과 보기 <span aria-hidden="true">→</span></button>
+        <button class="send" id="send-btn" type="button">결과 보기</button>
       </div>
 
-      <!-- AI 추천 결과: 04_서울을 4로잡다_recommend.js 가 JSON을 읽어서 채웁니다 -->
-      <section class="results" id="result" aria-live="polite" aria-label="AI 추천 결과">
+      <!-- 추천 결과: 04_서울을 4로잡다_recommend.js 가 JSON을 읽어서 채웁니다 -->
+      <section class="results" id="result" aria-live="polite" aria-label="추천 결과">
         <div id="result-box"></div>
       </section>
     </div>

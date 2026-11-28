@@ -3,7 +3,6 @@
     {
       "id": "recommend-001",
       "category": "exhibition",
-      "genre": "ex",
       "title": "[서울시립 서서울미술관] 뉴미디어 국제전 《셰자드 다우드: 미래의 기억》",
       "startDate": "2026-12-03",
       "endDate": "2027-02-28",
@@ -34,7 +33,6 @@
     {
       "id": "recommend-002",
       "category": "performance",
-      "genre": "live",
       "title": "양수연 가야금 독주회 [기록: 가즌회상]",
       "startDate": "2026-11-29",
       "endDate": "2026-11-29",
@@ -65,7 +63,6 @@
     {
       "id": "recommend-003",
       "category": "event",
-      "genre": "space",
       "title": "2026 광화문마켓",
       "startDate": "2026-12-11",
       "endDate": "2027-01-10",
@@ -96,7 +93,6 @@
     {
       "id": "recommend-004",
       "category": "performance",
-      "genre": "live",
       "title": "오페레타 [유쾌한 미망인]",
       "startDate": "2026-11-27",
       "endDate": "2026-11-28",
@@ -126,7 +122,6 @@
     {
       "id": "recommend-005",
       "category": "exhibition",
-      "genre": "ex",
       "title": "[서울시립 사진미술관] 확산의 물결",
       "startDate": "2026-11-25",
       "endDate": "2027-03-21",
@@ -157,7 +152,6 @@
     {
       "id": "recommend-006",
       "category": "popup",
-      "genre": "pop",
       "title": "토마쓰리 뒹굴뒹굴 겨울일기",
       "startDate": "2026-11-17",
       "endDate": "2026-12-30",
@@ -188,7 +182,6 @@
     {
       "id": "recommend-007",
       "category": "performance",
-      "genre": "live",
       "title": "[성북문화재단] 꿈빛극장 기획공연 윈터콘서트 [소란: 눈이 부신 우리]",
       "startDate": "2026-12-12",
       "endDate": "2026-12-12",
@@ -217,7 +210,6 @@
     {
       "id": "recommend-008",
       "category": "popup",
-      "genre": "pop",
       "title": "퍼펫순순 POP-UP STORE IN HONGDAE",
       "startDate": "2026-11-27",
       "endDate": "2026-12-10",
@@ -248,7 +240,6 @@
     {
       "id": "recommend-009",
       "category": "exhibition",
-      "genre": "ex",
       "title": "한불수교 140주년 [기념에서 풍경으로 From Monument to Landscape]",
       "startDate": "2026-10-17",
       "endDate": "2027-02-14",
@@ -278,7 +269,6 @@
     {
       "id": "recommend-010",
       "category": "performance",
-      "genre": "live",
       "title": "[2026공연봄날 공식선정작] 화이트 라이 크리스마스",
       "startDate": "2026-12-10",
       "endDate": "2026-12-12",
@@ -308,7 +298,6 @@
     {
       "id": "recommend-011",
       "category": "exhibition",
-      "genre": "ex",
       "title": "[소마미술관] 국립현대미술관미술은행 소장품기획전 《군락: 여섯 개의 뜰》",
       "startDate": "2026-10-09",
       "endDate": "2027-05-30",
@@ -338,7 +327,6 @@
     {
       "id": "recommend-012",
       "category": "event",
-      "genre": "space",
       "title": "커튼 콜 가든 겨울시즌",
       "startDate": "2026-11-17",
       "endDate": "2027-01-03",
@@ -368,7 +356,6 @@
     {
       "id": "recommend-013",
       "category": "exhibition",
-      "genre": "ex",
       "title": "[서울시립미술관 서소문본관] 린 허쉬만 리슨: 나의 [나]들",
       "startDate": "2026-10-21",
       "endDate": "2027-02-21",
@@ -398,7 +385,6 @@
     {
       "id": "recommend-014",
       "category": "popup",
-      "genre": "pop",
       "title": "더현대 서울 크리스마스 빌리지",
       "startDate": "2026-11-10",
       "endDate": "2026-12-31",
@@ -429,7 +415,6 @@
     {
       "id": "recommend-015",
       "category": "performance",
-      "genre": "live",
       "title": "2026 카즈미 타테이시 트리오 내한공연-지브리, 재즈를 만나다-(서울)",
       "startDate": "2026-12-22",
       "endDate": "2026-12-22",
@@ -460,7 +445,6 @@
     {
       "id": "recommend-016",
       "category": "event",
-      "genre": "space",
       "title": "용산 크리스마스 아틀리에",
       "startDate": "2026-12-11",
       "endDate": "2026-12-20",
@@ -491,7 +475,6 @@
     {
       "id": "recommend-017",
       "category": "popup",
-      "genre": "pop",
       "title": "산리오캐릭터즈 물음표 상점",
       "startDate": "2026-11-25",
       "endDate": "2026-12-27",
@@ -522,7 +505,6 @@
     {
       "id": "recommend-018",
       "category": "exhibition",
-      "genre": "ex",
       "title": "[서울시] 서울시 공공미술 작품전시 《평화의 잔상》",
       "startDate": "2026-10-24",
       "endDate": "2026-12-13",
@@ -551,7 +533,6 @@
     {
       "id": "recommend-019",
       "category": "event",
-      "genre": "space",
       "title": "2026 서울라이트 광화문 [윤슬 : 시간의 수면]",
       "startDate": "2026-12-11",
       "endDate": "2027-01-10",
@@ -580,7 +561,6 @@
     {
       "id": "recommend-020",
       "category": "performance",
-      "genre": "live",
       "title": "[2026공연봄날 공식선정작] 수상한 외갓집",
       "startDate": "2026-12-01",
       "endDate": "2026-12-03",

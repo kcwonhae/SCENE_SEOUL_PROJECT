@@ -2,15 +2,15 @@
 // 팀 04 서울을 4로잡다 / 신윤정(2411997)
 // * 공통 JS(04_서울을 4로잡다_common.js)를 이 파일보다 먼저 불러와야 한다 (기간 글자에 사용)
 
-// 장르 코드 → 화면에 보여줄 이름
-const GENRE_NAME = { ex: '전시', live: '공연', pop: '팝업', space: '이벤트' };
+// 카테고리 → 화면에 보여줄 이름
+const CATEGORY_NAME = { exhibition: '전시', performance: '공연', popup: '팝업', event: '이벤트' };
 
-// 장르 → 상세 보기로 이동할 페이지 (JSON의 sourceUrl이 비어 있을 때 사용)
-const GENRE_PAGE = {
-  ex: '../exhibition/04_서울을 4로잡다_exhibition.html',
-  live: '../performance/04_서울을 4로잡다_performance.html',
-  pop: '../popup/04_서울을 4로잡다_popup.html',
-  space: '../event/04_서울을 4로잡다_event.html'
+// 카테고리 → 상세 보기로 이동할 페이지 (JSON의 sourceUrl이 비어 있을 때 사용)
+const CATEGORY_PAGE = {
+  exhibition: '../exhibition/04_서울을 4로잡다_exhibition.html',
+  performance: '../performance/04_서울을 4로잡다_performance.html',
+  popup: '../popup/04_서울을 4로잡다_popup.html',
+  event: '../event/04_서울을 4로잡다_event.html'
 };
 
 // 결과 제목에 쓸 말 (누구와 기준)
@@ -53,14 +53,14 @@ fetch('../data/04_서울을 4로잡다_recommend.json')
     allItems = data.recommendations;
   })
   .catch(error => {
-    resultBox.innerHTML = '<p class="ss-empty">추천 데이터를 불러오지 못했어요. Live Server로 열었는지 확인해 주세요.</p>';
+    resultBox.innerHTML = '<p class="ss-empty">추천 데이터를 불러오지 못했어요.</p>';
     console.log(error);
   });
 
 // 지금 선택된 조건을 객체로 모으기 (예산만 하나, 나머지는 여러 개를 배열로)
 // 예산을 안 골랐으면 'any'(제한 없음)로 본다
 function getConditions() {
-  const conds = { who: [], weather: [], time: [], place: [], mood: [], genre: [], budget: 'any' };
+  const conds = { who: [], weather: [], time: [], place: [], mood: [], category: [], budget: 'any' };
   for (let i = 0; i < chips.length; i++) {
     const input = chips[i];
     if (input.checked) {
@@ -102,7 +102,7 @@ function getScore(item, conds) {
   if (isMatch(conds.place, placeValues)) score++;
 
   if (isMatch(conds.mood, item.mood)) score++;
-  if (isMatch(conds.genre, [item.genre])) score++;
+  if (isMatch(conds.category, [item.category])) score++;
   if (conds.budget === 'any' || item.price <= BUDGET_LIMIT[conds.budget]) score++;
   return score;
 }
@@ -141,10 +141,11 @@ function pickTop3(conds) {
 // 추천 카드 1장
 function makeCard(row, number) {
   const item = row.item;
-  let link = GENRE_PAGE[item.genre];
+  let link = CATEGORY_PAGE[item.category];
   let target = '';
   if (item.sourceUrl !== '') {
     link = item.sourceUrl;
+    // 수업 외: rel="noopener noreferrer"는 새 창으로 열 때 원래 페이지를 보호하는 링크 속성이다
     target = ' target="_blank" rel="noopener noreferrer"';
   }
   return `
@@ -152,7 +153,7 @@ function makeCard(row, number) {
       <span class="rank">${number}</span>
       <div class="poster"><img src="${item.image}" alt="${item.title} 포스터"></div>
       <div class="info">
-        <h3><a href="${link}"${target}><span class="genre">${GENRE_NAME[item.genre]}</span>${item.title}</a></h3>
+        <h3><a href="${link}"${target}><span class="genre">${CATEGORY_NAME[item.category]}</span>${item.title}</a></h3>
         <p class="period">${SceneSeoul.formatPeriod(item)}</p>
         <p class="meta">${item.location}</p>
       </div>
@@ -161,6 +162,16 @@ function makeCard(row, number) {
         <span aria-hidden="true"></span>
       </label>
     </article>`;
+}
+
+// 칩을 하나라도 골랐으면 true
+function hasChecked() {
+  for (let i = 0; i < chips.length; i++) {
+    if (chips[i].checked) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // 추천 결과 그리기
@@ -200,7 +211,14 @@ function showResult() {
 
 // '결과 보기'를 누르면 잠깐 생각하는 척 한 뒤 결과가 바뀐다
 sendBtn.addEventListener('click', () => {
+  // 아무 칩도 안 골랐으면 결과 대신 안내 문구를 보여준다
+  if (hasChecked() === false) {
+    shownIds = [];
+    resultBox.innerHTML = '<p class="think">조건을 하나 이상 선택해 주세요.</p>';
+    return;
+  }
   resultBox.innerHTML = '<p class="think">추천을 고르는 중이에요...</p>';
+  // 수업 외: location.href에 '#id'를 넣으면 그 id 위치로 화면이 이동한다
   location.href = '#result';
   setTimeout(showResult, 800);
 });
