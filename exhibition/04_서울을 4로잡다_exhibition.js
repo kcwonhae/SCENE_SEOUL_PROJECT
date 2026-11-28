@@ -73,7 +73,7 @@ function getFilteredExhibitions() {
         }
     }
 
-    // 최신순은 JSON 에 적힌 순서를 그대로 사용 (진행 중 → 개막 예정 순으로 적혀 있음)
+    // 최신순은 JSON 에 적힌 순서를 그대로 사용 (진행 중 -> 개막 예정 순으로 적혀 있음)
     if (selectedSort === 'closing') {
         sortByDate(result, 'endDate');    // 종료일이 가까운 순
     }
@@ -134,7 +134,7 @@ function renderExhibitionCard(item) {
     }
     imageBox.appendChild(image);
 
-    // 하트: 저장과 취소, 로그인 전 안내는 common.js 의 toggleSaved() 가 처리
+    // 하트: 찜과 찜 취소, 로그인 전 안내는 common.js 의 toggleSaved() 가 처리
     const heartLabel = document.createElement('label');
     heartLabel.className = 'ss-heart-toggle';
     const heartInput = document.createElement('input');
@@ -142,7 +142,7 @@ function renderExhibitionCard(item) {
     heartInput.setAttribute('data-save-id', item.id);
     heartInput.setAttribute('aria-label', item.title + ' 찜하기');
     heartInput.checked = SceneSeoul.isSaved(item.id);
-    heartInput.addEventListener('change', function () {
+    heartInput.addEventListener('change', () => {
         SceneSeoul.toggleSaved(item.id);
     });
     const heartShape = document.createElement('span');
@@ -243,7 +243,7 @@ function makePageButton(text, page, isArrow, label, disabled) {
         button.setAttribute('aria-current', 'page');
     }
 
-    button.addEventListener('click', function () {
+    button.addEventListener('click', () => {
         currentPage = page;
         renderExhibitionList();
     });
@@ -267,7 +267,7 @@ function markActiveFilter() {
 
 // 분류 버튼 클릭
 for (const button of filterButtons) {
-    button.addEventListener('click', function () {
+    button.addEventListener('click', () => {
         selectedGenre = button.getAttribute('data-filter');
         currentPage = 1;
         renderExhibitionList();
@@ -276,14 +276,14 @@ for (const button of filterButtons) {
 
 // 검색창 입력
 // 수업 외: input 이벤트 (글자를 입력하거나 지울 때마다 발생)
-exhibitionSearch.addEventListener('input', function () {
+exhibitionSearch.addEventListener('input', () => {
     searchWord = exhibitionSearch.value;
     currentPage = 1;
     renderExhibitionList();
 });
 
 // 정렬 기준 선택
-exhibitionSort.addEventListener('change', function () {
+exhibitionSort.addEventListener('change', () => {
     selectedSort = exhibitionSort.value;
     currentPage = 1;
     renderExhibitionList();
@@ -305,7 +305,7 @@ function resetExhibitionFilter() {
 // 뒤로가기로 돌아오면 브라우저가 이전 화면을 그대로 꺼내 보여줄 때가 있음
 // 그때는 JSON 을 다시 불러오지 않으므로 여기서 한 번 더 초기화
 // 수업 외: pageshow 이벤트, event.persisted (저장해 둔 이전 화면을 꺼내 보여준 경우 true)
-window.addEventListener('pageshow', function (event) {
+window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
         resetExhibitionFilter();
     }
