@@ -413,7 +413,7 @@ agendaList.addEventListener("click", function (event) {
     }
     // toggleSaved()도 로그인을 확인하지만 안내 문구가 달라서 페이지 문구를 먼저 보여 줌
     if (SceneSeoul.getUser() === "") {
-        alert("로그인 후 저장할 수 있어요.");
+        alert("로그인 후에 찜할 수 있어요.");
         return;
     }
     SceneSeoul.toggleSaved(button.dataset.id);

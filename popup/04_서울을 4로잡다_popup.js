@@ -29,8 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return element;
     }
 
-    // "2026-11-04" ~ "2026-12-25" → "2026.11.04 ~ 2026.12.25"
-    // 공통 SceneSeoul.formatPeriod()는 같은 해이면 끝 날짜의 연도를 빼서(2026.11.04 ~ 12.25) 기존 표기를 유지함
+    // "2026.11.04 ~ 2026.12.25" 로 출력
     function formatPeriod(item) {
         const start = item.startDate.replace(/-/g, ".");
         const end = (item.endDate || "").replace(/-/g, ".");
@@ -209,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // toggleSaved()에도 로그인 확인이 있지만 안내 문구가 달라서 페이지 문구를 먼저 보여 줌
         if (SceneSeoul.getUser() === "") {
             checkbox.checked = false;
-            alert("로그인 후 저장할 수 있어요.");
+            alert("로그인 후에 찜할 수 있어요.");
             return;
         }
 
