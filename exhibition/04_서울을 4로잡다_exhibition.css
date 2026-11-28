@@ -16,22 +16,6 @@ p {
     margin: 0;
 }
 
-/* 접근성용 링크 평상시 숨기기 */
-.skip {
-    position: absolute; /* 위치를 분리 후 지정 */
-    left: 12px;  /* 기준 위치의 왼쪽에서 12px 떨어짐 */
-    top: -80px;  /* 위쪽으로 올려 화면 밖으로 숨기기 */
-    z-index: 200;  /* 다른 요소와 겹칠 때 앞쪽에 표시 */
-    padding: 10px 16px;  /* 글자 주변 여백 */
-    border-radius: 8px;
-    background: var(--ss-ink);
-    color: var(--ss-white);
-}
-
-.skip:focus {
-    top: 12px;
-}
-
 /* 전시 페이지 본문 기본 글자 크기만 조정 (공통 .ss-page 의 다른 값은 그대로) */
 .ss-page {
     font-size: 14px;
