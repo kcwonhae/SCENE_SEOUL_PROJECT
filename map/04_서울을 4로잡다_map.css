@@ -78,7 +78,8 @@
     font-weight: 400;
 }
 
-/* 마커 색 안내 (지도 마커와 같은 모양의 작은 동그라미, 색과 테두리는 map.js 의 TYPE_COLOR, addMarker 와 같게) */
+/* 마커 색 안내 (지도 마커와 같은 모양의 작은 동그라미)
+   색은 map.js 의 TYPE_COLOR 와 같게, 테두리는 흰 배경에서 구분되도록 회색 */
 .map-legend {
     display: flex;
     gap: 14px;
