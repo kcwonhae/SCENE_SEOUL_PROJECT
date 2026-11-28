@@ -20,7 +20,7 @@ const skyline = document.querySelector(".edition-next-background");
 const sceneHeading = document.querySelector(".scenes .section-heading");
 const sceneCards = document.querySelectorAll(".scene-card");
 
-// COMING UP IN SEOUL
+// NOW IN SEOUL
 const header = document.querySelector(".ss-header");
 const agenda = document.querySelector(".agenda-section");
 const agendaSticky = document.querySelector(".agenda-sticky");
@@ -31,6 +31,10 @@ const nextButton = document.getElementById("agendaNext");
 const monthText = document.getElementById("agendaMonth");
 const dayText = document.getElementById("agendaToday");
 const weekdayText = document.getElementById("agendaWeekday");
+
+// SEOUL ON THE MAP
+const atlas = document.querySelector(".atlas-section");
+const atlasOverlay = document.querySelector(".atlas-overlay");
 
 // 수업 외: matchMedia로 운영체제의 '동작 줄이기' 설정을 확인해 켠 사용자는 애니메이션 없이 보여 줌
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -44,6 +48,10 @@ const sources = [
 
 const categoryLabels = { "전시": "EXHIBITION", "공연": "PERFORMANCE", "팝업": "POP-UP", "이벤트": "EVENT" };
 
+// NOW IN SEOUL 카드는 카테고리마다 2장씩, 모두 8장
+const NOW_CARD_COUNT = 8;
+const CARDS_PER_CATEGORY = 2;
+
 // 이미지를 불러오지 못했을 때 쓰는 HERO 이미지 네 장
 const fallbackImages = [
     "../images/04_index_01.png",
@@ -54,10 +62,10 @@ const fallbackImages = [
 
 const heartSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"/></svg>';
 
-let upcomingEvents = [];
+let nowEvents = [];
 let todayKey = "";
 let userMovedCarousel = false;
-let carouselStart = null;
+let mapPointer = null;    // 지도 위에 있는 마우스의 마지막 화면 좌표
 let ticking = false;
 
 
@@ -193,7 +201,7 @@ function updateSceneReveal() {
 }
 
 
-// COMING UP IN SEOUL: 날짜
+// NOW IN SEOUL: 날짜
 
 // 수업 외: padStart(2, "0")로 한 자리 월·일 앞에 0을 붙여 "2026-01-05" 형식으로 맞춤
 function dateKey(date) {
@@ -217,20 +225,21 @@ function parseDate(text) {
     return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
 }
 
-function formatShortDate(date) {
-    return String(date.getMonth() + 1).padStart(2, "0") + "." + String(date.getDate()).padStart(2, "0");
+// 카드 기간은 POP-UP 카드와 같은 "2026.07.19 ~ 2026.12.14" 형식으로 표시
+function formatDate(date) {
+    return date.getFullYear() + "." +
+        String(date.getMonth() + 1).padStart(2, "0") + "." +
+        String(date.getDate()).padStart(2, "0");
 }
 
 function formatRange(item) {
-    const start = formatShortDate(item.startDate);
-    const end = formatShortDate(item.endDate);
-    return start === end && item.startDate.getFullYear() === item.endDate.getFullYear()
-        ? start
-        : start + " ~ " + end;
+    const start = formatDate(item.startDate);
+    const end = formatDate(item.endDate);
+    return start === end ? start : start + " ~ " + end;
 }
 
 
-// COMING UP IN SEOUL: JSON 불러오기와 정렬
+// NOW IN SEOUL: JSON 불러오기와 카드 고르기
 
 function loadSource(source) {
     return fetch(source.path)
@@ -261,27 +270,43 @@ function loadSource(source) {
         });
 }
 
-// 오늘 이전에 끝난 행사는 빼고, 진행 중인 행사(거리 0) → 가까운 시작일 순으로 정렬
-function pickUpcoming(events) {
+// 종료일이 가까운 순, 같으면 제목 가나다순
+function compareEndDate(a, b) {
+    return a.endDate - b.endDate || a.title.localeCompare(b.title, "ko");    // 수업 외: 날짜가 같으면 제목을 가나다순으로 비교
+}
+
+// 오늘 진행 중인 행사만 남기고, 카테고리마다 종료일이 가까운 2개씩 골라 8장을 만듦
+// 한 카테고리만 보이지 않도록 나눠서 고름 (종료일 순으로만 고르면 하루짜리 공연이 대부분을 차지함)
+function pickNowEvents(events) {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-    return events
+    const ongoing = events
         .filter(function (item) {
-            return item.endDate >= today;
+            return item.startDate <= today && item.endDate >= today;
         })
-        .sort(function (a, b) {
-            const distanceA = Math.max(0, a.startDate - today);
-            const distanceB = Math.max(0, b.startDate - today);
-            return distanceA - distanceB
-                || a.startDate - b.startDate
-                || a.endDate - b.endDate
-                || a.title.localeCompare(b.title, "ko");    // 수업 외: 날짜가 같으면 제목을 가나다순으로 비교
+        .sort(compareEndDate);
+
+    let picked = [];
+    sources.forEach(function (source) {
+        const sameCategory = ongoing.filter(function (item) {
+            return item.category === source.category;
         });
+        picked = picked.concat(sameCategory.slice(0, CARDS_PER_CATEGORY));
+    });
+
+    // 진행 중 행사가 2개보다 적은 카테고리가 있으면 남은 행사 중 종료일이 가까운 순으로 채움
+    if (picked.length < NOW_CARD_COUNT) {
+        const rest = ongoing.filter(function (item) {
+            return !picked.includes(item);
+        });
+        picked = picked.concat(rest.slice(0, NOW_CARD_COUNT - picked.length));
+    }
+
+    return picked.sort(compareEndDate);
 }
 
 
-// COMING UP IN SEOUL: 카드 만들기
+// NOW IN SEOUL: 카드 만들기
 
 // 같은 행사는 새로고침해도 같은 대체 이미지가 나오도록 id 글자로 번호를 정함
 function fallbackImageFor(id) {
@@ -370,10 +395,10 @@ function makeAgendaCard(item) {
 function renderAgenda() {
     agendaList.replaceChildren();    // 수업 외: 기존 카드와 안내 문구를 한 번에 비움
 
-    if (upcomingEvents.length === 0) {
-        agendaList.appendChild(makeElement("p", "agenda-status", "현재 안내할 예정 행사가 없습니다."));
+    if (nowEvents.length === 0) {
+        agendaList.appendChild(makeElement("p", "agenda-status", "현재 진행 중인 행사가 없습니다."));
     } else {
-        upcomingEvents.forEach(function (item) {
+        nowEvents.forEach(function (item) {
             agendaList.appendChild(makeAgendaCard(item));
         });
     }
@@ -389,7 +414,7 @@ function renderAgenda() {
 }
 
 
-// COMING UP IN SEOUL: 찜하기
+// NOW IN SEOUL: 찜하기
 
 // 하트 버튼 모양을 저장된 찜 목록(로그인 사용자 기준)에 맞춤
 function updateAgendaHearts() {
@@ -421,7 +446,7 @@ agendaList.addEventListener("click", function (event) {
 });
 
 
-// COMING UP IN SEOUL: 카드 캐러셀
+// NOW IN SEOUL: 카드 캐러셀
 
 // max: 가로로 스크롤할 수 있는 최대 거리, step: 카드 한 장 + 간격 너비
 function getCarouselSize() {
@@ -463,10 +488,10 @@ function moveCarousel(direction) {
     agendaViewport.scrollTo({ left: target, behavior: reduceMotion ? "instant" : "smooth" });    // 수업 외: 가로 스크롤 위치를 부드럽게 이동
 }
 
-// 섹션이 헤더 아래에 고정된 동안 페이지 스크롤 진행률만큼 카드를 한 칸 옆으로 이동
+// 섹션이 헤더 아래에 고정된 동안 페이지 스크롤 진행률만큼 첫 카드에서 마지막 카드까지 이동
 function updateAgendaCarousel() {
     const size = getCarouselSize();
-    const enabled = !reduceMotion && size.max > 3 && size.step > 0 && upcomingEvents.length > 3;
+    const enabled = !reduceMotion && size.max > 3 && size.step > 0 && nowEvents.length > 3;
 
     agenda.classList.toggle("has-carousel-motion", enabled);
     // 노트북처럼 화면 높이가 낮을 때 카드 크기를 줄이는 클래스
@@ -492,11 +517,8 @@ function updateAgendaCarousel() {
     if (userMovedCarousel) {
         return;
     }
-    if (carouselStart === null) {
-        carouselStart = agendaViewport.scrollLeft;
-    }
     agendaViewport.classList.add("is-scroll-driven");
-    agendaViewport.scrollLeft = Math.min(size.max, carouselStart + size.step * ease(progress));
+    agendaViewport.scrollLeft = size.max * ease(progress);
 }
 
 prevButton.addEventListener("click", function () {
@@ -541,6 +563,48 @@ skipButton.addEventListener("click", function () {
 });
 
 
+// SEOUL ON THE MAP: 마우스 위치에 따라 반사광과 지도 이미지를 움직임
+
+// 지도 영역 안에서 마우스의 상대 위치(0~1)를 계산해 CSS 변수로 전달
+// 화면 전체 좌표(clientX, clientY)에서 섹션의 시작 위치를 빼야 지도 안의 위치가 됨
+function updateMapPointer() {
+    if (!mapPointer) {
+        return;
+    }
+    const rect = atlas.getBoundingClientRect();
+    const x = limit((mapPointer.x - rect.left) / rect.width, 0, 1);
+    const y = limit((mapPointer.y - rect.top) / rect.height, 0, 1);
+
+    // 수업 외: style.setProperty()로 CSS 변수 값을 바꿔 반사광 중심을 마우스 위치로 옮김
+    atlas.style.setProperty("--glow-x", (x * 100).toFixed(2) + "%");
+    atlas.style.setProperty("--glow-y", (y * 100).toFixed(2) + "%");
+
+    // 지도는 마우스 반대 방향으로 가로 최대 12px, 세로 최대 10px만 움직여 깊이감을 줌
+    // 1.04배 확대로 생기는 여유(1366×657 기준 세로 약 11px)보다 작게 잡아 가장자리가 드러나지 않게 함
+    if (!reduceMotion) {
+        atlas.style.setProperty("--map-shift-x", ((0.5 - x) * 24).toFixed(2) + "px");
+        atlas.style.setProperty("--map-shift-y", ((0.5 - y) * 20).toFixed(2) + "px");
+        atlas.style.setProperty("--map-scale", "1.04");
+    }
+}
+
+// 수업 외: pointermove는 마우스가 요소 위에서 움직일 때마다 발생함
+atlas.addEventListener("pointermove", function (event) {
+    mapPointer = { x: event.clientX, y: event.clientY };
+    atlas.classList.add("is-map-active");
+    updateMapPointer();
+});
+
+// 마우스가 나가면 광택은 사라지고 지도는 0.65초 동안 원래 위치로 돌아감
+atlas.addEventListener("pointerleave", function () {
+    mapPointer = null;
+    atlas.classList.remove("is-map-active");
+    atlas.style.setProperty("--map-shift-x", "0px");
+    atlas.style.setProperty("--map-shift-y", "0px");
+    atlas.style.setProperty("--map-scale", "1");
+});
+
+
 // EDIT 화살표에 마우스를 올리면 제목 두 줄의 색을 서로 바꿈
 
 function setEditionLinkActive(event) {
@@ -564,8 +628,12 @@ function update() {
 
     if (!reduceMotion) {
         updateSceneReveal();
+        rise(atlasOverlay, revealAmount(atlasOverlay, 0), 18);
     }
     updateAgendaCarousel();
+
+    // 마우스를 지도 위에 둔 채 스크롤하면 섹션 위치가 바뀌므로 광택 위치를 다시 계산
+    updateMapPointer();
 }
 
 function requestUpdate() {
@@ -578,11 +646,8 @@ function requestUpdate() {
 
 window.addEventListener("scroll", requestUpdate, { passive: true });    // 수업 외: 스크롤을 막지 않는 리스너라고 알려 스크롤 끊김을 줄임
 
+// 창 크기가 바뀌면 카드 너비와 이동 거리가 달라지므로 다시 계산
 window.addEventListener("resize", function () {
-    // 창 크기가 바뀌면 카드 너비가 달라지므로 시작 위치를 다시 잡음
-    if (!userMovedCarousel) {
-        carouselStart = null;
-    }
     updateCarouselButtons();
     requestUpdate();
 });
@@ -631,7 +696,7 @@ function loadAgenda() {
             return;
         }
 
-        upcomingEvents = pickUpcoming(loaded);
+        nowEvents = pickNowEvents(loaded);
         renderAgenda();
     });
 }

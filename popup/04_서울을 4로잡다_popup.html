@@ -90,7 +90,7 @@
         </section>
 
         <!-- 추천 팝업 캐러셀: 공통 carousel.js가 JSON의 featured 항목으로 만듦 -->
-        <section class="ss-category-feature" aria-label="추천 팝업">
+        <section class="featured-popup" aria-label="추천 팝업">
             <div class="ss-carousel" data-src="../data/04_서울을 4로잡다_popup.json"></div>
         </section>
 
@@ -98,7 +98,8 @@
         <section class="ss-catalog popup-catalog" id="discover" aria-labelledby="popup-catalog-title">
             <div class="ss-category-heading">
                 <h2 class="ss-category-title" id="popup-catalog-title">ALL <em class="ss-category-title-accent">POP-UPS.</em></h2>
-                <div class="popup-divider" aria-hidden="true"></div>
+                <!-- 제목 아래 구분선 -->
+                <hr class="popup-divider">
             </div>
 
             <div class="ss-catalog-controls">
@@ -108,15 +109,25 @@
                         <button type="button" class="ss-filter" data-filter="fashion" aria-pressed="false">패션</button>
                         <button type="button" class="ss-filter" data-filter="art" aria-pressed="false">아트</button>
                         <button type="button" class="ss-filter" data-filter="life" aria-pressed="false">라이프스타일</button>
-                        <button type="button" class="ss-filter" data-filter="goods" aria-pressed="false">굿즈 · 마켓</button>
+                        <button type="button" class="ss-filter" data-filter="goods" aria-pressed="false">굿즈/마켓</button>
                     </div>
 
-                    <div class="ss-search" role="search">
-                        <input id="popup-catalog-search" type="search" autocomplete="off" placeholder="팝업명, 장소 검색" aria-label="팝업 이름 또는 지역 검색">
-                        <svg class="ss-search-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" width="20" height="20" viewBox="0 0 24 24">
-                            <circle cx="10.8" cy="10.8" r="6.6"></circle>
-                            <path d="m16 16 5 5"></path>
-                        </svg>
+                    <!-- 정렬 드롭다운은 검색창 바로 위에 배치 (스타일은 category.css) -->
+                    <div class="ss-sort-search">
+                        <select class="ss-sort-select" id="popup-sort" aria-label="팝업 정렬 기준">
+                            <option value="latest">최신순</option>
+                            <option value="ongoing">진행 중</option>
+                            <option value="closing">마감 임박</option>
+                            <option value="upcoming">오픈 예정</option>
+                        </select>
+
+                        <div class="ss-search" role="search">
+                            <input id="popup-catalog-search" type="search" autocomplete="off" placeholder="팝업명, 장소 검색" aria-label="팝업 이름 또는 지역 검색">
+                            <svg class="ss-search-icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" width="20" height="20" viewBox="0 0 24 24">
+                                <circle cx="10.8" cy="10.8" r="6.6"></circle>
+                                <path d="m16 16 5 5"></path>
+                            </svg>
+                        </div>
                     </div>
                 </div>
 

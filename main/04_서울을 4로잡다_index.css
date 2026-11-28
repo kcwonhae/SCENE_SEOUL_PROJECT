@@ -51,7 +51,7 @@
 }
 
 .scene-image-exhibition {
-    background-image: url("../images/04_index_01.png");
+    background-image: url("../images/04_index_01.jpg");
     opacity: 1;
 }
 
@@ -60,11 +60,11 @@
 }
 
 .scene-image-popup {
-    background-image: url("../images/04_index_03.png");
+    background-image: url("../images/04_index_03.jpg");
 }
 
 .scene-image-event {
-    background-image: url("../images/04_index_04.png");
+    background-image: url("../images/04_index_04.jpg");
 }
 
 /* 흰 글자가 잘 보이도록 하단과 왼쪽에 음영을 줌 */
@@ -371,7 +371,6 @@
 .scene-art {
     height: clamp(205px, min(27vw, 36vh), 320px);
     overflow: hidden;
-    border-radius: 4px;
     background: #F1F1F1;
 }
 
@@ -455,11 +454,11 @@
 }
 
 
-/* 5. COMING UP IN SEOUL */
+/* 5. NOW IN SEOUL */
 
+/* 아래 지도 섹션의 흰 그라데이션과 바로 이어지도록 아래 여백은 두지 않음 */
 .agenda-section {
     position: relative;
-    margin-bottom: clamp(40px, 6vh, 78px);
     background: var(--ss-white);
     color: var(--ss-ink);
 }
@@ -553,7 +552,7 @@
     gap: 0.025em;
     margin: 0;
     font-family: "DM Sans", sans-serif;
-    font-size: clamp(90px, 11vw, 164px);
+    font-size: clamp(80px, 9.5vw, 140px);
     font-weight: 700;
     line-height: 0.95;
     letter-spacing: -0.085em;
@@ -861,21 +860,39 @@
     height: calc(100vh - var(--ss-header-height));
     padding: 0 7%;
     overflow: hidden;
-    background: #E7E7E0 url("../images/04_index.map.png") center / cover no-repeat;
+    background: #E7E7E0;
 }
 
-/* 위쪽은 앞 섹션의 흰 배경과 이어지고, 왼쪽은 제목이 잘 보이도록 흐리게 처리 */
+/* 지도 이미지 레이어: 기본 상태는 섹션 배경일 때와 같은 크기와 위치
+    마우스를 올리면 JS가 --map-shift-x, --map-shift-y, --map-scale 값을 바꿈 */
+.atlas-map {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: url("../images/04_index.map.jpg") center / cover no-repeat;
+    transform: translate(var(--map-shift-x, 0px), var(--map-shift-y, 0px)) scale(var(--map-scale, 1));
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 마우스를 따라 움직이는 동안에는 복귀 때보다 빠르게 반응하도록 시간을 줄임 */
+.atlas-section.is-map-active .atlas-map {
+    transition-duration: 0.3s;
+}
+
+/* 위쪽은 앞 섹션의 흰 배경과 이어지고, 왼쪽은 제목이 잘 보이도록 흐리게 처리
+    광택(::after)보다 위에 두어 제목 주변에서는 광택이 드러나지 않게 함 */
 .atlas-section::before {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 1;
     background:
         linear-gradient(to bottom,
             rgba(255, 255, 255, 1) 0%,
-            rgba(255, 255, 255, 0.88) 7%,
-            rgba(255, 255, 255, 0.42) 23%,
-            rgba(255, 255, 255, 0.08) 43%,
-            rgba(255, 255, 255, 0) 67%),
+            rgba(255, 255, 255, 0.88) 5%,
+            rgba(255, 255, 255, 0.42) 14%,
+            rgba(255, 255, 255, 0.08) 28%,
+            rgba(255, 255, 255, 0) 45%),
         linear-gradient(to right,
             rgba(255, 255, 255, 0.88) 0%,
             rgba(255, 255, 255, 0.73) 16%,
@@ -884,10 +901,43 @@
     pointer-events: none;
 }
 
+/* 유리 위에 빛이 비치는 느낌의 반사광
+    안쪽(170px)은 흰빛, 바깥쪽(320px)은 옅은 파란빛을 겹쳐 손전등처럼 경계가 생기지 않게 함
+    지도 디테일이 가려지지 않도록 가장 밝은 부분도 불투명도 45%로 낮춤 */
+.atlas-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    /* 수업 외: radial-gradient로 마우스 좌표(--glow-x, --glow-y)를 중심으로 한 원형 그라데이션을 만듦 */
+    background:
+        radial-gradient(circle 170px at var(--glow-x, 50%) var(--glow-y, 50%),
+            rgba(255, 255, 255, 0.45) 0%,
+            rgba(255, 255, 255, 0.18) 55%,
+            rgba(255, 255, 255, 0) 100%),
+        radial-gradient(circle 320px at var(--glow-x, 50%) var(--glow-y, 50%),
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(70, 102, 176, 0.08) 60%,
+            rgba(70, 102, 176, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.65s ease;
+    pointer-events: none;
+}
+
+.atlas-section.is-map-active::after {
+    opacity: 1;
+}
+
 .atlas-overlay {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     max-width: 750px;
+}
+
+/* 제목과 버튼은 FIND YOUR SCENE 제목과 같은 방식으로 스크롤에 맞춰 올라옴 */
+.js-ready .atlas-overlay {
+    opacity: 0;
+    transform: translateY(18px);
 }
 
 .atlas-overlay h2 {

@@ -12,29 +12,26 @@
 }
 
 
-/* 2. 팝업 목록 */
+/* 2. 추천 팝업 캐러셀 */
+/* 공통 캐러셀 CSS를 사용하고 바깥 여백만 조정 (전시 페이지와 같은 값) */
+.featured-popup {
+    padding: 8px 72px 64px;
+}
 
+
+/* 3. 팝업 목록 */
+/* 공통 카테고리 CSS를 사용하고 위쪽 여백만 조정 (아래쪽은 category.css 기본값 110px) */
 .popup-catalog {
-    padding-top: 76px;
-    padding-bottom: 100px;
+    padding-top: 24px;
 }
 
-.popup-catalog .ss-category-heading {
-    margin-bottom: 10px;
-}
-
-/* 제목 아래 가로 구분선 */
+/* 제목 아래 얇은 회색 구분선 (전시 페이지 .ex-divider와 같은 모양)
+    구분선 아래 간격은 category.css 기본값(제목 영역 36px + 툴바 20px)을 그대로 사용해 전시와 맞춤 */
 .popup-divider {
-    height: 1px;
-    margin-top: 24px;
-    background: var(--ss-ink);
-}
-
-
-/* 3. 카테고리 필터와 검색 */
-
-.popup-catalog .ss-toolbar {
-    padding-top: 8px;
+    height: 12px;
+    margin: 21px 0 0;
+    border: 0;
+    border-top: 2px solid var(--ss-line);
 }
 
 

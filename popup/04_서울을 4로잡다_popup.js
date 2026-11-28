@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cards = document.getElementById("cards");
     const filters = document.querySelector(".ss-filters");
     const search = document.getElementById("popup-catalog-search");
+    const sortSelect = document.getElementById("popup-sort");
     const pager = document.getElementById("popup-pagination");
 
     const DATA_URL = "../data/04_서울을 4로잡다_popup.json";
@@ -13,7 +14,18 @@ document.addEventListener("DOMContentLoaded", function () {
     let popups = [];
     let category = "all";
     let keyword = "";
+    let sortType = "latest";
     let page = 1;
+
+
+    // 오늘 날짜를 JSON과 같은 "YYYY-MM-DD" 형식으로 만듦
+    // 수업 외: padStart()로 월·일을 두 자리로 맞춤
+    function getTodayText() {
+        const today = new Date();
+        return today.getFullYear() + "-" +
+            String(today.getMonth() + 1).padStart(2, "0") + "-" +
+            String(today.getDate()).padStart(2, "0");
+    }
 
 
     // 카드 만들기
@@ -71,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 제목, 장소, 기간
         const info = makeElement("div", "ss-card-info");
-        const place = (item.district ? item.district + " · " : "") + item.location;    // 수업 외: 삼항연산자로 지역이 있을 때만 앞에 붙임
+        const place = item.location;
         info.append(
             makeElement("h3", "pop-card-title", item.title),
             makeElement("p", "pop-card-place", place),
@@ -118,10 +130,47 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // 목록 표시: 카테고리 필터 → 키워드 검색 → 페이지 나누기 순서로 처리
+    // 드롭다운 정렬 기준 적용
+    // 날짜가 모두 YYYY-MM-DD 형식이라 문자열 비교만으로 날짜 순서가 맞음
+    function applySort(list) {
+        const today = getTodayText();
+
+        if (sortType === "ongoing") {
+            return list.filter(function (item) {
+                return item.startDate <= today && (!item.endDate || today <= item.endDate);
+            });
+        }
+
+        if (sortType === "closing") {
+            // 수업 외: localeCompare()로 두 날짜 문자열의 순서를 비교함
+            return list
+                .filter(function (item) {
+                    return item.endDate && item.endDate >= today;
+                })
+                .sort(function (a, b) {
+                    return a.endDate.localeCompare(b.endDate);
+                });
+        }
+
+        if (sortType === "upcoming") {
+            return list
+                .filter(function (item) {
+                    return item.startDate > today;
+                })
+                .sort(function (a, b) {
+                    return a.startDate.localeCompare(b.startDate);
+                });
+        }
+
+        // 최신순: 불러올 때 정렬해 둔 기존 목록 순서를 그대로 사용
+        return list;
+    }
+
+
+    // 목록 표시: 카테고리 필터 → 키워드 검색 → 정렬 → 페이지 나누기 순서로 처리
 
     function render() {
-        const matched = popups.filter(function (item) {
+        const searched = popups.filter(function (item) {
             const matchesCategory = category === "all" || item.subCategory === category;
             const searchText = [item.title, item.brand, item.location, item.district, item.description]
                 .concat(item.tags || [])
@@ -131,6 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // 수업 외: includes()로 검색어가 문자열 안에 들어 있는지 확인함
             return matchesCategory && searchText.includes(keyword);
         });
+        const matched = applySort(searched);
 
         const totalPages = Math.max(1, Math.ceil(matched.length / PAGE_SIZE));
         page = Math.min(page, totalPages);
@@ -140,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         cards.replaceChildren();    // 수업 외: 이전에 그린 카드를 한 번에 비움
         if (pageItems.length === 0) {
-            cards.appendChild(makeElement("p", "popup-empty", "조건에 맞는 팝업이 없습니다."));
+            cards.appendChild(makeElement("p", "popup-empty", "해당하는 팝업이 없습니다."));
         } else {
             pageItems.forEach(function (item) {
                 cards.appendChild(makeCard(item));
@@ -165,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 이벤트 처리
 
-    // 필터를 바꾸거나 검색어를 입력하면 첫 페이지부터 다시 보여 줌
+    // 필터·검색어·정렬 기준을 바꾸면 첫 페이지부터 다시 보여 줌
     filters.addEventListener("click", function (event) {
         // 수업 외: closest()로 클릭한 요소에서 가장 가까운 필터 버튼을 찾음
         const button = event.target.closest(".ss-filter");
@@ -187,6 +237,12 @@ document.addEventListener("DOMContentLoaded", function () {
         render();
     });
 
+    sortSelect.addEventListener("change", function () {
+        sortType = sortSelect.value;
+        page = 1;
+        render();
+    });
+
     pager.addEventListener("click", function (event) {
         const button = event.target.closest("button");
         if (!button || button.disabled) {
@@ -204,15 +260,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // 로그인하지 않았다면 체크를 되돌리고 저장하지 않음
-        // toggleSaved()에도 로그인 확인이 있지만 안내 문구가 달라서 페이지 문구를 먼저 보여 줌
-        if (SceneSeoul.getUser() === "") {
-            checkbox.checked = false;
-            alert("로그인 후에 찜할 수 있어요.");
-            return;
-        }
-
-        // 저장 후 common.js가 화면의 모든 하트를 다시 맞춤
+        // 저장과 취소, 로그인 전 안내는 common.js의 toggleSaved()가 처리
+        // (로그인 전이면 안내 후 updateHearts()로 체크를 원래대로 되돌림)
         SceneSeoul.toggleSaved(checkbox.dataset.saveId);
     });
 
@@ -232,12 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // 종료된 팝업을 먼저 빼고(filter) 남은 팝업을 시작일이 빠른 순서로 정렬함(sort)
-            // YYYY-MM-DD 형식이라 문자열 비교만으로 날짜 순서가 맞음
-            // 수업 외: padStart()로 월·일을 두 자리로 맞추고, localeCompare()로 두 문자열의 순서를 비교함
-            const today = new Date();
-            const todayText = today.getFullYear() + "-" +
-                String(today.getMonth() + 1).padStart(2, "0") + "-" +
-                String(today.getDate()).padStart(2, "0");
+            const todayText = getTodayText();
 
             popups = data
                 .filter(function (item) {
