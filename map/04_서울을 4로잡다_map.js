@@ -16,10 +16,10 @@ const TYPE_LABEL = {
 
 // 지도 마커 색 (카테고리별)
 const TYPE_COLOR = {
-    exhibition: "#4666B0",
-    performance: "#D9534F",
-    popup: "#E0A800",
-    event: "#3E8E6B"
+    exhibition: "#2B3F7A",
+    performance: "#F15060",
+    popup: "#FFDB63",
+    event: "#2A9D8F"
 };
 
 // 서울 25개 행정구 좌표 [위도, 경도]
@@ -90,10 +90,11 @@ function toDate(dateText) {
     return new Date(y, m - 1, d);
 }
 
-// 장소 앞에 구 이름 붙이기 (주소에 이미 구 이름이 있으면 그대로) — 카드, 말풍선, 검색에서 같이 쓰기
+// "구 이름 / 장소" 글자 만들기 — 카드, 말풍선, 검색에서 같이 쓰기
+// 팝업처럼 장소가 "서울 ○○구 …" 주소로 적혀 있으면 그 부분을 지워 구 이름이 두 번 나오지 않게 함
 function getPlaceText(item) {
-    if (item.gu !== "" && !hasText(item.place, item.gu)) {
-        return item.gu + " · " + item.place;
+    if (item.gu !== "") {
+        return item.gu + " / " + item.place.replace("서울 " + item.gu + " ", "");
     }
     return item.place;
 }
@@ -178,7 +179,7 @@ function sortItems(list) {
 
 /* 06. 로그인 및 찜 (common.js 사용) */
 // 하트 모양도 common.js 의 updateHearts() 가 맞춰 줌.
-// 이건 "저장한 것"을 보고 있을 때 목록을 다시 그리는 일만 함.
+// 이건 "찜한 것"을 보고 있을 때 목록을 다시 그리는 일만 함.
 function refreshSavedCards() {
     if (currentType === "saved") {
         updateList();
@@ -231,13 +232,13 @@ function makeCard(item) {
     const check = document.createElement("input");
     check.type = "checkbox";
     check.setAttribute("data-save-id", item.id);
-    check.setAttribute("aria-label", item.title + " 저장");
+    check.setAttribute("aria-label", item.title + " 찜하기");
     check.checked = SceneSeoul.isSaved(item.id);
 
-    // 저장과 취소는 common.js 가 처리
+    // 찜과 찜 취소는 common.js 가 처리
     check.addEventListener("change", function () {
         SceneSeoul.toggleSaved(item.id);
-        refreshSavedCards();   // "저장한 것"을 보고 있으면 바로 다시 그림
+        refreshSavedCards();   // "찜한 것"을 보고 있으면 바로 다시 그림
     });
 
     const mark = document.createElement("span");
@@ -313,9 +314,9 @@ function render() {
         if (loading) {
             empty.innerText = "콘텐츠를 불러오는 중이에요...";
         } else if (currentType === "saved" && SceneSeoul.getUser() !== "") {
-            empty.innerText = "저장한 콘텐츠가 없어요. 마음에 드는 카드의 하트를 눌러보세요.";
+            empty.innerText = "찜한 콘텐츠가 없어요. 마음에 드는 카드의 하트를 눌러보세요.";
         } else if (currentType === "saved") {
-            empty.innerText = "로그인하면 하트로 저장한 콘텐츠를 모아볼 수 있어요.";
+            empty.innerText = "로그인하면 하트로 찜한 콘텐츠를 모아볼 수 있어요.";
         } else {
             empty.innerText = "조건에 맞는 콘텐츠가 없어요.";
         }
@@ -388,7 +389,7 @@ function addMarker(item) {
     const marker = L.circleMarker([item.lat, item.lng], {
         radius: 7,
         color: "#FFFFFF",
-        weight: 2,
+        weight: 1.5,
         fillColor: TYPE_COLOR[item.type],
         fillOpacity: 0.95
     });
@@ -497,7 +498,7 @@ nextBtn.addEventListener("click", function () {
     cardBox.scrollLeft += 480;    // 수업 외: scrollLeft
 });
 
-// 로그인 및 로그아웃했을 때 "저장한 것" 목록을 맞추기
+// 로그인 및 로그아웃했을 때 "찜한 것" 목록을 맞추기
 // 수업 외: 직접 만든 이벤트
 window.addEventListener("scene:login", refreshSavedCards);
 
