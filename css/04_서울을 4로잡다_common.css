@@ -1,7 +1,7 @@
 
 /* SCENE:SEOUL - 공통 스타일
    모든 페이지에서 사용하는 색상, 헤더, 푸터를 관리한다. */
-
+   
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600&display=swap");
 
 :root {
