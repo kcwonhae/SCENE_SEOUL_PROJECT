@@ -5,15 +5,6 @@
    색은 common.css의 8가지(--ss-...)만 씁니다.
    ===================================================== */
 
-/* ---------- 1. 이 페이지에서 쓰는 이름 → common.css 변수에 연결 ---------- */
-:root {
-  --white: var(--ss-white);
-  --mute: var(--ss-muted);
-  --ink: var(--ss-ink);
-  --blue: var(--ss-blue);
-  --yellow: var(--ss-yellow);
-}
-
 /* ---------- 2. 기본 ---------- */
 ul,
 ol {
@@ -29,11 +20,6 @@ p {
   margin: 0;
 }
 
-:focus {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
-
 /* '본문 바로가기' 링크: 평소에는 화면 밖에 숨어 있다가 키보드로 선택되면 나타남 */
 .skip {
   position: absolute;
@@ -42,8 +28,8 @@ p {
   z-index: 200;
   padding: .6rem 1rem;
   border-radius: 8px;
-  background: var(--ink);
-  color: var(--white);
+  background: var(--ss-ink);
+  color: var(--ss-white);
 }
 
 .skip:focus {
@@ -58,6 +44,14 @@ p {
 /* ---------- 3. 카테고리 영역 (구조는 category.css가 담당, 여기는 공연만의 추가 규칙) ---------- */
 .ss-catalog {
   padding-top: 24px;
+}
+
+/* 제목 아래 얇은 회색 구분선 */
+.perf-divider {
+  height: 12px;
+  margin: 21px 0 0;
+  border: 0;
+  border-top: 2px solid var(--ss-line);
 }
 
 /* 공통 .ss-catalog-controls 안에서 순서(order)로 배치 */
@@ -80,7 +74,7 @@ p {
   order: 4;
   padding: 60px 0;
   text-align: center;
-  color: var(--mute);
+  color: var(--ss-muted);
 }
 
 #pager {
@@ -90,7 +84,7 @@ p {
 /* 카드 제목 링크 */
 .ss-card-title a:hover,
 .ss-card-title a:focus {
-  color: var(--blue);
+  color: var(--ss-blue);
 }
 
 

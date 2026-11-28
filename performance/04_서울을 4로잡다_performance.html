@@ -4,17 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>공연 | SCENE.SEOUL</title>
-  <meta name="description" content="서울의 콘서트, 뮤지컬, 연극, 클래식·무용 공연을 한곳에서 둘러보세요.">
-
-  <meta name="team-number" content="04">
-  <meta name="team-name" content="서울을 4로잡다">
-  <meta name="author" content="신윤정(2411997)">
+    <title>공연 | SCENE.SEOUL</title>
+    
+    <meta name="project" content="SCENE:SEOUL">
+    <meta name="team-number" content="04">
+    <meta name="team-name" content="서울을 4로잡다">
+    <meta name="contributor" content="2411997_신윤정">
+    <meta name="description" content="서울의 콘서트, 뮤지컬, 연극, 클래식·무용 공연을 한곳에서 둘러보세요.">
+    
   <link rel="stylesheet" href="../css/04_서울을 4로잡다_common.css">
   <link rel="stylesheet" href="../css/04_서울을 4로잡다_category.css">
   <link rel="stylesheet" href="../css/04_서울을 4로잡다_carousel.css">
   <link rel="stylesheet" href="04_서울을 4로잡다_performance.css">
   <link rel="stylesheet" href="../login/04_서울을 4로잡다_login.css">
+  <link rel="stylesheet" href="../css/04_서울을 4로잡다_language.css">
   <script src="../login/04_서울을 4로잡다_login.js" defer></script>
   <script src="../js/04_서울을 4로잡다_weather.js" defer></script>
   <script src="../js/04_서울을 4로잡다_language.js" defer></script>
@@ -37,6 +40,8 @@
       <a href="../map/04_서울을 4로잡다_map.html">지도</a>
     </nav>
     <div class="ss-header-actions">
+      <button class="header-login" type="button">LOGIN</button>
+
       <span class="ss-header-quick-icons">
         <span class="ss-language" role="button" tabindex="0" aria-label="언어 선택" aria-expanded="false"
           aria-haspopup="true">
@@ -53,7 +58,7 @@
           </ul>
         </span>
       </span>
-      <button class="header-login" type="button">LOGIN</button>
+
       <a class="header-mypage" href="../mycalendar/04_서울을 4로잡다_mycalendar.html">MY PAGE</a>
       <span class="ss-weather-icon" id="header-weather" aria-label="서울 날씨" title="날씨 정보 불러오는 중"><svg viewBox="0 0 24 24"
           fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
@@ -97,6 +102,7 @@
       <div class="ss-category-heading">
         <h2 class="ss-category-title" id="perf-list-title">ALL <em class="ss-category-title-accent">PERFORMANCES.</em>
         </h2>
+        <hr class="perf-divider">
       </div>
       <!-- 필터(장르 버튼) + 검색창 -->
       <div class="ss-catalog-controls">
@@ -108,14 +114,24 @@
             <a class="ss-filter" href="#play" data-genre="play">연극</a>
             <a class="ss-filter" href="#classic" data-genre="classic">클래식/무용</a>
           </nav>
-          <div class="ss-search" role="search">
-            <label class="ss-visually-hidden" for="perf-search">공연 검색</label>
-            <input id="perf-search" type="search" placeholder="공연명, 장소 검색">
-            <svg class="ss-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" aria-hidden="true">
-              <circle cx="10.8" cy="10.8" r="6.6" />
-              <path d="m16 16 5 5" />
-            </svg>
+          <!-- 정렬 기준 + 검색창: 정렬 드롭다운이 검색창 바로 위 (category.css의 .ss-sort-search) -->
+          <div class="ss-sort-search">
+            <label class="ss-visually-hidden" for="perf-sort">정렬 기준</label>
+            <select class="ss-sort-select" id="perf-sort">
+              <option value="latest">최신순</option>
+              <option value="ongoing">진행 중</option>
+              <option value="closing">마감 임박</option>
+              <option value="upcoming">오픈 예정</option>
+            </select>
+            <div class="ss-search" role="search">
+              <label class="ss-visually-hidden" for="perf-search">공연 검색</label>
+              <input id="perf-search" type="search" placeholder="공연명, 장소 검색">
+              <svg class="ss-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <circle cx="10.8" cy="10.8" r="6.6" />
+                <path d="m16 16 5 5" />
+              </svg>
+            </div>
           </div>
         </div>
 
