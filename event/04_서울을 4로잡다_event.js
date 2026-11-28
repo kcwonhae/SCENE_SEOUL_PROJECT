@@ -8,9 +8,72 @@ let eventItems = [];
 let selectedCategory = 'all';
 let searchWord = '';
 let currentPage = 1;
+let eventSort = 'latest';
+
+// 검색창 위에 정렬 메뉴 배치
+const eventSearchBox = eventSearch.closest('.ss-search');
+const sortSearch = document.createElement('div');
+sortSearch.className = 'ss-sort-search';
+eventSearchBox.before(sortSearch);
+const sortLabel = document.createElement('label');
+sortLabel.className = 'ss-visually-hidden';
+sortLabel.htmlFor = 'event-sort';
+sortLabel.textContent = '이벤트 목록 정렬';
+const sortSelect = document.createElement('select');
+sortSelect.id = 'event-sort';
+sortSelect.className = 'ss-sort-select';
+[
+    ['latest', '최신순'],
+    ['ongoing', '진행 중'],
+    ['closing', '마감 임박'],
+    ['upcoming', '오픈 예정']
+].forEach(([value, label]) => {
+    const option = document.createElement('option');
+    option.value = value;
+    option.textContent = label;
+    sortSelect.append(option);
+});
+sortSearch.append(sortLabel, sortSelect, eventSearchBox);
 
 function eventPeriod(item) {
     return SceneSeoul.formatPeriod(item);
+}
+
+// 오늘 날짜는 한국 시간대에 해당하는 브라우저 현지 날짜로 비교
+function dateValue(value, fallback) {
+    const date = typeof value === 'string' ? value.slice(0, 10) : '';
+    return /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : fallback;
+}
+
+function todayValue() {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, '0');
+    const d = String(now.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+}
+
+function sortEventItems(items) {
+    const today = todayValue();
+    const start = item => dateValue(item.startDate || item.date, '9999-12-31');
+    const end = item => dateValue(item.endDate, start(item));
+    const validEnd = item => dateValue(item.endDate, '9999-12-31');
+
+    let result = items;
+    if (eventSort === 'ongoing') {
+        result = items.filter(item => start(item) <= today && validEnd(item) >= today);
+        return result.sort((a, b) => start(a).localeCompare(start(b)));
+    }
+    if (eventSort === 'closing') {
+        result = items.filter(item => validEnd(item) >= today && validEnd(item) !== '9999-12-31');
+        return result.sort((a, b) => end(a).localeCompare(end(b)) || start(a).localeCompare(start(b)));
+    }
+    if (eventSort === 'upcoming') {
+        result = items.filter(item => start(item) > today && start(item) !== '9999-12-31');
+        return result.sort((a, b) => start(a).localeCompare(start(b)));
+    }
+    // 최신순은 기존 날짜 오름차순 그대로
+    return result.sort((a, b) => start(a).localeCompare(start(b)));
 }
 
 function renderEventCard(item) {
@@ -72,11 +135,12 @@ function renderEventList() {
         const text = [item.title, item.location, item.district, item.description].join(' ').toLowerCase();
         return matchesCategory && text.includes(searchWord);
     });
-    const pages = Math.max(1, Math.ceil(filtered.length / EVENT_PAGE_SIZE));
+    const sorted = sortEventItems(filtered);
+    const pages = Math.max(1, Math.ceil(sorted.length / EVENT_PAGE_SIZE));
     currentPage = Math.min(currentPage, pages);
     const from = (currentPage - 1) * EVENT_PAGE_SIZE;
-    eventCards.replaceChildren(...filtered.slice(from, from + EVENT_PAGE_SIZE).map(renderEventCard));
-    if (!filtered.length) {
+    eventCards.replaceChildren(...sorted.slice(from, from + EVENT_PAGE_SIZE).map(renderEventCard));
+    if (!sorted.length) {
         const empty = document.createElement('p');
         empty.className = 'popup-empty';
         empty.textContent = '해당하는 이벤트가 없습니다.';
@@ -119,6 +183,12 @@ eventSearch.addEventListener('input', () => {
     renderEventList();
 });
 
+sortSelect.addEventListener('change', () => {
+    eventSort = sortSelect.value;
+    currentPage = 1;
+    renderEventList();
+});
+
 fetch('../data/04_서울을 4로잡다_event.json')
     .then(response => {
         if (!response.ok) throw new Error('이벤트 JSON 로딩 실패');
@@ -126,11 +196,6 @@ fetch('../data/04_서울을 4로잡다_event.json')
     })
     .then(items => {
         eventItems = Array.isArray(items) ? items : (items.events || []);
-        eventItems.sort((a, b) => {
-            const aDate = a.startDate || a.date || '9999-12-31';
-            const bDate = b.startDate || b.date || '9999-12-31';
-            return aDate.localeCompare(bDate);
-        });
         renderEventList();
     })
     .catch(error => {

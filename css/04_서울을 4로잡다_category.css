@@ -855,3 +855,35 @@
     font-size: 14px;
     text-align: center;
 }
+
+
+/* 카테고리 목록 정렬 */
+.ss-sort-search {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.ss-sort-select {
+    width: 115px;
+    min-height: 30px;
+    padding: 5px 24px 5px 10px;
+    border: 1px solid var(--ss-line);
+    border-radius: 0;
+    background: var(--ss-white);
+    color: var(--ss-ink);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ss-sort-select:focus-visible {
+    outline: 2px solid var(--ss-blue);
+    outline-offset: 2px;
+}
+
+.ss-sort-select option {
+    background: var(--ss-white);
+    color: var(--ss-ink);
+}
