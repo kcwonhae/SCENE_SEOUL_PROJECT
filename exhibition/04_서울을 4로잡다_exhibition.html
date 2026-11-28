@@ -131,14 +131,25 @@
                     <button class="ss-filter" type="button" data-filter="history" aria-pressed="false">역사·문화</button>
                 </nav>
 
-                <div class="ss-search" role="search">
-                    <label class="ss-visually-hidden" for="ex-search">전시 검색</label>
-                    <input id="ex-search" type="search" placeholder="전시명, 장소 검색">
-                    <svg class="ss-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                        <circle cx="10.8" cy="10.8" r="6.6"></circle>
-                        <path d="m16 16 5 5"></path>
-                    </svg>
+                <!-- 드롭다운과 검색창 -->
+                <div class="ss-sort-search">
+                    <label class="ss-visually-hidden" for="ex-sort">전시 정렬 기준</label>
+                    <select id="ex-sort" class="ss-sort-select">
+                        <option value="latest">최신순</option>
+                        <option value="ongoing">진행 중</option>
+                        <option value="closing">마감 임박</option>
+                        <option value="upcoming">오픈 예정</option>
+                    </select>
+
+                    <div class="ss-search" role="search">
+                        <label class="ss-visually-hidden" for="ex-search">전시 검색</label>
+                        <input id="ex-search" type="search" placeholder="전시명, 장소 검색">
+                        <svg class="ss-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <circle cx="10.8" cy="10.8" r="6.6"></circle>
+                            <path d="m16 16 5 5"></path>
+                        </svg>
+                    </div>
                 </div>
             </div>
 
