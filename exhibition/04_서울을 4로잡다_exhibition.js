@@ -2,16 +2,19 @@
    - 데이터: 전시 JSON 1개 (위쪽 캐러셀과 아래 목록이 같은 파일을 사용)
    - 로그인 및 찜: common.js 의 SceneSeoul 함수 사용
    - 카드: category.css 의 공통 카드(.ss-card) 사용
+   - 정렬: category.css 의 공통 드롭다운(.ss-sort-select) 사용
    - 수업 외: 해당 줄에 표시해 둠 */
 
 const exhibitionCards = document.getElementById('ex-cards');
 const exhibitionPagination = document.getElementById('ex-pagination');
 const exhibitionSearch = document.getElementById('ex-search');
+const exhibitionSort = document.getElementById('ex-sort');
 const filterButtons = document.querySelectorAll('.ss-filters button[data-filter]');
 const EXHIBITION_PAGE_SIZE = 8;          // 한 페이지에 보여줄 카드 수
 let exhibitionItems = [];                // JSON에서 불러온 전시 전체
 let selectedGenre = 'all';               // 지금 선택된 분류
 let searchWord = '';                     // 검색창에 적은 글자
+let selectedSort = 'latest';             // 지금 선택된 정렬 기준
 let currentPage = 1;                     // 지금 보고 있는 페이지
 
 
@@ -90,8 +93,9 @@ function sortExhibitions(list) {
 }
 
 
-/* 04. 분류와 검색어에 맞는 전시만 고르기 */
+/* 04. 분류, 검색어, 정렬 기준에 맞는 전시만 고르기 */
 function getFilteredExhibitions() {
+    const today = getTodayText();
     const result = [];
     for (const item of exhibitionItems) {
         // 분류: '전체'이거나 같은 분류일 때
@@ -99,12 +103,53 @@ function getFilteredExhibitions() {
         // 검색: 검색어가 없거나, 제목 · 장소 · 구 이름에 검색어가 들어 있을 때
         const text = item.title + ' ' + item.location + ' ' + item.district;
         const matchesWord = searchWord === '' || hasText(text, searchWord);
+        // 정렬 기준: 진행 중, 마감 임박, 오픈 예정에 맞는 날짜일 때
+        const matchesSort = matchesSortRule(item, today);
 
-        if (matchesGenre && matchesWord) {
+        if (matchesGenre && matchesWord && matchesSort) {
             result.push(item);
         }
     }
+
+    // 최신순은 처음 불러올 때 정렬한 순서를 그대로 사용
+    if (selectedSort === 'closing') {
+        sortByDate(result, 'endDate');    // 종료일이 가까운 순
+    }
+    if (selectedSort === 'upcoming') {
+        sortByDate(result, 'startDate');  // 시작일이 가까운 순
+    }
     return result;
+}
+
+// 전시 하나가 지금 정렬 기준에 들어가는지 확인 (기준은 사용자가 보는 오늘 날짜)
+function matchesSortRule(item, today) {
+    if (selectedSort === 'ongoing') {
+        // 진행 중 (종료일이 없으면 상시 운영이라 진행 중)
+        return item.startDate <= today && (item.endDate === '' || today <= item.endDate);
+    }
+    if (selectedSort === 'closing') {
+        // 마감 임박 (종료일이 없으면 마감이 없어서 제외)
+        return item.endDate !== '' && today <= item.endDate;
+    }
+    if (selectedSort === 'upcoming') {
+        // 오픈 예정 (오늘 이후에 시작하는 전시)
+        return today < item.startDate;
+    }
+    return true; // 최신순: 모두 보여줌
+}
+
+// list 를 key(startDate 또는 endDate) 날짜가 빠른 순으로 정렬
+// 수업 외: sort 에 비교 함수 넣기
+function sortByDate(list, key) {
+    list.sort(function (a, b) {
+        if (a[key] < b[key]) {
+            return -1;
+        }
+        if (a[key] > b[key]) {
+            return 1;
+        }
+        return 0;
+    });
 }
 
 
@@ -275,14 +320,23 @@ exhibitionSearch.addEventListener('input', function () {
     renderExhibitionList();
 });
 
+// 정렬 기준 선택
+exhibitionSort.addEventListener('change', function () {
+    selectedSort = exhibitionSort.value;
+    currentPage = 1;
+    renderExhibitionList();
+});
 
-/* 10. 분류, 검색 초기화 */
-// 다른 페이지에 다녀오면 항상 '전체', 빈 검색창, 1페이지로 돌아가도록 설정
+
+/* 10. 분류, 검색, 정렬 초기화 */
+// 다른 페이지에 다녀오면 항상 '전체', 빈 검색창, 최신순, 1페이지로 돌아가도록 설정(버그 일어나서 수정함)
 function resetExhibitionFilter() {
     selectedGenre = 'all';
     searchWord = '';
+    selectedSort = 'latest';
     currentPage = 1;
     exhibitionSearch.value = '';
+    exhibitionSort.value = 'latest';
     renderExhibitionList();
 }
 
