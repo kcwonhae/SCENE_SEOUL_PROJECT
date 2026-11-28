@@ -13,7 +13,6 @@
     align-items: center;
     justify-content: center;
     padding: 16px;
-    box-sizing: border-box;
     background: rgba(21, 27, 42, .55);
     backdrop-filter: blur(4px);    /* 수업 외: 뒤 화면 흐리게 */
     opacity: 1;
@@ -26,7 +25,7 @@
     display: flex;
 }
 
-/* 로그인 후: 보이는 상태 그대로 투명도만 0 으로 → 0.5초 동안 흐려짐 */
+/* 로그인 후: 보이는 상태 그대로 투명도만 0 으로 -> 0.5초 동안 흐려짐 */
 .ss-login-overlay.is-closing {
     display: flex;
     opacity: 0;
@@ -40,7 +39,6 @@
     max-height: 90vh;
     overflow-y: auto;
     padding: 52px 64px 48px;
-    box-sizing: border-box;
     text-align: center;
     background: var(--ss-white);
     color: var(--ss-ink);
@@ -97,7 +95,6 @@
     height: 56px;
     margin: 0 auto;
     padding: 0 20px;
-    box-sizing: border-box;
     border: 1px solid #b9bdc7;
     border-radius: 14px;
     background: var(--ss-white);
@@ -139,7 +136,6 @@
     height: 56px;
     margin: 0 auto;
     padding: 0 24px;
-    box-sizing: border-box;
     border: 0;
     border-radius: 14px;
     background: var(--ss-ink);   /* 로그인 버튼 색 */
