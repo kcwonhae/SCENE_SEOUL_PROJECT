@@ -139,6 +139,18 @@
     letter-spacing: .08em;
 }
 
+/* 말풍선 제목 (누르면 아래 목록으로 내려감, 마우스를 올리면 옅어짐)
+   leaflet.css 의 링크 색을 이기도록 앞에 .leaflet-popup-content 를 붙임 */
+.leaflet-popup-content .marker-title {
+    display: block;
+    color: var(--ss-ink);
+    font-weight: 700;
+}
+
+.leaflet-popup-content .marker-title:hover {
+    opacity: .5;
+}
+
 .marker-place {
     margin-top: 2px;
     color: var(--ss-muted);
@@ -155,7 +167,7 @@
     transition: color .2s ease;
 }
 
-/* 마우스를 올리면 진한 남색(ink)으로 */
+/* 마우스를 올리면 진한 남색으로 */
 .leaflet-popup-content .marker-link:hover {
     color: var(--ss-ink);
 }
