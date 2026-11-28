@@ -90,11 +90,10 @@ function toDate(dateText) {
     return new Date(y, m - 1, d);
 }
 
-// "구 이름 / 장소" 글자 만들기 — 카드, 말풍선, 검색에서 같이 쓰기
-// 팝업처럼 장소가 "서울 ○○구 …" 주소로 적혀 있으면 그 부분을 지워 구 이름이 두 번 나오지 않게 함
+// 장소 앞에 구 이름 붙이기 — 카드, 말풍선, 검색에서 같이 쓰기
 function getPlaceText(item) {
     if (item.gu !== "") {
-        return item.gu + " / " + item.place.replace("서울 " + item.gu + " ", "");
+        return item.gu + " / " + item.place;
     }
     return item.place;
 }
@@ -223,7 +222,7 @@ function getFiltered(withDistrict) {
 /* 08. 포스터 카드 (category.css 공통 카드) */
 
 // 공통 카드 구조 (클래스는 모두 팀 공통 category.css 에 정의된 것을 그대로 사용)
-// pop-card-* 도 category.css 의 공통 카드 클래스다 (팝업 페이지 전용 아님)
+// pop-card-* 도 category.css 의 공통 카드 클래스 (팝업 페이지 전용 아님)
 // 장소는 글자가 길면 … 으로 줄여 주는 .pop-card-place 를 쓰기
 function makeCard(item) {
     const card = document.createElement("article");
@@ -275,7 +274,7 @@ function makeCard(item) {
     type.innerText = TYPE_LABEL[item.type];
     top.appendChild(type);
 
-    // 제목에 < > 가 들어간 경우가 있어서 innerHTML 대신 innerText 로 넣는다
+    // 제목에 < > 가 들어간 경우가 있어서 innerHTML 대신 innerText 로 넣기.
     const title = document.createElement("h3");
     title.className = "ss-card-title";
     title.innerText = item.title;
@@ -584,7 +583,7 @@ function start() {
     makeOptions();
     selectDistrict("", true);
 
-    // 장소 좌표 → 팀 JSON 4개 순서로 읽은 뒤 목록과 마커를 그리기
+    // 장소 좌표: 팀 JSON 4개 순서로 읽은 뒤 목록과 마커를 그리기
     loadVenues(function () {
         loadAllItems(function (list) {
             allItems = cleanUp(list.map(toItem));
